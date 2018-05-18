@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GTI_Desktop.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="LastUser" Type="System.String" Scope="User">
+      <Value Profile="(Default)">GTI</Value>
+    </Setting>
+    <Setting Name="ServerName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Deutsch</Value>
+    </Setting>
+    <Setting Name="DataBaseReal" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Tributacao</Value>
+    </Setting>
+    <Setting Name="DataBaseTeste" Type="System.String" Scope="User">
+      <Value Profile="(Default)">TributacaoTeste</Value>
+    </Setting>
+    <Setting Name="Form_Extrato_width" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">900</Value>
+    </Setting>
+    <Setting Name="Form_Extrato_height" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">600</Value>
+    </Setting>
+    <Setting Name="UserId" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Form_Processo_Tramite_width" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">690</Value>
+    </Setting>
+    <Setting Name="Form_Processo_Tramite_height" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">368</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

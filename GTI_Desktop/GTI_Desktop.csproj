@@ -1,0 +1,718 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9F2D568A-06F6-4E5D-BAA7-87801E152741}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>GTI_Desktop</RootNamespace>
+    <AssemblyName>GTI_Desktop</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.1000.523\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.1000.523\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.1000.523\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.1000.523\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.1000.523\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owf.Controls.A1Panel">
+      <HintPath>Files\Owf.Controls.A1Panel.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\gtiConfig.cs" />
+    <Compile Include="Classes\gtiCore.cs" />
+    <Compile Include="Classes\gtiTypes.cs" />
+    <Compile Include="Classes\ListViewColumnSorter.cs" />
+    <Compile Include="Datasets\dsProcessoDoc.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsProcessoDoc.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\dsProcessoRequerente.cs">
+      <DependentUpon>dsProcessoRequerente.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\dsProcessoRequerente.designer.cs">
+      <DependentUpon>dsProcessoRequerente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\dsProcessoRequerente1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsProcessoRequerente.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Editores\Data_Editor.cs" />
+    <Compile Include="Editores\Tributo_Editor.cs" />
+    <Compile Include="Forms\Bairro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Bairro.designer.cs">
+      <DependentUpon>Bairro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Cidadao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Cidadao.designer.cs">
+      <DependentUpon>Cidadao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Cidadao_Lista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Cidadao_Lista.designer.cs">
+      <DependentUpon>Cidadao_Lista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Config.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Config.designer.cs">
+      <DependentUpon>Config.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Empresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Empresa.Designer.cs">
+      <DependentUpon>Empresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Endereco.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Endereco.designer.cs">
+      <DependentUpon>Endereco.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\errorBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\errorBox.designer.cs">
+      <DependentUpon>errorBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Extrato.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Extrato.Designer.cs">
+      <DependentUpon>Extrato.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Lancamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Lancamento.Designer.cs">
+      <DependentUpon>Lancamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Imovel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Imovel.Designer.cs">
+      <DependentUpon>Imovel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\inputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\inputBox.designer.cs">
+      <DependentUpon>inputBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Login.designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main.designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pais.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pais.designer.cs">
+      <DependentUpon>Pais.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Parcela_Detalhe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Parcela_Detalhe.Designer.cs">
+      <DependentUpon>Parcela_Detalhe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Documento_Detalhe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Documento_Detalhe.Designer.cs">
+      <DependentUpon>Documento_Detalhe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Parcela_Edit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Parcela_Edit.Designer.cs">
+      <DependentUpon>Parcela_Edit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Processo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Processo.designer.cs">
+      <DependentUpon>Processo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Processo_Assunto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Processo_Assunto.designer.cs">
+      <DependentUpon>Processo_Assunto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Processo_Despacho.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Processo_Despacho.designer.cs">
+      <DependentUpon>Processo_Despacho.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Processo_Documento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Processo_Documento.designer.cs">
+      <DependentUpon>Processo_Documento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Processo_Lista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Processo_Lista.Designer.cs">
+      <DependentUpon>Processo_Lista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Processo_Local.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Processo_Local.designer.cs">
+      <DependentUpon>Processo_Local.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Processo_Tramite.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Processo_Tramite.designer.cs">
+      <DependentUpon>Processo_Tramite.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Profissao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Profissao.designer.cs">
+      <DependentUpon>Profissao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Report.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Report.designer.cs">
+      <DependentUpon>Report.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SecurityEventForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SecurityEventForm.Designer.cs">
+      <DependentUpon>SecurityEventForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SecurityUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SecurityUserForm.Designer.cs">
+      <DependentUpon>SecurityUserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SelectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SelectForm.Designer.cs">
+      <DependentUpon>SelectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Tributo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Tributo.Designer.cs">
+      <DependentUpon>Tributo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Usuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Usuario.Designer.cs">
+      <DependentUpon>Usuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Usuario_Lista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Usuario_Lista.Designer.cs">
+      <DependentUpon>Usuario_Lista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Usuario_Setor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Usuario_Setor.Designer.cs">
+      <DependentUpon>Usuario_Setor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ZoomBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ZoomBox.designer.cs">
+      <DependentUpon>ZoomBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="User_Controls\ctlDataEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User_Controls\ctlDataEditor.Designer.cs">
+      <DependentUpon>ctlDataEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User_Controls\ctlTributoEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User_Controls\ctlTributoEditor.Designer.cs">
+      <DependentUpon>ctlTributoEditor.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\Bairro.resx">
+      <DependentUpon>Bairro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Cidadao.resx">
+      <DependentUpon>Cidadao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Cidadao_Lista.resx">
+      <DependentUpon>Cidadao_Lista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Config.resx">
+      <DependentUpon>Config.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Empresa.resx">
+      <DependentUpon>Empresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Endereco.resx">
+      <DependentUpon>Endereco.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\errorBox.resx">
+      <DependentUpon>errorBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Extrato.resx">
+      <DependentUpon>Extrato.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Lancamento.resx">
+      <DependentUpon>Lancamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Imovel.resx">
+      <DependentUpon>Imovel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pais.resx">
+      <DependentUpon>Pais.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Parcela_Detalhe.resx">
+      <DependentUpon>Parcela_Detalhe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Documento_Detalhe.resx">
+      <DependentUpon>Documento_Detalhe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Parcela_Edit.resx">
+      <DependentUpon>Parcela_Edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Processo.resx">
+      <DependentUpon>Processo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Processo_Assunto.resx">
+      <DependentUpon>Processo_Assunto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Processo_Despacho.resx">
+      <DependentUpon>Processo_Despacho.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Processo_Documento.resx">
+      <DependentUpon>Processo_Documento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Processo_Local.resx">
+      <DependentUpon>Processo_Local.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Processo_Tramite.resx">
+      <DependentUpon>Processo_Tramite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Profissao.resx">
+      <DependentUpon>Profissao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Report.resx">
+      <DependentUpon>Report.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SecurityEventForm.resx">
+      <DependentUpon>SecurityEventForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SecurityUserForm.resx">
+      <DependentUpon>SecurityUserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SelectForm.resx">
+      <DependentUpon>SelectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Tributo.resx">
+      <DependentUpon>Tributo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Usuario.resx">
+      <DependentUpon>Usuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Usuario_Lista.resx">
+      <DependentUpon>Usuario_Lista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Usuario_Setor.resx">
+      <DependentUpon>Usuario_Setor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ZoomBox.resx">
+      <DependentUpon>ZoomBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\ComprovanteDoc.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\ComunicadoDoc.rdlc" />
+    <EmbeddedResource Include="Report\ProcessoRequerente.rdlc" />
+    <EmbeddedResource Include="Report\RequerimentoAbertura.rdlc" />
+    <EmbeddedResource Include="Report\RequerimentoCancelamento.rdlc" />
+    <EmbeddedResource Include="User_Controls\ctlDataEditor.resx">
+      <DependentUpon>ctlDataEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User_Controls\ctlTributoEditor.resx">
+      <DependentUpon>ctlTributoEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Datasets\dsProcessoDoc.xsc">
+      <DependentUpon>dsProcessoDoc.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsProcessoDoc.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsProcessoDoc.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\dsProcessoDoc.xss">
+      <DependentUpon>dsProcessoDoc.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsProcessoRequerente.xsc">
+      <DependentUpon>dsProcessoRequerente.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsProcessoRequerente.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsProcessoRequerente1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\dsProcessoRequerente.xss">
+      <DependentUpon>dsProcessoRequerente.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Abaixo.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Acima.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alterar.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\anexo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Apagar.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brback.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brback1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btMobiliario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancelar.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\config.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Consultar.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Direita.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\downarrow.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ErrorIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Esquerda.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_sent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gravar.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gray.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GTI.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ledgreen.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ledred.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\leftarrow.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mi_ico_up[1].gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\more[1].gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OK.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\option.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\people.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\print.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\processo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh-16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rightarrow.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sair.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sair2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\texture1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\texture2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\texture11.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\texture21.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\texture22.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\texture23.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\motion-pund-art.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Historico.gif" />
+    <None Include="Resources\funnel.png" />
+    <None Include="Resources\addfavorite.png" />
+    <None Include="Resources\removefavorite.png" />
+    <None Include="Resources\uparrow.gif" />
+    <None Include="Resources\downarrow1.gif" />
+    <None Include="Resources\comment.png" />
+    <None Include="Resources\receber.png" />
+    <None Include="Resources\enviar.png" />
+    <None Include="Resources\photo_16x16.gif" />
+    <None Include="Resources\Brasao.png" />
+    <None Include="Resources\download.png" />
+    <None Include="Resources\GTI_logo.png" />
+    <None Include="Resources\Debito.png" />
+    <None Include="Resources\Menu1.png" />
+    <None Include="Resources\Menu.png" />
+    <None Include="Resources\email[1]_2.gif" />
+    <None Include="Resources\email1.gif" />
+    <None Include="Resources\email2.gif" />
+    <None Include="Historico.gif" />
+    <None Include="Resources\write.gif" />
+    <None Include="Resources\chave.png" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GTI_Bll\GTI_Bll.csproj">
+      <Project>{9b7b83db-4417-4143-b465-52fe4870d2e0}</Project>
+      <Name>GTI_Bll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GTI_Models\GTI_Models.csproj">
+      <Project>{859b188d-0d59-418e-af77-5235b79087f4}</Project>
+      <Name>GTI_Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
