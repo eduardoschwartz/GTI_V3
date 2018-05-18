@@ -25,9 +25,8 @@ namespace GTI_Desktop.Forms {
             bAddNew = false;
             ControlBehaviour(true);
             gtiCore.Liberado(this);
-
         }
-        
+
         private void ControlBehaviour(bool bStart) {
             AddButton.Enabled = bStart;
             EditButton.Enabled = bStart;
