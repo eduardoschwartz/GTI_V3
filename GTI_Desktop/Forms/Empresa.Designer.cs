@@ -114,15 +114,15 @@
             this.DataAbertura = new System.Windows.Forms.MaskedTextBox();
             this.label27 = new System.Windows.Forms.Label();
             this.ENtab = new System.Windows.Forms.TabPage();
-            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.HomePage = new System.Windows.Forms.TextBox();
             this.label47 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
-            this.label45 = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.lblSetor = new System.Windows.Forms.Label();
-            this.lblDistrito = new System.Windows.Forms.Label();
+            this.Subunidade = new System.Windows.Forms.Label();
+            this.Unidade = new System.Windows.Forms.Label();
+            this.Face = new System.Windows.Forms.Label();
+            this.Lote = new System.Windows.Forms.Label();
+            this.Quadra = new System.Windows.Forms.Label();
+            this.Setor = new System.Windows.Forms.Label();
+            this.Distrito = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
@@ -131,35 +131,35 @@
             this.label40 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
             this.a1Panel4 = new Owf.Controls.A1Panel();
-            this.checkBox11 = new System.Windows.Forms.CheckBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.MesmoEndereco = new System.Windows.Forms.CheckBox();
+            this.Bairro_EE = new System.Windows.Forms.TextBox();
+            this.Cidade_EE = new System.Windows.Forms.TextBox();
+            this.UF_EE = new System.Windows.Forms.TextBox();
+            this.EnderecoEntregaButton = new System.Windows.Forms.Button();
             this.label26 = new System.Windows.Forms.Label();
-            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.Logradouro_EE = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
-            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.Cep_EE = new System.Windows.Forms.TextBox();
+            this.Complemento_EE = new System.Windows.Forms.TextBox();
+            this.Numero_EE = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
             this.a1Panel3 = new Owf.Controls.A1Panel();
-            this.label51 = new System.Windows.Forms.Label();
+            this.CodigoImovel = new System.Windows.Forms.Label();
             this.label50 = new System.Windows.Forms.Label();
-            this.Bairro_EE = new System.Windows.Forms.TextBox();
-            this.Cidade_EE = new System.Windows.Forms.TextBox();
-            this.UF_EE = new System.Windows.Forms.TextBox();
-            this.EndEntrega = new System.Windows.Forms.Button();
+            this.Bairro = new System.Windows.Forms.TextBox();
+            this.Cidade = new System.Windows.Forms.TextBox();
+            this.UF = new System.Windows.Forms.TextBox();
+            this.EnderecoButton = new System.Windows.Forms.Button();
             this.label28 = new System.Windows.Forms.Label();
-            this.Logradouro_EE = new System.Windows.Forms.TextBox();
+            this.Logradouro = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
-            this.CEP_EE = new System.Windows.Forms.TextBox();
-            this.Complemento_EE = new System.Windows.Forms.TextBox();
-            this.Numero_EE = new System.Windows.Forms.TextBox();
+            this.Cep = new System.Windows.Forms.TextBox();
+            this.Complemento = new System.Windows.Forms.TextBox();
+            this.Numero = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
@@ -302,7 +302,9 @@
             // 
             // InscEstadual
             // 
+            this.InscEstadual.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.InscEstadual.Location = new System.Drawing.Point(290, 11);
+            this.InscEstadual.MaxLength = 15;
             this.InscEstadual.Name = "InscEstadual";
             this.InscEstadual.Size = new System.Drawing.Size(125, 20);
             this.InscEstadual.TabIndex = 1;
@@ -342,6 +344,7 @@
             // 
             // RG
             // 
+            this.RG.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.RG.Location = new System.Drawing.Point(618, 38);
             this.RG.MaxLength = 25;
             this.RG.Name = "RG";
@@ -350,7 +353,9 @@
             // 
             // RazaoSocial
             // 
+            this.RazaoSocial.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.RazaoSocial.Location = new System.Drawing.Point(94, 37);
+            this.RazaoSocial.MaxLength = 200;
             this.RazaoSocial.Name = "RazaoSocial";
             this.RazaoSocial.Size = new System.Drawing.Size(458, 20);
             this.RazaoSocial.TabIndex = 4;
@@ -729,7 +734,9 @@
             // 
             // NomeFantasia
             // 
+            this.NomeFantasia.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.NomeFantasia.Location = new System.Drawing.Point(111, 7);
+            this.NomeFantasia.MaxLength = 60;
             this.NomeFantasia.Name = "NomeFantasia";
             this.NomeFantasia.Size = new System.Drawing.Size(401, 20);
             this.NomeFantasia.TabIndex = 0;
@@ -759,11 +766,13 @@
             // SimplesButton
             // 
             this.SimplesButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SimplesButton.Enabled = false;
             this.SimplesButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
             this.SimplesButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SimplesButton.Name = "SimplesButton";
             this.SimplesButton.Size = new System.Drawing.Size(23, 22);
             this.SimplesButton.Text = "toolStripButton4";
+            this.SimplesButton.ToolTipText = "Exibe os períodos de entrada e saída no Simples";
             // 
             // a1Panel12
             // 
@@ -816,7 +825,9 @@
             // 
             // Placa
             // 
+            this.Placa.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.Placa.Location = new System.Drawing.Point(5, 85);
+            this.Placa.MaxLength = 8;
             this.Placa.Name = "Placa";
             this.Placa.Size = new System.Drawing.Size(97, 20);
             this.Placa.TabIndex = 19;
@@ -844,7 +855,9 @@
             // 
             // PontoAgencia
             // 
+            this.PontoAgencia.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.PontoAgencia.Location = new System.Drawing.Point(350, 83);
+            this.PontoAgencia.MaxLength = 40;
             this.PontoAgencia.Name = "PontoAgencia";
             this.PontoAgencia.Size = new System.Drawing.Size(162, 20);
             this.PontoAgencia.TabIndex = 6;
@@ -862,11 +875,11 @@
             // 
             this.OptanteMei.AutoSize = true;
             this.OptanteMei.BackColor = System.Drawing.Color.Transparent;
-            this.OptanteMei.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OptanteMei.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OptanteMei.ForeColor = System.Drawing.Color.DarkRed;
             this.OptanteMei.Location = new System.Drawing.Point(303, 272);
             this.OptanteMei.Name = "OptanteMei";
-            this.OptanteMei.Size = new System.Drawing.Size(33, 13);
+            this.OptanteMei.Size = new System.Drawing.Size(30, 13);
             this.OptanteMei.TabIndex = 194;
             this.OptanteMei.Text = "NÃO";
             // 
@@ -884,11 +897,11 @@
             // 
             this.SimplesNacional.AutoSize = true;
             this.SimplesNacional.BackColor = System.Drawing.Color.Transparent;
-            this.SimplesNacional.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SimplesNacional.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SimplesNacional.ForeColor = System.Drawing.Color.DarkRed;
             this.SimplesNacional.Location = new System.Drawing.Point(108, 272);
             this.SimplesNacional.Name = "SimplesNacional";
-            this.SimplesNacional.Size = new System.Drawing.Size(33, 13);
+            this.SimplesNacional.Size = new System.Drawing.Size(30, 13);
             this.SimplesNacional.TabIndex = 189;
             this.SimplesNacional.Text = "NÃO";
             // 
@@ -905,9 +918,11 @@
             // CapitalSocial
             // 
             this.CapitalSocial.Location = new System.Drawing.Point(262, 151);
+            this.CapitalSocial.MaxLength = 14;
             this.CapitalSocial.Name = "CapitalSocial";
             this.CapitalSocial.Size = new System.Drawing.Size(103, 20);
             this.CapitalSocial.TabIndex = 9;
+            this.CapitalSocial.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CapitalSocial_KeyPress);
             // 
             // label16
             // 
@@ -921,9 +936,11 @@
             // QtdeFuncionario
             // 
             this.QtdeFuncionario.Location = new System.Drawing.Point(111, 151);
+            this.QtdeFuncionario.MaxLength = 5;
             this.QtdeFuncionario.Name = "QtdeFuncionario";
             this.QtdeFuncionario.Size = new System.Drawing.Size(65, 20);
             this.QtdeFuncionario.TabIndex = 8;
+            this.QtdeFuncionario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.QtdeFuncionario_KeyPress);
             // 
             // label15
             // 
@@ -937,6 +954,7 @@
             // HorarioExtenso
             // 
             this.HorarioExtenso.Location = new System.Drawing.Point(111, 108);
+            this.HorarioExtenso.MaxLength = 300;
             this.HorarioExtenso.Multiline = true;
             this.HorarioExtenso.Name = "HorarioExtenso";
             this.HorarioExtenso.Size = new System.Drawing.Size(401, 38);
@@ -1125,6 +1143,7 @@
             // NumProcessoEncerramento
             // 
             this.NumProcessoEncerramento.Location = new System.Drawing.Point(262, 58);
+            this.NumProcessoEncerramento.MaxLength = 15;
             this.NumProcessoEncerramento.Name = "NumProcessoEncerramento";
             this.NumProcessoEncerramento.Size = new System.Drawing.Size(74, 20);
             this.NumProcessoEncerramento.TabIndex = 4;
@@ -1180,6 +1199,7 @@
             // NumProcessoAbertura
             // 
             this.NumProcessoAbertura.Location = new System.Drawing.Point(262, 32);
+            this.NumProcessoAbertura.MaxLength = 15;
             this.NumProcessoAbertura.Name = "NumProcessoAbertura";
             this.NumProcessoAbertura.Size = new System.Drawing.Size(74, 20);
             this.NumProcessoAbertura.TabIndex = 2;
@@ -1214,15 +1234,15 @@
             // ENtab
             // 
             this.ENtab.BackColor = System.Drawing.SystemColors.Control;
-            this.ENtab.Controls.Add(this.textBox15);
+            this.ENtab.Controls.Add(this.HomePage);
             this.ENtab.Controls.Add(this.label47);
-            this.ENtab.Controls.Add(this.label46);
-            this.ENtab.Controls.Add(this.label45);
-            this.ENtab.Controls.Add(this.label44);
-            this.ENtab.Controls.Add(this.label43);
-            this.ENtab.Controls.Add(this.label42);
-            this.ENtab.Controls.Add(this.lblSetor);
-            this.ENtab.Controls.Add(this.lblDistrito);
+            this.ENtab.Controls.Add(this.Subunidade);
+            this.ENtab.Controls.Add(this.Unidade);
+            this.ENtab.Controls.Add(this.Face);
+            this.ENtab.Controls.Add(this.Lote);
+            this.ENtab.Controls.Add(this.Quadra);
+            this.ENtab.Controls.Add(this.Setor);
+            this.ENtab.Controls.Add(this.Distrito);
             this.ENtab.Controls.Add(this.label35);
             this.ENtab.Controls.Add(this.label36);
             this.ENtab.Controls.Add(this.label37);
@@ -1239,13 +1259,14 @@
             this.ENtab.TabIndex = 1;
             this.ENtab.Text = "Localização/Entrega";
             // 
-            // textBox15
+            // HomePage
             // 
-            this.textBox15.Location = new System.Drawing.Point(90, 250);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(518, 20);
-            this.textBox15.TabIndex = 173;
-            this.textBox15.TabStop = false;
+            this.HomePage.Location = new System.Drawing.Point(90, 250);
+            this.HomePage.MaxLength = 100;
+            this.HomePage.Name = "HomePage";
+            this.HomePage.Size = new System.Drawing.Size(650, 20);
+            this.HomePage.TabIndex = 173;
+            this.HomePage.TabStop = false;
             // 
             // label47
             // 
@@ -1257,82 +1278,82 @@
             this.label47.TabIndex = 172;
             this.label47.Text = "Home Page..:";
             // 
-            // label46
+            // Subunidade
             // 
-            this.label46.AutoSize = true;
-            this.label46.BackColor = System.Drawing.Color.Transparent;
-            this.label46.ForeColor = System.Drawing.Color.Navy;
-            this.label46.Location = new System.Drawing.Point(583, 231);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(25, 13);
-            this.label46.TabIndex = 171;
-            this.label46.Text = "000";
+            this.Subunidade.AutoSize = true;
+            this.Subunidade.BackColor = System.Drawing.Color.Transparent;
+            this.Subunidade.ForeColor = System.Drawing.Color.Navy;
+            this.Subunidade.Location = new System.Drawing.Point(583, 231);
+            this.Subunidade.Name = "Subunidade";
+            this.Subunidade.Size = new System.Drawing.Size(25, 13);
+            this.Subunidade.TabIndex = 171;
+            this.Subunidade.Text = "000";
             // 
-            // label45
+            // Unidade
             // 
-            this.label45.AutoSize = true;
-            this.label45.BackColor = System.Drawing.Color.Transparent;
-            this.label45.ForeColor = System.Drawing.Color.Navy;
-            this.label45.Location = new System.Drawing.Point(470, 231);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(19, 13);
-            this.label45.TabIndex = 170;
-            this.label45.Text = "00";
+            this.Unidade.AutoSize = true;
+            this.Unidade.BackColor = System.Drawing.Color.Transparent;
+            this.Unidade.ForeColor = System.Drawing.Color.Navy;
+            this.Unidade.Location = new System.Drawing.Point(470, 231);
+            this.Unidade.Name = "Unidade";
+            this.Unidade.Size = new System.Drawing.Size(19, 13);
+            this.Unidade.TabIndex = 170;
+            this.Unidade.Text = "00";
             // 
-            // label44
+            // Face
             // 
-            this.label44.AutoSize = true;
-            this.label44.BackColor = System.Drawing.Color.Transparent;
-            this.label44.ForeColor = System.Drawing.Color.Navy;
-            this.label44.Location = new System.Drawing.Point(375, 231);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(19, 13);
-            this.label44.TabIndex = 169;
-            this.label44.Text = "00";
+            this.Face.AutoSize = true;
+            this.Face.BackColor = System.Drawing.Color.Transparent;
+            this.Face.ForeColor = System.Drawing.Color.Navy;
+            this.Face.Location = new System.Drawing.Point(375, 231);
+            this.Face.Name = "Face";
+            this.Face.Size = new System.Drawing.Size(19, 13);
+            this.Face.TabIndex = 169;
+            this.Face.Text = "00";
             // 
-            // label43
+            // Lote
             // 
-            this.label43.AutoSize = true;
-            this.label43.BackColor = System.Drawing.Color.Transparent;
-            this.label43.ForeColor = System.Drawing.Color.Navy;
-            this.label43.Location = new System.Drawing.Point(296, 231);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(37, 13);
-            this.label43.TabIndex = 168;
-            this.label43.Text = "00000";
+            this.Lote.AutoSize = true;
+            this.Lote.BackColor = System.Drawing.Color.Transparent;
+            this.Lote.ForeColor = System.Drawing.Color.Navy;
+            this.Lote.Location = new System.Drawing.Point(296, 231);
+            this.Lote.Name = "Lote";
+            this.Lote.Size = new System.Drawing.Size(37, 13);
+            this.Lote.TabIndex = 168;
+            this.Lote.Text = "00000";
             // 
-            // label42
+            // Quadra
             // 
-            this.label42.AutoSize = true;
-            this.label42.BackColor = System.Drawing.Color.Transparent;
-            this.label42.ForeColor = System.Drawing.Color.Navy;
-            this.label42.Location = new System.Drawing.Point(219, 231);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(31, 13);
-            this.label42.TabIndex = 167;
-            this.label42.Text = "0000";
+            this.Quadra.AutoSize = true;
+            this.Quadra.BackColor = System.Drawing.Color.Transparent;
+            this.Quadra.ForeColor = System.Drawing.Color.Navy;
+            this.Quadra.Location = new System.Drawing.Point(219, 231);
+            this.Quadra.Name = "Quadra";
+            this.Quadra.Size = new System.Drawing.Size(31, 13);
+            this.Quadra.TabIndex = 167;
+            this.Quadra.Text = "0000";
             // 
-            // lblSetor
+            // Setor
             // 
-            this.lblSetor.AutoSize = true;
-            this.lblSetor.BackColor = System.Drawing.Color.Transparent;
-            this.lblSetor.ForeColor = System.Drawing.Color.Navy;
-            this.lblSetor.Location = new System.Drawing.Point(134, 231);
-            this.lblSetor.Name = "lblSetor";
-            this.lblSetor.Size = new System.Drawing.Size(19, 13);
-            this.lblSetor.TabIndex = 166;
-            this.lblSetor.Text = "00";
+            this.Setor.AutoSize = true;
+            this.Setor.BackColor = System.Drawing.Color.Transparent;
+            this.Setor.ForeColor = System.Drawing.Color.Navy;
+            this.Setor.Location = new System.Drawing.Point(134, 231);
+            this.Setor.Name = "Setor";
+            this.Setor.Size = new System.Drawing.Size(19, 13);
+            this.Setor.TabIndex = 166;
+            this.Setor.Text = "00";
             // 
-            // lblDistrito
+            // Distrito
             // 
-            this.lblDistrito.AutoSize = true;
-            this.lblDistrito.BackColor = System.Drawing.Color.Transparent;
-            this.lblDistrito.ForeColor = System.Drawing.Color.Navy;
-            this.lblDistrito.Location = new System.Drawing.Point(61, 231);
-            this.lblDistrito.Name = "lblDistrito";
-            this.lblDistrito.Size = new System.Drawing.Size(13, 13);
-            this.lblDistrito.TabIndex = 165;
-            this.lblDistrito.Text = "0";
+            this.Distrito.AutoSize = true;
+            this.Distrito.BackColor = System.Drawing.Color.Transparent;
+            this.Distrito.ForeColor = System.Drawing.Color.Navy;
+            this.Distrito.Location = new System.Drawing.Point(61, 231);
+            this.Distrito.Name = "Distrito";
+            this.Distrito.Size = new System.Drawing.Size(13, 13);
+            this.Distrito.TabIndex = 165;
+            this.Distrito.Text = "0";
             // 
             // label35
             // 
@@ -1407,17 +1428,17 @@
             // a1Panel4
             // 
             this.a1Panel4.BorderColor = System.Drawing.Color.Gray;
-            this.a1Panel4.Controls.Add(this.checkBox11);
-            this.a1Panel4.Controls.Add(this.textBox8);
-            this.a1Panel4.Controls.Add(this.textBox9);
-            this.a1Panel4.Controls.Add(this.textBox10);
-            this.a1Panel4.Controls.Add(this.button2);
+            this.a1Panel4.Controls.Add(this.MesmoEndereco);
+            this.a1Panel4.Controls.Add(this.Bairro_EE);
+            this.a1Panel4.Controls.Add(this.Cidade_EE);
+            this.a1Panel4.Controls.Add(this.UF_EE);
+            this.a1Panel4.Controls.Add(this.EnderecoEntregaButton);
             this.a1Panel4.Controls.Add(this.label26);
-            this.a1Panel4.Controls.Add(this.textBox11);
+            this.a1Panel4.Controls.Add(this.Logradouro_EE);
             this.a1Panel4.Controls.Add(this.label29);
-            this.a1Panel4.Controls.Add(this.textBox12);
-            this.a1Panel4.Controls.Add(this.textBox13);
-            this.a1Panel4.Controls.Add(this.textBox14);
+            this.a1Panel4.Controls.Add(this.Cep_EE);
+            this.a1Panel4.Controls.Add(this.Complemento_EE);
+            this.a1Panel4.Controls.Add(this.Numero_EE);
             this.a1Panel4.Controls.Add(this.label30);
             this.a1Panel4.Controls.Add(this.label31);
             this.a1Panel4.Controls.Add(this.label32);
@@ -1435,70 +1456,70 @@
             this.a1Panel4.Size = new System.Drawing.Size(368, 209);
             this.a1Panel4.TabIndex = 157;
             // 
-            // checkBox11
+            // MesmoEndereco
             // 
-            this.checkBox11.AutoSize = true;
-            this.checkBox11.ForeColor = System.Drawing.Color.Navy;
-            this.checkBox11.Location = new System.Drawing.Point(7, 171);
-            this.checkBox11.Name = "checkBox11";
-            this.checkBox11.Size = new System.Drawing.Size(185, 17);
-            this.checkBox11.TabIndex = 171;
-            this.checkBox11.Text = "Utilizar o endereço de localização";
-            this.checkBox11.UseVisualStyleBackColor = true;
+            this.MesmoEndereco.AutoSize = true;
+            this.MesmoEndereco.ForeColor = System.Drawing.Color.Navy;
+            this.MesmoEndereco.Location = new System.Drawing.Point(7, 171);
+            this.MesmoEndereco.Name = "MesmoEndereco";
+            this.MesmoEndereco.Size = new System.Drawing.Size(185, 17);
+            this.MesmoEndereco.TabIndex = 171;
+            this.MesmoEndereco.Text = "Utilizar o endereço de localização";
+            this.MesmoEndereco.UseVisualStyleBackColor = true;
             // 
-            // textBox8
+            // Bairro_EE
             // 
-            this.textBox8.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox8.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox8.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox8.Location = new System.Drawing.Point(88, 116);
-            this.textBox8.MaxLength = 50;
-            this.textBox8.Name = "textBox8";
-            this.textBox8.ReadOnly = true;
-            this.textBox8.Size = new System.Drawing.Size(261, 20);
-            this.textBox8.TabIndex = 18;
-            this.textBox8.TabStop = false;
+            this.Bairro_EE.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.Bairro_EE.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.Bairro_EE.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.Bairro_EE.Location = new System.Drawing.Point(88, 116);
+            this.Bairro_EE.MaxLength = 50;
+            this.Bairro_EE.Name = "Bairro_EE";
+            this.Bairro_EE.ReadOnly = true;
+            this.Bairro_EE.Size = new System.Drawing.Size(261, 20);
+            this.Bairro_EE.TabIndex = 18;
+            this.Bairro_EE.TabStop = false;
             // 
-            // textBox9
+            // Cidade_EE
             // 
-            this.textBox9.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox9.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox9.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox9.Location = new System.Drawing.Point(132, 142);
-            this.textBox9.MaxLength = 50;
-            this.textBox9.Name = "textBox9";
-            this.textBox9.ReadOnly = true;
-            this.textBox9.Size = new System.Drawing.Size(217, 20);
-            this.textBox9.TabIndex = 20;
-            this.textBox9.TabStop = false;
+            this.Cidade_EE.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.Cidade_EE.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.Cidade_EE.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.Cidade_EE.Location = new System.Drawing.Point(132, 142);
+            this.Cidade_EE.MaxLength = 50;
+            this.Cidade_EE.Name = "Cidade_EE";
+            this.Cidade_EE.ReadOnly = true;
+            this.Cidade_EE.Size = new System.Drawing.Size(217, 20);
+            this.Cidade_EE.TabIndex = 20;
+            this.Cidade_EE.TabStop = false;
             // 
-            // textBox10
+            // UF_EE
             // 
-            this.textBox10.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox10.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox10.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox10.Location = new System.Drawing.Point(88, 142);
-            this.textBox10.MaxLength = 50;
-            this.textBox10.Name = "textBox10";
-            this.textBox10.ReadOnly = true;
-            this.textBox10.Size = new System.Drawing.Size(38, 20);
-            this.textBox10.TabIndex = 19;
-            this.textBox10.TabStop = false;
+            this.UF_EE.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.UF_EE.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.UF_EE.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.UF_EE.Location = new System.Drawing.Point(88, 142);
+            this.UF_EE.MaxLength = 50;
+            this.UF_EE.Name = "UF_EE";
+            this.UF_EE.ReadOnly = true;
+            this.UF_EE.Size = new System.Drawing.Size(38, 20);
+            this.UF_EE.TabIndex = 19;
+            this.UF_EE.TabStop = false;
             // 
-            // button2
+            // EnderecoEntregaButton
             // 
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(255)))), ((int)(((byte)(230)))));
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Image = global::GTI_Desktop.Properties.Resources.Alterar;
-            this.button2.Location = new System.Drawing.Point(330, 168);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(19, 19);
-            this.button2.TabIndex = 21;
-            this.button2.UseVisualStyleBackColor = true;
+            this.EnderecoEntregaButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.EnderecoEntregaButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.EnderecoEntregaButton.FlatAppearance.BorderSize = 0;
+            this.EnderecoEntregaButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(255)))), ((int)(((byte)(230)))));
+            this.EnderecoEntregaButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.EnderecoEntregaButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.EnderecoEntregaButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
+            this.EnderecoEntregaButton.Location = new System.Drawing.Point(330, 168);
+            this.EnderecoEntregaButton.Name = "EnderecoEntregaButton";
+            this.EnderecoEntregaButton.Size = new System.Drawing.Size(19, 19);
+            this.EnderecoEntregaButton.TabIndex = 21;
+            this.EnderecoEntregaButton.UseVisualStyleBackColor = true;
             // 
             // label26
             // 
@@ -1512,18 +1533,18 @@
             this.label26.Text = "Endereço de Entrega";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox11
+            // Logradouro_EE
             // 
-            this.textBox11.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox11.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox11.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox11.Location = new System.Drawing.Point(88, 39);
-            this.textBox11.MaxLength = 50;
-            this.textBox11.Name = "textBox11";
-            this.textBox11.ReadOnly = true;
-            this.textBox11.Size = new System.Drawing.Size(261, 20);
-            this.textBox11.TabIndex = 14;
-            this.textBox11.TabStop = false;
+            this.Logradouro_EE.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.Logradouro_EE.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.Logradouro_EE.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.Logradouro_EE.Location = new System.Drawing.Point(88, 39);
+            this.Logradouro_EE.MaxLength = 50;
+            this.Logradouro_EE.Name = "Logradouro_EE";
+            this.Logradouro_EE.ReadOnly = true;
+            this.Logradouro_EE.Size = new System.Drawing.Size(261, 20);
+            this.Logradouro_EE.TabIndex = 14;
+            this.Logradouro_EE.TabStop = false;
             // 
             // label29
             // 
@@ -1537,36 +1558,36 @@
             this.label29.TabIndex = 166;
             this.label29.Text = "UF/Cidade......:";
             // 
-            // textBox12
+            // Cep_EE
             // 
-            this.textBox12.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox12.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox12.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox12.Location = new System.Drawing.Point(230, 65);
-            this.textBox12.MaxLength = 50;
-            this.textBox12.Name = "textBox12";
-            this.textBox12.ReadOnly = true;
-            this.textBox12.Size = new System.Drawing.Size(72, 20);
-            this.textBox12.TabIndex = 16;
-            this.textBox12.TabStop = false;
+            this.Cep_EE.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.Cep_EE.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.Cep_EE.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.Cep_EE.Location = new System.Drawing.Point(230, 65);
+            this.Cep_EE.MaxLength = 50;
+            this.Cep_EE.Name = "Cep_EE";
+            this.Cep_EE.ReadOnly = true;
+            this.Cep_EE.Size = new System.Drawing.Size(72, 20);
+            this.Cep_EE.TabIndex = 16;
+            this.Cep_EE.TabStop = false;
             // 
-            // textBox13
+            // Complemento_EE
             // 
-            this.textBox13.Location = new System.Drawing.Point(88, 90);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.ReadOnly = true;
-            this.textBox13.Size = new System.Drawing.Size(261, 20);
-            this.textBox13.TabIndex = 17;
-            this.textBox13.TabStop = false;
+            this.Complemento_EE.Location = new System.Drawing.Point(88, 90);
+            this.Complemento_EE.Name = "Complemento_EE";
+            this.Complemento_EE.ReadOnly = true;
+            this.Complemento_EE.Size = new System.Drawing.Size(261, 20);
+            this.Complemento_EE.TabIndex = 17;
+            this.Complemento_EE.TabStop = false;
             // 
-            // textBox14
+            // Numero_EE
             // 
-            this.textBox14.Location = new System.Drawing.Point(88, 65);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.ReadOnly = true;
-            this.textBox14.Size = new System.Drawing.Size(71, 20);
-            this.textBox14.TabIndex = 15;
-            this.textBox14.TabStop = false;
+            this.Numero_EE.Location = new System.Drawing.Point(88, 65);
+            this.Numero_EE.Name = "Numero_EE";
+            this.Numero_EE.ReadOnly = true;
+            this.Numero_EE.Size = new System.Drawing.Size(71, 20);
+            this.Numero_EE.TabIndex = 15;
+            this.Numero_EE.TabStop = false;
             // 
             // label30
             // 
@@ -1631,18 +1652,18 @@
             // a1Panel3
             // 
             this.a1Panel3.BorderColor = System.Drawing.Color.Gray;
-            this.a1Panel3.Controls.Add(this.label51);
+            this.a1Panel3.Controls.Add(this.CodigoImovel);
             this.a1Panel3.Controls.Add(this.label50);
-            this.a1Panel3.Controls.Add(this.Bairro_EE);
-            this.a1Panel3.Controls.Add(this.Cidade_EE);
-            this.a1Panel3.Controls.Add(this.UF_EE);
-            this.a1Panel3.Controls.Add(this.EndEntrega);
+            this.a1Panel3.Controls.Add(this.Bairro);
+            this.a1Panel3.Controls.Add(this.Cidade);
+            this.a1Panel3.Controls.Add(this.UF);
+            this.a1Panel3.Controls.Add(this.EnderecoButton);
             this.a1Panel3.Controls.Add(this.label28);
-            this.a1Panel3.Controls.Add(this.Logradouro_EE);
+            this.a1Panel3.Controls.Add(this.Logradouro);
             this.a1Panel3.Controls.Add(this.label20);
-            this.a1Panel3.Controls.Add(this.CEP_EE);
-            this.a1Panel3.Controls.Add(this.Complemento_EE);
-            this.a1Panel3.Controls.Add(this.Numero_EE);
+            this.a1Panel3.Controls.Add(this.Cep);
+            this.a1Panel3.Controls.Add(this.Complemento);
+            this.a1Panel3.Controls.Add(this.Numero);
             this.a1Panel3.Controls.Add(this.label21);
             this.a1Panel3.Controls.Add(this.label22);
             this.a1Panel3.Controls.Add(this.label23);
@@ -1660,16 +1681,16 @@
             this.a1Panel3.Size = new System.Drawing.Size(368, 208);
             this.a1Panel3.TabIndex = 156;
             // 
-            // label51
+            // CodigoImovel
             // 
-            this.label51.AutoSize = true;
-            this.label51.BackColor = System.Drawing.Color.Transparent;
-            this.label51.ForeColor = System.Drawing.Color.Navy;
-            this.label51.Location = new System.Drawing.Point(89, 175);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(43, 13);
-            this.label51.TabIndex = 172;
-            this.label51.Text = "000000";
+            this.CodigoImovel.AutoSize = true;
+            this.CodigoImovel.BackColor = System.Drawing.Color.Transparent;
+            this.CodigoImovel.ForeColor = System.Drawing.Color.Navy;
+            this.CodigoImovel.Location = new System.Drawing.Point(89, 175);
+            this.CodigoImovel.Name = "CodigoImovel";
+            this.CodigoImovel.Size = new System.Drawing.Size(43, 13);
+            this.CodigoImovel.TabIndex = 172;
+            this.CodigoImovel.Text = "000000";
             // 
             // label50
             // 
@@ -1683,59 +1704,60 @@
             this.label50.TabIndex = 171;
             this.label50.Text = "Código imóvel..:";
             // 
-            // Bairro_EE
+            // Bairro
             // 
-            this.Bairro_EE.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.Bairro_EE.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.Bairro_EE.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.Bairro_EE.Location = new System.Drawing.Point(88, 116);
-            this.Bairro_EE.MaxLength = 50;
-            this.Bairro_EE.Name = "Bairro_EE";
-            this.Bairro_EE.ReadOnly = true;
-            this.Bairro_EE.Size = new System.Drawing.Size(261, 20);
-            this.Bairro_EE.TabIndex = 18;
-            this.Bairro_EE.TabStop = false;
+            this.Bairro.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.Bairro.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.Bairro.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.Bairro.Location = new System.Drawing.Point(88, 116);
+            this.Bairro.MaxLength = 50;
+            this.Bairro.Name = "Bairro";
+            this.Bairro.ReadOnly = true;
+            this.Bairro.Size = new System.Drawing.Size(261, 20);
+            this.Bairro.TabIndex = 18;
+            this.Bairro.TabStop = false;
             // 
-            // Cidade_EE
+            // Cidade
             // 
-            this.Cidade_EE.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.Cidade_EE.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.Cidade_EE.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.Cidade_EE.Location = new System.Drawing.Point(132, 142);
-            this.Cidade_EE.MaxLength = 50;
-            this.Cidade_EE.Name = "Cidade_EE";
-            this.Cidade_EE.ReadOnly = true;
-            this.Cidade_EE.Size = new System.Drawing.Size(217, 20);
-            this.Cidade_EE.TabIndex = 20;
-            this.Cidade_EE.TabStop = false;
+            this.Cidade.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.Cidade.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.Cidade.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.Cidade.Location = new System.Drawing.Point(132, 142);
+            this.Cidade.MaxLength = 50;
+            this.Cidade.Name = "Cidade";
+            this.Cidade.ReadOnly = true;
+            this.Cidade.Size = new System.Drawing.Size(217, 20);
+            this.Cidade.TabIndex = 20;
+            this.Cidade.TabStop = false;
             // 
-            // UF_EE
+            // UF
             // 
-            this.UF_EE.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.UF_EE.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.UF_EE.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.UF_EE.Location = new System.Drawing.Point(88, 142);
-            this.UF_EE.MaxLength = 50;
-            this.UF_EE.Name = "UF_EE";
-            this.UF_EE.ReadOnly = true;
-            this.UF_EE.Size = new System.Drawing.Size(38, 20);
-            this.UF_EE.TabIndex = 19;
-            this.UF_EE.TabStop = false;
+            this.UF.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.UF.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.UF.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.UF.Location = new System.Drawing.Point(88, 142);
+            this.UF.MaxLength = 50;
+            this.UF.Name = "UF";
+            this.UF.ReadOnly = true;
+            this.UF.Size = new System.Drawing.Size(38, 20);
+            this.UF.TabIndex = 19;
+            this.UF.TabStop = false;
             // 
-            // EndEntrega
+            // EnderecoButton
             // 
-            this.EndEntrega.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.EndEntrega.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.EndEntrega.FlatAppearance.BorderSize = 0;
-            this.EndEntrega.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(255)))), ((int)(((byte)(230)))));
-            this.EndEntrega.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.EndEntrega.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.EndEntrega.Image = global::GTI_Desktop.Properties.Resources.Alterar;
-            this.EndEntrega.Location = new System.Drawing.Point(330, 168);
-            this.EndEntrega.Name = "EndEntrega";
-            this.EndEntrega.Size = new System.Drawing.Size(19, 19);
-            this.EndEntrega.TabIndex = 21;
-            this.EndEntrega.UseVisualStyleBackColor = true;
+            this.EnderecoButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.EnderecoButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.EnderecoButton.FlatAppearance.BorderSize = 0;
+            this.EnderecoButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(255)))), ((int)(((byte)(230)))));
+            this.EnderecoButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.EnderecoButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.EnderecoButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
+            this.EnderecoButton.Location = new System.Drawing.Point(330, 168);
+            this.EnderecoButton.Name = "EnderecoButton";
+            this.EnderecoButton.Size = new System.Drawing.Size(19, 19);
+            this.EnderecoButton.TabIndex = 21;
+            this.Ttp.SetToolTip(this.EnderecoButton, "Cadastrar o endereço da empresa");
+            this.EnderecoButton.UseVisualStyleBackColor = true;
             // 
             // label28
             // 
@@ -1749,18 +1771,18 @@
             this.label28.Text = "Localização da Empresa";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Logradouro_EE
+            // Logradouro
             // 
-            this.Logradouro_EE.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.Logradouro_EE.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.Logradouro_EE.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.Logradouro_EE.Location = new System.Drawing.Point(88, 39);
-            this.Logradouro_EE.MaxLength = 50;
-            this.Logradouro_EE.Name = "Logradouro_EE";
-            this.Logradouro_EE.ReadOnly = true;
-            this.Logradouro_EE.Size = new System.Drawing.Size(261, 20);
-            this.Logradouro_EE.TabIndex = 14;
-            this.Logradouro_EE.TabStop = false;
+            this.Logradouro.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.Logradouro.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.Logradouro.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.Logradouro.Location = new System.Drawing.Point(88, 39);
+            this.Logradouro.MaxLength = 50;
+            this.Logradouro.Name = "Logradouro";
+            this.Logradouro.ReadOnly = true;
+            this.Logradouro.Size = new System.Drawing.Size(261, 20);
+            this.Logradouro.TabIndex = 14;
+            this.Logradouro.TabStop = false;
             // 
             // label20
             // 
@@ -1774,36 +1796,36 @@
             this.label20.TabIndex = 166;
             this.label20.Text = "UF/Cidade.......:";
             // 
-            // CEP_EE
+            // Cep
             // 
-            this.CEP_EE.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.CEP_EE.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.CEP_EE.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.CEP_EE.Location = new System.Drawing.Point(230, 65);
-            this.CEP_EE.MaxLength = 50;
-            this.CEP_EE.Name = "CEP_EE";
-            this.CEP_EE.ReadOnly = true;
-            this.CEP_EE.Size = new System.Drawing.Size(72, 20);
-            this.CEP_EE.TabIndex = 16;
-            this.CEP_EE.TabStop = false;
+            this.Cep.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.Cep.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.Cep.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.Cep.Location = new System.Drawing.Point(230, 65);
+            this.Cep.MaxLength = 50;
+            this.Cep.Name = "Cep";
+            this.Cep.ReadOnly = true;
+            this.Cep.Size = new System.Drawing.Size(72, 20);
+            this.Cep.TabIndex = 16;
+            this.Cep.TabStop = false;
             // 
-            // Complemento_EE
+            // Complemento
             // 
-            this.Complemento_EE.Location = new System.Drawing.Point(88, 90);
-            this.Complemento_EE.Name = "Complemento_EE";
-            this.Complemento_EE.ReadOnly = true;
-            this.Complemento_EE.Size = new System.Drawing.Size(261, 20);
-            this.Complemento_EE.TabIndex = 17;
-            this.Complemento_EE.TabStop = false;
+            this.Complemento.Location = new System.Drawing.Point(88, 90);
+            this.Complemento.Name = "Complemento";
+            this.Complemento.ReadOnly = true;
+            this.Complemento.Size = new System.Drawing.Size(261, 20);
+            this.Complemento.TabIndex = 17;
+            this.Complemento.TabStop = false;
             // 
-            // Numero_EE
+            // Numero
             // 
-            this.Numero_EE.Location = new System.Drawing.Point(88, 65);
-            this.Numero_EE.Name = "Numero_EE";
-            this.Numero_EE.ReadOnly = true;
-            this.Numero_EE.Size = new System.Drawing.Size(71, 20);
-            this.Numero_EE.TabIndex = 15;
-            this.Numero_EE.TabStop = false;
+            this.Numero.Location = new System.Drawing.Point(88, 65);
+            this.Numero.Name = "Numero";
+            this.Numero.ReadOnly = true;
+            this.Numero.Size = new System.Drawing.Size(71, 20);
+            this.Numero.TabIndex = 15;
+            this.Numero.TabStop = false;
             // 
             // label21
             // 
@@ -2935,47 +2957,47 @@
         internal System.Windows.Forms.Label label13;
         private System.Windows.Forms.CheckBox Vistoria_chk;
         private Owf.Controls.A1Panel a1Panel4;
-        internal System.Windows.Forms.TextBox textBox8;
-        internal System.Windows.Forms.TextBox textBox9;
-        internal System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.Button button2;
+        internal System.Windows.Forms.TextBox Bairro_EE;
+        internal System.Windows.Forms.TextBox Cidade_EE;
+        internal System.Windows.Forms.TextBox UF_EE;
+        private System.Windows.Forms.Button EnderecoEntregaButton;
         private System.Windows.Forms.Label label26;
-        internal System.Windows.Forms.TextBox textBox11;
+        internal System.Windows.Forms.TextBox Logradouro_EE;
         private System.Windows.Forms.Label label29;
-        internal System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.TextBox textBox14;
+        internal System.Windows.Forms.TextBox Cep_EE;
+        private System.Windows.Forms.TextBox Complemento_EE;
+        private System.Windows.Forms.TextBox Numero_EE;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label label34;
         private Owf.Controls.A1Panel a1Panel3;
-        internal System.Windows.Forms.TextBox Bairro_EE;
-        internal System.Windows.Forms.TextBox Cidade_EE;
-        internal System.Windows.Forms.TextBox UF_EE;
-        private System.Windows.Forms.Button EndEntrega;
+        internal System.Windows.Forms.TextBox Bairro;
+        internal System.Windows.Forms.TextBox Cidade;
+        internal System.Windows.Forms.TextBox UF;
+        private System.Windows.Forms.Button EnderecoButton;
         private System.Windows.Forms.Label label28;
-        internal System.Windows.Forms.TextBox Logradouro_EE;
+        internal System.Windows.Forms.TextBox Logradouro;
         private System.Windows.Forms.Label label20;
-        internal System.Windows.Forms.TextBox CEP_EE;
-        private System.Windows.Forms.TextBox Complemento_EE;
-        private System.Windows.Forms.TextBox Numero_EE;
+        internal System.Windows.Forms.TextBox Cep;
+        private System.Windows.Forms.TextBox Complemento;
+        private System.Windows.Forms.TextBox Numero;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.CheckBox checkBox11;
-        private System.Windows.Forms.TextBox textBox15;
+        private System.Windows.Forms.CheckBox MesmoEndereco;
+        private System.Windows.Forms.TextBox HomePage;
         internal System.Windows.Forms.Label label47;
-        internal System.Windows.Forms.Label label46;
-        internal System.Windows.Forms.Label label45;
-        internal System.Windows.Forms.Label label44;
-        internal System.Windows.Forms.Label label43;
-        internal System.Windows.Forms.Label label42;
-        internal System.Windows.Forms.Label lblSetor;
-        internal System.Windows.Forms.Label lblDistrito;
+        internal System.Windows.Forms.Label Subunidade;
+        internal System.Windows.Forms.Label Unidade;
+        internal System.Windows.Forms.Label Face;
+        internal System.Windows.Forms.Label Lote;
+        internal System.Windows.Forms.Label Quadra;
+        internal System.Windows.Forms.Label Setor;
+        internal System.Windows.Forms.Label Distrito;
         internal System.Windows.Forms.Label label35;
         internal System.Windows.Forms.Label label36;
         internal System.Windows.Forms.Label label37;
@@ -2987,7 +3009,7 @@
         internal System.Windows.Forms.Label label48;
         private System.Windows.Forms.TabPage RStab;
         private System.Windows.Forms.ToolStripButton PhotoButton;
-        internal System.Windows.Forms.Label label51;
+        internal System.Windows.Forms.Label CodigoImovel;
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;

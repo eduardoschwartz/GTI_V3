@@ -1,6 +1,7 @@
 ﻿using GTI_Models.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace GTI_Dal.Classes {
@@ -115,6 +116,13 @@ namespace GTI_Dal.Classes {
             return ret;
         }
 
+        public bool Empresa_Simples(int Codigo,DateTime Data) {
+            using (var db = new GTI_Context(_connection)) {
+                short nRet = db.Database.SqlQuery<short>("SELECT dbo.RETORNASN2(@Codigo,@Data)", new SqlParameter("@Codigo", Codigo), new SqlParameter("@Data", Data)).Single();
+                return nRet == 1 ? true : false;
+            }
+        }
+
         public EmpresaStruct Retorna_Empresa(int Codigo) {
             using (var db = new GTI_Context(_connection)) {
                 var reg = (from m in db.Mobiliario
@@ -159,6 +167,7 @@ namespace GTI_Dal.Classes {
                 row.Bairro_nome = reg.Bairro_nome;
                 row.Cidade_nome = reg.Cidade_nome;
                 row.UF = reg.UF;
+                row.Endereco_codigo = reg.Endereco_codigo;
                 row.Endereco_nome = reg.Endereco_nome;
                 row.Numero = reg.Numero;
                 row.Complemento = reg.Complemento;
@@ -203,8 +212,11 @@ namespace GTI_Dal.Classes {
                 
 
                 row.Atividade_extenso = reg.Atividade_extenso ?? "";
-                Endereco_Data Cep_Class = new Endereco_Data(_connection);
-                //row.Cep = Cep_Class.RetornaCep(Convert.ToInt32(reg.Clogradouro), Convert.ToInt16(reg.Numero)) == 0 ? "00000000" : Cep_Class.RetornaCep(Convert.ToInt32(reg.Codlogradouro), Convert.ToInt16(reg.Numero)).ToString("0000");
+                if (reg.Cidade_codigo == 413) {
+                    Endereco_Data Cep_Class = new Endereco_Data(_connection);
+                    int nCep = Cep_Class.RetornaCep((int)reg.Endereco_codigo, (short)reg.Numero);
+                    row.Cep = nCep == 0 ? "00000000" : nCep.ToString("0000");
+                }
 
                 return row;
             }

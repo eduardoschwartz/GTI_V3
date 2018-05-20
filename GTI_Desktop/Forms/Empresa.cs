@@ -61,7 +61,6 @@ namespace GTI_Desktop.Forms {
             PlacaOKButton.Enabled = !bStart;
             PlacaCancelButton.Enabled = !bStart;
             Placa.ReadOnly = bStart;
-            SimplesButton.Enabled = !bStart;
             InscTemp_chk.AutoCheck = !bStart;
             SustitutoTrib_chk.AutoCheck = !bStart;
             AlvaraAuto_chk.AutoCheck = !bStart;
@@ -110,6 +109,23 @@ namespace GTI_Desktop.Forms {
             StatusEmpresa.Text = "";
             SimplesNacional.Text = "NÃO";
             OptanteMei.Text = "NÃO";
+            Logradouro.Text = "";
+            Numero.Text = "";
+            Complemento.Text = "";
+            Cep.Text = "";
+            Bairro.Text = "";
+            Cidade.Text = "";
+            UF.Text = "";
+            CodigoImovel.Text = "000000";
+            Logradouro_EE.Text = "";
+            Numero_EE.Text = "";
+            Complemento_EE.Text = "";
+            Cep_EE.Text = "";
+            Bairro_EE.Text = "";
+            Cidade_EE.Text = "";
+            UF_EE.Text = "";
+            MesmoEndereco.Checked = false;
+
         }
 
         private void CarregaLista() {
@@ -169,9 +185,38 @@ namespace GTI_Desktop.Forms {
             Close();
         }
 
+        private void SILList_MouseMove(object sender, MouseEventArgs e) {
+            int newHoveredIndex = SILList.IndexFromPoint(e.Location);
+            //ToolTip para a lista SIL
+            if (hoveredIndex != newHoveredIndex) {
+                hoveredIndex = newHoveredIndex;
+                if (hoveredIndex > -1) {
+                    Ttp.Active = false;
+                    Ttp.SetToolTip(SILList, ((sil)SILList.Items[hoveredIndex]).Sil);
+                    Ttp.Active = true;
+                }
+            }
+        }
+
+        private void QtdeFuncionario_KeyPress(object sender, KeyPressEventArgs e) {
+            const char Delete = (char)8;
+            e.Handled = !Char.IsDigit(e.KeyChar) && e.KeyChar != Delete;
+        }
+
+        private void CapitalSocial_KeyPress(object sender, KeyPressEventArgs e) {
+            if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 44)) {
+                e.Handled = true;
+                return;
+            }
+            if (e.KeyChar == 44) {
+                if ((sender as TextBox).Text.IndexOf(e.KeyChar) != -1)
+                    e.Handled = true;
+            }
+        }
+
         private void CodigoButton_Click(object sender, EventArgs e) {
             inputBox z = new inputBox();
-            String sCod = z.Show("", "Informação", "Digite ó código do imóvel.", 6, gtiCore.eTweakMode.IntegerPositive);
+            String sCod = z.Show("", "Informação", "Digite a inscrição municipal.", 6, gtiCore.eTweakMode.IntegerPositive);
             if (!string.IsNullOrEmpty(sCod)) {
                 gtiCore.Ocupado(this);
                 Empresa_bll empresa_Class = new Empresa_bll(_connection);
@@ -211,7 +256,6 @@ namespace GTI_Desktop.Forms {
             else 
                 StatusEmpresa.ForeColor = Color.Blue;
 
-
             DataAbertura.Text = Reg.Data_abertura.ToString("dd/MM/yyyy");
             NumProcessoAbertura.Text = Reg.Numprocesso;
             if(gtiCore.IsDate(Reg.Dataprocesso.ToString()))
@@ -244,20 +288,42 @@ namespace GTI_Desktop.Forms {
             SILList.DataSource = empresa_Class.Lista_Sil(Codigo);
             SILList.DisplayMember = "Sil";
 
+            bool bMei = empresa_Class.Empresa_Mei(Codigo);
+            if (bMei) {
+                OptanteMei.Text = "SIM";
+                OptanteMei.ForeColor = Color.Green;
+            }else {
+                OptanteMei.Text = "NÃO";
+                OptanteMei.ForeColor = Color.DarkRed;
+            }
+
+            bool bSimples = empresa_Class.Empresa_Simples(Codigo,DateTime.Now);
+            if (bSimples) {
+                SimplesNacional.Text =  "SIM" ;
+                SimplesNacional.ForeColor = Color.Green;
+                SimplesButton.Enabled = true;
+            } else {
+                SimplesNacional.Text = "NÃO";
+                SimplesNacional.ForeColor = Color.DarkRed;
+                SimplesButton.Enabled = false;
+            }
+
+            Logradouro.Text = Reg.Endereco_nome;
+            Logradouro.Tag = Reg.Endereco_codigo.ToString();
+            Numero.Text = Reg.Numero.ToString();
+            Complemento.Text = Reg.Complemento;
+            Bairro.Text = Reg.Bairro_nome;
+            Bairro.Tag = Reg.Bairro_codigo.ToString();
+            Cidade.Text = Reg.Cidade_nome;
+            Cidade.Tag = Reg.Cidade_codigo.ToString();
+            UF.Text = Reg.UF;
+            Cep.Text = Reg.Cep;
+
         }
 
-        private void SILList_MouseMove(object sender, MouseEventArgs e) {
-            int newHoveredIndex = SILList.IndexFromPoint(e.Location);
-            //ToolTip para a lista SIL
-            if (hoveredIndex != newHoveredIndex) {
-                hoveredIndex = newHoveredIndex;
-                if (hoveredIndex > -1) {
-                    Ttp.Active = false;
-                    Ttp.SetToolTip(SILList, ((sil)SILList.Items[hoveredIndex]).Sil);
-                    Ttp.Active = true;
-                } 
-            } 
-        }
+
+        
+
 
 
 

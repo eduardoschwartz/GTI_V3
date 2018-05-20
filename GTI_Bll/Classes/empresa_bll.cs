@@ -105,5 +105,17 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Sil(Codigo);
         }
 
+        /// <summary>
+        /// Retorna True se a empresa for do simpels e false se nãop for.
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <param name="Data"></param>
+        /// <returns></returns>
+        public bool Empresa_Simples(int Codigo, DateTime Data) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Empresa_Simples(Codigo,Data);
+        }
+
+
     }
 }

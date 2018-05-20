@@ -225,7 +225,7 @@ namespace GTI_Desktop.Forms {
 
         private void BtCod_Click(object sender, EventArgs e) {
             inputBox z = new inputBox();
-            String sCod = z.Show("", "Informação", "Digite ó código do imóvel.", 6, gtiCore.eTweakMode.IntegerPositive);
+            String sCod = z.Show("", "Informação", "Digite o código do imóvel.", 6, gtiCore.eTweakMode.IntegerPositive);
             if (!string.IsNullOrEmpty(sCod)) {
                 gtiCore.Ocupado(this);
                 Imovel_bll clsImovel = new Imovel_bll(_connection);
