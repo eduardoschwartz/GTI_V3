@@ -118,10 +118,13 @@ namespace GTI_Models.Models {
         public float? Capital_social { get; set; }
         public string Nome_orgao { get; set; }
         public int? prof_responsavel_codigo { get; set; }
+        public string prof_responsavel_nome { get; set; }
+        public string Prof_responsavel_conselho { get; set; }
+        public string Prof_responsavel_registro { get; set; }
         public string Numero_registro_resp { get; set; }
         public short? Qtde_socio { get; set; }
         public short? Qtde_empregado { get; set; }
-        public short? Responsavel_contabil { get; set; }
+        public short? Responsavel_contabil_codigo { get; set; }
         public string Rg_responsavel { get; set; }
         public string Orgao_emissor_resp { get; set; }
         public string Nome_contato { get; set; }

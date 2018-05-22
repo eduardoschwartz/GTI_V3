@@ -130,19 +130,21 @@ namespace GTI_Dal.Classes {
                            join c in db.Cidade on new { p1 = (short)m.Codcidade, p2 = m.Siglauf } equals new { p1 = c.Codcidade, p2 = c.Siglauf } into mc from c in mc.DefaultIfEmpty()
                            join l in db.Logradouro on m.Codlogradouro equals l.Codlogradouro into lm from l in lm.DefaultIfEmpty()
                            join h in db.Horariofunc on m.Horario equals h.Codhorario into hm from h in hm.DefaultIfEmpty()
+                           join p in db.Cidadao on m.Codprofresp equals p.Codcidadao into mp from p in mp.DefaultIfEmpty()
                            where m.Codigomob == Codigo
                            select new EmpresaStruct{Codigo= m.Codigomob, Razao_social= m.Razaosocial,Nome_fantasia=m.Nomefantasia,Endereco_codigo=m.Codlogradouro,Endereco_nome= l.Endereco,Numero=  m.Numero,Complemento= m.Complemento,
                                                     Bairro_codigo=m.Codbairro,Bairro_nome=b.Descbairro,Cidade_codigo=m.Codcidade,Cidade_nome=c.Desccidade,UF=m.Siglauf,Cep=m.Cep,Homepage=m.Homepage,Horario=m.Horario,
                                                     Data_abertura=m.Dataabertura,Numprocesso=m.Numprocesso,Dataprocesso=m.Dataprocesso,Data_Encerramento=m.Dataencerramento,Numprocessoencerramento=m.Numprocencerramento,
                                                     Dataprocencerramento=m.Dataprocencerramento,Inscricao_estadual=m.Inscestadual,Isencao=m.Isencao,Atividade_codigo=m.Codatividade,Atividade_extenso=m.Ativextenso,Area=m.Areatl,
                                                     Codigo_aliquota=m.Codigoaliq,Data_inicial_desconto=m.Datainicialdesc,Data_final_desconto=m.Datafinaldesc,Percentual_desconto=m.Percdesconto,Capital_social=m.Capitalsocial,
-                                                    Nome_orgao=m.Nomeorgao,prof_responsavel_codigo=m.Codprofresp,Numero_registro_resp=m.Numregistroresp,Qtde_socio=m.Qtdesocio,Qtde_empregado=m.Qtdeempregado,Responsavel_contabil=m.Respcontabil,
+                                                    Nome_orgao=m.Nomeorgao,prof_responsavel_codigo=m.Codprofresp,Numero_registro_resp=m.Numregistroresp,Qtde_socio=m.Qtdesocio,Qtde_empregado=m.Qtdeempregado,Responsavel_contabil_codigo=m.Respcontabil,
                                                     Rg_responsavel=m.Rgresp,Orgao_emissor_resp=m.Orgaoemisresp,Nome_contato=m.Nomecontato,Cargo_contato=m.Cargocontato,Fone_contato=m.Fonecontato,Fax_contato=m.Faxcontato,
                                                     Email_contato=m.Emailcontato,Vistoria=m.Vistoria,Qtde_profissionais=m.Qtdeprof,Rg=m.Rg,Orgao=m.Orgao,Nome_logradouro=m.Nomelogradouro,Simples=m.Simples,Regime_especial=m.Regespecial,
                                                     Alvara=m.Alvara,Data_simples=m.Datasimples,Isento_taxa=m.Isentotaxa,Mei=m.Mei,Horario_extenso=m.Horarioext,Iss_eletro=m.Isseletro,Dispensa_ie_data=m.Dispensaiedata,
                                                     Dispensa_ie_processo=m.Dispensaieproc,Data_alvara_provisorio=m.Dtalvaraprovisorio,Senha_iss=m.Senhaiss,Inscricao_temporaria=m.Insctemp,Horas_24=m.Horas24,Isento_iss=m.Isentoiss,
                                                     Bombonieri=m.Bombonieri,Emite_nf=m.Emitenf,Danfe=m.Danfe,Imovel=m.Imovel,Sil=m.Sil,Substituto_tributario_issqn=m.Substituto_tributario_issqn,Individual=m.Individual,
-                                                    Ponto_agencia=m.Ponto_agencia,Cadastro_vre=m.Cadastro_vre,Liberado_vre=m.Liberado_vre,Cpf=m.Cpf,Cnpj=m.Cnpj
+                                                    Ponto_agencia=m.Ponto_agencia,Cadastro_vre=m.Cadastro_vre,Liberado_vre=m.Liberado_vre,Cpf=m.Cpf,Cnpj=m.Cnpj,Prof_responsavel_registro=m.Numregistroresp,
+                                                    Prof_responsavel_conselho=m.Nomeorgao,prof_responsavel_nome=p.Nomecidadao
                            }).FirstOrDefault();
 
 
@@ -231,7 +233,15 @@ namespace GTI_Dal.Classes {
                     row.Imovel = regImovel.Codigo;
                 }
 
-
+                row.Nome_contato = reg.Nome_contato;
+                row.Fone_contato = reg.Fone_contato;
+                row.Email_contato = reg.Email_contato;
+                row.Cargo_contato = reg.Cargo_contato;
+                row.prof_responsavel_codigo = reg.prof_responsavel_codigo;
+                row.prof_responsavel_nome = reg.prof_responsavel_nome;
+                row.Prof_responsavel_registro = reg.Prof_responsavel_registro;
+                row.Prof_responsavel_conselho = reg.Prof_responsavel_conselho;
+                row.Responsavel_contabil_codigo = reg.Responsavel_contabil_codigo;
 
                 return row;
             }
@@ -308,6 +318,56 @@ namespace GTI_Dal.Classes {
                            join c in db.Cidadao on m.Codcidadao equals c.Codcidadao where  m.Codmobiliario==Codigo
                            orderby c.Nomecidadao select new MobiliarioproprietarioStruct {Codcidadao=m.Codcidadao,Nome=c.Nomecidadao }).ToList();
                 return Sql;
+            }
+        }
+
+        public List<Escritoriocontabil> Lista_Escritorio_Contabil() {
+            using (var db = new GTI_Context(_connection)) {
+                var Sql = (from e in db.Escritoriocontabil where e.Codigoesc>0 orderby e.Nomeesc  select e).ToList();
+                return Sql;
+            }
+        }
+
+        public EscritoriocontabilStruct Dados_Escritorio_Contabil(int Codigo) {
+            using (var db = new GTI_Context(_connection)) {
+                var reg = (from m in db.Escritoriocontabil
+                           join b in db.Bairro on  m.Codbairro equals b.Codbairro  into mb from b in mb.DefaultIfEmpty()
+                           join l in db.Logradouro on m.Codlogradouro equals l.Codlogradouro into lm from l in lm.DefaultIfEmpty()
+                           where m.Codigoesc == Codigo
+                           select new EscritoriocontabilStruct {Codigo=m.Codigoesc,Nome=m.Nomeesc,Logradouro_Codigo=m.Codlogradouro,Logradouro_Nome=l.Endereco,Numero=m.Numero,
+                           Complemento=m.Complemento,Bairro_Codigo=m.Codbairro,Bairro_Nome=b.Descbairro,Cidade_Nome=m.Nomecidade,UF=m.UF,Telefone=m.Telefone,Email=m.Email,
+                           Cpf=m.Cpf,Cnpj=m.Cnpj,Im=m.Im,Crc=m.Crc,Recebecarne=m.Recebecarne
+                           }).FirstOrDefault();
+
+                EscritoriocontabilStruct row = new EscritoriocontabilStruct();
+                if (reg == null)
+                    return row;
+                row.Codigo = reg.Codigo;
+                row.Nome = reg.Nome;
+                row.Logradouro_Codigo = reg.Logradouro_Codigo;
+                row.Logradouro_Nome = reg.Logradouro_Nome;
+                row.Numero = reg.Numero;
+                row.Complemento = reg.Complemento;
+                row.Bairro_Codigo = reg.Bairro_Codigo;
+                row.Bairro_Nome = reg.Bairro_Nome;
+                row.Cidade_Codigo = reg.Cidade_Codigo;
+                row.Cidade_Nome = reg.Cidade_Nome;
+                row.UF = reg.UF;
+                row.Cpf = reg.Cpf;
+                row.Cnpj = reg.Cnpj;
+                row.Crc = reg.Crc;
+                row.Email = reg.Email;
+                row.Im = reg.Im;
+                row.Telefone = reg.Telefone;
+                row.Recebecarne = reg.Recebecarne;
+
+                if (reg.Logradouro_Codigo >0) {
+                    Endereco_Data Cep_Class = new Endereco_Data(_connection);
+                    int nCep = Cep_Class.RetornaCep((int)reg.Logradouro_Codigo, (short)reg.Numero);
+                    row.Cep = nCep == 0 ? "00000000" : nCep.ToString("0000");
+                }
+
+                return row;
             }
         }
 

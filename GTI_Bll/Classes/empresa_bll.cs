@@ -171,6 +171,25 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Empresa_Proprietario(Codigo);
         }
 
+        /// <summary>
+        /// Lista dos escritórios de contabilidade
+        /// </summary>
+        /// <returns></returns>
+        public List<Escritoriocontabil> Lista_Escritorio_Contabil() {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Lista_Escritorio_Contabil();
+        }
+
+        /// <summary>
+        /// Retorna os dados do escritório contabil
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public EscritoriocontabilStruct Dados_Escritorio_Contabil(int Codigo) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Dados_Escritorio_Contabil(Codigo);
+        }
+
 
     }
 }

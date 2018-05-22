@@ -130,6 +130,9 @@
             this.label40 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
             this.a1Panel4 = new Owf.Controls.A1Panel();
+            this.EnderecoentregaToolStrip = new System.Windows.Forms.ToolStrip();
+            this.EnderecoentregaButton = new System.Windows.Forms.ToolStripButton();
+            this.MesmoEndereco = new System.Windows.Forms.CheckBox();
             this.Bairro_EE = new System.Windows.Forms.TextBox();
             this.Cidade_EE = new System.Windows.Forms.TextBox();
             this.UF_EE = new System.Windows.Forms.TextBox();
@@ -145,6 +148,9 @@
             this.label33 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
             this.a1Panel3 = new Owf.Controls.A1Panel();
+            this.EnderecoToolStrip = new System.Windows.Forms.ToolStrip();
+            this.FotoButton = new System.Windows.Forms.ToolStripButton();
+            this.EnderecoButton = new System.Windows.Forms.ToolStripButton();
             this.CodigoImovel = new System.Windows.Forms.Label();
             this.label50 = new System.Windows.Forms.Label();
             this.Bairro = new System.Windows.Forms.TextBox();
@@ -162,23 +168,37 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.RStab = new System.Windows.Forms.TabPage();
+            this.a1Panel8 = new Owf.Controls.A1Panel();
+            this.ProprietarioToolStrip = new System.Windows.Forms.ToolStrip();
+            this.ProprietarioAddButton = new System.Windows.Forms.ToolStripButton();
+            this.ProprietarioDelButton = new System.Windows.Forms.ToolStripButton();
+            this.ProprietarioList = new System.Windows.Forms.ListBox();
+            this.label52 = new System.Windows.Forms.Label();
+            this.a1Panel7 = new Owf.Controls.A1Panel();
+            this.ContadorEmailButton = new System.Windows.Forms.Button();
+            this.ContadorEmail = new System.Windows.Forms.TextBox();
+            this.label75 = new System.Windows.Forms.Label();
+            this.label61 = new System.Windows.Forms.Label();
+            this.ContadorFone = new System.Windows.Forms.TextBox();
+            this.label63 = new System.Windows.Forms.Label();
+            this.ContadorNome = new System.Windows.Forms.TextBox();
+            this.label64 = new System.Windows.Forms.Label();
             this.a1Panel6 = new Owf.Controls.A1Panel();
             this.label53 = new System.Windows.Forms.Label();
-            this.textBox19 = new System.Windows.Forms.TextBox();
+            this.ContatoEmail = new System.Windows.Forms.TextBox();
             this.label57 = new System.Windows.Forms.Label();
-            this.textBox18 = new System.Windows.Forms.TextBox();
+            this.ContatoFone = new System.Windows.Forms.TextBox();
             this.label56 = new System.Windows.Forms.Label();
-            this.textBox17 = new System.Windows.Forms.TextBox();
+            this.ContatoCargo = new System.Windows.Forms.TextBox();
             this.label55 = new System.Windows.Forms.Label();
-            this.textBox16 = new System.Windows.Forms.TextBox();
+            this.ContatoNome = new System.Windows.Forms.TextBox();
             this.label54 = new System.Windows.Forms.Label();
             this.a1Panel5 = new Owf.Controls.A1Panel();
-            this.label62 = new System.Windows.Forms.Label();
-            this.textBox20 = new System.Windows.Forms.TextBox();
+            this.ProfissionalRegistro = new System.Windows.Forms.TextBox();
             this.label58 = new System.Windows.Forms.Label();
-            this.textBox21 = new System.Windows.Forms.TextBox();
+            this.ProfissionalConselho = new System.Windows.Forms.TextBox();
             this.label59 = new System.Windows.Forms.Label();
-            this.textBox22 = new System.Windows.Forms.TextBox();
+            this.ProfissionalNome = new System.Windows.Forms.TextBox();
             this.label60 = new System.Windows.Forms.Label();
             this.ATtab = new System.Windows.Forms.TabPage();
             this.a1Panel11 = new Owf.Controls.A1Panel();
@@ -228,27 +248,12 @@
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.FotoButton = new System.Windows.Forms.ToolStripButton();
-            this.EnderecoToolStrip = new System.Windows.Forms.ToolStrip();
-            this.EnderecoButton = new System.Windows.Forms.ToolStripButton();
-            this.MesmoEndereco = new System.Windows.Forms.CheckBox();
-            this.EnderecoentregaToolStrip = new System.Windows.Forms.ToolStrip();
-            this.EnderecoentregaButton = new System.Windows.Forms.ToolStripButton();
-            this.label64 = new System.Windows.Forms.Label();
-            this.textBox25 = new System.Windows.Forms.TextBox();
-            this.label63 = new System.Windows.Forms.Label();
-            this.textBox24 = new System.Windows.Forms.TextBox();
-            this.label61 = new System.Windows.Forms.Label();
-            this.label75 = new System.Windows.Forms.Label();
-            this.textBox31 = new System.Windows.Forms.TextBox();
-            this.button15 = new System.Windows.Forms.Button();
-            this.a1Panel7 = new Owf.Controls.A1Panel();
-            this.a1Panel8 = new Owf.Controls.A1Panel();
-            this.label52 = new System.Windows.Forms.Label();
-            this.ProprietarioList = new System.Windows.Forms.ListBox();
-            this.ProprietarioAddButton = new System.Windows.Forms.ToolStripButton();
-            this.ProprietarioDelButton = new System.Windows.Forms.ToolStripButton();
-            this.ProprietarioToolStrip = new System.Windows.Forms.ToolStrip();
+            this.ContadorList = new System.Windows.Forms.ComboBox();
+            this.RemoveContadorButon = new System.Windows.Forms.Button();
+            this.label62 = new System.Windows.Forms.Label();
+            this.ProfissionalToolStrip = new System.Windows.Forms.ToolStrip();
+            this.ProfissionalAddButton = new System.Windows.Forms.ToolStripButton();
+            this.ProfissionalDelButton = new System.Windows.Forms.ToolStripButton();
             this.a1Panel1.SuspendLayout();
             this.CodigoToolStrip.SuspendLayout();
             this.tBar.SuspendLayout();
@@ -261,8 +266,13 @@
             this.a1Panel2.SuspendLayout();
             this.ENtab.SuspendLayout();
             this.a1Panel4.SuspendLayout();
+            this.EnderecoentregaToolStrip.SuspendLayout();
             this.a1Panel3.SuspendLayout();
+            this.EnderecoToolStrip.SuspendLayout();
             this.RStab.SuspendLayout();
+            this.a1Panel8.SuspendLayout();
+            this.ProprietarioToolStrip.SuspendLayout();
+            this.a1Panel7.SuspendLayout();
             this.a1Panel6.SuspendLayout();
             this.a1Panel5.SuspendLayout();
             this.ATtab.SuspendLayout();
@@ -271,11 +281,7 @@
             this.a1Panel9.SuspendLayout();
             this.HStab.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            this.EnderecoToolStrip.SuspendLayout();
-            this.EnderecoentregaToolStrip.SuspendLayout();
-            this.a1Panel7.SuspendLayout();
-            this.a1Panel8.SuspendLayout();
-            this.ProprietarioToolStrip.SuspendLayout();
+            this.ProfissionalToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // a1Panel1
@@ -1451,6 +1457,43 @@
             this.a1Panel4.Size = new System.Drawing.Size(368, 209);
             this.a1Panel4.TabIndex = 157;
             // 
+            // EnderecoentregaToolStrip
+            // 
+            this.EnderecoentregaToolStrip.BackColor = System.Drawing.Color.Transparent;
+            this.EnderecoentregaToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.EnderecoentregaToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.EnderecoentregaToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.EnderecoentregaButton});
+            this.EnderecoentregaToolStrip.Location = new System.Drawing.Point(320, 168);
+            this.EnderecoentregaToolStrip.Name = "EnderecoentregaToolStrip";
+            this.EnderecoentregaToolStrip.Size = new System.Drawing.Size(26, 25);
+            this.EnderecoentregaToolStrip.TabIndex = 174;
+            this.EnderecoentregaToolStrip.TabStop = true;
+            this.EnderecoentregaToolStrip.Text = "toolStrip3";
+            // 
+            // EnderecoentregaButton
+            // 
+            this.EnderecoentregaButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.EnderecoentregaButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.EnderecoentregaButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
+            this.EnderecoentregaButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.EnderecoentregaButton.Name = "EnderecoentregaButton";
+            this.EnderecoentregaButton.Size = new System.Drawing.Size(23, 22);
+            this.EnderecoentregaButton.Text = "toolStripButton2";
+            this.EnderecoentregaButton.ToolTipText = "Alterar o endereço de entrega";
+            // 
+            // MesmoEndereco
+            // 
+            this.MesmoEndereco.AutoSize = true;
+            this.MesmoEndereco.ForeColor = System.Drawing.Color.Navy;
+            this.MesmoEndereco.Location = new System.Drawing.Point(7, 171);
+            this.MesmoEndereco.Name = "MesmoEndereco";
+            this.MesmoEndereco.Size = new System.Drawing.Size(185, 17);
+            this.MesmoEndereco.TabIndex = 171;
+            this.MesmoEndereco.Text = "Utilizar o endereço de localização";
+            this.MesmoEndereco.UseVisualStyleBackColor = true;
+            this.MesmoEndereco.CheckedChanged += new System.EventHandler(this.MesmoEndereco_CheckedChanged);
+            // 
             // Bairro_EE
             // 
             this.Bairro_EE.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
@@ -1649,6 +1692,43 @@
             this.a1Panel3.ShadowOffSet = 7;
             this.a1Panel3.Size = new System.Drawing.Size(368, 208);
             this.a1Panel3.TabIndex = 156;
+            // 
+            // EnderecoToolStrip
+            // 
+            this.EnderecoToolStrip.AutoSize = false;
+            this.EnderecoToolStrip.BackColor = System.Drawing.Color.Transparent;
+            this.EnderecoToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.EnderecoToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.EnderecoToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FotoButton,
+            this.EnderecoButton});
+            this.EnderecoToolStrip.Location = new System.Drawing.Point(135, 168);
+            this.EnderecoToolStrip.Name = "EnderecoToolStrip";
+            this.EnderecoToolStrip.Size = new System.Drawing.Size(214, 25);
+            this.EnderecoToolStrip.TabIndex = 173;
+            this.EnderecoToolStrip.TabStop = true;
+            this.EnderecoToolStrip.Text = "toolStrip3";
+            // 
+            // FotoButton
+            // 
+            this.FotoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.FotoButton.Image = global::GTI_Desktop.Properties.Resources.photo_16x16;
+            this.FotoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.FotoButton.Name = "FotoButton";
+            this.FotoButton.Size = new System.Drawing.Size(23, 22);
+            this.FotoButton.Text = "toolStripButton4";
+            this.FotoButton.ToolTipText = "Imagem da Empresa";
+            // 
+            // EnderecoButton
+            // 
+            this.EnderecoButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.EnderecoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.EnderecoButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
+            this.EnderecoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.EnderecoButton.Name = "EnderecoButton";
+            this.EnderecoButton.Size = new System.Drawing.Size(23, 22);
+            this.EnderecoButton.Text = "toolStripButton2";
+            this.EnderecoButton.ToolTipText = "Alterar o endereço de localização";
             // 
             // CodigoImovel
             // 
@@ -1853,17 +1933,207 @@
             this.RStab.TabIndex = 2;
             this.RStab.Text = "Responsável";
             // 
+            // a1Panel8
+            // 
+            this.a1Panel8.BorderColor = System.Drawing.Color.Gray;
+            this.a1Panel8.Controls.Add(this.ProprietarioToolStrip);
+            this.a1Panel8.Controls.Add(this.ProprietarioList);
+            this.a1Panel8.Controls.Add(this.label52);
+            this.a1Panel8.GradientEndColor = System.Drawing.SystemColors.Control;
+            this.a1Panel8.GradientStartColor = System.Drawing.SystemColors.Control;
+            this.a1Panel8.Image = null;
+            this.a1Panel8.ImageLocation = new System.Drawing.Point(4, 4);
+            this.a1Panel8.Location = new System.Drawing.Point(11, 13);
+            this.a1Panel8.Name = "a1Panel8";
+            this.a1Panel8.Size = new System.Drawing.Size(367, 115);
+            this.a1Panel8.TabIndex = 221;
+            // 
+            // ProprietarioToolStrip
+            // 
+            this.ProprietarioToolStrip.BackColor = System.Drawing.Color.Transparent;
+            this.ProprietarioToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.ProprietarioToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.ProprietarioToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ProprietarioAddButton,
+            this.ProprietarioDelButton});
+            this.ProprietarioToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.ProprietarioToolStrip.Location = new System.Drawing.Point(333, 29);
+            this.ProprietarioToolStrip.Name = "ProprietarioToolStrip";
+            this.ProprietarioToolStrip.Size = new System.Drawing.Size(24, 48);
+            this.ProprietarioToolStrip.TabIndex = 226;
+            this.ProprietarioToolStrip.Text = "toolStrip2";
+            // 
+            // ProprietarioAddButton
+            // 
+            this.ProprietarioAddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ProprietarioAddButton.Image = global::GTI_Desktop.Properties.Resources.add;
+            this.ProprietarioAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ProprietarioAddButton.Name = "ProprietarioAddButton";
+            this.ProprietarioAddButton.Size = new System.Drawing.Size(22, 20);
+            this.ProprietarioAddButton.Text = "Adicionar proprietário";
+            this.ProprietarioAddButton.ToolTipText = "Adicionar novo SIL";
+            // 
+            // ProprietarioDelButton
+            // 
+            this.ProprietarioDelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ProprietarioDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.ProprietarioDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ProprietarioDelButton.Name = "ProprietarioDelButton";
+            this.ProprietarioDelButton.Size = new System.Drawing.Size(22, 20);
+            this.ProprietarioDelButton.Text = "Excluir proprietário";
+            this.ProprietarioDelButton.ToolTipText = "Excluir o SIL Selecionado";
+            // 
+            // ProprietarioList
+            // 
+            this.ProprietarioList.FormattingEnabled = true;
+            this.ProprietarioList.Location = new System.Drawing.Point(5, 22);
+            this.ProprietarioList.Name = "ProprietarioList";
+            this.ProprietarioList.Size = new System.Drawing.Size(325, 82);
+            this.ProprietarioList.TabIndex = 225;
+            // 
+            // label52
+            // 
+            this.label52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label52.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.label52.ForeColor = System.Drawing.Color.LightYellow;
+            this.label52.Location = new System.Drawing.Point(-3, 0);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(365, 18);
+            this.label52.TabIndex = 224;
+            this.label52.Text = "Proprietários e Sócios";
+            this.label52.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // a1Panel7
+            // 
+            this.a1Panel7.BorderColor = System.Drawing.Color.Gray;
+            this.a1Panel7.Controls.Add(this.RemoveContadorButon);
+            this.a1Panel7.Controls.Add(this.ContadorList);
+            this.a1Panel7.Controls.Add(this.ContadorEmailButton);
+            this.a1Panel7.Controls.Add(this.ContadorEmail);
+            this.a1Panel7.Controls.Add(this.label75);
+            this.a1Panel7.Controls.Add(this.label61);
+            this.a1Panel7.Controls.Add(this.ContadorFone);
+            this.a1Panel7.Controls.Add(this.label63);
+            this.a1Panel7.Controls.Add(this.ContadorNome);
+            this.a1Panel7.Controls.Add(this.label64);
+            this.a1Panel7.GradientEndColor = System.Drawing.SystemColors.Control;
+            this.a1Panel7.GradientStartColor = System.Drawing.SystemColors.Control;
+            this.a1Panel7.Image = null;
+            this.a1Panel7.ImageLocation = new System.Drawing.Point(4, 4);
+            this.a1Panel7.Location = new System.Drawing.Point(398, 13);
+            this.a1Panel7.Name = "a1Panel7";
+            this.a1Panel7.Size = new System.Drawing.Size(349, 115);
+            this.a1Panel7.TabIndex = 220;
+            // 
+            // ContadorEmailButton
+            // 
+            this.ContadorEmailButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ContadorEmailButton.Image = global::GTI_Desktop.Properties.Resources.email1;
+            this.ContadorEmailButton.Location = new System.Drawing.Point(314, 80);
+            this.ContadorEmailButton.Name = "ContadorEmailButton";
+            this.ContadorEmailButton.Size = new System.Drawing.Size(25, 21);
+            this.ContadorEmailButton.TabIndex = 230;
+            this.ContadorEmailButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.ContadorEmailButton, "Enviar email para o contador");
+            this.ContadorEmailButton.UseVisualStyleBackColor = true;
+            // 
+            // ContadorEmail
+            // 
+            this.ContadorEmail.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.ContadorEmail.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.ContadorEmail.Location = new System.Drawing.Point(66, 81);
+            this.ContadorEmail.MaxLength = 200;
+            this.ContadorEmail.Name = "ContadorEmail";
+            this.ContadorEmail.ReadOnly = true;
+            this.ContadorEmail.Size = new System.Drawing.Size(242, 20);
+            this.ContadorEmail.TabIndex = 225;
+            this.ContadorEmail.TabStop = false;
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.BackColor = System.Drawing.Color.Transparent;
+            this.label75.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label75.ForeColor = System.Drawing.Color.Black;
+            this.label75.Location = new System.Drawing.Point(13, 84);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(47, 13);
+            this.label75.TabIndex = 224;
+            this.label75.Text = "Email....:";
+            // 
+            // label61
+            // 
+            this.label61.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label61.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.label61.ForeColor = System.Drawing.Color.LightYellow;
+            this.label61.Location = new System.Drawing.Point(0, 0);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(344, 18);
+            this.label61.TabIndex = 223;
+            this.label61.Text = "Responsável Contábil";
+            this.label61.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // ContadorFone
+            // 
+            this.ContadorFone.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.ContadorFone.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.ContadorFone.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.ContadorFone.Location = new System.Drawing.Point(66, 55);
+            this.ContadorFone.MaxLength = 40;
+            this.ContadorFone.Name = "ContadorFone";
+            this.ContadorFone.ReadOnly = true;
+            this.ContadorFone.Size = new System.Drawing.Size(271, 20);
+            this.ContadorFone.TabIndex = 221;
+            this.ContadorFone.TabStop = false;
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.BackColor = System.Drawing.Color.Transparent;
+            this.label63.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label63.ForeColor = System.Drawing.Color.Black;
+            this.label63.Location = new System.Drawing.Point(13, 58);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(46, 13);
+            this.label63.TabIndex = 222;
+            this.label63.Text = "Fone....:";
+            // 
+            // ContadorNome
+            // 
+            this.ContadorNome.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.ContadorNome.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.ContadorNome.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.ContadorNome.Location = new System.Drawing.Point(66, 29);
+            this.ContadorNome.MaxLength = 100;
+            this.ContadorNome.Name = "ContadorNome";
+            this.ContadorNome.ReadOnly = true;
+            this.ContadorNome.Size = new System.Drawing.Size(242, 20);
+            this.ContadorNome.TabIndex = 219;
+            this.ContadorNome.TabStop = false;
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.BackColor = System.Drawing.Color.Transparent;
+            this.label64.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label64.ForeColor = System.Drawing.Color.Black;
+            this.label64.Location = new System.Drawing.Point(13, 32);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(47, 13);
+            this.label64.TabIndex = 220;
+            this.label64.Text = "Nome...:";
+            // 
             // a1Panel6
             // 
             this.a1Panel6.BorderColor = System.Drawing.Color.Gray;
             this.a1Panel6.Controls.Add(this.label53);
-            this.a1Panel6.Controls.Add(this.textBox19);
+            this.a1Panel6.Controls.Add(this.ContatoEmail);
             this.a1Panel6.Controls.Add(this.label57);
-            this.a1Panel6.Controls.Add(this.textBox18);
+            this.a1Panel6.Controls.Add(this.ContatoFone);
             this.a1Panel6.Controls.Add(this.label56);
-            this.a1Panel6.Controls.Add(this.textBox17);
+            this.a1Panel6.Controls.Add(this.ContatoCargo);
             this.a1Panel6.Controls.Add(this.label55);
-            this.a1Panel6.Controls.Add(this.textBox16);
+            this.a1Panel6.Controls.Add(this.ContatoNome);
             this.a1Panel6.Controls.Add(this.label54);
             this.a1Panel6.GradientEndColor = System.Drawing.SystemColors.Control;
             this.a1Panel6.GradientStartColor = System.Drawing.SystemColors.Control;
@@ -1886,17 +2156,16 @@
             this.label53.Text = "Dados do Contato";
             this.label53.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox19
+            // ContatoEmail
             // 
-            this.textBox19.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox19.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox19.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox19.Location = new System.Drawing.Point(66, 103);
-            this.textBox19.MaxLength = 50;
-            this.textBox19.Name = "textBox19";
-            this.textBox19.Size = new System.Drawing.Size(286, 20);
-            this.textBox19.TabIndex = 212;
-            this.textBox19.TabStop = false;
+            this.ContatoEmail.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.ContatoEmail.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.ContatoEmail.Location = new System.Drawing.Point(66, 103);
+            this.ContatoEmail.MaxLength = 100;
+            this.ContatoEmail.Name = "ContatoEmail";
+            this.ContatoEmail.Size = new System.Drawing.Size(286, 20);
+            this.ContatoEmail.TabIndex = 229;
+            this.ContatoEmail.TabStop = false;
             // 
             // label57
             // 
@@ -1910,17 +2179,17 @@
             this.label57.TabIndex = 213;
             this.label57.Text = "Email....:";
             // 
-            // textBox18
+            // ContatoFone
             // 
-            this.textBox18.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox18.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox18.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox18.Location = new System.Drawing.Point(66, 77);
-            this.textBox18.MaxLength = 50;
-            this.textBox18.Name = "textBox18";
-            this.textBox18.Size = new System.Drawing.Size(286, 20);
-            this.textBox18.TabIndex = 210;
-            this.textBox18.TabStop = false;
+            this.ContatoFone.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.ContatoFone.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.ContatoFone.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.ContatoFone.Location = new System.Drawing.Point(66, 77);
+            this.ContatoFone.MaxLength = 40;
+            this.ContatoFone.Name = "ContatoFone";
+            this.ContatoFone.Size = new System.Drawing.Size(286, 20);
+            this.ContatoFone.TabIndex = 228;
+            this.ContatoFone.TabStop = false;
             // 
             // label56
             // 
@@ -1934,17 +2203,17 @@
             this.label56.TabIndex = 211;
             this.label56.Text = "Fone....:";
             // 
-            // textBox17
+            // ContatoCargo
             // 
-            this.textBox17.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox17.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox17.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox17.Location = new System.Drawing.Point(66, 51);
-            this.textBox17.MaxLength = 50;
-            this.textBox17.Name = "textBox17";
-            this.textBox17.Size = new System.Drawing.Size(286, 20);
-            this.textBox17.TabIndex = 208;
-            this.textBox17.TabStop = false;
+            this.ContatoCargo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.ContatoCargo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.ContatoCargo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.ContatoCargo.Location = new System.Drawing.Point(66, 51);
+            this.ContatoCargo.MaxLength = 25;
+            this.ContatoCargo.Name = "ContatoCargo";
+            this.ContatoCargo.Size = new System.Drawing.Size(286, 20);
+            this.ContatoCargo.TabIndex = 227;
+            this.ContatoCargo.TabStop = false;
             // 
             // label55
             // 
@@ -1958,17 +2227,17 @@
             this.label55.TabIndex = 209;
             this.label55.Text = "Cargo...:";
             // 
-            // textBox16
+            // ContatoNome
             // 
-            this.textBox16.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox16.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox16.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox16.Location = new System.Drawing.Point(66, 25);
-            this.textBox16.MaxLength = 50;
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(286, 20);
-            this.textBox16.TabIndex = 206;
-            this.textBox16.TabStop = false;
+            this.ContatoNome.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.ContatoNome.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.ContatoNome.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.ContatoNome.Location = new System.Drawing.Point(66, 25);
+            this.ContatoNome.MaxLength = 50;
+            this.ContatoNome.Name = "ContatoNome";
+            this.ContatoNome.Size = new System.Drawing.Size(286, 20);
+            this.ContatoNome.TabIndex = 226;
+            this.ContatoNome.TabStop = false;
             // 
             // label54
             // 
@@ -1985,12 +2254,13 @@
             // a1Panel5
             // 
             this.a1Panel5.BorderColor = System.Drawing.Color.Gray;
+            this.a1Panel5.Controls.Add(this.ProfissionalToolStrip);
             this.a1Panel5.Controls.Add(this.label62);
-            this.a1Panel5.Controls.Add(this.textBox20);
+            this.a1Panel5.Controls.Add(this.ProfissionalRegistro);
             this.a1Panel5.Controls.Add(this.label58);
-            this.a1Panel5.Controls.Add(this.textBox21);
+            this.a1Panel5.Controls.Add(this.ProfissionalConselho);
             this.a1Panel5.Controls.Add(this.label59);
-            this.a1Panel5.Controls.Add(this.textBox22);
+            this.a1Panel5.Controls.Add(this.ProfissionalNome);
             this.a1Panel5.Controls.Add(this.label60);
             this.a1Panel5.GradientEndColor = System.Drawing.SystemColors.Control;
             this.a1Panel5.GradientStartColor = System.Drawing.SystemColors.Control;
@@ -2001,29 +2271,17 @@
             this.a1Panel5.Size = new System.Drawing.Size(349, 142);
             this.a1Panel5.TabIndex = 218;
             // 
-            // label62
+            // ProfissionalRegistro
             // 
-            this.label62.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label62.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.label62.ForeColor = System.Drawing.Color.LightYellow;
-            this.label62.Location = new System.Drawing.Point(0, 0);
-            this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(344, 18);
-            this.label62.TabIndex = 219;
-            this.label62.Text = "Profissional Responsável";
-            this.label62.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // textBox20
-            // 
-            this.textBox20.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox20.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox20.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox20.Location = new System.Drawing.Point(66, 92);
-            this.textBox20.MaxLength = 50;
-            this.textBox20.Name = "textBox20";
-            this.textBox20.Size = new System.Drawing.Size(271, 20);
-            this.textBox20.TabIndex = 217;
-            this.textBox20.TabStop = false;
+            this.ProfissionalRegistro.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.ProfissionalRegistro.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.ProfissionalRegistro.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.ProfissionalRegistro.Location = new System.Drawing.Point(64, 77);
+            this.ProfissionalRegistro.MaxLength = 14;
+            this.ProfissionalRegistro.Name = "ProfissionalRegistro";
+            this.ProfissionalRegistro.Size = new System.Drawing.Size(271, 20);
+            this.ProfissionalRegistro.TabIndex = 232;
+            this.ProfissionalRegistro.TabStop = false;
             // 
             // label58
             // 
@@ -2031,23 +2289,23 @@
             this.label58.BackColor = System.Drawing.Color.Transparent;
             this.label58.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label58.ForeColor = System.Drawing.Color.Black;
-            this.label58.Location = new System.Drawing.Point(12, 95);
+            this.label58.Location = new System.Drawing.Point(10, 80);
             this.label58.Name = "label58";
             this.label58.Size = new System.Drawing.Size(52, 13);
             this.label58.TabIndex = 218;
             this.label58.Text = "Registro.:";
             // 
-            // textBox21
+            // ProfissionalConselho
             // 
-            this.textBox21.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox21.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox21.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox21.Location = new System.Drawing.Point(66, 66);
-            this.textBox21.MaxLength = 50;
-            this.textBox21.Name = "textBox21";
-            this.textBox21.Size = new System.Drawing.Size(271, 20);
-            this.textBox21.TabIndex = 215;
-            this.textBox21.TabStop = false;
+            this.ProfissionalConselho.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.ProfissionalConselho.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.ProfissionalConselho.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.ProfissionalConselho.Location = new System.Drawing.Point(64, 51);
+            this.ProfissionalConselho.MaxLength = 50;
+            this.ProfissionalConselho.Name = "ProfissionalConselho";
+            this.ProfissionalConselho.Size = new System.Drawing.Size(271, 20);
+            this.ProfissionalConselho.TabIndex = 231;
+            this.ProfissionalConselho.TabStop = false;
             // 
             // label59
             // 
@@ -2055,23 +2313,24 @@
             this.label59.BackColor = System.Drawing.Color.Transparent;
             this.label59.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label59.ForeColor = System.Drawing.Color.Black;
-            this.label59.Location = new System.Drawing.Point(12, 69);
+            this.label59.Location = new System.Drawing.Point(10, 54);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(54, 13);
             this.label59.TabIndex = 216;
             this.label59.Text = "Conselho:";
             // 
-            // textBox22
+            // ProfissionalNome
             // 
-            this.textBox22.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox22.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox22.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox22.Location = new System.Drawing.Point(66, 40);
-            this.textBox22.MaxLength = 50;
-            this.textBox22.Name = "textBox22";
-            this.textBox22.Size = new System.Drawing.Size(271, 20);
-            this.textBox22.TabIndex = 213;
-            this.textBox22.TabStop = false;
+            this.ProfissionalNome.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.ProfissionalNome.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.ProfissionalNome.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.ProfissionalNome.Location = new System.Drawing.Point(64, 25);
+            this.ProfissionalNome.MaxLength = 200;
+            this.ProfissionalNome.Name = "ProfissionalNome";
+            this.ProfissionalNome.ReadOnly = true;
+            this.ProfissionalNome.Size = new System.Drawing.Size(273, 20);
+            this.ProfissionalNome.TabIndex = 213;
+            this.ProfissionalNome.TabStop = false;
             // 
             // label60
             // 
@@ -2079,7 +2338,7 @@
             this.label60.BackColor = System.Drawing.Color.Transparent;
             this.label60.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label60.ForeColor = System.Drawing.Color.Black;
-            this.label60.Location = new System.Drawing.Point(12, 43);
+            this.label60.Location = new System.Drawing.Point(10, 28);
             this.label60.Name = "label60";
             this.label60.Size = new System.Drawing.Size(53, 13);
             this.label60.TabIndex = 214;
@@ -2603,264 +2862,73 @@
             this.columnHeader8.Text = "Usuário";
             this.columnHeader8.Width = 150;
             // 
-            // FotoButton
+            // ContadorList
             // 
-            this.FotoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.FotoButton.Image = global::GTI_Desktop.Properties.Resources.photo_16x16;
-            this.FotoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.FotoButton.Name = "FotoButton";
-            this.FotoButton.Size = new System.Drawing.Size(23, 22);
-            this.FotoButton.Text = "toolStripButton4";
-            this.FotoButton.ToolTipText = "Imagem da Empresa";
+            this.ContadorList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ContadorList.DropDownWidth = 280;
+            this.ContadorList.FormattingEnabled = true;
+            this.ContadorList.Location = new System.Drawing.Point(66, 28);
+            this.ContadorList.Name = "ContadorList";
+            this.ContadorList.Size = new System.Drawing.Size(242, 21);
+            this.ContadorList.TabIndex = 231;
+            this.ContadorList.SelectedIndexChanged += new System.EventHandler(this.ContadorList_SelectedIndexChanged);
             // 
-            // EnderecoToolStrip
+            // RemoveContadorButon
             // 
-            this.EnderecoToolStrip.AutoSize = false;
-            this.EnderecoToolStrip.BackColor = System.Drawing.Color.Transparent;
-            this.EnderecoToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.EnderecoToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.EnderecoToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.FotoButton,
-            this.EnderecoButton});
-            this.EnderecoToolStrip.Location = new System.Drawing.Point(135, 168);
-            this.EnderecoToolStrip.Name = "EnderecoToolStrip";
-            this.EnderecoToolStrip.Size = new System.Drawing.Size(214, 25);
-            this.EnderecoToolStrip.TabIndex = 173;
-            this.EnderecoToolStrip.TabStop = true;
-            this.EnderecoToolStrip.Text = "toolStrip3";
+            this.RemoveContadorButon.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.RemoveContadorButon.Location = new System.Drawing.Point(314, 28);
+            this.RemoveContadorButon.Name = "RemoveContadorButon";
+            this.RemoveContadorButon.Size = new System.Drawing.Size(25, 21);
+            this.RemoveContadorButon.TabIndex = 232;
+            this.Ttp.SetToolTip(this.RemoveContadorButon, "Remover contador do cadastro da empresa");
+            this.RemoveContadorButon.UseVisualStyleBackColor = true;
             // 
-            // EnderecoButton
+            // label62
             // 
-            this.EnderecoButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.EnderecoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.EnderecoButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
-            this.EnderecoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.EnderecoButton.Name = "EnderecoButton";
-            this.EnderecoButton.Size = new System.Drawing.Size(23, 22);
-            this.EnderecoButton.Text = "toolStripButton2";
-            this.EnderecoButton.ToolTipText = "Alterar o endereço de localização";
+            this.label62.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label62.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.label62.ForeColor = System.Drawing.Color.LightYellow;
+            this.label62.Location = new System.Drawing.Point(0, 0);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(344, 18);
+            this.label62.TabIndex = 219;
+            this.label62.Text = "Profissional Responsável";
+            this.label62.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // MesmoEndereco
+            // ProfissionalToolStrip
             // 
-            this.MesmoEndereco.AutoSize = true;
-            this.MesmoEndereco.ForeColor = System.Drawing.Color.Navy;
-            this.MesmoEndereco.Location = new System.Drawing.Point(7, 171);
-            this.MesmoEndereco.Name = "MesmoEndereco";
-            this.MesmoEndereco.Size = new System.Drawing.Size(185, 17);
-            this.MesmoEndereco.TabIndex = 171;
-            this.MesmoEndereco.Text = "Utilizar o endereço de localização";
-            this.MesmoEndereco.UseVisualStyleBackColor = true;
-            this.MesmoEndereco.CheckedChanged += new System.EventHandler(this.MesmoEndereco_CheckedChanged);
+            this.ProfissionalToolStrip.BackColor = System.Drawing.Color.Transparent;
+            this.ProfissionalToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.ProfissionalToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.ProfissionalToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ProfissionalAddButton,
+            this.ProfissionalDelButton});
+            this.ProfissionalToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.ProfissionalToolStrip.Location = new System.Drawing.Point(292, 103);
+            this.ProfissionalToolStrip.Name = "ProfissionalToolStrip";
+            this.ProfissionalToolStrip.Size = new System.Drawing.Size(80, 25);
+            this.ProfissionalToolStrip.TabIndex = 233;
+            this.ProfissionalToolStrip.Text = "toolStrip2";
             // 
-            // EnderecoentregaToolStrip
+            // ProfissionalAddButton
             // 
-            this.EnderecoentregaToolStrip.BackColor = System.Drawing.Color.Transparent;
-            this.EnderecoentregaToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.EnderecoentregaToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.EnderecoentregaToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.EnderecoentregaButton});
-            this.EnderecoentregaToolStrip.Location = new System.Drawing.Point(320, 168);
-            this.EnderecoentregaToolStrip.Name = "EnderecoentregaToolStrip";
-            this.EnderecoentregaToolStrip.Size = new System.Drawing.Size(26, 25);
-            this.EnderecoentregaToolStrip.TabIndex = 174;
-            this.EnderecoentregaToolStrip.TabStop = true;
-            this.EnderecoentregaToolStrip.Text = "toolStrip3";
+            this.ProfissionalAddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ProfissionalAddButton.Image = global::GTI_Desktop.Properties.Resources.add;
+            this.ProfissionalAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ProfissionalAddButton.Name = "ProfissionalAddButton";
+            this.ProfissionalAddButton.Size = new System.Drawing.Size(23, 22);
+            this.ProfissionalAddButton.Text = "Adicionar proprietário";
+            this.ProfissionalAddButton.ToolTipText = "Selecionar um cidaddão como profissional responsável";
             // 
-            // EnderecoentregaButton
+            // ProfissionalDelButton
             // 
-            this.EnderecoentregaButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.EnderecoentregaButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.EnderecoentregaButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
-            this.EnderecoentregaButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.EnderecoentregaButton.Name = "EnderecoentregaButton";
-            this.EnderecoentregaButton.Size = new System.Drawing.Size(23, 22);
-            this.EnderecoentregaButton.Text = "toolStripButton2";
-            this.EnderecoentregaButton.ToolTipText = "Alterar o endereço de entrega";
-            // 
-            // label64
-            // 
-            this.label64.AutoSize = true;
-            this.label64.BackColor = System.Drawing.Color.Transparent;
-            this.label64.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label64.ForeColor = System.Drawing.Color.Black;
-            this.label64.Location = new System.Drawing.Point(13, 32);
-            this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(47, 13);
-            this.label64.TabIndex = 220;
-            this.label64.Text = "Nome...:";
-            // 
-            // textBox25
-            // 
-            this.textBox25.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox25.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox25.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox25.Location = new System.Drawing.Point(66, 29);
-            this.textBox25.MaxLength = 50;
-            this.textBox25.Name = "textBox25";
-            this.textBox25.Size = new System.Drawing.Size(271, 20);
-            this.textBox25.TabIndex = 219;
-            this.textBox25.TabStop = false;
-            // 
-            // label63
-            // 
-            this.label63.AutoSize = true;
-            this.label63.BackColor = System.Drawing.Color.Transparent;
-            this.label63.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label63.ForeColor = System.Drawing.Color.Black;
-            this.label63.Location = new System.Drawing.Point(13, 58);
-            this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(46, 13);
-            this.label63.TabIndex = 222;
-            this.label63.Text = "Fone....:";
-            // 
-            // textBox24
-            // 
-            this.textBox24.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox24.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox24.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox24.Location = new System.Drawing.Point(66, 55);
-            this.textBox24.MaxLength = 50;
-            this.textBox24.Name = "textBox24";
-            this.textBox24.Size = new System.Drawing.Size(271, 20);
-            this.textBox24.TabIndex = 221;
-            this.textBox24.TabStop = false;
-            // 
-            // label61
-            // 
-            this.label61.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label61.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.label61.ForeColor = System.Drawing.Color.LightYellow;
-            this.label61.Location = new System.Drawing.Point(0, 0);
-            this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(344, 18);
-            this.label61.TabIndex = 223;
-            this.label61.Text = "Responsável Contábil";
-            this.label61.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label75
-            // 
-            this.label75.AutoSize = true;
-            this.label75.BackColor = System.Drawing.Color.Transparent;
-            this.label75.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label75.ForeColor = System.Drawing.Color.Black;
-            this.label75.Location = new System.Drawing.Point(13, 84);
-            this.label75.Name = "label75";
-            this.label75.Size = new System.Drawing.Size(47, 13);
-            this.label75.TabIndex = 224;
-            this.label75.Text = "Email....:";
-            // 
-            // textBox31
-            // 
-            this.textBox31.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox31.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox31.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox31.Location = new System.Drawing.Point(66, 81);
-            this.textBox31.MaxLength = 50;
-            this.textBox31.Name = "textBox31";
-            this.textBox31.Size = new System.Drawing.Size(242, 20);
-            this.textBox31.TabIndex = 225;
-            this.textBox31.TabStop = false;
-            // 
-            // button15
-            // 
-            this.button15.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button15.Image = global::GTI_Desktop.Properties.Resources.email1;
-            this.button15.Location = new System.Drawing.Point(314, 80);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(25, 21);
-            this.button15.TabIndex = 226;
-            this.button15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button15.UseVisualStyleBackColor = true;
-            // 
-            // a1Panel7
-            // 
-            this.a1Panel7.BorderColor = System.Drawing.Color.Gray;
-            this.a1Panel7.Controls.Add(this.button15);
-            this.a1Panel7.Controls.Add(this.textBox31);
-            this.a1Panel7.Controls.Add(this.label75);
-            this.a1Panel7.Controls.Add(this.label61);
-            this.a1Panel7.Controls.Add(this.textBox24);
-            this.a1Panel7.Controls.Add(this.label63);
-            this.a1Panel7.Controls.Add(this.textBox25);
-            this.a1Panel7.Controls.Add(this.label64);
-            this.a1Panel7.GradientEndColor = System.Drawing.SystemColors.Control;
-            this.a1Panel7.GradientStartColor = System.Drawing.SystemColors.Control;
-            this.a1Panel7.Image = null;
-            this.a1Panel7.ImageLocation = new System.Drawing.Point(4, 4);
-            this.a1Panel7.Location = new System.Drawing.Point(398, 13);
-            this.a1Panel7.Name = "a1Panel7";
-            this.a1Panel7.Size = new System.Drawing.Size(349, 115);
-            this.a1Panel7.TabIndex = 220;
-            // 
-            // a1Panel8
-            // 
-            this.a1Panel8.BorderColor = System.Drawing.Color.Gray;
-            this.a1Panel8.Controls.Add(this.ProprietarioToolStrip);
-            this.a1Panel8.Controls.Add(this.ProprietarioList);
-            this.a1Panel8.Controls.Add(this.label52);
-            this.a1Panel8.GradientEndColor = System.Drawing.SystemColors.Control;
-            this.a1Panel8.GradientStartColor = System.Drawing.SystemColors.Control;
-            this.a1Panel8.Image = null;
-            this.a1Panel8.ImageLocation = new System.Drawing.Point(4, 4);
-            this.a1Panel8.Location = new System.Drawing.Point(11, 13);
-            this.a1Panel8.Name = "a1Panel8";
-            this.a1Panel8.Size = new System.Drawing.Size(367, 115);
-            this.a1Panel8.TabIndex = 221;
-            // 
-            // label52
-            // 
-            this.label52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label52.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.label52.ForeColor = System.Drawing.Color.LightYellow;
-            this.label52.Location = new System.Drawing.Point(-3, 0);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(365, 18);
-            this.label52.TabIndex = 224;
-            this.label52.Text = "Proprietários e Sócios";
-            this.label52.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // ProprietarioList
-            // 
-            this.ProprietarioList.FormattingEnabled = true;
-            this.ProprietarioList.Location = new System.Drawing.Point(5, 22);
-            this.ProprietarioList.Name = "ProprietarioList";
-            this.ProprietarioList.Size = new System.Drawing.Size(325, 82);
-            this.ProprietarioList.TabIndex = 225;
-            // 
-            // ProprietarioAddButton
-            // 
-            this.ProprietarioAddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ProprietarioAddButton.Image = global::GTI_Desktop.Properties.Resources.add;
-            this.ProprietarioAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ProprietarioAddButton.Name = "ProprietarioAddButton";
-            this.ProprietarioAddButton.Size = new System.Drawing.Size(30, 20);
-            this.ProprietarioAddButton.Text = "Adicionar proprietário";
-            this.ProprietarioAddButton.ToolTipText = "Adicionar novo SIL";
-            // 
-            // ProprietarioDelButton
-            // 
-            this.ProprietarioDelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ProprietarioDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.ProprietarioDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ProprietarioDelButton.Name = "ProprietarioDelButton";
-            this.ProprietarioDelButton.Size = new System.Drawing.Size(30, 20);
-            this.ProprietarioDelButton.Text = "Excluir proprietário";
-            this.ProprietarioDelButton.ToolTipText = "Excluir o SIL Selecionado";
-            // 
-            // ProprietarioToolStrip
-            // 
-            this.ProprietarioToolStrip.BackColor = System.Drawing.Color.Transparent;
-            this.ProprietarioToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.ProprietarioToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.ProprietarioToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ProprietarioAddButton,
-            this.ProprietarioDelButton});
-            this.ProprietarioToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.ProprietarioToolStrip.Location = new System.Drawing.Point(333, 29);
-            this.ProprietarioToolStrip.Name = "ProprietarioToolStrip";
-            this.ProprietarioToolStrip.Size = new System.Drawing.Size(24, 48);
-            this.ProprietarioToolStrip.TabIndex = 226;
-            this.ProprietarioToolStrip.Text = "toolStrip2";
+            this.ProfissionalDelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ProfissionalDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.ProfissionalDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ProfissionalDelButton.Name = "ProfissionalDelButton";
+            this.ProfissionalDelButton.Size = new System.Drawing.Size(23, 22);
+            this.ProfissionalDelButton.Text = "Excluir proprietário";
+            this.ProfissionalDelButton.ToolTipText = "Remover o nome do profissional";
             // 
             // Empresa
             // 
@@ -2900,9 +2968,19 @@
             this.ENtab.PerformLayout();
             this.a1Panel4.ResumeLayout(false);
             this.a1Panel4.PerformLayout();
+            this.EnderecoentregaToolStrip.ResumeLayout(false);
+            this.EnderecoentregaToolStrip.PerformLayout();
             this.a1Panel3.ResumeLayout(false);
             this.a1Panel3.PerformLayout();
+            this.EnderecoToolStrip.ResumeLayout(false);
+            this.EnderecoToolStrip.PerformLayout();
             this.RStab.ResumeLayout(false);
+            this.a1Panel8.ResumeLayout(false);
+            this.a1Panel8.PerformLayout();
+            this.ProprietarioToolStrip.ResumeLayout(false);
+            this.ProprietarioToolStrip.PerformLayout();
+            this.a1Panel7.ResumeLayout(false);
+            this.a1Panel7.PerformLayout();
             this.a1Panel6.ResumeLayout(false);
             this.a1Panel6.PerformLayout();
             this.a1Panel5.ResumeLayout(false);
@@ -2916,16 +2994,8 @@
             this.HStab.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.EnderecoToolStrip.ResumeLayout(false);
-            this.EnderecoToolStrip.PerformLayout();
-            this.EnderecoentregaToolStrip.ResumeLayout(false);
-            this.EnderecoentregaToolStrip.PerformLayout();
-            this.a1Panel7.ResumeLayout(false);
-            this.a1Panel7.PerformLayout();
-            this.a1Panel8.ResumeLayout(false);
-            this.a1Panel8.PerformLayout();
-            this.ProprietarioToolStrip.ResumeLayout(false);
-            this.ProprietarioToolStrip.PerformLayout();
+            this.ProfissionalToolStrip.ResumeLayout(false);
+            this.ProfissionalToolStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3043,21 +3113,20 @@
         private System.Windows.Forms.Label label50;
         private Owf.Controls.A1Panel a1Panel6;
         private System.Windows.Forms.Label label53;
-        internal System.Windows.Forms.TextBox textBox19;
+        internal System.Windows.Forms.TextBox ContatoEmail;
         private System.Windows.Forms.Label label57;
-        internal System.Windows.Forms.TextBox textBox18;
+        internal System.Windows.Forms.TextBox ContatoFone;
         private System.Windows.Forms.Label label56;
-        internal System.Windows.Forms.TextBox textBox17;
+        internal System.Windows.Forms.TextBox ContatoCargo;
         private System.Windows.Forms.Label label55;
-        internal System.Windows.Forms.TextBox textBox16;
+        internal System.Windows.Forms.TextBox ContatoNome;
         private System.Windows.Forms.Label label54;
         private Owf.Controls.A1Panel a1Panel5;
-        private System.Windows.Forms.Label label62;
-        internal System.Windows.Forms.TextBox textBox20;
+        internal System.Windows.Forms.TextBox ProfissionalRegistro;
         private System.Windows.Forms.Label label58;
-        internal System.Windows.Forms.TextBox textBox21;
+        internal System.Windows.Forms.TextBox ProfissionalConselho;
         private System.Windows.Forms.Label label59;
-        internal System.Windows.Forms.TextBox textBox22;
+        internal System.Windows.Forms.TextBox ProfissionalNome;
         private System.Windows.Forms.Label label60;
         private System.Windows.Forms.TabPage ATtab;
         private Owf.Controls.A1Panel a1Panel9;
@@ -3149,13 +3218,19 @@
         private System.Windows.Forms.ListBox ProprietarioList;
         private System.Windows.Forms.Label label52;
         private Owf.Controls.A1Panel a1Panel7;
-        private System.Windows.Forms.Button button15;
-        internal System.Windows.Forms.TextBox textBox31;
+        private System.Windows.Forms.Button ContadorEmailButton;
+        internal System.Windows.Forms.TextBox ContadorEmail;
         private System.Windows.Forms.Label label75;
         private System.Windows.Forms.Label label61;
-        internal System.Windows.Forms.TextBox textBox24;
+        internal System.Windows.Forms.TextBox ContadorFone;
         private System.Windows.Forms.Label label63;
-        internal System.Windows.Forms.TextBox textBox25;
+        internal System.Windows.Forms.TextBox ContadorNome;
         private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.ComboBox ContadorList;
+        private System.Windows.Forms.Button RemoveContadorButon;
+        private System.Windows.Forms.ToolStrip ProfissionalToolStrip;
+        private System.Windows.Forms.ToolStripButton ProfissionalAddButton;
+        private System.Windows.Forms.ToolStripButton ProfissionalDelButton;
+        private System.Windows.Forms.Label label62;
     }
 }

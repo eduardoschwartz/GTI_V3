@@ -82,5 +82,6 @@ namespace GTI_Dal {
         public DbSet<mobiliarioplaca> Mobiliarioplaca { get; set; }
         public DbSet<sil> Sil { get; set; }
         public DbSet<mobiliarioendentrega> Mobiliarioendentrega { get; set; }
+        public DbSet<Escritoriocontabil> Escritoriocontabil { get; set; }
     }
 }

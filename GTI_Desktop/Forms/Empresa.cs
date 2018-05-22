@@ -15,6 +15,7 @@ namespace GTI_Desktop.Forms {
             gtiCore.Ocupado(this);
             InitializeComponent();
             tBar.Renderer = new MySR();
+            ProfissionalToolStrip.Renderer = new MySR();
             VeiculosToolStrip.Renderer = new MySR();
             SimplesToolStrip.Renderer = new MySR();
             CodigoToolStrip.Renderer = new MySR();
@@ -39,9 +40,12 @@ namespace GTI_Desktop.Forms {
             CancelarButton.Enabled = !bStart;
             CodigoButton.Enabled = bStart;
             EnderecoButton.Enabled = !bStart;
+            RemoveContadorButon.Enabled = !bStart;
             EnderecoentregaButton.Enabled = !bStart;
             ProprietarioAddButton.Enabled = !bStart;
             ProprietarioDelButton.Enabled = !bStart;
+            ProfissionalAddButton.Enabled = !bStart;
+            ProfissionalDelButton.Enabled = !bStart;
             PessoaList.Enabled = !bStart;
             PessoaList.Visible = !bStart;
             PessoaText.Visible = bStart;
@@ -76,6 +80,15 @@ namespace GTI_Desktop.Forms {
             Bombonieri_chk.AutoCheck = !bStart;
             Vistoria_chk.AutoCheck = !bStart;
             MesmoEndereco.AutoCheck = !bStart;
+            ContatoNome.ReadOnly = bStart;
+            ContatoFone.ReadOnly = bStart;
+            ContatoEmail.ReadOnly = bStart;
+            ContatoCargo.ReadOnly = bStart;
+            ProfissionalConselho.ReadOnly = bStart;
+            ProfissionalRegistro.ReadOnly = bStart;
+            ContadorList.Visible = !bStart;
+            ContadorList.Enabled = !bStart;
+
         }
 
         private void ClearFields() {
@@ -138,6 +151,17 @@ namespace GTI_Desktop.Forms {
             Unidade.Text = "00";
             Subunidade.Text = "000";
             HomePage.Text = "";
+            ContatoNome.Text = "";
+            ContatoCargo.Text = "";
+            ContatoEmail.Text = "";
+            ContatoFone.Text = "";
+            ContadorNome.Text = "";
+            ContadorFone.Text = "";
+            ContadorEmail.Text = "";
+            ProfissionalNome.Text = "";
+            ProfissionalRegistro.Text = "";
+            ProfissionalConselho.Text = "";
+
         }
 
         private void CarregaLista() {
@@ -145,6 +169,11 @@ namespace GTI_Desktop.Forms {
             HorarioList.DataSource = empresa_Class.Lista_Horario();
             HorarioList.DisplayMember = "deschorario";
             HorarioList.ValueMember = "codhorario";
+
+            ContadorList.DataSource = empresa_Class.Lista_Escritorio_Contabil();
+            ContadorList.DisplayMember = "Nomeesc";
+            ContadorList.ValueMember = "Codigoesc";
+            
         }
 
         private void GravarButton_Click(object sender, EventArgs e) {
@@ -190,6 +219,16 @@ namespace GTI_Desktop.Forms {
             } else {
                 HorarioFuncionamento.Text = "";
                 HorarioFuncionamento.Tag = "0";
+            }
+        }
+
+        private void ContadorList_SelectedIndexChanged(object sender, EventArgs e) {
+            if (ContadorList.SelectedIndex > -1) {
+                ContadorNome.Text = ContadorList.Text;
+                ContadorNome.Tag = ContadorList.SelectedValue.ToString();
+            } else {
+                ContadorNome.Text = "";
+                ContadorNome.Tag = "0";
             }
         }
 
@@ -362,7 +401,6 @@ namespace GTI_Desktop.Forms {
             } else
                 MesmoEndereco.Checked = true;
 
-
             Distrito.Text = Reg.Distrito.ToString();
             Setor.Text = Reg.Setor.ToString("00");
             Quadra.Text = Reg.Quadra.ToString("0000");
@@ -375,10 +413,27 @@ namespace GTI_Desktop.Forms {
             ProprietarioList.DataSource = empresa_Class.Lista_Empresa_Proprietario(Codigo);
             ProprietarioList.DisplayMember = "Nome";
 
+            ContatoNome.Text = Reg.Nome_contato;
+            ContatoCargo.Text = Reg.Cargo_contato;
+            ContatoFone.Text = Reg.Fone_contato;
+            ContatoEmail.Text = Reg.Email_contato;
+
+            if (Reg.Responsavel_contabil_codigo != null && Reg.Responsavel_contabil_codigo>0) {
+                ContadorList.SelectedValue = Reg.Responsavel_contabil_codigo;
+                EscritoriocontabilStruct RegEsc = empresa_Class.Dados_Escritorio_Contabil((int)Reg.Responsavel_contabil_codigo);
+                ContadorNome.Text = RegEsc.Nome;
+                ContadorEmail.Text = RegEsc.Email;
+                ContadorFone.Text = RegEsc.Telefone;
+            }
+
+            ProfissionalNome.Text = Reg.prof_responsavel_nome;
+            ProfissionalNome.Tag = Reg.prof_responsavel_codigo;
+            ProfissionalConselho.Text = Reg.Prof_responsavel_conselho;
+            ProfissionalRegistro.Text = Reg.Prof_responsavel_registro;
+
+
 
         }
-
-
 
     }
 }

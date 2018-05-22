@@ -76,6 +76,7 @@
     <Compile Include="Models\debitotributo.cs" />
     <Compile Include="Models\endentrega.cs" />
     <Compile Include="Models\endereco.cs" />
+    <Compile Include="Models\escritoriocontabil.cs" />
     <Compile Include="Models\facequadra.cs" />
     <Compile Include="Models\horariofunc.cs" />
     <Compile Include="Models\lancamento.cs" />
