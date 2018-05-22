@@ -160,6 +160,13 @@ namespace GTI_Models.Models {
         public bool? Cadastro_vre { get; set; }
         public bool? Liberado_vre { get; set; }
         public string Situacao { get; set; }
+        public short Distrito { get; set; }
+        public short Setor { get; set; }
+        public short Quadra { get; set; }
+        public int Lote { get; set; }
+        public short Seq { get; set; }
+        public short Unidade { get; set; }
+        public short Subunidade { get; set; }
     }
 
 }

@@ -506,5 +506,32 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public ImovelStruct Inscricao_imovel(int Logradouro, short Numero) {
+            using (var db = new GTI_Context(_connection)) {
+                var reg = (from i in db.Cadimob
+                           join f in db.Facequadra on new { p1 = i.Distrito, p2 = i.Setor, p3 = i.Quadra, p4 = i.Seq } equals new { p1 = f.Coddistrito, p2 = f.Codsetor, p3 = f.Codquadra, p4 = f.Codface } into fi from f in fi.DefaultIfEmpty()
+                           join l in db.Logradouro on f.Codlogr equals l.Codlogradouro into lf from l in lf.DefaultIfEmpty()
+                           where f.Codlogr == Logradouro && i.Li_num == Numero
+                           select new ImovelStruct {Codigo=i.Codreduzido,
+                               Distrito = i.Distrito, Setor = i.Setor, Quadra = i.Quadra, Lote = i.Lote, Seq = i.Seq, Unidade = i.Unidade, SubUnidade = i.Subunidade
+                           }).FirstOrDefault();
+
+                ImovelStruct row = new ImovelStruct();
+                if (reg == null)
+                    return row;
+                row.Codigo = reg.Codigo;
+                row.Distrito = reg.Distrito;
+                row.Setor = reg.Setor;
+                row.Quadra = reg.Quadra;
+                row.Lote = reg.Lote;
+                row.Seq = reg.Seq;
+                row.Unidade = reg.Unidade;
+                row.SubUnidade = reg.SubUnidade;
+
+                return row;
+            }
+        }
+
+
     }//end class
 }

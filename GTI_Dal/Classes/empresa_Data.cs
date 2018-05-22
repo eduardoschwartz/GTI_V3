@@ -218,6 +218,21 @@ namespace GTI_Dal.Classes {
                     row.Cep = nCep == 0 ? "00000000" : nCep.ToString("0000");
                 }
 
+                Imovel_Data imovel_Class = new Imovel_Data(_connection);
+                ImovelStruct regImovel = imovel_Class.Inscricao_imovel((int)reg.Endereco_codigo,(short)reg.Numero);
+                if (regImovel != null) {
+                    row.Distrito = regImovel.Distrito;
+                    row.Setor = regImovel.Setor;
+                    row.Quadra = regImovel.Quadra;
+                    row.Lote = regImovel.Lote;
+                    row.Seq = regImovel.Seq;
+                    row.Unidade = regImovel.Unidade;
+                    row.Subunidade = regImovel.SubUnidade;
+                    row.Imovel = regImovel.Codigo;
+                }
+
+
+
                 return row;
             }
         }
@@ -252,6 +267,46 @@ namespace GTI_Dal.Classes {
         public List<sil> Lista_Sil(int Codigo) {
             using (var db = new GTI_Context(_connection)) {
                 var Sql = (from s in db.Sil where s.Codigo==Codigo orderby s.Data_emissao descending select s).ToList();
+                return Sql;
+            }
+        }
+
+        public mobiliarioendentrega Empresa_Endereco_entrega(int Codigo) {
+            using (var db = new GTI_Context(_connection)) {
+                var reg = (from m in db.Mobiliarioendentrega
+                           join b in db.Bairro on new { p1 = m.Codbairro, p2 = m.Codcidade, p3 = m.Uf } equals new { p1 = b.Codbairro, p2 = b.Codcidade, p3 = b.Siglauf } into mb from b in mb.DefaultIfEmpty()
+                           join c in db.Cidade on new { p1 = m.Codcidade, p2 = m.Uf } equals new { p1 = c.Codcidade, p2 = c.Siglauf } into mc from c in mc.DefaultIfEmpty()
+                           join l in db.Logradouro on m.Codlogradouro equals l.Codlogradouro into lm from l in lm.DefaultIfEmpty()
+                           where m.Codmobiliario == Codigo
+                           select new  { m.Codmobiliario,m.Codlogradouro,Nomelogradouro=l.Endereco,m.Numimovel, m.Complemento,m.Uf,m.Codcidade,m.Codbairro,m.Cep,b.Descbairro,c.Desccidade
+                           }).FirstOrDefault();
+
+                mobiliarioendentrega row = new mobiliarioendentrega();
+                if (reg == null)
+                    return row;
+                row.Descbairro = reg.Descbairro;
+                row.Desccidade = reg.Desccidade;
+                row.Uf = reg.Uf;
+                row.Codlogradouro = reg.Codlogradouro;
+                row.Nomelogradouro = reg.Nomelogradouro;
+                row.Numimovel = reg.Numimovel;
+                row.Complemento = reg.Complemento;
+                row.Cep = reg.Cep;
+                if (reg.Codcidade == 413) {
+                    Endereco_Data Cep_Class = new Endereco_Data(_connection);
+                    int nCep = Cep_Class.RetornaCep(reg.Codlogradouro, reg.Numimovel);
+                    row.Cep = nCep == 0 ? "00000000" : nCep.ToString("0000");
+                }
+
+                return row;
+            }
+        }
+
+        public List<MobiliarioproprietarioStruct> Lista_Empresa_Proprietario(int Codigo) {
+            using (var db = new GTI_Context(_connection)) {
+                var Sql = (from m in db.Mobiliarioproprietario
+                           join c in db.Cidadao on m.Codcidadao equals c.Codcidadao where  m.Codmobiliario==Codigo
+                           orderby c.Nomecidadao select new MobiliarioproprietarioStruct {Codcidadao=m.Codcidadao,Nome=c.Nomecidadao }).ToList();
                 return Sql;
             }
         }

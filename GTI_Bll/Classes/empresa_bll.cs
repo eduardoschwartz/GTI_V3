@@ -10,37 +10,72 @@ namespace GTI_Bll.Classes {
             _connection = sConnection;
         }
 
+        /// <summary>
+        /// Verifica se a empresa esta cadastrada
+        /// </summary>
+        /// <param name="nCodigo"></param>
+        /// <returns></returns>
         public bool Existe_Empresa(int nCodigo) {
             Empresa_Data obj = new Empresa_Data(_connection);
             return obj.Existe_Empresa(nCodigo);
 
         }
 
+        /// <summary>
+        /// Retorna o cadastro da empresa
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
         public EmpresaStruct Retorna_Empresa(int Codigo) {
             Empresa_Data obj = new Empresa_Data(_connection);
             return obj.Retorna_Empresa(Codigo);
         }
 
+        /// <summary>
+        /// Verifica se a empresa esta suspensa
+        /// </summary>
+        /// <param name="nCodigo"></param>
+        /// <returns></returns>
         public bool EmpresaSuspensa(int nCodigo) {
             Empresa_Data obj = new Empresa_Data(_connection);
             return obj.Empresa_Suspensa(nCodigo);
         }
 
+        /// <summary>
+        /// Verifica se tem alguma empresa com o CNPJ informado
+        /// </summary>
+        /// <param name="sCNPJ"></param>
+        /// <returns></returns>
         public int ExisteEmpresaCnpj(string sCNPJ) {
             Empresa_Data obj = new Empresa_Data(_connection);
             return obj.Existe_EmpresaCnpj(sCNPJ);
         }
 
+        /// <summary>
+        /// Verifica se tem alguma empresa com o CPF informado
+        /// </summary>
+        /// <param name="sCPF"></param>
+        /// <returns></returns>
         public int ExisteEmpresaCpf(string sCPF) {
             Empresa_Data obj = new Empresa_Data(_connection);
             return obj.Existe_EmpresaCpf(sCPF);
         }
 
+        /// <summary>
+        /// Verifica se a empresa possui vigilância sanitária
+        /// </summary>
+        /// <param name="nCodigo"></param>
+        /// <returns></returns>
         public bool Empresa_tem_VS(int nCodigo) {
             Empresa_Data obj = new Empresa_Data(_connection);
             return obj.Empresa_tem_VS(nCodigo);
         }
 
+        /// <summary>
+        /// Verifica se a empresa trem taxa de licença
+        /// </summary>
+        /// <param name="nCodigo"></param>
+        /// <returns></returns>
         public bool Empresa_tem_TL(int nCodigo) {
             Empresa_Data obj = new Empresa_Data(_connection);
             return obj.Empresa_tem_TL(nCodigo);
@@ -114,6 +149,26 @@ namespace GTI_Bll.Classes {
         public bool Empresa_Simples(int Codigo, DateTime Data) {
             Empresa_Data obj = new Empresa_Data(_connection);
             return obj.Empresa_Simples(Codigo,Data);
+        }
+
+        /// <summary>
+        /// Retorna o endereço de entrega da empresa
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public mobiliarioendentrega Empresa_Endereco_entrega(int Codigo) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Empresa_Endereco_entrega(Codigo);
+        }
+
+        /// <summary>
+        /// Lista dos proprietários da empresa
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public List<MobiliarioproprietarioStruct> Lista_Empresa_Proprietario(int Codigo) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Lista_Empresa_Proprietario(Codigo);
         }
 
 

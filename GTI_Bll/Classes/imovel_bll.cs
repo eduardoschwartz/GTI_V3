@@ -106,5 +106,17 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Area_Condominio(Codigo);
         }
 
+        /// <summary>
+        /// Retorna a inscrição cadastral completa do imóvel
+        /// </summary>
+        /// <param name="Logradouro"></param>
+        /// <param name="Numero"></param>
+        /// <returns></returns>
+        public ImovelStruct Inscricao_imovel(int Logradouro, short Numero) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Inscricao_imovel(Logradouro,Numero);
+        }
+
+
     }//end class
 }

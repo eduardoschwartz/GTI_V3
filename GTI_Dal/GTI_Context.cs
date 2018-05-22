@@ -81,5 +81,6 @@ namespace GTI_Dal {
         public DbSet<security_event> Security_event { get; set; }
         public DbSet<mobiliarioplaca> Mobiliarioplaca { get; set; }
         public DbSet<sil> Sil { get; set; }
+        public DbSet<mobiliarioendentrega> Mobiliarioendentrega { get; set; }
     }
 }

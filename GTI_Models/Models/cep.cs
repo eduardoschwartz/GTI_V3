@@ -18,7 +18,7 @@ namespace GTI_Models.Models {
         public bool Impar { get; set; }
         [Required]
         public bool Par { get; set; }
-        public short Codbairro { get; set; }
+        public short? Codbairro { get; set; }
     }
 
 }

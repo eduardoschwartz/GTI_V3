@@ -2,10 +2,8 @@
 using GTI_Desktop.Classes;
 using GTI_Models.Models;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using static GTI_Desktop.Classes.GtiTypes;
 
 namespace GTI_Desktop.Forms {
     public partial class Empresa : Form {
@@ -16,10 +14,13 @@ namespace GTI_Desktop.Forms {
         public Empresa() {
             gtiCore.Ocupado(this);
             InitializeComponent();
+            tBar.Renderer = new MySR();
             VeiculosToolStrip.Renderer = new MySR();
             SimplesToolStrip.Renderer = new MySR();
             CodigoToolStrip.Renderer = new MySR();
             SilToolStrip.Renderer = new MySR();
+            EnderecoToolStrip.Renderer =new MySR();
+            EnderecoentregaToolStrip.Renderer = new MySR();
             CarregaLista();
             ClearFields();
             bAddNew = false;
@@ -37,7 +38,10 @@ namespace GTI_Desktop.Forms {
             GravarButton.Enabled = !bStart;
             CancelarButton.Enabled = !bStart;
             CodigoButton.Enabled = bStart;
-            PhotoButton.Enabled = bStart;
+            EnderecoButton.Enabled = !bStart;
+            EnderecoentregaButton.Enabled = !bStart;
+            ProprietarioAddButton.Enabled = !bStart;
+            ProprietarioDelButton.Enabled = !bStart;
             PessoaList.Enabled = !bStart;
             PessoaList.Visible = !bStart;
             PessoaText.Visible = bStart;
@@ -71,6 +75,7 @@ namespace GTI_Desktop.Forms {
             Horas24_chk.AutoCheck = !bStart;
             Bombonieri_chk.AutoCheck = !bStart;
             Vistoria_chk.AutoCheck = !bStart;
+            MesmoEndereco.AutoCheck = !bStart;
         }
 
         private void ClearFields() {
@@ -125,7 +130,14 @@ namespace GTI_Desktop.Forms {
             Cidade_EE.Text = "";
             UF_EE.Text = "";
             MesmoEndereco.Checked = false;
-
+            Distrito.Text = "0";
+            Setor.Text = "00";
+            Quadra.Text = "0000";
+            Lote.Text = "00000";
+            Face.Text = "00";
+            Unidade.Text = "00";
+            Subunidade.Text = "000";
+            HomePage.Text = "";
         }
 
         private void CarregaLista() {
@@ -183,6 +195,21 @@ namespace GTI_Desktop.Forms {
 
         private void SairButton_Click(object sender, EventArgs e) {
             Close();
+        }
+
+        private void MesmoEndereco_CheckedChanged(object sender, EventArgs e) {
+            if (MesmoEndereco.CheckState == CheckState.Checked) {
+                Logradouro_EE.Text = Logradouro.Text;
+                Logradouro_EE.Tag = Logradouro.Tag;
+                Numero_EE.Text = Numero.Text;
+                Complemento_EE.Text = Complemento.Text;
+                Bairro_EE.Text = Bairro.Text;
+                Bairro_EE.Tag = Bairro.Tag;
+                Cidade_EE.Text = Cidade.Text;
+                Cidade_EE.Tag = Cidade.Tag;
+                UF_EE.Text = UF.Text;
+                Cep_EE.Text = Cep.Text;
+            }
         }
 
         private void SILList_MouseMove(object sender, MouseEventArgs e) {
@@ -319,11 +346,37 @@ namespace GTI_Desktop.Forms {
             UF.Text = Reg.UF;
             Cep.Text = Reg.Cep;
 
+            mobiliarioendentrega endEntrega = empresa_Class.Empresa_Endereco_entrega(Codigo);
+            if (!string.IsNullOrWhiteSpace(endEntrega.Nomelogradouro)) {
+                Logradouro_EE.Text = endEntrega.Nomelogradouro;
+                Logradouro_EE.Tag = endEntrega.Codlogradouro.ToString();
+                Numero_EE.Text = endEntrega.Numimovel.ToString();
+                Complemento_EE.Text = endEntrega.Complemento;
+                Bairro_EE.Text = endEntrega.Descbairro;
+                Bairro_EE.Tag = endEntrega.Codbairro.ToString();
+                Cidade_EE.Text = endEntrega.Desccidade;
+                Cidade_EE.Tag = endEntrega.Codcidade.ToString();
+                UF_EE.Text = endEntrega.Uf;
+                Cep_EE.Text = endEntrega.Cep;
+                MesmoEndereco.Checked = false;
+            } else
+                MesmoEndereco.Checked = true;
+
+
+            Distrito.Text = Reg.Distrito.ToString();
+            Setor.Text = Reg.Setor.ToString("00");
+            Quadra.Text = Reg.Quadra.ToString("0000");
+            Lote.Text = Reg.Lote.ToString("00000");
+            Face.Text = Reg.Seq.ToString("00");
+            Unidade.Text = Reg.Unidade.ToString("00");
+            Subunidade.Text = Reg.Subunidade.ToString("000");
+            CodigoImovel.Text =Convert.ToInt32(Reg.Imovel).ToString("000000");
+
+            ProprietarioList.DataSource = empresa_Class.Lista_Empresa_Proprietario(Codigo);
+            ProprietarioList.DisplayMember = "Nome";
+
+
         }
-
-
-        
-
 
 
 
