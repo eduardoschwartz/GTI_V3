@@ -54,6 +54,8 @@
             this.StatusEmpresa = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.Ttp = new System.Windows.Forms.ToolTip(this.components);
+            this.ContadorEmailButton = new System.Windows.Forms.Button();
+            this.RemoveContadorButon = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.DGtab = new System.Windows.Forms.TabPage();
             this.SilToolStrip = new System.Windows.Forms.ToolStrip();
@@ -175,7 +177,7 @@
             this.ProprietarioList = new System.Windows.Forms.ListBox();
             this.label52 = new System.Windows.Forms.Label();
             this.a1Panel7 = new Owf.Controls.A1Panel();
-            this.ContadorEmailButton = new System.Windows.Forms.Button();
+            this.ContadorList = new System.Windows.Forms.ComboBox();
             this.ContadorEmail = new System.Windows.Forms.TextBox();
             this.label75 = new System.Windows.Forms.Label();
             this.label61 = new System.Windows.Forms.Label();
@@ -194,6 +196,10 @@
             this.ContatoNome = new System.Windows.Forms.TextBox();
             this.label54 = new System.Windows.Forms.Label();
             this.a1Panel5 = new Owf.Controls.A1Panel();
+            this.ProfissionalToolStrip = new System.Windows.Forms.ToolStrip();
+            this.ProfissionalAddButton = new System.Windows.Forms.ToolStripButton();
+            this.ProfissionalDelButton = new System.Windows.Forms.ToolStripButton();
+            this.label62 = new System.Windows.Forms.Label();
             this.ProfissionalRegistro = new System.Windows.Forms.TextBox();
             this.label58 = new System.Windows.Forms.Label();
             this.ProfissionalConselho = new System.Windows.Forms.TextBox();
@@ -248,12 +254,6 @@
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ContadorList = new System.Windows.Forms.ComboBox();
-            this.RemoveContadorButon = new System.Windows.Forms.Button();
-            this.label62 = new System.Windows.Forms.Label();
-            this.ProfissionalToolStrip = new System.Windows.Forms.ToolStrip();
-            this.ProfissionalAddButton = new System.Windows.Forms.ToolStripButton();
-            this.ProfissionalDelButton = new System.Windows.Forms.ToolStripButton();
             this.a1Panel1.SuspendLayout();
             this.CodigoToolStrip.SuspendLayout();
             this.tBar.SuspendLayout();
@@ -275,13 +275,13 @@
             this.a1Panel7.SuspendLayout();
             this.a1Panel6.SuspendLayout();
             this.a1Panel5.SuspendLayout();
+            this.ProfissionalToolStrip.SuspendLayout();
             this.ATtab.SuspendLayout();
             this.a1Panel11.SuspendLayout();
             this.a1Panel10.SuspendLayout();
             this.a1Panel9.SuspendLayout();
             this.HStab.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            this.ProfissionalToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // a1Panel1
@@ -597,6 +597,28 @@
             this.toolStripLabel1.Name = "toolStripLabel1";
             this.toolStripLabel1.Size = new System.Drawing.Size(61, 22);
             this.toolStripLabel1.Text = "Situação..:";
+            // 
+            // ContadorEmailButton
+            // 
+            this.ContadorEmailButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ContadorEmailButton.Image = global::GTI_Desktop.Properties.Resources.email1;
+            this.ContadorEmailButton.Location = new System.Drawing.Point(314, 80);
+            this.ContadorEmailButton.Name = "ContadorEmailButton";
+            this.ContadorEmailButton.Size = new System.Drawing.Size(25, 21);
+            this.ContadorEmailButton.TabIndex = 230;
+            this.ContadorEmailButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.ContadorEmailButton, "Enviar email para o contador");
+            this.ContadorEmailButton.UseVisualStyleBackColor = true;
+            // 
+            // RemoveContadorButon
+            // 
+            this.RemoveContadorButon.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.RemoveContadorButon.Location = new System.Drawing.Point(314, 28);
+            this.RemoveContadorButon.Name = "RemoveContadorButon";
+            this.RemoveContadorButon.Size = new System.Drawing.Size(25, 21);
+            this.RemoveContadorButon.TabIndex = 232;
+            this.Ttp.SetToolTip(this.RemoveContadorButon, "Remover contador do cadastro da empresa");
+            this.RemoveContadorButon.UseVisualStyleBackColor = true;
             // 
             // tabControl1
             // 
@@ -2025,17 +2047,16 @@
             this.a1Panel7.Size = new System.Drawing.Size(349, 115);
             this.a1Panel7.TabIndex = 220;
             // 
-            // ContadorEmailButton
+            // ContadorList
             // 
-            this.ContadorEmailButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ContadorEmailButton.Image = global::GTI_Desktop.Properties.Resources.email1;
-            this.ContadorEmailButton.Location = new System.Drawing.Point(314, 80);
-            this.ContadorEmailButton.Name = "ContadorEmailButton";
-            this.ContadorEmailButton.Size = new System.Drawing.Size(25, 21);
-            this.ContadorEmailButton.TabIndex = 230;
-            this.ContadorEmailButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Ttp.SetToolTip(this.ContadorEmailButton, "Enviar email para o contador");
-            this.ContadorEmailButton.UseVisualStyleBackColor = true;
+            this.ContadorList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ContadorList.DropDownWidth = 280;
+            this.ContadorList.FormattingEnabled = true;
+            this.ContadorList.Location = new System.Drawing.Point(66, 28);
+            this.ContadorList.Name = "ContadorList";
+            this.ContadorList.Size = new System.Drawing.Size(242, 21);
+            this.ContadorList.TabIndex = 231;
+            this.ContadorList.SelectedIndexChanged += new System.EventHandler(this.ContadorList_SelectedIndexChanged);
             // 
             // ContadorEmail
             // 
@@ -2270,6 +2291,53 @@
             this.a1Panel5.Name = "a1Panel5";
             this.a1Panel5.Size = new System.Drawing.Size(349, 142);
             this.a1Panel5.TabIndex = 218;
+            // 
+            // ProfissionalToolStrip
+            // 
+            this.ProfissionalToolStrip.BackColor = System.Drawing.Color.Transparent;
+            this.ProfissionalToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.ProfissionalToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.ProfissionalToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ProfissionalAddButton,
+            this.ProfissionalDelButton});
+            this.ProfissionalToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.ProfissionalToolStrip.Location = new System.Drawing.Point(292, 103);
+            this.ProfissionalToolStrip.Name = "ProfissionalToolStrip";
+            this.ProfissionalToolStrip.Size = new System.Drawing.Size(80, 25);
+            this.ProfissionalToolStrip.TabIndex = 233;
+            this.ProfissionalToolStrip.Text = "toolStrip2";
+            // 
+            // ProfissionalAddButton
+            // 
+            this.ProfissionalAddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ProfissionalAddButton.Image = global::GTI_Desktop.Properties.Resources.add;
+            this.ProfissionalAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ProfissionalAddButton.Name = "ProfissionalAddButton";
+            this.ProfissionalAddButton.Size = new System.Drawing.Size(23, 22);
+            this.ProfissionalAddButton.Text = "Adicionar proprietário";
+            this.ProfissionalAddButton.ToolTipText = "Selecionar um cidaddão como profissional responsável";
+            // 
+            // ProfissionalDelButton
+            // 
+            this.ProfissionalDelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ProfissionalDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.ProfissionalDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ProfissionalDelButton.Name = "ProfissionalDelButton";
+            this.ProfissionalDelButton.Size = new System.Drawing.Size(23, 22);
+            this.ProfissionalDelButton.Text = "Excluir proprietário";
+            this.ProfissionalDelButton.ToolTipText = "Remover o nome do profissional";
+            // 
+            // label62
+            // 
+            this.label62.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label62.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.label62.ForeColor = System.Drawing.Color.LightYellow;
+            this.label62.Location = new System.Drawing.Point(0, 0);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(344, 18);
+            this.label62.TabIndex = 219;
+            this.label62.Text = "Profissional Responsável";
+            this.label62.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ProfissionalRegistro
             // 
@@ -2862,74 +2930,6 @@
             this.columnHeader8.Text = "Usuário";
             this.columnHeader8.Width = 150;
             // 
-            // ContadorList
-            // 
-            this.ContadorList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ContadorList.DropDownWidth = 280;
-            this.ContadorList.FormattingEnabled = true;
-            this.ContadorList.Location = new System.Drawing.Point(66, 28);
-            this.ContadorList.Name = "ContadorList";
-            this.ContadorList.Size = new System.Drawing.Size(242, 21);
-            this.ContadorList.TabIndex = 231;
-            this.ContadorList.SelectedIndexChanged += new System.EventHandler(this.ContadorList_SelectedIndexChanged);
-            // 
-            // RemoveContadorButon
-            // 
-            this.RemoveContadorButon.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.RemoveContadorButon.Location = new System.Drawing.Point(314, 28);
-            this.RemoveContadorButon.Name = "RemoveContadorButon";
-            this.RemoveContadorButon.Size = new System.Drawing.Size(25, 21);
-            this.RemoveContadorButon.TabIndex = 232;
-            this.Ttp.SetToolTip(this.RemoveContadorButon, "Remover contador do cadastro da empresa");
-            this.RemoveContadorButon.UseVisualStyleBackColor = true;
-            // 
-            // label62
-            // 
-            this.label62.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label62.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.label62.ForeColor = System.Drawing.Color.LightYellow;
-            this.label62.Location = new System.Drawing.Point(0, 0);
-            this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(344, 18);
-            this.label62.TabIndex = 219;
-            this.label62.Text = "Profissional Responsável";
-            this.label62.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // ProfissionalToolStrip
-            // 
-            this.ProfissionalToolStrip.BackColor = System.Drawing.Color.Transparent;
-            this.ProfissionalToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.ProfissionalToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.ProfissionalToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ProfissionalAddButton,
-            this.ProfissionalDelButton});
-            this.ProfissionalToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.ProfissionalToolStrip.Location = new System.Drawing.Point(292, 103);
-            this.ProfissionalToolStrip.Name = "ProfissionalToolStrip";
-            this.ProfissionalToolStrip.Size = new System.Drawing.Size(80, 25);
-            this.ProfissionalToolStrip.TabIndex = 233;
-            this.ProfissionalToolStrip.Text = "toolStrip2";
-            // 
-            // ProfissionalAddButton
-            // 
-            this.ProfissionalAddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ProfissionalAddButton.Image = global::GTI_Desktop.Properties.Resources.add;
-            this.ProfissionalAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ProfissionalAddButton.Name = "ProfissionalAddButton";
-            this.ProfissionalAddButton.Size = new System.Drawing.Size(23, 22);
-            this.ProfissionalAddButton.Text = "Adicionar proprietário";
-            this.ProfissionalAddButton.ToolTipText = "Selecionar um cidaddão como profissional responsável";
-            // 
-            // ProfissionalDelButton
-            // 
-            this.ProfissionalDelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ProfissionalDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.ProfissionalDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ProfissionalDelButton.Name = "ProfissionalDelButton";
-            this.ProfissionalDelButton.Size = new System.Drawing.Size(23, 22);
-            this.ProfissionalDelButton.Text = "Excluir proprietário";
-            this.ProfissionalDelButton.ToolTipText = "Remover o nome do profissional";
-            // 
             // Empresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2985,6 +2985,8 @@
             this.a1Panel6.PerformLayout();
             this.a1Panel5.ResumeLayout(false);
             this.a1Panel5.PerformLayout();
+            this.ProfissionalToolStrip.ResumeLayout(false);
+            this.ProfissionalToolStrip.PerformLayout();
             this.ATtab.ResumeLayout(false);
             this.a1Panel11.ResumeLayout(false);
             this.a1Panel10.ResumeLayout(false);
@@ -2994,8 +2996,6 @@
             this.HStab.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.ProfissionalToolStrip.ResumeLayout(false);
-            this.ProfissionalToolStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

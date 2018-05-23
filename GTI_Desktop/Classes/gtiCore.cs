@@ -202,7 +202,7 @@ namespace GTI_Desktop.Classes {
         /// <returns>Nome da Conexão</returns>
         public static string Connection_Name() {
             string connString = "";
-            Ul = "everest"; Up = "gtisys";
+            Ul = "gtisys"; Up = "everest";
             Main f1 = (Main)Application.OpenForms["Main"];
             try {
                 BaseDados = f1.sbDataBase.Text;
@@ -338,7 +338,7 @@ namespace GTI_Desktop.Classes {
 
             sqlBuilder.DataSource = ServerName;
             sqlBuilder.InitialCatalog = DataBaseName;
-            sqlBuilder.IntegratedSecurity = true;
+            sqlBuilder.IntegratedSecurity = false;
             sqlBuilder.UserID = LoginName;
             sqlBuilder.Password = Pwd;
 

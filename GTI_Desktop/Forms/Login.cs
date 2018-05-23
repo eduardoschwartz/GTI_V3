@@ -259,7 +259,8 @@ namespace GTI_Desktop.Forms {
         private void SairButton_Click(object sender, EventArgs e) {
             Main f1 = (Main)Application.OpenForms["Main"];
             FormClosingEventArgs e1 = new FormClosingEventArgs(CloseReason.MdiFormClosing, true);
-            f1.Main_FormClosing(sender, e1);
+            if (MessageBox.Show("Sair do sistema?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                f1.Main_FormClosing(null, e1);
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
@@ -268,11 +269,9 @@ namespace GTI_Desktop.Forms {
                     LoginButton_Click(null, null);
                     break;
                 case Keys.Escape:
-                    if (MessageBox.Show("Sair do sistema?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question,MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                        SairButton_Click(null,null);
+                    SairButton_Click(null, null);
                     break;
             }
-
             return base.ProcessCmdKey(ref msg, keyData);
         }
     }

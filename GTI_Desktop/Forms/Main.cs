@@ -518,10 +518,20 @@ namespace GTI_Desktop.Forms {
             mnuAtribuicaoAcesso_Click(null, null);
         }
 
-        private void SegurancaPorEventoMenu_Click(object sender, EventArgs e) {
-           
+       
+        private void mnuEscritorioContabil_Click(object sender, EventArgs e) {
+            var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Escritorio_Contabil);
+            if (formToShow != null) {
+                formToShow.Show();
+            } else {
+                Forms.Escritorio_Contabil f1 = new Forms.Escritorio_Contabil {
+                    Tag = "Menu",
+                    MdiParent = this
+                };
+                f1.Show();
+                f1.BringToFront();
+            }
         }
-
 
     }//end class
 }

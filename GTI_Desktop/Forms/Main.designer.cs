@@ -345,7 +345,7 @@
             this.mnuBairro,
             this.mnuPaises});
             this.mnuTerritorial.Name = "mnuTerritorial";
-            this.mnuTerritorial.Size = new System.Drawing.Size(180, 22);
+            this.mnuTerritorial.Size = new System.Drawing.Size(124, 22);
             this.mnuTerritorial.Text = "Territorial";
             // 
             // mnuBairro
@@ -367,7 +367,7 @@
             this.mnuParametroDiversos.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cadastroDeProfissõesToolStripMenuItem});
             this.mnuParametroDiversos.Name = "mnuParametroDiversos";
-            this.mnuParametroDiversos.Size = new System.Drawing.Size(180, 22);
+            this.mnuParametroDiversos.Size = new System.Drawing.Size(124, 22);
             this.mnuParametroDiversos.Text = "Diversos";
             // 
             // cadastroDeProfissõesToolStripMenuItem
@@ -421,21 +421,22 @@
             this.mnuEmpresa,
             this.mnuEscritorioContabil});
             this.mnuMobiliarioCadastro.Name = "mnuMobiliarioCadastro";
-            this.mnuMobiliarioCadastro.Size = new System.Drawing.Size(121, 22);
+            this.mnuMobiliarioCadastro.Size = new System.Drawing.Size(180, 22);
             this.mnuMobiliarioCadastro.Text = "Cadastro";
             // 
             // mnuEmpresa
             // 
             this.mnuEmpresa.Name = "mnuEmpresa";
-            this.mnuEmpresa.Size = new System.Drawing.Size(169, 22);
+            this.mnuEmpresa.Size = new System.Drawing.Size(180, 22);
             this.mnuEmpresa.Text = "Empresa";
             this.mnuEmpresa.Click += new System.EventHandler(this.MnuEmpresa_Click);
             // 
             // mnuEscritorioContabil
             // 
             this.mnuEscritorioContabil.Name = "mnuEscritorioContabil";
-            this.mnuEscritorioContabil.Size = new System.Drawing.Size(169, 22);
+            this.mnuEscritorioContabil.Size = new System.Drawing.Size(180, 22);
             this.mnuEscritorioContabil.Text = "Escritório contábil";
+            this.mnuEscritorioContabil.Click += new System.EventHandler(this.mnuEscritorioContabil_Click);
             // 
             // mnuAtendimento
             // 
@@ -558,7 +559,7 @@
             // mnuConfig
             // 
             this.mnuConfig.Name = "mnuConfig";
-            this.mnuConfig.Size = new System.Drawing.Size(180, 22);
+            this.mnuConfig.Size = new System.Drawing.Size(146, 22);
             this.mnuConfig.Text = "Configuração";
             this.mnuConfig.Click += new System.EventHandler(this.MnuConfig_Click);
             // 
@@ -569,7 +570,7 @@
             this.mnuCadastroEvento,
             this.mnuAtribuicaoAcesso});
             this.mnuSecurity.Name = "mnuSecurity";
-            this.mnuSecurity.Size = new System.Drawing.Size(180, 22);
+            this.mnuSecurity.Size = new System.Drawing.Size(146, 22);
             this.mnuSecurity.Text = "Segurança";
             // 
             // mnuCadastroUsuario

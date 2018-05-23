@@ -332,10 +332,11 @@ namespace GTI_Dal.Classes {
             using (var db = new GTI_Context(_connection)) {
                 var reg = (from m in db.Escritoriocontabil
                            join b in db.Bairro on  m.Codbairro equals b.Codbairro  into mb from b in mb.DefaultIfEmpty()
+                           join c in db.Cidade on new { p1 = (short)m.Codcidade, p2 = m.UF } equals new { p1 = c.Codcidade, p2 = c.Siglauf } into mc from c in mc.DefaultIfEmpty()
                            join l in db.Logradouro on m.Codlogradouro equals l.Codlogradouro into lm from l in lm.DefaultIfEmpty()
                            where m.Codigoesc == Codigo
                            select new EscritoriocontabilStruct {Codigo=m.Codigoesc,Nome=m.Nomeesc,Logradouro_Codigo=m.Codlogradouro,Logradouro_Nome=l.Endereco,Numero=m.Numero,
-                           Complemento=m.Complemento,Bairro_Codigo=m.Codbairro,Bairro_Nome=b.Descbairro,Cidade_Nome=m.Nomecidade,UF=m.UF,Telefone=m.Telefone,Email=m.Email,
+                           Complemento=m.Complemento,Bairro_Codigo=m.Codbairro,Bairro_Nome=b.Descbairro,Cidade_Nome=c.Desccidade,UF=m.UF,Telefone=m.Telefone,Email=m.Email,
                            Cpf=m.Cpf,Cnpj=m.Cnpj,Im=m.Im,Crc=m.Crc,Recebecarne=m.Recebecarne
                            }).FirstOrDefault();
 

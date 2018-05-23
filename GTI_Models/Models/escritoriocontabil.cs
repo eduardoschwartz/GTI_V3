@@ -4,15 +4,12 @@ namespace GTI_Models.Models {
     public class Escritoriocontabil {
         [Key]
         public short Codigoesc { get; set; }
-        public int? Codigoold { get; set; }
         public string Nomeesc { get; set; }
         public int? Codlogradouro { get; set; }
         public string Nomelogradouro { get; set; }
         public int? Numero { get; set; }
         public short? Codbairro { get; set; }
-        public string Nomebairro { get; set; }
         public string Cep { get; set; }
-        public string Nomecidade { get; set; }
         public string UF { get; set; }
         public string Telefone { get; set; }
         public string Email { get; set; }
@@ -22,6 +19,7 @@ namespace GTI_Models.Models {
         public string Cnpj { get; set; }
         public int? Im { get; set; }
         public string Complemento { get; set; }
+        public int? Codcidade { get; set; }
     }
 
     public class EscritoriocontabilStruct {
