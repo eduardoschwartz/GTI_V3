@@ -65,7 +65,7 @@
             this.IM = new System.Windows.Forms.TextBox();
             this.RecebeCarneCheck = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.Codigo = new System.Windows.Forms.Label();
+            this.CodigoEscritorio = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.Crc = new System.Windows.Forms.TextBox();
             this.pnlEnd.SuspendLayout();
@@ -395,6 +395,7 @@
             this.DelButton.Size = new System.Drawing.Size(23, 22);
             this.DelButton.Text = "toolStripButton3";
             this.DelButton.ToolTipText = "Excluir registro";
+            this.DelButton.Click += new System.EventHandler(this.DelButton_Click);
             // 
             // FindButton
             // 
@@ -459,6 +460,7 @@
             this.EnderecoButton.Name = "EnderecoButton";
             this.EnderecoButton.Size = new System.Drawing.Size(124, 22);
             this.EnderecoButton.Text = "Alterar o endereço";
+            this.EnderecoButton.Click += new System.EventHandler(this.EnderecoButton_Click);
             // 
             // lblNomeDoc
             // 
@@ -513,7 +515,6 @@
             this.IM.Location = new System.Drawing.Point(370, 56);
             this.IM.MaxLength = 6;
             this.IM.Name = "IM";
-            this.IM.ReadOnly = true;
             this.IM.Size = new System.Drawing.Size(71, 20);
             this.IM.TabIndex = 5;
             this.IM.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IM_KeyPress);
@@ -539,15 +540,15 @@
             this.label4.TabIndex = 166;
             this.label4.Text = "Código......:";
             // 
-            // Codigo
+            // CodigoEscritorio
             // 
-            this.Codigo.AutoSize = true;
-            this.Codigo.ForeColor = System.Drawing.Color.Maroon;
-            this.Codigo.Location = new System.Drawing.Point(72, 9);
-            this.Codigo.Name = "Codigo";
-            this.Codigo.Size = new System.Drawing.Size(43, 13);
-            this.Codigo.TabIndex = 167;
-            this.Codigo.Text = "000000";
+            this.CodigoEscritorio.AutoSize = true;
+            this.CodigoEscritorio.ForeColor = System.Drawing.Color.Maroon;
+            this.CodigoEscritorio.Location = new System.Drawing.Point(72, 9);
+            this.CodigoEscritorio.Name = "CodigoEscritorio";
+            this.CodigoEscritorio.Size = new System.Drawing.Size(25, 13);
+            this.CodigoEscritorio.TabIndex = 167;
+            this.CodigoEscritorio.Text = "000";
             // 
             // label6
             // 
@@ -565,7 +566,6 @@
             this.Crc.Location = new System.Drawing.Point(221, 6);
             this.Crc.MaxLength = 30;
             this.Crc.Name = "Crc";
-            this.Crc.ReadOnly = true;
             this.Crc.Size = new System.Drawing.Size(112, 20);
             this.Crc.TabIndex = 1;
             // 
@@ -576,7 +576,7 @@
             this.ClientSize = new System.Drawing.Size(454, 242);
             this.Controls.Add(this.Crc);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.Codigo);
+            this.Controls.Add(this.CodigoEscritorio);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.RecebeCarneCheck);
             this.Controls.Add(this.IM);
@@ -648,7 +648,7 @@
         internal System.Windows.Forms.TextBox Email;
         internal System.Windows.Forms.TextBox Fone;
         internal System.Windows.Forms.Label label4;
-        internal System.Windows.Forms.Label Codigo;
+        internal System.Windows.Forms.Label CodigoEscritorio;
         internal System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox Crc;
     }

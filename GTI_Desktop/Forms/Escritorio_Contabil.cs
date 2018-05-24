@@ -9,17 +9,7 @@ namespace GTI_Desktop.Forms {
     public partial class Escritorio_Contabil : Form {
 
         bool bAddNew;
-        int _CodEscritorio = 0;
         string _connection = gtiCore.Connection_Name();
-
-        public int CodCidadao {
-            get { return (_CodEscritorio); }
-            set {
-                _CodEscritorio = value;
-                bAddNew = false;
-                CarregaDados(_CodEscritorio);
-            }
-        }
 
         public Escritorio_Contabil() {
             InitializeComponent();
@@ -30,6 +20,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void Clear_Reg() {
+            CodigoEscritorio.Text = "000";
             Nome.Text = "";
             Nome.Tag = "";
             CPF.Text = "";
@@ -68,6 +59,8 @@ namespace GTI_Desktop.Forms {
             EnderecoButton.Enabled = !bStart;
 
             Nome.ReadOnly = bStart;
+            Crc.ReadOnly = bStart;
+            Crc.BackColor = color_disable;
             CPF.ReadOnly = bStart;
             CNPJ.ReadOnly = bStart;
             IM.ReadOnly = bStart;
@@ -83,11 +76,14 @@ namespace GTI_Desktop.Forms {
         private void AddButton_Click(object sender, EventArgs e) {
             bAddNew = true;
             ControlBehaviour(false);
+            Clear_Reg();
+            Crc.Focus();
         }
 
         private void EditButton_Click(object sender, EventArgs e) {
             bAddNew=false;
             ControlBehaviour(false);
+            Crc.Focus();
         }
 
         private void SairButton_Click(object sender, EventArgs e) {
@@ -98,7 +94,7 @@ namespace GTI_Desktop.Forms {
             using (var form = new Escritorio_Contabil_Lista()) {
                 var result = form.ShowDialog(this);
                 if (result == DialogResult.OK) {
-                    int val = form.ReturnValue;
+                    short val = form.ReturnValue;
                     CarregaDados(val);
                 }
             }
@@ -107,6 +103,7 @@ namespace GTI_Desktop.Forms {
         private void CarregaDados(int Codigo) {
             Empresa_bll empresa_Class = new Empresa_bll(_connection);
             EscritoriocontabilStruct reg = empresa_Class.Dados_Escritorio_Contabil(Codigo);
+            CodigoEscritorio.Text = reg.Codigo.ToString("000");
             Nome.Text = reg.Nome;
             CPF.Text = reg.Cpf;
             CNPJ.Text = reg.Cnpj;
@@ -127,13 +124,55 @@ namespace GTI_Desktop.Forms {
             RecebeCarneCheck.Checked = (bool)reg.Recebecarne;
         }
 
+        private void EnderecoButton_Click(object sender, EventArgs e) {
+            GTI_Models.Models.Endereco reg = new GTI_Models.Models.Endereco {
+                Id_pais = 1,
+                Sigla_uf = UF.Text == "" ? "SP" : UF.Text,
+                Id_cidade = string.IsNullOrWhiteSpace(Cidade.Text) ? 413 : Convert.ToInt32(Cidade.Tag.ToString()),
+                Id_bairro = string.IsNullOrWhiteSpace(Bairro.Text) ? 0 : Convert.ToInt32(Bairro.Tag.ToString())
+            };
+            if (Logradouro.Tag == null) Logradouro.Tag = "0";
+            if (string.IsNullOrWhiteSpace(Logradouro.Tag.ToString()))
+                Logradouro.Tag = "0";
+            reg.Id_logradouro = string.IsNullOrWhiteSpace(Logradouro.Text) ? 0 : Convert.ToInt32(Logradouro.Tag.ToString());
+            reg.Nome_logradouro = reg.Id_cidade != 413 ? Logradouro.Text : "";
+            reg.Numero_imovel = Numero.Text == "" ? 0 : Convert.ToInt32(Numero.Text);
+            reg.Complemento = Complemento.Text;
+            reg.Email = Email.Text;
+            reg.Cep = reg.Id_cidade != 413 ? Cep.Text == "" ? 0 : Convert.ToInt32(gtiCore.ExtractNumber(Cep.Text)) : 0;
+
+            Forms.Endereco f1 = new Forms.Endereco(reg);
+            f1.ShowDialog();
+            if (!f1.EndRetorno.Cancelar) {
+                Pais.Text = "BRASIL";
+                Pais.Tag = "1";
+                UF.Text = f1.EndRetorno.Sigla_uf;
+                Cidade.Text = f1.EndRetorno.Nome_cidade;
+                Cidade.Tag = f1.EndRetorno.Id_cidade.ToString();
+                Bairro.Text = f1.EndRetorno.Nome_bairro;
+                Bairro.Tag = f1.EndRetorno.Id_bairro.ToString();
+                Logradouro.Text = f1.EndRetorno.Nome_logradouro;
+                Logradouro.Tag = f1.EndRetorno.Id_logradouro.ToString();
+                Numero.Text = f1.EndRetorno.Numero_imovel.ToString();
+                Complemento.Text = f1.EndRetorno.Complemento;
+                Email.Text = f1.EndRetorno.Email;
+                Cep.Text = f1.EndRetorno.Cep.ToString("00000-000");
+            }
+        }
+
         private void GravarButton_Click(object sender, EventArgs e) {
+            Bairro.Tag = string.IsNullOrWhiteSpace(Bairro.Tag.ToString()) ? "0" : Bairro.Tag;
+            Cidade.Tag = string.IsNullOrWhiteSpace(Cidade.Tag.ToString()) ? "0" : Cidade.Tag;
+            Logradouro.Tag = string.IsNullOrWhiteSpace(Logradouro.Tag.ToString()) ? "0" : Logradouro.Tag;
+            IM.Text = string.IsNullOrWhiteSpace(IM.Text) ? "0" : IM.Text;
+            Numero.Text = string.IsNullOrWhiteSpace(Numero.Text) ? "0" : Numero.Text;
+
             Escritoriocontabil reg = new Escritoriocontabil();
             reg.Cep = Cep.Text;
             reg.Cnpj = CNPJ.Text;
             reg.Codbairro = Convert.ToInt16(Bairro.Tag);
             reg.Codcidade = Convert.ToInt32(Cidade.Tag);
-            reg.Codigoesc = Convert.ToInt16(Codigo.Text);
+            reg.Codigoesc = Convert.ToInt32(CodigoEscritorio.Text);
             reg.Codlogradouro = Convert.ToInt32(Logradouro.Tag);
             reg.Complemento = Complemento.Text;
             reg.Cpf = CPF.Text;
@@ -147,10 +186,46 @@ namespace GTI_Desktop.Forms {
             reg.Telefone = Fone.Text;
             reg.UF = UF.Text;
 
-
-            ControlBehaviour(true);
+            Empresa_bll empresa_Class = new Empresa_bll(_connection);
+            Exception ex;
+            if (bAddNew) {
+                int nLastCod = empresa_Class.Retorna_Ultimo_Codigo_Escritorio() ;
+                reg.Codigoesc=++nLastCod;
+                ex = empresa_Class.Incluir_escritorio(reg);
+                if (ex != null) {
+                    ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                    eBox.ShowDialog();
+                } else {
+                    CarregaDados(nLastCod);
+                    ControlBehaviour(true);
+                }
+            } else {
+                reg.Codigoesc = Convert.ToInt32(CodigoEscritorio.Text);
+                ex = empresa_Class.Alterar_escritorio(reg);
+                if (ex != null) {
+                    ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                    eBox.ShowDialog();
+                } else {
+                    ControlBehaviour(true);
+                }
+            }
         }
 
-
+        private void DelButton_Click(object sender, EventArgs e) {
+            int nCodigo = Convert.ToInt32(CodigoEscritorio.Text);
+            if (nCodigo == 0)
+                MessageBox.Show("Selecione um escritório.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else {
+                if (MessageBox.Show("Excluir este registro?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+                    Empresa_bll empresa_Class = new Empresa_bll(_connection);
+                    Exception ex = empresa_Class.Excluir_Escritorio(nCodigo);
+                    if (ex != null) {
+                        ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                        eBox.ShowDialog();
+                    } else
+                        Clear_Reg();
+                }
+            }
+        }
     }
 }

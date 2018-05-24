@@ -190,6 +190,123 @@ namespace GTI_Bll.Classes {
             return obj.Dados_Escritorio_Contabil(Codigo);
         }
 
+        /// <summary>
+        /// Validação para gravação do escritório de contabilidade
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Valida_Escritorio_Contabil(Escritoriocontabil reg) {
+            Exception AppEx;
+            if (String.IsNullOrWhiteSpace(reg.Nomeesc)) {
+                AppEx = new Exception("Digite o nome do escritório");
+                return AppEx;
+            }
+
+            if (String.IsNullOrWhiteSpace(reg.Cpf) && String.IsNullOrEmpty(reg.Cnpj)) {
+                AppEx = new Exception("Digite o CPF ou CNPJ.");
+                return AppEx;
+            }
+
+            if (!string.IsNullOrWhiteSpace(reg.Cpf) && !bllCore.ValidaCpf(reg.Cpf)) {
+                AppEx = new Exception("CPF inválido.");
+                return AppEx;
+            }
+
+            if (!string.IsNullOrWhiteSpace(reg.Cnpj) && !bllCore.ValidaCNPJ(reg.Cnpj)) {
+                AppEx = new Exception("CNPJ inválido.");
+                return AppEx;
+            }
+
+            if (String.IsNullOrWhiteSpace(reg.Nomelogradouro) && reg.Codlogradouro==0) {
+                AppEx = new Exception("Digite o endereço do escritório.");
+                return AppEx;
+            }
+
+            if (reg.Codcidade==0) {
+                AppEx = new Exception("Selecione a cidade.");
+                return AppEx;
+            }
+
+            if (String.IsNullOrWhiteSpace( reg.UF) ) {
+                AppEx = new Exception("Selecione a UF.");
+                return AppEx;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Incluir um novo escritório contábil
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Incluir_escritorio(Escritoriocontabil reg) {
+            Exception AppEx = Valida_Escritorio_Contabil(reg);
+            if (AppEx != null) return AppEx;
+            Empresa_Data obj = new Empresa_Data(_connection);
+            Exception ex = obj.Incluir_escritorio(reg);
+            return ex;
+        }
+
+        /// <summary>
+        /// Alterar o cadastro de um escritório contábil
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Alterar_escritorio(Escritoriocontabil reg) {
+            Exception AppEx = Valida_Escritorio_Contabil(reg);
+            if (AppEx != null) return AppEx;
+            Empresa_Data obj = new Empresa_Data(_connection);
+            Exception ex = obj.Alterar_escritorio(reg);
+            return ex;
+        }
+
+        /// <summary>
+        /// Último código de escritório cadastrado
+        /// </summary>
+        /// <returns></returns>
+        public int Retorna_Ultimo_Codigo_Escritorio() {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Retorna_Ultimo_Codigo_Escritorio();
+        }
+
+        /// <summary>
+        /// Verifica se alguma empresa esta usando o código de escritório
+        /// </summary>
+        /// <param name="id_cidadao"></param>
+        /// <returns></returns>
+        private Exception Escritorio_em_uso(int id_escritorio) {
+            Exception AppEx = null;
+            Empresa_Data obj = new Empresa_Data(_connection);
+            bool bUso = obj.Empresa_Escritorio(id_escritorio);
+            if (bUso)
+                AppEx = new Exception("Exclusão não permitida. Escritório em uso nas empresas.");
+            return AppEx;
+        }
+
+        /// <summary>
+        /// Verifica se o escritório esta sendo utilizado em alguma empresa
+        /// </summary>
+        /// <param name="id_escritorio"></param>
+        /// <returns></returns>
+        public bool Empresa_Escritorio(int id_escritorio) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Empresa_Escritorio(id_escritorio);
+        }
+
+        /// <summary>
+        /// Excluir um escritório cadastrado
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public Exception Excluir_Escritorio(int Codigo) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            Exception ex = Escritorio_em_uso(Codigo);
+            if (ex == null)
+                ex = obj.Excluir_Escritorio(Codigo);
+            return ex;
+
+        }
 
     }
 }

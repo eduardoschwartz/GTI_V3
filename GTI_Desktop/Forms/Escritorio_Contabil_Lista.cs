@@ -6,7 +6,7 @@ using System;
 namespace GTI_Desktop.Forms {
     public partial class Escritorio_Contabil_Lista : Form {
         string _connection = gtiCore.Connection_Name();
-        public int ReturnValue { get; set; }
+        public short ReturnValue { get; set; }
 
         public Escritorio_Contabil_Lista() {
             InitializeComponent();
@@ -20,7 +20,7 @@ namespace GTI_Desktop.Forms {
         private void OKbutton_Click(object sender, System.EventArgs e) {
             if (MainList.SelectedItem!=null) {
                 DialogResult = DialogResult.OK;
-                ReturnValue = Convert.ToInt32(MainList.SelectedValue);
+                ReturnValue = Convert.ToInt16(MainList.SelectedValue);
             } else {
                 DialogResult = DialogResult.Cancel;
             }

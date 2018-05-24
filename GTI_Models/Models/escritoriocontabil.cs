@@ -3,7 +3,7 @@
 namespace GTI_Models.Models {
     public class Escritoriocontabil {
         [Key]
-        public short Codigoesc { get; set; }
+        public int Codigoesc { get; set; }
         public string Nomeesc { get; set; }
         public int? Codlogradouro { get; set; }
         public string Nomelogradouro { get; set; }
@@ -24,10 +24,11 @@ namespace GTI_Models.Models {
 
     public class EscritoriocontabilStruct {
         [Key]
-        public short Codigo { get; set; }
+        public int Codigo { get; set; }
         public string Nome { get; set; }
         public int? Logradouro_Codigo { get; set; }
         public string Logradouro_Nome { get; set; }
+        public string Logradouro_Nome_Fora { get; set; }
         public int? Numero { get; set; }
         public string Complemento { get; set; }
         public short? Bairro_Codigo { get; set; }

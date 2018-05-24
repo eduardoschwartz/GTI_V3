@@ -1,6 +1,7 @@
 ﻿using GTI_Models.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
@@ -337,7 +338,7 @@ namespace GTI_Dal.Classes {
                            where m.Codigoesc == Codigo
                            select new EscritoriocontabilStruct {Codigo=m.Codigoesc,Nome=m.Nomeesc,Logradouro_Codigo=m.Codlogradouro,Logradouro_Nome=l.Endereco,Numero=m.Numero,
                            Complemento=m.Complemento,Bairro_Codigo=m.Codbairro,Bairro_Nome=b.Descbairro,Cidade_Nome=c.Desccidade,UF=m.UF,Telefone=m.Telefone,Email=m.Email,
-                           Cpf=m.Cpf,Cnpj=m.Cnpj,Im=m.Im,Crc=m.Crc,Recebecarne=m.Recebecarne
+                           Cpf=m.Cpf,Cnpj=m.Cnpj,Im=m.Im,Crc=m.Crc,Recebecarne=m.Recebecarne,Cidade_Codigo=m.Codcidade,Logradouro_Nome_Fora  =m.Nomelogradouro
                            }).FirstOrDefault();
 
                 EscritoriocontabilStruct row = new EscritoriocontabilStruct();
@@ -346,7 +347,7 @@ namespace GTI_Dal.Classes {
                 row.Codigo = reg.Codigo;
                 row.Nome = reg.Nome;
                 row.Logradouro_Codigo = reg.Logradouro_Codigo;
-                row.Logradouro_Nome = reg.Logradouro_Nome;
+                row.Logradouro_Nome = reg.Logradouro_Nome ?? reg.Logradouro_Nome_Fora;
                 row.Numero = reg.Numero;
                 row.Complemento = reg.Complemento;
                 row.Bairro_Codigo = reg.Bairro_Codigo;
@@ -360,7 +361,7 @@ namespace GTI_Dal.Classes {
                 row.Email = reg.Email;
                 row.Im = reg.Im;
                 row.Telefone = reg.Telefone;
-                row.Recebecarne = reg.Recebecarne;
+                row.Recebecarne =  reg.Recebecarne==null?false:reg.Recebecarne;
 
                 if (reg.Logradouro_Codigo >0) {
                     Endereco_Data Cep_Class = new Endereco_Data(_connection);
@@ -371,6 +372,102 @@ namespace GTI_Dal.Classes {
                 return row;
             }
         }
+
+        public Exception Incluir_escritorio(Escritoriocontabil reg) {
+            using (var db = new GTI_Context(_connection)) {
+                object[] Parametros = new  object[17];
+                Parametros[0] = new SqlParameter { ParameterName = "@Codigoesc", SqlDbType = SqlDbType.Int, SqlValue = reg.Codigoesc };
+                Parametros[1] = new SqlParameter { ParameterName = "@Nomeesc", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Nomeesc };
+                Parametros[2] = new SqlParameter { ParameterName = "@Codlogradouro", SqlDbType = SqlDbType.Int, SqlValue = reg.Codlogradouro };
+                Parametros[3] = new SqlParameter { ParameterName = "@Nomelogradouro", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Nomelogradouro };
+                Parametros[4] = new SqlParameter { ParameterName = "@Numero", SqlDbType = SqlDbType.Int, SqlValue = reg.Numero };
+                Parametros[5] = new SqlParameter { ParameterName = "@Codbairro", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Codbairro };
+                Parametros[6] = new SqlParameter { ParameterName = "@Cep", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Cep };
+                Parametros[7] = new SqlParameter { ParameterName = "@UF", SqlDbType = SqlDbType.VarChar, SqlValue = reg.UF };
+                Parametros[8] = new SqlParameter { ParameterName = "@Telefone", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Telefone };
+                Parametros[9] = new SqlParameter { ParameterName = "@Email", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Email };
+                Parametros[10] = new SqlParameter { ParameterName = "@Recebecarne", SqlDbType = SqlDbType.Bit, SqlValue = reg.Recebecarne };
+                Parametros[11] = new SqlParameter { ParameterName = "@Crc", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Crc };
+                Parametros[12] = new SqlParameter { ParameterName = "@Cpf", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Cpf };
+                Parametros[13] = new SqlParameter { ParameterName = "@Cnpj", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Cnpj };
+                Parametros[14] = new SqlParameter { ParameterName = "@Im", SqlDbType = SqlDbType.Int, SqlValue = reg.Im };
+                Parametros[15] = new SqlParameter { ParameterName = "@Complemento", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Complemento };
+                Parametros[16] = new SqlParameter { ParameterName = "@Codcidade", SqlDbType = SqlDbType.Int, SqlValue = reg.Codcidade };
+
+                db.Database.ExecuteSqlCommand("INSERT INTO escritoriocontabil(codigoesc,nomeesc,codlogradouro,nomelogradouro,numero,codbairro,cep,uf,telefone," +
+                                              "email,recebecarne,crc,cpf,cnpj,im,complemento,codcidade) VALUES(@Codigoesc,@nomeesc,@Codlogradouro,@Nomelogradouro," +
+                                              "@Numero,@Codbairro,@Cep,@UF,@Telefone,@Email,@Recebecarne,@Crc,@Cpf,@Cnpj,@Im,@Complemento,@Codcidade)", Parametros);
+
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Exception Alterar_escritorio(Escritoriocontabil reg) {
+            using (var db = new GTI_Context(_connection)) {
+                Escritoriocontabil b = db.Escritoriocontabil.First(i => i.Codigoesc == reg.Codigoesc);
+                b.Nomeesc = reg.Nomeesc;
+                b.Cep = reg.Cep;
+                b.Cnpj = reg.Cnpj;
+                b.Cpf = reg.Cpf;
+                b.Codbairro = reg.Codbairro;
+                b.Codcidade = reg.Codcidade;
+                b.Codlogradouro = reg.Codlogradouro;
+                b.Complemento = reg.Complemento;
+                b.Crc = reg.Crc;
+                b.Email = reg.Email;
+                b.Im = reg.Im;
+                b.Nomelogradouro = reg.Nomelogradouro;
+                b.Numero = reg.Numero;
+                b.Recebecarne = reg.Recebecarne;
+                b.Telefone = reg.Telefone;
+                b.UF = reg.UF;
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+       public int Retorna_Ultimo_Codigo_Escritorio() {
+            using (var db = new GTI_Context(_connection)) {
+                var Sql = (from c in db.Escritoriocontabil orderby c.Codigoesc descending select c.Codigoesc).FirstOrDefault();
+                return Sql;
+            }
+        }
+
+        public Exception Excluir_Escritorio(int Codigo) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    Escritoriocontabil b = db.Escritoriocontabil.First(i => i.Codigoesc == Codigo);
+                    db.Escritoriocontabil.Remove(b);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public bool Empresa_Escritorio(int id_escritorio) {
+            int _contador = 0;
+            using (var db = new GTI_Context(_connection)) {
+                Inicio:;
+                try {
+                    _contador = (from p in db.Mobiliario where p.Respcontabil == id_escritorio select p.Codigomob).Count();
+                } catch {
+                    goto Inicio; //este erro só acontece no timeout, então tenta até conseguir.                   
+                }
+                return _contador > 0 ? true : false;
+            }
+        }
+
 
     }
 }

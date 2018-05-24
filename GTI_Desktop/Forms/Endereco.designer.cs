@@ -133,6 +133,7 @@ namespace GTI_Desktop.Forms {
             this.btPais_Refresh.Name = "btPais_Refresh";
             this.btPais_Refresh.Size = new System.Drawing.Size(25, 25);
             this.btPais_Refresh.TabIndex = 7;
+            this.btPais_Refresh.TabStop = false;
             this.btPais_Refresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btPais_Refresh.UseVisualStyleBackColor = true;
             this.btPais_Refresh.Click += new System.EventHandler(this.BtPais_Refresh_Click);
@@ -144,7 +145,8 @@ namespace GTI_Desktop.Forms {
             this.btBairro_Refresh.Location = new System.Drawing.Point(426, 45);
             this.btBairro_Refresh.Name = "btBairro_Refresh";
             this.btBairro_Refresh.Size = new System.Drawing.Size(25, 25);
-            this.btBairro_Refresh.TabIndex = 10;
+            this.btBairro_Refresh.TabIndex = 4;
+            this.btBairro_Refresh.TabStop = false;
             this.btBairro_Refresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btBairro_Refresh.UseVisualStyleBackColor = true;
             this.btBairro_Refresh.Click += new System.EventHandler(this.BtBairro_Refresh_Click);
@@ -173,7 +175,7 @@ namespace GTI_Desktop.Forms {
             this.txtNum.MaxLength = 4;
             this.txtNum.Name = "txtNum";
             this.txtNum.Size = new System.Drawing.Size(54, 20);
-            this.txtNum.TabIndex = 5;
+            this.txtNum.TabIndex = 6;
             this.txtNum.TextChanged += new System.EventHandler(this.TxtNum_TextChanged);
             this.txtNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtNum_KeyDown);
             // 
@@ -183,7 +185,7 @@ namespace GTI_Desktop.Forms {
             this.txtComplemento.MaxLength = 50;
             this.txtComplemento.Name = "txtComplemento";
             this.txtComplemento.Size = new System.Drawing.Size(163, 20);
-            this.txtComplemento.TabIndex = 6;
+            this.txtComplemento.TabIndex = 7;
             this.txtComplemento.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtComplemento_KeyDown);
             // 
             // label7
@@ -225,11 +227,12 @@ namespace GTI_Desktop.Forms {
             this.mskCep.Mask = "99999-999";
             this.mskCep.Name = "mskCep";
             this.mskCep.Size = new System.Drawing.Size(68, 20);
-            this.mskCep.TabIndex = 7;
+            this.mskCep.TabIndex = 8;
             this.mskCep.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MskCep_KeyDown);
             // 
             // txtLogradouro
             // 
+            this.txtLogradouro.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtLogradouro.Location = new System.Drawing.Point(82, 76);
             this.txtLogradouro.MaxLength = 50;
             this.txtLogradouro.Name = "txtLogradouro";
@@ -244,7 +247,7 @@ namespace GTI_Desktop.Forms {
             this.lstLogr.Location = new System.Drawing.Point(82, 76);
             this.lstLogr.Name = "lstLogr";
             this.lstLogr.Size = new System.Drawing.Size(280, 21);
-            this.lstLogr.TabIndex = 21;
+            this.lstLogr.TabIndex = 5;
             this.lstLogr.TabStop = false;
             this.lstLogr.Visible = false;
             this.lstLogr.TextChanged += new System.EventHandler(this.LstLogr_TextChanged);
@@ -272,7 +275,7 @@ namespace GTI_Desktop.Forms {
             this.txtEmail.MaxLength = 50;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(280, 20);
-            this.txtEmail.TabIndex = 8;
+            this.txtEmail.TabIndex = 9;
             // 
             // label9
             // 
