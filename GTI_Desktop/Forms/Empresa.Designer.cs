@@ -1981,7 +1981,7 @@
             this.ProprietarioToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.ProprietarioToolStrip.Location = new System.Drawing.Point(333, 29);
             this.ProprietarioToolStrip.Name = "ProprietarioToolStrip";
-            this.ProprietarioToolStrip.Size = new System.Drawing.Size(24, 48);
+            this.ProprietarioToolStrip.Size = new System.Drawing.Size(32, 67);
             this.ProprietarioToolStrip.TabIndex = 226;
             this.ProprietarioToolStrip.Text = "toolStrip2";
             // 
@@ -1991,9 +1991,9 @@
             this.ProprietarioAddButton.Image = global::GTI_Desktop.Properties.Resources.add;
             this.ProprietarioAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ProprietarioAddButton.Name = "ProprietarioAddButton";
-            this.ProprietarioAddButton.Size = new System.Drawing.Size(22, 20);
+            this.ProprietarioAddButton.Size = new System.Drawing.Size(30, 20);
             this.ProprietarioAddButton.Text = "Adicionar proprietário";
-            this.ProprietarioAddButton.ToolTipText = "Adicionar novo SIL";
+            this.ProprietarioAddButton.ToolTipText = "Adicionar novo proprietário";
             // 
             // ProprietarioDelButton
             // 
@@ -2001,9 +2001,9 @@
             this.ProprietarioDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
             this.ProprietarioDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ProprietarioDelButton.Name = "ProprietarioDelButton";
-            this.ProprietarioDelButton.Size = new System.Drawing.Size(22, 20);
+            this.ProprietarioDelButton.Size = new System.Drawing.Size(30, 20);
             this.ProprietarioDelButton.Text = "Excluir proprietário";
-            this.ProprietarioDelButton.ToolTipText = "Excluir o SIL Selecionado";
+            this.ProprietarioDelButton.ToolTipText = "Excluir o proprietário Selecionado";
             // 
             // ProprietarioList
             // 
@@ -2303,7 +2303,7 @@
             this.ProfissionalToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.ProfissionalToolStrip.Location = new System.Drawing.Point(292, 103);
             this.ProfissionalToolStrip.Name = "ProfissionalToolStrip";
-            this.ProfissionalToolStrip.Size = new System.Drawing.Size(80, 25);
+            this.ProfissionalToolStrip.Size = new System.Drawing.Size(49, 25);
             this.ProfissionalToolStrip.TabIndex = 233;
             this.ProfissionalToolStrip.Text = "toolStrip2";
             // 

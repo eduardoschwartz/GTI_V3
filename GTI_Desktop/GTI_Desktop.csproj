@@ -152,6 +152,18 @@
     <Compile Include="Forms\Cidadao_Lista.designer.cs">
       <DependentUpon>Cidadao_Lista.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Condominio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Condominio.Designer.cs">
+      <DependentUpon>Condominio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Condominio_Lista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Condominio_Lista.Designer.cs">
+      <DependentUpon>Condominio_Lista.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Config.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -378,6 +390,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Cidadao_Lista.resx">
       <DependentUpon>Cidadao_Lista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Condominio.resx">
+      <DependentUpon>Condominio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Condominio_Lista.resx">
+      <DependentUpon>Condominio_Lista.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Config.resx">
       <DependentUpon>Config.cs</DependentUpon>

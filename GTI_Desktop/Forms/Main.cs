@@ -533,5 +533,20 @@ namespace GTI_Desktop.Forms {
             }
         }
 
+        private void mnuCadastroCondominio_Click(object sender, EventArgs e) {
+            var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Condominio);
+            if (formToShow != null) {
+                formToShow.Show();
+            } else {
+                Forms.Condominio f1 = new Forms.Condominio {
+                    Tag = "Menu",
+                    MdiParent = this
+                };
+                f1.Show();
+                f1.BringToFront();
+            }
+        }
+
+
     }//end class
 }

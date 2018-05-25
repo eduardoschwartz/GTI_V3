@@ -117,6 +117,15 @@ namespace GTI_Bll.Classes {
             return obj.Inscricao_imovel(Logradouro,Numero);
         }
 
+        /// <summary>
+        /// Lista dos condomínios cadastrados
+        /// </summary>
+        /// <returns></returns>
+        public List<Condominio> Lista_Condominio() {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Lista_Condominio();
+        }
+
 
     }//end class
 }

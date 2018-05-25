@@ -111,6 +111,7 @@
             this.optDv2 = new System.Windows.Forms.RadioButton();
             this.optDv1 = new System.Windows.Forms.RadioButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.mnuCadastroCondominio = new System.Windows.Forms.ToolStripMenuItem();
             this.sBar.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.topBar.SuspendLayout();
@@ -389,22 +390,23 @@
             // 
             this.mnuCadastro.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuCadastroImovel,
+            this.mnuCadastroCondominio,
             this.mnuFaceQuadra});
             this.mnuCadastro.Name = "mnuCadastro";
-            this.mnuCadastro.Size = new System.Drawing.Size(121, 22);
+            this.mnuCadastro.Size = new System.Drawing.Size(180, 22);
             this.mnuCadastro.Text = "Cadastro";
             // 
             // mnuCadastroImovel
             // 
             this.mnuCadastroImovel.Name = "mnuCadastroImovel";
-            this.mnuCadastroImovel.Size = new System.Drawing.Size(156, 22);
+            this.mnuCadastroImovel.Size = new System.Drawing.Size(180, 22);
             this.mnuCadastroImovel.Text = "Imóvel";
             this.mnuCadastroImovel.Click += new System.EventHandler(this.MnuCadImob_Click);
             // 
             // mnuFaceQuadra
             // 
             this.mnuFaceQuadra.Name = "mnuFaceQuadra";
-            this.mnuFaceQuadra.Size = new System.Drawing.Size(156, 22);
+            this.mnuFaceQuadra.Size = new System.Drawing.Size(180, 22);
             this.mnuFaceQuadra.Text = "Face de Quadra";
             // 
             // mnuMobiliario
@@ -421,20 +423,20 @@
             this.mnuEmpresa,
             this.mnuEscritorioContabil});
             this.mnuMobiliarioCadastro.Name = "mnuMobiliarioCadastro";
-            this.mnuMobiliarioCadastro.Size = new System.Drawing.Size(180, 22);
+            this.mnuMobiliarioCadastro.Size = new System.Drawing.Size(121, 22);
             this.mnuMobiliarioCadastro.Text = "Cadastro";
             // 
             // mnuEmpresa
             // 
             this.mnuEmpresa.Name = "mnuEmpresa";
-            this.mnuEmpresa.Size = new System.Drawing.Size(180, 22);
+            this.mnuEmpresa.Size = new System.Drawing.Size(169, 22);
             this.mnuEmpresa.Text = "Empresa";
             this.mnuEmpresa.Click += new System.EventHandler(this.MnuEmpresa_Click);
             // 
             // mnuEscritorioContabil
             // 
             this.mnuEscritorioContabil.Name = "mnuEscritorioContabil";
-            this.mnuEscritorioContabil.Size = new System.Drawing.Size(180, 22);
+            this.mnuEscritorioContabil.Size = new System.Drawing.Size(169, 22);
             this.mnuEscritorioContabil.Text = "Escritório contábil";
             this.mnuEscritorioContabil.Click += new System.EventHandler(this.mnuEscritorioContabil_Click);
             // 
@@ -872,6 +874,13 @@
             this.optDv1.UseVisualStyleBackColor = false;
             this.optDv1.CheckedChanged += new System.EventHandler(this.OptDv1_CheckedChanged);
             // 
+            // mnuCadastroCondominio
+            // 
+            this.mnuCadastroCondominio.Name = "mnuCadastroCondominio";
+            this.mnuCadastroCondominio.Size = new System.Drawing.Size(180, 22);
+            this.mnuCadastroCondominio.Text = "Condomínios";
+            this.mnuCadastroCondominio.Click += new System.EventHandler(this.mnuCadastroCondominio_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -991,6 +1000,7 @@
         private System.Windows.Forms.ToolStripMenuItem CadastroUsuarioMenu;
         private System.Windows.Forms.ToolStripMenuItem EventosDoSistemaMenu;
         private System.Windows.Forms.ToolStripMenuItem AtribuicaoDeAcessoMenu;
+        private System.Windows.Forms.ToolStripMenuItem mnuCadastroCondominio;
     }
 }
 

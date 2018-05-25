@@ -410,33 +410,73 @@ namespace GTI_Dal.Classes {
             }
         }
 
-        public CondominioStruct Dados_Condominio(int nCodigo) {
+        public ImovelStruct Inscricao_imovel(int Logradouro, short Numero) {
             using (var db = new GTI_Context(_connection)) {
-                var reg = (from c in db.Condominio
-                           join fq in db.Facequadra on new { p1 = c.Cd_distrito, p2 = c.Cd_setor, p3 = c.Cd_quadra, p4 = c.Cd_seq } equals new { p1 = fq.Coddistrito, p2 = fq.Codsetor, p3 = fq.Codquadra, p4 = fq.Codface } into ifq from fq in ifq.DefaultIfEmpty()
-                           join l in db.Logradouro on fq.Codlogr equals l.Codlogradouro into lfq from l in lfq.DefaultIfEmpty()
-                           join b in db.Bairro on new { p1 = c.Cd_uf, p2 = c.Cd_codcidade, p3 = c.Cd_codbairro } equals new { p1 = "SP", p2 = (short)413, p3 = b.Codbairro } into bcd from b in bcd.DefaultIfEmpty()
-                           join bf in db.Benfeitoria on c.Cd_codbenf equals bf.Codbenfeitoria into cb from bf in cb.DefaultIfEmpty()
-                           join p in db.Pedologia on c.Cd_codpedol equals p.Codpedologia into cp from p in cp.DefaultIfEmpty()
-                           join t in db.Topografia on c.Cd_codtopog equals t.Codtopografia into ct from t in ct.DefaultIfEmpty()
-                           join s in db.Situacao on c.Cd_codsituacao equals s.Codsituacao into cst from s in cst.DefaultIfEmpty()
-                           join a in db.Categprop on c.Cd_codcategprop equals a.Codcategprop into cct from a in cct.DefaultIfEmpty()
-                           join u in db.Usoterreno on c.Cd_codusoterreno equals u.Codusoterreno into cu from u in cu.DefaultIfEmpty()
-                           where c.Cd_codigo == nCodigo
+                var reg = (from i in db.Cadimob
+                           join f in db.Facequadra on new { p1 = i.Distrito, p2 = i.Setor, p3 = i.Quadra, p4 = i.Seq } equals new { p1 = f.Coddistrito, p2 = f.Codsetor, p3 = f.Codquadra, p4 = f.Codface } into fi from f in fi.DefaultIfEmpty()
+                           join l in db.Logradouro on f.Codlogr equals l.Codlogradouro into lf from l in lf.DefaultIfEmpty()
+                           where f.Codlogr == Logradouro && i.Li_num == Numero
+                           select new ImovelStruct {Codigo=i.Codreduzido,
+                               Distrito = i.Distrito, Setor = i.Setor, Quadra = i.Quadra, Lote = i.Lote, Seq = i.Seq, Unidade = i.Unidade, SubUnidade = i.Subunidade
+                           }).FirstOrDefault();
+
+                ImovelStruct row = new ImovelStruct();
+                if (reg == null)
+                    return row;
+                row.Codigo = reg.Codigo;
+                row.Distrito = reg.Distrito;
+                row.Setor = reg.Setor;
+                row.Quadra = reg.Quadra;
+                row.Lote = reg.Lote;
+                row.Seq = reg.Seq;
+                row.Unidade = reg.Unidade;
+                row.SubUnidade = reg.SubUnidade;
+
+                return row;
+            }
+        }
+
+        public List<Condominio> Lista_Condominio() {
+            using (var db = new GTI_Context(_connection)) {
+                var Sql = (from e in db.Condominio where e.Cd_codigo > 0 orderby e.Cd_nomecond select e).ToList();
+                return Sql;
+            }
+        }
+
+        public CondominioStruct Dados_Condominio(int Codigo) {
+            using (var db = new GTI_Context(_connection)) {
+                var reg = (from m in db.Condominio
+                           join b in db.Bairro on m.Cd_codbairro equals b.Codbairro into mb from b in mb.DefaultIfEmpty()
+                           join c in db.Cidade on new { p1 = (short)m.Cd_codcidade, p2 = m.Cd_uf } equals new { p1 = c.Codcidade, p2 = c.Siglauf } into mc from c in mc.DefaultIfEmpty()
+                           join f in db.Facequadra on new { p1 = m.Cd_distrito, p2 = m.Cd_setor, p3 = m.Cd_quadra, p4 = m.Cd_seq } equals new { p1 = f.Coddistrito, p2 = f.Codsetor, p3 = f.Codquadra, p4 = f.Codface } into mf from f in mf.DefaultIfEmpty()
+                           join l in db.Logradouro on f.Codlogr equals l.Codlogradouro into lm from l in lm.DefaultIfEmpty()
+                           join bf in db.Benfeitoria on m.Cd_codbenf equals bf.Codbenfeitoria into ib from bf in ib.DefaultIfEmpty()
+                           join pd in db.Pedologia on m.Cd_codpedol equals pd.Codpedologia into ip from pd in ip.DefaultIfEmpty()
+                           join tp in db.Topografia on m.Cd_codtopog equals tp.Codtopografia into it from tp in it.DefaultIfEmpty()
+                           join st in db.Situacao on m.Cd_codsituacao equals st.Codsituacao into ist from st in ist.DefaultIfEmpty()
+                           join cp in db.Categprop on m.Cd_codcategprop equals cp.Codcategprop into icp from cp in icp.DefaultIfEmpty()
+                           join u in db.Usoterreno on m.Cd_codusoterreno equals u.Codusoterreno into iu from u in iu.DefaultIfEmpty()
+                           where m.Cd_codigo == Codigo
                            select new CondominioStruct {
-                               Codigo = c.Cd_codigo,Nome=c.Cd_nomecond, Distrito = c.Cd_distrito, Setor = c.Cd_setor, Quadra = c.Cd_quadra, Lote = c.Cd_lote,Seq=c.Cd_seq,
-                               Area_Construida=c.Cd_areatotconstr,Area_Terreno=c.Cd_areaterreno,Benfeitoria=c.Cd_codbenf,Categoria=c.Cd_codcategprop,Uso_terreno=c.Cd_codusoterreno,  
-                               Pedologia=c.Cd_codpedol,Situacao=c.Cd_codsituacao,Topografia=c.Cd_codsituacao,Fracao_Ideal=c.Cd_fracao,Codigo_Bairro=c.Cd_codbairro,
-                               Codigo_Proprietario=c.Cd_prop,Complemento=c.Cd_compl,Lote_Original=c.Cd_lotes,Quadra_Original=c.Cd_quadras,Numero=c.Cd_num,Qtde_Unidade=c.Cd_numunid,
-                               Codigo_Logradouro=l.Codlogradouro,Nome_Logradouro=l.Endereco,Nome_Bairro=b.Descbairro,Benfeitoria_Nome=bf.Descbenfeitoria,Categoria_Nome=a.Desccategprop,
-                               Pedologia_Nome=p.Descpedologia,Situacao_Nome=s.Descsituacao,Topografia_Nome=t.Desctopografia,Uso_terreno_Nome=u.Descusoterreno
+                               Codigo = m.Cd_codigo, Nome = m.Cd_nomecond, Codigo_Logradouro = f.Codlogr, Nome_Logradouro = l.Endereco, Numero = m.Cd_num, Cep = m.Cd_cep,
+                               Complemento = m.Cd_compl, Codigo_Bairro = m.Cd_codbairro, Nome_Bairro = b.Descbairro, Area_Construida = m.Cd_areatotconstr, Area_Terreno = m.Cd_areaterreno,
+                               Benfeitoria = m.Cd_codbenf, Categoria = m.Cd_codcategprop, Fracao_Ideal = m.Cd_fracao, Pedologia = m.Cd_codpedol, Lote_Original = m.Cd_lotes, Quadra_Original = m.Cd_quadras,
+                               Situacao = m.Cd_codsituacao, Topografia = m.Cd_codtopog, Uso_terreno = m.Cd_codusoterreno, Codigo_Proprietario = m.Cd_prop, Qtde_Unidade = m.Cd_numunid, Distrito = m.Cd_distrito,
+                               Setor = m.Cd_setor, Quadra = m.Cd_quadra, Lote = m.Cd_lote, Seq = m.Cd_seq, Benfeitoria_Nome = bf.Descbenfeitoria, Categoria_Nome = cp.Desccategprop, Pedologia_Nome = pd.Descpedologia,
+                               Situacao_Nome = st.Descsituacao, Topografia_Nome = tp.Desctopografia, Uso_terreno_Nome = u.Descusoterreno
                            }).FirstOrDefault();
 
                 CondominioStruct row = new CondominioStruct();
                 if (reg == null)
                     return row;
-                row.Codigo = nCodigo;
+                row.Codigo = reg.Codigo;
                 row.Nome = reg.Nome;
+                row.Codigo_Logradouro = reg.Codigo_Logradouro;
+                row.Nome_Logradouro = reg.Nome_Logradouro;
+                row.Numero = reg.Numero;
+                row.Complemento = reg.Complemento;
+                row.Codigo_Bairro = reg.Codigo_Bairro;
+                row.Nome_Bairro = reg.Nome_Bairro;
                 row.Distrito = reg.Distrito;
                 row.Setor = reg.Setor;
                 row.Quadra = reg.Quadra;
@@ -448,25 +488,27 @@ namespace GTI_Dal.Classes {
                 row.Benfeitoria_Nome = reg.Benfeitoria_Nome;
                 row.Categoria = reg.Categoria;
                 row.Categoria_Nome = reg.Categoria_Nome;
+                row.Cep = reg.Cep;
+                row.Codigo_Proprietario = reg.Codigo_Proprietario;
+                row.Fracao_Ideal = reg.Fracao_Ideal;
+                row.Lote_Original = reg.Lote_Original;
                 row.Pedologia = reg.Pedologia;
                 row.Pedologia_Nome = reg.Pedologia_Nome;
+                row.Qtde_Unidade = reg.Qtde_Unidade;
+                row.Quadra_Original = reg.Quadra_Original;
                 row.Situacao = reg.Situacao;
                 row.Situacao_Nome = reg.Situacao_Nome;
                 row.Topografia = reg.Topografia;
                 row.Topografia_Nome = reg.Topografia_Nome;
                 row.Uso_terreno = reg.Uso_terreno;
                 row.Uso_terreno_Nome = reg.Uso_terreno_Nome;
-                row.Fracao_Ideal = reg.Fracao_Ideal;
-                row.Codigo_Logradouro = reg.Codigo_Logradouro;
-                row.Nome_Logradouro = reg.Nome_Logradouro;
-                row.Codigo_Bairro = reg.Codigo_Bairro;
-                row.Nome_Bairro = reg.Nome_Bairro;
-                row.Qtde_Unidade = reg.Qtde_Unidade;
-                row.Quadra_Original = reg.Quadra_Original;
-                row.Lote_Original = reg.Lote_Original;
-                row.Numero = reg.Numero;
-                row.Complemento = reg.Complemento;
-                row.Codigo_Proprietario = reg.Codigo_Proprietario;
+
+                if (reg.Codigo_Logradouro > 0) {
+                    Endereco_Data Cep_Class = new Endereco_Data(_connection);
+                    int nCep = Cep_Class.RetornaCep((int)reg.Codigo_Logradouro, (short)reg.Numero);
+                    row.Cep = nCep == 0 ? "00000000" : nCep.ToString("0000");
+                }
+
                 return row;
             }
         }
@@ -498,40 +540,12 @@ namespace GTI_Dal.Classes {
                         Numero_Processo = item.Numero_Processo,
                         Data_Processo = item.Data_Processo,
                         Data_Aprovacao = item.Data_Aprovacao,
-                        Tipo_Area=item.Tipo_Area
+                        Tipo_Area = item.Tipo_Area
                     };
                     Lista.Add(Linha);
                 }
                 return Lista;
             }
         }
-
-        public ImovelStruct Inscricao_imovel(int Logradouro, short Numero) {
-            using (var db = new GTI_Context(_connection)) {
-                var reg = (from i in db.Cadimob
-                           join f in db.Facequadra on new { p1 = i.Distrito, p2 = i.Setor, p3 = i.Quadra, p4 = i.Seq } equals new { p1 = f.Coddistrito, p2 = f.Codsetor, p3 = f.Codquadra, p4 = f.Codface } into fi from f in fi.DefaultIfEmpty()
-                           join l in db.Logradouro on f.Codlogr equals l.Codlogradouro into lf from l in lf.DefaultIfEmpty()
-                           where f.Codlogr == Logradouro && i.Li_num == Numero
-                           select new ImovelStruct {Codigo=i.Codreduzido,
-                               Distrito = i.Distrito, Setor = i.Setor, Quadra = i.Quadra, Lote = i.Lote, Seq = i.Seq, Unidade = i.Unidade, SubUnidade = i.Subunidade
-                           }).FirstOrDefault();
-
-                ImovelStruct row = new ImovelStruct();
-                if (reg == null)
-                    return row;
-                row.Codigo = reg.Codigo;
-                row.Distrito = reg.Distrito;
-                row.Setor = reg.Setor;
-                row.Quadra = reg.Quadra;
-                row.Lote = reg.Lote;
-                row.Seq = reg.Seq;
-                row.Unidade = reg.Unidade;
-                row.SubUnidade = reg.SubUnidade;
-
-                return row;
-            }
-        }
-
-
     }//end class
 }
