@@ -12,6 +12,11 @@ namespace GTI_Bll.Classes {
             _connection = sConnection;
         }
 
+        /// <summary>
+        /// Retorna os dados de um imóvel
+        /// </summary>
+        /// <param name="nCodigo"></param>
+        /// <returns></returns>
         public ImovelStruct Dados_Imovel(int nCodigo) {
             Imovel_Data obj = new Imovel_Data(_connection);
             return obj.Dados_Imovel(nCodigo);
@@ -124,6 +129,27 @@ namespace GTI_Bll.Classes {
         public List<Condominio> Lista_Condominio() {
             Imovel_Data obj = new Imovel_Data(_connection);
             return obj.Lista_Condominio();
+        }
+
+        /// <summary>
+        /// Lista das testadas do condomínio
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public List<Testadacondominio> Lista_Testada_Condominio(int Codigo) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Lista_Testada_Condominio(Codigo);
+        }
+
+
+        /// <summary>
+        /// Lista das unidades do condomínio
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public List<Condominiounidade> Lista_Unidade_Condominio(int Codigo) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Lista_Unidade_Condominio(Codigo);
         }
 
 

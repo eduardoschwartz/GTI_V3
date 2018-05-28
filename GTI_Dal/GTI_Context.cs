@@ -61,6 +61,7 @@ namespace GTI_Dal {
         public DbSet<Condominio> Condominio { get; set; }
         public DbSet<Condominioarea> CondominioArea { get; set; }
         public DbSet<Condominiounidade> CondominioUnidade { get; set; }
+        public DbSet<Testadacondominio> Testadacondominio { get; set; }
         public DbSet<Facequadra> Facequadra { get; set; }
         public DbSet<Endentrega> Endentrega { get; set; }
         public DbSet<Testada> Testada { get; set; }
@@ -83,5 +84,6 @@ namespace GTI_Dal {
         public DbSet<sil> Sil { get; set; }
         public DbSet<mobiliarioendentrega> Mobiliarioendentrega { get; set; }
         public DbSet<Escritoriocontabil> Escritoriocontabil { get; set; }
+
     }
 }

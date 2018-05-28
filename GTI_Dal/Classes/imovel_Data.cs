@@ -547,5 +547,38 @@ namespace GTI_Dal.Classes {
                 return Lista;
             }
         }
+
+        public List<Testadacondominio> Lista_Testada_Condominio(int Codigo) {
+            using (var db = new GTI_Context(_connection)) {
+                var reg = (from t in db.Testadacondominio where t.Codcond == Codigo orderby t.Numface select t).ToList();
+                List<Testadacondominio> Lista = new List<Testadacondominio>();
+                foreach (var item in reg) {
+                    Testadacondominio Linha = new Testadacondominio {
+                        Codcond = item.Codcond,
+                        Numface = item.Numface,
+                        Areatestada = item.Areatestada
+                    };
+                    Lista.Add(Linha);
+                }
+                return Lista;
+            }
+        }
+
+        public List<Condominiounidade> Lista_Unidade_Condominio(int Codigo) {
+            using (var db = new GTI_Context(_connection)) {
+                var reg = (from t in db.CondominioUnidade where t.Cd_codigo == Codigo orderby new { t.Cd_unidade,t.Cd_subunidades } select t).ToList();
+                List<Condominiounidade> Lista = new List<Condominiounidade>();
+                foreach (var item in reg) {
+                    Condominiounidade Linha = new Condominiounidade {
+                        Cd_codigo = item.Cd_codigo,
+                        Cd_unidade = item.Cd_unidade,
+                        Cd_subunidades = item.Cd_subunidades
+                    };
+                    Lista.Add(Linha);
+                }
+                return Lista;
+            }
+        }
+
     }//end class
 }

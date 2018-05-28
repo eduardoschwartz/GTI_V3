@@ -102,6 +102,7 @@
     <Compile Include="Models\situacaolancamento.cs" />
     <Compile Include="Models\spExtrato.cs" />
     <Compile Include="Models\testada.cs" />
+    <Compile Include="Models\Testadacondominio.cs" />
     <Compile Include="Models\tipoconstr.cs" />
     <Compile Include="Models\tipolivro.cs" />
     <Compile Include="Models\tipousuario.cs" />

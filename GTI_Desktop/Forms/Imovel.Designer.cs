@@ -24,8 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Proprietários", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Proprietário Solidário", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Proprietários", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Proprietário Solidário", System.Windows.Forms.HorizontalAlignment.Left);
             this.optMT2 = new System.Windows.Forms.RadioButton();
             this.optEnd3 = new System.Windows.Forms.RadioButton();
             this.optEnd2 = new System.Windows.Forms.RadioButton();
@@ -207,6 +207,7 @@
             this.label46 = new System.Windows.Forms.Label();
             this.txtAreaConstruida = new System.Windows.Forms.TextBox();
             this.label43 = new System.Windows.Forms.Label();
+            this.alterarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.a1Panel1.SuspendLayout();
             this.tbEE.SuspendLayout();
             this.a1Panel3.SuspendLayout();
@@ -697,13 +698,13 @@
             this.lvProp.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.lvProp.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
-            listViewGroup1.Header = "Proprietários";
-            listViewGroup1.Name = "groupPP";
-            listViewGroup2.Header = "Proprietário Solidário";
-            listViewGroup2.Name = "groupPS";
+            listViewGroup3.Header = "Proprietários";
+            listViewGroup3.Name = "groupPP";
+            listViewGroup4.Header = "Proprietário Solidário";
+            listViewGroup4.Name = "groupPS";
             this.lvProp.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2});
+            listViewGroup3,
+            listViewGroup4});
             this.lvProp.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lvProp.HideSelection = false;
             this.lvProp.HoverSelection = true;
@@ -869,6 +870,7 @@
             // 
             this.btOpcoesP.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuAdicionarA,
+            this.alterarToolStripMenuItem,
             this.mnuRemoverA});
             this.btOpcoesP.Image = global::GTI_Desktop.Properties.Resources.option;
             this.btOpcoesP.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -2373,15 +2375,21 @@
             this.label43.TabIndex = 21;
             this.label43.Text = "Área em m²...:";
             // 
+            // alterarToolStripMenuItem
+            // 
+            this.alterarToolStripMenuItem.Name = "alterarToolStripMenuItem";
+            this.alterarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.alterarToolStripMenuItem.Text = "Alterar";
+            // 
             // Imovel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(762, 377);
+            this.Controls.Add(this.pnlArea);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.tabImovel);
             this.Controls.Add(this.tBar);
-            this.Controls.Add(this.pnlArea);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Imovel";
@@ -2610,5 +2618,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuAddHistorico;
         private System.Windows.Forms.ToolStripMenuItem mnuRemoverHistorico;
         private System.Windows.Forms.ToolStripMenuItem mnuViewHistorico;
+        private System.Windows.Forms.ToolStripMenuItem alterarToolStripMenuItem;
     }
 }

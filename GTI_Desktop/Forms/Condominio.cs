@@ -2,6 +2,7 @@
 using GTI_Desktop.Classes;
 using GTI_Models.Models;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -30,7 +31,6 @@ namespace GTI_Desktop.Forms {
             SaveButton.Enabled = !bStart;
             CancelarButton.Enabled = !bStart;
             EnderecoButton.Enabled = !bStart;
-            AreasButton.Enabled = !bStart;
             UnidadesButton.Enabled = !bStart;
             TestadaAddButton.Enabled = !bStart;
             TestadaDelButton.Enabled = !bStart;
@@ -201,6 +201,8 @@ namespace GTI_Desktop.Forms {
             UsoList.SelectedValue = -1;
             UnidadesListView.Items.Clear();
             TestadaListView.Items.Clear();
+            AreaListView.Items.Clear();
+            SomaArea.Text = "0,00";
         }
 
         private void CarregaDados(int Codigo) {
@@ -236,8 +238,88 @@ namespace GTI_Desktop.Forms {
             CategoriaList.SelectedValue = reg.Categoria;
             Uso.Text = reg.Uso_terreno_Nome;
             UsoList.SelectedValue = reg.Uso_terreno;
-            
+            AreaPredial.Text = Convert.ToDecimal(reg.Area_Construida).ToString("#0.00");
+            AreaTerreno.Text = Convert.ToDecimal(reg.Area_Terreno).ToString("#0.00");
+            Unidades.Text = reg.Qtde_Unidade.ToString();
+
+            List<Testadacondominio> ListaTestada = imovel_Class.Lista_Testada_Condominio(Codigo);
+            foreach (Testadacondominio Testada in ListaTestada) {
+                ListViewItem lvItem = new ListViewItem(Testada.Numface.ToString("00"));
+                lvItem.SubItems.Add(Testada.Areatestada.ToString("#0.00"));
+                TestadaListView.Items.Add(lvItem);
+            }
+
+            List<Condominiounidade> ListaUnidade = imovel_Class.Lista_Unidade_Condominio(Codigo);
+            foreach (Condominiounidade Unidade in ListaUnidade) {
+                ListViewItem lvItem = new ListViewItem(Unidade.Cd_unidade.ToString("00"));
+                lvItem.SubItems.Add(Unidade.Cd_subunidades.ToString("00"));
+                UnidadesListView.Items.Add(lvItem);
+            }
+
+            short n = 1;
+            decimal SomaArea = 0;
+            List<AreaStruct> ListaArea = imovel_Class.Lista_Area_Condominio(Codigo);
+            foreach (AreaStruct Area in ListaArea) {
+                ListViewItem lvItem = new ListViewItem(n.ToString("00"));
+                lvItem.SubItems.Add(string.Format("{0:0.00}", (decimal)Area.Area));
+                lvItem.SubItems.Add(Area.Uso_Nome);
+                lvItem.SubItems.Add(Area.Tipo_Nome);
+                lvItem.SubItems.Add(Area.Categoria_Nome);
+                lvItem.SubItems.Add(Area.Pavimentos.ToString());
+                lvItem.Tag = reg.Seq.ToString();
+                AreaListView.Items.Add(lvItem);
+                SomaArea += (decimal)reg.Area_Construida;
+                n++;
+            }
+            this.SomaArea.Text = string.Format("{0:0.00}", SomaArea);
+
         }
 
+        private void AreasButton_Click(object sender, EventArgs e) {
+            if (AreasButton.Checked) {
+                AreaPanel.BringToFront();
+            } 
+            AreaPanel.Visible = AreasButton.Checked;
+            PanelDados.Enabled = !AreasButton.Checked;
+            PanelHeader.Enabled = !AreasButton.Checked;
+            PanelLocal.Enabled = !AreasButton.Checked;
+            PanelOutro.Enabled = !AreasButton.Checked;
+            tBar.Enabled = !AreasButton.Checked;
+        }
+
+        private void CloseAreaButton_Click(object sender, EventArgs e) {
+            AreasButton.Checked = false;
+            AreasButton_Click(null, null);
+        }
+
+        private void mnuSair_Click(object sender, EventArgs e) {
+            AreasButton.Checked = false;
+            AreasButton_Click(null, null);
+        }
+
+        private void AdicionarMenuItem_Click(object sender, EventArgs e) {
+            AreaPanel.Enabled = false;
+            AreaEditPanel.Visible = true;
+            AreaEditPanel.BringToFront();
+            AreaConstruida.Focus();
+        }
+
+        private void RemoverMenuItem_Click(object sender, EventArgs e) {
+        }
+
+        private void OkAreaButton_Click(object sender, EventArgs e) {
+            AreaPanel.Enabled = true;
+            AreaEditPanel.Visible = false;
+        }
+
+        private void CancelAreaButton_Click(object sender, EventArgs e) {
+            AreaPanel.Enabled = true;
+            AreaEditPanel.Visible = false;
+        }
+
+        private void AlterarMenuItem_Click(object sender, EventArgs e) {
+            AreaPanel.Enabled = false;
+            AreaEditPanel.Visible = true;
+        }
     }
 }
