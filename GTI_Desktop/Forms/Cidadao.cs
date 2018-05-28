@@ -203,16 +203,13 @@ namespace GTI_Desktop.Forms {
         }
 
         private void BtFind_Click(object sender, EventArgs e) {
-            var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Bairro);
-            if (formToShow != null) {
-                formToShow.Show();
-            } else {
-                Cidadao_Lista f1 = new Cidadao_Lista {
-                    Tag = "Cidadao"
-                };
-                Main f2 = (Main)Application.OpenForms["Main"];
-                f1.MdiParent = f2;
-                f1.Show();
+
+            using (var form = new Cidadao_Lista()) {
+                var result = form.ShowDialog(this);
+                if (result == DialogResult.OK) {
+                    int val = form.ReturnValue;
+                    LoadReg(val);
+                }
             }
         }
 

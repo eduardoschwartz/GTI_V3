@@ -64,8 +64,8 @@ namespace GTI_Models.Models {
         [StringLength(50)]
         public string Profissao { get; set; }
         public int Codprofissao { get; set; }
-        public int Codpais { get; set; }
-        public int Codpais2 { get; set; }
+        public int? Codpais { get; set; }
+        public int? Codpais2 { get; set; }
     }
 
     public class CidadaoStruct {

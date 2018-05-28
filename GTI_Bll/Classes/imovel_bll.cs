@@ -152,6 +152,15 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Unidade_Condominio(Codigo);
         }
 
+        /// <summary>
+        /// Retorna a Lista dos imóveis filtrados
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public List<ImovelStruct> Lista_Imovel(ImovelStruct Reg) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Lista_Imovel(Reg);
+                    }
 
     }//end class
 }

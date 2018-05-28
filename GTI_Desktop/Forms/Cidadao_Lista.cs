@@ -1,7 +1,5 @@
 ﻿using GTI_Bll.Classes;
 using GTI_Desktop.Classes;
-using GTI_Desktop.Properties;
-using GTI_Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,6 +11,7 @@ namespace GTI_Desktop.Forms {
     public partial class Cidadao_Lista : Form {
         string _connection = gtiCore.Connection_Name();
         private ListViewColumnSorter lvwColumnSorter;
+        public int ReturnValue { get; set; }
 
         public Cidadao_Lista() {
             InitializeComponent();
@@ -114,18 +113,13 @@ namespace GTI_Desktop.Forms {
         }
 
         private void BtReturn_Click(object sender, EventArgs e) {
-            if (lvMain.Items.Count > 0) {
-                if (lvMain.SelectedItems.Count > 0) {
-                    if (this.Tag.ToString().Equals("Cidadao")) {
-                        Cidadao f1 = (Cidadao)Application.OpenForms["Cidadao"];
-                        if (f1 != null)
-                            f1.CodCidadao = Convert.ToInt32(lvMain.SelectedItems[0].Text);
-                    }
-                    this.Hide();
-                } else
-                    MessageBox.Show("Selecione um item.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            } else
-                MessageBox.Show("Selecione um item.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (lvMain.SelectedItems.Count > 0) {
+                DialogResult = DialogResult.OK;
+                ReturnValue = Convert.ToInt32(lvMain.SelectedItems[0].Text);
+                Close();
+            } else {
+                MessageBox.Show("Selecione um cidadão.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
 
         }
     }

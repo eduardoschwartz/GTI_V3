@@ -85,6 +85,10 @@ namespace GTI_Models.Models {
         public string Situacao_Nome { get; set; }
         public short? Pedologia { get; set; }
         public string Pedologia_Nome { get; set; }
+        public string Inscricao { get; set; }
+        public int? Proprietario_Codigo { get; set; }
+        public string Proprietario_Nome { get; set; }
+        public bool? Proprietario_Principal { get; set; }
     }
 
     public class LogradouroStruct {

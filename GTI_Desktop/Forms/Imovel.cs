@@ -230,9 +230,10 @@ namespace GTI_Desktop.Forms {
                 gtiCore.Ocupado(this);
                 Imovel_bll clsImovel = new Imovel_bll(_connection);
                 if (clsImovel.Existe_Imovel(Convert.ToInt32(sCod))) {
-                    lblCod.Text = Convert.ToInt32(sCod).ToString("000000");
+                    int Codigo = Convert.ToInt32(sCod);
+                    lblCod.Text = Codigo.ToString("000000");
                     ClearFields();
-                    CarregaImovel();
+                    CarregaImovel(Codigo);
                     CarregaCondominio();
                 } else
                     MessageBox.Show("Imóvel não cadastrado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -581,7 +582,15 @@ namespace GTI_Desktop.Forms {
         }
 
         private void BtFind_Click(object sender, EventArgs e) {
-            //TODO: Desativar/excluir  o imóvel
+
+            using (var form = new Imovel_Lista()) {
+                var result = form.ShowDialog(this);
+                if (result == DialogResult.OK) {
+                    int val = form.ReturnValue;
+                    ClearFields();
+                    CarregaImovel(val);
+                }
+            }
         }
 
         private void BtPrint_Click(object sender, EventArgs e) {
@@ -597,11 +606,11 @@ namespace GTI_Desktop.Forms {
             //TODO: Histórico do imóvel
         }
 
-        private void CarregaImovel() {
+        private void CarregaImovel(int Codigo) {
             if (String.IsNullOrEmpty(lblCod.Text)) return;
-            int nCodigo = Convert.ToInt32(lblCod.Text);
+            
             Imovel_bll clsImovel = new Imovel_bll(_connection);
-            ImovelStruct regImovel = clsImovel.Dados_Imovel(nCodigo);
+            ImovelStruct regImovel = clsImovel.Dados_Imovel(Codigo);
             if (regImovel.Codigo == 0)
                 MessageBox.Show("Imóvel não cadastrado", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
@@ -662,7 +671,7 @@ namespace GTI_Desktop.Forms {
 
 
                 //Carrega proprietário
-                List<ProprietarioStruct> Lista = clsImovel.Lista_Proprietario(nCodigo);
+                List<ProprietarioStruct> Lista = clsImovel.Lista_Proprietario(Codigo);
                 foreach (ProprietarioStruct reg in Lista) {
                     ListViewItem lvItem = new ListViewItem();
                     if (reg.Tipo == "P")
@@ -678,7 +687,7 @@ namespace GTI_Desktop.Forms {
                 }
 
                 //Carrega testada
-                List<GTI_Models.Models.Testada> ListaT = clsImovel.Lista_Testada(nCodigo);
+                List<GTI_Models.Models.Testada> ListaT = clsImovel.Lista_Testada(Codigo);
                 foreach (GTI_Models.Models.Testada reg in ListaT) {
                     ListViewItem lvItem = new ListViewItem(reg.Numface.ToString("00"));
                     lvItem.SubItems.Add(string.Format("{0:0.00}", (decimal)reg.Areatestada));
@@ -695,7 +704,7 @@ namespace GTI_Desktop.Forms {
                     optEnd3.Checked = true;
 
                 bllCore.TipoEndereco Tipoend = regImovel.EE_TipoEndereco == 0 ? bllCore.TipoEndereco.Local : regImovel.EE_TipoEndereco == 1 ? bllCore.TipoEndereco.Proprietario : bllCore.TipoEndereco.Entrega;
-                EnderecoStruct regEntrega = clsImovel.Dados_Endereco(nCodigo, Tipoend);
+                EnderecoStruct regEntrega = clsImovel.Dados_Endereco(Codigo, Tipoend);
                 if (regEntrega != null) {
                     txtLogradouro_EE.Text = regEntrega.Endereco.ToString();
                     txtLogradouro_EE.Tag = regEntrega.CodLogradouro.ToString();
@@ -712,7 +721,7 @@ namespace GTI_Desktop.Forms {
                 //Carrega Área
                 short n = 1;
                 decimal SomaArea = 0;
-                List<GTI_Models.Models.AreaStruct> ListaA = clsImovel.Lista_Area(nCodigo);
+                List<GTI_Models.Models.AreaStruct> ListaA = clsImovel.Lista_Area(Codigo);
                 foreach (GTI_Models.Models.AreaStruct reg in ListaA) {
                     ListViewItem lvItem = new ListViewItem(n.ToString("00"));
                     lvItem.SubItems.Add(string.Format("{0:0.00}", (decimal)reg.Area));
@@ -744,9 +753,8 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-
-
-
-
+        private void btDel_Click(object sender, EventArgs e) {
+            //TODO: Desativar/excluir  o imóvel
+        }
     }
 }

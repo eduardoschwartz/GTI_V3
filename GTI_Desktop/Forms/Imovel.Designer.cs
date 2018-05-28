@@ -24,8 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Proprietários", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Proprietário Solidário", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Proprietários", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Proprietário Solidário", System.Windows.Forms.HorizontalAlignment.Left);
             this.optMT2 = new System.Windows.Forms.RadioButton();
             this.optEnd3 = new System.Windows.Forms.RadioButton();
             this.optEnd2 = new System.Windows.Forms.RadioButton();
@@ -76,6 +76,7 @@
             this.mnuAreas = new System.Windows.Forms.ToolStrip();
             this.btOpcoesP = new System.Windows.Forms.ToolStripDropDownButton();
             this.mnuAdicionarA = new System.Windows.Forms.ToolStripMenuItem();
+            this.alterarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRemoverA = new System.Windows.Forms.ToolStripMenuItem();
             this.lblSomaArea = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
@@ -207,7 +208,6 @@
             this.label46 = new System.Windows.Forms.Label();
             this.txtAreaConstruida = new System.Windows.Forms.TextBox();
             this.label43 = new System.Windows.Forms.Label();
-            this.alterarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.a1Panel1.SuspendLayout();
             this.tbEE.SuspendLayout();
             this.a1Panel3.SuspendLayout();
@@ -698,13 +698,13 @@
             this.lvProp.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.lvProp.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
-            listViewGroup3.Header = "Proprietários";
-            listViewGroup3.Name = "groupPP";
-            listViewGroup4.Header = "Proprietário Solidário";
-            listViewGroup4.Name = "groupPS";
+            listViewGroup1.Header = "Proprietários";
+            listViewGroup1.Name = "groupPP";
+            listViewGroup2.Header = "Proprietário Solidário";
+            listViewGroup2.Name = "groupPS";
             this.lvProp.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup3,
-            listViewGroup4});
+            listViewGroup1,
+            listViewGroup2});
             this.lvProp.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lvProp.HideSelection = false;
             this.lvProp.HoverSelection = true;
@@ -884,6 +884,12 @@
             this.mnuAdicionarA.Size = new System.Drawing.Size(125, 22);
             this.mnuAdicionarA.Text = "Adicionar";
             this.mnuAdicionarA.Click += new System.EventHandler(this.MnuAdicionarA_Click);
+            // 
+            // alterarToolStripMenuItem
+            // 
+            this.alterarToolStripMenuItem.Name = "alterarToolStripMenuItem";
+            this.alterarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.alterarToolStripMenuItem.Text = "Alterar";
             // 
             // mnuRemoverA
             // 
@@ -2133,6 +2139,7 @@
             this.btDel.Name = "btDel";
             this.btDel.Size = new System.Drawing.Size(23, 22);
             this.btDel.ToolTipText = "Excluir";
+            this.btDel.Click += new System.EventHandler(this.btDel_Click);
             // 
             // btFind
             // 
@@ -2374,12 +2381,6 @@
             this.label43.Size = new System.Drawing.Size(72, 13);
             this.label43.TabIndex = 21;
             this.label43.Text = "Área em m²...:";
-            // 
-            // alterarToolStripMenuItem
-            // 
-            this.alterarToolStripMenuItem.Name = "alterarToolStripMenuItem";
-            this.alterarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.alterarToolStripMenuItem.Text = "Alterar";
             // 
             // Imovel
             // 

@@ -11,7 +11,6 @@ namespace GTI_Dal.Classes {
             _connection = sConnection;
         }
 
-
         public List<Cidadao> Lista_Cidadao(string Nome,string Cpf,string CNPJ) {
             using (var db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Cidadao select c);
@@ -38,7 +37,6 @@ namespace GTI_Dal.Classes {
                 return Sql;
             }
         }
-
 
         public bool ExisteCidadao(int nCodigo) {
             bool bRet = false;

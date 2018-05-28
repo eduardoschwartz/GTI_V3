@@ -42,6 +42,7 @@ namespace GTI_Dal.Classes {
                 row.Seq = reg.Seq;
                 row.Unidade = reg.Unidade;
                 row.SubUnidade = reg.SubUnidade;
+                row.Inscricao=  reg.Distrito.ToString() + reg.Setor.ToString("00") + reg.Quadra.ToString("0000") + reg.Lote.ToString("00000") + reg.Seq.ToString("00") + reg.Unidade.ToString("00") + reg.SubUnidade.ToString("000");
                 row.CodigoCondominio = reg.CodigoCondominio;
                 row.NomeCondominio = reg.NomeCondominio.ToString();
                 row.Imunidade = reg.Imunidade == null ? false : Convert.ToBoolean(reg.Imunidade);
@@ -580,5 +581,42 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public List<ImovelStruct> Lista_Imovel(ImovelStruct Reg) {
+            using (var db = new GTI_Context(_connection)) {
+                var Sql = (from c in db.Cadimob
+                           join p in db.Proprietario on c.Codreduzido equals p.Codreduzido into pc from p in pc.DefaultIfEmpty()
+                           join i in db.Cidadao on p.Codcidadao equals i.Codcidadao into ip from i in ip.DefaultIfEmpty()
+                           orderby c.Codreduzido
+                           select new ImovelStruct { Codigo=c.Codreduzido,Distrito=c.Distrito,Setor=c.Setor,Quadra=c.Quadra,Lote=c.Lote,Seq=c.Seq,Unidade=c.Unidade,
+                               SubUnidade =c.Subunidade,Proprietario_Codigo=p.Codcidadao,Proprietario_Nome=i.Nomecidadao,Proprietario_Principal=p.Principal });
+                if (Reg.Codigo > 0)
+                    Sql = Sql.Where(c => c.Codigo == Reg.Codigo);
+                if(Reg.Proprietario_Codigo>0)
+                    Sql = Sql.Where(c => c.Proprietario_Codigo == Reg.Proprietario_Codigo);
+                if(Convert.ToBoolean(Reg.Proprietario_Principal))
+                    Sql = Sql.Where(c => c.Proprietario_Principal==Reg.Proprietario_Principal);
+                if (Reg.Distrito > 0)
+                    Sql = Sql.Where(c => c.Distrito == Reg.Distrito);
+                if (Reg.Setor > 0)
+                    Sql = Sql.Where(c => c.Setor == Reg.Setor);
+                if (Reg.Quadra > 0)
+                    Sql = Sql.Where(c => c.Quadra == Reg.Quadra);
+                if (Reg.Lote > 0)
+                    Sql = Sql.Where(c => c.Lote == Reg.Lote);
+
+                List<ImovelStruct> Lista = new List<ImovelStruct>();
+                foreach (var item in Sql) {
+                    ImovelStruct Linha = new ImovelStruct {
+                        Codigo = item.Codigo,
+                        Inscricao = item.Distrito.ToString() + item.Setor.ToString("00") + item.Quadra.ToString("0000") + item.Lote.ToString("00000") + item.Seq.ToString("00") + item.Unidade.ToString("00") + item.SubUnidade.ToString("000"),
+                        Proprietario_Codigo=item.Proprietario_Codigo,Proprietario_Nome=item.Proprietario_Nome
+                    };
+                    Lista.Add(Linha);
+                }
+                return Lista.ToList();
+            }
+        }
+
+        
     }//end class
 }
