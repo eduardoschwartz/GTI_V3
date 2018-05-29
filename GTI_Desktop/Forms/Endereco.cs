@@ -10,10 +10,11 @@ using static GTI_Desktop.Classes.GtiTypes;
 
 namespace GTI_Desktop.Forms {
     public partial class Endereco : Form {
+        bool _camposObrigatorios;
         string _connection = gtiCore.Connection_Name();
         public GTI_Models.Models.Endereco EndRetorno { get; set; }
 
-        public Endereco(GTI_Models.Models.Endereco reg, bool EnderecoLocal = false, bool EditarBairro = true) {
+        public Endereco(GTI_Models.Models.Endereco reg, bool EnderecoLocal = false, bool EditarBairro = true,bool CamposObrigatorios = true) {
             InitializeComponent();
             Carrega_Endereco(reg);
             cmbPais.Enabled = !EnderecoLocal;
@@ -22,6 +23,7 @@ namespace GTI_Desktop.Forms {
             cmbBairro.Enabled = EditarBairro;
             btPais_Refresh.Enabled = !EnderecoLocal;
             btBairro_Refresh.Enabled = !EnderecoLocal;
+            _camposObrigatorios = CamposObrigatorios;
         }
 
         private void CmbUF_SelectedIndexChanged(object sender, EventArgs e) {
@@ -138,30 +140,31 @@ namespace GTI_Desktop.Forms {
         }
 
         private void BtReturn_Click(object sender, EventArgs e) {
-            if (Convert.ToInt32(cmbCidade.SelectedValue) == 413) {
-                if (txtLogradouro.Tag.ToString() == "") txtLogradouro.Tag = "0";
-                if (Convert.ToInt32(txtLogradouro.Tag.ToString())==0) {
-                    MessageBox.Show("Selecione um logradouro válido!","Atenção",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                    return;
+            if (_camposObrigatorios) {
+                if (Convert.ToInt32(cmbCidade.SelectedValue) == 413) {
+                    if (txtLogradouro.Tag.ToString() == "") txtLogradouro.Tag = "0";
+                    if (Convert.ToInt32(txtLogradouro.Tag.ToString()) == 0) {
+                        MessageBox.Show("Selecione um logradouro válido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                } else {
+                    if (string.IsNullOrWhiteSpace(txtLogradouro.Text)) {
+                        MessageBox.Show("Digite o nome do logradouro!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                 }
-            } else {
-                if (string.IsNullOrWhiteSpace(txtLogradouro.Text)) {
-                    MessageBox.Show("Digite o nome do logradouro!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                if (mskCep.Text.Trim() != "-") {
+                    if (!mskCep.MaskFull) {
+                        MessageBox.Show("Cep inválido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                 }
-            }
-            if (mskCep.Text.Trim() != "-") {
-                if (!mskCep.MaskFull) {
-                    MessageBox.Show("Cep inválido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            }
 
-            if (!string.IsNullOrWhiteSpace(txtEmail.Text) & !gtiCore.Valida_Email(txtEmail.Text)) {
-                MessageBox.Show("Endereço de email inválido.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return ;
+                if (!string.IsNullOrWhiteSpace(txtEmail.Text) & !gtiCore.Valida_Email(txtEmail.Text)) {
+                    MessageBox.Show("Endereço de email inválido.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
-
 
 
             EndRetorno = new GTI_Models.Models.Endereco();

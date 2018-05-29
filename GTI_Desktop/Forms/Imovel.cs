@@ -614,6 +614,7 @@ namespace GTI_Desktop.Forms {
             if (regImovel.Codigo == 0)
                 MessageBox.Show("Imóvel não cadastrado", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
+                lblCod.Text = Codigo.ToString("000000");
                 StringBuilder sInscricao = new StringBuilder();
                 sInscricao.Append(regImovel.Distrito.ToString() + ".");
                 sInscricao.Append(regImovel.Setor.ToString("00") + ".");
