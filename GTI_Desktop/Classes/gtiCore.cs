@@ -7,6 +7,8 @@ using GTI_Desktop.Forms;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Text;
+using System.Collections;
+using System.IO;
 
 namespace GTI_Desktop.Classes {
     public static class gtiCore {
@@ -369,6 +371,137 @@ namespace GTI_Desktop.Classes {
                 return false;
         }
 
+        #region Dat Acesso
+
+        public static string DecryptDatArray(byte[] aArray) {
+            string Result = "";
+            for (int nPos = 0; nPos < aArray.Length; nPos++) {
+                if (aArray[nPos].ToString() != null)
+                    Result += Convert.ToChar(aArray[nPos]);
+            }
+            return Result;
+        }
+
+        public static string ValueDatReg(string sReg) {
+            int nPos;
+            for (nPos = 2; nPos < sReg.Length; nPos++) {
+                if (sReg.Substring(nPos, 1) == "#") {
+                    if (sReg.Substring(nPos, 2) == "#%")
+                        break;
+                }
+            }
+            return sReg.Substring(2, nPos - 2);
+        }
+
+        public static ArrayList ParseDatString(string sReg) {
+            string sField = "{";
+            ArrayList aFields = new ArrayList();
+            char[] delimiters = new char[] { '#', '%' };
+            string[] aString = sReg.Split(delimiters);
+            for (int i = 0; i < aString.Length; i++) {
+                if (aString[i].ToString() != "")
+                    sField += aString[i].ToString() + ",";
+            }
+            sField = sField.Substring(0, sField.Length - 1) + "}";
+            aFields.Add(sField);
+            return aFields;
+        }
+
+        public static List<ArrayList> ReadFromDatFile(string sFile, string sTable, string sCriterio) {
+
+            byte[] aHeader = new byte[2];
+            byte[] aReg = new byte[0];
+            
+            
+            List<ArrayList> aLinhas = new List<ArrayList>();
+
+            //open file
+            if (!File.Exists(sFile)) return aLinhas;
+            FileStream mFile = File.Open(sFile, FileMode.Open);
+            long nSize = mFile.Length;
+            while (mFile.Position < nSize) {
+                Array.Resize(ref aReg, 0);
+                int nChar = mFile.ReadByte();
+                //find the begining of a register
+                if (nChar == 124) {
+                    //We need to find out the size of the Register
+                    int nBookMark = Convert.ToInt32(mFile.Position);
+                    //walk throught the record
+                    while (mFile.Position < nSize) {
+                        nChar = mFile.ReadByte();
+                        if (nChar == 124) {
+                            //we found the begining of the next record, this will be the size of the array aReg
+                            int nNewSize = Convert.ToInt32(mFile.Position) - nBookMark - 3;
+                            Array.Resize(ref aReg, nNewSize);
+                            //back to the last position 
+                            mFile.Position = nBookMark;
+                            mFile.Read(aHeader, 0, 2);
+                            if (DecryptDatArray(aHeader) == sTable) {
+                                //read the register
+                                mFile.Read(aReg, 0, aReg.Length);
+                                string sRegister = DecryptDatArray(aReg);
+                                //test the value
+                                string sTestValue = ValueDatReg(sRegister);
+                                if (sCriterio == "" || sTestValue == sCriterio) {
+                                    char[] delimiters = new char[] { '#', '%' };
+                                    string[] aString = sRegister.Split(delimiters);
+                                    ArrayList aFields = new ArrayList();
+                                    aFields.AddRange(aString);
+                                    Inicio:;
+                                    for (int i = 0; i < aFields.Count; i++) {
+                                        if (string.IsNullOrWhiteSpace( aFields[i].ToString())) {
+                                            aFields.RemoveAt(i);
+                                            goto Inicio;
+                                        }
+                                    }
+                                    aLinhas.Add(aFields );
+                                    //***remover os comentários abaixo se quiser filtrar por registro individual***
+                                    //   if (sCriterio != "") {
+                                    //if we specified a value,  so we dont need to read the rest
+                                    //  goto CloseFile;
+                                    //   }
+                                    //*************************************************
+                                }
+                            } else if (DecryptDatArray(aHeader) == "XX") {
+                                //end of file
+                                goto CloseFile;
+                            }
+                            break;
+                        }
+                    }
+                    goto NextReg;
+                }
+                NextReg:;
+            }
+            //close and return
+            CloseFile:;
+            mFile.Close();
+            mFile.Dispose();
+            return aLinhas;
+        }
+
+        public static void CreateDatFile(string Path, List<string> aArray) {
+            Encoding ANSI = Encoding.Default;
+            using (StreamWriter sw = new StreamWriter(Path, false, ANSI)) {
+                foreach (string item in aArray) {
+                    sw.Write(item);
+                }
+                sw.Write("|XX");
+                sw.Flush();
+                sw.Close();
+            }
+        }
+
+        public static string ConvertDatReg(string Prefix, string[] aArray) {
+            string Result = "|" + Prefix;
+            foreach (string item in aArray) {
+                Result += "#%" + item;
+            }
+            return Result;
+        }
+
+
+        #endregion
 
     }
 

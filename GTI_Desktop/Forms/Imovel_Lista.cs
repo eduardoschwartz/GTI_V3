@@ -3,7 +3,9 @@ using GTI_Desktop.Classes;
 using GTI_Models.Models;
 using Microsoft.Office.Interop.Excel;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace GTI_Desktop.Forms {
@@ -11,6 +13,7 @@ namespace GTI_Desktop.Forms {
         string _connection = gtiCore.Connection_Name();
         public int ReturnValue { get; set; }
         private ListViewColumnSorter lvwColumnSorter;
+        List<ArrayList> aDatResult;
 
         public Imovel_Lista() {
             InitializeComponent();
@@ -19,17 +22,49 @@ namespace GTI_Desktop.Forms {
             ProprietarioToolStrip.Renderer = new MySR();
             CondominioToolStrip.Renderer = new MySR();
             lvwColumnSorter = new ListViewColumnSorter();
+            ReadDatFile();
         }
 
         private void SelectButton_Click(object sender, EventArgs e) {
-            if (MainListView.SelectedItems.Count>0) {
+            ListView.SelectedIndexCollection col = MainListView.SelectedIndices;
+            if (col.Count>0) {
                 DialogResult = DialogResult.OK;
-                ReturnValue = Convert.ToInt32(MainListView.SelectedItems[0].Text);
+                ReturnValue = Convert.ToInt32(MainListView.Items[col[0]].Text);
+                SaveDatFile();
                 Close();
             } else {
                 MessageBox.Show("Selecione um imóvel.","Atenção",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
             }
         }
+        
+
+        private void SaveDatFile() {
+            List<string> aLista = new List<string>();
+            string[] aReg = new string[3];
+
+            aLista.Add( gtiCore.ConvertDatReg("CD", Codigo.Text.Split()));
+            for (int i = 0; i < MainListView.VirtualListSize; i++) {
+                aReg[0] = MainListView.Items[i].Text;
+                aReg[1] = MainListView.Items[i].SubItems[1].Text;
+                aReg[2] = MainListView.Items[i].SubItems[2].Text;
+                aLista.Add(gtiCore.ConvertDatReg("IM", aReg));
+            }
+
+            string sDir = AppDomain.CurrentDomain.BaseDirectory;
+            gtiCore.CreateDatFile(sDir + "\\cd.dat", aLista);
+
+        }
+
+        private void ReadDatFile (){
+            string sDir = AppDomain.CurrentDomain.BaseDirectory;
+            
+            aDatResult = gtiCore.ReadFromDatFile(sDir + "\\cd.dat", "CD", "");
+            if(aDatResult[0].Count>0)
+                Codigo.Text = aDatResult[0][0].ToString();
+            aDatResult = gtiCore.ReadFromDatFile(sDir + "\\cd.dat", "IM", "");
+            MainListView.VirtualListSize = aDatResult.Count;
+        }
+
 
         private void ProprietarioButton_Click(object sender, EventArgs e) {
             using (var form = new Cidadao_Lista()) {
@@ -95,22 +130,34 @@ namespace GTI_Desktop.Forms {
             List<ImovelStruct> Lista = imovel_Class.Lista_Imovel(Reg);
 
             int _pos = 0, _total = Lista.Count;
-            MainListView.BeginUpdate();
+
+            ArrayList itemlv = new ArrayList(3);
             foreach (var item in Lista) {
-                ListViewItem lvi = new ListViewItem(item.Codigo.ToString("000000"));
-                lvi.SubItems.Add(item.Inscricao.ToString());
-                lvi.SubItems.Add(item.Proprietario_Nome.ToString());
-                lvi.SubItems.Add(item.NomeLogradouro);
-                lvi.SubItems.Add(item.Numero.ToString());
-                lvi.SubItems.Add(item.Complemento);
-                lvi.SubItems.Add(item.NomeBairro);
-                lvi.SubItems.Add(item.CodigoCondominio==999?"": item.NomeCondominio);
-                MainListView.Items.Add(lvi);
-                if (_pos % 20 == 0)
-                    CallPB(PBar, _pos, _total);
-                _pos++;
+                itemlv.Add( item.Codigo.ToString("000000"));
+                itemlv.Add( item.Inscricao.ToString());
+                itemlv.Add( item.Proprietario_Nome.ToString());
+                aDatResult.Add(itemlv);
             }
+            MainListView.BeginUpdate();
+            MainListView.VirtualListSize = aDatResult.Count;
             MainListView.EndUpdate();
+
+            /*            MainListView.BeginUpdate();
+                        foreach (var item in Lista) {
+                            ListViewItem lvi = new ListViewItem(item.Codigo.ToString("000000"));
+                            lvi.SubItems.Add(item.Inscricao.ToString());
+                            lvi.SubItems.Add(item.Proprietario_Nome.ToString());
+                            lvi.SubItems.Add(item.NomeLogradouro);
+                            lvi.SubItems.Add(item.Numero.ToString());
+                            lvi.SubItems.Add(item.Complemento);
+                            lvi.SubItems.Add(item.NomeBairro);
+                            lvi.SubItems.Add(item.CodigoCondominio==999?"": item.NomeCondominio);
+                            MainListView.Items.Add(lvi);
+                            if (_pos % 20 == 0)
+                                CallPB(PBar, _pos, _total);
+                            _pos++;
+                        }
+                        MainListView.EndUpdate();*/
             MainListView.ListViewItemSorter = lvwColumnSorter;
             TotalImovel.Text = _total.ToString();
             PBar.Value = 0;
@@ -216,6 +263,18 @@ namespace GTI_Desktop.Forms {
                     MessageBox.Show("Seus dados foram exportados para o Excel com sucesso.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+
+        }
+
+        private void MainListView_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e) {
+            var acc = aDatResult[e.ItemIndex];
+            e.Item = new ListViewItem(
+                new string[]
+                { acc[0].ToString(), acc[1].ToString(), acc[2].ToString() ,"","","","",""}) {
+                Tag = acc,
+                BackColor = e.ItemIndex % 2 == 0 ? Color.Beige : Color.White
+            };
+
 
         }
     }

@@ -29,7 +29,28 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.CondominioToolStrip = new System.Windows.Forms.ToolStrip();
+            this.CondominioAddButton = new System.Windows.Forms.ToolStripButton();
+            this.CondominioDelButton = new System.Windows.Forms.ToolStripButton();
+            this.ProprietarioToolStrip = new System.Windows.Forms.ToolStrip();
+            this.ProprietarioAddButton = new System.Windows.Forms.ToolStripButton();
+            this.ProprietarioDelButton = new System.Windows.Forms.ToolStripButton();
+            this.Condominio = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.EnderecoToolStrip = new System.Windows.Forms.ToolStrip();
+            this.EnderecoAddButton = new System.Windows.Forms.ToolStripButton();
+            this.EnderecoDelButton = new System.Windows.Forms.ToolStripButton();
+            this.Bairro = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.Numero = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.Logradouro = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.Inscricao = new System.Windows.Forms.MaskedTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.Proprietario = new System.Windows.Forms.TextBox();
@@ -38,41 +59,20 @@
             this.Codigo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tBar = new System.Windows.Forms.ToolStrip();
+            this.FindButton = new System.Windows.Forms.ToolStripButton();
+            this.SelectButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.PBar = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.TotalImovel = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.Bairro = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.Numero = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.Logradouro = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.Condominio = new System.Windows.Forms.TextBox();
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ProprietarioToolStrip = new System.Windows.Forms.ToolStrip();
-            this.CondominioToolStrip = new System.Windows.Forms.ToolStrip();
-            this.EnderecoToolStrip = new System.Windows.Forms.ToolStrip();
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.CondominioAddButton = new System.Windows.Forms.ToolStripButton();
-            this.CondominioDelButton = new System.Windows.Forms.ToolStripButton();
-            this.ProprietarioAddButton = new System.Windows.Forms.ToolStripButton();
-            this.ProprietarioDelButton = new System.Windows.Forms.ToolStripButton();
-            this.EnderecoAddButton = new System.Windows.Forms.ToolStripButton();
-            this.EnderecoDelButton = new System.Windows.Forms.ToolStripButton();
-            this.FindButton = new System.Windows.Forms.ToolStripButton();
-            this.SelectButton = new System.Windows.Forms.ToolStripButton();
             this.ExcelButton = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
-            this.tBar.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.ProprietarioToolStrip.SuspendLayout();
             this.CondominioToolStrip.SuspendLayout();
+            this.ProprietarioToolStrip.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.EnderecoToolStrip.SuspendLayout();
+            this.tBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainListView
@@ -96,7 +96,9 @@
             this.MainListView.TabIndex = 6;
             this.MainListView.UseCompatibleStateImageBehavior = false;
             this.MainListView.View = System.Windows.Forms.View.Details;
+            this.MainListView.VirtualMode = true;
             this.MainListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.MainListView_ColumnClick);
+            this.MainListView.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.MainListView_RetrieveVirtualItem);
             // 
             // columnHeader1
             // 
@@ -122,6 +124,21 @@
             this.columnHeader5.Text = "Nº";
             this.columnHeader5.Width = 38;
             // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Compl.";
+            this.columnHeader6.Width = 70;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Bairro";
+            this.columnHeader7.Width = 130;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Condomínio";
+            this.columnHeader8.Width = 130;
+            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -143,6 +160,208 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(713, 169);
             this.panel1.TabIndex = 75;
+            // 
+            // CondominioToolStrip
+            // 
+            this.CondominioToolStrip.BackColor = System.Drawing.Color.Transparent;
+            this.CondominioToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.CondominioToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.CondominioToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CondominioAddButton,
+            this.CondominioDelButton});
+            this.CondominioToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.CondominioToolStrip.Location = new System.Drawing.Point(404, 130);
+            this.CondominioToolStrip.Name = "CondominioToolStrip";
+            this.CondominioToolStrip.Size = new System.Drawing.Size(49, 25);
+            this.CondominioToolStrip.TabIndex = 208;
+            this.CondominioToolStrip.Text = "toolStrip2";
+            // 
+            // CondominioAddButton
+            // 
+            this.CondominioAddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.CondominioAddButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.CondominioAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.CondominioAddButton.Name = "CondominioAddButton";
+            this.CondominioAddButton.Size = new System.Drawing.Size(23, 22);
+            this.CondominioAddButton.Text = "Adicionar um condomínio";
+            this.CondominioAddButton.ToolTipText = "Adicionar um condomínio";
+            this.CondominioAddButton.Click += new System.EventHandler(this.CondominioButton_Click);
+            // 
+            // CondominioDelButton
+            // 
+            this.CondominioDelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.CondominioDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.CondominioDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.CondominioDelButton.Name = "CondominioDelButton";
+            this.CondominioDelButton.Size = new System.Drawing.Size(23, 22);
+            this.CondominioDelButton.Text = "Remover o condomínio";
+            this.CondominioDelButton.ToolTipText = "Remover o condomínio";
+            this.CondominioDelButton.Click += new System.EventHandler(this.CondominioDelButton_Click);
+            // 
+            // ProprietarioToolStrip
+            // 
+            this.ProprietarioToolStrip.BackColor = System.Drawing.Color.Transparent;
+            this.ProprietarioToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.ProprietarioToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.ProprietarioToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ProprietarioAddButton,
+            this.ProprietarioDelButton});
+            this.ProprietarioToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.ProprietarioToolStrip.Location = new System.Drawing.Point(404, 31);
+            this.ProprietarioToolStrip.Name = "ProprietarioToolStrip";
+            this.ProprietarioToolStrip.Size = new System.Drawing.Size(49, 25);
+            this.ProprietarioToolStrip.TabIndex = 207;
+            this.ProprietarioToolStrip.Text = "toolStrip2";
+            // 
+            // ProprietarioAddButton
+            // 
+            this.ProprietarioAddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ProprietarioAddButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.ProprietarioAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ProprietarioAddButton.Name = "ProprietarioAddButton";
+            this.ProprietarioAddButton.Size = new System.Drawing.Size(23, 22);
+            this.ProprietarioAddButton.Text = "toolStripButton1";
+            this.ProprietarioAddButton.ToolTipText = "Adicionar um proprietário";
+            this.ProprietarioAddButton.Click += new System.EventHandler(this.ProprietarioButton_Click);
+            // 
+            // ProprietarioDelButton
+            // 
+            this.ProprietarioDelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ProprietarioDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.ProprietarioDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ProprietarioDelButton.Name = "ProprietarioDelButton";
+            this.ProprietarioDelButton.Size = new System.Drawing.Size(23, 22);
+            this.ProprietarioDelButton.Text = "toolStripButton3";
+            this.ProprietarioDelButton.ToolTipText = "Remover o proprietário";
+            this.ProprietarioDelButton.Click += new System.EventHandler(this.ProprietarioDelButton_Click);
+            // 
+            // Condominio
+            // 
+            this.Condominio.Location = new System.Drawing.Point(78, 134);
+            this.Condominio.MaxLength = 0;
+            this.Condominio.Name = "Condominio";
+            this.Condominio.ReadOnly = true;
+            this.Condominio.Size = new System.Drawing.Size(323, 20);
+            this.Condominio.TabIndex = 94;
+            this.Condominio.TabStop = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(10, 137);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(67, 13);
+            this.label7.TabIndex = 92;
+            this.label7.Text = "Condomínio:";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.EnderecoToolStrip);
+            this.groupBox1.Controls.Add(this.Bairro);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.Numero);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.Logradouro);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Location = new System.Drawing.Point(3, 55);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(454, 72);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            // 
+            // EnderecoToolStrip
+            // 
+            this.EnderecoToolStrip.BackColor = System.Drawing.Color.Transparent;
+            this.EnderecoToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.EnderecoToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.EnderecoToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.EnderecoAddButton,
+            this.EnderecoDelButton});
+            this.EnderecoToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.EnderecoToolStrip.Location = new System.Drawing.Point(401, 36);
+            this.EnderecoToolStrip.Name = "EnderecoToolStrip";
+            this.EnderecoToolStrip.Size = new System.Drawing.Size(49, 25);
+            this.EnderecoToolStrip.TabIndex = 208;
+            this.EnderecoToolStrip.Text = "toolStrip2";
+            // 
+            // EnderecoAddButton
+            // 
+            this.EnderecoAddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.EnderecoAddButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.EnderecoAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.EnderecoAddButton.Name = "EnderecoAddButton";
+            this.EnderecoAddButton.Size = new System.Drawing.Size(23, 22);
+            this.EnderecoAddButton.Text = "toolStripButton1";
+            this.EnderecoAddButton.ToolTipText = "Selecionar um endereço";
+            this.EnderecoAddButton.Click += new System.EventHandler(this.EnderecoAddButton_Click);
+            // 
+            // EnderecoDelButton
+            // 
+            this.EnderecoDelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.EnderecoDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.EnderecoDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.EnderecoDelButton.Name = "EnderecoDelButton";
+            this.EnderecoDelButton.Size = new System.Drawing.Size(23, 22);
+            this.EnderecoDelButton.Text = "toolStripButton3";
+            this.EnderecoDelButton.ToolTipText = "Limpar o campo endereço";
+            this.EnderecoDelButton.Click += new System.EventHandler(this.EnderecoDelButton_Click);
+            // 
+            // Bairro
+            // 
+            this.Bairro.Location = new System.Drawing.Point(75, 40);
+            this.Bairro.MaxLength = 0;
+            this.Bairro.Name = "Bairro";
+            this.Bairro.ReadOnly = true;
+            this.Bairro.Size = new System.Drawing.Size(323, 20);
+            this.Bairro.TabIndex = 92;
+            this.Bairro.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 43);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(67, 13);
+            this.label6.TabIndex = 91;
+            this.label6.Text = "Bairro..........:";
+            // 
+            // Numero
+            // 
+            this.Numero.Location = new System.Drawing.Point(392, 13);
+            this.Numero.MaxLength = 0;
+            this.Numero.Name = "Numero";
+            this.Numero.ReadOnly = true;
+            this.Numero.Size = new System.Drawing.Size(52, 20);
+            this.Numero.TabIndex = 90;
+            this.Numero.TabStop = false;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(361, 16);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(25, 13);
+            this.label5.TabIndex = 89;
+            this.label5.Text = "Nº.:";
+            // 
+            // Logradouro
+            // 
+            this.Logradouro.Location = new System.Drawing.Point(75, 14);
+            this.Logradouro.MaxLength = 0;
+            this.Logradouro.Name = "Logradouro";
+            this.Logradouro.ReadOnly = true;
+            this.Logradouro.Size = new System.Drawing.Size(272, 20);
+            this.Logradouro.TabIndex = 87;
+            this.Logradouro.TabStop = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(8, 16);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 13);
+            this.label4.TabIndex = 86;
+            this.label4.Text = "Logradouro.:";
             // 
             // Inscricao
             // 
@@ -233,6 +452,28 @@
             this.tBar.TabIndex = 70;
             this.tBar.Text = "toolStrip1";
             // 
+            // FindButton
+            // 
+            this.FindButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.FindButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.FindButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.FindButton.Name = "FindButton";
+            this.FindButton.Size = new System.Drawing.Size(23, 22);
+            this.FindButton.Text = "toolStripButton1";
+            this.FindButton.ToolTipText = "Pesquisar";
+            this.FindButton.Click += new System.EventHandler(this.FindButton_Click);
+            // 
+            // SelectButton
+            // 
+            this.SelectButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SelectButton.Image = global::GTI_Desktop.Properties.Resources.rightarrow;
+            this.SelectButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SelectButton.Name = "SelectButton";
+            this.SelectButton.Size = new System.Drawing.Size(23, 22);
+            this.SelectButton.Text = "toolStripButton2";
+            this.SelectButton.ToolTipText = "Retornar";
+            this.SelectButton.Click += new System.EventHandler(this.SelectButton_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -266,245 +507,6 @@
             this.toolStripLabel2.Size = new System.Drawing.Size(100, 22);
             this.toolStripLabel2.Text = "Total encontrado:";
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.EnderecoToolStrip);
-            this.groupBox1.Controls.Add(this.Bairro);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.Numero);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.Logradouro);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Location = new System.Drawing.Point(3, 55);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(454, 72);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            // 
-            // Bairro
-            // 
-            this.Bairro.Location = new System.Drawing.Point(75, 40);
-            this.Bairro.MaxLength = 0;
-            this.Bairro.Name = "Bairro";
-            this.Bairro.ReadOnly = true;
-            this.Bairro.Size = new System.Drawing.Size(323, 20);
-            this.Bairro.TabIndex = 92;
-            this.Bairro.TabStop = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 43);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 13);
-            this.label6.TabIndex = 91;
-            this.label6.Text = "Bairro..........:";
-            // 
-            // Numero
-            // 
-            this.Numero.Location = new System.Drawing.Point(392, 13);
-            this.Numero.MaxLength = 0;
-            this.Numero.Name = "Numero";
-            this.Numero.ReadOnly = true;
-            this.Numero.Size = new System.Drawing.Size(52, 20);
-            this.Numero.TabIndex = 90;
-            this.Numero.TabStop = false;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(361, 16);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(25, 13);
-            this.label5.TabIndex = 89;
-            this.label5.Text = "Nº.:";
-            // 
-            // Logradouro
-            // 
-            this.Logradouro.Location = new System.Drawing.Point(75, 14);
-            this.Logradouro.MaxLength = 0;
-            this.Logradouro.Name = "Logradouro";
-            this.Logradouro.ReadOnly = true;
-            this.Logradouro.Size = new System.Drawing.Size(272, 20);
-            this.Logradouro.TabIndex = 87;
-            this.Logradouro.TabStop = false;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 16);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 13);
-            this.label4.TabIndex = 86;
-            this.label4.Text = "Logradouro.:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(10, 137);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(67, 13);
-            this.label7.TabIndex = 92;
-            this.label7.Text = "Condomínio:";
-            // 
-            // Condominio
-            // 
-            this.Condominio.Location = new System.Drawing.Point(78, 134);
-            this.Condominio.MaxLength = 0;
-            this.Condominio.Name = "Condominio";
-            this.Condominio.ReadOnly = true;
-            this.Condominio.Size = new System.Drawing.Size(323, 20);
-            this.Condominio.TabIndex = 94;
-            this.Condominio.TabStop = false;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "Compl.";
-            this.columnHeader6.Width = 70;
-            // 
-            // ProprietarioToolStrip
-            // 
-            this.ProprietarioToolStrip.BackColor = System.Drawing.Color.Transparent;
-            this.ProprietarioToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.ProprietarioToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.ProprietarioToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ProprietarioAddButton,
-            this.ProprietarioDelButton});
-            this.ProprietarioToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.ProprietarioToolStrip.Location = new System.Drawing.Point(404, 31);
-            this.ProprietarioToolStrip.Name = "ProprietarioToolStrip";
-            this.ProprietarioToolStrip.Size = new System.Drawing.Size(49, 25);
-            this.ProprietarioToolStrip.TabIndex = 207;
-            this.ProprietarioToolStrip.Text = "toolStrip2";
-            // 
-            // CondominioToolStrip
-            // 
-            this.CondominioToolStrip.BackColor = System.Drawing.Color.Transparent;
-            this.CondominioToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.CondominioToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.CondominioToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CondominioAddButton,
-            this.CondominioDelButton});
-            this.CondominioToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.CondominioToolStrip.Location = new System.Drawing.Point(404, 130);
-            this.CondominioToolStrip.Name = "CondominioToolStrip";
-            this.CondominioToolStrip.Size = new System.Drawing.Size(49, 25);
-            this.CondominioToolStrip.TabIndex = 208;
-            this.CondominioToolStrip.Text = "toolStrip2";
-            // 
-            // EnderecoToolStrip
-            // 
-            this.EnderecoToolStrip.BackColor = System.Drawing.Color.Transparent;
-            this.EnderecoToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.EnderecoToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.EnderecoToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.EnderecoAddButton,
-            this.EnderecoDelButton});
-            this.EnderecoToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.EnderecoToolStrip.Location = new System.Drawing.Point(401, 36);
-            this.EnderecoToolStrip.Name = "EnderecoToolStrip";
-            this.EnderecoToolStrip.Size = new System.Drawing.Size(49, 25);
-            this.EnderecoToolStrip.TabIndex = 208;
-            this.EnderecoToolStrip.Text = "toolStrip2";
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "Bairro";
-            this.columnHeader7.Width = 130;
-            // 
-            // columnHeader8
-            // 
-            this.columnHeader8.Text = "Condomínio";
-            this.columnHeader8.Width = 130;
-            // 
-            // CondominioAddButton
-            // 
-            this.CondominioAddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.CondominioAddButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.CondominioAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.CondominioAddButton.Name = "CondominioAddButton";
-            this.CondominioAddButton.Size = new System.Drawing.Size(23, 22);
-            this.CondominioAddButton.Text = "Adicionar um condomínio";
-            this.CondominioAddButton.ToolTipText = "Adicionar um condomínio";
-            this.CondominioAddButton.Click += new System.EventHandler(this.CondominioButton_Click);
-            // 
-            // CondominioDelButton
-            // 
-            this.CondominioDelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.CondominioDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.CondominioDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.CondominioDelButton.Name = "CondominioDelButton";
-            this.CondominioDelButton.Size = new System.Drawing.Size(23, 22);
-            this.CondominioDelButton.Text = "Remover o condomínio";
-            this.CondominioDelButton.ToolTipText = "Remover o condomínio";
-            this.CondominioDelButton.Click += new System.EventHandler(this.CondominioDelButton_Click);
-            // 
-            // ProprietarioAddButton
-            // 
-            this.ProprietarioAddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ProprietarioAddButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.ProprietarioAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ProprietarioAddButton.Name = "ProprietarioAddButton";
-            this.ProprietarioAddButton.Size = new System.Drawing.Size(23, 22);
-            this.ProprietarioAddButton.Text = "toolStripButton1";
-            this.ProprietarioAddButton.ToolTipText = "Adicionar um proprietário";
-            this.ProprietarioAddButton.Click += new System.EventHandler(this.ProprietarioButton_Click);
-            // 
-            // ProprietarioDelButton
-            // 
-            this.ProprietarioDelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ProprietarioDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.ProprietarioDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ProprietarioDelButton.Name = "ProprietarioDelButton";
-            this.ProprietarioDelButton.Size = new System.Drawing.Size(23, 22);
-            this.ProprietarioDelButton.Text = "toolStripButton3";
-            this.ProprietarioDelButton.ToolTipText = "Remover o proprietário";
-            this.ProprietarioDelButton.Click += new System.EventHandler(this.ProprietarioDelButton_Click);
-            // 
-            // EnderecoAddButton
-            // 
-            this.EnderecoAddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.EnderecoAddButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.EnderecoAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.EnderecoAddButton.Name = "EnderecoAddButton";
-            this.EnderecoAddButton.Size = new System.Drawing.Size(23, 22);
-            this.EnderecoAddButton.Text = "toolStripButton1";
-            this.EnderecoAddButton.ToolTipText = "Selecionar um endereço";
-            this.EnderecoAddButton.Click += new System.EventHandler(this.EnderecoAddButton_Click);
-            // 
-            // EnderecoDelButton
-            // 
-            this.EnderecoDelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.EnderecoDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.EnderecoDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.EnderecoDelButton.Name = "EnderecoDelButton";
-            this.EnderecoDelButton.Size = new System.Drawing.Size(23, 22);
-            this.EnderecoDelButton.Text = "toolStripButton3";
-            this.EnderecoDelButton.ToolTipText = "Limpar o campo endereço";
-            this.EnderecoDelButton.Click += new System.EventHandler(this.EnderecoDelButton_Click);
-            // 
-            // FindButton
-            // 
-            this.FindButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.FindButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.FindButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.FindButton.Name = "FindButton";
-            this.FindButton.Size = new System.Drawing.Size(23, 22);
-            this.FindButton.Text = "toolStripButton1";
-            this.FindButton.ToolTipText = "Pesquisar";
-            this.FindButton.Click += new System.EventHandler(this.FindButton_Click);
-            // 
-            // SelectButton
-            // 
-            this.SelectButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SelectButton.Image = global::GTI_Desktop.Properties.Resources.rightarrow;
-            this.SelectButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SelectButton.Name = "SelectButton";
-            this.SelectButton.Size = new System.Drawing.Size(23, 22);
-            this.SelectButton.Text = "toolStripButton2";
-            this.SelectButton.ToolTipText = "Retornar";
-            this.SelectButton.Click += new System.EventHandler(this.SelectButton_Click);
-            // 
             // ExcelButton
             // 
             this.ExcelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -531,16 +533,16 @@
             this.Text = "Lista dos imóveis cadastrados";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.tBar.ResumeLayout(false);
-            this.tBar.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.ProprietarioToolStrip.ResumeLayout(false);
-            this.ProprietarioToolStrip.PerformLayout();
             this.CondominioToolStrip.ResumeLayout(false);
             this.CondominioToolStrip.PerformLayout();
+            this.ProprietarioToolStrip.ResumeLayout(false);
+            this.ProprietarioToolStrip.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.EnderecoToolStrip.ResumeLayout(false);
             this.EnderecoToolStrip.PerformLayout();
+            this.tBar.ResumeLayout(false);
+            this.tBar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
