@@ -407,7 +407,7 @@ namespace GTI_Desktop.Classes {
             return aFields;
         }
 
-        public static List<ArrayList> ReadFromDatFile(string sFile, string sTable, string sCriterio) {
+        public static List<ArrayList> ReadFromDatFile(string sFile, string sTable, string sCriterio="") {
 
             byte[] aHeader = new byte[2];
             byte[] aReg = new byte[0];
@@ -449,7 +449,7 @@ namespace GTI_Desktop.Classes {
                                     aFields.AddRange(aString);
                                     Inicio:;
                                     for (int i = 0; i < aFields.Count; i++) {
-                                        if (string.IsNullOrWhiteSpace( aFields[i].ToString())) {
+                                        if ( aFields[i].ToString()=="") {
                                             aFields.RemoveAt(i);
                                             goto Inicio;
                                         }
@@ -495,7 +495,7 @@ namespace GTI_Desktop.Classes {
         public static string ConvertDatReg(string Prefix, string[] aArray) {
             string Result = "|" + Prefix;
             foreach (string item in aArray) {
-                Result += "#%" + item;
+                    Result += "#%" + item;
             }
             return Result;
         }

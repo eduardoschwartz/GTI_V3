@@ -62,8 +62,6 @@
             this.FindButton = new System.Windows.Forms.ToolStripButton();
             this.SelectButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.PBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.TotalImovel = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.ExcelButton = new System.Windows.Forms.ToolStripButton();
@@ -440,8 +438,6 @@
             this.FindButton,
             this.SelectButton,
             this.toolStripSeparator1,
-            this.PBar,
-            this.toolStripSeparator2,
             this.TotalImovel,
             this.toolStripLabel2,
             this.ExcelButton});
@@ -478,19 +474,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // PBar
-            // 
-            this.PBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.PBar.AutoSize = false;
-            this.PBar.Name = "PBar";
-            this.PBar.Size = new System.Drawing.Size(100, 14);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // TotalImovel
             // 
@@ -568,8 +551,6 @@
         private System.Windows.Forms.MaskedTextBox Inscricao;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripProgressBar PBar;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripLabel TotalImovel;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.Label label7;

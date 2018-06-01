@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace GTI_Desktop.Forms {
@@ -36,35 +37,98 @@ namespace GTI_Desktop.Forms {
                 MessageBox.Show("Selecione um imóvel.","Atenção",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
             }
         }
-        
 
         private void SaveDatFile() {
             List<string> aLista = new List<string>();
-            string[] aReg = new string[3];
+            string[] aReg = new string[8];
+            string[] aTmp = new string[1];
 
             aLista.Add( gtiCore.ConvertDatReg("CD", Codigo.Text.Split()));
+            aLista.Add(gtiCore.ConvertDatReg("PR", PrincipalCheckBox.Checked.ToString().Split()));
+            aTmp[0] = Inscricao.Text;
+            aLista.Add(gtiCore.ConvertDatReg("IC", aTmp));
+            if (Proprietario.Tag == null || Proprietario.Tag.ToString() == "") Proprietario.Tag = "0";
+            aTmp[0] = Proprietario.Text;
+            aLista.Add(gtiCore.ConvertDatReg("PP", aTmp));
+            aLista.Add(gtiCore.ConvertDatReg("Pt", Proprietario.Tag.ToString().Split()));
+            if (Logradouro.Tag == null || Logradouro.Tag.ToString() == "") Logradouro.Tag = "0";
+            aTmp[0] = Logradouro.Text;
+            aLista.Add(gtiCore.ConvertDatReg("LG", aTmp));
+            aLista.Add(gtiCore.ConvertDatReg("Lt", Logradouro.Tag.ToString().Split()));
+            aLista.Add(gtiCore.ConvertDatReg("NM", Numero.Text.Split()));
+            if (Bairro.Tag == null || Bairro.Tag.ToString() == "") Bairro.Tag = "0";
+            aTmp[0] = Bairro.Text;
+            aLista.Add(gtiCore.ConvertDatReg("BR", aTmp));
+            aLista.Add(gtiCore.ConvertDatReg("Bt", Bairro.Tag.ToString().Split()));
+            if (Condominio.Tag == null || Condominio.Tag.ToString() == "") Condominio.Tag = "0";
+            aTmp[0] = Condominio.Text;
+            aLista.Add(gtiCore.ConvertDatReg("CN", aTmp));
+            aLista.Add(gtiCore.ConvertDatReg("Ct", Condominio.Tag.ToString().Split()));
+
             for (int i = 0; i < MainListView.VirtualListSize; i++) {
                 aReg[0] = MainListView.Items[i].Text;
                 aReg[1] = MainListView.Items[i].SubItems[1].Text;
                 aReg[2] = MainListView.Items[i].SubItems[2].Text;
+                aReg[3] = MainListView.Items[i].SubItems[3].Text == "" ? " " : MainListView.Items[i].SubItems[3].Text;
+                aReg[4] = MainListView.Items[i].SubItems[4].Text == "" ? " " : MainListView.Items[i].SubItems[4].Text;
+                aReg[5] = MainListView.Items[i].SubItems[5].Text == "" ? " " : MainListView.Items[i].SubItems[5].Text;
+                aReg[6] = MainListView.Items[i].SubItems[6].Text == "" ? " " : MainListView.Items[i].SubItems[6].Text;
+                aReg[7] = MainListView.Items[i].SubItems[7].Text == "" ? " " : MainListView.Items[i].SubItems[7].Text;
                 aLista.Add(gtiCore.ConvertDatReg("IM", aReg));
             }
 
             string sDir = AppDomain.CurrentDomain.BaseDirectory;
             gtiCore.CreateDatFile(sDir + "\\cd.dat", aLista);
-
         }
 
-        private void ReadDatFile (){
+        private void ReadDatFile() {
             string sDir = AppDomain.CurrentDomain.BaseDirectory;
-            
-            aDatResult = gtiCore.ReadFromDatFile(sDir + "\\cd.dat", "CD", "");
-            if(aDatResult[0].Count>0)
+            //se o arquivo não existir, então não tem o que ler.
+            if (!File.Exists(sDir + "\\cd.dat")) return;
+            //se o arquivo for de outro dia, então não ler.
+            if (File.GetLastWriteTime(sDir + "\\cd.dat").ToString("MM/dd/yyyy") != DateTime.Now.ToString("MM/dd/yyyy")) return;
+            //lê o q arquivo
+            aDatResult = gtiCore.ReadFromDatFile(sDir + "\\cd.dat", "CD");
+            if (aDatResult[0].Count > 0)
                 Codigo.Text = aDatResult[0][0].ToString();
-            aDatResult = gtiCore.ReadFromDatFile(sDir + "\\cd.dat", "IM", "");
+            aDatResult = gtiCore.ReadFromDatFile(sDir + "\\cd.dat", "PR");
+            if (aDatResult[0].Count > 0)
+                PrincipalCheckBox.Checked = Convert.ToBoolean( aDatResult[0][0]);
+            aDatResult = gtiCore.ReadFromDatFile(sDir + "\\cd.dat", "IC");
+            if (aDatResult[0].Count > 0)
+                Inscricao.Text= aDatResult[0][0].ToString();
+            aDatResult = gtiCore.ReadFromDatFile(sDir + "\\cd.dat", "PP");
+            if (aDatResult[0].Count > 0)
+                Proprietario.Text = aDatResult[0][0].ToString();
+            aDatResult = gtiCore.ReadFromDatFile(sDir + "\\cd.dat", "Pt");
+            if (aDatResult[0].Count > 0)
+                Proprietario.Tag = aDatResult[0][0].ToString();
+            aDatResult = gtiCore.ReadFromDatFile(sDir + "\\cd.dat", "LG");
+            if (aDatResult[0].Count > 0)
+                Logradouro.Text = aDatResult[0][0].ToString();
+            aDatResult = gtiCore.ReadFromDatFile(sDir + "\\cd.dat", "Lt");
+            if (aDatResult[0].Count > 0)
+                Logradouro.Tag = aDatResult[0][0].ToString();
+            aDatResult = gtiCore.ReadFromDatFile(sDir + "\\cd.dat", "NM");
+            if (aDatResult[0].Count > 0)
+                Numero.Text = aDatResult[0][0].ToString();
+            aDatResult = gtiCore.ReadFromDatFile(sDir + "\\cd.dat", "BR");
+            if (aDatResult[0].Count > 0)
+                Bairro.Text = aDatResult[0][0].ToString();
+            aDatResult = gtiCore.ReadFromDatFile(sDir + "\\cd.dat", "Bt");
+            if (aDatResult[0].Count > 0)
+                Bairro.Tag = aDatResult[0][0].ToString();
+            aDatResult = gtiCore.ReadFromDatFile(sDir + "\\cd.dat", "CN");
+            if (aDatResult[0].Count > 0)
+                Condominio.Text = aDatResult[0][0].ToString();
+            aDatResult = gtiCore.ReadFromDatFile(sDir + "\\cd.dat", "Ct");
+            if (aDatResult[0].Count > 0)
+                Condominio.Tag = aDatResult[0][0].ToString();
+
+
+            aDatResult = gtiCore.ReadFromDatFile(sDir + "\\cd.dat", "IM");
             MainListView.VirtualListSize = aDatResult.Count;
         }
-
 
         private void ProprietarioButton_Click(object sender, EventArgs e) {
             using (var form = new Cidadao_Lista()) {
@@ -99,14 +163,18 @@ namespace GTI_Desktop.Forms {
 
         private void FindButton_Click(object sender, EventArgs e) {
 
-            MainListView.Items.Clear();
+            MainListView.BeginUpdate();
+            MainListView.VirtualListSize = 0;
+            MainListView.EndUpdate();
+
             gtiCore.Ocupado(this);
             Imovel_bll imovel_Class = new Imovel_bll(_connection);
 
             ImovelStruct Reg = new ImovelStruct();
             Reg.Codigo = string.IsNullOrEmpty(Codigo.Text) ? 0 : Convert.ToInt32(Codigo.Text);
             Reg.Proprietario_Principal = PrincipalCheckBox.Checked;
-            Reg.Proprietario_Codigo = Proprietario.Tag == null ? 0 : Convert.ToInt32(Proprietario.Tag.ToString());
+            if (Proprietario.Tag == null || Proprietario.Tag.ToString() == "") Proprietario.Tag = "0";
+            Reg.Proprietario_Codigo =  Convert.ToInt32(Proprietario.Tag.ToString());
             Reg.Distrito = Inscricao.Text.Substring(0, 1).Trim() == "" ? (short)0 : Convert.ToInt16(Inscricao.Text.Substring(0, 1).Trim());
             Reg.Setor = Inscricao.Text.Substring(2, 2).Trim() == "" ? (short)0 : Convert.ToInt16(Inscricao.Text.Substring(2, 2).Trim());
             Reg.Quadra = Inscricao.Text.Substring(5, 4).Trim() == "" ? (short)0 : Convert.ToInt16(Inscricao.Text.Substring(5, 4).Trim());
@@ -130,37 +198,27 @@ namespace GTI_Desktop.Forms {
             List<ImovelStruct> Lista = imovel_Class.Lista_Imovel(Reg);
 
             int _pos = 0, _total = Lista.Count;
-
-            ArrayList itemlv = new ArrayList(3);
+            if (aDatResult == null) aDatResult = new List<ArrayList>();
+            aDatResult.Clear();
             foreach (var item in Lista) {
+                ArrayList itemlv = new ArrayList(8);
                 itemlv.Add( item.Codigo.ToString("000000"));
                 itemlv.Add( item.Inscricao.ToString());
                 itemlv.Add( item.Proprietario_Nome.ToString());
+                itemlv.Add(item.NomeLogradouro.ToString());
+                itemlv.Add(item.Numero.ToString());
+                itemlv.Add(item.Complemento==null?"": item.Complemento.ToString());
+                itemlv.Add(item.NomeBairro.ToString());
+                itemlv.Add(item.CodigoCondominio==999?"": item.NomeCondominio.ToString());
                 aDatResult.Add(itemlv);
+                _pos++;
             }
             MainListView.BeginUpdate();
             MainListView.VirtualListSize = aDatResult.Count;
             MainListView.EndUpdate();
 
-            /*            MainListView.BeginUpdate();
-                        foreach (var item in Lista) {
-                            ListViewItem lvi = new ListViewItem(item.Codigo.ToString("000000"));
-                            lvi.SubItems.Add(item.Inscricao.ToString());
-                            lvi.SubItems.Add(item.Proprietario_Nome.ToString());
-                            lvi.SubItems.Add(item.NomeLogradouro);
-                            lvi.SubItems.Add(item.Numero.ToString());
-                            lvi.SubItems.Add(item.Complemento);
-                            lvi.SubItems.Add(item.NomeBairro);
-                            lvi.SubItems.Add(item.CodigoCondominio==999?"": item.NomeCondominio);
-                            MainListView.Items.Add(lvi);
-                            if (_pos % 20 == 0)
-                                CallPB(PBar, _pos, _total);
-                            _pos++;
-                        }
-                        MainListView.EndUpdate();*/
             MainListView.ListViewItemSorter = lvwColumnSorter;
             TotalImovel.Text = _total.ToString();
-            PBar.Value = 0;
             gtiCore.Liberado(this);
             if(MainListView.Items.Count==0)
                 MessageBox.Show("Nenhum imóvel coincide com os critérios especificados","Atenção",MessageBoxButtons.OK,MessageBoxIcon.Information);
@@ -229,7 +287,7 @@ namespace GTI_Desktop.Forms {
             using (SaveFileDialog sfd = new SaveFileDialog() {
                 Filter = "Excel |* .xls",
                 InitialDirectory = @"c:\dados\xls",
-                FileName = "DadosListView_Excel_" + DateTime.Now.Millisecond.ToString() + ".xls",
+                FileName = "Consulta_Imovel.xls",
                 ValidateNames = true
             }) {
                 if (sfd.ShowDialog() == DialogResult.OK) {
@@ -242,18 +300,22 @@ namespace GTI_Desktop.Forms {
                     ws.Cells[1, 2] = "Inscrição";
                     ws.Cells[1, 3] = "Proprietário";
                     ws.Cells[1, 4] = "Endereço";
+                    ws.Cells[1, 5] = "Nº";
+                    ws.Cells[1, 6] = "Compl.";
+                    ws.Cells[1, 7] = "Bairro";
+                    ws.Cells[1, 8] = "Condomínio";
 
-                    int i = 2;
-                    foreach (ListViewItem item in MainListView.Items) {
-                        ws.Cells[i, 1] = item.SubItems[0].Text;
-                        ws.Cells[i, 2] = item.SubItems[1].Text;
-                        
-                        ws.Cells[i, 3] = item.SubItems[2].Text;
-                        ws.Cells[i, 4] = item.SubItems[3].Text;
-                        i++;
+                    int r = 2;
+                    for (int i = 0; i < MainListView.VirtualListSize; i++) {
+                        ws.Cells[i + r, 1] = MainListView.Items[i].Text;
+                        ws.Cells[i + r, 2] = MainListView.Items[i].SubItems[1].Text;
+                        ws.Cells[i + r, 3] = MainListView.Items[i].SubItems[2].Text;
+                        ws.Cells[i + r, 4] = MainListView.Items[i].SubItems[3].Text;
+                        ws.Cells[i + r, 5] = MainListView.Items[i].SubItems[4].Text;
+                        ws.Cells[i + r, 6] = MainListView.Items[i].SubItems[5].Text;
+                        ws.Cells[i + r, 7] = MainListView.Items[i].SubItems[6].Text;
+                        ws.Cells[i + r, 8] = MainListView.Items[i].SubItems[7].Text;
                     }
-
-//                    ws.Range["B2", "B10"].Style.NumberFormatLocal = "0";
 
                     ws.Columns.AutoFit();
                     wb.SaveAs(sfd.FileName, XlFileFormat.xlWorkbookNormal, Type.Missing, Type.Missing, false, false, XlSaveAsAccessMode.xlNoChange,
@@ -270,12 +332,11 @@ namespace GTI_Desktop.Forms {
             var acc = aDatResult[e.ItemIndex];
             e.Item = new ListViewItem(
                 new string[]
-                { acc[0].ToString(), acc[1].ToString(), acc[2].ToString() ,"","","","",""}) {
+                { acc[0].ToString(), acc[1].ToString(), acc[2].ToString() ,acc[3].ToString(),acc[4].ToString(),acc[5].ToString(),acc[6].ToString(),acc[7].ToString()}) {
                 Tag = acc,
                 BackColor = e.ItemIndex % 2 == 0 ? Color.Beige : Color.White
             };
-
-
         }
+
     }
 }
