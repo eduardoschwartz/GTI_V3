@@ -732,6 +732,25 @@
     <None Include="Resources\write.gif" />
     <None Include="Resources\chave.png" />
     <None Include="Resources\icon_excel.gif" />
+    <None Include="Resources\dc33ac11.png" />
+    <None Include="Resources\apnsetting.png" />
+    <None Include="Resources\mobileiron.png" />
+    <None Include="Resources\sweethome.png" />
+    <None Include="Resources\8366_64x64.png" />
+    <None Include="Resources\emoji_1f3ed.png" />
+    <None Include="Resources\emoji_1f6e0.png" />
+    <None Include="Resources\7837_64x64.png" />
+    <None Include="Resources\emoji_1f510.png" />
+    <None Include="Resources\1588_64x64.png" />
+    <None Include="Resources\6946_64x64.png" />
+    <None Include="Resources\fabrica.png" />
+    <None Include="Resources\parcela.png" />
+    <None Include="Resources\boleto.png" />
+    <None Include="Resources\doc.png" />
+    <None Include="Resources\9153_64x64.png" />
+    <None Include="Resources\Sair.png" />
+    <None Include="Resources\Business.png" />
+    <None Include="Resources\pasta-azul-lupa.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

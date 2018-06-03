@@ -546,7 +546,5 @@ namespace GTI_Desktop.Forms {
                 f1.BringToFront();
             }
         }
-
-
     }//end class
 }

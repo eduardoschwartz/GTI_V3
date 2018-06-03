@@ -512,7 +512,7 @@
             this.MaximizeBox = false;
             this.Name = "Imovel_Lista";
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Lista dos imóveis cadastrados";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
