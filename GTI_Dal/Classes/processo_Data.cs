@@ -13,7 +13,6 @@ namespace GTI_Dal.Classes {
             _connection = sConnection;
         }
 
-
         public List<Documento> Lista_Documento() {
             using (var db = new GTI_Context(_connection)) {
                 var Sql = from c in db.Documento orderby c.Nome select c;
@@ -173,7 +172,6 @@ namespace GTI_Dal.Classes {
             }
         }
 
-
         public Exception Incluir_Assunto_Local(List<Assuntocc> Lista) {
             using (var db = new GTI_Context(_connection)) {
                 try {
@@ -300,7 +298,6 @@ namespace GTI_Dal.Classes {
             }
         }
 
-
         public Exception Excluir_Local(int Codigo) {
             using (var db = new GTI_Context(_connection)) {
                 Centrocusto b = db.Centrocusto.First(i => i.Codigo == Codigo);
@@ -393,8 +390,7 @@ namespace GTI_Dal.Classes {
                 row.DataReativacao = reg.DataReativacao;
                 row.DataCancelado = reg.DataCancelado;
                 row.DataArquivado = reg.DataArquivado;
-                row.ListaAnexo = ListProcessoAnexo(nAno, nNumero);
-                row.Anexo = ListProcessoAnexo(nAno, nNumero).Count().ToString() + " Anexo(s)";
+                row.ListaAnexo = ListProcessoAnexo(nAno, nNumero);row.Anexo = ListProcessoAnexo(nAno, nNumero).Count().ToString() + " Anexo(s)";
                 row.ObsAnexo = reg.ObsAnexo == null ? "" : reg.ObsAnexo.ToString().Trim();
                 row.Interno = Convert.ToBoolean(reg.Interno);
                 row.Fisico = Convert.ToBoolean(reg.Fisico);
@@ -623,7 +619,6 @@ namespace GTI_Dal.Classes {
             }
         }
 
-
         public List<TramiteStruct> DadosTramite(short Ano, int Numero, int CodAssunto) {
             List<TramiteStruct> Lista = new List<TramiteStruct>();
             using (var db = new GTI_Context(_connection)) {
@@ -767,7 +762,6 @@ namespace GTI_Dal.Classes {
             }
         }
 
-
         public Exception Excluir_Tramite(int Ano, int Numero, int Seq) {
             using (var db = new GTI_Context(_connection)) {
                 try {
@@ -822,6 +816,24 @@ Inicio:;
                 return _contador > 0 ? true : false;
             }
         }
+
+        public List<ProcessoStruct> Lista_Processos(ProcessoStruct Filter) {
+            using (var db = new GTI_Context(_connection)) {
+                var Sql = (from p in db.Processogti
+                           join c in db.Cidadao on p.Codcidadao equals c.Codcidadao into cp from c in cp.DefaultIfEmpty()
+                           join a in db.Assunto on p.Codassunto equals a.Codigo into ap from a in ap.DefaultIfEmpty()
+                           join e in db.Processoend on new { p.Codassunto } equals a.Codigo into ap from a in ap.DefaultIfEmpty()
+                           select new ProcessoStruct { Ano=p.Ano,Numero=p.Numero,NomeCidadao=c.Nomecidadao,Assunto=a.Nome,DataEntrada=p.Dataentrada,DataCancelado=p.Datacancel,
+                                                DataReativacao=p.Datareativa,DataArquivado=p.Dataarquiva,DataSuspensao=p.Datasuspenso,Interno=p.Interno,Fisico=p.Fisico});
+                if (!string.IsNullOrWhiteSpace(Filter.SNumero))
+                    Sql = Sql.Where(c => c.Ano == Filter.Ano && c.Numero==Filter.Numero);
+                return Sql.ToList();
+            }
+        }
+
+
+
+
 
 
     }

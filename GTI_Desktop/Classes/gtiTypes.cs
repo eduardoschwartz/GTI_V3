@@ -52,6 +52,7 @@ namespace GTI_Desktop.Classes {
                 return _name;
             }
         }
+
     }
     
 }

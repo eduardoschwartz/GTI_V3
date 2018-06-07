@@ -39,10 +39,15 @@
             this.toolStripStatusLabel9 = new System.Windows.Forms.ToolStripStatusLabel();
             this.sbServidor = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel12 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.baseRealToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.baseDeTestesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sbDataBase = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel10 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel13 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.LedGreen = new System.Windows.Forms.ToolStripStatusLabel();
+            this.LedRed = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuParametros = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTerritorial = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,15 +92,6 @@
             this.emCascataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ladoALadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.topBar = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.txtDV = new System.Windows.Forms.TextBox();
-            this.lblDV2 = new System.Windows.Forms.Label();
-            this.a1Panel1 = new Owf.Controls.A1Panel();
-            this.lblDV3 = new System.Windows.Forms.Label();
-            this.lblDV = new System.Windows.Forms.Label();
-            this.optDv2 = new System.Windows.Forms.RadioButton();
-            this.optDv1 = new System.Windows.Forms.RadioButton();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btImobiliario = new System.Windows.Forms.ToolStripButton();
             this.btMobiliario = new System.Windows.Forms.ToolStripButton();
             this.btCidadao = new System.Windows.Forms.ToolStripButton();
@@ -105,18 +101,23 @@
             this.ParcelamentoButton = new System.Windows.Forms.ToolStripButton();
             this.ConsultaDocButton = new System.Windows.Forms.ToolStripButton();
             this.AlvaraButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btConfig = new System.Windows.Forms.ToolStripButton();
             this.btSecurity = new System.Windows.Forms.ToolStripDropDownButton();
             this.CadastroUsuarioMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.EventosDoSistemaMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.AtribuicaoDeAcessoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.btSair = new System.Windows.Forms.ToolStripButton();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.baseRealToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.baseDeTestesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.LedGreen = new System.Windows.Forms.ToolStripStatusLabel();
-            this.LedRed = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.txtDV = new System.Windows.Forms.TextBox();
+            this.lblDV2 = new System.Windows.Forms.Label();
+            this.a1Panel1 = new Owf.Controls.A1Panel();
+            this.lblDV3 = new System.Windows.Forms.Label();
+            this.lblDV = new System.Windows.Forms.Label();
+            this.optDv2 = new System.Windows.Forms.RadioButton();
+            this.optDv1 = new System.Windows.Forms.RadioButton();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolStripStatusLabel11 = new System.Windows.Forms.ToolStripStatusLabel();
             this.sBar.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.topBar.SuspendLayout();
@@ -146,7 +147,8 @@
             this.toolStripStatusLabel4,
             this.toolStripStatusLabel13,
             this.LedGreen,
-            this.LedRed});
+            this.LedRed,
+            this.toolStripStatusLabel11});
             this.sBar.Location = new System.Drawing.Point(0, 472);
             this.sBar.Name = "sBar";
             this.sBar.Size = new System.Drawing.Size(898, 24);
@@ -248,6 +250,32 @@
             this.toolStripStatusLabel12.Name = "toolStripStatusLabel12";
             this.toolStripStatusLabel12.Size = new System.Drawing.Size(4, 19);
             // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.baseRealToolStripMenuItem,
+            this.baseDeTestesToolStripMenuItem});
+            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(96, 22);
+            this.toolStripDropDownButton1.Text = "Base de Dados";
+            // 
+            // baseRealToolStripMenuItem
+            // 
+            this.baseRealToolStripMenuItem.Name = "baseRealToolStripMenuItem";
+            this.baseRealToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.baseRealToolStripMenuItem.Text = "Base Real";
+            this.baseRealToolStripMenuItem.Click += new System.EventHandler(this.BaseRealToolStripMenuItem_Click);
+            // 
+            // baseDeTestesToolStripMenuItem
+            // 
+            this.baseDeTestesToolStripMenuItem.Name = "baseDeTestesToolStripMenuItem";
+            this.baseDeTestesToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.baseDeTestesToolStripMenuItem.Text = "Base de Testes";
+            this.baseDeTestesToolStripMenuItem.Click += new System.EventHandler(this.BaseDeTestesToolStripMenuItem_Click);
+            // 
             // sbDataBase
             // 
             this.sbDataBase.ForeColor = System.Drawing.Color.Maroon;
@@ -276,6 +304,21 @@
             this.toolStripStatusLabel13.Name = "toolStripStatusLabel13";
             this.toolStripStatusLabel13.Size = new System.Drawing.Size(13, 19);
             this.toolStripStatusLabel13.Text = "  ";
+            // 
+            // LedGreen
+            // 
+            this.LedGreen.AutoSize = false;
+            this.LedGreen.Image = global::GTI_Desktop.Properties.Resources.ledgreen;
+            this.LedGreen.Name = "LedGreen";
+            this.LedGreen.Size = new System.Drawing.Size(20, 19);
+            // 
+            // LedRed
+            // 
+            this.LedRed.AutoSize = false;
+            this.LedRed.Enabled = false;
+            this.LedRed.Image = global::GTI_Desktop.Properties.Resources.ledred;
+            this.LedRed.Name = "LedRed";
+            this.LedRed.Size = new System.Drawing.Size(20, 19);
             // 
             // menuStrip1
             // 
@@ -629,11 +672,11 @@
             this.btImobiliario,
             this.btMobiliario,
             this.btCidadao,
-            this.btExtrato,
-            this.btProtocolo,
             this.EmissaoGuiaButton,
             this.ParcelamentoButton,
             this.ConsultaDocButton,
+            this.btExtrato,
+            this.btProtocolo,
             this.AlvaraButton,
             this.toolStripSeparator2,
             this.btConfig,
@@ -645,6 +688,158 @@
             this.topBar.Size = new System.Drawing.Size(898, 55);
             this.topBar.TabIndex = 10;
             this.topBar.Text = "toolStrip1";
+            // 
+            // btImobiliario
+            // 
+            this.btImobiliario.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btImobiliario.Image = global::GTI_Desktop.Properties.Resources.Home;
+            this.btImobiliario.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btImobiliario.Name = "btImobiliario";
+            this.btImobiliario.Size = new System.Drawing.Size(52, 52);
+            this.btImobiliario.Text = "Cadastro de imóveis";
+            this.btImobiliario.Click += new System.EventHandler(this.BtImobiliario_Click);
+            // 
+            // btMobiliario
+            // 
+            this.btMobiliario.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btMobiliario.Image = global::GTI_Desktop.Properties.Resources.fabrica;
+            this.btMobiliario.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btMobiliario.Name = "btMobiliario";
+            this.btMobiliario.Size = new System.Drawing.Size(52, 52);
+            this.btMobiliario.Text = "Cadastro de empresas";
+            this.btMobiliario.Click += new System.EventHandler(this.BtMobiliario_Click);
+            // 
+            // btCidadao
+            // 
+            this.btCidadao.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btCidadao.Image = global::GTI_Desktop.Properties.Resources._7837_64x64;
+            this.btCidadao.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btCidadao.Name = "btCidadao";
+            this.btCidadao.Size = new System.Drawing.Size(52, 52);
+            this.btCidadao.Text = "toolStripButton1";
+            this.btCidadao.ToolTipText = "Cadastro de Cidadão";
+            this.btCidadao.Click += new System.EventHandler(this.BtCidadao_Click);
+            // 
+            // btExtrato
+            // 
+            this.btExtrato.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btExtrato.Image = global::GTI_Desktop.Properties.Resources.Debito;
+            this.btExtrato.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btExtrato.Name = "btExtrato";
+            this.btExtrato.Size = new System.Drawing.Size(52, 52);
+            this.btExtrato.Text = "toolStripButton1";
+            this.btExtrato.ToolTipText = "Extrato do contribuinte";
+            this.btExtrato.Click += new System.EventHandler(this.BtExtrato_Click);
+            // 
+            // btProtocolo
+            // 
+            this.btProtocolo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btProtocolo.Image = global::GTI_Desktop.Properties.Resources._8366_64x64;
+            this.btProtocolo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btProtocolo.Name = "btProtocolo";
+            this.btProtocolo.Size = new System.Drawing.Size(52, 52);
+            this.btProtocolo.Text = "Controle de processos";
+            this.btProtocolo.Click += new System.EventHandler(this.BtProtocolo_Click);
+            // 
+            // EmissaoGuiaButton
+            // 
+            this.EmissaoGuiaButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.EmissaoGuiaButton.Image = global::GTI_Desktop.Properties.Resources.boleto;
+            this.EmissaoGuiaButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.EmissaoGuiaButton.Name = "EmissaoGuiaButton";
+            this.EmissaoGuiaButton.Size = new System.Drawing.Size(52, 52);
+            this.EmissaoGuiaButton.Text = "toolStripButton2";
+            this.EmissaoGuiaButton.ToolTipText = "Emissão de guias";
+            // 
+            // ParcelamentoButton
+            // 
+            this.ParcelamentoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ParcelamentoButton.Image = global::GTI_Desktop.Properties.Resources.parcela;
+            this.ParcelamentoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ParcelamentoButton.Name = "ParcelamentoButton";
+            this.ParcelamentoButton.Size = new System.Drawing.Size(52, 52);
+            this.ParcelamentoButton.Text = "toolStripButton1";
+            this.ParcelamentoButton.ToolTipText = "Parcelamento de débito";
+            // 
+            // ConsultaDocButton
+            // 
+            this.ConsultaDocButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ConsultaDocButton.Image = global::GTI_Desktop.Properties.Resources.pasta_azul_lupa;
+            this.ConsultaDocButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ConsultaDocButton.Name = "ConsultaDocButton";
+            this.ConsultaDocButton.Size = new System.Drawing.Size(52, 52);
+            this.ConsultaDocButton.Text = "toolStripButton3";
+            this.ConsultaDocButton.ToolTipText = "Consulta documento";
+            // 
+            // AlvaraButton
+            // 
+            this.AlvaraButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.AlvaraButton.Image = ((System.Drawing.Image)(resources.GetObject("AlvaraButton.Image")));
+            this.AlvaraButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AlvaraButton.Name = "AlvaraButton";
+            this.AlvaraButton.Size = new System.Drawing.Size(52, 52);
+            this.AlvaraButton.Text = "toolStripButton1";
+            this.AlvaraButton.ToolTipText = "Emissão de alvará";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 55);
+            // 
+            // btConfig
+            // 
+            this.btConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btConfig.Image = global::GTI_Desktop.Properties.Resources.emoji_1f6e0;
+            this.btConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btConfig.Name = "btConfig";
+            this.btConfig.Size = new System.Drawing.Size(52, 52);
+            this.btConfig.Text = "Configuração do sistema";
+            this.btConfig.Click += new System.EventHandler(this.BtConfig_Click);
+            // 
+            // btSecurity
+            // 
+            this.btSecurity.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btSecurity.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CadastroUsuarioMenu,
+            this.EventosDoSistemaMenu,
+            this.AtribuicaoDeAcessoMenu});
+            this.btSecurity.Image = global::GTI_Desktop.Properties.Resources.emoji_1f510;
+            this.btSecurity.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btSecurity.Name = "btSecurity";
+            this.btSecurity.Size = new System.Drawing.Size(61, 52);
+            this.btSecurity.Text = "toolStripDropDownButton2";
+            this.btSecurity.ToolTipText = "Opções de Segurança";
+            // 
+            // CadastroUsuarioMenu
+            // 
+            this.CadastroUsuarioMenu.Name = "CadastroUsuarioMenu";
+            this.CadastroUsuarioMenu.Size = new System.Drawing.Size(188, 22);
+            this.CadastroUsuarioMenu.Text = "Cadastro de usuários";
+            this.CadastroUsuarioMenu.Click += new System.EventHandler(this.CadastroUsuarioMenu_Click);
+            // 
+            // EventosDoSistemaMenu
+            // 
+            this.EventosDoSistemaMenu.Name = "EventosDoSistemaMenu";
+            this.EventosDoSistemaMenu.Size = new System.Drawing.Size(188, 22);
+            this.EventosDoSistemaMenu.Text = "Eventos do sistema";
+            this.EventosDoSistemaMenu.Click += new System.EventHandler(this.EventosDoSistemaMenu_Click);
+            // 
+            // AtribuicaoDeAcessoMenu
+            // 
+            this.AtribuicaoDeAcessoMenu.Name = "AtribuicaoDeAcessoMenu";
+            this.AtribuicaoDeAcessoMenu.Size = new System.Drawing.Size(188, 22);
+            this.AtribuicaoDeAcessoMenu.Text = "Atribuição de acessos";
+            this.AtribuicaoDeAcessoMenu.Click += new System.EventHandler(this.AtribuicaoDeAcessoMenu_Click);
+            // 
+            // btSair
+            // 
+            this.btSair.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btSair.Image = global::GTI_Desktop.Properties.Resources.Sair1;
+            this.btSair.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btSair.Name = "btSair";
+            this.btSair.Size = new System.Drawing.Size(52, 52);
+            this.btSair.Text = "Sair do sistema";
+            this.btSair.Click += new System.EventHandler(this.BtSair_Click);
             // 
             // toolStripSeparator1
             // 
@@ -743,198 +938,11 @@
             this.optDv1.UseVisualStyleBackColor = false;
             this.optDv1.CheckedChanged += new System.EventHandler(this.OptDv1_CheckedChanged);
             // 
-            // btImobiliario
+            // toolStripStatusLabel11
             // 
-            this.btImobiliario.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btImobiliario.Image = global::GTI_Desktop.Properties.Resources.Home;
-            this.btImobiliario.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btImobiliario.Name = "btImobiliario";
-            this.btImobiliario.Size = new System.Drawing.Size(52, 52);
-            this.btImobiliario.Text = "Cadastro de imóveis";
-            this.btImobiliario.Click += new System.EventHandler(this.BtImobiliario_Click);
-            // 
-            // btMobiliario
-            // 
-            this.btMobiliario.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btMobiliario.Image = global::GTI_Desktop.Properties.Resources.fabrica;
-            this.btMobiliario.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btMobiliario.Name = "btMobiliario";
-            this.btMobiliario.Size = new System.Drawing.Size(52, 52);
-            this.btMobiliario.Text = "Cadastro de empresas";
-            this.btMobiliario.Click += new System.EventHandler(this.BtMobiliario_Click);
-            // 
-            // btCidadao
-            // 
-            this.btCidadao.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btCidadao.Image = global::GTI_Desktop.Properties.Resources._7837_64x64;
-            this.btCidadao.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btCidadao.Name = "btCidadao";
-            this.btCidadao.Size = new System.Drawing.Size(52, 52);
-            this.btCidadao.Text = "toolStripButton1";
-            this.btCidadao.ToolTipText = "Cadastro de Cidadão";
-            this.btCidadao.Click += new System.EventHandler(this.BtCidadao_Click);
-            // 
-            // btExtrato
-            // 
-            this.btExtrato.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btExtrato.Image = global::GTI_Desktop.Properties.Resources.Debito;
-            this.btExtrato.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btExtrato.Name = "btExtrato";
-            this.btExtrato.Size = new System.Drawing.Size(52, 52);
-            this.btExtrato.Text = "toolStripButton1";
-            this.btExtrato.ToolTipText = "Extrato do contribuinte";
-            this.btExtrato.Click += new System.EventHandler(this.BtExtrato_Click);
-            // 
-            // btProtocolo
-            // 
-            this.btProtocolo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btProtocolo.Image = global::GTI_Desktop.Properties.Resources._8366_64x64;
-            this.btProtocolo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btProtocolo.Name = "btProtocolo";
-            this.btProtocolo.Size = new System.Drawing.Size(52, 52);
-            this.btProtocolo.Text = "Controle de processos";
-            this.btProtocolo.Click += new System.EventHandler(this.BtProtocolo_Click);
-            // 
-            // EmissaoGuiaButton
-            // 
-            this.EmissaoGuiaButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.EmissaoGuiaButton.Image = global::GTI_Desktop.Properties.Resources.boleto;
-            this.EmissaoGuiaButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.EmissaoGuiaButton.Name = "EmissaoGuiaButton";
-            this.EmissaoGuiaButton.Size = new System.Drawing.Size(52, 52);
-            this.EmissaoGuiaButton.Text = "toolStripButton2";
-            this.EmissaoGuiaButton.ToolTipText = "Emissão de guias";
-            // 
-            // ParcelamentoButton
-            // 
-            this.ParcelamentoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ParcelamentoButton.Image = global::GTI_Desktop.Properties.Resources.parcela;
-            this.ParcelamentoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ParcelamentoButton.Name = "ParcelamentoButton";
-            this.ParcelamentoButton.Size = new System.Drawing.Size(52, 52);
-            this.ParcelamentoButton.Text = "toolStripButton1";
-            this.ParcelamentoButton.ToolTipText = "Parcelamento de débito";
-            // 
-            // ConsultaDocButton
-            // 
-            this.ConsultaDocButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ConsultaDocButton.Image = global::GTI_Desktop.Properties.Resources.pasta_azul_lupa;
-            this.ConsultaDocButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ConsultaDocButton.Name = "ConsultaDocButton";
-            this.ConsultaDocButton.Size = new System.Drawing.Size(52, 52);
-            this.ConsultaDocButton.Text = "toolStripButton3";
-            this.ConsultaDocButton.ToolTipText = "Consulta documento";
-            // 
-            // AlvaraButton
-            // 
-            this.AlvaraButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.AlvaraButton.Image = ((System.Drawing.Image)(resources.GetObject("AlvaraButton.Image")));
-            this.AlvaraButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.AlvaraButton.Name = "AlvaraButton";
-            this.AlvaraButton.Size = new System.Drawing.Size(52, 52);
-            this.AlvaraButton.Text = "toolStripButton1";
-            this.AlvaraButton.ToolTipText = "Emissão de alvará";
-            // 
-            // btConfig
-            // 
-            this.btConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btConfig.Image = global::GTI_Desktop.Properties.Resources.emoji_1f6e0;
-            this.btConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btConfig.Name = "btConfig";
-            this.btConfig.Size = new System.Drawing.Size(52, 52);
-            this.btConfig.Text = "Configuração do sistema";
-            this.btConfig.Click += new System.EventHandler(this.BtConfig_Click);
-            // 
-            // btSecurity
-            // 
-            this.btSecurity.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btSecurity.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CadastroUsuarioMenu,
-            this.EventosDoSistemaMenu,
-            this.AtribuicaoDeAcessoMenu});
-            this.btSecurity.Image = global::GTI_Desktop.Properties.Resources.emoji_1f510;
-            this.btSecurity.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btSecurity.Name = "btSecurity";
-            this.btSecurity.Size = new System.Drawing.Size(61, 52);
-            this.btSecurity.Text = "toolStripDropDownButton2";
-            this.btSecurity.ToolTipText = "Opções de Segurança";
-            // 
-            // CadastroUsuarioMenu
-            // 
-            this.CadastroUsuarioMenu.Name = "CadastroUsuarioMenu";
-            this.CadastroUsuarioMenu.Size = new System.Drawing.Size(188, 22);
-            this.CadastroUsuarioMenu.Text = "Cadastro de usuários";
-            this.CadastroUsuarioMenu.Click += new System.EventHandler(this.CadastroUsuarioMenu_Click);
-            // 
-            // EventosDoSistemaMenu
-            // 
-            this.EventosDoSistemaMenu.Name = "EventosDoSistemaMenu";
-            this.EventosDoSistemaMenu.Size = new System.Drawing.Size(188, 22);
-            this.EventosDoSistemaMenu.Text = "Eventos do sistema";
-            this.EventosDoSistemaMenu.Click += new System.EventHandler(this.EventosDoSistemaMenu_Click);
-            // 
-            // AtribuicaoDeAcessoMenu
-            // 
-            this.AtribuicaoDeAcessoMenu.Name = "AtribuicaoDeAcessoMenu";
-            this.AtribuicaoDeAcessoMenu.Size = new System.Drawing.Size(188, 22);
-            this.AtribuicaoDeAcessoMenu.Text = "Atribuição de acessos";
-            this.AtribuicaoDeAcessoMenu.Click += new System.EventHandler(this.AtribuicaoDeAcessoMenu_Click);
-            // 
-            // btSair
-            // 
-            this.btSair.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btSair.Image = global::GTI_Desktop.Properties.Resources.Sair1;
-            this.btSair.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btSair.Name = "btSair";
-            this.btSair.Size = new System.Drawing.Size(52, 52);
-            this.btSair.Text = "Sair do sistema";
-            this.btSair.Click += new System.EventHandler(this.BtSair_Click);
-            // 
-            // toolStripDropDownButton1
-            // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.baseRealToolStripMenuItem,
-            this.baseDeTestesToolStripMenuItem});
-            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(96, 19);
-            this.toolStripDropDownButton1.Text = "Base de Dados";
-            // 
-            // baseRealToolStripMenuItem
-            // 
-            this.baseRealToolStripMenuItem.Name = "baseRealToolStripMenuItem";
-            this.baseRealToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            this.baseRealToolStripMenuItem.Text = "Base Real";
-            this.baseRealToolStripMenuItem.Click += new System.EventHandler(this.BaseRealToolStripMenuItem_Click);
-            // 
-            // baseDeTestesToolStripMenuItem
-            // 
-            this.baseDeTestesToolStripMenuItem.Name = "baseDeTestesToolStripMenuItem";
-            this.baseDeTestesToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            this.baseDeTestesToolStripMenuItem.Text = "Base de Testes";
-            this.baseDeTestesToolStripMenuItem.Click += new System.EventHandler(this.BaseDeTestesToolStripMenuItem_Click);
-            // 
-            // LedGreen
-            // 
-            this.LedGreen.AutoSize = false;
-            this.LedGreen.Image = global::GTI_Desktop.Properties.Resources.ledgreen;
-            this.LedGreen.Name = "LedGreen";
-            this.LedGreen.Size = new System.Drawing.Size(20, 19);
-            // 
-            // LedRed
-            // 
-            this.LedRed.AutoSize = false;
-            this.LedRed.Enabled = false;
-            this.LedRed.Image = global::GTI_Desktop.Properties.Resources.ledred;
-            this.LedRed.Name = "LedRed";
-            this.LedRed.Size = new System.Drawing.Size(20, 19);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 55);
+            this.toolStripStatusLabel11.Name = "toolStripStatusLabel11";
+            this.toolStripStatusLabel11.Size = new System.Drawing.Size(124, 15);
+            this.toolStripStatusLabel11.Text = "toolStripStatusLabel11";
             // 
             // Main
             // 
@@ -1061,6 +1069,7 @@
         private System.Windows.Forms.ToolStripButton EmissaoGuiaButton;
         private System.Windows.Forms.ToolStripButton ConsultaDocButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel11;
     }
 }
 

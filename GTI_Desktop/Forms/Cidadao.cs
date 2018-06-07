@@ -37,7 +37,6 @@ namespace GTI_Desktop.Forms {
             cmbProfissao.ValueMember = "codigo";
         }
 
-
         private void CmbPessoa_SelectedIndexChanged(object sender, EventArgs e) {
             if (cmbPessoa.SelectedIndex == 0) {
                 lblNomeDoc.Text = "CPF....:";
@@ -203,7 +202,6 @@ namespace GTI_Desktop.Forms {
         }
 
         private void BtFind_Click(object sender, EventArgs e) {
-
             using (var form = new Cidadao_Lista()) {
                 var result = form.ShowDialog(this);
                 if (result == DialogResult.OK) {

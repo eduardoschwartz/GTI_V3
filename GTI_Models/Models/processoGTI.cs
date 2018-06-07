@@ -167,5 +167,9 @@ namespace GTI_Models.Models {
         public string NomeCompleto { get; set; }
     }
 
+    public class ProcessoNumero {
+        public int Ano { get; set; }
+        public int Numero { get; set; }
+    }
 
 }

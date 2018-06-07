@@ -63,7 +63,7 @@ namespace GTI_Models.Models {
         public DateTime? Data_nascimento { get; set; }
         [StringLength(50)]
         public string Profissao { get; set; }
-        public int Codprofissao { get; set; }
+        public int? Codprofissao { get; set; }
         public int? Codpais { get; set; }
         public int? Codpais2 { get; set; }
     }

@@ -407,7 +407,7 @@ namespace GTI_Desktop.Classes {
             return aFields;
         }
 
-        public static List<ArrayList> ReadFromDatFile(string sFile, string sTable, string sCriterio="") {
+        public static List<ArrayList> ReadFromDatFile(string sFile, string sTable, bool bHeader=true) {
 
             byte[] aHeader = new byte[2];
             byte[] aReg = new byte[0];
@@ -442,26 +442,20 @@ namespace GTI_Desktop.Classes {
                                 string sRegister = DecryptDatArray(aReg);
                                 //test the value
                                 string sTestValue = ValueDatReg(sRegister);
-                                if (sCriterio == "" || sTestValue == sCriterio) {
-                                    char[] delimiters = new char[] { '#', '%' };
-                                    string[] aString = sRegister.Split(delimiters);
-                                    ArrayList aFields = new ArrayList();
-                                    aFields.AddRange(aString);
-                                    Inicio:;
-                                    for (int i = 0; i < aFields.Count; i++) {
-                                        if ( aFields[i].ToString()=="") {
-                                            aFields.RemoveAt(i);
-                                            goto Inicio;
-                                        }
+                                char[] delimiters = new char[] { '#', '%' };
+                                string[] aString = sRegister.Split(delimiters);
+                                ArrayList aFields = new ArrayList();
+                                aFields.AddRange(aString);
+                                Inicio:;
+                                for (int i = 0; i < aFields.Count; i++) {
+                                    if (aFields[i].ToString() == "") {
+                                        aFields.RemoveAt(i);
+                                        goto Inicio;
                                     }
-                                    aLinhas.Add(aFields );
-                                    //***remover os comentários abaixo se quiser filtrar por registro individual***
-                                    //   if (sCriterio != "") {
-                                    //if we specified a value,  so we dont need to read the rest
-                                    //  goto CloseFile;
-                                    //   }
-                                    //*************************************************
                                 }
+                                aLinhas.Add(aFields);
+                                if(bHeader)
+                                    goto CloseFile;
                             } else if (DecryptDatArray(aHeader) == "XX") {
                                 //end of file
                                 goto CloseFile;

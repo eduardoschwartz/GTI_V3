@@ -295,16 +295,14 @@ namespace GTI_Desktop.Forms {
 
         private void BtFind_Click(object sender, EventArgs e)
         {
-            var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Processo_Lista);
-            if (formToShow != null) {
-                formToShow.Show();
-            } else {
-                Processo_Lista f1 = new Processo_Lista {
-                    Tag = "Processo"
-                };
-                Main f2 = (Main)Application.OpenForms["Main"];
-                f1.MdiParent = f2;
-                f1.Show();
+            using (var form = new Processo_Lista()) {
+                var result = form.ShowDialog(this);
+                if (result == DialogResult.OK) {
+                    ProcessoNumero val = form.ReturnValue;
+                    Processo_bll clsProcesso = new Processo_bll(_connection);
+                    NumProcText.Text = val.Numero + "-" + clsProcesso.DvProcesso(val.Numero) + "/" + val.Ano;
+                    LoadReg();
+                }
             }
         }
 
@@ -856,7 +854,7 @@ namespace GTI_Desktop.Forms {
                 CarregaProcesso();
         }
 
-        public void CarregaProcesso()
+        private void CarregaProcesso()
         {
             if (!String.IsNullOrEmpty(NumProcText.Text)) {
                 Processo_bll clsProcesso = new Processo_bll(_connection);

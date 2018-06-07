@@ -394,6 +394,16 @@ namespace GTI_Bll.Classes {
             Processo_Data obj = new Processo_Data(_connection);
             return obj.Cidadao_Processo(id_cidadao);
         }
+        
+        /// <summary>
+        /// Retorna a lista filtrada dos processos cadastrados .
+        /// </summary>
+        /// <param name="Filter"></param>
+        /// <returns></returns>
+        public List<ProcessoStruct> Lista_Processos(ProcessoStruct Filter) {
+            Processo_Data obj = new Processo_Data(_connection);
+            return obj.Lista_Processos(Filter);
+        }
 
 
     }
