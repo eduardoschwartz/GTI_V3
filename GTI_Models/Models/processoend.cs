@@ -8,7 +8,7 @@ namespace GTI_Models.Models {
         public short Ano { get; set; }
         [Key]
         [Column(Order = 2)]
-        public short Numprocesso { get; set; }
+        public int Numprocesso { get; set; }
         [Key]
         [Column(Order = 3)]
         public short Codlogr { get; set; }

@@ -400,7 +400,7 @@ namespace GTI_Bll.Classes {
         /// </summary>
         /// <param name="Filter"></param>
         /// <returns></returns>
-        public List<ProcessoStruct> Lista_Processos(ProcessoStruct Filter) {
+        public List<ProcessoStruct> Lista_Processos(ProcessoFilter Filter) {
             Processo_Data obj = new Processo_Data(_connection);
             return obj.Lista_Processos(Filter);
         }

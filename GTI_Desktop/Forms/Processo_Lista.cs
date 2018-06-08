@@ -60,25 +60,48 @@ namespace GTI_Desktop.Forms {
 
         private void Fill_List() {
             gtiCore.Ocupado(this);
+
+            //***Construção do filtro ****
             Processo_bll processo_Class = new Processo_bll(_connection);
-
-
-            ProcessoStruct Reg = new ProcessoStruct();
+            ProcessoFilter Reg = new ProcessoFilter();
             if (!String.IsNullOrEmpty(NumeroProcesso.Text)) {
                 Reg.Ano = processo_Class.ExtractAnoProcesso(NumeroProcesso.Text);
                 Reg.Numero = processo_Class.NumProcessoNoDV(NumeroProcesso.Text);
-                Reg.SNumero = NumeroProcesso.Text;
+                Reg.SNumProcesso = NumeroProcesso.Text;
             } else {
                 Reg.Ano = 0;
                 Reg.Numero = 0;
-                Reg.SNumero = "";
+                Reg.SNumProcesso = "";
             }
-            List<ProcessoStruct> Lista = processo_Class.Lista_Processos(Reg);
+            Reg.AnoIni = AnoInicial.Text.Trim() == "" ? 0 : Convert.ToInt32(AnoInicial.Text);
+            Reg.AnoFim = AnoFinal.Text.Trim() == "" ? 0 : Convert.ToInt32(AnoFinal.Text);
 
-            int _total = Lista.Count;
+            //********************************
+
+
+
+            List<ProcessoStruct> Lista = processo_Class.Lista_Processos(Reg);
+            List<ProcessoNumero> aCount = new List<ProcessoNumero>(); //usado na totalização dos processos
+            
+            int _total = 0;
             if (aDatResult == null) aDatResult = new List<ArrayList>();
             aDatResult.Clear();
             foreach (var item in Lista) {
+
+                //Array para totalizar os processos distintos, desta forma processos com mais de um endereço serão contados apenas 1 vez.
+                bool bFind = false;
+                for (int i = 0; i < aCount.Count; i++) {
+                    if (aCount[i].Ano==item.Ano && aCount[i].Numero == item.Numero) {
+                        bFind = true;
+                        break;
+                    }
+                }
+                if (!bFind) {
+                    aCount.Add(new ProcessoNumero { Ano = item.Ano, Numero = item.Numero });
+                    _total++;
+                }
+                //******************************************
+
                 ArrayList itemlv = new ArrayList();
                 itemlv.Add(item.Ano.ToString());
                 itemlv.Add(item.Numero.ToString("00000") + "-" +  processo_Class.DvProcesso( item.Numero));
@@ -105,7 +128,12 @@ namespace GTI_Desktop.Forms {
                     itemlv.Add("S");
                 else
                     itemlv.Add("N");
-                itemlv.Add("endereçooooo");
+                string sEndereco = item.LogradouroNome ?? "";
+                string sNumero = item.LogradouroNumero ?? "";
+                if (sEndereco != "")
+                    itemlv.Add(sEndereco + ", " + sNumero ?? "");
+                else
+                    itemlv.Add("");
 
                 aDatResult.Add(itemlv);
             }

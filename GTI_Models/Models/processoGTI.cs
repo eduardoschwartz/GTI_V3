@@ -85,6 +85,8 @@ namespace GTI_Models.Models {
         public List<ProcessoDocStruct> ListaProcessoDoc { get; set; }
         public string TipoEnd { get; set; }
         public string ObsAnexo { get; set; }
+        public string LogradouroNome { get; set; }
+        public string LogradouroNumero { get; set; }
     }
 
     public class ProcessoEndStruct {
@@ -142,7 +144,9 @@ namespace GTI_Models.Models {
     }
 
     public class ProcessoFilter {
-        public int NumProcesso { get; set; }
+        public string SNumProcesso { get; set; }
+        public int Ano { get; set; }
+        public int Numero { get; set; }
         public int AnoIni { get; set; }
         public int AnoFim { get; set; }
         public string Requerente { get; set; }
@@ -171,5 +175,7 @@ namespace GTI_Models.Models {
         public int Ano { get; set; }
         public int Numero { get; set; }
     }
+
+
 
 }

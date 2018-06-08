@@ -365,6 +365,7 @@ namespace GTI_Desktop.Forms {
 
         private short RetornaDV() {
             short ret = 0;
+            if (txtDV.Text == "") txtDV.Text = "0";
             int Numero = Convert.ToInt32(txtDV.Text);
             if (optDv1.Checked) {
                 Processo_bll clsProcesso = new Processo_bll(_connection);

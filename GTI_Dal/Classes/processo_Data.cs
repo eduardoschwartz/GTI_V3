@@ -817,16 +817,25 @@ Inicio:;
             }
         }
 
-        public List<ProcessoStruct> Lista_Processos(ProcessoStruct Filter) {
+        public List<ProcessoStruct> Lista_Processos(ProcessoFilter Filter) {
             using (var db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Processogti
                            join c in db.Cidadao on p.Codcidadao equals c.Codcidadao into cp from c in cp.DefaultIfEmpty()
                            join a in db.Assunto on p.Codassunto equals a.Codigo into ap from a in ap.DefaultIfEmpty()
-                           join e in db.Processoend on new { p.Codassunto } equals a.Codigo into ap from a in ap.DefaultIfEmpty()
-                           select new ProcessoStruct { Ano=p.Ano,Numero=p.Numero,NomeCidadao=c.Nomecidadao,Assunto=a.Nome,DataEntrada=p.Dataentrada,DataCancelado=p.Datacancel,
-                                                DataReativacao=p.Datareativa,DataArquivado=p.Dataarquiva,DataSuspensao=p.Datasuspenso,Interno=p.Interno,Fisico=p.Fisico});
-                if (!string.IsNullOrWhiteSpace(Filter.SNumero))
+                           join e in db.Processoend on new { P1 = p.Ano, P2 = p.Numero } equals new { P1 = e.Ano, P2 = e.Numprocesso } into ep from e in ep.DefaultIfEmpty()
+                           join l in db.Logradouro on e.Codlogr equals l.Codlogradouro into le from l in le.DefaultIfEmpty()
+                           select new ProcessoStruct {
+                               Ano = p.Ano, Numero = p.Numero, NomeCidadao = c.Nomecidadao, Assunto = a.Nome, DataEntrada = p.Dataentrada, DataCancelado = p.Datacancel,
+                               DataReativacao = p.Datareativa, DataArquivado = p.Dataarquiva, DataSuspensao = p.Datasuspenso, Interno = p.Interno, Fisico = p.Fisico, LogradouroNome = l.Endereco,
+                               LogradouroNumero = e.Numero
+                           }); 
+                if (!string.IsNullOrWhiteSpace(Filter.SNumProcesso))
                     Sql = Sql.Where(c => c.Ano == Filter.Ano && c.Numero==Filter.Numero);
+                if (Filter.AnoIni>0)
+                    Sql = Sql.Where(c => c.Ano >= Filter.AnoIni);
+                if (Filter.AnoFim > 0)
+                    Sql = Sql.Where(c => c.Ano <= Filter.AnoFim);
+
                 return Sql.ToList();
             }
         }
