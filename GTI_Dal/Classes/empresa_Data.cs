@@ -13,7 +13,6 @@ namespace GTI_Dal.Classes {
         public Empresa_Data(string sConnection) {
             _connection = sConnection;
         }
-
         
         public bool Existe_Empresa(int nCodigo) {
             bool bRet = false;
