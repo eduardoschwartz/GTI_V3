@@ -467,6 +467,58 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Exception Incluir_DEmp(List<DEmpresa> Lista) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    foreach (DEmpresa reg in Lista) {
+                        db.DEmpresa.Add(reg);
+                        db.SaveChanges();
+                    }
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public List<DEmpresa> ListaDEmpresa(int nSid) {
+            List<DEmpresa> reg;
+            using (var db = new GTI_Context(_connection)) {
+                reg = (from b in db.DEmpresa where b.sid == nSid select b).ToList();
+                return reg;
+            }
+        }
+
+        public Exception Delete_DEmpresa(int nSid) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.DEmpresa.RemoveRange(db.DEmpresa.Where(i => i.sid == nSid));
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public List<CnaeStruct> ListaCnae(int nCodigo) {
+            List<CnaeStruct> Lista = new List<CnaeStruct>();
+            using (var db = new GTI_Context(_connection)) {
+                var rows = (from m in db.Mobiliariocnae join c in db.Cnaesubclasse on
+                            new { p1 = m.Divisao, p2 = m.Grupo, p3 = m.Classe, p4 = m.Subclasse } equals
+                            new { p1 = c.Divisao, p2 = c.Grupo, p3 = c.Classe, p4 = c.Subclasse }
+                            where m.Codmobiliario == nCodigo
+                            select new { m.Cnae, c.Descricao });
+                foreach (var reg in rows) {
+                    CnaeStruct Linha = new CnaeStruct();
+                    Linha.Cnae = reg.Cnae;
+                    Linha.Descricao = reg.Descricao;
+                    Lista.Add(Linha);
+                }
+                return Lista;
+            }
+        }
+
 
     }
 }

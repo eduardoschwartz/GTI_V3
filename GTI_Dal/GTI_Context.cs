@@ -84,6 +84,9 @@ namespace GTI_Dal {
         public DbSet<sil> Sil { get; set; }
         public DbSet<mobiliarioendentrega> Mobiliarioendentrega { get; set; }
         public DbSet<Escritoriocontabil> Escritoriocontabil { get; set; }
+        public DbSet<DEmpresa> DEmpresa { get; set; }
+        public DbSet<Mobiliariocnae> Mobiliariocnae { get; set; }
+        public DbSet<Cnaesubclasse> Cnaesubclasse { get; set; }
 
     }
 }

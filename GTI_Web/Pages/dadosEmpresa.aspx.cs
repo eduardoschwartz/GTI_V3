@@ -118,149 +118,149 @@ namespace UIWeb.Pages {
                 sSocio2 = sSocio2.Substring(0, sSocio2.Length - 2);
             PROPRIETARIO.Text = "<pre>" + sSocio + "</pre>";
 
-             //List<CnaeStruct> ListaCnae = empresa_class.ListaCnae(Codigo);
+             List<CnaeStruct> ListaCnae = empresa_class.ListaCnae(Codigo);
              string sCnae = "";
-             //sCnae2 = "";
-             //foreach (CnaeStruct cnae in ListaCnae) {
-             //    sCnae += cnae.Cnae + "-" + cnae.Descricao + System.Environment.NewLine;
-             //    sCnae2 += cnae.Cnae + "-" + cnae.Descricao + System.Environment.NewLine;
-             //}
-             //    if (!string.IsNullOrWhiteSpace(sCnae2))
-             //      sCnae2 = sCnae2.Substring(0, sCnae2.Length - 1);
+            sCnae2 = "";
+            foreach (CnaeStruct cnae in ListaCnae) {
+                sCnae += cnae.Cnae + "-" + cnae.Descricao + System.Environment.NewLine;
+                sCnae2 += cnae.Cnae + "-" + cnae.Descricao + System.Environment.NewLine;
+            }
+            if (!string.IsNullOrWhiteSpace(sCnae2))
+                sCnae2 = sCnae2.Substring(0, sCnae2.Length - 1);
 
-             CNAE.Text = "<pre>" + sCnae + "</pre>";
+            CNAE.Text = "<pre>" + sCnae + "</pre>";
              SIMPLES.Text = empresa_class.Empresa_Simples(Codigo,DateTime.Now) ? "SIM" : "NÃO";
         }
 
         protected void btPrint_Click(object sender, EventArgs e) {
-            //if (String.IsNullOrWhiteSpace(RAZAOSOCIAL.Text))
-            //    lblMsg.Text = "Selecione uma empresa para imprimir";
-            //else {
-            //    lblMsg.Text = "";
+            if (String.IsNullOrWhiteSpace(RAZAOSOCIAL.Text))
+                lblMsg.Text = "Selecione uma empresa para imprimir";
+            else {
+                lblMsg.Text = "";
 
-            //    List<DEmpresa> aLista = new List<DEmpresa>();
-            //    int nSid = gtiCore.GetRandomNumber();
-            //    DEmpresa reg = new DEmpresa();
-            //    reg.sid = nSid;
-            //    reg.nome = "Inscrição Municipal";
-            //    reg.valor = IM.Text;
-            //    aLista.Add(reg);
-            //    reg = new DEmpresa();
-            //    reg.sid = nSid;
-            //    reg.nome = "Razão Social";
-            //    reg.valor = RAZAOSOCIAL.Text;
-            //    aLista.Add(reg);
-            //    reg = new DEmpresa();
-            //    reg.sid = nSid;
-            //    reg.nome = "CNPJ/CPF";
-            //    reg.valor = CNPJ.Text;
-            //    aLista.Add(reg);
-            //    reg = new DEmpresa();
-            //    reg.sid = nSid;
-            //    reg.nome = "Data de Abertura";
-            //    reg.valor = DATAABERTURA.Text;
-            //    aLista.Add(reg);
-            //    reg = new DEmpresa();
-            //    reg.sid = nSid;
-            //    reg.nome = "Data de Encerramento";
-            //    reg.valor = DATAENCERRAMENTO.Text;
-            //    aLista.Add(reg);
-            //    reg = new DEmpresa();
-            //    reg.sid = nSid;
-            //    reg.nome = "Inscrição Estadual";
-            //    reg.valor = IE.Text;
-            //    aLista.Add(reg);
-            //    reg = new DEmpresa();
-            //    reg.sid = nSid;
-            //    reg.nome = "Situação";
-            //    reg.valor = SITUACAO.Text;
-            //    aLista.Add(reg);
-            //    reg = new DEmpresa();
-            //    reg.sid = nSid;
-            //    reg.nome = "Endereço";
-            //    reg.valor = ENDERECO.Text;
-            //    aLista.Add(reg);
-            //    reg = new DEmpresa();
-            //    reg.sid = nSid;
-            //    reg.nome = "Email";
-            //    reg.valor = EMAIL.Text;
-            //    aLista.Add(reg);
-            //    reg = new DEmpresa();
-            //    reg.sid = nSid;
-            //    reg.nome = "Telefone";
-            //    reg.valor = TELEFONE.Text;
-            //    aLista.Add(reg);
-            //    reg = new DEmpresa();
-            //    reg.sid = nSid;
-            //    reg.nome = "Regime de ISS";
-            //    reg.valor = REGIMEISS.Text;
-            //    aLista.Add(reg);
-            //    reg = new DEmpresa();
-            //    reg.sid = nSid;
-            //    reg.nome = "Vigilância Sanitária";
-            //    reg.valor = VIGSANIT.Text;
-            //    aLista.Add(reg);
-            //    reg = new DEmpresa();
-            //    reg.sid = nSid;
-            //    reg.nome = "Taxa de Licença";
-            //    reg.valor = TAXALICENCA.Text;
-            //    aLista.Add(reg); reg = new DEmpresa();
-            //    reg.sid = nSid;
-            //    reg.nome = "Optante do Simples";
-            //    reg.valor = SIMPLES.Text;
-            //    aLista.Add(reg);
-            //    reg = new DEmpresa();
-            //    reg.sid = nSid;
-            //    reg.nome = "Micro Emp. Individual";
-            //    reg.valor = MEI.Text;
-            //    aLista.Add(reg);
-            //    reg = new DEmpresa();
-            //    reg.sid = nSid;
-            //    reg.nome = "Área";
-            //    reg.valor = AREA.Text;
-            //    aLista.Add(reg);
-            //    reg = new DEmpresa();
-            //    reg.sid = nSid;
-            //    reg.nome = "Proprietário";
-            //    reg.valor = sSocio2;
-            //    aLista.Add(reg);
-            //    reg = new DEmpresa();
-            //    reg.sid = nSid;
-            //    reg.nome = "Atividades";
-            //    reg.valor = sCnae2;
-            //    aLista.Add(reg);
-            //    clsEmpresa empresa_class = new clsEmpresa();
-            //    empresa_class.Grava_DEmp(aLista);
+                List<DEmpresa> aLista = new List<DEmpresa>();
+                int nSid = gtiCore.GetRandomNumber();
+                DEmpresa reg = new DEmpresa();
+                reg.sid = nSid;
+                reg.nome = "Inscrição Municipal";
+                reg.valor = IM.Text;
+                aLista.Add(reg);
+                reg = new DEmpresa();
+                reg.sid = nSid;
+                reg.nome = "Razão Social";
+                reg.valor = RAZAOSOCIAL.Text;
+                aLista.Add(reg);
+                reg = new DEmpresa();
+                reg.sid = nSid;
+                reg.nome = "CNPJ/CPF";
+                reg.valor = CNPJ.Text;
+                aLista.Add(reg);
+                reg = new DEmpresa();
+                reg.sid = nSid;
+                reg.nome = "Data de Abertura";
+                reg.valor = DATAABERTURA.Text;
+                aLista.Add(reg);
+                reg = new DEmpresa();
+                reg.sid = nSid;
+                reg.nome = "Data de Encerramento";
+                reg.valor = DATAENCERRAMENTO.Text;
+                aLista.Add(reg);
+                reg = new DEmpresa();
+                reg.sid = nSid;
+                reg.nome = "Inscrição Estadual";
+                reg.valor = IE.Text;
+                aLista.Add(reg);
+                reg = new DEmpresa();
+                reg.sid = nSid;
+                reg.nome = "Situação";
+                reg.valor = SITUACAO.Text;
+                aLista.Add(reg);
+                reg = new DEmpresa();
+                reg.sid = nSid;
+                reg.nome = "Endereço";
+                reg.valor = ENDERECO.Text;
+                aLista.Add(reg);
+                reg = new DEmpresa();
+                reg.sid = nSid;
+                reg.nome = "Email";
+                reg.valor = EMAIL.Text;
+                aLista.Add(reg);
+                reg = new DEmpresa();
+                reg.sid = nSid;
+                reg.nome = "Telefone";
+                reg.valor = TELEFONE.Text;
+                aLista.Add(reg);
+                reg = new DEmpresa();
+                reg.sid = nSid;
+                reg.nome = "Regime de ISS";
+                reg.valor = REGIMEISS.Text;
+                aLista.Add(reg);
+                reg = new DEmpresa();
+                reg.sid = nSid;
+                reg.nome = "Vigilância Sanitária";
+                reg.valor = VIGSANIT.Text;
+                aLista.Add(reg);
+                reg = new DEmpresa();
+                reg.sid = nSid;
+                reg.nome = "Taxa de Licença";
+                reg.valor = TAXALICENCA.Text;
+                aLista.Add(reg); reg = new DEmpresa();
+                reg.sid = nSid;
+                reg.nome = "Optante do Simples";
+                reg.valor = SIMPLES.Text;
+                aLista.Add(reg);
+                reg = new DEmpresa();
+                reg.sid = nSid;
+                reg.nome = "Micro Emp. Individual";
+                reg.valor = MEI.Text;
+                aLista.Add(reg);
+                reg = new DEmpresa();
+                reg.sid = nSid;
+                reg.nome = "Área";
+                reg.valor = AREA.Text;
+                aLista.Add(reg);
+                reg = new DEmpresa();
+                reg.sid = nSid;
+                reg.nome = "Proprietário";
+                reg.valor = sSocio2;
+                aLista.Add(reg);
+                reg = new DEmpresa();
+                reg.sid = nSid;
+                reg.nome = "Atividades";
+                reg.valor = sCnae2;
+                aLista.Add(reg);
+                Empresa_bll empresa_Class = new Empresa_bll("GTIconnection");
+                Exception ex = empresa_Class.Incluir_DEmp(aLista);
+                if (ex != null) {
+                    lblMsg.Text = "Erro na solicitação e dados ao servidor.";
+                } else {
+                    List<DEmpresa> ListaEmp = empresa_Class.ListaDEmpresa(nSid);
+                    DataTable dt = gtiCore.ConvertToDatatable(ListaEmp);
 
-            //    List<DEmpresa> ListaEmp = empresa_class.ListaDEmpresa(nSid);
-            //    DataTable dt = gtiCore.ConvertToDatatable(ListaEmp);
+                    Warning[] warnings;
+                    string[] streamIds;
+                    string mimeType = string.Empty;
+                    string encoding = string.Empty;
+                    string extension = string.Empty;
 
-            //    Warning[] warnings;
-            //    string[] streamIds;
-            //    string mimeType = string.Empty;
-            //    string encoding = string.Empty;
-            //    string extension = string.Empty;
+                    DataSet Ds = gtiCore.ToDataSet(ListaEmp);
+                    ReportDataSource rdsAct = new ReportDataSource("dsDadosEmpresa", Ds.Tables[0]);
+                    ReportViewer viewer = new ReportViewer();
+                    viewer.LocalReport.Refresh();
+                    viewer.LocalReport.ReportPath = Server.MapPath("~/Report/rptDadosEmpresa.rdlc");
+                    viewer.LocalReport.DataSources.Add(rdsAct); // Add  datasource here         
+                    byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+                    ex= empresa_Class.Delete_DEmpresa(nSid);
+                    Response.Buffer = true;
+                    Response.Clear();
+                    Response.ContentType = mimeType;
+                    Response.AddHeader("content-disposition", "attachment; filename= guia_pmj" + "." + extension);
+                    Response.OutputStream.Write(bytes, 0, bytes.Length);
+                    Response.Flush();
+                    Response.End();
+                }
 
-            //    DataSet Ds = gtiCore.ToDataSet(ListaEmp);
-            //    ReportDataSource rdsAct = new ReportDataSource("dsDadosEmpresa", Ds.Tables[0]);
-            //    ReportViewer viewer = new ReportViewer();
-            //    viewer.LocalReport.Refresh();
-            //    viewer.LocalReport.ReportPath = Server.MapPath("~/Report/rptDadosEmpresa.rdlc");
-            //    //viewer.LocalReport.ReportPath = "Report/rptDadosEmpresa.rdlc";
-            //    //ReportParameter[] param = new ReportParameter[5];
-            //    //param[0] = new ReportParameter("Report_Parameter_0", "1st Para", true);
-            //    viewer.LocalReport.DataSources.Add(rdsAct); // Add  datasource here         
-            //    byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-            //    empresa_class.Delete_DEmpresa(nSid);
-            //    Response.Buffer = true;
-            //    Response.Clear();
-            //    Response.ContentType = mimeType;
-            //    Response.AddHeader("content-disposition", "attachment; filename= guia_pmj" + "." + extension);
-            //    Response.OutputStream.Write(bytes, 0, bytes.Length);
-            //    Response.Flush();
-            //    Response.End();
-
-            //}    
+            }
         }
 
         

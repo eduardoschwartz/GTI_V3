@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\style.css" />
+    <Content Include="DEmp.aspx" />
     <Content Include="Pages\dadosEmpresa.aspx" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
@@ -110,6 +111,19 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSets\dsDadosEmpresa.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsDadosEmpresa.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DEmp.aspx.cs">
+      <DependentUpon>DEmp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DEmp.aspx.designer.cs">
+      <DependentUpon>DEmp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="gtiCore.cs" />
     <Compile Include="Pages\dadosEmpresa.aspx.cs">
       <DependentUpon>dadosEmpresa.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -131,6 +145,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DataSets\dsDadosEmpresa.xsc">
+      <DependentUpon>dsDadosEmpresa.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\dsDadosEmpresa.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsDadosEmpresa.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSets\dsDadosEmpresa.xss">
+      <DependentUpon>dsDadosEmpresa.xsd</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -139,6 +164,10 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Report\rptDadosEmpresa.rdlc" />
+  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -172,4 +172,17 @@ namespace GTI_Models.Models {
         public short Subunidade { get; set; }
     }
 
+    public class CnaeStruct {
+        public string Cnae { get; set; }
+        public string Descricao { get; set; }
+    }
+
+    public class SilStructure {
+        public int Codigo { get; set; }
+        public string Protocolo { get; set; }
+        public DateTime? Data_Emissao { get; set; }
+        public DateTime? Data_Validade { get; set; }
+        public double? AreaImovel { get; set; }
+    }
+
 }

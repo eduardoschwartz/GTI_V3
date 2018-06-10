@@ -308,6 +308,47 @@ namespace GTI_Bll.Classes {
 
         }
 
+        /// <summary>
+        /// Incluir os dados da empresa utilizados na impressão dos detalhes da empresa na Web
+        /// </summary>
+        /// <param name="Lista"></param>
+        /// <returns></returns>
+        public Exception Incluir_DEmp(List<DEmpresa> Lista) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            Exception ex = obj.Incluir_DEmp(Lista);
+            return ex;
+        }
+
+        /// <summary>
+        /// Lista os dados de uma empresa na web
+        /// </summary>
+        /// <param name="nSid"></param>
+        /// <returns></returns>
+        public List<DEmpresa> ListaDEmpresa(int nSid) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.ListaDEmpresa(nSid);
+        }
+
+        /// <summary>
+        /// Excluir os dados da tabela DEmpresa utilizada na consulta web de empresas
+        /// </summary>
+        /// <param name="nSid"></param>
+        /// <returns></returns>
+        public Exception Delete_DEmpresa(int nSid) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            Exception ex = obj.Delete_DEmpresa(nSid);
+            return ex;
+        }
+
+        /// <summary>
+        /// Retorna a Lista de Cnaes de uma empresa
+        /// </summary>
+        /// <param name="nCodigo"></param>
+        /// <returns></returns>
+        public List<CnaeStruct> ListaCnae(int nCodigo) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.ListaCnae(nCodigo);
+        }
 
     }
 }

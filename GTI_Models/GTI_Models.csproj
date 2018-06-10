@@ -68,12 +68,14 @@
     <Compile Include="Models\cep.cs" />
     <Compile Include="Models\cidadao.cs" />
     <Compile Include="Models\cidade.cs" />
+    <Compile Include="Models\Cnaesubclasse.cs" />
     <Compile Include="Models\condominio.cs" />
     <Compile Include="Models\condominioarea.cs" />
     <Compile Include="Models\condominiounidade.cs" />
     <Compile Include="Models\debitoobservacao.cs" />
     <Compile Include="Models\debitoparcela.cs" />
     <Compile Include="Models\debitotributo.cs" />
+    <Compile Include="Models\DEmpresa.cs" />
     <Compile Include="Models\endentrega.cs" />
     <Compile Include="Models\endereco.cs" />
     <Compile Include="Models\escritoriocontabil.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="Models\mobiliario.cs" />
     <Compile Include="Models\benfeitoria.cs" />
     <Compile Include="Models\categprop.cs" />
+    <Compile Include="Models\mobiliariocnae.cs" />
     <Compile Include="Models\mobiliarioendentrega.cs" />
     <Compile Include="Models\mobiliarioplaca.cs" />
     <Compile Include="Models\numdocumento.cs" />
