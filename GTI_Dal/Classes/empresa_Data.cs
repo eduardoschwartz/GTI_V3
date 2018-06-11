@@ -15,7 +15,7 @@ namespace GTI_Dal.Classes {
         }
         
         public bool Existe_Empresa(int nCodigo) {
-            bool bRet = false;
+            bool bRet = true;
             using (var db = new GTI_Context(_connection)) {
                 var existingReg = db.Mobiliario.Count(a => a.Codigomob == nCodigo);
                 if (existingReg != 0) {
@@ -144,7 +144,7 @@ namespace GTI_Dal.Classes {
                                                     Dispensa_ie_processo=m.Dispensaieproc,Data_alvara_provisorio=m.Dtalvaraprovisorio,Senha_iss=m.Senhaiss,Inscricao_temporaria=m.Insctemp,Horas_24=m.Horas24,Isento_iss=m.Isentoiss,
                                                     Bombonieri=m.Bombonieri,Emite_nf=m.Emitenf,Danfe=m.Danfe,Imovel=m.Imovel,Sil=m.Sil,Substituto_tributario_issqn=m.Substituto_tributario_issqn,Individual=m.Individual,
                                                     Ponto_agencia=m.Ponto_agencia,Cadastro_vre=m.Cadastro_vre,Liberado_vre=m.Liberado_vre,Cpf=m.Cpf,Cnpj=m.Cnpj,Prof_responsavel_registro=m.Numregistroresp,
-                                                    Prof_responsavel_conselho=m.Nomeorgao,prof_responsavel_nome=p.Nomecidadao
+                                                    Prof_responsavel_conselho=m.Nomeorgao,prof_responsavel_nome=p.Nomecidadao,Horario_Nome=h.Deschorario
                            }).FirstOrDefault();
 
 
@@ -182,6 +182,7 @@ namespace GTI_Dal.Classes {
                 row.Numprocessoencerramento = reg.Numprocessoencerramento;
                 row.Dataprocencerramento = reg.Dataprocencerramento;
                 row.Horario = reg.Horario;
+                row.Horario_Nome = reg.Horario_Nome;
                 row.Ponto_agencia = reg.Ponto_agencia;
                 string horario = reg.Horario_extenso == null || reg.Horario_extenso == "" ? "" : reg.Horario_extenso;
                 row.Horario_extenso = horario;
@@ -518,6 +519,27 @@ namespace GTI_Dal.Classes {
                 return Lista;
             }
         }
+
+        public SilStructure CarregaSil(int Codigo) {
+            using (var db = new GTI_Context(_connection)) {
+                var reg = (from s in db.Sil where s.Codigo == Codigo
+                           select new {
+                               s.Codigo, s.Protocolo, s.Data_emissao, s.Data_validade, s.Area_imovel
+                           }).FirstOrDefault();
+
+                SilStructure row = new SilStructure();
+                if (reg == null)
+                    return row;
+                row.Codigo = Codigo;
+                row.Data_Emissao = reg.Data_emissao;
+                row.Data_Validade = reg.Data_validade;
+                row.Protocolo = reg.Protocolo;
+                row.AreaImovel = reg.Area_imovel;
+                return (row);
+            }
+        }
+
+
 
 
     }

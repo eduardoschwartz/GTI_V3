@@ -6,7 +6,7 @@ namespace GTI_Models.Models {
     public class SpExtrato {
         [Key]
         [Column(Order=1)]
-        public int Userid { get; set; }
+        public string Usuario { get; set; }
         [Key]
         [Column(Order = 2)]
         public int Codreduzido { get; set; }

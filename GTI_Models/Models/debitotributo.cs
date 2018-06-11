@@ -24,7 +24,7 @@ namespace GTI_Models.Models {
         public byte Codcomplemento { get; set; }
         [Key]
         [Column(Order = 7)]
-        public byte Codtributo { get; set; }
+        public short Codtributo { get; set; }
         public decimal? Valortributo { get; set; }
         public decimal? Valorcorrecao { get; set; }
         public decimal? Valormulta { get; set; }

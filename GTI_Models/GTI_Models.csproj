@@ -63,6 +63,7 @@
     <Compile Include="Models\assunto.cs" />
     <Compile Include="Models\assuntodoc.cs" />
     <Compile Include="Models\bairro.cs" />
+    <Compile Include="Models\boletoguia.cs" />
     <Compile Include="Models\cadimob.cs" />
     <Compile Include="Models\categconstr.cs" />
     <Compile Include="Models\cep.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Models\facequadra.cs" />
     <Compile Include="Models\horariofunc.cs" />
     <Compile Include="Models\lancamento.cs" />
+    <Compile Include="Models\laseriptu.cs" />
     <Compile Include="Models\mei.cs" />
     <Compile Include="Models\mobiliario.cs" />
     <Compile Include="Models\benfeitoria.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="Models\processo_historico.cs" />
     <Compile Include="Models\proprietario.cs" />
     <Compile Include="Models\security_event.cs" />
+    <Compile Include="Models\segunda_via_web.cs" />
     <Compile Include="Models\sil.cs" />
     <Compile Include="Models\sistema.cs" />
     <Compile Include="Models\situacao.cs" />

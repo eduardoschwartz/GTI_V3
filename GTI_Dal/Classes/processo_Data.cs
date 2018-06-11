@@ -321,7 +321,6 @@ namespace GTI_Dal.Classes {
         public bool Existe_Processo(int Ano, int Numero) {
             bool bValido = false;
             using (var db = new GTI_Context(_connection)) {
-                var Sql = (from c in db.Centrocusto orderby c.Codigo descending select c.Codigo).FirstOrDefault();
                 var existingReg = db.Processogti.Count(a => a.Ano == Ano && a.Numero == Numero);
                 if (existingReg > 0)
                     bValido = true;

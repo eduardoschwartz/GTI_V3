@@ -331,6 +331,72 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Parcela_Documentos(reg);
         }
 
+        /// <summary>
+        /// Insere na tabela boletoguia
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception InsertBoletoGuia(Boletoguia Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.InsertBoletoGuia(Reg);
+            return ex;
+        }
+
+        /// <summary>
+        /// Insere na tabela segunda_via_web
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Numero_Segunda_Via(Segunda_via_web Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Numero_Segunda_Via(Reg);
+            return ex;
+        }
+
+
+        /// <summary>
+        /// Lista a tabela boletoguia
+        /// </summary>
+        /// <param name="nSid"></param>
+        /// <returns></returns>
+        public List<Boletoguia> Lista_Boleto_Guia(int nSid) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Lista_Boleto_Guia(nSid);
+        }
+
+        /// <summary>
+        /// Parcelas da CIP para impressão na Web
+        /// </summary>
+        /// <param name="nCodigo"></param>
+        /// <param name="nAno"></param>
+        /// <returns></returns>
+        public List<DebitoStructure> Lista_Parcelas_CIP(int nCodigo, int nAno) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Lista_Parcelas_CIP(nCodigo,nAno);
+        }
+
+        /// <summary>
+        /// Prepara os dados para imprimir o carnê na web
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <param name="Ano"></param>
+        /// <returns></returns>
+        public Exception Insert_Carne_Web(int Codigo, int Ano) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Carne_Web(Codigo, Ano);
+            return ex;
+        }
+
+        /// <summary>
+        /// Apaga os dados temporários do carnê na web
+        /// </summary>
+        /// <param name="nSid"></param>
+        /// <returns></returns>
+        public Exception Excluir_Carne(int nSid) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Excluir_Carne(nSid);
+            return ex;
+        }
 
     }//end class
 }

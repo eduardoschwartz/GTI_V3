@@ -23,6 +23,10 @@ namespace UIWeb {
             return " ".PadRight(Tamanho);
         }
 
+        public static string Mask(string sSqlField) {
+            return sSqlField.Replace("'", "''");
+        }
+
         public static bool ValidaCpf(string cpf) {
 
             int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };

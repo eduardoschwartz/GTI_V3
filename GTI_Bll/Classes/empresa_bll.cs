@@ -350,5 +350,17 @@ namespace GTI_Bll.Classes {
             return obj.ListaCnae(nCodigo);
         }
 
+        /// <summary>
+        /// Retorna o número Sil de uma empresa
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public SilStructure CarregaSil(int Codigo) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.CarregaSil(Codigo);
+        }
+
+
+
     }
 }

@@ -43,8 +43,44 @@ namespace GTI_Models.Models {
         public short? Protesto_data_remessa { get; set; }
         public int Userid { get; set; }
     }
-         
-   
+
+    public class DebitoStructure {
+        public string Usuario { get; set; }
+        public int Codigo_Reduzido { get; set; }
+        public int Ano_Exercicio { get; set; }
+        public int Codigo_Lancamento { get; set; }
+        public string Descricao_Lancamento { get; set; }
+        public int Sequencia_Lancamento { get; set; }
+        public short? Numero_Parcela { get; set; }
+        public short Complemento { get; set; }
+        public DateTime? Data_Vencimento { get; set; }
+        public DateTime Data_Base { get; set; }
+        public int MyProperty { get; set; }
+        public int Codigo_Situacao { get; set; }
+        public string Nome_Situacao { get; set; }
+        public string Numero_Processo { get; set; }
+        public int Codigo_Tributo { get; set; }
+        public string Descricao_Tributo { get; set; }
+        public string Abreviatura_Tributo { get; set; }
+        public Decimal Soma_Principal { get; set; }
+        public Decimal Soma_Multa { get; set; }
+        public Decimal Soma_Juros { get; set; }
+        public Decimal Soma_Correcao { get; set; }
+        public Decimal Soma_Total { get; set; }
+        public DateTime? Data_Inscricao { get; set; }
+        public DateTime? Data_Ajuizamento { get; set; }
+        public int? Numero_Livro { get; set; }
+        public int? Pagina_Livro { get; set; }
+        public int? Numero_Certidao { get; set; }
+        public bool Notificado { get; set; }
+        public DateTime? Data_Pagamento { get; set; }
+        public double Numero_Documento { get; set; }
+        public Decimal Valor_Pago { get; set; }
+        public Decimal Valor_Pago_Real { get; set; }
+        public int? Numero_Execucao { get; set; }
+        public int? Ano_execucao { get; set; }
+        public string Processo_CNJ { get; set; }
+    }
 
 
 }

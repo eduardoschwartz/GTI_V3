@@ -20,6 +20,7 @@ namespace GTI_Models.Models {
         public string Nome { get; set; }
         public string Tipo { get; set; }
         public bool Principal { get; set; }
+        public string CPF { get; set; }
     }
 
 
