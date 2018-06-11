@@ -376,6 +376,17 @@ namespace GTI_Bll.Classes {
         }
 
         /// <summary>
+        /// Parcelas de IPTU para impressão na Web
+        /// </summary>
+        /// <param name="nCodigo"></param>
+        /// <param name="nAno"></param>
+        /// <returns></returns>
+        public List<DebitoStructure> Lista_Parcelas_IPTU(int nCodigo, int nAno) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Lista_Parcelas_IPTU(nCodigo, nAno);
+        }
+
+        /// <summary>
         /// Prepara os dados para imprimir o carnê na web
         /// </summary>
         /// <param name="Codigo"></param>
@@ -395,6 +406,119 @@ namespace GTI_Bll.Classes {
         public Exception Excluir_Carne(int nSid) {
             Tributario_Data obj = new Tributario_Data(_connection);
             Exception ex = obj.Excluir_Carne(nSid);
+            return ex;
+        }
+
+        /// <summary>
+        /// Carrega os dados de IPTU de um código no ano informado
+        /// </summary>
+        /// <param name="nCodigo"></param>
+        /// <param name="nAno"></param>
+        /// <returns></returns>
+        public Laseriptu Carrega_Dados_IPTU(int nCodigo, int nAno) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Carrega_Dados_IPTU(nCodigo, nAno);
+        }
+
+        /// <summary>
+        /// Pesquisa o endereço de um terreno lançado na CIP 
+        /// </summary>
+        /// <param name="nNumDocumento"></param>
+        /// <returns></returns>
+        public bool Existe_Documento_CIP(int nNumDocumento) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Existe_Documento_CIP(nNumDocumento);
+        }
+
+        /// <summary>
+        /// Retorna o código reduzido associado a um documento
+        /// </summary>
+        /// <param name="nNumDocumento"></param>
+        /// <returns></returns>
+        public int Retorna_Codigo_por_Documento(int nNumDocumento) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Retorna_Codigo_por_Documento(nNumDocumento);
+        }
+
+        /// <summary>
+        /// Retorna verdadeiro se o Refis esta ativo
+        /// </summary>
+        /// <returns></returns>
+        public bool IsRefis() {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.IsRefis();
+        }
+
+        /// <summary>
+        /// Retorna verdadeiro se o Refis do Distrito Industrial esta ativo
+        /// </summary>
+        /// <returns></returns>
+        public bool IsRefisDI() {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.IsRefisDI();
+        }
+
+        /// <summary>
+        /// Grava um novo documento
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public int Insert_Documento(Numdocumento Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Insert_Documento(Reg);
+        }
+
+        /// <summary>
+        /// Grava na tabela parceladocumento
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Parcela_Documento(Parceladocumento Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Parcela_Documento(Reg);
+            return ex;
+        }
+
+        /// <summary>
+        /// Envia os débitos para serem impressos na DAM
+        /// </summary>
+        /// <param name="lstDebito"></param>
+        /// <param name="nNumDoc"></param>
+        /// <param name="DataBoleto"></param>
+        /// <returns></returns>
+        public Int32 Insert_Boleto_DAM(List<DebitoStructure> lstDebito, Int32 nNumDoc, DateTime DataBoleto) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Insert_Boleto_DAM(lstDebito,nNumDoc,DataBoleto);
+        }
+
+        /// <summary>
+        /// Lista a tabela boleto
+        /// </summary>
+        /// <param name="nSid"></param>
+        /// <returns></returns>
+        public List<Boleto> Lista_Boleto_DAM(int nSid) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Lista_Boleto_DAM(nSid);
+        }
+
+        /// <summary>
+        /// Verifica se o documento informado já foi gerado pelo comércio eletrônico
+        /// </summary>
+        /// <param name="nNumDocumento"></param>
+        /// <returns></returns>
+        public bool Existe_Comercio_Eletronico(int nNumDocumento) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Existe_Comercio_Eletronico(nNumDocumento);
+        }
+
+        /// <summary>
+        /// Grava na tabela comercio_eletronico
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Boleto_Comercio_Eletronico(comercio_eletronico Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Boleto_Comercio_Eletronico(Reg);
             return ex;
         }
 

@@ -18,17 +18,43 @@ namespace GTI_Dal.Classes {
                 Codigo = Codigo
             };
             if (Tipo == dalCore.LocalEndereco.Imovel) {
-                Imovel_Data clsImovel = new Imovel_Data(_connection);
-                List<ProprietarioStruct> ListaProp = clsImovel.Lista_Proprietario(Codigo, true);
+                Imovel_Data imovel_Class = new Imovel_Data(_connection);
+                List<ProprietarioStruct> ListaProp = imovel_Class.Lista_Proprietario(Codigo, true);
                 reg.Nome = ListaProp[0].Nome;
+                reg.cpf_cnpj = ListaProp[0].CPF;
+                ImovelStruct RegImovel = imovel_Class.Dados_Imovel(Codigo);
+                reg.Inscricao = RegImovel.Inscricao;
+                reg.endereco = RegImovel.NomeLogradouro;
+                reg.numero = (short)RegImovel.Numero;
+                reg.complemento = RegImovel.Complemento;
+                reg.nome_bairro = RegImovel.NomeBairro;
+                reg.nome_cidade = "JABOTICABAL";
+                reg.nome_uf = "SP";
+                reg.cep = RegImovel.Cep;
             } else if (Tipo == dalCore.LocalEndereco.Empresa) {
                 Empresa_Data clsEmpresa = new Empresa_Data(_connection);
                 EmpresaStruct regEmpresa = clsEmpresa.Retorna_Empresa(Codigo);
                 reg.Nome = regEmpresa.Razao_social;
+                reg.cpf_cnpj = regEmpresa.Cpf_cnpj;
+                reg.endereco = regEmpresa.Endereco_nome;
+                reg.numero = (short)regEmpresa.Numero;
+                reg.complemento = regEmpresa.Complemento;
+                reg.nome_bairro = regEmpresa.Bairro_nome;
+                reg.nome_cidade = regEmpresa.Cidade_nome;
+                reg.nome_uf = regEmpresa.UF;
+                reg.cep = regEmpresa.Cep;
             } else {
                 Cidadao_Data clsCidadao = new Cidadao_Data(_connection);
                 Cidadao regCidadao = clsCidadao.Retorna_Cidadao(Codigo);
                 reg.Nome = regCidadao.Nomecidadao;
+                reg.cpf_cnpj = regCidadao.Cpf;
+                reg.endereco = regCidadao.Nomelogradouro;
+                reg.numero = (short)regCidadao.Numimovel;
+                reg.complemento = regCidadao.Complemento;
+                reg.nome_bairro = regCidadao.Nomebairro;
+                reg.nome_cidade = regCidadao.Nomecidade;
+                reg.nome_uf = regCidadao.Siglauf;
+                reg.cep = regCidadao.Cep.ToString();
             }
 
             return reg;

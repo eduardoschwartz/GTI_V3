@@ -7,7 +7,7 @@ namespace GTI_Models.Models {
         public int numdocumento { get; set; }
         public DateTime? Datadocumento { get; set; }
         public short? Codbanco { get; set; }
-        public string Agencia { get; set; }
+        public string Codagencia { get; set; }
         public decimal? Valorpago { get; set; }
         public decimal? Valortaxadoc { get; set; }
         public byte? Isentomj { get; set; }

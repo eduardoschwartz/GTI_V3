@@ -88,7 +88,9 @@ namespace GTI_Dal {
         public DbSet<Mobiliariocnae> Mobiliariocnae { get; set; }
         public DbSet<Cnaesubclasse> Cnaesubclasse { get; set; }
         public DbSet<Boletoguia> Boletoguia { get; set; }
+        public DbSet<Boleto> Boleto { get; set; }
         public DbSet<Segunda_via_web> Segunda_via_web { get; set; }
         public DbSet<Laseriptu> Laser_iptu { get; set; }
+        public DbSet<comercio_eletronico> Comercio_eletronico { get; set; }
     }
 }

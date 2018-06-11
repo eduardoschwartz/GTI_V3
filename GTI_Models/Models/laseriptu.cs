@@ -16,7 +16,7 @@ namespace GTI_Models.Models {
         public decimal? Impostoterritorial { get; set; }
         public string Natureza { get; set; }
         public decimal? Areaconstrucao { get; set; }
-        public decimal? Testadaprincipal { get; set; }
+        public decimal? Testadaprinc { get; set; }
         public decimal? Valortotalparc { get; set; }
         public decimal? Valortotalunica { get; set; }
         public decimal? Valortotalunica2 { get; set; }

@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 
 namespace GTI_Dal.Classes {
     public class Tributario_Data {
+        public static int Plano = 0;
 
         private string _connection;
+
         public Tributario_Data(string sConnection) {
             _connection = sConnection;
         }
@@ -526,8 +529,6 @@ namespace GTI_Dal.Classes {
         //        return Lista;
         //    }
         //}
-
-
         
         public Exception InsertBoletoGuia(Boletoguia Reg) {
             using (var db = new GTI_Context(_connection)) {
@@ -561,6 +562,14 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public List<Boleto> Lista_Boleto_DAM(int nSid) {
+            List<Boleto> reg;
+            using (var db = new GTI_Context(_connection)) {
+                reg = (from b in db.Boleto where b.Sid == nSid select b).ToList();
+                return reg;
+            }
+        }
+
         public List<DebitoStructure> Lista_Parcelas_CIP(int nCodigo, int nAno) {
             using (var db = new GTI_Context(_connection)) {
                 var reg = (from dp in db.Debitoparcela
@@ -569,6 +578,40 @@ namespace GTI_Dal.Classes {
                            join pd in db.Parceladocumento on new { p1 = dp.Codreduzido, p2 = dp.Anoexercicio, p3 = dp.Codlancamento, p4 = dp.Seqlancamento, p5 = dp.Numparcela, p6 = dp.Codcomplemento }
                                                       equals new { p1 = pd.Codreduzido, p2 = pd.Anoexercicio, p3 = pd.Codlancamento, p4 = pd.Seqlancamento, p5 = pd.Numparcela, p6 = pd.Codcomplemento } into dppd from pd in dppd.DefaultIfEmpty()
                            where dp.Codreduzido == nCodigo && dp.Anoexercicio == nAno && dp.Codlancamento == 79 && dp.Seqlancamento == 0 && dp.Statuslanc == 3
+                           orderby new { dp.Numparcela, dp.Codcomplemento }
+                           select new { dp.Codreduzido, dp.Anoexercicio, dp.Codlancamento, dp.Seqlancamento, dp.Numparcela, dp.Codcomplemento, dp.Datavencimento, dt.Valortributo, pd.Numdocumento });
+
+                List<DebitoStructure> Lista = new List<DebitoStructure>();
+                foreach (var query in reg) {
+                    foreach (DebitoStructure item in Lista) {
+                        if (item.Numero_Parcela == query.Numparcela && item.Complemento == query.Codcomplemento)
+                            goto Proximo;
+                    }
+                    DebitoStructure Linha = new DebitoStructure();
+                    Linha.Codigo_Reduzido = query.Codreduzido;
+                    Linha.Ano_Exercicio = query.Anoexercicio;
+                    Linha.Codigo_Lancamento = query.Codlancamento;
+                    Linha.Sequencia_Lancamento = query.Seqlancamento;
+                    Linha.Numero_Parcela = query.Numparcela;
+                    Linha.Complemento = query.Codcomplemento;
+                    Linha.Soma_Principal = Convert.ToDecimal(query.Valortributo);
+                    Linha.Data_Vencimento = query.Datavencimento;
+                    Linha.Numero_Documento = query.Numdocumento;
+                    Lista.Add(Linha);
+                    Proximo:;
+                }
+                return Lista;
+            }
+        }
+
+        public List<DebitoStructure> Lista_Parcelas_IPTU(int nCodigo, int nAno) {
+            using (var db = new GTI_Context(_connection)) {
+                var reg = (from dp in db.Debitoparcela
+                           join dt in db.Debitotributo on new { p1 = dp.Codreduzido, p2 = dp.Anoexercicio, p3 = dp.Codlancamento, p4 = dp.Seqlancamento, p5 = dp.Numparcela, p6 = dp.Codcomplemento }
+                                                   equals new { p1 = dt.Codreduzido, p2 = dt.Anoexercicio, p3 = dt.Codlancamento, p4 = dt.Seqlancamento, p5 = dt.Numparcela, p6 = dt.Codcomplemento } into dpdt from dt in dpdt.DefaultIfEmpty()
+                           join pd in db.Parceladocumento on new { p1 = dp.Codreduzido, p2 = dp.Anoexercicio, p3 = dp.Codlancamento, p4 = dp.Seqlancamento, p5 = dp.Numparcela, p6 = dp.Codcomplemento }
+                                                      equals new { p1 = pd.Codreduzido, p2 = pd.Anoexercicio, p3 = pd.Codlancamento, p4 = pd.Seqlancamento, p5 = pd.Numparcela, p6 = pd.Codcomplemento } into dppd from pd in dppd.DefaultIfEmpty()
+                           where dp.Codreduzido == nCodigo && dp.Anoexercicio == nAno && dp.Codlancamento == 1 && dp.Seqlancamento == 0 && dp.Statuslanc == 3
                            orderby new { dp.Numparcela, dp.Codcomplemento }
                            select new { dp.Codreduzido, dp.Anoexercicio, dp.Codlancamento, dp.Seqlancamento, dp.Numparcela, dp.Codcomplemento, dp.Datavencimento, dt.Valortributo, pd.Numdocumento });
 
@@ -620,7 +663,232 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Laseriptu Carrega_Dados_IPTU(int nCodigo, int nAno) {
+            using (var db = new GTI_Context(_connection)) {
+                Laseriptu reg = (from l in db.Laser_iptu where l.Ano == nAno && l.Codreduzido == nCodigo select l).FirstOrDefault();
+                return reg;
+            }
+        }
 
+        public bool Existe_Documento_CIP(int nNumDocumento) {
+            bool bRet = false;
+            using (var db = new GTI_Context(_connection)) {
+                var existingReg = db.Parceladocumento.Where(a => a.Codlancamento == 79).Count(a => a.Numdocumento == nNumDocumento);
+                if (existingReg != 0) {
+                    bRet = true;
+                }
+            }
+            return bRet;
+        }
+
+        public int Retorna_Codigo_por_Documento(int nNumDocumento) {
+            int Sql = 0;
+            using (var db = new GTI_Context(_connection)) {
+                Sql = (from b in db.Parceladocumento where  b.Numdocumento == nNumDocumento select b.Codreduzido).FirstOrDefault();
+            }
+            return Sql;
+        }
+
+        public bool IsRefis() {
+            return false;
+        }
+
+        public bool IsRefisDI() {
+            return false;
+        }
+
+        public int Insert_Documento(Numdocumento Reg) {
+            Int32 maxCod = 0;
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    maxCod = db.Numdocumento.Max(u => u.numdocumento);
+                    maxCod++;
+                    db.Database.ExecuteSqlCommand("INSERT INTO numdocumento(numdocumento,datadocumento,valorguia,emissor,registrado) VALUES(@numdocumento,@datadocumento,@valorguia,@emissor,@registrado)",
+                        new SqlParameter("@numdocumento", maxCod),
+                        new SqlParameter("@datadocumento", Reg.Datadocumento),
+                        new SqlParameter("@valorguia", Reg.Valorguia),
+                        new SqlParameter("@emissor", Reg.Emissor),
+                        new SqlParameter("@registrado", Reg.Registrado));
+                } catch (Exception ex) {
+                    throw (ex.InnerException);
+                }
+                return maxCod;
+
+            }
+        }
+
+        public Exception Insert_Parcela_Documento(Parceladocumento Reg) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Parceladocumento.Add(Reg);
+                    db.SaveChanges();
+                    
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Int32 Insert_Boleto_DAM(List<DebitoStructure> lstDebito, Int32 nNumDoc, DateTime DataBoleto) {
+            int nSid = dalCore.GetRandomNumber(), nCodigo = lstDebito[0].Codigo_Reduzido, nNumero = 0, Pos = 0;
+            string sInscricao = "", sNome = "", sQuadra = "", sLote = "", sCPF = "", sEndereco = "", sComplemento = "", sBairro = "", sCidade = "", sUF = "";
+            decimal SomaPrincipal = 0, SomaTotal = 0;
+
+            string sNumDoc = nNumDoc.ToString() + "-" + dalCore.RetornaDVDocumento(nNumDoc).ToString();
+            string sNumDoc2 = nNumDoc.ToString() + dalCore.RetornaDVDocumento(nNumDoc).ToString();
+            string sNumDoc3 = nNumDoc.ToString() + dalCore.Modulo11(nNumDoc.ToString("0000000000000")).ToString();
+
+            dalCore.TipoContribuinte tpContribuinte = nCodigo < 100000 ?
+                dalCore.TipoContribuinte.Imovel : nCodigo >= 100000 && nCodigo < 400000 ? dalCore.TipoContribuinte.Empresa : dalCore.TipoContribuinte.Cidadao;
+            dalCore.LocalEndereco Local = nCodigo < 100000 ?
+                dalCore.LocalEndereco.Imovel : nCodigo >= 100000 && nCodigo < 400000 ? dalCore.LocalEndereco.Empresa : dalCore.LocalEndereco.Cidadao;
+
+
+            Sistema_Data sistema_Class = new Sistema_Data("GTIconnection");
+            Contribuinte_Header_Struct regDados = sistema_Class.Contribuinte_Header(nCodigo,Local);
+            sNome = regDados.Nome;
+            sCPF = regDados.cpf_cnpj;
+            sInscricao = regDados.Inscricao;
+            sQuadra = "";
+            sLote = "";
+            sEndereco = regDados.endereco == null ? "" : regDados.endereco;
+            nNumero = regDados.numero;
+            sComplemento = regDados.complemento == null ? "" : regDados.complemento;
+            sBairro = regDados.nome_bairro == null ? "" : regDados.nome_bairro;
+            sCidade = regDados.nome_cidade == null ? "" : regDados.nome_cidade;
+            sUF = regDados.nome_uf;
+
+            DeleteSid(nSid);
+
+            foreach (DebitoStructure reg in lstDebito) {
+                SomaPrincipal += Convert.ToDecimal(reg.Soma_Principal);
+                SomaTotal += Convert.ToDecimal(reg.Soma_Total);
+            }
+
+            StringBuilder sFullLanc = new StringBuilder();
+
+            foreach (DebitoStructure Lanc in lstDebito) {
+                if (sFullLanc.ToString().IndexOf(Lanc.Descricao_Lancamento) == -1) {
+                    String DescLanc = Lanc.Descricao_Lancamento;
+                    sFullLanc.Append(DescLanc + "/");
+                }
+            }
+            sFullLanc.Remove(sFullLanc.Length - 1, 1);
+
+            decimal nValorguia = Math.Truncate(Convert.ToDecimal(SomaTotal * 100));
+            string NumBarra = dalCore.Gera2of5Cod((nValorguia).ToString(), Convert.ToDateTime(DataBoleto), Convert.ToInt32(nNumDoc), Convert.ToInt32(nCodigo));
+            string numbarra2a = NumBarra.Substring(0, 13);
+            string numbarra2b = NumBarra.Substring(13, 13);
+            string numbarra2c = NumBarra.Substring(26, 13);
+            string numbarra2d = NumBarra.Substring(39, 13);
+            string strBarra = dalCore.Gera2of5Str(numbarra2a.Substring(0, 11) + numbarra2b.Substring(0, 11) + numbarra2c.Substring(0, 11) + numbarra2d.Substring(0, 11));
+            string sBarra = dalCore.Mask(strBarra);
+            
+            foreach (DebitoStructure reg in lstDebito) {
+                try {
+                    Boleto regBoleto = new Boleto();
+                    regBoleto.Usuario = "GTI.Web.Dam";
+                    regBoleto.Computer = "Internet";
+                    regBoleto.Sid = nSid;
+                    regBoleto.Seq = Convert.ToInt16(Pos);
+                    regBoleto.Inscricao = sInscricao;
+                    regBoleto.Codreduzido = reg.Codigo_Reduzido.ToString();
+                    regBoleto.Nome = dalCore.Truncate(sNome.Trim(), 37, "...");
+                    regBoleto.Cpf = sCPF;
+                    regBoleto.Endereco = dalCore.Truncate(sEndereco, 37, "...");
+                    regBoleto.Numimovel = Convert.ToInt16(nNumero);
+                    regBoleto.Complemento = dalCore.Truncate(sComplemento, 27, "...");
+                    regBoleto.Bairro = dalCore.Truncate(sBairro, 27, "...");
+                    regBoleto.Cidade = sCidade;
+                    regBoleto.Uf = sUF;
+                    regBoleto.Quadra = dalCore.Truncate(sQuadra, 15, "");
+                    regBoleto.Lote = dalCore.Truncate(sLote, 10, "");
+                    regBoleto.Fulllanc = dalCore.Truncate(sFullLanc.ToString(), 1997, "...");
+                    regBoleto.Fulltrib = dalCore.Truncate(reg.Descricao_Tributo.Trim(), 1997, "...");
+                    regBoleto.Numdoc = sNumDoc;
+                    regBoleto.Datadam = Convert.ToDateTime(DataBoleto);
+                    regBoleto.Nomefunc = "GTI.Web";
+                    regBoleto.Anoexercicio = reg.Ano_Exercicio;
+                    regBoleto.Codlancamento = Convert.ToInt16(reg.Codigo_Lancamento);
+                    regBoleto.Seqlancamento = Convert.ToInt16(reg.Sequencia_Lancamento);
+                    regBoleto.Numparcela = Convert.ToInt16(reg.Numero_Parcela);
+                    regBoleto.Codcomplemento = Convert.ToInt16(reg.Complemento);
+                    regBoleto.Datavencto = Convert.ToDateTime(reg.Data_Vencimento);
+                    regBoleto.Aj = reg.Data_Ajuizamento == null || reg.Data_Ajuizamento == DateTime.MinValue ? "N" : "S";
+                    regBoleto.Da = reg.Ano_Exercicio == DateTime.Now.Year ? "N" : "S";
+                    regBoleto.Principal = Convert.ToDecimal(reg.Soma_Principal);
+                    regBoleto.Juros = Convert.ToDecimal(reg.Soma_Juros);
+                    regBoleto.Multa = Convert.ToDecimal(reg.Soma_Multa);
+                    regBoleto.Correcao = Convert.ToDecimal(reg.Soma_Correcao);
+                    regBoleto.Total = Convert.ToDecimal(reg.Soma_Total);
+                    regBoleto.Numdoc2 = sNumDoc2;
+                    regBoleto.Digitavel = "";
+                    regBoleto.Codbarra = sBarra;
+                    regBoleto.Valordam = SomaTotal;
+                    regBoleto.Valorprincdam = SomaPrincipal;
+                    regBoleto.Numbarra2a = numbarra2a;
+                    regBoleto.Numbarra2b = numbarra2b;
+                    regBoleto.Numbarra2c = numbarra2c;
+                    regBoleto.Numbarra2d = numbarra2d;
+                    GravaDam(regBoleto);
+                    Pos++;
+                } catch (SqlException ex) {
+                    throw new Exception(ex.Message);
+                } catch (Exception ex) {
+                    throw new Exception(ex.Message);
+                }
+            }
+            return nSid;
+        }
+
+        public void DeleteSid(int nSid) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Boletoguia.RemoveRange(db.Boletoguia.Where(i => i.Sid == nSid));
+                    db.SaveChanges();
+                    db.Boleto.RemoveRange(db.Boleto.Where(i => i.Sid == nSid));
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    throw (ex.InnerException);
+                }
+            }
+        }
+
+        public void GravaDam(Boleto Reg) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Boleto.Add(Reg);
+                    db.SaveChanges();
+                    return;
+                } catch (Exception ex) {
+                    throw (ex.InnerException);
+                }
+            }
+        }
+
+        public bool Existe_Comercio_Eletronico(int nNumDocumento) {
+            bool bRet = false;
+            using (var db = new GTI_Context(_connection)) {
+                var existingReg = db.Comercio_eletronico.Where(a => a.Numdoc > 1).Count(a => a.Numdoc == nNumDocumento);
+                if (existingReg != 0) {
+                    bRet = true;
+                }
+            }
+            return bRet;
+        }
+
+        public Exception Insert_Boleto_Comercio_Eletronico(comercio_eletronico Reg) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Comercio_eletronico.Add(Reg);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
 
 
     }//end class

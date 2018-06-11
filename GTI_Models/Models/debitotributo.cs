@@ -32,4 +32,14 @@ namespace GTI_Models.Models {
         public bool? Intacto { get; set; }
         public bool? Valorporbaixa { get; set; }
     }
+
+    public class TributoStructure {
+        public int Codigo { get; set; }
+        public string Descricao { get; set; }
+        public Decimal Valor_Principal { get; set; }
+        public Decimal Valor_Multa { get; set; }
+        public Decimal Valor_Juros { get; set; }
+        public Decimal Valor_Correcao { get; set; }
+        public Decimal Valor_Total { get; set; }
+    }
 }

@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace UIWeb {
     public static class gtiCore {
-
+        
         public static String RetornaNumero(String Numero) {
             if (String.IsNullOrEmpty(Numero))
                 return "0";

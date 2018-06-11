@@ -63,6 +63,7 @@
     <Compile Include="Models\assunto.cs" />
     <Compile Include="Models\assuntodoc.cs" />
     <Compile Include="Models\bairro.cs" />
+    <Compile Include="Models\boleto.cs" />
     <Compile Include="Models\boletoguia.cs" />
     <Compile Include="Models\cadimob.cs" />
     <Compile Include="Models\categconstr.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Models\cidadao.cs" />
     <Compile Include="Models\cidade.cs" />
     <Compile Include="Models\Cnaesubclasse.cs" />
+    <Compile Include="Models\comercio_eletronico.cs" />
     <Compile Include="Models\condominio.cs" />
     <Compile Include="Models\condominioarea.cs" />
     <Compile Include="Models\condominiounidade.cs" />
