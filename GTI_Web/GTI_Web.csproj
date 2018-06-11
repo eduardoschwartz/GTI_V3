@@ -98,14 +98,18 @@
     <Content Include="Images\codbarra.jpg" />
     <Content Include="Images\doc.jpg" />
     <Content Include="Images\icon_24_buscar_on.png" />
+    <Content Include="PageConsultaDebito.aspx" />
+    <Content Include="PageDeca.aspx" />
     <Content Include="Pages\alvara_vre.aspx" />
     <Content Include="Pages\boletoBB.aspx" />
     <Content Include="Pages\cip.aspx" />
     <Content Include="Pages\dadosEmpresa.aspx" />
     <Content Include="Pages\damweb.aspx" />
     <Content Include="Pages\damwebend2.aspx" />
+    <Content Include="Pages\envioDeca.aspx" />
     <Content Include="Pages\gtiMenu.aspx" />
     <Content Include="Pages\gtiMenu2.aspx" />
+    <Content Include="Pages\readVRExml.aspx" />
     <Content Include="Pages\SegundaViaCIP.aspx" />
     <Content Include="Pages\SegundaViaCIPFim.aspx" />
     <Content Include="Pages\SegundaViaIPTU.aspx" />
@@ -143,6 +147,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsDadosEmpresa.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DataSets\dsDAM.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsDAM.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DEmp.aspx.cs">
       <DependentUpon>DEmp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -151,6 +160,20 @@
       <DependentUpon>DEmp.aspx</DependentUpon>
     </Compile>
     <Compile Include="gtiCore.cs" />
+    <Compile Include="PageConsultaDebito.aspx.cs">
+      <DependentUpon>PageConsultaDebito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PageConsultaDebito.aspx.designer.cs">
+      <DependentUpon>PageConsultaDebito.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PageDeca.aspx.cs">
+      <DependentUpon>PageDeca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PageDeca.aspx.designer.cs">
+      <DependentUpon>PageDeca.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\alvara_vre.aspx.cs">
       <DependentUpon>alvara_vre.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -193,6 +216,13 @@
     <Compile Include="Pages\damwebend2.aspx.designer.cs">
       <DependentUpon>damwebend2.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\envioDeca.aspx.cs">
+      <DependentUpon>envioDeca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\envioDeca.aspx.designer.cs">
+      <DependentUpon>envioDeca.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\gtiMenu.aspx.cs">
       <DependentUpon>gtiMenu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -206,6 +236,13 @@
     </Compile>
     <Compile Include="Pages\gtiMenu2.aspx.designer.cs">
       <DependentUpon>gtiMenu2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\readVRExml.aspx.cs">
+      <DependentUpon>readVRExml.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\readVRExml.aspx.designer.cs">
+      <DependentUpon>readVRExml.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\SegundaViaCIP.aspx.cs">
       <DependentUpon>SegundaViaCIP.aspx</DependentUpon>
@@ -277,6 +314,18 @@
     </None>
     <Content Include="DataSets\dsDadosEmpresa.xss">
       <DependentUpon>dsDadosEmpresa.xsd</DependentUpon>
+    </Content>
+    <Content Include="Deca\DECANOVO.pdf" />
+    <Content Include="DataSets\dsDAM.xsc">
+      <DependentUpon>dsDAM.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\dsDAM.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsDAM.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSets\dsDAM.xss">
+      <DependentUpon>dsDAM.xsd</DependentUpon>
     </Content>
     <None Include="packages.config" />
     <None Include="Web.Debug.config">

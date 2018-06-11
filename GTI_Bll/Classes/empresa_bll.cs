@@ -360,7 +360,59 @@ namespace GTI_Bll.Classes {
             return obj.CarregaSil(Codigo);
         }
 
+        /// <summary>
+        /// Verifica se a empresa já existe na tabela vre_empresa
+        /// </summary>
+        /// <param name="nCodigo"></param>
+        /// <returns></returns>
+        public bool Existe_Empresa_Vre(int nCodigo) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Existe_Empresa_Vre(nCodigo);
+        }
 
+        /// <summary>
+        /// Insere na tabela vre_empresa
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Empresa_Vre(Vre_empresa reg) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            Exception ex = obj.Insert_Empresa_Vre(reg);
+            return ex;
+        }
+
+        /// <summary>
+        /// Insere na tabela vre_atividade
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Atividade_Vre(Vre_atividade reg) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            Exception ex = obj.Insert_Atividade_Vre(reg);
+            return ex;
+        }
+
+        /// <summary>
+        /// Insere na tabela vre_socio
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Socio_Vre(Vre_socio reg) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            Exception ex = obj.Insert_Socio_Vre(reg);
+            return ex;
+        }
+
+        /// <summary>
+        /// Insere na tabela vre_licenciamento
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Licenciamento_Vre(Vre_licenciamento reg) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            Exception ex = obj.Insert_Licenciamento_Vre(reg);
+            return ex;
+        }
 
     }
 }

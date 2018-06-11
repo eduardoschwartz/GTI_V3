@@ -539,8 +539,64 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public bool Existe_Empresa_Vre(int nCodigo) {
+            bool bRet = false;
+            using (var db = new GTI_Context(_connection)) {
+                var existingReg = db.Vre_empresa.Count(a => a.Id == nCodigo);
+                if (existingReg != 0) {
+                    bRet = true;
+                }
+            }
+            return bRet;
+        }
 
+        public Exception Insert_Empresa_Vre(Vre_empresa reg) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Vre_empresa.Add(reg);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
 
+        public Exception Insert_Atividade_Vre(Vre_atividade reg) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Vre_atividade.Add(reg);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Exception Insert_Socio_Vre(Vre_socio reg) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Vre_socio.Add(reg);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Exception Insert_Licenciamento_Vre(Vre_licenciamento reg) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Vre_licencimento.Add(reg);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
 
     }
 }
