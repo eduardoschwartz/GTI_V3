@@ -1,25 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="cip.aspx.cs" Inherits="UIWeb.Pages.cip" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="cip.aspx.cs" Inherits="UIWeb.Pages.cip" MasterPageFile="~/Pages/default.Master" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" ContentPlaceHolderID="MenuContentPlaceHolder" runat="server">
+    <link href="../css/gti.css" rel="stylesheet" />
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-
-
-
-    <title></title>
-    <style type="text/css">
-        .auto-style1 {
-            width: 188px;
-        }
-    </style>
-</head>
-<body>
-    <form id="form2" runat="server">
      <div style="color: #3a8dcc;">
     
-            <asp:Label ID="Label3" runat="server" ForeColor="#000066" Text="Sistema Tributário Municipal"></asp:Label>
-            &nbsp;<br />
+            <br /> 
+            <br />
             Contribuição de Iluminação Pública - C.I.P.<br />
             <br />
             <table style="width: 350px;">
@@ -33,7 +20,7 @@
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
                     <td>
-                <asp:Button ID="btAcesso" runat="server" Text="Consultar" OnClick="btAcesso_Click" />
+                <asp:Button class="button1" ID="btAcesso" runat="server" Text="Consultar" OnClick="btAcesso_Click" />
                     &nbsp;</td>
                 </tr>
             </table>
@@ -67,7 +54,5 @@
         <br />
         <br />
         <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/doc.jpg" />
-    </form>
-
-</body>
-</html>
+    
+</asp:Content>

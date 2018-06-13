@@ -1,50 +1,44 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="dadosEmpresa.aspx.cs" Inherits="UIWeb.Pages.dadosEmpresa" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="dadosEmpresa.aspx.cs" Inherits="UIWeb.Pages.dadosEmpresa" MasterPageFile="~/Pages/default.Master" %>
 
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-        
-</head>
-<body style="height: 643px; font-family:Tahoma; font-size:12px;">
-    <form id="form1" runat="server">
+<asp:Content ID="Content" ContentPlaceHolderID="MenuContentPlaceHolder" runat="server">
+
+    <link href="../css/gti.css" rel="stylesheet" />
      <div style="color: #3a8dcc;">
     
-            <asp:Label ID="Label3" runat="server" ForeColor="#000066" Text="Sistema Tributário Municipal"></asp:Label>
-            &nbsp;<br />
+            
+            <br />
             Dados Cadastrais de Empresa<br />
             <br />
-            <table style="width: 350px;">
+            <table style="width: 350px; height: 70px;">
                 <tr>
-                    <td class="auto-style1">Inscrição Municipal..:</td>
+                    <td >Inscrição Municipal..:</td>
                     <td>
                 <asp:TextBox ID="txtIM" runat="server" Width="83px" MaxLength="6" TextMode="Number"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
-                    <td class="auto-style1">Número do CNPJ....:</td>
+                    <td >Número do CNPJ....:</td>
                     <td>
                 <asp:TextBox ID="txtCNPJ" runat="server" Width="188px" MaxLength="14" TextMode="Number"></asp:TextBox>
                     </td>
                 </tr>
-                <tr>
-                    <td class="auto-style1">&nbsp;</td>
+                <tr style="height:40px; " >
+                    <td> </td>
                     <td>
-                <asp:Button ID="btAcesso" runat="server" Text="Consultar" OnClick="btAcesso_Click" />
-                    &nbsp;<asp:Button ID="btPrint" runat="server" Text="Imprimir" OnClick="btPrint_Click" />
+                <asp:Button class="button" ID="btAcesso" runat="server" Text="Consultar" OnClick="btAcesso_Click" />
+                    &nbsp;<asp:Button class="button" ID="btPrint" runat="server" Text="Imprimir" OnClick="btPrint_Click" />
                     </td>
                 </tr>
             </table>
-            <br />
+          
             
              
          <asp:Label ID="lblMsg" runat="server" ForeColor="Red" />
 
      </div>
         <br />
-        <br />
-        <asp:Table ID="Tbl" runat="server" Width="610px" BorderStyle="Double" Height="19px" BorderColor="#3a8dcc" CaptionAlign="Left" Font-Bold="False">
+        <asp:Table ID="Tbl" runat="server"  BorderStyle="Double" Height="19px" BorderColor="#3a8dcc" CaptionAlign="Left" Font-Bold="False">
             <asp:TableRow Width="550px" BorderStyle="Solid" BorderWidth="1px">
                 <asp:TableCell Width="30%">Inscrição Municipal</asp:TableCell>
                 <asp:TableCell runat="server" ID="IM" Width="70%" ForeColor="#3a8dcc"></asp:TableCell>
@@ -118,7 +112,9 @@
                 <asp:TableCell ID="CNAE" runat="server"  ForeColor="#3a8dcc"></asp:TableCell>
             </asp:TableRow>
         </asp:Table>
-    </form>
-</body>
-</html>
+    
+
+</asp:Content>
+
+
 

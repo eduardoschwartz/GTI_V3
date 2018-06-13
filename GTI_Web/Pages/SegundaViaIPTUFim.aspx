@@ -1,26 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SegundaViaIPTUFim.aspx.cs" Inherits="UIWeb.Pages.SegundaViaIPTUFim" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SegundaViaIPTUFim.aspx.cs" Inherits="UIWeb.Pages.SegundaViaIPTUFim" MasterPageFile="~/Pages/default.Master" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-
-    <style type="text/css">
-        
-        #form1 {
-            height: 265px;
-        }
-        </style>
+<asp:Content ID="Content1" ContentPlaceHolderID="MenuContentPlaceHolder" runat="server">
+    <link href="../css/gti.css" rel="stylesheet" />
 
 
-
-
-</head>
-<body style="height: 643px; font-family:Tahoma; font-size:11px;">
-    <form id="form1" runat="server">
         <div style="color: #3a8dcc;">
-            <asp:Label ID="Label3" runat="server" ForeColor="#000066" Text="Sistema Tributário Municipal"></asp:Label>
+            <br />
             &nbsp;<br />
             
             Emissão de segunda via do carnê de IPTU - 2018<br />
@@ -33,7 +18,7 @@
 &nbsp;<asp:Label ID="lblNome" runat="server" Font-Size="Small" ForeColor="Maroon" Text="Label"></asp:Label>
             <br />
             <br />
-            <asp:Button ID="btPrint" runat="server" OnClick="btPrint_Click" Text="Imprimir" ToolTip="Imprimir a segunda via do carnê de IPTU" />
+            <asp:Button ID="btPrint" class="button1" runat="server" OnClick="btPrint_Click" Text="Imprimir" Width="93px" />
             <br />
             <br />
             <br />
@@ -47,10 +32,5 @@
             <br />
         </div>
         <br />
-    </form> 
-</body>
-
     
-
-</html>
-
+</asp:Content>

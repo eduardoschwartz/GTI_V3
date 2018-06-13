@@ -1,16 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SegundaViaIPTU.aspx.cs" Inherits="UIWeb.SegundaViaIPTU" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SegundaViaIPTU.aspx.cs" Inherits="UIWeb.SegundaViaIPTU" MasterPageFile="~/Pages/default.Master" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" ContentPlaceHolderID="MenuContentPlaceHolder" runat="server">
+    <link href="../css/gti.css" rel="stylesheet" />
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
+
 
     <style type="text/css">
         
-        #form1 {
-            height: 170px;
-        }
         .auto-style3 {
             width: 333px;
         }
@@ -18,7 +14,7 @@
             width: 433px;
         }
         .auto-style5 {
-            height: 230px;
+            width: 99px;
         }
     </style>
 
@@ -57,11 +53,8 @@
 
 
 
-</head>
-<body style="height: 643px; font-family:Tahoma; font-size:11px;">
-    <form id="form1" runat="server" class="auto-style5">
         <div style="color: #3a8dcc;">
-            <asp:Label ID="Label3" runat="server" ForeColor="#000066" Text="Sistema Tributário Municipal"></asp:Label>
+            <br />
             &nbsp;<br />
             
             Emissão de segunda via do carnê de IPTU - 2018<br />
@@ -93,13 +86,14 @@
                 <br />
                 <table border="0">
                     <tr>
-                        <td>
+                        <td class="auto-style5">
                             <img height="30" alt="" src="Turing.aspx" width="80" />
+                            &nbsp;
                         </td>
                         <td class="auto-style4">&nbsp;Digite o conteúdo da imagem
                             <br />
-                            <asp:TextBox ID="txtimgcode" runat="server" ViewStateMode="Disabled" Width="147px"></asp:TextBox>
-                            &nbsp;      <asp:Button ID="btPrint" runat="server" OnClick="btPrint_Click" Text="Imprimir" ToolTip="Gerar segunda via" />
+                            &nbsp;<asp:TextBox ID="txtimgcode" runat="server" ViewStateMode="Disabled" Width="147px" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px"></asp:TextBox>
+                            &nbsp;&nbsp;&nbsp;      <asp:Button ID="btPrint" class="button1" runat="server" OnClick="btPrint_Click" Text="Imprimir" Width="100px" />
                             <br />
                         </td>
                       
@@ -110,9 +104,5 @@
 
         </div>
         <br />
-    </form> 
-</body>
-
-    
-
-</html>
+   
+</asp:Content>

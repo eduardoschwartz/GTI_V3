@@ -1,10 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="gtiMenu2.aspx.cs" Inherits="UIWeb.Pages.gtiMenu2" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="gtiMenu2.aspx.cs" Inherits="UIWeb.Pages.gtiMenu2" MasterPageFile="~/Pages/default.Master" %>
 
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
+<asp:Content ID="Content" ContentPlaceHolderID="MenuContentPlaceHolder" runat="server">
+    <link href="../css/gti.css" rel="stylesheet" />
     <script>
 
         function formata(campo, mask, evt) {
@@ -37,24 +35,22 @@
             } else return false;
         }
     </script>
-</head>
-<body>
-    <form id="form1" runat="server">
+
     <div style="color: #3a8dcc;">
     
-            <asp:Label ID="Label3" runat="server" ForeColor="#000066" Text="Sistema Tributário Municipal"></asp:Label>
+
             &nbsp;<br />
             <br />
-        <asp:Label ID="Label1" runat="server" ForeColor="#CC0000" Text="Digite a data de pagamento (máximo de 30 dias):" Font-Underline="True"></asp:Label>
+        <asp:Label ID="Label4" runat="server" ForeColor="#3a8dcc" Text="Digite a data de pagamento (máximo de 30 dias):" Font-Underline="True"></asp:Label>
             <br />
         <br />
             <asp:TextBox ID="txtVencto" runat="server" MaxLength="10" onKeyPress="return formata(this, '§§/§§/§§§§', event)"></asp:TextBox>
             &nbsp;&nbsp;
-                            <asp:Label ID="lblmsg" runat="server" Font-Bold="True" ForeColor="Red" Text=""></asp:Label>
+                            <asp:Label ID="lblMsg" runat="server" Font-Bold="False" ForeColor="Red"></asp:Label>
             <br />
             <br />
-            <asp:Button ID="btOK" runat="server" OnClick="btOK_Click" Text="Continuar" />
+            <asp:Button class="button" ID="btOK" runat="server" OnClick="btOK_Click" Text="Continuar" />
         </div>
-    </form>
-</body>
-</html>
+</asp:Content>
+
+

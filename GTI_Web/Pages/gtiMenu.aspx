@@ -1,30 +1,35 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="gtiMenu.aspx.cs" Inherits="UIWeb.gtiMenu" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="gtiMenu.aspx.cs" Inherits="UIWeb.gtiMenu" MasterPageFile="~/Pages/default.Master" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" ContentPlaceHolderID="MenuContentPlaceHolder" runat="server">
+    <link href="../css/gti.css" rel="stylesheet" />
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div style="color: #3a8dcc;">
-    
-            <asp:Label ID="Label3" runat="server" ForeColor="#000066" Text="Sistema Tributário Municipal"></asp:Label>
-            &nbsp;<br />
+
+        <div id="content" style="width: 600px">
+            <h3>Serviços disponíveis</h3>
             <br />
-        <asp:Label ID="Label1" runat="server" ForeColor="#CC0000" Text="Selecione o serviço desejado:" Font-Underline="True"></asp:Label>
             <br />
-        <br />
-            <asp:RadioButtonList ID="optList" runat="server">
-                <asp:ListItem selected="True">Consulta e atualização de boletos vencidos para pagamento</asp:ListItem>
-                <asp:ListItem>Emissão de 2ª via do carnê de IPTU (2018)</asp:ListItem>
-                <asp:ListItem>Emissão de 2ª via da Contribuição de Iluminação Pública (CIP) (2018)</asp:ListItem>
-                <asp:ListItem>Imprimir os detalhes de um boleto</asp:ListItem>
-            </asp:RadioButtonList>
-            <br />
-            <asp:Button ID="btOK" runat="server" OnClick="btOK_Click" Text="Continuar" />
+           
+            <ul>
+                <li><a href="gtiMenu2.aspx" style="width: 600px">Consulta e atualização de boletos vencidos para pagamento</a></li>
+                <li><a href="SegundaViaIPTU.aspx" style="width: 600px">Emissão de 2ª via do carnê de IPTU (2018)</a></li>
+                <li><a href="SegundaViaCIP.aspx" style="width: 600px">Emissão de 2ª via da Contribuição de Iluminação Pública (CIP) (2018)</a></li>
+                <li><a href="cip.aspx" style="width: 600px">Consultar endereço da Contribuição de Iluminação Pública (CIP) (2018)</a></li>
+                <li><a href="detalhe_boleto.aspx" style="width: 600px">Imprimir os detalhes de um boleto</a></li>
+                <li><a href="dadosEmpresa.aspx" style="width: 600px">Consultar dados cadastrais de uma empresa</a></li>
+                <li><a href="../Deca/DECANOVO.pdf" style="width: 600px">Download da Declaração Cadastral (DECA)</a></li>
+                <li><a href="readVRExml.aspx" style="width: 600px">Importação de arquivos Via Rápida Empresa (VRE)</a></li>
+                <li><a href="alvara_vre.aspx" style="width: 600px">Alvará Via Rápida Empresa (VRE)</a></li>
+            </ul>
         </div>
-    </form>
-</body>
-</html>
+
+
+
+
+
+
+
+
+
+</asp:Content>
+
+

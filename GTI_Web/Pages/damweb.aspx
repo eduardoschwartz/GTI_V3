@@ -1,13 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="damweb.aspx.cs" Inherits="UIWeb.Pages.damweb" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="damweb.aspx.cs" Inherits="UIWeb.Pages.damweb" MasterPageFile="~/Pages/default.Master" %>
 
-
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-
-<head runat="server">
-    <title></title>
+<asp:Content ID="Content" ContentPlaceHolderID="MenuContentPlaceHolder" runat="server">
+    <link href="../css/gti.css" rel="stylesheet" />
     <script>
 
         function formata(campo, mask, evt) {
@@ -44,74 +38,82 @@
 
 
     <style type="text/css">
-        .auto-style1 {
-            width: 300px;
-        }
-
-        .auto-style2 {
-            width: 217px;
-        }
-
-        #form1 {
-            height: 641px;
-        }
+        
+      
         .auto-style3 {
             color: blue;
         }
+        .auto-style7 {
+            font-size: 8pt;
+            font: 400 10px/1.5 Arial,Verdana, sans-serif, Helvetica;
+            color: #3a8dcc;
+            width: 800px;
+           height:400px;
+            overflow: auto;
+        }
+        .auto-style8 {
+            width: 800px;
+        }
+        .auto-style9 {
+            float: right;
+            width: 239px;
+        }
+        .auto-style10 {
+            height: 64px;
+        }
+        .auto-style11 {
+            width: 115px;
+        }
     </style>
 
-</head>
-
-<body style="height: 643px; font-family:Tahoma; font-size:11px;">
-    <form id="form1" runat="server">
         <div style="color: #3a8dcc;">
             <asp:ScriptManager ID="ScriptManager1" runat="server">
             </asp:ScriptManager>
-            <asp:Label ID="Label3" runat="server" ForeColor="#000066" Text="Sistema Tributário Municipal"></asp:Label>
+            <br />
             &nbsp;<br />
-            Consulta de débitos em aberto<br />
+            Consulta e atualização de débitos não pagos<br />
             Emissão de Documento de Arrecadação Municipal (D.A.M.)<br />
             <br />
-            <asp:Panel ID="Panel2" runat="server" ForeColor="Black" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" Width="675px">
+            <asp:Panel ID="Panel2" runat="server" ForeColor="Black" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" Width="675px"  >
                 <table style="width: 100%;">
                     <tr>
-                        <td class="auto-style1">
+                        <td class="panel">
                             <asp:RadioButtonList ID="optList" runat="server" AutoPostBack="True" OnSelectedIndexChanged="optList_SelectedIndexChanged" RepeatDirection="Horizontal">
                                 <asp:ListItem Selected="True" Value="1">Imóvel</asp:ListItem>
                                 <asp:ListItem Value="2">Empresa</asp:ListItem>
                                 <asp:ListItem Value="3">Contribuintes</asp:ListItem>
                             </asp:RadioButtonList>
                         </td>
-                        <td>
+                        <td class="panel">
                             <asp:Label ID="lblNome" runat="server" Text="Label"></asp:Label>
                         </td>
                     </tr>
                     <tr>
-                        <td class="auto-style1">
-                            &nbsp;</td>
-                        <td>
+                        <td class="panel">
+                            </td>
+                        <td class="panel">
                             <asp:Label ID="lblEndereco" runat="server" Text="Label"></asp:Label>
                         </td>
                     </tr>
                     <tr>
-                        <td class="auto-style1">&nbsp;&nbsp;
+                        <td class="panel">&nbsp;&nbsp;
                             <asp:Label ID="lblCod" runat="server" Text="Código do imóvel..:"></asp:Label>
                             &nbsp;
                             <asp:TextBox ID="txtCod" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="6" Width="70px" OnTextChanged="txtCod_TextChanged"></asp:TextBox>
                             &nbsp; (Sem dígito)</td>
-                        <td>
+                        <td class="panel">
                             <asp:Label ID="lblDoc" runat="server" Text="Label"></asp:Label>
                         </td>
                     </tr>
-                    <tr><td>&nbsp;
+                    <tr><td class="panel">&nbsp;
                         <asp:RadioButton ID="optCPF" runat="server" AutoPostBack="True" Checked="True" GroupName="optDoc" OnCheckedChanged="optCPF_CheckedChanged" Text="CPF" />
                         &nbsp;&nbsp;
                         <asp:RadioButton ID="optCNPJ" runat="server" AutoPostBack="True" GroupName="optDoc" OnCheckedChanged="optCNPJ_CheckedChanged" Text="CNPJ" />
                         </td><td>
-                            <asp:Label ID="lblmsg" runat="server" Font-Bold="True" ForeColor="Red" Text=""></asp:Label>
+                            <asp:Label ID="lblmsg" runat="server" Font-Bold="False" ForeColor="Red"></asp:Label>
                         </td></tr>
                     <tr>
-                        <td>&nbsp;&nbsp;
+                        <td class="panel">&nbsp;&nbsp;
                          <asp:Label ID="Label1" runat="server" Text="CPF/CNPJ:"></asp:Label>
                             &nbsp;
                         &nbsp;
@@ -119,36 +121,38 @@
                             
                             <asp:TextBox ID="txtCNPJ" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="18" onKeyPress="return formata(this, '§§.§§§.§§§/§§§§-§§', event)" TabIndex="1" Visible="False" Width="166px"></asp:TextBox>
                         </td>
-                        <td>&nbsp;&nbsp;
+                        <td class="panel">&nbsp;&nbsp;
                          <asp:Label ID="Label2" runat="server" Text="Data de Vencimento:"></asp:Label>
                             &nbsp;
                         &nbsp;
-                            <asp:Label ID="lblVenctoDam" runat="server" Text="Label" CssClass="auto-style3"></asp:Label>
+                            <asp:Label ID="lblVenctoDam" runat="server" Text="Label" CssClass="auto-style3" ForeColor="#990000"></asp:Label>
                         </td>
                     </tr>
                 </table>
-                <br />
+              
                 <table border="0">
                     <tr>
-                        <td>
-                            <img height="30" alt="" src="Turing.aspx" width="80" />
+                        <td class="auto-style11" >
+                            <img height="30" alt="" src="Turing.aspx" width="80"  />
                         </td>
-                        <td class="auto-style2">&nbsp;Digite o conteúdo da imagem
+                        <td class="panel">&nbsp;Digite o conteúdo da imagem
                             <br />
                             <asp:TextBox ID="txtimgcode" runat="server" OnClick="btConsultar_Click" ViewStateMode="Disabled" Width="147px" TabIndex="3"></asp:TextBox>
                             &nbsp;<asp:ImageButton ID="btConsultar" runat="server" ImageAlign="AbsBottom" ImageUrl="~/Images/icon_24_buscar_on.png" OnClick="btConsultar_Click" ToolTip="Pesquisar débitos em aberto" TabIndex="4" />
                         </td>
                         <td>
-                            <asp:Button ID="btSelectAll" runat="server" OnClick="btSelectAll_Click" Text="Selecionar todos" Width="120px" TabIndex="5" />
-                            <br />
-                            <asp:Button ID="btSelectNone" runat="server" OnClick="btSelectNone_Click" Text="Desmarcar todos" Width="120px" TabIndex="6" />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                           
+                            <asp:Button ID="btSelectAll" runat="server" OnClick="btSelectAll_Click" Text="Selecionar todos" class="button1" />
+                            &nbsp;&nbsp;
+                            <asp:Button ID="btSelectNone" runat="server" class="button1" OnClick="btSelectNone_Click" Text="Desmarcar todos" />
                         </td>
                     </tr>
                 </table>
             </asp:Panel>
-            <br />
-            <div style="color: #3a8dcc; width: 675px; height: 373px; overflow: auto;">
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+           
+            <div class="auto-style7" style="color: #3a8dcc; " >
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server" >
                     <ContentTemplate>
                         <asp:GridView ID="grdMain" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" HeaderStyle-BackColor="#3AC0F2" Width="990px" HeaderStyle-ForeColor="White" TabIndex="7">
                             <Columns>
@@ -157,55 +161,56 @@
                                         <asp:CheckBox ID="chkRow" runat="server" AutoPostBack="True" OnCheckedChanged="chkRow_CheckedChanged" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="Exercicio" HeaderStyle-HorizontalAlign="Center" HeaderText="Ano" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="40" >
-                                    <HeaderStyle HorizontalAlign="Center" />
+                                <asp:BoundField DataField="Exercicio" HeaderStyle-HorizontalAlign="Center" HeaderText="Ano" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="40" ItemStyle-ForeColor="#3A8DCC" ItemStyle-Font-Names="Arial" ItemStyle-Font-Size="X-Small" >
+                                    <HeaderStyle HorizontalAlign="Center" Font-Size="Small" Font-Bold="false"/>
                                     <ItemStyle Width="60px" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="Lancamento" HeaderText="Lancamento" ItemStyle-Width="150" HtmlEncode="false">
+                                <asp:BoundField DataField="Lancamento" HeaderText="Lancamento" ItemStyle-Width="150" HtmlEncode="false" ItemStyle-HorizontalAlign="Left"  ItemStyle-ForeColor="#3A8DCC" ItemStyle-Font-Names="Arial" ItemStyle-Font-Size="X-Small">
+                                    <HeaderStyle HorizontalAlign="Left" Font-Size="Small" Font-Bold="false" />
                                     <ItemStyle Width="250px" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="Sequencia" HeaderStyle-HorizontalAlign="Center" HeaderText="Seq" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="30">
-                                    <HeaderStyle HorizontalAlign="Center" />
+                                <asp:BoundField DataField="Sequencia" HeaderStyle-HorizontalAlign="Center" HeaderText="Seq" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="30"  ItemStyle-ForeColor="#3A8DCC" ItemStyle-Font-Names="Arial" ItemStyle-Font-Size="X-Small">
+                                    <HeaderStyle HorizontalAlign="Center" Font-Size="Small" Font-Bold="false"/>
                                     <ItemStyle Width="40px" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="Parcela" HeaderStyle-HorizontalAlign="Center" HeaderText="Parc" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="30">
-                                    <HeaderStyle HorizontalAlign="Center" />
+                                <asp:BoundField DataField="Parcela" HeaderStyle-HorizontalAlign="Center" HeaderText="Parc" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="30"  ItemStyle-ForeColor="#3A8DCC" ItemStyle-Font-Names="Arial" ItemStyle-Font-Size="X-Small">
+                                    <HeaderStyle HorizontalAlign="Center" Font-Size="Small" Font-Bold="false"/>
                                     <ItemStyle Width="40px" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="Complemento" HeaderStyle-HorizontalAlign="Center" HeaderText="Cpl" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="30">
-                                    <HeaderStyle HorizontalAlign="Center" />
+                                <asp:BoundField DataField="Complemento" HeaderStyle-HorizontalAlign="Center" HeaderText="Cpl" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="30" ItemStyle-ForeColor="#3A8DCC" ItemStyle-Font-Names="Arial" ItemStyle-Font-Size="X-Small">
+                                    <HeaderStyle HorizontalAlign="Center" Font-Size="Small" Font-Bold="false"/>
                                     <ItemStyle Width="40px" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="DtVencimento" HeaderStyle-HorizontalAlign="Center" HeaderText="Dt.Vencto" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="70">
-                                    <HeaderStyle HorizontalAlign="Center" />
+                                <asp:BoundField DataField="DtVencimento" HeaderStyle-HorizontalAlign="Center" HeaderText="Dt.Vencto" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="70" ItemStyle-ForeColor="#3A8DCC" ItemStyle-Font-Names="Arial" ItemStyle-Font-Size="X-Small">
+                                    <HeaderStyle HorizontalAlign="Center" Font-Size="Small" Font-Bold="false"/>
                                     <ItemStyle Width="70px" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="VlPrincipal" HeaderStyle-HorizontalAlign="Right" HeaderText="Principal" ItemStyle-HorizontalAlign="Right" ItemStyle-Width="70">
-                                    <HeaderStyle HorizontalAlign="Right" />
+                                <asp:BoundField DataField="VlPrincipal" HeaderStyle-HorizontalAlign="Right" HeaderText="Principal" ItemStyle-HorizontalAlign="Right" ItemStyle-Width="70" ItemStyle-ForeColor="#3A8DCC" ItemStyle-Font-Names="Arial" ItemStyle-Font-Size="X-Small">
+                                    <HeaderStyle HorizontalAlign="Right" Font-Size="Small" Font-Bold="false"/>
                                     <ItemStyle Width="70px" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="VlJuros" HeaderStyle-HorizontalAlign="Right" HeaderText="Juros" ItemStyle-HorizontalAlign="Right" ItemStyle-Width="70">
-                                    <HeaderStyle HorizontalAlign="Right" />
+                                <asp:BoundField DataField="VlJuros" HeaderStyle-HorizontalAlign="Right" HeaderText="Juros" ItemStyle-HorizontalAlign="Right" ItemStyle-Width="70" ItemStyle-ForeColor="#3A8DCC" ItemStyle-Font-Names="Arial" ItemStyle-Font-Size="X-Small">
+                                    <HeaderStyle HorizontalAlign="Right" Font-Size="Small" Font-Bold="false"/>
                                     <ItemStyle Width="70px" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="VlMulta" HeaderStyle-HorizontalAlign="Right" HeaderText="Multa" ItemStyle-HorizontalAlign="Right" ItemStyle-Width="70">
-                                    <HeaderStyle HorizontalAlign="Right" />
+                                <asp:BoundField DataField="VlMulta" HeaderStyle-HorizontalAlign="Right" HeaderText="Multa" ItemStyle-HorizontalAlign="Right" ItemStyle-Width="70" ItemStyle-ForeColor="#3A8DCC" ItemStyle-Font-Names="Arial" ItemStyle-Font-Size="X-Small">
+                                    <HeaderStyle HorizontalAlign="Right" Font-Size="Small" Font-Bold="false"/>
                                     <ItemStyle Width="70px" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="VlCorrecao" HeaderStyle-HorizontalAlign="Right" HeaderText="Correção" ItemStyle-HorizontalAlign="Right" ItemStyle-Width="70">
-                                    <HeaderStyle HorizontalAlign="Right" />
+                                <asp:BoundField DataField="VlCorrecao" HeaderStyle-HorizontalAlign="Right" HeaderText="Correção" ItemStyle-HorizontalAlign="Right" ItemStyle-Width="70" ItemStyle-ForeColor="#3A8DCC" ItemStyle-Font-Names="Arial" ItemStyle-Font-Size="X-Small">
+                                    <HeaderStyle HorizontalAlign="Right" Font-Size="Small" Font-Bold="false"/>
                                     <ItemStyle Width="70px" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="VlTotal" HeaderStyle-HorizontalAlign="Right" HeaderText="Total" ItemStyle-HorizontalAlign="Right" ItemStyle-Width="70">
-                                    <HeaderStyle HorizontalAlign="Right" />
+                                <asp:BoundField DataField="VlTotal" HeaderStyle-HorizontalAlign="Right" HeaderText="Total" ItemStyle-HorizontalAlign="Right" ItemStyle-Width="70" ItemStyle-ForeColor="#3A8DCC" ItemStyle-Font-Names="Arial" ItemStyle-Font-Size="X-Small">
+                                    <HeaderStyle HorizontalAlign="Right" Font-Size="Small" Font-Bold="false"/>
                                     <ItemStyle Width="70px" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="DtAjuiza" HeaderStyle-HorizontalAlign="Center" HeaderText="Ajuizado" ItemStyle-HorizontalAlign="Center" >
-                                    <HeaderStyle HorizontalAlign="Right" />
+                                <asp:BoundField DataField="DtAjuiza" HeaderStyle-HorizontalAlign="Center" HeaderText="Ajuizado" ItemStyle-HorizontalAlign="Center"  ItemStyle-ForeColor="#3A8DCC" ItemStyle-Font-Names="Arial" ItemStyle-Font-Size="X-Small" >
+                                    <HeaderStyle HorizontalAlign="Right" Font-Size="Small" Font-Bold="false"/>
                                     <ItemStyle Width="70px" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="Protesto" HeaderStyle-HorizontalAlign="Center" HeaderText="Protesto" ItemStyle-HorizontalAlign="Center" >
-                                    <HeaderStyle HorizontalAlign="Right" />
+                                <asp:BoundField DataField="Protesto" HeaderStyle-HorizontalAlign="Center" HeaderText="Protesto" ItemStyle-HorizontalAlign="Center"  ItemStyle-ForeColor="#3A8DCC" ItemStyle-Font-Names="Arial" ItemStyle-Font-Size="X-Small">
+                                    <HeaderStyle HorizontalAlign="Right" Font-Size="Small" Font-Bold="false"/>
                                     <ItemStyle Width="70px" />
                                 </asp:BoundField>
                                 
@@ -225,14 +230,14 @@
 
             </div>
         </div>
-        <br />
-        <div style="width: 675px">
+      
+        <div class="auto-style8">
             <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                 <ContentTemplate>
-                    <asp:Panel ID="pnlTotal" runat="server" BackColor="#006699" BorderStyle="Solid" BorderWidth="1px" ForeColor="White" Height="93px" Width="100%">
-                        <asp:Table ID="TableTotal" runat="server" CellPadding="5" HorizontalAlign="Right" Height="85px" Width="680px">
-                            <asp:TableHeaderRow ID="TableHeaderRow1" runat="server" ForeColor="#FFCC66" Font-Bold="True">
-                                <asp:TableHeaderCell Width="225px"></asp:TableHeaderCell>
+                    <asp:Panel ID="pnlTotal" runat="server" BackColor="#006699" BorderStyle="Solid" BorderWidth="1px" ForeColor="White" Height="93px" Width="801px">
+                        <asp:Table ID="TableTotal" runat="server" CellPadding="5" HorizontalAlign="Right" Height="85px" Width="600px">
+                            <asp:TableHeaderRow ID="TableHeaderRow1" runat="server" ForeColor="#FFCC66" Font-Bold="True" Font-Size="X-Small">
+                                <asp:TableHeaderCell Width="600px"></asp:TableHeaderCell>
                                 <asp:TableHeaderCell HorizontalAlign="Right" Width="70px"></asp:TableHeaderCell>
                                 <asp:TableHeaderCell HorizontalAlign="Right" Width="70px" Font-Bold="False" Font-Underline="True">Principal</asp:TableHeaderCell>
                                 <asp:TableHeaderCell HorizontalAlign="Right" Width="70px" Font-Bold="False" Font-Underline="True">Juros</asp:TableHeaderCell>
@@ -240,8 +245,8 @@
                                 <asp:TableHeaderCell HorizontalAlign="Right" Width="70px" Font-Bold="False" Font-Underline="True">Correção</asp:TableHeaderCell>
                                 <asp:TableHeaderCell HorizontalAlign="Right" Width="70px" Font-Bold="False" Font-Underline="True">Total</asp:TableHeaderCell>
                             </asp:TableHeaderRow>
-                            <asp:TableRow ID="TableRow1" runat="server" ForeColor="White">
-                                <asp:TableCell Width="225px"></asp:TableCell>
+                            <asp:TableRow ID="TableRow1" runat="server" ForeColor="White" Font-Size="X-Small">
+                                <asp:TableCell Width="600px"></asp:TableCell>
                                 <asp:TableCell ID="Descricao" runat="server" HorizontalAlign="Right" Width="150px">Total Devido:</asp:TableCell>
                                 <asp:TableCell ID="Principal" runat="server" HorizontalAlign="Right" Width="70px">0,00</asp:TableCell>
                                 <asp:TableCell ID="Juros" runat="server" HorizontalAlign="Right" Width="70px">0,00</asp:TableCell>
@@ -249,8 +254,8 @@
                                 <asp:TableCell ID="Correcao" runat="server" HorizontalAlign="Right" Width="70px">0,00</asp:TableCell>
                                 <asp:TableCell ID="Total" runat="server" HorizontalAlign="Right" Width="70px">0,00</asp:TableCell>
                             </asp:TableRow>
-                            <asp:TableRow ID="TableRow2" runat="server" ForeColor="Yellow">
-                                <asp:TableCell Width="225px"></asp:TableCell>
+                            <asp:TableRow ID="TableRow2" runat="server" ForeColor="Yellow" Font-Size="X-Small">
+                                <asp:TableCell Width="600px"></asp:TableCell>
                                 <asp:TableCell ID="TableCell1" runat="server" HorizontalAlign="Right" Width="150px">Total Selecionado:</asp:TableCell>
                                 <asp:TableCell ID="Principal2" runat="server" HorizontalAlign="Right" Width="70px">0,00</asp:TableCell>
                                 <asp:TableCell ID="Juros2" runat="server" HorizontalAlign="Right" Width="70px">0,00</asp:TableCell>
@@ -268,11 +273,11 @@
                 </ContentTemplate>
             </asp:UpdatePanel>
 
-            <div style="float: right;">
+            <div class="auto-style9">
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                     <ContentTemplate>
-                        <asp:Panel ID="Pnlresumo" runat="server" BorderStyle="Solid" BorderWidth="1px" ForeColor="White" HorizontalAlign="Center">
-                            <asp:Table ID="TableResumo" runat="server" CellPadding="5" HorizontalAlign="Right" Height="65px" BackColor="SandyBrown">
+                        <asp:Panel ID="Pnlresumo" runat="server" BorderStyle="Solid" BorderWidth="1px" ForeColor="White" HorizontalAlign="Center" Height="57px">
+                            <asp:Table ID="TableResumo" runat="server" CellPadding="5" HorizontalAlign="Right" Height="53px" BackColor="SandyBrown">
                                 
                                 <asp:TableRow ID="RowTot" runat="server" ForeColor="Black">
                                     <asp:TableCell ID="TableCell12" runat="server" HorizontalAlign="Right" Width="150px">Total da Guia</asp:TableCell>
@@ -294,17 +299,14 @@
                 </asp:UpdatePanel>
             </div>
 
-            <div>
-                <asp:Label ID="lblMsg2" runat="server" ForeColor="Maroon" Text="lblMsg2"></asp:Label>
+            <div class="auto-style10">
+                <asp:Label ID="lblMsg2" runat="server" ForeColor="#CC0000" Text="lblMsg2"></asp:Label>
                 <br />
                 <br />
-                <asp:Button ID="btPrint" runat="server" align="left" colspan="2" OnClick="btPrint_Click" Text="Emissão de Guia" Width="150px" TabIndex="8" />
+                <asp:Button ID="btPrint" runat="server" align="left" colspan="2" OnClick="btPrint_Click" Text="Emissão de Guia" class="button" />
             </div>
         </div>
 
-        <br />
-        <br />
+      
 
-    </form>
-</body>
-</html>
+</asp:Content>

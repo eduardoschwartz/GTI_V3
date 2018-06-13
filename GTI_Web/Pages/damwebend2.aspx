@@ -1,18 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="damwebend2.aspx.cs" Inherits="UIWeb.Pages.damwebend2" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="damwebend2.aspx.cs" Inherits="UIWeb.Pages.damwebend2" MasterPageFile="~/Pages/default.Master"    %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content" ContentPlaceHolderID="MenuContentPlaceHolder" runat="server" >
+    <link href="../css/gti.css" rel="stylesheet" />
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-    <style type="text/css">
-        .auto-style1 {
-            text-align: left;
-        }
-    </style>
-    </head>
-<body style="height: 643px; font-family: Tahoma; font-size: 11px;">
-    <form id="pagamento" runat="server" action="https://mpag.bb.com.br/site/mpag/" method="post" name="pagamento">
+    <%--<form id="pagamento" runat="server" action="https://mpag.bb.com.br/site/mpag/" method="post" name="pagamento">--%>
         <div class="auto-style1">
         <input type="hidden" name="msgLoja" value="<%= "RECEBER SOMENTE ATE O VENCIMENTO, APOS ATUALIZAR O BOLETO NO SITE www.jaboticabal.sp.gov.br" %>" />
         <input type="hidden" name="cep" value="<%= Convert.ToInt32(RetornaNumero( txtCep.Text)) %>" />
@@ -35,10 +26,12 @@
         <input type="hidden" name="idConv" value="<%= 317203 %>" />
 
 
-        <asp:Label ID="Label10" runat="server" ForeColor="#000066" Text="Sistema Tributário Municipal"></asp:Label>
+       <div style="color: #3a8dcc;">
             &nbsp;<br />
-            Consulta de débitos em aberto<br />
-            Emissão de Documento de Arrecadação Municipal (D.A.M.)<br />
+           <br />
+           Clique em imprimir boleto para 
+           gerar o Boleto Bancário<br />
+           
             <br />
             <br />
 
@@ -117,20 +110,15 @@
                 </asp:TableCell>
             </asp:TableRow>
         </asp:Table>       
-               
+               </div>
         <br />
 
         
         <asp:TextBox ID="TextBox1" runat="server" BorderStyle="None"></asp:TextBox>
 
         
-        <asp:Button ID="btGerar" runat="server" Text="Imprimir Boleto" Width="169px" Height="26px" BackColor="#000066" Font-Bold="True" ForeColor="#FFFFCC"     />
+        <asp:Button ID="btGerar" runat="server" Text="Imprimir Boleto" class="button1"  PostBackUrl="https://mpag.bb.com.br/site/mpag/"   />
         &nbsp;&nbsp;&nbsp;
         </div>
-        </form>
-    
-</body>
-
-    
-
-</html>
+       
+</asp:Content>

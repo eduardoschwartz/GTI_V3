@@ -7,27 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UIWeb.Pages {
+namespace GTI_Web.Pages {
     
     
-    public partial class envioDeca {
+    public partial class _default {
         
         /// <summary>
-        /// txtAcesso control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAcesso;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// btAcesso control.
+        /// MenuContentPlaceHolder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btAcesso;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder MenuContentPlaceHolder;
     }
 }

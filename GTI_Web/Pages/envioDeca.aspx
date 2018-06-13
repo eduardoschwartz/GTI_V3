@@ -1,17 +1,13 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="envioDeca.aspx.cs" Inherits="UIWeb.Pages.envioDeca" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="envioDeca.aspx.cs" Inherits="UIWeb.Pages.envioDeca" MasterPageFile="~/Pages/default.Master" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content" ContentPlaceHolderID="MenuContentPlaceHolder" runat="server">
+    <link href="../css/gti.css" rel="stylesheet" />
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
+
+
     <div>
     <br />
-            <a href="../Deca/DECANOVO.pdf" >Download da Declaração Cadastral - DECA</a>
-        <br />
+            
         <br />
         <br />
         Acesso VRE:
@@ -21,6 +17,5 @@
             <br />
         <br />
     </div>
-    </form>
-</body>
-</html>
+   
+    </asp:Content>

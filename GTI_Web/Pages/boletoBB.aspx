@@ -1,20 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="boletoBB.aspx.cs" Inherits="UIWeb.Pages.boletoBB" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="boletoBB.aspx.cs" Inherits="UIWeb.Pages.boletoBB" MasterPageFile="~/Pages/default.Master" %>
 
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
+<asp:Content ID="Content" ContentPlaceHolderID="MenuContentPlaceHolder" runat="server">
+    <link href="../css/gti.css" rel="stylesheet" />
 
-<script>
-
-</script>
-  
-
-</head>
-<body>
-
-    <form id="pagamento" runat="server" action="https://mpag.bb.com.br/site/mpag/" method="post" name="pagamento">
+    <br />
+    <br />
         <input type="hidden" name="msgLoja" value="<%= "RECEBER SOMENTE ATE O VENCIMENTO, APOS ATUALIZAR O BOLETO NO SITE www.jaboticabal.sp.gov.br" %>" />
         <input type="hidden" name="cep" value="<%= Convert.ToInt32( Regex.Replace(txtCep.Text, "[^0-9]", "")) %>" />
         <input type="hidden" name="uf" value="<%= txtUF.Text %>" />
@@ -116,8 +107,6 @@
         
         <asp:TextBox ID="TextBox1" runat="server" BorderStyle="None"></asp:TextBox>
 
-         <asp:Button ID="btGerar" runat="server" Text="Imprimir Boleto" Width="169px" Height="26px" BackColor="#000066" Font-Bold="True" ForeColor="#FFFFCC"    />
+         <asp:Button ID="btGerar" runat="server" Text="Imprimir Boleto" class="button"    />
 
-    &nbsp;</form>
-</body>
-</html>
+</asp:Content>
