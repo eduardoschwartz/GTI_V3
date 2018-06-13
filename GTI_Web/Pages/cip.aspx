@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="wait.aspx.cs" Inherits="GTI_Web.Pages.wait" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="cip.aspx.cs" Inherits="GTI_Web.Pages.cip" %>
 
 <!DOCTYPE html>
 
@@ -9,10 +9,6 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <br />
-            <br />
-            Página em manutenção....
-            
         </div>
     </form>
 </body>

@@ -80,5 +80,9 @@ namespace UIWeb.Pages {
         protected void btResumo_Unload(object sender, EventArgs e) {
             
         }
+
+        protected void btGerar_Click(object sender, EventArgs e) {
+
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using GTI_Models.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -235,11 +236,10 @@ namespace GTI_Dal.Classes {
                 var prmDtA = new SqlParameter { ParameterName = "@DataNow", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Data_Atualizacao == null ? DateTime.Now : Data_Atualizacao };
                 var prmUser = new SqlParameter { ParameterName = "@Usuario", SqlDbType = SqlDbType.VarChar, SqlValue = Usuario };
 
-                var result = db.SpExtrato.SqlQuery("spEXTRATONEW @CodReduz1, @CodReduz2, @AnoExercicio1 ,@AnoExercicio2 ,@CodLancamento1 ,@CodLancamento2, @SeqLancamento1 ,@SeqLancamento2, @NumParcela1, @NumParcela2, @CodComplemento1, @CodComplemento2, @Status1, @Status2, @DataNow, @Usuario ",
+                var result = db.SpExtrato.SqlQuery("EXEC spEXTRATONEW @CodReduz1, @CodReduz2, @AnoExercicio1 ,@AnoExercicio2 ,@CodLancamento1 ,@CodLancamento2, @SeqLancamento1 ,@SeqLancamento2, @NumParcela1, @NumParcela2, @CodComplemento1, @CodComplemento2, @Status1, @Status2, @DataNow, @Usuario ",
                     prmCod1, prmCod2, prmAno1, prmAno2, prmLanc1, prmLanc2, prmSeq1, prmSeq2, prmPc1, prmPc2, prmCp1, prmCp2, prmSta1, prmSta2, prmDtA, prmUser).ToList();
 
                 List<SpExtrato> ListaDebito = new List<SpExtrato>();
-
                 foreach (SpExtrato item in result) {
                     SpExtrato reg = new SpExtrato {
                         Anoexercicio = item.Anoexercicio,
@@ -256,7 +256,7 @@ namespace GTI_Dal.Classes {
                         Certidao = item.Certidao,
                         Numlivro = item.Numlivro,
                         Pagina = item.Pagina,
-                        Numdocumento=item.Numdocumento,
+                        Numdocumento = item.Numdocumento,
                         Dataajuiza = item.Dataajuiza,
                         Valortributo = item.Valortributo,
                         Valormulta = item.Valormulta,
@@ -278,6 +278,7 @@ namespace GTI_Dal.Classes {
                 }
                 return ListaDebito;
             }
+
         }
 
         public List<SpExtrato> Lista_Extrato_Parcela(List<SpExtrato> Lista_Tributo) {

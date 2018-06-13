@@ -107,6 +107,6 @@
         
         <asp:TextBox ID="TextBox1" runat="server" BorderStyle="None"></asp:TextBox>
 
-         <asp:Button ID="btGerar" runat="server" Text="Imprimir Boleto" class="button"    />
+         <asp:Button ID="btGerar" runat="server" Text="Imprimir Boleto" class="button" OnClick="btGerar_Click" PostBackUrl="https://mpag.bb.com.br/site/mpag/"   />
 
 </asp:Content>

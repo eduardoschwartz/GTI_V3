@@ -10,7 +10,7 @@
 namespace GTI_Web.Pages {
 
 
-    public partial class wait {
+    public partial class cip {
 
         /// <summary>
         /// form1 control.

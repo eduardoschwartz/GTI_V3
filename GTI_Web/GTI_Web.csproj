@@ -109,8 +109,10 @@
     <Content Include="PageDeca.aspx" />
     <Content Include="Pages\alvara_vre.aspx" />
     <Content Include="Pages\boletoBB.aspx" />
+    <Content Include="Pages\cip.aspx" />
     <Content Include="Pages\cipendereco.aspx" />
-    <Content Include="Pages\dadosEmpresa.aspx" />
+    <Content Include="Pages\dadosempresa.aspx" />
+    <Content Include="Pages\dadosEmpresa2.aspx" />
     <Content Include="Pages\damweb.aspx" />
     <Content Include="Pages\damwebend2.aspx" />
     <Content Include="Pages\detalhe_boleto.aspx" />
@@ -122,8 +124,8 @@
     <Content Include="Pages\SegundaViaCIPFim.aspx" />
     <Content Include="Pages\SegundaViaIPTU.aspx" />
     <Content Include="Pages\SegundaViaIPTUFim.aspx" />
-    <Content Include="Pages\wait.aspx" />
     <Content Include="Pages\Turing.aspx" />
+    <Content Include="Pages\wait.aspx" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -197,6 +199,13 @@
     <Compile Include="Pages\boletoBB.aspx.designer.cs">
       <DependentUpon>boletoBB.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\cip.aspx.cs">
+      <DependentUpon>cip.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\cip.aspx.designer.cs">
+      <DependentUpon>cip.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\cipendereco.aspx.cs">
       <DependentUpon>cipendereco.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -204,12 +213,19 @@
     <Compile Include="Pages\cipendereco.aspx.designer.cs">
       <DependentUpon>cipendereco.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\dadosEmpresa.aspx.cs">
-      <DependentUpon>dadosEmpresa.aspx</DependentUpon>
+    <Compile Include="Pages\dadosempresa.aspx.cs">
+      <DependentUpon>dadosempresa.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\dadosEmpresa.aspx.designer.cs">
-      <DependentUpon>dadosEmpresa.aspx</DependentUpon>
+    <Compile Include="Pages\dadosempresa.aspx.designer.cs">
+      <DependentUpon>dadosempresa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\dadosEmpresa2.aspx.cs">
+      <DependentUpon>dadosEmpresa2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\dadosEmpresa2.aspx.designer.cs">
+      <DependentUpon>dadosEmpresa2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\damweb.aspx.cs">
       <DependentUpon>damweb.aspx</DependentUpon>
@@ -295,19 +311,19 @@
     <Compile Include="Pages\SegundaViaIPTUFim.aspx.designer.cs">
       <DependentUpon>SegundaViaIPTUFim.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\wait.aspx.cs">
-      <DependentUpon>wait.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\wait.aspx.designer.cs">
-      <DependentUpon>wait.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Turing.aspx.cs">
       <DependentUpon>Turing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\Turing.aspx.designer.cs">
       <DependentUpon>Turing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\wait.aspx.cs">
+      <DependentUpon>wait.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\wait.aspx.designer.cs">
+      <DependentUpon>wait.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
@@ -359,6 +375,7 @@
     </Content>
     <None Include="packages.config" />
     <Content Include="Pages\default.Master" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
