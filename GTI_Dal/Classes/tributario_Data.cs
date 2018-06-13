@@ -30,10 +30,12 @@ namespace GTI_Dal.Classes {
             }
         }
 
-        public List<Tributo> Lista_Tributo() {
+        public List<Tributo> Lista_Tributo(int Codigo=0) {
             using (var db = new GTI_Context(_connection)) {
-                var Sql = from l in db.Tributo orderby l.Desctributo select l;
-                return Sql.ToList();
+                List<Tributo> Sql = (from l in db.Tributo orderby l.Desctributo select l).ToList();
+                if (Codigo > 0)
+                    Sql=Sql.Where(c => c.Codtributo == Codigo).ToList();
+                return Sql;
             }
         }
 
@@ -510,27 +512,48 @@ namespace GTI_Dal.Classes {
             }
         }
 
-        //public List<ParceladocumentoStruct> Lista_Lancamento_Documentos(Parceladocumento reg) {
-        //    using (var db = new GTI_Context(_connection)) {
-        //        var Sql = (from d in db.Numdocumento
-        //                   join p in db.Parceladocumento on d.numdocumento equals p.Numdocumento into dp1 from p in dp1.DefaultIfEmpty()
-        //                   where p.Codreduzido == reg.Codreduzido && p.Anoexercicio == reg.Anoexercicio && p.Codlancamento == reg.Codlancamento &&
-        //                   p.Seqlancamento == reg.Seqlancamento && p.Numparcela == reg.Numparcela && p.Codcomplemento == reg.Codcomplemento
-        //                   orderby d.numdocumento
-        //                   select new ParceladocumentoStruct{Documento= d.numdocumento, d.Datadocumento, d.Valorguia }).ToList();
-        //        List<Numdocumento> Lista = new List<Numdocumento>();
-        //        foreach (var item in Sql) {
-        //            Numdocumento Linha = new Numdocumento();
-        //            Linha.numdocumento = item.numdocumento;
-        //            Linha.Datadocumento = item.Datadocumento;
-        //            Linha.Valorguia = item.Valorguia;
-        //            Lista.Add(Linha);
-        //        }
-        //        return Lista;
-        //    }
-        //}
-        
-        public Exception InsertBoletoGuia(Boletoguia Reg) {
+        public List<DebitoStructure> Lista_Tabela_Parcela_Documento(int nNumdocumento) {
+            using (var db = new GTI_Context(_connection)) {
+                    var reg = (from p in db.Parceladocumento where p.Numdocumento == nNumdocumento
+                               select new { p.Codreduzido, p.Anoexercicio, p.Codlancamento, p.Seqlancamento, p.Numparcela, p.Codcomplemento });
+                    List<DebitoStructure> Lista = new List<DebitoStructure>();
+                    foreach (var query in reg) {
+                        DebitoStructure Linha = new DebitoStructure();
+                        Linha.Codigo_Reduzido = query.Codreduzido;
+                        Linha.Ano_Exercicio = query.Anoexercicio;
+                        Linha.Codigo_Lancamento = query.Codlancamento;
+                        Linha.Sequencia_Lancamento = query.Seqlancamento;
+                        Linha.Numero_Parcela = query.Numparcela;
+                        Linha.Complemento = query.Codcomplemento;
+                        Lista.Add(Linha);
+                    }
+                    return Lista;
+                }
+            }
+
+
+
+            //public List<ParceladocumentoStruct> Lista_Lancamento_Documentos(Parceladocumento reg) {
+            //    using (var db = new GTI_Context(_connection)) {
+            //        var Sql = (from d in db.Numdocumento
+            //                   join p in db.Parceladocumento on d.numdocumento equals p.Numdocumento into dp1 from p in dp1.DefaultIfEmpty()
+            //                   where p.Codreduzido == reg.Codreduzido && p.Anoexercicio == reg.Anoexercicio && p.Codlancamento == reg.Codlancamento &&
+            //                   p.Seqlancamento == reg.Seqlancamento && p.Numparcela == reg.Numparcela && p.Codcomplemento == reg.Codcomplemento
+            //                   orderby d.numdocumento
+            //                   select new ParceladocumentoStruct{Documento= d.numdocumento, d.Datadocumento, d.Valorguia }).ToList();
+            //        List<Numdocumento> Lista = new List<Numdocumento>();
+            //        foreach (var item in Sql) {
+            //            Numdocumento Linha = new Numdocumento();
+            //            Linha.numdocumento = item.numdocumento;
+            //            Linha.Datadocumento = item.Datadocumento;
+            //            Linha.Valorguia = item.Valorguia;
+            //            Lista.Add(Linha);
+            //        }
+            //        return Lista;
+            //    }
+            //}
+
+            public Exception Insert_Boleto_Guia(Boletoguia Reg) {
             using (var db = new GTI_Context(_connection)) {
                 try {
                     db.Boletoguia.Add(Reg);
@@ -674,6 +697,17 @@ namespace GTI_Dal.Classes {
             bool bRet = false;
             using (var db = new GTI_Context(_connection)) {
                 var existingReg = db.Parceladocumento.Where(a => a.Codlancamento == 79).Count(a => a.Numdocumento == nNumDocumento);
+                if (existingReg != 0) {
+                    bRet = true;
+                }
+            }
+            return bRet;
+        }
+
+        public bool Existe_Documento(int nNumDocumento) {
+            bool bRet = false;
+            using (var db = new GTI_Context(_connection)) {
+                var existingReg = db.Numdocumento.Where(a => a.numdocumento > 1).Count(a => a.numdocumento == nNumDocumento);
                 if (existingReg != 0) {
                     bRet = true;
                 }
@@ -890,6 +924,13 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Numdocumento Retorna_Dados_Documento(int nNumDocumento) {
+            Numdocumento reg;
+            using (var db = new GTI_Context(_connection)) {
+                reg = (from m in db.Numdocumento where m.numdocumento == nNumDocumento select m).FirstOrDefault();
+            }
+            return reg;
+        }
 
     }//end class
 }

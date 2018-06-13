@@ -109,7 +109,7 @@
     <Content Include="PageDeca.aspx" />
     <Content Include="Pages\alvara_vre.aspx" />
     <Content Include="Pages\boletoBB.aspx" />
-    <Content Include="Pages\cip.aspx" />
+    <Content Include="Pages\cipendereco.aspx" />
     <Content Include="Pages\dadosEmpresa.aspx" />
     <Content Include="Pages\damweb.aspx" />
     <Content Include="Pages\damwebend2.aspx" />
@@ -122,7 +122,7 @@
     <Content Include="Pages\SegundaViaCIPFim.aspx" />
     <Content Include="Pages\SegundaViaIPTU.aspx" />
     <Content Include="Pages\SegundaViaIPTUFim.aspx" />
-    <Content Include="Pages\Teste.aspx" />
+    <Content Include="Pages\wait.aspx" />
     <Content Include="Pages\Turing.aspx" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
@@ -197,12 +197,12 @@
     <Compile Include="Pages\boletoBB.aspx.designer.cs">
       <DependentUpon>boletoBB.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\cip.aspx.cs">
-      <DependentUpon>cip.aspx</DependentUpon>
+    <Compile Include="Pages\cipendereco.aspx.cs">
+      <DependentUpon>cipendereco.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\cip.aspx.designer.cs">
-      <DependentUpon>cip.aspx</DependentUpon>
+    <Compile Include="Pages\cipendereco.aspx.designer.cs">
+      <DependentUpon>cipendereco.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\dadosEmpresa.aspx.cs">
       <DependentUpon>dadosEmpresa.aspx</DependentUpon>
@@ -295,12 +295,12 @@
     <Compile Include="Pages\SegundaViaIPTUFim.aspx.designer.cs">
       <DependentUpon>SegundaViaIPTUFim.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Teste.aspx.cs">
-      <DependentUpon>Teste.aspx</DependentUpon>
+    <Compile Include="Pages\wait.aspx.cs">
+      <DependentUpon>wait.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Teste.aspx.designer.cs">
-      <DependentUpon>Teste.aspx</DependentUpon>
+    <Compile Include="Pages\wait.aspx.designer.cs">
+      <DependentUpon>wait.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Turing.aspx.cs">
       <DependentUpon>Turing.aspx</DependentUpon>
@@ -371,6 +371,7 @@
     <EmbeddedResource Include="Report\rptDadosEmpresa.rdlc" />
     <EmbeddedResource Include="Report\rptDamParcelado.rdlc" />
     <EmbeddedResource Include="Report\rptDamParceladoCIP.rdlc" />
+    <EmbeddedResource Include="Report\rptDetalheBoleto.rdlc" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

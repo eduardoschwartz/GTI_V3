@@ -40,9 +40,9 @@ namespace GTI_Bll.Classes {
 
         ///<summary> Retorna a lista dos tributos cadastrados.
         ///</summary>
-        public List<Tributo> Lista_Tributo() {
+        public List<Tributo> Lista_Tributo(int Codigo=0) {
             Tributario_Data obj = new Tributario_Data(_connection);
-            return obj.Lista_Tributo();
+            return obj.Lista_Tributo(Codigo);
         }
 
         ///<summary> Retorna a lista dos tipos de livros cadastrados.
@@ -332,13 +332,23 @@ namespace GTI_Bll.Classes {
         }
 
         /// <summary>
+        /// Lista tabela parceladocumento
+        /// </summary>
+        /// <param name="nNumdocumento"></param>
+        /// <returns></returns>
+        public List<DebitoStructure> Lista_Tabela_Parcela_Documento(int nNumdocumento) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Lista_Tabela_Parcela_Documento(nNumdocumento);
+        }
+
+        /// <summary>
         /// Insere na tabela boletoguia
         /// </summary>
         /// <param name="Reg"></param>
         /// <returns></returns>
-        public Exception InsertBoletoGuia(Boletoguia Reg) {
+        public Exception Insert_Boleto_Guia(Boletoguia Reg) {
             Tributario_Data obj = new Tributario_Data(_connection);
-            Exception ex = obj.InsertBoletoGuia(Reg);
+            Exception ex = obj.Insert_Boleto_Guia(Reg);
             return ex;
         }
 
@@ -521,6 +531,27 @@ namespace GTI_Bll.Classes {
             Exception ex = obj.Insert_Boleto_Comercio_Eletronico(Reg);
             return ex;
         }
+
+        /// <summary>
+        /// Verifica a existência de um número de documento
+        /// </summary>
+        /// <param name="nNumDocumento"></param>
+        /// <returns></returns>
+        public bool Existe_Documento(int nNumDocumento) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Existe_Documento(nNumDocumento);
+        }
+
+        /// <summary>
+        /// Retorna o cadastro de um documento
+        /// </summary>
+        /// <param name="nNumDocumento"></param>
+        /// <returns></returns>
+        public Numdocumento Retorna_Dados_Documento(int nNumDocumento) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Retorna_Dados_Documento(nNumDocumento);
+        }
+
 
     }//end class
 }

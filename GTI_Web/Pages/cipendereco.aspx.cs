@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 
 namespace UIWeb.Pages {
-    public partial class cip : System.Web.UI.Page {
+    public partial class cipendereco : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
             if (!IsPostBack) {
                 txtNumDoc.Text = "";

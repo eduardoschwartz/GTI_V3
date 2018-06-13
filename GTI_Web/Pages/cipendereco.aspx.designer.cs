@@ -10,7 +10,7 @@
 namespace UIWeb.Pages {
     
     
-    public partial class cip {
+    public partial class cipendereco {
         
         /// <summary>
         /// txtNumDoc control.

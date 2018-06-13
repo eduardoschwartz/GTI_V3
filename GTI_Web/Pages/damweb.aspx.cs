@@ -603,9 +603,9 @@ namespace UIWeb.Pages {
                         }
 
                         for (int i = 0; i < aTributos.Count; i++)
-                            DescTributo += aTributos[i].ToString("000");
+                            DescTributo += aTributos[i].ToString("000") + "-" + tributario_Class.Lista_Tributo(aTributos[i])[0].Abrevtributo + ","; ;
 
-                        //DescTributo = DescTributo.Substring(0, DescTributo.Length - 1);
+                        DescTributo = DescTributo.Substring(0, DescTributo.Length - 1);
                         reg.Descricao_Tributo = DescTributo;
                         lstExtrato.Add(reg);
                     }

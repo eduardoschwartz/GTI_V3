@@ -1,10 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="detalhe_boleto.aspx.cs" Inherits="UIWeb.Pages.detalhe_boleto" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="detalhe_boleto.aspx.cs" Inherits="UIWeb.Pages.detalhe_boleto" MasterPageFile="~/Pages/default.Master" %>
+<asp:Content ID="Content" ContentPlaceHolderID="MenuContentPlaceHolder" runat="server">
+    <link href="../css/gti.css" rel="stylesheet" />
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
     <script>
 
         function formata(campo, mask, evt) {
@@ -40,20 +37,6 @@
 
     <style type="text/css">
         
-        .auto-style2 {
-            width: 217px;
-        }
-
-        #form1 {
-            height: 641px;
-        }
-        .auto-style4 {
-            font-size: small;
-        }
-        .auto-style5 {
-            width: 217px;
-            font-size: small;
-        }
         .auto-style6 {
             color: #FF0000;
             font-size: small;
@@ -63,22 +46,20 @@
             font-size: small;
         }
     </style>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
-            <asp:Label ID="Label10" runat="server" ForeColor="#000066" Text="Sistema Tributário Municipal" CssClass="auto-style5"></asp:Label>
-            &nbsp;<br class="auto-style5" />
-            <span class="auto-style2"><span class="auto-style4">Imprimir detalhes de um boleto</span><br />
+        <div style="color: #3a8dcc;">
             <br />
-            <asp:Label ID="Label11" runat="server" Text="Digite o nº do documento..:" CssClass="auto-style4" ForeColor="#000099"></asp:Label>
+            &nbsp;<br  />
+             Imprimir detalhes de um boleto<br />
+            <br />
+            <asp:Label ID="Label11" runat="server" Text="Digite o nº do documento..:"  ></asp:Label>
             &nbsp;
             <asp:TextBox ID="txtCod" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="17" Width="232px" OnTextChanged="txtCod_TextChanged" onKeyPress="return formata(this, '§§§§§§§§§§§§§§§§§', event)" ></asp:TextBox>
             <br />
-            </span>
+            
             <br />
-                        <asp:RadioButton ID="optCPF" runat="server" AutoPostBack="True" Checked="True" GroupName="optDoc" OnCheckedChanged="optCPF_CheckedChanged" Text="CPF" CssClass="auto-style4" ForeColor="#000099" />
-                        <asp:RadioButton ID="optCNPJ" runat="server" AutoPostBack="True" GroupName="optDoc" OnCheckedChanged="optCNPJ_CheckedChanged" Text="CNPJ" CssClass="auto-style4" ForeColor="#000099" />
+                        <asp:RadioButton ID="optCPF" runat="server" AutoPostBack="True" Checked="True" GroupName="optDoc" OnCheckedChanged="optCPF_CheckedChanged" Text="CPF"  />
+                        &nbsp;
+                        <asp:RadioButton ID="optCNPJ" runat="server" AutoPostBack="True" GroupName="optDoc" OnCheckedChanged="optCNPJ_CheckedChanged" Text="CNPJ"  />
                        
                          
                             &nbsp;
@@ -88,14 +69,12 @@
                             
                             <asp:TextBox ID="txtCNPJ" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="18" onKeyPress="return formata(this, '§§.§§§.§§§/§§§§-§§', event)" TabIndex="1" Visible="False" Width="166px"></asp:TextBox>
             <br />
-            <strong><span class="auto-style7">(CPF/CNPJ conforme informado no boleto)</span><span class="auto-style6"><br />
-            </span></strong><strong>
-            <br class="auto-style6" />
-            </strong>
-            <asp:Button ID="btConsultar" runat="server" OnClick="btConsultar_Click" Text="Imprimir" />
+            <span class="auto-style7">(CPF/CNPJ conforme informado no boleto)<br />
+            </span><span class="auto-style6"><br />
+            </span>
+            <asp:Button ID="btConsultar" class="button1" runat="server" OnClick="btConsultar_Click" Text="Imprimir" />
 &nbsp;
             <asp:Label ID="lblMsg" runat="server" Text="Label" ForeColor="#CC0000"></asp:Label>
         </div>
-    </form>
-</body>
-</html>
+   
+</asp:Content>

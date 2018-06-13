@@ -119,7 +119,7 @@ namespace UIWeb {
                 string strBarra = gtiCore.Gera2of5Str(reg.Numbarra2a.Substring(0,11)+ reg.Numbarra2b.Substring(0, 11)+ reg.Numbarra2c.Substring(0, 11)+ reg.Numbarra2d.Substring(0, 11));
                 reg.Codbarra = gtiCore.Mask(strBarra);
                 
-                tributario_Class.InsertBoletoGuia(reg);
+                tributario_Class.Insert_Boleto_Guia(reg);
 
                 Segunda_via_web reg_sv = new Segunda_via_web();
                 reg_sv.Numero_documento = Convert.ToInt32(item.Numero_Documento);

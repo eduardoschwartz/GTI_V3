@@ -1,4 +1,6 @@
-﻿using Microsoft.Reporting.WebForms;
+﻿using GTI_Bll.Classes;
+using GTI_Models.Models;
+using Microsoft.Reporting.WebForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,7 +8,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using UIWeb.Models;
 
 namespace UIWeb.Pages {
     public partial class detalhe_boleto : System.Web.UI.Page {
@@ -76,26 +77,25 @@ namespace UIWeb.Pages {
                 }
             }
             int nNumDoc = Convert.ToInt32(txtCod.Text.Substring(txtCod.Text.Length - 8, 8));
-
-            clsDebito Debito_class = new clsDebito();
+            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
             int nCodigo = 0;
             DateTime dDataDoc = Convert.ToDateTime("01/01/1900");
             decimal nValorGuia = 0;
-            bool bExisteDoc = Debito_class.ExisteDocumento(nNumDoc);
+            bool bExisteDoc = tributario_Class.Existe_Documento(nNumDoc);
             if (!bExisteDoc) {
                 lblMsg.Text = "Número de documento não cadastrado.";
             } else {
                 
-                nCodigo = Debito_class.RetornaDocumentoCodigo(nNumDoc);
-                numdocumento DadosDoc = Debito_class.RetornaDadosDocumento(nNumDoc);
-                dDataDoc = Convert.ToDateTime(DadosDoc.datadocumento);
-                nValorGuia = Convert.ToDecimal( DadosDoc.valorguia);
+                nCodigo = tributario_Class.Retorna_Codigo_por_Documento(nNumDoc);
+                Numdocumento DadosDoc = tributario_Class.Retorna_Dados_Documento(nNumDoc);
+                dDataDoc = Convert.ToDateTime(DadosDoc.Datadocumento);
+                nValorGuia = Convert.ToDecimal( DadosDoc.Valorguia);
             }
 
             if (nCodigo < 100000) {
-                clsImovel imovel_class = new clsImovel();
-                ImovelStruct reg = imovel_class.LoadReg(nCodigo);
-                List<ProprietarioStruct> regProp = imovel_class.ListaProprietario(nCodigo, true);
+                Imovel_bll imovel_Class = new Imovel_bll("GTIconnection");
+                ImovelStruct reg = imovel_Class.Dados_Imovel(nCodigo);
+                List<ProprietarioStruct> regProp = imovel_Class.Lista_Proprietario(nCodigo, true);
                 if (optCPF.Checked) {
                     if (Convert.ToInt64(gtiCore.RetornaNumero(regProp[0].CPF)).ToString("00000000000") != num_cpf_cnpj) {
                         lblMsg.Text = "CPF informado não pertence a este documento.";
@@ -109,22 +109,22 @@ namespace UIWeb.Pages {
                 }
             } else {
                 if (nCodigo >= 100000 && nCodigo < 500000) {
-                    clsEmpresa empresa_class = new clsEmpresa();
-                    EmpresaStruct reg = empresa_class.LoadReg(nCodigo);
+                    Empresa_bll empresa_Class = new Empresa_bll("GTIconnection");
+                    EmpresaStruct reg = empresa_Class.Retorna_Empresa(nCodigo);
                     if (optCPF.Checked) {
-                        if (Convert.ToInt64(gtiCore.RetornaNumero(reg.cpf_cnpj)).ToString("00000000000") != num_cpf_cnpj) {
+                        if (Convert.ToInt64(gtiCore.RetornaNumero(reg.Cpf_cnpj)).ToString("00000000000") != num_cpf_cnpj) {
                             lblMsg.Text = "CPF informado não pertence a este documento.";
                             return;
                         }
                     } else {
-                        if (Convert.ToInt64(gtiCore.RetornaNumero(reg.cpf_cnpj)).ToString("00000000000000") != num_cpf_cnpj) {
+                        if (Convert.ToInt64(gtiCore.RetornaNumero(reg.Cpf_cnpj)).ToString("00000000000000") != num_cpf_cnpj) {
                             lblMsg.Text = "CNPJ informado não pertence a este documento.";
                             return;
                         }
                     }
                 } else {
-                    clsCidadao cidadao_class = new clsCidadao();
-                    CidadaoStruct reg = cidadao_class.LoadReg(nCodigo);
+                    Cidadao_bll cidadao_Class = new Cidadao_bll("GTIconnection");
+                    CidadaoStruct reg = cidadao_Class.LoadReg(nCodigo);
                     if (optCPF.Checked) {
                         if (Convert.ToInt64(gtiCore.RetornaNumero(reg.Cpf)).ToString("00000000000") != num_cpf_cnpj) {
                             lblMsg.Text = "CPF informado não pertence a este documento.";
@@ -141,36 +141,51 @@ namespace UIWeb.Pages {
             }
 
             List<DebitoStructure>ListaParcelas= Carregaparcelas(nNumDoc,dDataDoc);
-            int nSid = Debito_class.GravaDetalheDAM(ListaParcelas, txtCod.Text, dDataDoc,nValorGuia);
+            int nSid = tributario_Class.Insert_Boleto_DAM(ListaParcelas,nNumDoc, dDataDoc);
             printCarne(nSid);
         }
 
         private List<DebitoStructure> Carregaparcelas(int nNumDoc,DateTime dDataDoc) {
             int i = 0;
-            clsDebito debito_class = new clsDebito();
-            List<DebitoStructure> ListaParcelas = debito_class.ListaParcelasDocumento(nNumDoc);
+            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
+            List<DebitoStructure> ListaParcelas = tributario_Class.Lista_Tabela_Parcela_Documento(    nNumDoc);
             foreach (DebitoStructure Linha in ListaParcelas) {
-                List<DebitoStructure> reg = debito_class.Extrato(Linha.Codigo_Reduzido,(short)Linha.Ano_Exercicio,(short)Linha.Ano_Exercicio,(short)Linha.Codigo_Lancamento,(short)Linha.Codigo_Lancamento,
-                    (short)Linha.Sequencia_Lancamento,(short)Linha.Sequencia_Lancamento,(short)Linha.Numero_Parcela,(short)Linha.Numero_Parcela,Linha.Complemento,Linha.Complemento,0,99,dDataDoc,0);
+                List<SpExtrato> ListaTributo = tributario_Class.Lista_Extrato_Tributo(Linha.Codigo_Reduzido, (short)Linha.Ano_Exercicio, (short)Linha.Ano_Exercicio, (short)Linha.Codigo_Lancamento, (short)Linha.Codigo_Lancamento,
+                    (short)Linha.Sequencia_Lancamento, (short)Linha.Sequencia_Lancamento, (short)Linha.Numero_Parcela, (short)Linha.Numero_Parcela, Linha.Complemento, Linha.Complemento, 0, 99, dDataDoc, "Web");
+                List<SpExtrato> ListaParcela = tributario_Class.Lista_Extrato_Parcela(ListaTributo);
+
                 for (i = 0; i < ListaParcelas.Count; i++) {
                     if (ListaParcelas[i].Ano_Exercicio == Linha.Ano_Exercicio & ListaParcelas[i].Codigo_Lancamento == Linha.Codigo_Lancamento & ListaParcelas[i].Sequencia_Lancamento == Linha.Sequencia_Lancamento &
                         ListaParcelas[i].Numero_Parcela == Linha.Numero_Parcela & ListaParcelas[i].Complemento == Linha.Complemento)
                         break;
                 }
-                ListaParcelas[i].Soma_Principal = reg[0].Soma_Principal;
-                ListaParcelas[i].Soma_Multa = reg[0].Soma_Multa;
-                ListaParcelas[i].Soma_Juros = reg[0].Soma_Juros;
-                ListaParcelas[i].Soma_Correcao = reg[0].Soma_Correcao;
-                ListaParcelas[i].Soma_Total = reg[0].Soma_Total;
-                ListaParcelas[i].Descricao_Lancamento = reg[0].Descricao_Lancamento;
+                ListaParcelas[i].Soma_Principal = ListaParcela[0].Valortributo;
+                ListaParcelas[i].Soma_Multa = ListaParcela[0].Valormulta;
+                ListaParcelas[i].Soma_Juros = ListaParcela[0].Valorjuros;
+                ListaParcelas[i].Soma_Correcao = ListaParcela[0].Valorcorrecao;
+                ListaParcelas[i].Soma_Total = ListaParcela[0].Valortotal;
+                ListaParcelas[i].Descricao_Lancamento = ListaParcela[0].Desclancamento;
                 string DescTributo = "";
-                DescTributo = "";
-                foreach (TributoStructure a in reg[0].Tributos) {
-                    DescTributo += a.Codigo.ToString("000") + "-" + a.Descricao + "/";
+
+                List<int> aTributos = new List<int>();
+                foreach (SpExtrato Trib in ListaTributo) {
+                    bool bFind = false;
+                    for (int b = 0; b < aTributos.Count; b++) {
+                        if (aTributos[b] == Trib.Codtributo) {
+                            bFind = true;
+                            break;
+                        }
+                    }
+                    if (!bFind)
+                        aTributos.Add(Trib.Codtributo);
                 }
+
+                for (int c = 0; c < aTributos.Count; c++)
+                    DescTributo += aTributos[c].ToString("000") + "-" + tributario_Class.Lista_Tributo(aTributos[c])[0].Abrevtributo + ",";
+
                 DescTributo = DescTributo.Substring(0, DescTributo.Length - 1);
                 ListaParcelas[i].Descricao_Tributo = DescTributo;
-                ListaParcelas[i].Data_Vencimento = reg[0].Data_Vencimento;
+                ListaParcelas[i].Data_Vencimento = ListaParcela[0].Datavencimento;
             }
 
             return ListaParcelas;
@@ -185,8 +200,8 @@ namespace UIWeb.Pages {
             string encoding = string.Empty;
             string extension = string.Empty;
             Session["sid"] = "";
-            clsDebito Debito_Class = new clsDebito();
-            List<boleto> ListaBoleto = Debito_Class.ListaBoletoDAM(nSid);
+            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
+            List<Boleto> ListaBoleto = tributario_Class.Lista_Boleto_DAM(nSid);
             DataSet Ds = gtiCore.ToDataSet(ListaBoleto);
             ReportDataSource rdsAct = new ReportDataSource("dsDam", Ds.Tables[0]);
             ReportViewer viewer = new ReportViewer();
@@ -194,7 +209,7 @@ namespace UIWeb.Pages {
             viewer.LocalReport.ReportPath = Server.MapPath("~/Report/rptDetalheBoleto.rdlc");
             viewer.LocalReport.DataSources.Add(rdsAct); // Add  datasource here         
             byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-            Debito_Class.DeleteDam(nSid);
+            tributario_Class.Excluir_Carne(nSid);
             Response.Buffer = true;
             Response.Clear();
             Response.ContentType = mimeType;

@@ -6,7 +6,8 @@ namespace UIWeb {
        
         
         protected void Page_Load(object sender, EventArgs e) {
-            Response.Redirect("~/Pages/gtiMenu.aspx");
+            //Response.Redirect("~/Pages/gtiMenu.aspx");
+            Response.Redirect("~/Pages/wait.aspx");
         }
 
        
