@@ -95,7 +95,6 @@
     <Content Include="css\default.css" />
     <Content Include="css\gti.css" />
     <Content Include="css\style.css" />
-    <Content Include="DEmp.aspx" />
     <Content Include="Images\border2.gif" />
     <Content Include="Images\brasaocor.png" />
     <Content Include="Images\BrasaoJaboticabal.jpg" />
@@ -105,14 +104,10 @@
     <Content Include="Images\GTI_logo.png" />
     <Content Include="Images\icon_24_buscar_on.png" />
     <Content Include="Images\topbg.gif" />
-    <Content Include="PageConsultaDebito.aspx" />
-    <Content Include="PageDeca.aspx" />
     <Content Include="Pages\alvara_vre.aspx" />
     <Content Include="Pages\boletoBB.aspx" />
-    <Content Include="Pages\cip.aspx" />
     <Content Include="Pages\cipendereco.aspx" />
-    <Content Include="Pages\dadosempresa.aspx" />
-    <Content Include="Pages\dadosEmpresa2.aspx" />
+    <Content Include="Pages\dadosEmpresa.aspx" />
     <Content Include="Pages\damweb.aspx" />
     <Content Include="Pages\damwebend2.aspx" />
     <Content Include="Pages\detalhe_boleto.aspx" />
@@ -163,28 +158,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsDAM.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DEmp.aspx.cs">
-      <DependentUpon>DEmp.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DEmp.aspx.designer.cs">
-      <DependentUpon>DEmp.aspx</DependentUpon>
-    </Compile>
     <Compile Include="gtiCore.cs" />
-    <Compile Include="PageConsultaDebito.aspx.cs">
-      <DependentUpon>PageConsultaDebito.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PageConsultaDebito.aspx.designer.cs">
-      <DependentUpon>PageConsultaDebito.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PageDeca.aspx.cs">
-      <DependentUpon>PageDeca.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PageDeca.aspx.designer.cs">
-      <DependentUpon>PageDeca.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\alvara_vre.aspx.cs">
       <DependentUpon>alvara_vre.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -199,13 +173,6 @@
     <Compile Include="Pages\boletoBB.aspx.designer.cs">
       <DependentUpon>boletoBB.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\cip.aspx.cs">
-      <DependentUpon>cip.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\cip.aspx.designer.cs">
-      <DependentUpon>cip.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\cipendereco.aspx.cs">
       <DependentUpon>cipendereco.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -213,19 +180,12 @@
     <Compile Include="Pages\cipendereco.aspx.designer.cs">
       <DependentUpon>cipendereco.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\dadosempresa.aspx.cs">
-      <DependentUpon>dadosempresa.aspx</DependentUpon>
+    <Compile Include="Pages\dadosEmpresa.aspx.cs">
+      <DependentUpon>dadosEmpresa.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\dadosempresa.aspx.designer.cs">
-      <DependentUpon>dadosempresa.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\dadosEmpresa2.aspx.cs">
-      <DependentUpon>dadosEmpresa2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\dadosEmpresa2.aspx.designer.cs">
-      <DependentUpon>dadosEmpresa2.aspx</DependentUpon>
+    <Compile Include="Pages\dadosEmpresa.aspx.designer.cs">
+      <DependentUpon>dadosEmpresa.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\damweb.aspx.cs">
       <DependentUpon>damweb.aspx</DependentUpon>
