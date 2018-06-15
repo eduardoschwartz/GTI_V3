@@ -2,28 +2,60 @@
 
 <asp:Content ID="Content" ContentPlaceHolderID="MenuContentPlaceHolder" runat="server">
     <link href="../css/gti.css" rel="stylesheet" />
+    <script>
+
+        function formata(campo, mask, evt) {
+
+            if (document.all) { // Internet Explorer 
+                key = evt.keyCode;
+            }
+            else { // Nestcape 
+                key = evt.which;
+            }
+
+            string = campo.value;
+            i = string.length;
+
+            if (i < mask.length) {
+                if (mask.charAt(i) == '§') {
+                    return (key > 47 && key < 58);
+                } else {
+                    if (mask.charAt(i) == '!') { return true; }
+                    for (c = i; c < mask.length; c++) {
+                        if (mask.charAt(c) != '§' && mask.charAt(c) != '!')
+                            campo.value = campo.value + mask.charAt(c);
+                        else if (mask.charAt(c) == '!') {
+                            return true;
+                        } else {
+                            return (key > 47 && key < 58);
+                        }
+                    }
+                }
+            } else return false;
+        }
+    </script>
 
      <div style="color: #3a8dcc;">
     
          <br />
-            &nbsp;<br />
+            <br />
             Dados Cadastrais de Empresa<br />
             <br />
             <table style="width: 473px;">
                 <tr>
-                    <td class="auto-style1" style="width: 95px">Inscrição Municipal..:</td>
+                    <td  style="width: 95px">Inscrição Municipal..:</td>
                     <td>
-                <asp:TextBox ID="txtIM" runat="server" Width="83px" MaxLength="6" TextMode="Number"></asp:TextBox>
+                <asp:TextBox ID="txtIM" runat="server" Width="83px"  BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" onKeyPress="return formata(this, '§§§§§§', event)"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
-                    <td class="auto-style1" style="width: 95px">Número do CNPJ....:</td>
+                    <td  style="width: 95px">Número do CNPJ....:</td>
                     <td>
-                <asp:TextBox ID="txtCNPJ" runat="server" Width="188px" MaxLength="14" TextMode="Number"></asp:TextBox>
+                <asp:TextBox ID="txtCNPJ" runat="server" Width="188px"  BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" onKeyPress="return formata(this, '§§.§§§.§§§/§§§§-§§', event)"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
-                    <td class="auto-style1" style="width: 95px">&nbsp;</td>
+                    <td  style="width: 95px">&nbsp;</td>
                     <td>
                 <asp:Button ID="btAcesso" class="button1" runat="server" Text="Consultar" OnClick="btAcesso_Click" />
                     &nbsp;<asp:Button ID="btPrint" class="button1" runat="server" Text="Imprimir" OnClick="btPrint_Click" />

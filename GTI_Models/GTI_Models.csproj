@@ -68,6 +68,7 @@
     <Compile Include="Models\cadimob.cs" />
     <Compile Include="Models\categconstr.cs" />
     <Compile Include="Models\cep.cs" />
+    <Compile Include="Models\certidaoenderecoatualizado.cs" />
     <Compile Include="Models\cidadao.cs" />
     <Compile Include="Models\cidade.cs" />
     <Compile Include="Models\Cnaesubclasse.cs" />
