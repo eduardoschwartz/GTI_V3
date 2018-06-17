@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="modelCore.cs" />
     <Compile Include="Models\anexo.cs" />
     <Compile Include="Models\areas.cs" />
     <Compile Include="Models\assunto.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Models\mobiliarioplaca.cs" />
     <Compile Include="Models\numdocumento.cs" />
     <Compile Include="Models\obsparcela.cs" />
+    <Compile Include="Models\parametros.cs" />
     <Compile Include="Models\parceladocumento.cs" />
     <Compile Include="Models\pedologia.cs" />
     <Compile Include="Models\processocidadao.cs" />

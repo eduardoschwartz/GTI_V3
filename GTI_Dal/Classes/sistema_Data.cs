@@ -49,7 +49,7 @@ namespace GTI_Dal.Classes {
                 reg.Nome = regCidadao.Nomecidadao;
                 reg.cpf_cnpj = regCidadao.Cpf;
                 reg.endereco = regCidadao.Nomelogradouro;
-                reg.numero = (short)regCidadao.Numimovel;
+               reg.numero = (short)regCidadao.Numimovel;
                 reg.complemento = regCidadao.Complemento;
                 reg.nome_bairro = regCidadao.Nomebairro;
                 reg.nome_cidade = regCidadao.Nomecidade;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using GTI_Models.Models;
 using GTI_Dal.Classes;
+using GTI_Models;
 
 namespace GTI_Bll.Classes {
     public class Tributario_bll {
@@ -552,6 +553,26 @@ namespace GTI_Bll.Classes {
             return obj.Retorna_Dados_Documento(nNumDocumento);
         }
 
+        /// <summary>
+        /// Retorna o próximo código da certidão requerida e incrementa a sequência
+        /// </summary>
+        /// <param name="tipo_certidao"></param>
+        /// <returns></returns>
+        public int Retorna_Codigo_Certidao(modelCore.TipoCertidao tipo_certidao) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Retorna_Codigo_Certidao(tipo_certidao);
+        }
+
+        /// <summary>
+        /// Insere na tabela certidaoenderecoatualizado
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Certidao_Endereco(Certidaoenderecoatualizado Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Certidao_Endereco(Reg);
+            return ex;
+        }
 
     }//end class
 }

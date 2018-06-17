@@ -19,6 +19,7 @@
                 <li><a href="../Deca/DECANOVO.pdf" style="width: 600px">Download da Declaração Cadastral (DECA)</a></li>
                 <li><a href="readVRExml.aspx" style="width: 600px">Importação de arquivos Via Rápida Empresa (VRE)</a></li>
                 <li><a href="alvara_vre.aspx" style="width: 600px">Alvará Via Rápida Empresa (VRE)</a></li>
+                <li><a href="gticertidao.aspx" style="width: 600px">Emissão de certidões</a></li>
             </ul>
         </div>
 

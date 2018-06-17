@@ -5,7 +5,7 @@ namespace GTI_Bll.Classes {
     public static class bllCore {
 
         public enum TipoEndereco { Local, Proprietario, Entrega }
-
+        
         public static System.Boolean IsNumeric(System.Object Expression) {
             if (Expression == null || Expression is DateTime)
                 return false;

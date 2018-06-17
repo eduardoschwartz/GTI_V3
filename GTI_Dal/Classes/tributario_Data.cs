@@ -6,6 +6,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using static GTI_Dal.Classes.dalCore;
+using static GTI_Models.modelCore;
 
 namespace GTI_Dal.Classes {
     public class Tributario_Data {
@@ -532,29 +534,27 @@ namespace GTI_Dal.Classes {
                 }
             }
 
+        //public List<ParceladocumentoStruct> Lista_Lancamento_Documentos(Parceladocumento reg) {
+        //    using (var db = new GTI_Context(_connection)) {
+        //        var Sql = (from d in db.Numdocumento
+        //                   join p in db.Parceladocumento on d.numdocumento equals p.Numdocumento into dp1 from p in dp1.DefaultIfEmpty()
+        //                   where p.Codreduzido == reg.Codreduzido && p.Anoexercicio == reg.Anoexercicio && p.Codlancamento == reg.Codlancamento &&
+        //                   p.Seqlancamento == reg.Seqlancamento && p.Numparcela == reg.Numparcela && p.Codcomplemento == reg.Codcomplemento
+        //                   orderby d.numdocumento
+        //                   select new ParceladocumentoStruct{Documento= d.numdocumento, d.Datadocumento, d.Valorguia }).ToList();
+        //        List<Numdocumento> Lista = new List<Numdocumento>();
+        //        foreach (var item in Sql) {
+        //            Numdocumento Linha = new Numdocumento();
+        //            Linha.numdocumento = item.numdocumento;
+        //            Linha.Datadocumento = item.Datadocumento;
+        //            Linha.Valorguia = item.Valorguia;
+        //            Lista.Add(Linha);
+        //        }
+        //        return Lista;
+        //    }
+        //}
 
-
-            //public List<ParceladocumentoStruct> Lista_Lancamento_Documentos(Parceladocumento reg) {
-            //    using (var db = new GTI_Context(_connection)) {
-            //        var Sql = (from d in db.Numdocumento
-            //                   join p in db.Parceladocumento on d.numdocumento equals p.Numdocumento into dp1 from p in dp1.DefaultIfEmpty()
-            //                   where p.Codreduzido == reg.Codreduzido && p.Anoexercicio == reg.Anoexercicio && p.Codlancamento == reg.Codlancamento &&
-            //                   p.Seqlancamento == reg.Seqlancamento && p.Numparcela == reg.Numparcela && p.Codcomplemento == reg.Codcomplemento
-            //                   orderby d.numdocumento
-            //                   select new ParceladocumentoStruct{Documento= d.numdocumento, d.Datadocumento, d.Valorguia }).ToList();
-            //        List<Numdocumento> Lista = new List<Numdocumento>();
-            //        foreach (var item in Sql) {
-            //            Numdocumento Linha = new Numdocumento();
-            //            Linha.numdocumento = item.numdocumento;
-            //            Linha.Datadocumento = item.Datadocumento;
-            //            Linha.Valorguia = item.Valorguia;
-            //            Lista.Add(Linha);
-            //        }
-            //        return Lista;
-            //    }
-            //}
-
-            public Exception Insert_Boleto_Guia(Boletoguia Reg) {
+        public Exception Insert_Boleto_Guia(Boletoguia Reg) {
             using (var db = new GTI_Context(_connection)) {
                 try {
                     db.Boletoguia.Add(Reg);
@@ -932,6 +932,53 @@ namespace GTI_Dal.Classes {
             }
             return reg;
         }
+
+        public int Retorna_Codigo_Certidao(TipoCertidao tipo_certidao) {
+            int nRet = 0;
+            using (var db = new GTI_Context(_connection)) {
+                var Sql = (from p in db.Parametros select p);
+                if (tipo_certidao == TipoCertidao.Endereco)
+                    Sql = Sql.Where(c => c.Nomeparam == "CETEND");
+                foreach (Parametros item in Sql) {
+                    nRet = Convert.ToInt32(item.Valparam)+1;
+                    break;
+                }
+            }
+            Exception ex = Atualiza_Codigo_Certidao(tipo_certidao, nRet);
+            if (ex == null)
+                return nRet;
+            else
+                return 0;
+        }
+
+        private Exception Atualiza_Codigo_Certidao(TipoCertidao tipo_certidao,int Valor) {
+            Parametros p=null;
+            using (var db = new GTI_Context(_connection)) {
+                if(tipo_certidao==TipoCertidao.Endereco)
+                    p = db.Parametros.First(i => i.Nomeparam == "CETEND");
+
+                p.Valparam = Valor.ToString();
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Exception Insert_Certidao_Endereco(Certidaoenderecoatualizado Reg) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Certidaoenderecoatualizado.Add(Reg);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
 
     }//end class
 }
