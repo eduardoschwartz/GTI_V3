@@ -96,7 +96,8 @@ namespace GTI_Dal {
         public DbSet<Vre_atividade> Vre_atividade { get; set; }
         public DbSet<Vre_socio> Vre_socio { get; set; }
         public DbSet<Vre_licenciamento> Vre_licencimento { get; set; }
-        public DbSet<Certidaoenderecoatualizado> Certidaoenderecoatualizado { get; set; }
+        public DbSet<Certidao_endereco> Certidao_endereco { get; set; }
+        public DbSet<Certidao_valor_venal> Certidao_valor_venal { get; set; }
         public DbSet<Parametros> Parametros { get; set; }
     }
 }

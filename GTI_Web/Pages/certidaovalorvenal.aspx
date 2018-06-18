@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Pages/default.Master" AutoEventWireup="true" CodeBehind="certidaoendereco.aspx.cs" Inherits="GTI_Web.Pages.certidaoendereco" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Pages/default.Master" AutoEventWireup="true" CodeBehind="certidaovalorvenal.aspx.cs" Inherits="GTI_Web.Pages.certidaovalorvenal" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MenuContentPlaceHolder" runat="server">
     <link href="../css/gti.css" rel="stylesheet" />
 
@@ -40,7 +40,7 @@
     
          <br />
              <br />
-             Certidão de endereço atualizado<br />
+             Certidão de valor venal<br />
              <br />
              <table style="width: 624px; height: 62px;">
                  <tr>
@@ -87,6 +87,8 @@
          <asp:Label ID="lblMsg" runat="server" ForeColor="Red" />
 
      </div>
+
+
 
 
 </asp:Content>

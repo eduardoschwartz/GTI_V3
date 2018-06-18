@@ -568,10 +568,22 @@ namespace GTI_Bll.Classes {
         /// </summary>
         /// <param name="Reg"></param>
         /// <returns></returns>
-        public Exception Insert_Certidao_Endereco(Certidaoenderecoatualizado Reg) {
+        public Exception Insert_Certidao_Endereco(Certidao_endereco Reg) {
             Tributario_Data obj = new Tributario_Data(_connection);
             Exception ex = obj.Insert_Certidao_Endereco(Reg);
             return ex;
+        }
+
+        /// <summary>
+        /// Retorna os dados da certidão de endereço
+        /// </summary>
+        /// <param name="Ano"></param>
+        /// <param name="Numero"></param>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public Certidao_endereco Retorna_Certidao_Endereco(int Ano, int Numero, int Codigo) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Retorna_Certidao_Endereco(Ano,Numero,Codigo);
         }
 
     }//end class

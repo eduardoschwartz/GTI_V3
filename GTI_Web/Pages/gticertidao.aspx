@@ -10,6 +10,7 @@
            
             <ul>
                 <li><a href="certidaoendereco.aspx" style="width: 600px">Certidão de endereço atualizado</a></li>
+                <li><a href="certidaovalorvenal.aspx" style="width: 600px">Certidão de valor venal</a></li>
             </ul>
         </div>
 

@@ -10,7 +10,7 @@
 namespace GTI_Web.Pages {
     
     
-    public partial class certidaoendereco {
+    public partial class certidaovalorvenal {
         
         /// <summary>
         /// txtIM control.

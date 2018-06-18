@@ -110,6 +110,7 @@
     <Content Include="Pages\alvara_vre.aspx" />
     <Content Include="Pages\boletoBB.aspx" />
     <Content Include="Pages\certidaoendereco.aspx" />
+    <Content Include="Pages\certidaovalorvenal.aspx" />
     <Content Include="Pages\cipendereco.aspx" />
     <Content Include="Pages\dadosEmpresa.aspx" />
     <Content Include="Pages\damweb.aspx" />
@@ -184,6 +185,13 @@
     </Compile>
     <Compile Include="Pages\certidaoendereco.aspx.designer.cs">
       <DependentUpon>certidaoendereco.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\certidaovalorvenal.aspx.cs">
+      <DependentUpon>certidaovalorvenal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\certidaovalorvenal.aspx.designer.cs">
+      <DependentUpon>certidaovalorvenal.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\cipendereco.aspx.cs">
       <DependentUpon>cipendereco.aspx</DependentUpon>
@@ -305,6 +313,12 @@
       <DependentUpon>wait.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\CertidaoEnderecoValida.cs">
+      <DependentUpon>CertidaoEnderecoValida.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Report\CertidaoEndereco.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -369,6 +383,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Report\CertidaoEnderecoValida.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CertidaoEnderecoValida.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\CertidaoEndereco.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CertidaoEndereco.cs</LastGenOutput>

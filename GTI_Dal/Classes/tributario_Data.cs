@@ -967,15 +967,23 @@ namespace GTI_Dal.Classes {
             }
         }
 
-        public Exception Insert_Certidao_Endereco(Certidaoenderecoatualizado Reg) {
+        public Exception Insert_Certidao_Endereco(Certidao_endereco Reg) {
             using (var db = new GTI_Context(_connection)) {
                 try {
-                    db.Certidaoenderecoatualizado.Add(Reg);
+                    db.Certidao_endereco.Add(Reg);
                     db.SaveChanges();
                 } catch (Exception ex) {
                     return ex;
                 }
                 return null;
+            }
+        }
+
+
+        public Certidao_endereco Retorna_Certidao_Endereco(int Ano,int Numero,int Codigo) {
+            using (var db = new GTI_Context(_connection)) {
+                var Sql = (from p in db.Certidao_endereco where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
+                return Sql;
             }
         }
 
