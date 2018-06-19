@@ -14,6 +14,9 @@ namespace UIWeb.Pages {
 
         protected void Page_Load(object sender, EventArgs e) {
             //txtVencto.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            String s = Request.QueryString["d"];
+            if (s != "gti")
+                Response.Redirect("~/Pages/gtiMenu.aspx");
         }
 
         protected void btOK_Click(object sender, EventArgs e) {

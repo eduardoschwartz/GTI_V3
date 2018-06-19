@@ -586,5 +586,29 @@ namespace GTI_Bll.Classes {
             return obj.Retorna_Certidao_Endereco(Ano,Numero,Codigo);
         }
 
+        /// <summary>
+        /// Retorna os dados da certidão de valor venal
+        /// </summary>
+        /// <param name="Ano"></param>
+        /// <param name="Numero"></param>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public Certidao_valor_venal Retorna_Certidao_ValorVenal(int Ano, int Numero, int Codigo) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Retorna_Certidao_ValorVenal(Ano, Numero, Codigo);
+        }
+
+        /// <summary>
+        /// Insere na tabela certidao_valor_venal
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Certidao_ValorVenal(Certidao_valor_venal Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Certidao_ValorVenal(Reg);
+            return ex;
+        }
+
+
     }//end class
 }

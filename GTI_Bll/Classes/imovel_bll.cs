@@ -160,7 +160,28 @@ namespace GTI_Bll.Classes {
         public List<ImovelStruct> Lista_Imovel(ImovelStruct Reg) {
             Imovel_Data obj = new Imovel_Data(_connection);
             return obj.Lista_Imovel(Reg);
-                    }
+        }
+
+        /// <summary>
+        /// Retorna os dados de IPTU de um imóvel em um ano
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <param name="Ano"></param>
+        /// <returns></returns>
+        public Laseriptu Dados_IPTU(int Codigo, int Ano) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Dados_IPTU(Codigo, Ano);
+        }
+
+        /// <summary>
+        /// Soma das áreas construidas do imóvel
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public decimal Soma_Area(int Codigo) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Soma_Area(Codigo);
+        }
 
     }//end class
 }

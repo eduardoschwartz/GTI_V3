@@ -85,6 +85,14 @@ namespace GTI_Dal.Classes {
             }
         }//End LoadReg
 
+        public decimal Soma_Area(int Codigo) {
+            using (var db = new GTI_Context(_connection)) {
+                decimal sum = db.Areas.Sum(x => x.Areaconstr);
+                return sum;
+            }
+        }
+
+
         public List<ProprietarioStruct> Lista_Proprietario(int CodigoImovel, bool Principal = false) {
             using (var db = new GTI_Context(_connection)) {
                 var reg = (from p in db.Proprietario
@@ -221,6 +229,7 @@ namespace GTI_Dal.Classes {
                         regEnd.CodigoCidade = _cidadao.CodigoCidadeC;
                         regEnd.NomeCidade = _cidadao.NomeCidadeC;
                         regEnd.UF = _cidadao.UfC;
+                        regEnd.Cep = _cidadao.CepC.ToString();
                     } else {
                         regEnd.Endereco = _cidadao.EnderecoR;
                         regEnd.Numero = _cidadao.NumeroR;
@@ -230,6 +239,7 @@ namespace GTI_Dal.Classes {
                         regEnd.CodigoCidade = _cidadao.CodigoCidadeR;
                         regEnd.NomeCidade = _cidadao.NomeCidadeR;
                         regEnd.UF = _cidadao.UfR;
+                        regEnd.Cep = _cidadao.CepR.ToString();
                     }
                 }
             }
@@ -644,6 +654,12 @@ namespace GTI_Dal.Classes {
             }
         }
 
-        
+        public Laseriptu Dados_IPTU(int Codigo,int Ano) {
+            using (var db = new GTI_Context(_connection)) {
+                var Sql = (from i in db.Laser_iptu where i.Ano == Ano && i.Codreduzido == Codigo select i).FirstOrDefault();
+                return Sql;
+            }
+        }
+
     }//end class
 }

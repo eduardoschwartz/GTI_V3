@@ -8,7 +8,7 @@ using System.Globalization;
 using System.Web;
 
 namespace GTI_Web.Pages {
-    public partial class certidaovalorvenal : System.Web.UI.Page {
+    public partial class certidaoisencao : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
 
         }
@@ -55,7 +55,7 @@ namespace GTI_Web.Pages {
                             lblMsg.Text = "Código de validação inválido.";
                         else {
                             sTipo = sCod.Substring(sCod.Length - 2, 2);
-                            if (sTipo == "VV") {
+                            if (sTipo == "CI") {
                                 Certidao_valor_venal dados = Valida_Dados(nNumero, nAno, nCodigo);
                                 if (dados != null)
                                     Exibe_Certidao_ValorVenal(dados);
@@ -72,12 +72,10 @@ namespace GTI_Web.Pages {
 
         private void PrintReport(int Codigo) {
             Imovel_bll imovel_Class = new Imovel_bll("GTIconnection");
+
+            decimal SomaArea = imovel_Class.Soma_Area(Codigo);
+
             ImovelStruct Reg = imovel_Class.Dados_Imovel(Codigo);
-            Laseriptu RegIPTU = imovel_Class.Dados_IPTU(Codigo,DateTime.Now.Year);
-            if (RegIPTU == null){
-                lblMsg.Text = "Não foi possível emitir certidão para este código";
-                return;
-            }
             string sComplemento = string.IsNullOrWhiteSpace(Reg.Complemento) ? "" : " " + Reg.Complemento.ToString().Trim();
             string sQuadras = string.IsNullOrWhiteSpace(Reg.QuadraOriginal) ? "" : " Quadra: " + Reg.QuadraOriginal.ToString().Trim();
             string sLotes = string.IsNullOrWhiteSpace(Reg.LoteOriginal) ? "" : " Lote: " + Reg.LoteOriginal.ToString().Trim();
@@ -90,10 +88,11 @@ namespace GTI_Web.Pages {
             string sNome = Lista[0].Nome;
 
             ReportDocument crystalReport = new ReportDocument();
-            crystalReport.Load(Server.MapPath("~/Report/CertidaoValorVenal.rpt"));
+            if(SomaArea<65)
+                crystalReport.Load(Server.MapPath("~/Report/CertidaoIsencao65.rpt"));
 
             Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
-            int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.ValorVenal);
+            int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Isencao);
             int _ano_certidao = DateTime.Now.Year;
 
             Certidao_valor_venal cert = new Certidao_valor_venal();
@@ -109,11 +108,7 @@ namespace GTI_Web.Pages {
             cert.descbairro = sBairro;
             cert.Li_quadras = Reg.QuadraOriginal;
             cert.Li_lotes = Reg.LoteOriginal;
-            cert.Vvt = (decimal)RegIPTU.Vvt;
-            cert.Vvp = (decimal)RegIPTU.Vvc;
-            cert.Vvi = (decimal)RegIPTU.Vvi;
-            cert.Areaterreno =(decimal) RegIPTU.Areaterreno;
-            string _valor_metro = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "R${0:#,###.##}", (cert.Vvt / cert.Areaterreno))+ " R$/m²";
+
 
             Exception ex = tributario_Class.Insert_Certidao_ValorVenal(cert);
             if (ex != null) {
@@ -121,15 +116,12 @@ namespace GTI_Web.Pages {
             } else {
                 crystalReport.SetParameterValue("NUMCERTIDAO", _numero_certidao.ToString("00000") + "/" + _ano_certidao.ToString("0000"));
                 crystalReport.SetParameterValue("DATAEMISSAO", DateTime.Now.ToString("dd/MM/yyyy") + " às " + DateTime.Now.ToString("HH:mm:ss"));
-                crystalReport.SetParameterValue("CONTROLE", _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + Codigo.ToString() + "-VV");
+                crystalReport.SetParameterValue("CONTROLE", _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + Codigo.ToString() + "-CI");
                 crystalReport.SetParameterValue("ENDERECO", sEndereco);
                 crystalReport.SetParameterValue("CADASTRO", Codigo.ToString("000000"));
                 crystalReport.SetParameterValue("NOME", sNome);
                 crystalReport.SetParameterValue("INSCRICAO", sInscricao);
                 crystalReport.SetParameterValue("BAIRRO", sBairro);
-                crystalReport.SetParameterValue("VVT", string.Format(CultureInfo.GetCultureInfo("pt-BR"), "R${0:#,###.##}", cert.Vvt) + " (" + _valor_metro +")");
-                crystalReport.SetParameterValue("VVP", string.Format(CultureInfo.GetCultureInfo("pt-BR"), "R${0:#,###.##}", cert.Vvp));
-                crystalReport.SetParameterValue("VVI", string.Format(CultureInfo.GetCultureInfo("pt-BR"), "R${0:#,###.##}", cert.Vvi));
 
                 HttpContext.Current.Response.Buffer = false;
                 HttpContext.Current.Response.ClearContent();
@@ -160,38 +152,25 @@ namespace GTI_Web.Pages {
             string sEndereco = dados.Logradouro + ", " + dados.Numero.ToString() + sComplemento;
 
             Imovel_bll imovel_Class = new Imovel_bll("GTIconnection");
-            Laseriptu RegIPTU = imovel_Class.Dados_IPTU(dados.Codigo, DateTime.Now.Year);
-            if (RegIPTU == null) {
-                lblMsg.Text = "Não foi possível emitir certidão para este código";
-                return;
-            }
-            decimal Vvt = (decimal)RegIPTU.Vvt;
-            decimal Vvp = (decimal)RegIPTU.Vvc;
-            decimal Vvi = (decimal)RegIPTU.Vvi;
-            decimal Areaterreno = (decimal)RegIPTU.Areaterreno;
-            string _valor_metro = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "R${0:#,###.##}", (Vvt / Areaterreno)) + " R$/m²";
 
 
             ReportDocument crystalReport = new ReportDocument();
-            crystalReport.Load(Server.MapPath("~/Report/CertidaoValorVenalValida.rpt"));
+            crystalReport.Load(Server.MapPath("~/Report/CertidaoIsencaoValida.rpt"));
             crystalReport.SetParameterValue("NUMCERTIDAO", dados.Numero.ToString("00000") + "/" + dados.Ano.ToString("0000"));
             crystalReport.SetParameterValue("DATAEMISSAO", dados.Data.ToString("dd/MM/yyyy") + " às " + dados.Data.ToString("HH:mm:ss"));
-            crystalReport.SetParameterValue("CONTROLE", dados.Numero.ToString("00000") + dados.Ano.ToString("0000") + "/" + dados.Codigo.ToString() + "-VV");
+            crystalReport.SetParameterValue("CONTROLE", dados.Numero.ToString("00000") + dados.Ano.ToString("0000") + "/" + dados.Codigo.ToString() + "-CI");
             crystalReport.SetParameterValue("ENDERECO", sEndereco);
             crystalReport.SetParameterValue("CADASTRO", dados.Codigo.ToString("000000"));
             crystalReport.SetParameterValue("NOME", dados.Nomecidadao);
             crystalReport.SetParameterValue("INSCRICAO", dados.Inscricao);
             crystalReport.SetParameterValue("BAIRRO", dados.descbairro);
-            crystalReport.SetParameterValue("VVT", string.Format(CultureInfo.GetCultureInfo("pt-BR"), "R${0:#,###.##}", Vvt) + " (" + _valor_metro + ")");
-            crystalReport.SetParameterValue("VVP", string.Format(CultureInfo.GetCultureInfo("pt-BR"), "R${0:#,###.##}", Vvp));
-            crystalReport.SetParameterValue("VVI", string.Format(CultureInfo.GetCultureInfo("pt-BR"), "R${0:#,###.##}", Vvi));
 
             HttpContext.Current.Response.Buffer = false;
             HttpContext.Current.Response.ClearContent();
             HttpContext.Current.Response.ClearHeaders();
 
             try {
-                crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true, "comp" + dados.Numero.ToString() + dados.Ano.ToString() );
+                crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true, "comp" + dados.Numero.ToString() + dados.Ano.ToString());
             } catch {
             } finally {
                 crystalReport.Close();
@@ -199,5 +178,9 @@ namespace GTI_Web.Pages {
             }
 
         }
+
+
+
+
     }
 }

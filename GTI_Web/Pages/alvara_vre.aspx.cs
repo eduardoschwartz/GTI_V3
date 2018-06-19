@@ -9,9 +9,12 @@ using System.Web.UI;
 namespace UIWeb {
     public partial class alvara_vre : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
+            String s = Request.QueryString["d"];
+            if (s != "gti")
+                Response.Redirect("~/Pages/gtiMenu.aspx");
         }
 
-        
+
         private void EmiteAlvara(int Codigo) {
             
             Empresa_bll empresa_Class = new Empresa_bll("GTIconnection");

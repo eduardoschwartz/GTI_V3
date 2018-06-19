@@ -939,6 +939,14 @@ namespace GTI_Dal.Classes {
                 var Sql = (from p in db.Parametros select p);
                 if (tipo_certidao == TipoCertidao.Endereco)
                     Sql = Sql.Where(c => c.Nomeparam == "CETEND");
+                else {
+                    if (tipo_certidao == TipoCertidao.ValorVenal)
+                        Sql = Sql.Where(c => c.Nomeparam == "CETVVN");
+                    else {
+                        if (tipo_certidao == TipoCertidao.Isencao)
+                            Sql = Sql.Where(c => c.Nomeparam == "CETISE");
+                    }
+                }
                 foreach (Parametros item in Sql) {
                     nRet = Convert.ToInt32(item.Valparam)+1;
                     break;
@@ -956,7 +964,14 @@ namespace GTI_Dal.Classes {
             using (var db = new GTI_Context(_connection)) {
                 if(tipo_certidao==TipoCertidao.Endereco)
                     p = db.Parametros.First(i => i.Nomeparam == "CETEND");
-
+                else {
+                    if (tipo_certidao == TipoCertidao.ValorVenal)
+                        p = db.Parametros.First(i => i.Nomeparam == "CETVVN");
+                    else {
+                        if (tipo_certidao == TipoCertidao.Isencao)
+                            p = db.Parametros.First(i => i.Nomeparam == "CETISE");
+                    }
+                }
                 p.Valparam = Valor.ToString();
                 try {
                     db.SaveChanges();
@@ -979,6 +994,18 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Exception Insert_Certidao_ValorVenal(Certidao_valor_venal Reg) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Certidao_valor_venal.Add(Reg);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
 
         public Certidao_endereco Retorna_Certidao_Endereco(int Ano,int Numero,int Codigo) {
             using (var db = new GTI_Context(_connection)) {
@@ -987,6 +1014,12 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Certidao_valor_venal Retorna_Certidao_ValorVenal(int Ano, int Numero, int Codigo) {
+            using (var db = new GTI_Context(_connection)) {
+                var Sql = (from p in db.Certidao_valor_venal where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
+                return Sql;
+            }
+        }
 
     }//end class
 }

@@ -11,6 +11,10 @@ namespace UIWeb.Pages {
         public static string sCnae2;
         public static string sSocio2;
         protected void Page_Load(object sender, EventArgs e) {
+            String s = Request.QueryString["d"];
+            if (s != "gti")
+                Response.Redirect("~/Pages/gtiMenu.aspx");
+
             if (!IsPostBack) {
                 txtCNPJ.Text = "";
                 txtIM.Text = "";
