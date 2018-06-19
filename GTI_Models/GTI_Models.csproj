@@ -70,6 +70,7 @@
     <Compile Include="Models\categconstr.cs" />
     <Compile Include="Models\cep.cs" />
     <Compile Include="Models\certidao_endereco.cs" />
+    <Compile Include="Models\certidao_isencao.cs" />
     <Compile Include="Models\certidao_valor_venal.cs" />
     <Compile Include="Models\cidadao.cs" />
     <Compile Include="Models\cidade.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Models\escritoriocontabil.cs" />
     <Compile Include="Models\facequadra.cs" />
     <Compile Include="Models\horariofunc.cs" />
+    <Compile Include="Models\isencao.cs" />
     <Compile Include="Models\lancamento.cs" />
     <Compile Include="Models\laseriptu.cs" />
     <Compile Include="Models\mei.cs" />
@@ -146,6 +148,7 @@
     <Compile Include="Models\vre_empresa.cs" />
     <Compile Include="Models\vre_licenciamento.cs" />
     <Compile Include="Models\vre_socio.cs" />
+    <Compile Include="Models\vwproprietarioduplicado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

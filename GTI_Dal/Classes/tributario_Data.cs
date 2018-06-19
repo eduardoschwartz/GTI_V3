@@ -1006,6 +1006,18 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Exception Insert_Certidao_Isencao(Certidao_isencao Reg) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Certidao_isencao.Add(Reg);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
 
         public Certidao_endereco Retorna_Certidao_Endereco(int Ano,int Numero,int Codigo) {
             using (var db = new GTI_Context(_connection)) {

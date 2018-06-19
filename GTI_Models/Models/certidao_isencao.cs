@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GTI_Models.Models {
-    public class Certidao_valor_venal {
+    public class Certidao_isencao {
         [Key]
         [Column(Order = 1)]
         public int Numero { get; set; }
@@ -14,15 +14,15 @@ namespace GTI_Models.Models {
         public int Codigo { get; set; }
         public string Nomecidadao { get; set; }
         public string Inscricao { get; set; }
-        public decimal Areaterreno { get; set; }
-        public decimal Vvt { get; set; }
-        public decimal Vvp { get; set; }
-        public decimal Vvi { get; set; }
         public string Logradouro { get; set; }
         public int Li_num { get; set; }
         public string Li_compl { get; set; }
         public string Li_quadras { get; set; }
         public string Li_lotes { get; set; }
         public string Descbairro { get; set; }
+        public decimal? Percisencao { get; set; }
+        public decimal? Area { get; set; }
+        public string Numprocesso { get; set; }
+        public DateTime? Dataprocesso { get; set; }
     }
 }

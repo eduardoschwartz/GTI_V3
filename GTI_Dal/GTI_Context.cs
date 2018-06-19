@@ -98,6 +98,9 @@ namespace GTI_Dal {
         public DbSet<Vre_licenciamento> Vre_licencimento { get; set; }
         public DbSet<Certidao_endereco> Certidao_endereco { get; set; }
         public DbSet<Certidao_valor_venal> Certidao_valor_venal { get; set; }
+        public DbSet<Certidao_isencao> Certidao_isencao { get; set; }
         public DbSet<Parametros> Parametros { get; set; }
+        public DbSet<Vwproprietarioduplicado> Vwproprietarioduplicado { get; set; }
+        public DbSet<Isencao> Isencao { get; set; }
     }
 }

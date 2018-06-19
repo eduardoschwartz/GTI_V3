@@ -16,14 +16,14 @@ namespace GTI_Web.Report {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class CertidaoIsencao65 : ReportClass {
+    public class CertidaoIsencaoProcesso : ReportClass {
         
-        public CertidaoIsencao65() {
+        public CertidaoIsencaoProcesso() {
         }
         
         public override string ResourceName {
             get {
-                return "CertidaoIsencao65.rpt";
+                return "CertidaoIsencaoProcesso.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace GTI_Web.Report {
         
         public override string FullResourceName {
             get {
-                return "GTI_Web.Report.CertidaoIsencao65.rpt";
+                return "GTI_Web.Report.CertidaoIsencaoProcesso.rpt";
             }
             set {
                 // Do nothing
@@ -202,9 +202,9 @@ namespace GTI_Web.Report {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedCertidaoIsencao65 : Component, ICachedReport {
+    public class CachedCertidaoIsencaoProcesso : Component, ICachedReport {
         
-        public CachedCertidaoIsencao65() {
+        public CachedCertidaoIsencaoProcesso() {
         }
         
         [Browsable(false)]
@@ -241,7 +241,7 @@ namespace GTI_Web.Report {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            CertidaoIsencao65 rpt = new CertidaoIsencao65();
+            CertidaoIsencaoProcesso rpt = new CertidaoIsencaoProcesso();
             rpt.Site = this.Site;
             return rpt;
         }

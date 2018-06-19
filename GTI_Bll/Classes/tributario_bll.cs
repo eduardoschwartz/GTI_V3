@@ -609,6 +609,15 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
-
+        /// <summary>
+        /// Insere na tabela certidao_isencao
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Certidao_Isencao(Certidao_isencao Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Certidao_Isencao(Reg);
+            return ex;
+        }
     }//end class
 }

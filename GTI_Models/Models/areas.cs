@@ -11,7 +11,7 @@ namespace GTI_Models.Models {
         [Column(Order = 2)]
         public short Seqarea { get; set; }
         public string Tipoarea { get; set; }
-        public decimal Areaconstr { get; set; }
+        public decimal? Areaconstr { get; set; }
         public short Usoconstr { get; set; }
         public short Tipoconstr { get; set; }
         public short Catconstr { get; set; }

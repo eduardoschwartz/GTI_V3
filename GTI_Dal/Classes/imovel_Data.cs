@@ -71,7 +71,6 @@ namespace GTI_Dal.Classes {
                 row.Uso_terreno_Nome = reg.Uso_terreno_Nome;
                 row.EE_TipoEndereco = reg.EE_TipoEndereco;
 
-
                 EnderecoStruct regEnd = Dados_Endereco(nCodigo, dalCore.TipoEndereco.Local);
                 row.CodigoLogradouro = regEnd.CodLogradouro;
                 row.NomeLogradouro = regEnd.Endereco;
@@ -87,11 +86,17 @@ namespace GTI_Dal.Classes {
 
         public decimal Soma_Area(int Codigo) {
             using (var db = new GTI_Context(_connection)) {
-                decimal sum = db.Areas.Sum(x => x.Areaconstr);
-                return sum;
+                var sum = db.Areas.Where(x=>x.Codreduzido==Codigo).Sum(x => x.Areaconstr);
+                return Convert.ToDecimal(sum);
             }
         }
 
+        public int Qtde_Imovel_Cidadao(int CodigoImovel) {
+            using (var db = new GTI_Context(_connection)) {
+                int Sql = (from v in db.Vwproprietarioduplicado join p in db.Proprietario on v.Codproprietario equals p.Codcidadao where p.Codreduzido == CodigoImovel && p.Tipoprop == "P" select v.Qtdeimovel).FirstOrDefault();
+                    return Sql;
+            }
+        }
 
         public List<ProprietarioStruct> Lista_Proprietario(int CodigoImovel, bool Principal = false) {
             using (var db = new GTI_Context(_connection)) {
@@ -404,7 +409,7 @@ namespace GTI_Dal.Classes {
                            join c in db.Categconstr on a.Catconstr equals c.Codcategconstr into ac from c in ac.DefaultIfEmpty()
                            join t in db.Tipoconstr on a.Tipoconstr equals t.Codtipoconstr into at from t in at.DefaultIfEmpty()
                            join u in db.Usoconstr on a.Usoconstr equals u.Codusoconstr into au from u in au.DefaultIfEmpty()
-                           where a.Codreduzido == Codigo orderby a.Seqarea select new AreaStruct { Codigo=a.Codreduzido,Data_Aprovacao=a.Dataaprova,Area=a.Areaconstr,Categoria_Codigo=a.Catconstr,
+                           where a.Codreduzido == Codigo orderby a.Seqarea select new AreaStruct { Codigo=a.Codreduzido,Data_Aprovacao=a.Dataaprova,Area=(decimal)a.Areaconstr,Categoria_Codigo=a.Catconstr,
                            Tipo_Nome=t.Desctipoconstr ,Categoria_Nome=c.Desccategconstr,Data_Processo=a.Dataprocesso,Numero_Processo=a.Numprocesso,Pavimentos=a.Qtdepav,Seq=a.Seqarea,Tipo_Area=a.Tipoarea,Tipo_Codigo=a.Tipoconstr,
                            Uso_Codigo=a.Usoconstr,Uso_Nome=u.Descusoconstr}).ToList();
                 List<AreaStruct> Lista = new List<AreaStruct>();
@@ -660,6 +665,47 @@ namespace GTI_Dal.Classes {
                 return Sql;
             }
         }
+
+        public bool Verifica_Imunidade(int Codigo) {
+            using (var db = new GTI_Context(_connection)) {
+                Cadimob Sql = (from c in db.Cadimob where c.Codreduzido == Codigo select c).FirstOrDefault();
+                if (Sql.Imune == null)
+                    return false;
+                else
+                    return Convert.ToBoolean(Sql.Imune);
+            }
+        }
+
+        public List<IsencaoStruct> Lista_Imovel_Isencao(int Codigo,int Ano=0) {
+            using (var db = new GTI_Context(_connection)) {
+                Processo_Data processo_Class = new Processo_Data(_connection);
+                
+                var reg = (from t in db.Isencao where t.Codreduzido == Codigo orderby t.Anoisencao select t).ToList();
+                if (Ano > 0)
+                    reg = reg.Where(t => t.Anoisencao == Ano).ToList();
+                List<IsencaoStruct> Lista = new List<IsencaoStruct>();
+                foreach (var item in reg) {
+                    IsencaoStruct Linha = new IsencaoStruct {
+                        Codreduzido = item.Codreduzido,
+                        Anoisencao = item.Anoisencao,
+                        Anoproc = item.Anoproc,
+                        Codisencao=item.Codisencao,
+                        dataaltera=item.dataaltera,
+                        dataprocesso= processo_Class.Dados_Processo((short)item.Anoproc,(int)item.Numproc).DataEntrada,
+                        Filantropico=item.Filantropico,
+                        Motivo=item.Motivo,
+                        Numproc=item.Numproc,
+                        Numprocesso=item.Numprocesso,
+                        Percisencao=item.Percisencao,
+                        Periodo=item.Periodo,
+                        Userid=item.Userid
+                    };
+                    Lista.Add(Linha);
+                }
+                return Lista;
+            }
+        }
+
 
     }//end class
 }

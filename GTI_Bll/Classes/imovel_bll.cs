@@ -183,5 +183,36 @@ namespace GTI_Bll.Classes {
             return obj.Soma_Area(Codigo);
         }
 
+        /// <summary>
+        /// Retorna a quantidade de imóveis que um contribuinte possui como proprietário
+        /// </summary>
+        /// <param name="CodigoImovel"></param>
+        /// <returns></returns>
+        public int Qtde_Imovel_Cidadao(int CodigoImovel) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Qtde_Imovel_Cidadao(CodigoImovel);
+        }
+
+        /// <summary>
+        /// Retorna verdadeiro se o imóvel for imune e falso se não for
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public bool Verifica_Imunidade(int Codigo) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Verifica_Imunidade(Codigo);
+        }
+
+        /// <summary>
+        /// Retorna a lista de isenções de um imóvel, caso o ano for especificado retorna apenas a isenção do ano.
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <param name="Ano"></param>
+        /// <returns></returns>
+        public List<IsencaoStruct> Lista_Imovel_Isencao(int Codigo, int Ano = 0) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Lista_Imovel_Isencao(Codigo,Ano);
+        }
+
     }//end class
 }

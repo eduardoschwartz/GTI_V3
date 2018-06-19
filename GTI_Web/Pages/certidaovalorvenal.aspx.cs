@@ -106,7 +106,7 @@ namespace GTI_Web.Pages {
             cert.Logradouro = Reg.NomeLogradouro;
             cert.Li_num = Convert.ToInt32(Reg.Numero);
             cert.Li_compl = Reg.Complemento;
-            cert.descbairro = sBairro;
+            cert.Descbairro = sBairro;
             cert.Li_quadras = Reg.QuadraOriginal;
             cert.Li_lotes = Reg.LoteOriginal;
             cert.Vvt = (decimal)RegIPTU.Vvt;
@@ -181,7 +181,7 @@ namespace GTI_Web.Pages {
             crystalReport.SetParameterValue("CADASTRO", dados.Codigo.ToString("000000"));
             crystalReport.SetParameterValue("NOME", dados.Nomecidadao);
             crystalReport.SetParameterValue("INSCRICAO", dados.Inscricao);
-            crystalReport.SetParameterValue("BAIRRO", dados.descbairro);
+            crystalReport.SetParameterValue("BAIRRO", dados.Descbairro);
             crystalReport.SetParameterValue("VVT", string.Format(CultureInfo.GetCultureInfo("pt-BR"), "R${0:#,###.##}", Vvt) + " (" + _valor_metro + ")");
             crystalReport.SetParameterValue("VVP", string.Format(CultureInfo.GetCultureInfo("pt-BR"), "R${0:#,###.##}", Vvp));
             crystalReport.SetParameterValue("VVI", string.Format(CultureInfo.GetCultureInfo("pt-BR"), "R${0:#,###.##}", Vvi));
