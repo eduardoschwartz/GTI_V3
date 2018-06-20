@@ -599,6 +599,18 @@ namespace GTI_Bll.Classes {
         }
 
         /// <summary>
+        /// Retorna os dados da certdão de isenção
+        /// </summary>
+        /// <param name="Ano"></param>
+        /// <param name="Numero"></param>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public Certidao_isencao Retorna_Certidao_Isencao(int Ano, int Numero, int Codigo) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Retorna_Certidao_Isencao(Ano, Numero, Codigo);
+        }
+
+        /// <summary>
         /// Insere na tabela certidao_valor_venal
         /// </summary>
         /// <param name="Reg"></param>
@@ -619,5 +631,9 @@ namespace GTI_Bll.Classes {
             Exception ex = obj.Insert_Certidao_Isencao(Reg);
             return ex;
         }
+
+
+
+
     }//end class
 }

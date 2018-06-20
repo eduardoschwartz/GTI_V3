@@ -162,7 +162,7 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_VVT {
+        public CrystalDecisions.Shared.IParameterField Parameter_PERC {
             get {
                 return this.DataDefinition.ParameterFields[8];
             }
@@ -170,17 +170,9 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_VVP {
+        public CrystalDecisions.Shared.IParameterField Parameter_PROCESSO {
             get {
                 return this.DataDefinition.ParameterFields[9];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_VVI {
-            get {
-                return this.DataDefinition.ParameterFields[10];
             }
         }
     }

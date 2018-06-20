@@ -1033,5 +1033,12 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Certidao_isencao Retorna_Certidao_Isencao(int Ano, int Numero, int Codigo) {
+            using (var db = new GTI_Context(_connection)) {
+                var Sql = (from p in db.Certidao_isencao where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
+                return Sql;
+            }
+        }
+
     }//end class
 }

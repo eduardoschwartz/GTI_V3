@@ -56,9 +56,9 @@ namespace GTI_Web.Pages {
                         else {
                             sTipo = sCod.Substring(sCod.Length - 2, 2);
                             if (sTipo == "CI") {
-                                Certidao_valor_venal dados = Valida_Dados(nNumero, nAno, nCodigo);
+                                Certidao_isencao dados = Valida_Dados(nNumero, nAno, nCodigo);
                                 if (dados != null)
-                                    Exibe_Certidao_ValorVenal(dados);
+                                    Exibe_Certidao_Isencao(dados);
                                 else
                                     lblMsg.Text = "Certidão não cadastrada.";
                             } else {
@@ -177,22 +177,30 @@ namespace GTI_Web.Pages {
             }
         }
 
-        private Certidao_valor_venal Valida_Dados(int Numero, int Ano, int Codigo) {
+        private Certidao_isencao Valida_Dados(int Numero, int Ano, int Codigo) {
             Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
-            Certidao_valor_venal dados = tributario_Class.Retorna_Certidao_ValorVenal(Ano, Numero, Codigo);
+            Certidao_isencao dados = tributario_Class.Retorna_Certidao_Isencao(Ano, Numero, Codigo);
             return dados;
         }
 
-        private void Exibe_Certidao_ValorVenal(Certidao_valor_venal dados) {
+        private void Exibe_Certidao_Isencao(Certidao_isencao dados) {
             lblMsg.Text = "";
-            string sComplemento = dados.Li_compl;
+            string sComplemento = dados.Li_compl==null?"":" " + dados.Li_compl;
             string sQuadras = string.IsNullOrWhiteSpace(dados.Li_quadras) ? "" : " Quadra: " + dados.Li_quadras.ToString().Trim();
             string sLotes = string.IsNullOrWhiteSpace(dados.Li_lotes) ? "" : " Lote: " + dados.Li_lotes.ToString().Trim();
             sComplemento += sQuadras + sLotes;
             string sEndereco = dados.Logradouro + ", " + dados.Numero.ToString() + sComplemento;
 
             Imovel_bll imovel_Class = new Imovel_bll("GTIconnection");
+            decimal nPerc = (decimal)dados.Percisencao;
+            if (nPerc == 0) nPerc = 100;
+            string sProc = "";
 
+            if (dados.Numero >0) {
+                List<IsencaoStruct> ListaIsencao = null;
+                ListaIsencao = imovel_Class.Lista_Imovel_Isencao(dados.Codigo, DateTime.Now.Year);
+                sProc = ListaIsencao[0].Numprocesso + " de " + Convert.ToDateTime(ListaIsencao[0].dataprocesso).ToString("dd/MM/yyyy");
+            }
 
             ReportDocument crystalReport = new ReportDocument();
             crystalReport.Load(Server.MapPath("~/Report/CertidaoIsencaoValida.rpt"));
@@ -204,6 +212,8 @@ namespace GTI_Web.Pages {
             crystalReport.SetParameterValue("NOME", dados.Nomecidadao);
             crystalReport.SetParameterValue("INSCRICAO", dados.Inscricao);
             crystalReport.SetParameterValue("BAIRRO", dados.Descbairro);
+            crystalReport.SetParameterValue("PERC", nPerc);
+            crystalReport.SetParameterValue("PROCESSO", sProc);
 
             HttpContext.Current.Response.Buffer = false;
             HttpContext.Current.Response.ClearContent();
