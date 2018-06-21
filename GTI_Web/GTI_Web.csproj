@@ -109,6 +109,7 @@
     <Content Include="Images\topbg.gif" />
     <Content Include="Pages\alvara_vre.aspx" />
     <Content Include="Pages\boletoBB.aspx" />
+    <Content Include="Pages\certidaodebito.aspx" />
     <Content Include="Pages\certidaoendereco.aspx" />
     <Content Include="Pages\certidaoisencao.aspx" />
     <Content Include="Pages\certidaovalorvenal.aspx" />
@@ -180,6 +181,13 @@
     </Compile>
     <Compile Include="Pages\boletoBB.aspx.designer.cs">
       <DependentUpon>boletoBB.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\certidaodebito.aspx.cs">
+      <DependentUpon>certidaodebito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\certidaodebito.aspx.designer.cs">
+      <DependentUpon>certidaodebito.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\certidaoendereco.aspx.cs">
       <DependentUpon>certidaoendereco.aspx</DependentUpon>
@@ -329,6 +337,12 @@
       <DependentUpon>wait.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\CertidaoDebitoImovel.cs">
+      <DependentUpon>CertidaoDebitoImovel.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Report\CertidaoIsencaoProcesso.cs">
       <DependentUpon>CertidaoIsencaoProcesso.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -412,7 +426,6 @@
     <Content Include="DataSets\dsDadosEmpresa.xss">
       <DependentUpon>dsDadosEmpresa.xsd</DependentUpon>
     </Content>
-    <Content Include="Deca\DECANOVO.pdf" />
     <Content Include="DataSets\dsDAM.xsc">
       <DependentUpon>dsDAM.xsd</DependentUpon>
     </Content>
@@ -424,6 +437,7 @@
     <Content Include="DataSets\dsDAM.xss">
       <DependentUpon>dsDAM.xsd</DependentUpon>
     </Content>
+    <Content Include="Deca\DECA2018.pdf" />
     <None Include="packages.config" />
     <Content Include="Pages\default.Master" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
@@ -435,6 +449,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Report\CertidaoDebitoImovel.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CertidaoDebitoImovel.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\CertidaoIsencaoProcesso.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CertidaoIsencaoProcesso.cs</LastGenOutput>

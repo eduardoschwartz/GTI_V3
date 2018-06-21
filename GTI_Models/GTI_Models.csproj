@@ -69,6 +69,7 @@
     <Compile Include="Models\cadimob.cs" />
     <Compile Include="Models\categconstr.cs" />
     <Compile Include="Models\cep.cs" />
+    <Compile Include="Models\certidao_debito.cs" />
     <Compile Include="Models\certidao_endereco.cs" />
     <Compile Include="Models\certidao_isencao.cs" />
     <Compile Include="Models\certidao_valor_venal.cs" />

@@ -15,7 +15,7 @@ namespace GTI_Dal.Classes {
         }
         
         public bool Existe_Empresa(int nCodigo) {
-            bool bRet = true;
+            bool bRet = false;
             using (var db = new GTI_Context(_connection)) {
                 var existingReg = db.Mobiliario.Count(a => a.Codigomob == nCodigo);
                 if (existingReg != 0) {

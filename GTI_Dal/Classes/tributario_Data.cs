@@ -1,12 +1,11 @@
 ﻿using GTI_Models.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-using static GTI_Dal.Classes.dalCore;
 using static GTI_Models.modelCore;
 
 namespace GTI_Dal.Classes {
@@ -1018,6 +1017,17 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Exception Insert_Certidao_Debito(Certidao_debito Reg) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Certidao_debito.Add(Reg);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
 
         public Certidao_endereco Retorna_Certidao_Endereco(int Ano,int Numero,int Codigo) {
             using (var db = new GTI_Context(_connection)) {
@@ -1039,6 +1049,70 @@ namespace GTI_Dal.Classes {
                 return Sql;
             }
         }
+
+        public Certidao_debito_detalhe Certidao_Debito(int Codigo) {
+            Certidao_debito_detalhe Certidao = new Certidao_debito_detalhe();
+            List<SpExtrato> ListaTributo = Lista_Extrato_Tributo(Codigo, 1980, 2050, 0, 99, 0, 99, 0, 999, 0, 99, 0, 99, DateTime.ParseExact(DateTime.Now.ToShortDateString(), "dd/MM/yyyy", null), "Web");
+            List<SpExtrato> ListaParcela = Lista_Extrato_Parcela(ListaTributo);
+            List<DebitoStructure> _lista_Debitos = new List<DebitoStructure>();
+
+            foreach (var item in ListaParcela) {
+                if (item.Statuslanc == 3 && (DateTime.Now - item.Datavencimento).TotalDays>0) {
+                    DebitoStructure reg = new DebitoStructure();
+                    reg.Codigo_Reduzido = item.Codreduzido;
+                    reg.Ano_Exercicio = item.Anoexercicio;
+                    reg.Codigo_Lancamento = Convert.ToInt16(item.Codlancamento);
+                    reg.Descricao_Lancamento = item.Desclancamento;
+                    reg.Sequencia_Lancamento = Convert.ToInt16(item.Seqlancamento);
+                    reg.Numero_Parcela = Convert.ToInt16(item.Numparcela);
+                    reg.Complemento = item.Codcomplemento;
+                    reg.Data_Vencimento = Convert.ToDateTime(item.Datavencimento);
+                    reg.Codigo_Situacao = Convert.ToInt16(item.Statuslanc);
+                    reg.Soma_Principal = item.Valortributo;
+                    reg.Soma_Juros = item.Valorjuros;
+                    reg.Soma_Multa = item.Valormulta;
+                    reg.Soma_Correcao = item.Valorcorrecao;
+                    reg.Soma_Total = item.Valortotal;
+                    reg.Data_Ajuizamento = item.Dataajuiza;
+                    _lista_Debitos.Add(reg);
+                }
+            }
+
+            ArrayList alArray = new ArrayList();
+            string _descricao_lancamento="";
+            string sDescTmp="";
+            //Se tiver débito não pago
+            if (_lista_Debitos.Count > 0) {
+                foreach (var item in _lista_Debitos) {
+                    bool bFind = false;
+                    sDescTmp = item.Descricao_Lancamento;
+                    if (item.Codigo_Lancamento==29)
+                        sDescTmp = "IPTU";
+                    for (int i = 0; i < alArray.Count; i++) {
+                        if (alArray[i].ToString() == sDescTmp) {
+                            bFind = true;
+                            break;
+                        }
+                    }
+                    if (!bFind)
+                        alArray.Add(sDescTmp);
+                }
+
+                for (int i = 0; i < alArray.Count; i++) {
+                    _descricao_lancamento += alArray[i].ToString() + ", ";
+                }
+                _descricao_lancamento = _descricao_lancamento.Substring(0, _descricao_lancamento.Length - 2);
+                Certidao.Tipo_Retorno = RetornoCertidaoDebito.Positiva;
+            } else {
+                Certidao.Descricao_Lancamentos = "OUTRUS";
+                Certidao.Tipo_Retorno = RetornoCertidaoDebito.NegativaPositiva;
+            }
+
+            Certidao.Descricao_Lancamentos = _descricao_lancamento;
+            return Certidao;
+        }
+
+
 
     }//end class
 }

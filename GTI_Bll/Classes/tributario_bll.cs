@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GTI_Models.Models;
 using GTI_Dal.Classes;
 using GTI_Models;
+using static GTI_Models.modelCore;
 
 namespace GTI_Bll.Classes {
     public class Tributario_bll {
@@ -632,7 +633,26 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        /// <summary>
+        /// Insere na tabela certidao_debito
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Certidao_Debito(Certidao_debito Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Certidao_Debito(Reg);
+            return ex;
+        }
 
+        /// <summary>
+        /// Retorna as infomações para a certidão de débitos
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public Certidao_debito_detalhe Certidao_Debito(int Codigo) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Certidao_Debito( Codigo);
+        }
 
 
     }//end class

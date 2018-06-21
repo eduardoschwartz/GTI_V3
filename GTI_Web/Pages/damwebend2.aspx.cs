@@ -39,12 +39,14 @@ namespace UIWeb.Pages {
                             txtNome.Text = reg.Razao_social;
                             txtEndereco.Text = reg.Endereco_nome + ", " + reg.Numero.ToString() + " " + reg.Complemento + " " + reg.Bairro_nome;
                             txtCidade.Text = reg.Cidade_nome;
+                            txtcpfCnpj.Text = reg.Cpf_cnpj;
                             txtCep.Text = reg.Cep;
                             txtUF.Text = reg.UF;
                         } else {
                             //Cidadão
                             Cidadao_bll cidadao_Class = new Cidadao_bll("GTIconnection");
                             CidadaoStruct reg = cidadao_Class.LoadReg(nCodigo);
+                            txtcpfCnpj.Text = string.IsNullOrWhiteSpace(reg.Cpf)?reg.Cnpj:reg.Cpf;
                             txtNome.Text = reg.Nome;
                             txtEndereco.Text = reg.EnderecoR + ", " + reg.NumeroR.ToString() + " " + reg.ComplementoR + " " + reg.NomeBairroR;
                             txtCidade.Text = reg.NomeCidadeR;
