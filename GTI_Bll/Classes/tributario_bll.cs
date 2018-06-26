@@ -654,6 +654,16 @@ namespace GTI_Bll.Classes {
             return obj.Certidao_Debito( Codigo);
         }
 
+        /// <summary>
+        /// Retorna o cálculo de IPTU do ano especificado
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <param name="Ano"></param>
+        /// <returns></returns>
+        public SpCalculo Calculo_IPTU(int Codigo, int Ano) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Calculo_IPTU(Codigo,Ano);
+        }
 
     }//end class
 }

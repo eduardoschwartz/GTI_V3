@@ -40,6 +40,7 @@ namespace UIWeb.Pages {
                             FillTable();
                     } else {
                         string sCnpj = txtCNPJ.Text.PadLeft(14, '0');
+                        sCnpj = gtiCore.RetornaNumero(sCnpj);
                         int nCodigo = empresa_class.ExisteEmpresaCnpj(sCnpj);
                         if (!string.IsNullOrWhiteSpace(sCnpj) && nCodigo == 0)
                             lblMsg.Text = "Erro: Cadastro inexistente.";
@@ -65,7 +66,6 @@ namespace UIWeb.Pages {
             REGIMEISS.Text = "";
             VIGSANIT.Text = "";
             TAXALICENCA.Text = "";
-            SIMPLES.Text = "";
             MEI.Text = "";
             PROPRIETARIO.Text = "";
             CNAE.Text = "";
@@ -134,7 +134,6 @@ namespace UIWeb.Pages {
                 sCnae2 = sCnae2.Substring(0, sCnae2.Length - 1);
 
             CNAE.Text = "<pre>" + sCnae + "</pre>";
-            SIMPLES.Text = empresa_class.Empresa_Simples(Codigo, DateTime.Now) ? "SIM" : "NÃO";
         }
 
         protected void btPrint_Click(object sender, EventArgs e) {
@@ -209,10 +208,6 @@ namespace UIWeb.Pages {
                 reg.sid = nSid;
                 reg.nome = "Taxa de Licença";
                 reg.valor = TAXALICENCA.Text;
-                aLista.Add(reg); reg = new DEmpresa();
-                reg.sid = nSid;
-                reg.nome = "Optante do Simples";
-                reg.valor = SIMPLES.Text;
                 aLista.Add(reg);
                 reg = new DEmpresa();
                 reg.sid = nSid;

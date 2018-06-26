@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 namespace GTI_Models.Models {
     public class Vre_empresa {
         [Key]
+        public int Sid { get; set; }
         public int Id { get; set; }
         public string Razao_social { get; set; }
         public string Cnpj { get; set; }

@@ -550,6 +550,78 @@ namespace GTI_Dal.Classes {
             return bRet;
         }
 
+        //public Exception Insert_Empresa_Vre(Vre_empresa reg) {
+
+        //    string query = "INSERT INTO vre_empresa(id,razao_social,cnpj,data_abertura,porte,numero_registro,tipo_registro,tipo_mei,cpf_responsavel,nome_responsavel,fone_contato1," +
+        //            "fone_contato2,email_contato,setor_quadra_lote,tipo_logradouro,nome_logradouro,numero_imovel,complemento,bairro,cidade,uf,cep,area_estabelecimento,nome_proprietario,email_proprietario," +
+        //            "fone_proprietario,nome_responsavel,fone_responsavel,area_total,pavimentos,contiguo,outros_usos,classif_CRC_PJ,classif_CRC_PF,numero_CRC_PJ,cnpj_contador,tipo_CRC_PF,tipo_CRC_PJ," +
+        //            "numero_CRC_PF,uf_CRC_PF,uf_CRC_PJ,cpf_contador,nome_arquivo,data_importacao,situacao,codreduzido,data_emissao,data_validade,protocolo) VALUES(@id,@razao_social,@cnpj,data_abertura,@porte," +
+        //            "@numero_registro,@tipo_registro,@tipo_mei,@cpf_responsavel,@nome_responsavel,@fone_contato1,@fone_contato2,@email_contato,@setor_quadra_lote,@tipo_logradouro,@nome_logradouro,@numero_imovel," +
+        //            "@complemento,@bairro,@cidade,@uf,@cep,@area_estabelecimento,@nome_proprietario,@email_proprietario,@fone_proprietario,@nome_responsavel,@fone_responsavel,@area_total,@pavimentos,@contiguo," +
+        //            "@outros_usos,@classif_CRC_PJ,@classif_CRC_PF,@numero_CRC_PJ,@cnpj_contador,@tipo_CRC_PF,@tipo_CRC_PJ,@numero_CRC_PF,@uf_CRC_PF,@uf_CRC_PJ,@cpf_contador,@nome_arquivo,@data_importacao," +
+        //            "@situacao,@codreduzido,@data_emissao,@data_validade,@protocolo)";
+
+        //    using (var db = new GTI_Context(_connection)) {
+        //            params object[] aPrm = new object;
+        //            cmd.Parameters.Add("@id", SqlDbType.Int).Value = reg.Id;
+        //            cmd.Parameters.Add("@Razao_social", SqlDbType.VarChar).Value = reg.Razao_social;
+        //            cmd.Parameters.Add("@Cnpj", SqlDbType.VarChar).Value = reg.Cnpj;
+        //            cmd.Parameters.Add("@Data_abertura", SqlDbType.DateTime).Value = reg.Data_abertura;
+        //            cmd.Parameters.Add("@Porte", SqlDbType.TinyInt).Value = reg.Porte;
+        //            cmd.Parameters.Add("@Numero_registro", SqlDbType.VarChar).Value = reg.Numero_registro;
+        //            cmd.Parameters.Add("@Tipo_registro", SqlDbType.TinyInt).Value = reg.Numero_registro;
+        //            cmd.Parameters.Add("@Tipo_mei", SqlDbType.TinyInt).Value = reg.Tipo_mei;
+        //            cmd.Parameters.Add("@Cpf_responsavel", SqlDbType.VarChar).Value = reg.Cpf_responsavel;
+        //            cmd.Parameters.Add("@Nome_responsavel", SqlDbType.VarChar).Value = reg.Nome_responsavel;
+        //            cmd.Parameters.Add("@Fone_contato1", SqlDbType.VarChar).Value = reg.Fone_contato1;
+        //            cmd.Parameters.Add("@Fone_contato2", SqlDbType.VarChar).Value = reg.Fone_contato2;
+        //            cmd.Parameters.Add("@Email_contato", SqlDbType.VarChar).Value = reg.Email_contato;
+        //            cmd.Parameters.Add("@Setor_quadra_lote", SqlDbType.VarChar).Value = reg.Setor_quadra_lote;
+        //            cmd.Parameters.Add("@Tipo_logradouro", SqlDbType.VarChar).Value = reg.Tipo_logradouro;
+        //            cmd.Parameters.Add("@Nome_logradouro", SqlDbType.VarChar).Value = reg.Nome_logradouro;
+        //            cmd.Parameters.Add("@Numero_imovel", SqlDbType.Int).Value = reg.Numero_imovel;
+        //            cmd.Parameters.Add("@Complemento", SqlDbType.VarChar).Value = reg.Complemento;
+        //            cmd.Parameters.Add("@Bairro", SqlDbType.VarChar).Value = reg.Bairro;
+        //            cmd.Parameters.Add("@Cidade", SqlDbType.VarChar).Value = reg.Cidade;
+        //            cmd.Parameters.Add("@UF", SqlDbType.VarChar).Value = reg.UF;
+        //            cmd.Parameters.Add("@Cep", SqlDbType.VarChar).Value = reg.Cep;
+        //            cmd.Parameters.Add("@Area_estabelecimento", SqlDbType.Float).Value = reg.Area_estabelecimento;
+        //            cmd.Parameters.Add("@Nome_proprietario", SqlDbType.VarChar).Value = reg.Nome_proprietario;
+        //            cmd.Parameters.Add("@Email_proprietario", SqlDbType.VarChar).Value = reg.Email_proprietario;
+        //            cmd.Parameters.Add("@Fone_proprietario", SqlDbType.Float).Value = reg.Fone_proprietario;
+        //            cmd.Parameters.Add("@Nome_responsavel_uso", SqlDbType.VarChar).Value = reg.Nome_responsavel_uso;
+        //            cmd.Parameters.Add("@Fone_responsavel_uso", SqlDbType.VarChar).Value = reg.Fone_responsavel_uso;
+        //            cmd.Parameters.Add("@Area_total", SqlDbType.Float).Value = reg.Area_total;
+        //            cmd.Parameters.Add("@Pavimentos", SqlDbType.VarChar).Value = reg.Pavimentos;
+        //            cmd.Parameters.Add("@Contiguo", SqlDbType.VarChar).Value = reg.Contiguo;
+        //            cmd.Parameters.Add("@Outros_usos", SqlDbType.Float).Value = reg.Outros_usos;
+        //            cmd.Parameters.Add("@Classif_CRC_PJ", SqlDbType.TinyInt).Value = reg.Classif_CRC_PF;
+        //            cmd.Parameters.Add("@Classif_CRC_PF", SqlDbType.TinyInt).Value = reg.Classif_CRC_PJ;
+        //            cmd.Parameters.Add("@Numero_CRC_PJ", SqlDbType.VarChar).Value = reg.Numero_CRC_PJ;
+        //            cmd.Parameters.Add("@Cnpj_contador", SqlDbType.VarChar).Value = reg.Cnpj_contador;
+        //            cmd.Parameters.Add("@Tipo_CRC_PF", SqlDbType.VarChar).Value = reg.Tipo_CRC_PF;
+        //            cmd.Parameters.Add("@Tipo_CRC_PJ", SqlDbType.VarChar).Value = reg.Tipo_CRC_PJ;
+        //            cmd.Parameters.Add("@Numero_CRC_PF", SqlDbType.VarChar).Value = reg.Numero_CRC_PF;
+        //            cmd.Parameters.Add("@UF_CRC_PF", SqlDbType.VarChar).Value = reg.Uf_CRC_PF;
+        //            cmd.Parameters.Add("@UF_CRC_PJ", SqlDbType.VarChar).Value = reg.Tipo_CRC_PJ;
+        //            cmd.Parameters.Add("@Cpf_contador", SqlDbType.VarChar).Value = reg.Cpf_contador;
+        //            cmd.Parameters.Add("@Nome_arquivo", SqlDbType.VarChar).Value = reg.Nome_arquivo;
+        //            cmd.Parameters.Add("@Data_importacao", SqlDbType.DateTime).Value = reg.Data_importacao;
+        //            cmd.Parameters.Add("@Situacao", SqlDbType.VarChar).Value = reg.Situacao;
+        //            cmd.Parameters.Add("@Codreduzido", SqlDbType.Int).Value = reg.Codreduzido;
+        //            cmd.Parameters.Add("@Data_emissao", SqlDbType.DateTime).Value = reg.Data_emissao;
+        //            cmd.Parameters.Add("@Data_validade", SqlDbType.VarChar).Value = reg.Data_validade;
+        //            cmd.Parameters.Add("@Protocolo", SqlDbType.VarChar).Value = reg.Protocolo;
+        //            try {
+        //                db.Database.ExecuteSqlCommand(query,)
+        //                } catch (Exception ex) {
+        //                return ex;
+        //            }
+        //            return null;
+        //    }
+
+        //}
+
         public Exception Insert_Empresa_Vre(Vre_empresa reg) {
             using (var db = new GTI_Context(_connection)) {
                 try {

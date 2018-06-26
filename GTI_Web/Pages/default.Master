@@ -47,7 +47,7 @@
                 </asp:ContentPlaceHolder>
             </div>
             <div id="footer"   >
-                Email para suporte técnico: <a href="mailto:gti@jaboticabal.sp.gov.br">gti@jaboticabal.sp.gov.br</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="gtiMenu.aspx">Retornar ao menu principal</a> 
+                 <a href="gtiMenu.aspx">Retornar ao menu principal</a> 
             </div>
 
         

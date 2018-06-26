@@ -74,7 +74,10 @@ namespace GTI_Web.Pages {
             Imovel_bll imovel_Class = new Imovel_bll("GTIconnection");
             ImovelStruct Reg = imovel_Class.Dados_Imovel(Codigo);
             Laseriptu RegIPTU = imovel_Class.Dados_IPTU(Codigo,DateTime.Now.Year);
-            if (RegIPTU == null){
+
+            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
+            SpCalculo RegCalculo = tributario_Class.Calculo_IPTU(Codigo, DateTime.Now.Year);
+            if (Reg == null){
                 lblMsg.Text = "Não foi possível emitir certidão para este código";
                 return;
             }
@@ -92,7 +95,7 @@ namespace GTI_Web.Pages {
             ReportDocument crystalReport = new ReportDocument();
             crystalReport.Load(Server.MapPath("~/Report/CertidaoValorVenal.rpt"));
 
-            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
+            
             int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.ValorVenal);
             int _ano_certidao = DateTime.Now.Year;
 
@@ -109,10 +112,10 @@ namespace GTI_Web.Pages {
             cert.Descbairro = sBairro;
             cert.Li_quadras = Reg.QuadraOriginal;
             cert.Li_lotes = Reg.LoteOriginal;
-            cert.Vvt = (decimal)RegIPTU.Vvt;
-            cert.Vvp = (decimal)RegIPTU.Vvc;
-            cert.Vvi = (decimal)RegIPTU.Vvi;
-            cert.Areaterreno =(decimal) RegIPTU.Areaterreno;
+            cert.Vvt = (decimal)RegCalculo.Vvt;
+            cert.Vvp = (decimal)RegCalculo.Vvp;
+            cert.Vvi = (decimal)RegCalculo.Vvi;
+            cert.Areaterreno =(decimal) RegCalculo.Areaterreno;
             string _valor_metro = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "R${0:#,###.##}", (cert.Vvt / cert.Areaterreno))+ " R$/m²";
 
             Exception ex = tributario_Class.Insert_Certidao_ValorVenal(cert);
@@ -127,9 +130,9 @@ namespace GTI_Web.Pages {
                 crystalReport.SetParameterValue("NOME", sNome);
                 crystalReport.SetParameterValue("INSCRICAO", sInscricao);
                 crystalReport.SetParameterValue("BAIRRO", sBairro);
-                crystalReport.SetParameterValue("VVT", string.Format(CultureInfo.GetCultureInfo("pt-BR"), "R${0:#,###.##}", cert.Vvt) + " (" + _valor_metro +")");
-                crystalReport.SetParameterValue("VVP", string.Format(CultureInfo.GetCultureInfo("pt-BR"), "R${0:#,###.##}", cert.Vvp));
-                crystalReport.SetParameterValue("VVI", string.Format(CultureInfo.GetCultureInfo("pt-BR"), "R${0:#,###.##}", cert.Vvi));
+                crystalReport.SetParameterValue("VVT", string.Format(CultureInfo.GetCultureInfo("pt-BR"), "R${0:0,000.00}", cert.Vvt) + " (" + _valor_metro +")");
+                crystalReport.SetParameterValue("VVP", string.Format(CultureInfo.GetCultureInfo("pt-BR"), "R${0:0,000.00}", cert.Vvp));
+                crystalReport.SetParameterValue("VVI", string.Format(CultureInfo.GetCultureInfo("pt-BR"), "R${0:0,000.00}", cert.Vvi));
 
                 HttpContext.Current.Response.Buffer = false;
                 HttpContext.Current.Response.ClearContent();

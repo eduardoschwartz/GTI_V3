@@ -22,7 +22,7 @@ namespace UIWeb.Pages {
             if (FileUpload1.PostedFile.ContentType.CompareTo("text/xml") == 0) {
                 try {
                     UploadArquivo();
-                } catch {
+                } catch (Exception ex){
                     throw;
                 }
             } else {
@@ -38,8 +38,8 @@ namespace UIWeb.Pages {
                 string MyPathWithoutDriveOrNetworkShare = FileUpload1.PostedFile.FileName.Substring(Path.GetPathRoot(FileUpload1.PostedFile.FileName).Length);
 
                 try {
-                    FileUpload1.SaveAs(path + MyPathWithoutDriveOrNetworkShare);
-                    List<EmpresaStruct>Lista= ReadFile(path + MyPathWithoutDriveOrNetworkShare);
+                    FileUpload1.SaveAs(path + System.IO.Path.GetFileName(MyPathWithoutDriveOrNetworkShare));
+                    List<EmpresaStruct>Lista= ReadFile(path +   System.IO.Path.GetFileName( MyPathWithoutDriveOrNetworkShare));
                     if (Lista.Count > 0) {
                         FillListView(Lista);
                         Grava_Empresas_Vre(Lista);
@@ -89,7 +89,7 @@ namespace UIWeb.Pages {
             }
             grdMain.DataSource = dt;
             grdMain.DataBind();
-            } catch  {
+            } catch  (Exception ex){
                 Statuslbl.Text = "Arquivo inválido";
                 throw;
             }
@@ -202,7 +202,7 @@ namespace UIWeb.Pages {
                 } else {
                     try {
                         Vre_empresa reg = new Vre_empresa();
-                        reg.Nome_arquivo = FileUpload1.PostedFile.FileName;
+                        reg.Nome_arquivo =Path.GetFileName( FileUpload1.PostedFile.FileName);
                         reg.Data_importacao = DateTime.Now;
                         reg.Id = Convert.ToInt32(item.id);
                         reg.Razao_social = item.Nome.ToString().Replace("&amp;", "&");

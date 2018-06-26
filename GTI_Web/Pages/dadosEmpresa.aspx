@@ -124,10 +124,6 @@
                 <asp:TableCell ID="TAXALICENCA" runat="server"  ForeColor="#3a8dcc"></asp:TableCell>
             </asp:TableRow>
              <asp:TableRow runat="server">
-                <asp:TableCell runat="server">Optante do Simples</asp:TableCell>
-                <asp:TableCell ID="SIMPLES" runat="server"  ForeColor="#3a8dcc"></asp:TableCell>
-            </asp:TableRow>
-             <asp:TableRow runat="server">
                 <asp:TableCell runat="server">Micro Emp.Individual</asp:TableCell>
                 <asp:TableCell ID="MEI" runat="server"  ForeColor="#3a8dcc"></asp:TableCell>
             </asp:TableRow>

@@ -52,7 +52,7 @@ namespace GTI_Web.Pages {
         private void PrintReport(int Codigo,TipoCadastro _tipo_cadastro) {
             ReportDocument crystalReport = new ReportDocument();
             string sComplemento = "", sQuadras = "", sLotes = "", sEndereco = "", sBairro = "", sInscricao = "", sNome = "", sCidade = "", sUF = "", sNumProcesso = "9222-3/2012";
-            string sData = "18/04/2012",sAtendente="GTI.Web",sCPF="",sCNPJ="",sAtividade="",sTipoCertidao="",sTributo="",sSufixo="",sNao="";
+            string sData = "18/04/2012",sAtendente="GTI.Web",sCPF="",sCNPJ="",sAtividade="",sTipoCertidao="",sTributo="",sSufixo="",sNao="",sDoc="";
             short nNumeroImovel = 0,nRet=0;
             DateTime dDataProc = Convert.ToDateTime(sData);
 
@@ -74,13 +74,12 @@ namespace GTI_Web.Pages {
                 sNome = Lista[0].Nome;
                 sCPF = Lista[0].CPF;
                 sCNPJ = Lista[0].CPF;
-                crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoImovel.rpt"));
             } else {
                 Empresa_bll empresa_Class = new Empresa_bll("GTIconnection");
                 EmpresaStruct Reg = empresa_Class.Retorna_Empresa(Codigo);
                 sComplemento = string.IsNullOrWhiteSpace(Reg.Complemento) ? "" : " " + Reg.Complemento.ToString().Trim();
                 sComplemento += sQuadras + sLotes;
-                sEndereco = Reg.Nome_logradouro + ", " + Reg.Numero.ToString() + sComplemento;
+                sEndereco = Reg.Endereco_nome + ", " + Reg.Numero.ToString() + sComplemento;
                 nNumeroImovel = (short)Reg.Numero;
                 sBairro = Reg.Bairro_nome;
                 sCidade = Reg.Cidade_nome;
@@ -88,8 +87,8 @@ namespace GTI_Web.Pages {
                 sNome = Reg.Razao_social;
                 sCPF = Reg.Cpf;
                 sCNPJ = Reg.Cnpj;
+                sDoc = Reg.Cpf_cnpj;
                 sAtividade = Reg.Atividade_extenso;
-                crystalReport.Load(Server.MapPath("~/Report/CertidaoDebito.rpt"));
             }
 
             //***Verifica débito
@@ -99,11 +98,33 @@ namespace GTI_Web.Pages {
                 sTipoCertidao = "NEGATIVA";
                 sNao = "Não ";
                 sSufixo = "CN";
-                
+                if (_tipo_cadastro == TipoCadastro.Imovel)
+                    crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoImovel.rpt"));
+                else {
+                    if (_tipo_cadastro == TipoCadastro.Empresa)
+                        crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoEmpresa.rpt"));
+                }
             } else {
                 if (dadosCertidao.Tipo_Retorno == RetornoCertidaoDebito.Positiva) {
                     sTipoCertidao = "POSITIVA";
                     sSufixo = "CP";
+                    if (_tipo_cadastro == TipoCadastro.Imovel)
+                        crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoImovel.rpt"));
+                    else {
+                        if (_tipo_cadastro == TipoCadastro.Empresa)
+                            crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoEmpresa.rpt"));
+                    }
+                } else {
+                    if (dadosCertidao.Tipo_Retorno == RetornoCertidaoDebito.NegativaPositiva) {
+                        sTipoCertidao = "POSITIVA COM EFEITO NEGATIVA";
+                        sSufixo = "PN";
+                        if (_tipo_cadastro == TipoCadastro.Imovel)
+                            crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoImovelPN.rpt"));
+                        else {
+                            if (_tipo_cadastro == TipoCadastro.Empresa)
+                                crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoEmpresaPN.rpt"));
+                        }
+                    }
                 }
             }
             sTributo = dadosCertidao.Descricao_Lancamentos;
@@ -147,6 +168,9 @@ namespace GTI_Web.Pages {
                 crystalReport.SetParameterValue("TIPOCERTIDAO", sTipoCertidao);
                 crystalReport.SetParameterValue("TRIBUTO", sTributo);
                 crystalReport.SetParameterValue("NAO", sNao);
+                crystalReport.SetParameterValue("DOC", sDoc);
+                crystalReport.SetParameterValue("CIDADE", sCidade + "/" + sUF);
+                crystalReport.SetParameterValue("ATIVIDADE", sAtividade);
 
                 HttpContext.Current.Response.Buffer = false;
                 HttpContext.Current.Response.ClearContent();

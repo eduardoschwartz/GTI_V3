@@ -1051,66 +1051,148 @@ namespace GTI_Dal.Classes {
         }
 
         public Certidao_debito_detalhe Certidao_Debito(int Codigo) {
+            TipoCadastro _tipo_Cadastro = Codigo < 100000 ? TipoCadastro.Imovel : Codigo >= 500000 ? TipoCadastro.Cidadao : TipoCadastro.Empresa;
             Certidao_debito_detalhe Certidao = new Certidao_debito_detalhe();
             List<SpExtrato> ListaTributo = Lista_Extrato_Tributo(Codigo, 1980, 2050, 0, 99, 0, 99, 0, 999, 0, 99, 0, 99, DateTime.ParseExact(DateTime.Now.ToShortDateString(), "dd/MM/yyyy", null), "Web");
-            List<SpExtrato> ListaParcela = Lista_Extrato_Parcela(ListaTributo);
-            List<DebitoStructure> _lista_Debitos = new List<DebitoStructure>();
+       
+            ArrayList alArrayNaoPagoVencido = new ArrayList();
+            ArrayList alArrayParceladoAVencer = new ArrayList();
+            ArrayList alArraySuspenso = new ArrayList();
+            ArrayList alArrayResult = new ArrayList();
 
-            foreach (var item in ListaParcela) {
-                if (item.Statuslanc == 3 && (DateTime.Now - item.Datavencimento).TotalDays>0) {
-                    DebitoStructure reg = new DebitoStructure();
-                    reg.Codigo_Reduzido = item.Codreduzido;
-                    reg.Ano_Exercicio = item.Anoexercicio;
-                    reg.Codigo_Lancamento = Convert.ToInt16(item.Codlancamento);
-                    reg.Descricao_Lancamento = item.Desclancamento;
-                    reg.Sequencia_Lancamento = Convert.ToInt16(item.Seqlancamento);
-                    reg.Numero_Parcela = Convert.ToInt16(item.Numparcela);
-                    reg.Complemento = item.Codcomplemento;
-                    reg.Data_Vencimento = Convert.ToDateTime(item.Datavencimento);
-                    reg.Codigo_Situacao = Convert.ToInt16(item.Statuslanc);
-                    reg.Soma_Principal = item.Valortributo;
-                    reg.Soma_Juros = item.Valorjuros;
-                    reg.Soma_Multa = item.Valormulta;
-                    reg.Soma_Correcao = item.Valorcorrecao;
-                    reg.Soma_Total = item.Valortotal;
-                    reg.Data_Ajuizamento = item.Dataajuiza;
-                    _lista_Debitos.Add(reg);
-                }
-            }
-
-            ArrayList alArray = new ArrayList();
-            string _descricao_lancamento="";
+            string _descricao_lancamento = "";
             string sDescTmp="";
-            //Se tiver débito não pago
-            if (_lista_Debitos.Count > 0) {
-                foreach (var item in _lista_Debitos) {
+
+            if (ListaTributo.Count > 0) {
+                bool bNaoPagoVencido = false;
+                bool bParceladoAVencer = false;
+                bool bSuspenso = false;
+
+                foreach (var item in ListaTributo) { 
                     bool bFind = false;
-                    sDescTmp = item.Descricao_Lancamento;
-                    if (item.Codigo_Lancamento==29)
+                    sDescTmp = item.Abrevtributo;
+                    if (item.Codlancamento==29)
                         sDescTmp = "IPTU";
-                    for (int i = 0; i < alArray.Count; i++) {
-                        if (alArray[i].ToString() == sDescTmp) {
+
+                    //Verifica o status
+                    //*** não pagos
+                    if ((item.Statuslanc == 3 | item.Statuslanc==18) && item.Datavencimento < DateTime.Now) {
+                        bNaoPagoVencido = true;
+                        for (int i = 0; i < alArrayNaoPagoVencido.Count; i++) {
+                            if (item.Codtributo == 26 || item.Codtributo == 90 || item.Codtributo == 112 || item.Codtributo == 113 || item.Codtributo == 585 || item.Codtributo == 587) {
+                                bFind = true;
+                                break;
+                            }
+                            if (alArrayNaoPagoVencido[i].ToString() == sDescTmp) {
+                                bFind = true;
+                                break;
+                            }
+                        }
+                        if (!bFind)
+                            alArrayNaoPagoVencido.Add(sDescTmp);
+    
+                    }
+
+                    //*** suspensos ou em julgamento
+                    if ((item.Statuslanc == 18 | item.Statuslanc == 19 | item.Statuslanc == 20) && item.Datavencimento < DateTime.Now) {
+                        bSuspenso = true;
+                        if (item.Codtributo == 26 || item.Codtributo == 90 || item.Codtributo == 112 || item.Codtributo == 113 || item.Codtributo == 585 || item.Codtributo == 587) {
                             bFind = true;
                             break;
                         }
+                        for (int i = 0; i < alArraySuspenso.Count; i++) {
+                            if (alArraySuspenso[i].ToString() == sDescTmp) {
+                                bFind = true;
+                                break;
+                            }
+                        }
+                        if (!bFind)
+                            alArraySuspenso.Add(sDescTmp);
                     }
-                    if (!bFind)
-                        alArray.Add(sDescTmp);
+
+                    //*** parcelados
+                    if (item.Codlancamento == 20 && (item.Statuslanc == 3 || item.Statuslanc == 18) && item.Datavencimento >= DateTime.Now) {
+                        bParceladoAVencer = true;
+                        for (int i = 0; i < alArrayParceladoAVencer.Count; i++) {
+                            if(item.Codtributo==26 || item.Codtributo==90 || item.Codtributo==112 || item.Codtributo==113||item.Codtributo==585 || item.Codtributo == 587) {
+                                bFind = true;
+                                break;
+                            }
+                            if (alArrayParceladoAVencer[i].ToString() == sDescTmp) {
+                                bFind = true;
+                                break;
+                            }
+                        }
+                        if (!bFind)
+                            alArrayParceladoAVencer.Add(sDescTmp);
+                    }
                 }
 
-                for (int i = 0; i < alArray.Count; i++) {
-                    _descricao_lancamento += alArray[i].ToString() + ", ";
+                if (bNaoPagoVencido) {
+                    alArrayResult = alArrayNaoPagoVencido;
+                } else {
+                    if (bSuspenso) {
+                        alArrayResult = alArraySuspenso;
+                    } else {
+                        if (bParceladoAVencer) {
+                            alArrayResult = alArrayParceladoAVencer;
+                        }
+                    }
                 }
-                _descricao_lancamento = _descricao_lancamento.Substring(0, _descricao_lancamento.Length - 2);
-                Certidao.Tipo_Retorno = RetornoCertidaoDebito.Positiva;
+
+                for (int i = 0; i < alArrayResult.Count; i++) {
+                    _descricao_lancamento += alArrayResult[i].ToString() + ", ";
+                }
+
+                if (_descricao_lancamento != "")
+                    _descricao_lancamento = _descricao_lancamento.Substring(0, _descricao_lancamento.Length - 2);
+                else {
+                    if (_tipo_Cadastro == TipoCadastro.Imovel) {
+                        _descricao_lancamento = "Débitos Imobiliários";
+                    } else {
+                        if (_tipo_Cadastro == TipoCadastro.Empresa) {
+                            _descricao_lancamento = "Débitos Mobiliários";
+                        } else {
+                            _descricao_lancamento = "Débitos do Contribuinte";
+                        }
+                    }
+                }
+
+                if (bNaoPagoVencido)
+                    Certidao.Tipo_Retorno = RetornoCertidaoDebito.Positiva;
+                else {
+                    //Verifica se tem débito suspenso/julgamento
+                    if (bSuspenso)
+                        Certidao.Tipo_Retorno = RetornoCertidaoDebito.NegativaPositiva;
+                    else {
+                        //Verifica se tem parcelamento
+                        if(bParceladoAVencer)
+                            Certidao.Tipo_Retorno = RetornoCertidaoDebito.NegativaPositiva;
+                        else
+                            Certidao.Tipo_Retorno = RetornoCertidaoDebito.Negativa;
+                    }
+                }
             } else {
-                Certidao.Descricao_Lancamentos = "OUTRUS";
-                Certidao.Tipo_Retorno = RetornoCertidaoDebito.NegativaPositiva;
+                //Código sem lançamentos, emite negativa
+                Certidao.Descricao_Lancamentos = "";
+                Certidao.Tipo_Retorno = RetornoCertidaoDebito.Negativa;
             }
 
             Certidao.Descricao_Lancamentos = _descricao_lancamento;
             return Certidao;
         }
+
+
+        public SpCalculo Calculo_IPTU(int Codigo, int Ano) {
+            using (var db = new GTI_Context(_connection)) {
+                var prmCodigo = new SqlParameter { ParameterName = "@Codigo", SqlDbType = SqlDbType.Int, SqlValue = Codigo };
+                var prmAno = new SqlParameter { ParameterName = "@Ano", SqlDbType = SqlDbType.Int, SqlValue = Ano };
+                SpCalculo result = db.SpCalculo.SqlQuery("EXEC spCalculo @Codigo, @Ano ", prmCodigo, prmAno).FirstOrDefault();
+                return result;
+            }
+        }
+
+
 
 
 

@@ -16,14 +16,14 @@ namespace GTI_Web.Report {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class CertidaoDebitoImovel : ReportClass {
+    public class CertidaoDebitoImovelPN : ReportClass {
         
-        public CertidaoDebitoImovel() {
+        public CertidaoDebitoImovelPN() {
         }
         
         public override string ResourceName {
             get {
-                return "CertidaoDebitoImovel.rpt";
+                return "CertidaoDebitoImovelPN.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace GTI_Web.Report {
         
         public override string FullResourceName {
             get {
-                return "GTI_Web.Report.CertidaoDebitoImovel.rpt";
+                return "GTI_Web.Report.CertidaoDebitoImovelPN.rpt";
             }
             set {
                 // Do nothing
@@ -210,9 +210,9 @@ namespace GTI_Web.Report {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedCertidaoDebitoImovel : Component, ICachedReport {
+    public class CachedCertidaoDebitoImovelPN : Component, ICachedReport {
         
-        public CachedCertidaoDebitoImovel() {
+        public CachedCertidaoDebitoImovelPN() {
         }
         
         [Browsable(false)]
@@ -249,7 +249,7 @@ namespace GTI_Web.Report {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            CertidaoDebitoImovel rpt = new CertidaoDebitoImovel();
+            CertidaoDebitoImovelPN rpt = new CertidaoDebitoImovelPN();
             rpt.Site = this.Site;
             return rpt;
         }

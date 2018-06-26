@@ -16,14 +16,14 @@ namespace GTI_Web.Report {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class CertidaoDebitoImovel : ReportClass {
+    public class CertidaoDebitoEmpresa : ReportClass {
         
-        public CertidaoDebitoImovel() {
+        public CertidaoDebitoEmpresa() {
         }
         
         public override string ResourceName {
             get {
-                return "CertidaoDebitoImovel.rpt";
+                return "CertidaoDebitoEmpresa.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace GTI_Web.Report {
         
         public override string FullResourceName {
             get {
-                return "GTI_Web.Report.CertidaoDebitoImovel.rpt";
+                return "GTI_Web.Report.CertidaoDebitoEmpresa.rpt";
             }
             set {
                 // Do nothing
@@ -138,7 +138,7 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_INSCRICAO {
+        public CrystalDecisions.Shared.IParameterField Parameter_NOME {
             get {
                 return this.DataDefinition.ParameterFields[5];
             }
@@ -146,7 +146,7 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_NOME {
+        public CrystalDecisions.Shared.IParameterField Parameter_BAIRRO {
             get {
                 return this.DataDefinition.ParameterFields[6];
             }
@@ -154,7 +154,7 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_BAIRRO {
+        public CrystalDecisions.Shared.IParameterField Parameter_TIPOCERTIDAO {
             get {
                 return this.DataDefinition.ParameterFields[7];
             }
@@ -162,7 +162,7 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_TIPOCERTIDAO {
+        public CrystalDecisions.Shared.IParameterField Parameter_TRIBUTO {
             get {
                 return this.DataDefinition.ParameterFields[8];
             }
@@ -170,7 +170,7 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_TRIBUTO {
+        public CrystalDecisions.Shared.IParameterField Parameter_NAO {
             get {
                 return this.DataDefinition.ParameterFields[9];
             }
@@ -178,7 +178,7 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_NAO {
+        public CrystalDecisions.Shared.IParameterField Parameter_DOC {
             get {
                 return this.DataDefinition.ParameterFields[10];
             }
@@ -186,7 +186,7 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DOC {
+        public CrystalDecisions.Shared.IParameterField Parameter_CIDADE {
             get {
                 return this.DataDefinition.ParameterFields[11];
             }
@@ -194,7 +194,7 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CIDADE {
+        public CrystalDecisions.Shared.IParameterField Parameter_ATIVIDADE {
             get {
                 return this.DataDefinition.ParameterFields[12];
             }
@@ -202,7 +202,7 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ATIVIDADE {
+        public CrystalDecisions.Shared.IParameterField Parameter_INSCRICAO {
             get {
                 return this.DataDefinition.ParameterFields[13];
             }
@@ -210,9 +210,9 @@ namespace GTI_Web.Report {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedCertidaoDebitoImovel : Component, ICachedReport {
+    public class CachedCertidaoDebitoEmpresa : Component, ICachedReport {
         
-        public CachedCertidaoDebitoImovel() {
+        public CachedCertidaoDebitoEmpresa() {
         }
         
         [Browsable(false)]
@@ -249,7 +249,7 @@ namespace GTI_Web.Report {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            CertidaoDebitoImovel rpt = new CertidaoDebitoImovel();
+            CertidaoDebitoEmpresa rpt = new CertidaoDebitoEmpresa();
             rpt.Site = this.Site;
             return rpt;
         }

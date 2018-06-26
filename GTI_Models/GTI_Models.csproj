@@ -115,6 +115,7 @@
     <Compile Include="Models\sistema.cs" />
     <Compile Include="Models\situacao.cs" />
     <Compile Include="Models\situacaolancamento.cs" />
+    <Compile Include="Models\spCalculo.cs" />
     <Compile Include="Models\spExtrato.cs" />
     <Compile Include="Models\testada.cs" />
     <Compile Include="Models\Testadacondominio.cs" />
