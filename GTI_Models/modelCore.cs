@@ -6,4 +6,15 @@ namespace GTI_Models {
         public enum TipoCadastro { Imovel, Empresa, Cidadao }
         public enum RetornoCertidaoDebito { Negativa, Positiva, NegativaPositiva}
     }
+
+    public class CompetenciaISS {
+        public int Codigo { get; set; }
+        public int Ano_Competencia { get; set; }
+        public int Mes_Competencia { get; set; }
+        public bool Encerrada { get; set; }
+        public bool Sem_Movimento { get; set; }
+        public decimal Valor { get; set; }
+    }
+
+
 }

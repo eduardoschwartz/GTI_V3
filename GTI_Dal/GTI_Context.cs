@@ -104,5 +104,6 @@ namespace GTI_Dal {
         public DbSet<Vwproprietarioduplicado> Vwproprietarioduplicado { get; set; }
         public DbSet<Isencao> Isencao { get; set; }
         public DbSet<SpCalculo> SpCalculo { get; set; }
+        
     }
 }

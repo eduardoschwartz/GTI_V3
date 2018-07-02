@@ -6,11 +6,19 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Configuration;
 using static GTI_Models.modelCore;
+using GTI_Models;
 
 namespace GTI_Dal.Classes {
     public class Tributario_Data {
         public static int Plano = 0;
+        private struct Competencia {
+            int Ano_Inicio;
+            int Mes_Inicio;
+            int AnoFinal;
+            int Mes_Final;
+        }
 
         private string _connection;
 
@@ -944,6 +952,10 @@ namespace GTI_Dal.Classes {
                     else {
                         if (tipo_certidao == TipoCertidao.Isencao)
                             Sql = Sql.Where(c => c.Nomeparam == "CETISE");
+                        else {
+                            if (tipo_certidao == TipoCertidao.Debito)
+                                Sql = Sql.Where(c => c.Nomeparam == "CDB");
+                        }
                     }
                 }
                 foreach (Parametros item in Sql) {
@@ -969,6 +981,10 @@ namespace GTI_Dal.Classes {
                     else {
                         if (tipo_certidao == TipoCertidao.Isencao)
                             p = db.Parametros.First(i => i.Nomeparam == "CETISE");
+                        else {
+                            if (tipo_certidao == TipoCertidao.Debito)
+                                p = db.Parametros.First(i => i.Nomeparam == "CDB");
+                        }
                     }
                 }
                 p.Valparam = Valor.ToString();
@@ -1050,6 +1066,15 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Certidao_debito Retorna_Certidao_Debito(int Ano, int Numero, int Codigo) {
+            using (var db = new GTI_Context(_connection)) {
+                var Sql = (from p in db.Certidao_debito where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
+                return Sql;
+            }
+        }
+
+
+
         public Certidao_debito_detalhe Certidao_Debito(int Codigo) {
             TipoCadastro _tipo_Cadastro = Codigo < 100000 ? TipoCadastro.Imovel : Codigo >= 500000 ? TipoCadastro.Cidadao : TipoCadastro.Empresa;
             Certidao_debito_detalhe Certidao = new Certidao_debito_detalhe();
@@ -1079,7 +1104,7 @@ namespace GTI_Dal.Classes {
                     if ((item.Statuslanc == 3 | item.Statuslanc==18) && item.Datavencimento < DateTime.Now) {
                         bNaoPagoVencido = true;
                         for (int i = 0; i < alArrayNaoPagoVencido.Count; i++) {
-                            if (item.Codtributo == 26 || item.Codtributo == 90 || item.Codtributo == 112 || item.Codtributo == 113 || item.Codtributo == 585 || item.Codtributo == 587) {
+                            if (item.Codtributo == 26 || item.Codtributo == 90 || item.Codtributo == 112 || item.Codtributo == 113 || item.Codtributo == 585 || item.Codtributo == 587 || item.Codtributo == 24 || item.Codtributo == 28) {
                                 bFind = true;
                                 break;
                             }
@@ -1096,7 +1121,7 @@ namespace GTI_Dal.Classes {
                     //*** suspensos ou em julgamento
                     if ((item.Statuslanc == 18 | item.Statuslanc == 19 | item.Statuslanc == 20) && item.Datavencimento < DateTime.Now) {
                         bSuspenso = true;
-                        if (item.Codtributo == 26 || item.Codtributo == 90 || item.Codtributo == 112 || item.Codtributo == 113 || item.Codtributo == 585 || item.Codtributo == 587) {
+                        if (item.Codtributo == 26 || item.Codtributo == 90 || item.Codtributo == 112 || item.Codtributo == 113 || item.Codtributo == 585 || item.Codtributo == 587 || item.Codtributo == 24 || item.Codtributo == 28) {
                             bFind = true;
                             break;
                         }
@@ -1114,7 +1139,7 @@ namespace GTI_Dal.Classes {
                     if (item.Codlancamento == 20 && (item.Statuslanc == 3 || item.Statuslanc == 18) && item.Datavencimento >= DateTime.Now) {
                         bParceladoAVencer = true;
                         for (int i = 0; i < alArrayParceladoAVencer.Count; i++) {
-                            if(item.Codtributo==26 || item.Codtributo==90 || item.Codtributo==112 || item.Codtributo==113||item.Codtributo==585 || item.Codtributo == 587) {
+                            if(item.Codtributo==26 || item.Codtributo==90 || item.Codtributo==112 || item.Codtributo==113||item.Codtributo==585 || item.Codtributo == 587 || item.Codtributo==24 ||item.Codtributo==28 ) {
                                 bFind = true;
                                 break;
                             }
@@ -1192,8 +1217,86 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public List<CompetenciaISS> Resumo_CompetenciaISS(int Codigo) {
+            List<CompetenciaISS> TabelaMes = new List<CompetenciaISS>();
+            using (var db = new Eicon_Context(ConfigurationManager.ConnectionStrings["GTIEicon"].ConnectionString)) {
+                decimal _mes_inicial = db.Tb_inter_encerramento_giss.OrderBy(c => c.Ano_competencia).ThenBy(c => c.Mes_competencia).Where(c => c.Num_cadastro == Codigo).Select(c => c.Mes_competencia).FirstOrDefault();
+                decimal _ano_inicial = db.Tb_inter_encerramento_giss.OrderBy(c => c.Ano_competencia).ThenBy(c => c.Mes_competencia).Where(c => c.Num_cadastro == Codigo).Select(c => c.Ano_competencia).FirstOrDefault();
+//                DateTime _dataencerramento = db.Tb_inter_encerramento_giss.OrderByDescending(c => c.Ano_competencia).ThenByDescending(c => c.Mes_competencia).Where(c => c.Num_cadastro == Codigo).Select(c => c.Data_encerramento).FirstOrDefault();
 
+                int _mes_anterior = 0, _ano_anterior = 0;
 
+                if (DateTime.Now.Month== 1){
+                    _mes_anterior = 12;
+                    _ano_anterior = DateTime.Now.Year - 1;
+                } else {
+                    _mes_anterior = DateTime.Now.Month-1;
+                    _ano_anterior = DateTime.Now.Year ;
+                }
+
+                DateTime _data_30dias = DateTime.Now.AddDays(-31);
+
+                int _mes_final = _data_30dias.Month;
+                int _ano_final = _data_30dias.Year;
+
+                decimal _mes_atual = _mes_inicial, _ano_atual = _ano_inicial;
+
+                while (true) {
+                    if (_ano_atual < 2015) //apenas para competencias acima de abril de 2015(Inicio da Giss)
+                        goto Continue;
+                    else {
+                        if(_ano_atual==2015 && _mes_atual<5)
+                            goto Continue;
+                    }
+
+                    CompetenciaISS reg = new CompetenciaISS();
+                    reg.Codigo = Codigo;
+                    reg.Ano_Competencia = Convert.ToInt32( _ano_atual);
+                    reg.Mes_Competencia = Convert.ToInt32(_mes_atual);
+                    reg.Encerrada = false;
+                    reg.Sem_Movimento = false;
+                    reg.Valor = 0;
+                    TabelaMes.Add(reg);
+
+                    Continue:;
+
+                    if (_mes_atual == 12) {
+                        _mes_atual = 1;
+                        _ano_atual++;
+                    } else
+                        _mes_atual++;
+
+                    if (_ano_atual == _ano_final && _mes_atual > _mes_final)
+                        break;
+
+                    if(_ano_atual>_ano_final)
+                        break;
+                    
+                }
+
+                var Sql = db.Tb_inter_encerramento_giss.Where(c => c.Num_cadastro == Codigo).OrderBy(c => c.Ano_competencia).ThenBy(c => c.Mes_competencia).Select(x => new  {  x.Ano_competencia,  x.Mes_competencia,x.Sem_movimento }).ToList();
+                foreach (var item in Sql) {
+                    for (int i = 0; i < TabelaMes.Count; i++) {
+                        if(TabelaMes[i].Ano_Competencia==item.Ano_competencia && TabelaMes[i].Mes_Competencia == item.Mes_competencia) {
+                            TabelaMes[i].Encerrada = true;
+                            TabelaMes[i].Sem_Movimento = item.Sem_movimento == "S" ? true : false;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return TabelaMes;
+        }
+
+        public int Competencias_Nao_Encerradas(List<CompetenciaISS>Lista) {
+            int nCount = 0;
+            for (int i = 0; i < Lista.Count; i++) {
+                if (Lista[i].Encerrada == false)
+                    nCount++;
+            }
+            return nCount;
+        }
 
 
     }//end class

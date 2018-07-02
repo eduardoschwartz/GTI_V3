@@ -612,6 +612,18 @@ namespace GTI_Bll.Classes {
         }
 
         /// <summary>
+        /// Retorna os dados da certidão de débitos
+        /// </summary>
+        /// <param name="Ano"></param>
+        /// <param name="Numero"></param>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public Certidao_debito Retorna_Certidao_Debito(int Ano, int Numero, int Codigo) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Retorna_Certidao_Debito(Ano, Numero, Codigo);
+        }
+
+        /// <summary>
         /// Insere na tabela certidao_valor_venal
         /// </summary>
         /// <param name="Reg"></param>
@@ -663,6 +675,26 @@ namespace GTI_Bll.Classes {
         public SpCalculo Calculo_IPTU(int Codigo, int Ano) {
             Tributario_Data obj = new Tributario_Data(_connection);
             return obj.Calculo_IPTU(Codigo,Ano);
+        }
+
+        /// <summary>
+        /// Retorna a lista das competências pagas de ISS
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public List<CompetenciaISS> Resumo_CompetenciaISS(int Codigo) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Resumo_CompetenciaISS(Codigo);
+        }
+
+        /// <summary>
+        /// Retorna a qtde meses nas quais a compet~encia não foi encerrada
+        /// </summary>
+        /// <param name="Lista"></param>
+        /// <returns></returns>
+        public int Competencias_Nao_Encerradas(List<CompetenciaISS> Lista) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Competencias_Nao_Encerradas(Lista);
         }
 
     }//end class

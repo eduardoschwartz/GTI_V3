@@ -343,6 +343,12 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Report\CertidaoDebitoEmpresaPN.cs">
+      <DependentUpon>CertidaoDebitoEmpresaPN.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Report\CertidaoDebitoImovelPN.cs">
       <DependentUpon>CertidaoDebitoImovelPN.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -369,6 +375,12 @@
     </Compile>
     <Compile Include="Report\CertidaoIsencao65.cs">
       <DependentUpon>CertidaoIsencao65.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Report\CertidaoDebitoValida.cs">
+      <DependentUpon>CertidaoDebitoValida.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
@@ -465,6 +477,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CertidaoDebitoEmpresa.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\CertidaoDebitoEmpresaPN.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CertidaoDebitoEmpresaPN.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\CertidaoDebitoImovelPN.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CertidaoDebitoImovelPN.cs</LastGenOutput>
@@ -484,6 +500,10 @@
     <EmbeddedResource Include="Report\CertidaoIsencao65.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CertidaoIsencao65.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\CertidaoDebitoValida.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CertidaoDebitoValida.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\CertidaoIsencaoValida.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

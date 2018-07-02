@@ -363,6 +363,16 @@ namespace GTI_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap emoji_1f4c3 {
+            get {
+                object obj = ResourceManager.GetObject("emoji_1f4c3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap emoji_1f510 {
             get {
                 object obj = ResourceManager.GetObject("emoji_1f510", resourceCulture);
@@ -496,6 +506,56 @@ namespace GTI_Desktop.Properties {
         internal static System.Drawing.Bitmap Home {
             get {
                 object obj = ResourceManager.GetObject("Home", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap if_Application_105234 {
+            get {
+                object obj = ResourceManager.GetObject("if_Application_105234", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap if_Folder_27849 {
+            get {
+                object obj = ResourceManager.GetObject("if_Folder_27849", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap if_folder_61771 {
+            get {
+                object obj = ResourceManager.GetObject("if_folder_61771", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap if_Gnome_Application_Certificate_48_55221 {
+            get {
+                object obj = ResourceManager.GetObject("if_Gnome-Application-Certificate-48_55221", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap if_Login_73221 {
+            get {
+                object obj = ResourceManager.GetObject("if_Login_73221", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

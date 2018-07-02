@@ -10,7 +10,7 @@ using static GTI_Models.modelCore;
 namespace GTI_Web.Pages {
     public partial class certidaodebito : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
-
+            lblMsg.Text = "";
         }
 
         protected void btPrint_Click(object sender, EventArgs e) {
@@ -39,8 +39,16 @@ namespace GTI_Web.Pages {
                         else {
                             if (txtimgcode.Text != Session["randomStr"].ToString())
                                 lblMsg.Text = "Código da imagem inválido";
-                            else
-                                PrintReport(Codigo,TipoCadastro.Empresa);
+                            else {
+                                //Verifica competência en
+                                Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
+                                int _holes = tributario_Class.Competencias_Nao_Encerradas(tributario_Class.Resumo_CompetenciaISS(Codigo));
+                                if (_holes == 0) {
+                                    lblMsg.Text = "";
+                                    PrintReport(Codigo, TipoCadastro.Empresa);
+                                } else
+                                    lblMsg.Text = "A empresa possui uma ou mais competências não encerradas.";
+                            }
                         }
                     } else {
                         lblMsg.Text = "Código não cadastrado.";
@@ -97,6 +105,7 @@ namespace GTI_Web.Pages {
             if (dadosCertidao.Tipo_Retorno == RetornoCertidaoDebito.Negativa) {
                 sTipoCertidao = "NEGATIVA";
                 sNao = "Não ";
+                nRet = 3;
                 sSufixo = "CN";
                 if (_tipo_cadastro == TipoCadastro.Imovel)
                     crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoImovel.rpt"));
@@ -107,6 +116,7 @@ namespace GTI_Web.Pages {
             } else {
                 if (dadosCertidao.Tipo_Retorno == RetornoCertidaoDebito.Positiva) {
                     sTipoCertidao = "POSITIVA";
+                    nRet = 4;
                     sSufixo = "CP";
                     if (_tipo_cadastro == TipoCadastro.Imovel)
                         crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoImovel.rpt"));
@@ -117,6 +127,7 @@ namespace GTI_Web.Pages {
                 } else {
                     if (dadosCertidao.Tipo_Retorno == RetornoCertidaoDebito.NegativaPositiva) {
                         sTipoCertidao = "POSITIVA COM EFEITO NEGATIVA";
+                        nRet = 5;
                         sSufixo = "PN";
                         if (_tipo_cadastro == TipoCadastro.Imovel)
                             crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoImovelPN.rpt"));
@@ -130,7 +141,7 @@ namespace GTI_Web.Pages {
             sTributo = dadosCertidao.Descricao_Lancamentos;
 
             //******************
-            int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Endereco);
+            int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Debito);
             int _ano_certidao = DateTime.Now.Year;
 
             Certidao_debito cert = new Certidao_debito();
@@ -152,6 +163,7 @@ namespace GTI_Web.Pages {
             cert.Cpf = sCPF;
             cert.Cnpj = sCNPJ;
             cert.Atividade = sAtividade;
+            cert.Lancamento = dadosCertidao.Descricao_Lancamentos;
             Exception ex = tributario_Class.Insert_Certidao_Debito(cert);
             if (ex != null) {
                 throw ex;
@@ -187,8 +199,99 @@ namespace GTI_Web.Pages {
         }
 
         protected void ValidarButton_Click(object sender, EventArgs e) {
+            string sCod = Codigo.Text;
+            string sTipo = "";
+            lblMsg.Text = "";
+            int nPos = 0, nPos2 = 0, nCodigo = 0, nAno = 0, nNumero = 0;
+            if (sCod.Trim().Length < 8)
+                lblMsg.Text = "Código de validação inválido.";
+            else {
+                nPos = sCod.IndexOf("-");
+                if (nPos < 6)
+                    lblMsg.Text = "Código de validação inválido.";
+                else {
+                    nPos2 = sCod.IndexOf("/");
+                    if (nPos2 < 5 || nPos - nPos2 < 2)
+                        lblMsg.Text = "Código de validação inválido.";
+                    else {
+                        nCodigo = Convert.ToInt32(sCod.Substring(nPos2 + 1, nPos - nPos2 - 1));
+                        nAno = Convert.ToInt32(sCod.Substring(nPos2 - 4, 4));
+                        nNumero = Convert.ToInt32(sCod.Substring(0, 5));
+                        if (nAno < 2010 || nAno > DateTime.Now.Year + 1)
+                            lblMsg.Text = "Código de validação inválido.";
+                        else {
+                            sTipo = sCod.Substring(sCod.Length - 2, 2);
+                            if (sTipo == "CN"|| sTipo == "CP"||sTipo == "PN") {
+                                Certidao_debito dados = Valida_Dados(nNumero, nAno, nCodigo);
+                                if (dados != null)
+                                    Exibe_Certidao_Debito(dados);
+                                else
+                                    lblMsg.Text = "Certidão não cadastrada.";
+                            } else {
+                                lblMsg.Text = "Código de validação inválido.";
+                            }
+                        }
+                    }
+                }
+            }
 
         }
+
+        private Certidao_debito Valida_Dados(int Numero, int Ano, int Codigo) {
+            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
+            Certidao_debito dados = tributario_Class.Retorna_Certidao_Debito(Ano, Numero, Codigo);
+            return dados;
+        }
+
+
+        private void Exibe_Certidao_Debito(Certidao_debito dados) {
+            lblMsg.Text = "";
+            string sEndereco = dados.Logradouro + ", " + dados.Numero.ToString();
+            string sTipo = "";
+            if (dados.Ret == 4)
+                sTipo = "CERTDÂO POSITIVA";
+            else {
+                if (dados.Ret == 5)
+                    sTipo = "CERTIDÃO POSITIVA EFEITO NEGATIVA";
+                else
+                    sTipo = "CERTIDÃO NEGATIVA";
+            }
+
+            Imovel_bll imovel_Class = new Imovel_bll("GTIconnection");
+            string sProc = dados.Processo;
+
+            ReportDocument crystalReport = new ReportDocument();
+            crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoValida.rpt"));
+            crystalReport.SetParameterValue("NUMCERTIDAO", dados.Numero.ToString("00000") + "/" + dados.Ano.ToString("0000"));
+            crystalReport.SetParameterValue("DATAEMISSAO", Convert.ToDateTime(dados.Datagravada).ToString("dd/MM/yyyy") + " às " + Convert.ToDateTime(dados.Datagravada).ToString("HH:mm:ss"));
+            crystalReport.SetParameterValue("CONTROLE", dados.Numero.ToString("00000") + dados.Ano.ToString("0000") + "/" + dados.Codigo.ToString() + "-CI");
+            crystalReport.SetParameterValue("ENDERECO", sEndereco);
+            crystalReport.SetParameterValue("CADASTRO", Convert.ToInt32(dados.Codigo).ToString("000000"));
+            crystalReport.SetParameterValue("NOME", dados.Nome);
+            crystalReport.SetParameterValue("INSCRICAO", string.IsNullOrWhiteSpace( dados.Inscricao)?"N/A":dados.Inscricao);
+            crystalReport.SetParameterValue("BAIRRO", dados.Bairro);
+            crystalReport.SetParameterValue("TIPO", sTipo);
+            crystalReport.SetParameterValue("PROCESSO", sProc);
+            crystalReport.SetParameterValue("ATIVIDADE", string.IsNullOrWhiteSpace(dados.Atividade) ? "N/A" : dados.Atividade);
+            crystalReport.SetParameterValue("TRIBUTO", string.IsNullOrWhiteSpace(dados.Lancamento) ? "N/A" : dados.Lancamento);
+
+            HttpContext.Current.Response.Buffer = false;
+            HttpContext.Current.Response.ClearContent();
+            HttpContext.Current.Response.ClearHeaders();
+
+            try {
+                crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true, "comp" + dados.Numero.ToString() + dados.Ano.ToString());
+            } catch {
+            } finally {
+                crystalReport.Close();
+                crystalReport.Dispose();
+            }
+
+        }
+
+
+
+
     }
 
 

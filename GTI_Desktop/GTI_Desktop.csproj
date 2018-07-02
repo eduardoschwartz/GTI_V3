@@ -65,6 +65,9 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="DropDownContainer">
       <HintPath>..\..\DropDownCo213899112009\DropDownContainer\DropDownContainer\bin\Release\DropDownContainer.dll</HintPath>
     </Reference>
@@ -384,6 +387,60 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Report\CertidaoDebitoEmpresa.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CertidaoDebitoEmpresa.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\CertidaoDebitoEmpresaPN.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CertidaoDebitoEmpresaPN.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\CertidaoDebitoImovel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CertidaoDebitoImovel.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\CertidaoDebitoImovelPN.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CertidaoDebitoImovelPN.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\CertidaoEndereco.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CertidaoEndereco.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\CertidaoImunidade.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CertidaoImunidade.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\CertidaoIsencao65.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CertidaoIsencao65.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\CertidaoIsencaoProcesso.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CertidaoIsencaoProcesso.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\CertidaoValorVenal.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CertidaoValorVenal.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="User_Controls\ctlDataEditor.cs">
       <SubType>UserControl</SubType>
@@ -515,6 +572,42 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\CertidaoDebitoEmpresa.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CertidaoDebitoEmpresa.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\CertidaoDebitoEmpresaPN.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CertidaoDebitoEmpresaPN.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\CertidaoDebitoImovel.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CertidaoDebitoImovel.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\CertidaoDebitoImovelPN.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CertidaoDebitoImovelPN.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\CertidaoEndereco.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CertidaoEndereco.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\CertidaoImunidade.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CertidaoImunidade.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\CertidaoIsencao65.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CertidaoIsencao65.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\CertidaoIsencaoProcesso.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CertidaoIsencaoProcesso.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\CertidaoValorVenal.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CertidaoValorVenal.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\ComprovanteDoc.rdlc">
       <SubType>Designer</SubType>
@@ -728,6 +821,12 @@
     <None Include="Resources\Sair.png" />
     <None Include="Resources\Business.png" />
     <None Include="Resources\pasta-azul-lupa.png" />
+    <None Include="Resources\emoji_1f4c3.png" />
+    <None Include="Resources\if_folder_61771.png" />
+    <None Include="Resources\if_Folder_27849.png" />
+    <None Include="Resources\if_Gnome-Application-Certificate-48_55221.png" />
+    <None Include="Resources\if_Application_105234.png" />
+    <None Include="Resources\if_Login_73221.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -763,6 +862,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
