@@ -152,6 +152,12 @@
     <Compile Include="Forms\Bairro.designer.cs">
       <DependentUpon>Bairro.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Certidao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Certidao.Designer.cs">
+      <DependentUpon>Certidao.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Cidadao.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -456,6 +462,9 @@
     </Compile>
     <EmbeddedResource Include="Forms\Bairro.resx">
       <DependentUpon>Bairro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Certidao.resx">
+      <DependentUpon>Certidao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Cidadao.resx">
       <DependentUpon>Cidadao.cs</DependentUpon>

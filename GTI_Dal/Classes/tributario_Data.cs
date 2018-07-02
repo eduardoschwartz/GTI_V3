@@ -13,12 +13,6 @@ using GTI_Models;
 namespace GTI_Dal.Classes {
     public class Tributario_Data {
         public static int Plano = 0;
-        private struct Competencia {
-            int Ano_Inicio;
-            int Mes_Inicio;
-            int AnoFinal;
-            int Mes_Final;
-        }
 
         private string _connection;
 

@@ -547,5 +547,19 @@ namespace GTI_Desktop.Forms {
                 f1.BringToFront();
             }
         }
+
+        private void CertidaoButton_Click(object sender, EventArgs e) {
+            var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Certidao);
+            if (formToShow != null) {
+                formToShow.Show();
+            } else {
+                Certidao f1 = new Certidao {
+                    Tag = "Menu",
+                    MdiParent = this
+                };
+                f1.Show();
+                f1.BringToFront();
+            }
+        }
     }//end class
 }
