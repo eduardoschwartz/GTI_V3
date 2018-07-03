@@ -42,7 +42,7 @@ namespace GTI_Dal.Classes {
                 row.Seq = reg.Seq;
                 row.Unidade = reg.Unidade;
                 row.SubUnidade = reg.SubUnidade;
-                row.Inscricao=  reg.Distrito.ToString() + reg.Setor.ToString("00") + reg.Quadra.ToString("0000") + reg.Lote.ToString("00000") + reg.Seq.ToString("00") + reg.Unidade.ToString("00") + reg.SubUnidade.ToString("000");
+                row.Inscricao = reg.Distrito.ToString() + "." + reg.Setor.ToString("00") + "." + reg.Quadra.ToString("0000") + "." + reg.Lote.ToString("00000") + "." + reg.Seq.ToString("00") + "." + reg.Unidade.ToString("00") + "." + reg.SubUnidade.ToString("000");
                 row.CodigoCondominio = reg.CodigoCondominio;
                 row.NomeCondominio = reg.NomeCondominio.ToString();
                 row.Imunidade = reg.Imunidade == null ? false : Convert.ToBoolean(reg.Imunidade);

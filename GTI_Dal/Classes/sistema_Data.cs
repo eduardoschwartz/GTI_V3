@@ -19,42 +19,60 @@ namespace GTI_Dal.Classes {
             };
             if (Tipo == dalCore.LocalEndereco.Imovel) {
                 Imovel_Data imovel_Class = new Imovel_Data(_connection);
+                bool Existe = imovel_Class.Existe_Imovel(Codigo);
+                if (!Existe)
+                    return null;
                 List<ProprietarioStruct> ListaProp = imovel_Class.Lista_Proprietario(Codigo, true);
                 reg.Nome = ListaProp[0].Nome;
-                reg.cpf_cnpj = ListaProp[0].CPF;
+                reg.Cpf_cnpj = ListaProp[0].CPF;
                 ImovelStruct RegImovel = imovel_Class.Dados_Imovel(Codigo);
                 reg.Inscricao = RegImovel.Inscricao;
-                reg.endereco = RegImovel.NomeLogradouro;
-                reg.numero = (short)RegImovel.Numero;
-                reg.complemento = RegImovel.Complemento;
-                reg.nome_bairro = RegImovel.NomeBairro;
-                reg.nome_cidade = "JABOTICABAL";
-                reg.nome_uf = "SP";
-                reg.cep = RegImovel.Cep;
+                reg.Endereco = RegImovel.NomeLogradouro;
+                reg.Numero = (short)RegImovel.Numero;
+                reg.Complemento = RegImovel.Complemento;
+                reg.Nome_bairro = RegImovel.NomeBairro;
+                reg.Nome_cidade = "JABOTICABAL";
+                reg.Nome_uf = "SP";
+                reg.Cep = RegImovel.Cep;
+                reg.Quadra_original = RegImovel.QuadraOriginal;
+                reg.Lote_original = RegImovel.LoteOriginal;
             } else if (Tipo == dalCore.LocalEndereco.Empresa) {
-                Empresa_Data clsEmpresa = new Empresa_Data(_connection);
-                EmpresaStruct regEmpresa = clsEmpresa.Retorna_Empresa(Codigo);
+                Empresa_Data empresa_Class = new Empresa_Data(_connection);
+                bool Existe = empresa_Class.Existe_Empresa(Codigo);
+                if (!Existe)
+                    return null;
+
+                EmpresaStruct regEmpresa = empresa_Class.Retorna_Empresa(Codigo);
                 reg.Nome = regEmpresa.Razao_social;
-                reg.cpf_cnpj = regEmpresa.Cpf_cnpj;
-                reg.endereco = regEmpresa.Endereco_nome;
-                reg.numero = (short)regEmpresa.Numero;
-                reg.complemento = regEmpresa.Complemento;
-                reg.nome_bairro = regEmpresa.Bairro_nome;
-                reg.nome_cidade = regEmpresa.Cidade_nome;
-                reg.nome_uf = regEmpresa.UF;
-                reg.cep = regEmpresa.Cep;
+                reg.Inscricao = "N/A";
+                reg.Cpf_cnpj = regEmpresa.Cpf_cnpj;
+                reg.Endereco = regEmpresa.Endereco_nome;
+                reg.Numero = (short)regEmpresa.Numero;
+                reg.Complemento = regEmpresa.Complemento;
+                reg.Nome_bairro = regEmpresa.Bairro_nome;
+                reg.Nome_cidade = regEmpresa.Cidade_nome;
+                reg.Nome_uf = regEmpresa.UF;
+                reg.Cep = regEmpresa.Cep;
+                reg.Quadra_original = "N/A";
+                reg.Lote_original = "N/A";
             } else {
-                Cidadao_Data clsCidadao = new Cidadao_Data(_connection);
-                Cidadao regCidadao = clsCidadao.Retorna_Cidadao(Codigo);
+                Cidadao_Data cidadao_Class = new Cidadao_Data(_connection);
+                bool Existe = cidadao_Class.ExisteCidadao(Codigo);
+                if (!Existe)
+                    return null;
+                Cidadao regCidadao = cidadao_Class.Retorna_Cidadao(Codigo);
                 reg.Nome = regCidadao.Nomecidadao;
-                reg.cpf_cnpj = regCidadao.Cpf;
-                reg.endereco = regCidadao.Nomelogradouro;
-               reg.numero = (short)regCidadao.Numimovel;
-                reg.complemento = regCidadao.Complemento;
-                reg.nome_bairro = regCidadao.Nomebairro;
-                reg.nome_cidade = regCidadao.Nomecidade;
-                reg.nome_uf = regCidadao.Siglauf;
-                reg.cep = regCidadao.Cep.ToString();
+                reg.Inscricao = "N/A";
+                reg.Cpf_cnpj = regCidadao.Cpf;
+                reg.Endereco = regCidadao.Nomelogradouro;
+                reg.Numero = (short)regCidadao.Numimovel;
+                reg.Complemento = regCidadao.Complemento;
+                reg.Nome_bairro = regCidadao.Nomebairro;
+                reg.Nome_cidade = regCidadao.Nomecidade;
+                reg.Nome_uf = regCidadao.Siglauf;
+                reg.Cep = regCidadao.Cep.ToString();
+                reg.Quadra_original = "N/A";
+                reg.Lote_original = "N/A";
             }
 
             return reg;

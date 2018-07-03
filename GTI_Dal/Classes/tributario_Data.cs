@@ -784,16 +784,16 @@ namespace GTI_Dal.Classes {
             Sistema_Data sistema_Class = new Sistema_Data("GTIconnection");
             Contribuinte_Header_Struct regDados = sistema_Class.Contribuinte_Header(nCodigo,Local);
             sNome = regDados.Nome;
-            sCPF = regDados.cpf_cnpj;
+            sCPF = regDados.Cpf_cnpj;
             sInscricao = regDados.Inscricao;
             sQuadra = "";
             sLote = "";
-            sEndereco = regDados.endereco == null ? "" : regDados.endereco;
-            nNumero = regDados.numero;
-            sComplemento = regDados.complemento == null ? "" : regDados.complemento;
-            sBairro = regDados.nome_bairro == null ? "" : regDados.nome_bairro;
-            sCidade = regDados.nome_cidade == null ? "" : regDados.nome_cidade;
-            sUF = regDados.nome_uf;
+            sEndereco = regDados.Endereco == null ? "" : regDados.Endereco;
+            nNumero = regDados.Numero;
+            sComplemento = regDados.Complemento == null ? "" : regDados.Complemento;
+            sBairro = regDados.Nome_bairro == null ? "" : regDados.Nome_bairro;
+            sCidade = regDados.Nome_cidade == null ? "" : regDados.Nome_cidade;
+            sUF = regDados.Nome_uf;
 
             DeleteSid(nSid);
 

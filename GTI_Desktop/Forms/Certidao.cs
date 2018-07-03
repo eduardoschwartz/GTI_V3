@@ -1,194 +1,110 @@
-﻿using GTI_Desktop.Properties;
+﻿using GTI_Bll.Classes;
+using GTI_Desktop.Classes;
+using GTI_Models.Models;
 using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace GTI_Desktop.Forms {
     public partial class Certidao : Form {
+        private string _connection = gtiCore.Connection_Name();
+
         public Certidao() {
             InitializeComponent();
+            TBar.Renderer = new MySR();
+            TipoList.SelectedIndex = 0;
         }
 
-       
-        private void CarregarButton_Click(object sender, EventArgs e) {
-
+        private void ClearFields() {
+            Nome.Text = "";
+            Endereco.Text = "";
+            Bairro.Text = "";
+            Cidade.Text = "";
+            Cep.Text = "";
+            Quadra.Text = "";
+            Lote.Text = "";
+            Atividade.Text = "";
+            Inscricao.Text = "";
+            Doc.Text = "";
         }
-
-        private void FillGrid() {
-            CertidaoGrid Pms = new CertidaoGrid {Assinatura="Sim",Tipo="01-Certidão de Débito"
-            };
-            pGrid.SelectedObject = Pms;
-        }
-
-        private void Certidao_Load(object sender, EventArgs e) {
-            FillGrid();
-            foreach (Control control in pGrid.Controls) {
-                ToolStrip toolStrip = control as ToolStrip;
-                
-                if (toolStrip != null) {
-                    toolStrip.BackColor = Color.BurlyWood;
-                    foreach (ToolStripItem item in toolStrip.Items) {
-                        if(item is ToolStripButton || item is ToolStripSeparator)
-                            item.Visible = false;
-                    }
-
-                    ToolStripButton button2 = new ToolStripButton("Imprimir Certidão");
-                    button2.Name = "ImprimirButton";
-                    button2.Image = Resources.print;
-                    button2.Click += new EventHandler(ImprimirButton_Click);
-                    toolStrip.Items.Add(button2);
-                    break;
+        
+        private void Dados_Impressao(int Codigo) {
+            Sistema_bll sistema_Class = new Sistema_bll(_connection);
+            Contribuinte_Header_Struct header = sistema_Class.Contribuinte_Header(Codigo);
+            if (header == null)
+                MessageBox.Show("Código não cadastrado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else {
+                Nome.Text = header.Nome;
+                Endereco.Text = header.Endereco + ", " + header.Numero.ToString();
+                Bairro.Text = header.Nome_bairro;
+                Cidade.Text = header.Nome_cidade + "/" + header.Nome_uf;
+                Cep.Text = header.Cep;
+                Inscricao.Text = header.Inscricao;
+                if (header.Cpf_cnpj != "") {
+                    if (header.Cpf_cnpj.Length == 11)
+                        Doc.Text = Convert.ToInt64(header.Cpf_cnpj).ToString(@"000\.000\.000\-00");
+                    else
+                        Doc.Text = Convert.ToInt64(header.Cpf_cnpj).ToString(@"00\.000\.000\/0000\-00");
+                }
+                Quadra.Text = header.Quadra_original;
+                Lote.Text = header.Lote_original;
+                if (Codigo >= 100000 && Codigo < 500000) {
+                    Empresa_bll empresa_Class = new Empresa_bll(_connection);
+                    EmpresaStruct dados = empresa_Class.Retorna_Empresa(Codigo);
+                    Atividade.Text = dados.Atividade_extenso;
                 }
             }
         }
 
-        void ImprimirButton_Click(object sender, EventArgs e) {
-            MessageBox.Show("It can print too"); ;
+        private void Codigo_KeyPress(object sender, KeyPressEventArgs e) {
+            const char Delete = (char)8;
+            e.Handled = !Char.IsDigit(e.KeyChar) && e.KeyChar != Delete;
         }
 
-    }
-
-
-    public class CertidaoGrid {
-        private string _codigo;
-        private string _nome;
-        private string _assinatura;
-        private string _processo;
-        private string _tipo;
-        private string _doc;
-        private string _endereco;
-        private string _bairro;
-        private string _cidade;
-        private string _cep;
-        private string _inscricao;
-        private string _quadra;
-        private string _lote;
-        private string _atividade;
-
-        [Category("Dados de Entrada"), DisplayName("Código/Inscrição Municipal")]
-        public string Codigo {
-            get { return _codigo; }
-            set { _codigo = value; }
+        private void Processo_KeyPress(object sender, KeyPressEventArgs e) {
+            if (e.KeyChar != (char)Keys.Return && e.KeyChar != (char)Keys.Tab) {
+                const char Delete = (char)8;
+                const char Minus = (char)45;
+                const char Barra = (char)47;
+                if (e.KeyChar == Minus && Processo.Text.Contains("-"))
+                    e.Handled = true;
+                else {
+                    if (e.KeyChar == Barra && Processo.Text.Contains("/"))
+                        e.Handled = true;
+                    else
+                        e.Handled = !Char.IsDigit(e.KeyChar) && e.KeyChar != Delete && e.KeyChar != Barra && e.KeyChar != Minus;
+                }
+            }
         }
 
-        [Category("Dados de Entrada"), DisplayName("Número do Processo")]
-        public string Processo {
-            get { return _processo; }
-            set { _processo = value; }
-        }
+        private void VerificarButton_Click(object sender, EventArgs e) {
+            int _codigo;
 
-        [TypeConverter(typeof(YesNoConverter))]
-        [Category("Dados de Entrada"), DisplayName("Ocultar Assinatura")]
-        public string Assinatura {
-            get { return _assinatura; }
-            set { _assinatura = value; }
-        }
+            if (Codigo.Text.Trim() == "")
+                MessageBox.Show("Código não informado.","Erro",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            else {
+                if (Processo.Text.Trim() == "")
+                    MessageBox.Show("Processo não informado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else {
+                    Processo_bll processo_Class = new Processo_bll(_connection);
+                    Exception ex = processo_Class.ValidaProcesso(Processo.Text);
+                    if(ex!=null)
+                        MessageBox.Show("Processo não cadastrado ou inválido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else {
+                        _codigo = Convert.ToInt32(Codigo.Text);
+                        Dados_Impressao(_codigo);
 
-        [TypeConverter(typeof(TipoConverter))]
-        [Category("Dados de Entrada")]
-        [DisplayName("Tipo de Certidão")]
-        public string Tipo {
-            get { return _tipo; }
-            set { _tipo = value; }
-        }
 
-        [Category("Dados de Impressão"),  ReadOnly(true), DisplayName("01-Nome/Razão Social")]
-        public string Nome {
-            get { return _nome; }
-            set { _nome = value; }
-        }
 
-        [Category("Dados de Impressão"), ReadOnly(true), DisplayName("02-CPF/CNPJ")]
-        public string Doc {
-            get { return _doc; }
-            set { _doc = value; }
-        }
+                    }
+                }
+            }
 
-        [Category("Dados de Impressão"), ReadOnly(true), DisplayName("03-Endereço")]
-        public string Endereco {
-            get { return _endereco; }
-            set { _endereco = value; }
-        }
-
-        [Category("Dados de Impressão"), ReadOnly(true), DisplayName("04-Bairro")]
-        public string Bairro {
-            get { return _bairro; }
-            set { _bairro = value; }
-        }
-
-        [Category("Dados de Impressão"), ReadOnly(true), DisplayName("05-Cidade")]
-        public string Cidade {
-            get { return _cidade; }
-            set { _cidade = value; }
-        }
-
-        [Category("Dados de Impressão"), ReadOnly(true), DisplayName("06-Cep")]
-        public string Cep {
-            get { return _cep; }
-            set { _cep = value; }
-        }
-
-        [Category("Dados de Impressão"), ReadOnly(true), DisplayName("07-Inscrição Cadastral")]
-        public string Inscricao {
-            get { return _inscricao; }
-            set { _inscricao = value; }
-        }
-
-        [Category("Dados de Impressão"), ReadOnly(true), DisplayName("08-Quadra Original")]
-        public string Quadra {
-            get { return _quadra; }
-            set { _quadra = value; }
-        }
-
-        [Category("Dados de Impressão"), ReadOnly(true), DisplayName("09-Lote Original")]
-        public string Lote {
-            get { return _lote; }
-            set { _lote = value; }
-        }
-
-        [Category("Dados de Impressão"), ReadOnly(true), DisplayName("10-Atividade")]
-        public string Atividade {
-            get { return _atividade; }
-            set { _atividade = value; }
         }
 
         
+
+
+
+
     }
-
-    public class TipoConverter : StringConverter {
-        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context) {
-            ArrayList _status = new ArrayList();
-            _status.Add("01 - Certidão de Débito");
-            _status.Add("02 - Certidão de Endereço");
-            _status.Add("03 - Certidão de Isenção");
-            _status.Add("04 - Certidão de Valor Venal");
-            return new StandardValuesCollection(_status);
-        }
-        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context) {
-            return true;
-        }
-        public override bool GetStandardValuesSupported(ITypeDescriptorContext context) {
-            return true;
-        }
-    }
-
-    public class YesNoConverter : StringConverter {
-        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context) {
-            ArrayList _status = new ArrayList();
-            _status.Add("Sim");
-            _status.Add("Não");
-            return new StandardValuesCollection(_status);
-        }
-        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context) {
-            return true;
-        }
-        public override bool GetStandardValuesSupported(ITypeDescriptorContext context) {
-            return true;
-        }
-    }
-
-
-
 }

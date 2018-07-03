@@ -13,7 +13,11 @@
             if (disposing && (components != null)) {
                 components.Dispose();
             }
-            base.Dispose(disposing);
+            try {
+                base.Dispose(disposing);
+            } catch  {
+                 }
+            
         }
 
         #region Windows Form Designer generated code
