@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using static GTI_Models.modelCore;
 
 namespace GTI_Dal.Classes {
     public class Sistema_Data {
@@ -78,9 +79,26 @@ namespace GTI_Dal.Classes {
             return reg;
         }
 
-        #region Security
+        public TipoCadastro Tipo_Cadastro(int Codigo) {
+            TipoCadastro _tipo_cadastro;
+            if (Codigo < 100000)
+                _tipo_cadastro = TipoCadastro.Imovel;
+            else {
+                if (Codigo >= 100000 && Codigo < 500000)
+                    _tipo_cadastro = TipoCadastro.Empresa;
+                else
+                    _tipo_cadastro = TipoCadastro.Cidadao;
+            }
+            return _tipo_cadastro;
+        }
 
-        public Exception Alterar_Senha(Usuario reg) {
+
+
+
+
+    #region Security
+
+    public Exception Alterar_Senha(Usuario reg) {
             using (var db = new GTI_Context(_connection)) {
                 string sLogin = reg.Nomelogin;
                 Usuario b = db.Usuario.First(i => i.Nomelogin == sLogin);

@@ -2,6 +2,7 @@
 using GTI_Models.Models;
 using System;
 using System.Collections.Generic;
+using static GTI_Models.modelCore;
 
 namespace GTI_Bll.Classes {
     public class Sistema_bll {
@@ -181,6 +182,15 @@ namespace GTI_Bll.Classes {
             return obj.GetUserBinary(id);
         }
 
+        /// <summary>
+        /// Retorna o tipo de cadastro baseado no código
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public TipoCadastro Tipo_Cadastro(int Codigo) {
+            Sistema_Data obj = new Sistema_Data(_connection);
+            return obj.Tipo_Cadastro(Codigo);
+        }
 
     }
 }

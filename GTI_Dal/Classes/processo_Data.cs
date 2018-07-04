@@ -839,7 +839,15 @@ Inicio:;
             }
         }
 
-
+        public DateTime? Data_Processo(int Ano,int Numero) {
+            using (var db = new GTI_Context(_connection)) {
+                DateTime? Sql = (from p in db.Processogti where p.Ano == Ano && p.Numero == Numero select p.Dataentrada).FirstOrDefault();
+                if (Sql == null)
+                    return null;
+                else
+                    return Sql;
+            }
+        }
 
 
 

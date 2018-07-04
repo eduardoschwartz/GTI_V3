@@ -396,7 +396,7 @@ namespace GTI_Bll.Classes {
         }
         
         /// <summary>
-        /// Retorna a lista filtrada dos processos cadastrados .
+        /// Retorna a lista filtrada dos processos cadastrados.
         /// </summary>
         /// <param name="Filter"></param>
         /// <returns></returns>
@@ -405,6 +405,16 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Processos(Filter);
         }
 
+        /// <summary>
+        /// Retorna a data de abertura do processo.
+        /// </summary>
+        /// <param name="Ano"></param>
+        /// <param name="Numero"></param>
+        /// <returns></returns>
+        public DateTime? Data_Processo(int Ano, int Numero) {
+            Processo_Data obj = new Processo_Data(_connection);
+            return obj.Data_Processo(Ano,Numero);
+        }
 
     }
 }

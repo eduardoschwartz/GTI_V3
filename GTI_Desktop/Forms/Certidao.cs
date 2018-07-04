@@ -1,12 +1,17 @@
 ﻿using GTI_Bll.Classes;
 using GTI_Desktop.Classes;
+using GTI_Models;
 using GTI_Models.Models;
 using System;
 using System.Windows.Forms;
+using static GTI_Models.modelCore;
 
 namespace GTI_Desktop.Forms {
     public partial class Certidao : Form {
         private string _connection = gtiCore.Connection_Name();
+        TipoCertidao _tipo_certidao;
+        TipoCadastro _tipo_cadastro;
+        DateTime? _data_processo;
 
         public Certidao() {
             InitializeComponent();
@@ -76,35 +81,130 @@ namespace GTI_Desktop.Forms {
             }
         }
 
+        private void Tipo_Certidao(int Indice,int codigo) {
+            if (Indice == 0)
+                _tipo_certidao = TipoCertidao.Debito;
+            else {
+                if (Indice == 1)
+                    _tipo_certidao = TipoCertidao.Endereco;
+                else {
+                    if (Indice == 2)
+                        _tipo_certidao = TipoCertidao.Isencao;
+                    else
+                        _tipo_certidao = TipoCertidao.ValorVenal;
+                }
+            }
+
+            return;
+        }
+
         private void VerificarButton_Click(object sender, EventArgs e) {
             int _codigo;
-
+            Processo_bll processo_Class = new Processo_bll(_connection);
+            Sistema_bll sistema_Class = new Sistema_bll(_connection);
+            ClearFields();
             if (Codigo.Text.Trim() == "")
                 MessageBox.Show("Código não informado.","Erro",MessageBoxButtons.OK,MessageBoxIcon.Error);
             else {
                 if (Processo.Text.Trim() == "")
                     MessageBox.Show("Processo não informado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else {
-                    Processo_bll processo_Class = new Processo_bll(_connection);
                     Exception ex = processo_Class.ValidaProcesso(Processo.Text);
                     if(ex!=null)
                         MessageBox.Show("Processo não cadastrado ou inválido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     else {
                         _codigo = Convert.ToInt32(Codigo.Text);
-                        Dados_Impressao(_codigo);
+                        _tipo_cadastro = sistema_Class.Tipo_Cadastro(_codigo);
+                        int _ano = processo_Class.ExtractAnoProcesso(Processo.Text);
+                        int _numero = processo_Class.NumProcessoNoDV(Processo.Text);
+                        _data_processo = processo_Class.Data_Processo(_ano, _numero);
 
-
-
+                        Tipo_Certidao(TipoList.SelectedIndex,_codigo);
+                        if((_tipo_certidao==TipoCertidao.Endereco||_tipo_certidao==TipoCertidao.Isencao||_tipo_certidao==TipoCertidao.ValorVenal) && _tipo_cadastro!=TipoCadastro.Imovel) 
+                            MessageBox.Show("Este tipo de certidão só pode ser emitida para imóveis.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        else {
+                            if(_tipo_certidao==TipoCertidao.Debito && _tipo_cadastro==TipoCadastro.Cidadao)
+                                MessageBox.Show("Este tipo de certidão não pode ser emitida para cidadão.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            else {
+                                Dados_Impressao(_codigo);
+                            }
+                        }
                     }
                 }
             }
-
         }
 
-        
+        private void ImprimirButton_Click(object sender, EventArgs e) {
+            if (Nome.Text == "") {
+                MessageBox.Show("Carregue os dados de um contribuinte para poder imprimir a certidão.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
+            Tributario_bll tributario_Class = new Tributario_bll(_connection);
+            int _userId = Properties.Settings.Default.UserId;
+            int _ano_certidao = DateTime.Now.Year;
+            int _numero_certidao = 0;
+            Report_Data _dados = null;
+            string _nomeReport = "",_controle="";
 
+            if (_tipo_certidao == TipoCertidao.Endereco) {
+                _nomeReport = "CertidaoEndereco";
+                _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Endereco);
+                _controle = _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + Codigo.Text + "-EA";
+                Certidao_endereco cert = new Certidao_endereco();
+                cert.Codigo = Convert.ToInt32(Codigo.Text);
+                cert.Ano = _ano_certidao;
+                cert.Numero = _numero_certidao;
+                cert.Data = DateTime.Now;
+                cert.Inscricao = Inscricao.Text;
+                cert.Nomecidadao = Nome.Text;
+                cert.Logradouro = Endereco.Text;
+                cert.descbairro = Bairro.Text;
+                cert.Li_quadras = Quadra.Text;
+                cert.Li_lotes = Lote.Text;
+                Exception ex = tributario_Class.Insert_Certidao_Endereco(cert);
+                if (ex != null) {
+                    throw ex;
+                }
+            }
 
+            if (_numero_certidao > 0) {
+                _dados = new Report_Data() {
+                    Codigo = Convert.ToInt32(Codigo.Text),
+                    Inscricao = Inscricao.Text,
+                    Nome = Nome.Text,
+                    Cpf_cnpj=Doc.Text,
+                    Endereco = Endereco.Text,
+                    Nome_bairro = Bairro.Text,
+                    Quadra_original = Quadra.Text,
+                    Lote_original = Lote.Text,
+                    Nome_cidade = Cidade.Text,
+                    Cep = Cep.Text,
+                    Numero_Certidao = _numero_certidao.ToString("000000") + "/" + _ano_certidao.ToString(),
+                    Controle = _controle,
+                    Assinatura_Hide = Assinatura.Checked,
+                    Processo = Processo.Text,
+                    Data_Processo=_data_processo,
+                    UserId = _userId
+                };
+                ReportCR fRpt = new ReportCR(_nomeReport, _dados);
+                fRpt.ShowDialog();
+            }
+        }
+
+        private void TipoList_SelectedIndexChanged(object sender, EventArgs e) {
+            ClearFields();
+        }
+
+        private void Codigo_TextChanged(object sender, EventArgs e) {
+            if (Codigo.Text != "")
+                ClearFields();
+        }
+
+        private void Processo_TextChanged(object sender, EventArgs e) {
+            if (Processo.Text != "")
+                ClearFields();
+        }
 
     }
 }

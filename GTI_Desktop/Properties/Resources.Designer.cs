@@ -83,26 +83,6 @@ namespace GTI_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _8366_64x64 {
-            get {
-                object obj = ResourceManager.GetObject("8366_64x64", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap _9153_64x64 {
-            get {
-                object obj = ResourceManager.GetObject("9153_64x64", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Abaixo {
             get {
                 object obj = ResourceManager.GetObject("Abaixo", resourceCulture);
@@ -356,36 +336,6 @@ namespace GTI_Desktop.Properties {
         internal static System.Drawing.Bitmap email2 {
             get {
                 object obj = ResourceManager.GetObject("email2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap emoji_1f4c3 {
-            get {
-                object obj = ResourceManager.GetObject("emoji_1f4c3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap emoji_1f510 {
-            get {
-                object obj = ResourceManager.GetObject("emoji_1f510", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap emoji_1f6e0 {
-            get {
-                object obj = ResourceManager.GetObject("emoji_1f6e0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

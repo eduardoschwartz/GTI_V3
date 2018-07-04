@@ -952,9 +952,14 @@ namespace GTI_Dal.Classes {
                         }
                     }
                 }
-                foreach (Parametros item in Sql) {
-                    nRet = Convert.ToInt32(item.Valparam)+1;
-                    break;
+                try {
+                    foreach (Parametros item in Sql) {
+                        nRet = Convert.ToInt32(item.Valparam) + 1;
+                        break;
+                    }
+                } catch (Exception ex2) {
+
+                    throw ex2;
                 }
             }
             Exception ex = Atualiza_Codigo_Certidao(tipo_certidao, nRet);
@@ -1027,18 +1032,6 @@ namespace GTI_Dal.Classes {
             }
         }
 
-        public Exception Insert_Certidao_Debito(Certidao_debito Reg) {
-            using (var db = new GTI_Context(_connection)) {
-                try {
-                    db.Certidao_debito.Add(Reg);
-                    db.SaveChanges();
-                } catch (Exception ex) {
-                    return ex;
-                }
-                return null;
-            }
-        }
-
         public Certidao_endereco Retorna_Certidao_Endereco(int Ano,int Numero,int Codigo) {
             using (var db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Certidao_endereco where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
@@ -1060,14 +1053,24 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Exception Insert_Certidao_Debito(Certidao_debito Reg) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Certidao_debito.Add(Reg);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
         public Certidao_debito Retorna_Certidao_Debito(int Ano, int Numero, int Codigo) {
             using (var db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Certidao_debito where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
                 return Sql;
             }
         }
-
-
 
         public Certidao_debito_detalhe Certidao_Debito(int Codigo) {
             TipoCadastro _tipo_Cadastro = Codigo < 100000 ? TipoCadastro.Imovel : Codigo >= 500000 ? TipoCadastro.Cidadao : TipoCadastro.Empresa;
@@ -1216,7 +1219,6 @@ namespace GTI_Dal.Classes {
             using (var db = new Eicon_Context(ConfigurationManager.ConnectionStrings["GTIEicon"].ConnectionString)) {
                 decimal _mes_inicial = db.Tb_inter_encerramento_giss.OrderBy(c => c.Ano_competencia).ThenBy(c => c.Mes_competencia).Where(c => c.Num_cadastro == Codigo).Select(c => c.Mes_competencia).FirstOrDefault();
                 decimal _ano_inicial = db.Tb_inter_encerramento_giss.OrderBy(c => c.Ano_competencia).ThenBy(c => c.Mes_competencia).Where(c => c.Num_cadastro == Codigo).Select(c => c.Ano_competencia).FirstOrDefault();
-//                DateTime _dataencerramento = db.Tb_inter_encerramento_giss.OrderByDescending(c => c.Ano_competencia).ThenByDescending(c => c.Mes_competencia).Where(c => c.Num_cadastro == Codigo).Select(c => c.Data_encerramento).FirstOrDefault();
 
                 int _mes_anterior = 0, _ano_anterior = 0;
 

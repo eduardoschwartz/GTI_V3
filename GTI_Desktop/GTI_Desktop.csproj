@@ -68,6 +68,7 @@
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="DropDownContainer">
       <HintPath>..\..\DropDownCo213899112009\DropDownContainer\DropDownContainer\bin\Release\DropDownContainer.dll</HintPath>
     </Reference>
@@ -80,6 +81,7 @@
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -113,6 +115,8 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -338,6 +342,12 @@
     <Compile Include="Forms\Report.designer.cs">
       <DependentUpon>Report.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ReportCR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ReportCR.Designer.cs">
+      <DependentUpon>ReportCR.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SecurityEventForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -388,6 +398,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Assinatura.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Assinatura.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -553,6 +568,9 @@
     <EmbeddedResource Include="Forms\Report.resx">
       <DependentUpon>Report.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ReportCR.resx">
+      <DependentUpon>ReportCR.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SecurityEventForm.resx">
       <DependentUpon>SecurityEventForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -576,6 +594,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ZoomBox.resx">
       <DependentUpon>ZoomBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Assinatura.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Assinatura.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -836,6 +858,23 @@
     <None Include="Resources\if_Gnome-Application-Certificate-48_55221.png" />
     <None Include="Resources\if_Application_105234.png" />
     <None Include="Resources\if_Login_73221.png" />
+    <None Include="Resources\ALBERTO.jpg" />
+    <None Include="Resources\anapaula.jpg" />
+    <None Include="Resources\assinatura_Hori.jpg" />
+    <None Include="Resources\daniela.jpg" />
+    <None Include="Resources\eduardo.jpg" />
+    <None Include="Resources\glayse.jpg" />
+    <None Include="Resources\joseane.jpg" />
+    <None Include="Resources\josiane.jpg" />
+    <None Include="Resources\leandro2.jpg" />
+    <None Include="Resources\luish.jpg" />
+    <None Include="Resources\Noeli.jpg" />
+    <None Include="Resources\Paula.jpg" />
+    <None Include="Resources\paulo.jpg" />
+    <None Include="Resources\renata.jpg" />
+    <None Include="Resources\rita.jpg" />
+    <None Include="Resources\rosangela.jpg" />
+    <None Include="Resources\solange.jpg" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
