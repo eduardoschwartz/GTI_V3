@@ -3,6 +3,7 @@ using GTI_Desktop.Classes;
 using GTI_Models;
 using GTI_Models.Models;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using static GTI_Models.modelCore;
 
@@ -142,17 +143,18 @@ namespace GTI_Desktop.Forms {
 
             Tributario_bll tributario_Class = new Tributario_bll(_connection);
             int _userId = Properties.Settings.Default.UserId;
-            int _ano_certidao = DateTime.Now.Year;
-            int _numero_certidao = 0;
+            int _ano_certidao = DateTime.Now.Year, _numero_certidao = 0, _codigo = Convert.ToInt32(Codigo.Text),_ano_isencao=DateTime.Now.Year;
+            decimal _percisencao = 0, SomaArea=0;
+            DateTime? _data_processo_isencao=null;
             Report_Data _dados = null;
-            string _nomeReport = "",_controle="";
+            string _nomeReport = "",_controle="",_numero_processo="";
 
             if (_tipo_certidao == TipoCertidao.Endereco) {
                 _nomeReport = "CertidaoEndereco";
                 _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Endereco);
-                _controle = _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + Codigo.Text + "-EA";
+                _controle = _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _codigo.ToString() + "-EA";
                 Certidao_endereco cert = new Certidao_endereco();
-                cert.Codigo = Convert.ToInt32(Codigo.Text);
+                cert.Codigo = Convert.ToInt32(_codigo);
                 cert.Ano = _ano_certidao;
                 cert.Numero = _numero_certidao;
                 cert.Data = DateTime.Now;
@@ -165,6 +167,63 @@ namespace GTI_Desktop.Forms {
                 Exception ex = tributario_Class.Insert_Certidao_Endereco(cert);
                 if (ex != null) {
                     throw ex;
+                }
+            } else {
+                if (_tipo_certidao == TipoCertidao.Isencao) {
+                    Imovel_bll imovel_Class = new Imovel_bll(_connection);
+                    bool bImune = imovel_Class.Verifica_Imunidade(_codigo);
+                    _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Isencao);
+                    _controle = _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _codigo.ToString() + "-CI";
+
+                    if (bImune) {
+                        _percisencao = 100;
+                        _nomeReport = "CertidaoImunidade";
+                    } else {
+                        bool bIsentoProcesso = false;
+                        List<IsencaoStruct> ListaIsencao = null;
+                        ListaIsencao = imovel_Class.Lista_Imovel_Isencao(_codigo, DateTime.Now.Year);
+                        if (ListaIsencao.Count > 0)
+                            bIsentoProcesso = true;
+                        if (bIsentoProcesso) {
+                            _nomeReport = "CertidaoIsencaoProcesso";
+                            _percisencao = (decimal)ListaIsencao[0].Percisencao;
+                            _numero_processo = ListaIsencao[0].Numprocesso;
+                            _data_processo_isencao = Convert.ToDateTime( ListaIsencao[0].dataprocesso);
+                        } else {
+                            SomaArea = imovel_Class.Soma_Area(_codigo);
+                            if (SomaArea < 65) {
+                                //Se tiver área < 65m² mas tiver mais de 1 imóvel, perde a isenção.
+                                int nQtdeImovel = imovel_Class.Qtde_Imovel_Cidadao(_codigo);
+                                if (nQtdeImovel > 1) {
+                                    MessageBox.Show("Este imóvel não esta isento da cobrança de IPTU no ano atual.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return;
+                                }
+                                _nomeReport = "CertidaoIsencao65";
+                            }
+                        }
+                    }
+
+                    Certidao_isencao cert = new Certidao_isencao();
+                    cert.Codigo = _codigo;
+                    cert.Ano = _ano_certidao;
+                    cert.Numero = _numero_certidao;
+                    cert.Data = DateTime.Now;
+                    cert.Inscricao = Inscricao.Text;
+                    cert.Nomecidadao = Nome.Text;
+                    cert.Logradouro = Endereco.Text;
+                    cert.Descbairro = Bairro.Text;
+                    cert.Li_quadras = Quadra.Text;
+                    cert.Li_lotes = Lote.Text;
+                    cert.Area = SomaArea;
+                    cert.Percisencao = _percisencao;
+                    cert.Numprocesso = _numero_processo;
+                    cert.Dataprocesso = _data_processo_isencao;
+                    Exception ex = tributario_Class.Insert_Certidao_Isencao(cert);
+                    if (ex != null) {
+                        throw ex;
+                    }
+
+
                 }
             }
 
@@ -185,10 +244,16 @@ namespace GTI_Desktop.Forms {
                     Assinatura_Hide = Assinatura.Checked,
                     Processo = Processo.Text,
                     Data_Processo=_data_processo,
-                    UserId = _userId
+                    UserId = _userId,
+                    Perc_Isencao=_percisencao,
+                    Data_Processo_Isencao=_data_processo_isencao,
+                    Processo_Isencao=_numero_processo,
+                    AnoIsencao=_ano_isencao,
+                    Area=SomaArea
                 };
                 ReportCR fRpt = new ReportCR(_nomeReport, _dados);
                 fRpt.ShowDialog();
+                ClearFields();
             }
         }
 

@@ -37,11 +37,15 @@ namespace GTI_Models.Models {
         public string Lote_original { get; set; }
         public string Atividade { get; set; }
         public string Tributos { get; set; }
+        public string Processo_Isencao { get; set; }
+        public DateTime? Data_Processo_Isencao { get; set; }
         public decimal? Perc_Isencao { get; set; }
+        public int? AnoIsencao { get; set; }
         public string Processo { get; set; }
         public DateTime? Data_Processo { get; set; }
         public int? UserId { get; set; }
-        public bool Assinatura_Hide { get; set; }
+        public bool? Assinatura_Hide { get; set; }
+        public decimal? Area { get; set; }
     }
 
 

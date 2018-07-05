@@ -186,7 +186,7 @@ namespace GTI_Desktop.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_NUMPROCESSO {
+        public CrystalDecisions.Shared.IParameterField Parameter_PROCESSO {
             get {
                 return this.DataDefinition.ParameterFields[11];
             }
@@ -197,6 +197,14 @@ namespace GTI_Desktop.Report {
         public CrystalDecisions.Shared.IParameterField Parameter_DATAPROCESSO {
             get {
                 return this.DataDefinition.ParameterFields[12];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_DOC {
+            get {
+                return this.DataDefinition.ParameterFields[13];
             }
         }
     }

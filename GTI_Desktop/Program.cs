@@ -14,10 +14,7 @@ namespace GTI_Desktop
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            try {
-                Application.Run(new Forms.Main());
-            } catch {
-            }
+            Application.Run(new Forms.Main());
             
         }
     }

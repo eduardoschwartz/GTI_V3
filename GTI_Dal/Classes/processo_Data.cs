@@ -370,7 +370,7 @@ namespace GTI_Dal.Classes {
                            join u in db.Usuario on c.Userid equals u.Id into uc from u in uc.DefaultIfEmpty()
                            where c.Ano == nAno && c.Numero == nNumero select new ProcessoStruct { Ano= c.Ano,CodigoAssunto=c.Codassunto,AtendenteNome=u.Nomelogin,CentroCusto=c.Centrocusto,
                            CodigoCidadao=(int)c.Codcidadao,Complemento=c.Complemento,DataArquivado=c.Dataarquiva,DataCancelado=c.Datacancel,DataEntrada=c.Dataentrada,DataReativacao=c.Datareativa,
-                           DataSuspensao=c.Datasuspenso,Fisico=c.Fisico,Hora=c.Hora,Inscricao=(int)c.Insc,Interno=c.Interno,Numero=c.Numero,ObsAnexo=c.Obsanexo,ObsArquiva=c.Obsa,
+                           DataSuspensao=c.Datasuspenso,Fisico=c.Fisico,Hora=c.Hora,Inscricao=(int)c.Insc,Interno=c.Interno,Numero=c.Numero,ObsArquiva=c.Obsa,
                            ObsCancela=c.Obsc,ObsReativa=c.Obsr,ObsSuspensao=c.Obss,Observacao=c.Observacao,Origem=c.Origem,TipoEnd=c.Tipoend,AtendenteId=u.Id}).First();
                 ProcessoStruct row = new ProcessoStruct {
                     AtendenteNome = reg.AtendenteNome,
@@ -390,7 +390,7 @@ namespace GTI_Dal.Classes {
                 row.DataCancelado = reg.DataCancelado;
                 row.DataArquivado = reg.DataArquivado;
                 row.ListaAnexo = ListProcessoAnexo(nAno, nNumero);row.Anexo = ListProcessoAnexo(nAno, nNumero).Count().ToString() + " Anexo(s)";
-                row.ObsAnexo = reg.ObsAnexo == null ? "" : reg.ObsAnexo.ToString().Trim();
+                //row.ObsAnexo = reg.ObsAnexo == null ? "" : reg.ObsAnexo.ToString().Trim();
                 row.Interno = Convert.ToBoolean(reg.Interno);
                 row.Fisico = Convert.ToBoolean(reg.Fisico);
                 row.Origem = Convert.ToInt16(reg.Origem);
