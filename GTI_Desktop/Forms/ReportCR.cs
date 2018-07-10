@@ -1,11 +1,15 @@
-﻿using GTI_Desktop.Classes;
+﻿using GTI_Bll.Classes;
+using GTI_Desktop.Classes;
 using GTI_Desktop.Report;
 using GTI_Models.Models;
 using System;
 using System.Windows.Forms;
+using static GTI_Models.modelCore;
 
 namespace GTI_Desktop.Forms {
     public partial class ReportCR : Form {
+        private string _connection = gtiCore.Connection_Name();
+
         public ReportCR(String ReportName,Report_Data Dados) {
             InitializeComponent();
             showReport(ReportName,Dados);
@@ -19,7 +23,6 @@ namespace GTI_Desktop.Forms {
                 case "CertidaoEndereco":
                     Text = "Certidão de Endereço";
                     CertidaoEndereco rpt_endereco = new CertidaoEndereco();
-                    
                     rpt_endereco.SetDatabaseLogon(gtiCore.Ul, gtiCore.Up, Properties.Settings.Default.ServerName, Properties.Settings.Default.DataBaseReal);
                     rpt_endereco.SetParameterValue("NUMCERTIDAO", _dados.Numero_Certidao);
                     rpt_endereco.SetParameterValue("DATAEMISSAO", DateTime.Now);
@@ -101,6 +104,56 @@ namespace GTI_Desktop.Forms {
                     rpt_isencao65.SetParameterValue("DOC", _dados.Cpf_cnpj == null ? "" : _dados.Cpf_cnpj);
                     rpt_isencao65.RecordSelectionFormula = "{Assinatura.Usuario}='" + _usuario + "'";
                     crViewer.ReportSource = rpt_isencao65;
+                    break;
+                case "CertidaoValorVenal":
+                    Text = "Certidão de Valor Venal";
+                    CertidaoValorVenal rpt_vvenal = new CertidaoValorVenal();
+                    Tributario_bll tributario_Class = new Tributario_bll(_connection);
+                    SpCalculo RegCalculo = tributario_Class.Calculo_IPTU(Convert.ToInt32( _dados.Codigo), DateTime.Now.Year);
+                    rpt_vvenal.SetDatabaseLogon(gtiCore.Ul, gtiCore.Up, Properties.Settings.Default.ServerName, Properties.Settings.Default.DataBaseReal);
+                    rpt_vvenal.SetParameterValue("NUMCERTIDAO", _dados.Numero_Certidao);
+                    rpt_vvenal.SetParameterValue("DATAEMISSAO", DateTime.Now);
+                    rpt_vvenal.SetParameterValue("CONTROLE", _dados.Controle);
+                    rpt_vvenal.SetParameterValue("BAIRRO", _dados.Nome_bairro);
+                    rpt_vvenal.SetParameterValue("ENDERECO", _dados.Endereco);
+                    rpt_vvenal.SetParameterValue("CADASTRO", _dados.Codigo);
+                    rpt_vvenal.SetParameterValue("INSCRICAO", _dados.Inscricao);
+                    rpt_vvenal.SetParameterValue("NOME", _dados.Nome);
+                    rpt_vvenal.SetParameterValue("PROCESSO", _dados.Processo);
+                    rpt_vvenal.SetParameterValue("DATAPROCESSO", _dados.Data_Processo);
+                    rpt_vvenal.SetParameterValue("QUADRA", _dados.Quadra_original);
+                    rpt_vvenal.SetParameterValue("LOTE", _dados.Lote_original);
+                    rpt_vvenal.SetParameterValue("DOCUMENTO", _dados.Cpf_cnpj == null ? "" : _dados.Cpf_cnpj);
+                    rpt_vvenal.SetParameterValue("VVT", RegCalculo.Vvt);
+                    rpt_vvenal.SetParameterValue("VVP", RegCalculo.Vvp);
+                    rpt_vvenal.SetParameterValue("VVI", RegCalculo.Vvi);
+                    rpt_vvenal.RecordSelectionFormula = "{Assinatura.Usuario}='" + _usuario + "'";
+                    crViewer.ReportSource = rpt_vvenal;
+                    break;
+                case "CertidaoDebitoImovel":
+                    Text = "Certidão de Débito";
+                    CertidaoDebitoImovel rpt_cdebitoimovel = new CertidaoDebitoImovel();
+                    rpt_cdebitoimovel.SetDatabaseLogon(gtiCore.Ul, gtiCore.Up, Properties.Settings.Default.ServerName, Properties.Settings.Default.DataBaseReal);
+                    rpt_cdebitoimovel.SetParameterValue("NUMCERTIDAO", _dados.Numero_Certidao);
+                    rpt_cdebitoimovel.SetParameterValue("DATAEMISSAO", DateTime.Now);
+                    rpt_cdebitoimovel.SetParameterValue("CONTROLE", _dados.Controle);
+                    rpt_cdebitoimovel.SetParameterValue("BAIRRO", _dados.Nome_bairro);
+                    rpt_cdebitoimovel.SetParameterValue("ENDERECO", _dados.Endereco);
+                    rpt_cdebitoimovel.SetParameterValue("CADASTRO", _dados.Codigo);
+                    rpt_cdebitoimovel.SetParameterValue("INSCRICAO", _dados.Inscricao);
+                    rpt_cdebitoimovel.SetParameterValue("NOME", _dados.Nome);
+
+                    rpt_cdebitoimovel.SetParameterValue("TIPOCERTIDAO", _dados.TipoCertidao);
+                    rpt_cdebitoimovel.SetParameterValue("TRIBUTO", _dados.Tributos);
+                    rpt_cdebitoimovel.SetParameterValue("NAO", _dados.Nao);
+                    rpt_cdebitoimovel.SetParameterValue("ATIVIDADE", _dados.Atividade);
+                    rpt_cdebitoimovel.SetParameterValue("CIDADE", _dados.Nome_cidade);
+
+                    rpt_cdebitoimovel.SetParameterValue("PROCESSO", _dados.Processo);
+                    rpt_cdebitoimovel.SetParameterValue("DATAPROCESSO", _dados.Data_Processo);
+                    rpt_cdebitoimovel.SetParameterValue("DOCUMENTO", _dados.Cpf_cnpj == null ? "" : _dados.Cpf_cnpj);
+                    rpt_cdebitoimovel.RecordSelectionFormula = "{Assinatura.Usuario}='" + _usuario + "'";
+                    crViewer.ReportSource = rpt_cdebitoimovel;
                     break;
                 default:
                     break;

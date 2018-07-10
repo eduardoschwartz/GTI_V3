@@ -186,7 +186,7 @@ namespace GTI_Desktop.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DOC {
+        public CrystalDecisions.Shared.IParameterField Parameter_CIDADE {
             get {
                 return this.DataDefinition.ParameterFields[11];
             }
@@ -194,7 +194,7 @@ namespace GTI_Desktop.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CIDADE {
+        public CrystalDecisions.Shared.IParameterField Parameter_ATIVIDADE {
             get {
                 return this.DataDefinition.ParameterFields[12];
             }
@@ -202,9 +202,25 @@ namespace GTI_Desktop.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ATIVIDADE {
+        public CrystalDecisions.Shared.IParameterField Parameter_PROCESSO {
             get {
                 return this.DataDefinition.ParameterFields[13];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_DATAPROCESSO {
+            get {
+                return this.DataDefinition.ParameterFields[14];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_DOCUMENTO {
+            get {
+                return this.DataDefinition.ParameterFields[15];
             }
         }
     }

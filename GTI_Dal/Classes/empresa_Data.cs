@@ -332,13 +332,14 @@ namespace GTI_Dal.Classes {
         public EscritoriocontabilStruct Dados_Escritorio_Contabil(int Codigo) {
             using (var db = new GTI_Context(_connection)) {
                 var reg = (from m in db.Escritoriocontabil
-                           join b in db.Bairro on  m.Codbairro equals b.Codbairro  into mb from b in mb.DefaultIfEmpty()
+                           join b in db.Bairro on m.Codbairro equals b.Codbairro into mb from b in mb.DefaultIfEmpty()
                            join c in db.Cidade on new { p1 = (short)m.Codcidade, p2 = m.UF } equals new { p1 = c.Codcidade, p2 = c.Siglauf } into mc from c in mc.DefaultIfEmpty()
                            join l in db.Logradouro on m.Codlogradouro equals l.Codlogradouro into lm from l in lm.DefaultIfEmpty()
                            where m.Codigoesc == Codigo
-                           select new EscritoriocontabilStruct {Codigo=m.Codigoesc,Nome=m.Nomeesc,Logradouro_Codigo=m.Codlogradouro,Logradouro_Nome=l.Endereco,Numero=m.Numero,
-                           Complemento=m.Complemento,Bairro_Codigo=m.Codbairro,Bairro_Nome=b.Descbairro,Cidade_Nome=c.Desccidade,UF=m.UF,Telefone=m.Telefone,Email=m.Email,
-                           Cpf=m.Cpf,Cnpj=m.Cnpj,Im=m.Im,Crc=m.Crc,Recebecarne=m.Recebecarne,Cidade_Codigo=m.Codcidade,Logradouro_Nome_Fora  =m.Nomelogradouro
+                           select new EscritoriocontabilStruct {
+                               Codigo = m.Codigoesc, Nome = m.Nomeesc, Logradouro_Codigo = m.Codlogradouro, Logradouro_Nome = l.Endereco, Numero = m.Numero,
+                               Complemento = m.Complemento, Bairro_Codigo = m.Codbairro, Bairro_Nome = b.Descbairro, Cidade_Nome = c.Desccidade, UF = m.UF, Telefone = m.Telefone, Email = m.Email,
+                               Cpf = m.Cpf, Cnpj = m.Cnpj, Im = m.Im, Crc = m.Crc, Recebecarne = m.Recebecarne, Cidade_Codigo = m.Codcidade, Logradouro_Nome_Fora = m.Nomelogradouro
                            }).FirstOrDefault();
 
                 EscritoriocontabilStruct row = new EscritoriocontabilStruct();
@@ -361,9 +362,9 @@ namespace GTI_Dal.Classes {
                 row.Email = reg.Email;
                 row.Im = reg.Im;
                 row.Telefone = reg.Telefone;
-                row.Recebecarne =  reg.Recebecarne==null?false:reg.Recebecarne;
+                row.Recebecarne = reg.Recebecarne == null ? false : reg.Recebecarne;
 
-                if (reg.Logradouro_Codigo >0) {
+                if (reg.Logradouro_Codigo > 0) {
                     Endereco_Data Cep_Class = new Endereco_Data(_connection);
                     int nCep = Cep_Class.RetornaCep((int)reg.Logradouro_Codigo, (short)reg.Numero);
                     row.Cep = nCep == 0 ? "00000000" : nCep.ToString("0000");
@@ -375,7 +376,7 @@ namespace GTI_Dal.Classes {
 
         public Exception Incluir_escritorio(Escritoriocontabil reg) {
             using (var db = new GTI_Context(_connection)) {
-                object[] Parametros = new  object[17];
+                object[] Parametros = new object[17];
                 Parametros[0] = new SqlParameter { ParameterName = "@Codigoesc", SqlDbType = SqlDbType.Int, SqlValue = reg.Codigoesc };
                 Parametros[1] = new SqlParameter { ParameterName = "@Nomeesc", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Nomeesc };
                 Parametros[2] = new SqlParameter { ParameterName = "@Codlogradouro", SqlDbType = SqlDbType.Int, SqlValue = reg.Codlogradouro };
@@ -435,7 +436,7 @@ namespace GTI_Dal.Classes {
             }
         }
 
-       public int Retorna_Ultimo_Codigo_Escritorio() {
+        public int Retorna_Ultimo_Codigo_Escritorio() {
             using (var db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Escritoriocontabil orderby c.Codigoesc descending select c.Codigoesc).FirstOrDefault();
                 return Sql;

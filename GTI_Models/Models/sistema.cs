@@ -46,6 +46,11 @@ namespace GTI_Models.Models {
         public int? UserId { get; set; }
         public bool? Assinatura_Hide { get; set; }
         public decimal? Area { get; set; }
+        public decimal? Valor_Venal_Predial { get; set; }
+        public decimal? Valor_Venal_Territorial { get; set; }
+        public decimal? Valor_Venal_Imovel { get; set; }
+        public string TipoCertidao { get; set; }
+        public string Nao { get; set; }
     }
 
 

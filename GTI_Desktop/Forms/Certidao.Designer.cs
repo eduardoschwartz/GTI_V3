@@ -25,6 +25,8 @@
         private void InitializeComponent() {
             this.a1Panel1 = new Owf.Controls.A1Panel();
             this.TBar = new System.Windows.Forms.ToolStrip();
+            this.VerificarButton = new System.Windows.Forms.ToolStripButton();
+            this.ImprimirButton = new System.Windows.Forms.ToolStripButton();
             this.Assinatura = new System.Windows.Forms.CheckBox();
             this.TipoList = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -53,8 +55,6 @@
             this.Endereco = new System.Windows.Forms.TextBox();
             this.Nome = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.VerificarButton = new System.Windows.Forms.ToolStripButton();
-            this.ImprimirButton = new System.Windows.Forms.ToolStripButton();
             this.a1Panel1.SuspendLayout();
             this.TBar.SuspendLayout();
             this.a1Panel2.SuspendLayout();
@@ -94,7 +94,28 @@
             this.TBar.Name = "TBar";
             this.TBar.Size = new System.Drawing.Size(74, 48);
             this.TBar.TabIndex = 7;
+            this.TBar.TabStop = true;
             this.TBar.Text = "toolStrip1";
+            // 
+            // VerificarButton
+            // 
+            this.VerificarButton.Image = global::GTI_Desktop.Properties.Resources.OK;
+            this.VerificarButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.VerificarButton.Name = "VerificarButton";
+            this.VerificarButton.Size = new System.Drawing.Size(72, 20);
+            this.VerificarButton.Text = "&Verificar";
+            this.VerificarButton.ToolTipText = "Verificar a disponibilidade da certidão";
+            this.VerificarButton.Click += new System.EventHandler(this.VerificarButton_Click);
+            // 
+            // ImprimirButton
+            // 
+            this.ImprimirButton.Image = global::GTI_Desktop.Properties.Resources.print;
+            this.ImprimirButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ImprimirButton.Name = "ImprimirButton";
+            this.ImprimirButton.Size = new System.Drawing.Size(72, 20);
+            this.ImprimirButton.Text = "&Imprimir";
+            this.ImprimirButton.ToolTipText = "Imprimir a certidão";
+            this.ImprimirButton.Click += new System.EventHandler(this.ImprimirButton_Click);
             // 
             // Assinatura
             // 
@@ -412,26 +433,6 @@
             this.label5.Size = new System.Drawing.Size(86, 13);
             this.label5.TabIndex = 2;
             this.label5.Text = "Nome................:";
-            // 
-            // VerificarButton
-            // 
-            this.VerificarButton.Image = global::GTI_Desktop.Properties.Resources.OK;
-            this.VerificarButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.VerificarButton.Name = "VerificarButton";
-            this.VerificarButton.Size = new System.Drawing.Size(72, 20);
-            this.VerificarButton.Text = "Verificar";
-            this.VerificarButton.ToolTipText = "Verificar a disponibilidade da certidão";
-            this.VerificarButton.Click += new System.EventHandler(this.VerificarButton_Click);
-            // 
-            // ImprimirButton
-            // 
-            this.ImprimirButton.Image = global::GTI_Desktop.Properties.Resources.print;
-            this.ImprimirButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ImprimirButton.Name = "ImprimirButton";
-            this.ImprimirButton.Size = new System.Drawing.Size(72, 20);
-            this.ImprimirButton.Text = "Imprimir";
-            this.ImprimirButton.ToolTipText = "Imprimir a certidão";
-            this.ImprimirButton.Click += new System.EventHandler(this.ImprimirButton_Click);
             // 
             // Certidao
             // 

@@ -10,9 +10,13 @@ using static GTI_Models.modelCore;
 namespace GTI_Desktop.Forms {
     public partial class Certidao : Form {
         private string _connection = gtiCore.Connection_Name();
+        private string sNao = "", sTipoCertidao = "", sTributo = "", sAtividade = "", sSufixo = "", sCPF = "", sCNPJ = "";
+        private short nRet = 0;
+
         TipoCertidao _tipo_certidao;
         TipoCadastro _tipo_cadastro;
         DateTime? _data_processo;
+
 
         public Certidao() {
             InitializeComponent();
@@ -46,10 +50,10 @@ namespace GTI_Desktop.Forms {
                 Cep.Text = header.Cep;
                 Inscricao.Text = header.Inscricao;
                 if (header.Cpf_cnpj != "") {
-                    if (header.Cpf_cnpj.Length == 11)
-                        Doc.Text = Convert.ToInt64(header.Cpf_cnpj).ToString(@"000\.000\.000\-00");
+                    if (gtiCore.ExtractNumber( header.Cpf_cnpj).Length == 11)
+                        Doc.Text = Convert.ToInt64(gtiCore.ExtractNumber(header.Cpf_cnpj)).ToString(@"000\.000\.000\-00");
                     else
-                        Doc.Text = Convert.ToInt64(header.Cpf_cnpj).ToString(@"00\.000\.000\/0000\-00");
+                        Doc.Text = Convert.ToInt64(gtiCore.ExtractNumber(header.Cpf_cnpj)).ToString(@"00\.000\.000\/0000\-00");
                 }
                 Quadra.Text = header.Quadra_original;
                 Lote.Text = header.Lote_original;
@@ -82,6 +86,20 @@ namespace GTI_Desktop.Forms {
             }
         }
 
+        private void TipoList_SelectedIndexChanged(object sender, EventArgs e) {
+            ClearFields();
+        }
+
+        private void Codigo_TextChanged(object sender, EventArgs e) {
+            if (Codigo.Text != "")
+                ClearFields();
+        }
+
+        private void Processo_TextChanged(object sender, EventArgs e) {
+            if (Processo.Text != "")
+                ClearFields();
+        }
+
         private void Tipo_Certidao(int Indice,int codigo) {
             if (Indice == 0)
                 _tipo_certidao = TipoCertidao.Debito;
@@ -103,6 +121,7 @@ namespace GTI_Desktop.Forms {
             int _codigo;
             Processo_bll processo_Class = new Processo_bll(_connection);
             Sistema_bll sistema_Class = new Sistema_bll(_connection);
+
             ClearFields();
             if (Codigo.Text.Trim() == "")
                 MessageBox.Show("Código não informado.","Erro",MessageBoxButtons.OK,MessageBoxIcon.Error);
@@ -127,7 +146,10 @@ namespace GTI_Desktop.Forms {
                             if(_tipo_certidao==TipoCertidao.Debito && _tipo_cadastro==TipoCadastro.Cidadao)
                                 MessageBox.Show("Este tipo de certidão não pode ser emitida para cidadão.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             else {
+
+                                gtiCore.Ocupado(this);
                                 Dados_Impressao(_codigo);
+                                gtiCore.Liberado(this);
                             }
                         }
                     }
@@ -143,11 +165,11 @@ namespace GTI_Desktop.Forms {
 
             Tributario_bll tributario_Class = new Tributario_bll(_connection);
             int _userId = Properties.Settings.Default.UserId;
-            int _ano_certidao = DateTime.Now.Year, _numero_certidao = 0, _codigo = Convert.ToInt32(Codigo.Text),_ano_isencao=DateTime.Now.Year;
-            decimal _percisencao = 0, SomaArea=0;
-            DateTime? _data_processo_isencao=null;
+            int _ano_certidao = DateTime.Now.Year, _numero_certidao = 0, _codigo = Convert.ToInt32(Codigo.Text), _ano_isencao = DateTime.Now.Year;
+            decimal _percisencao = 0, SomaArea = 0;
+            DateTime? _data_processo_isencao = null;
             Report_Data _dados = null;
-            string _nomeReport = "",_controle="",_numero_processo="";
+            string _nomeReport = "", _controle = "", _numero_processo = "";
 
             if (_tipo_certidao == TipoCertidao.Endereco) {
                 _nomeReport = "CertidaoEndereco";
@@ -188,7 +210,7 @@ namespace GTI_Desktop.Forms {
                             _nomeReport = "CertidaoIsencaoProcesso";
                             _percisencao = (decimal)ListaIsencao[0].Percisencao;
                             _numero_processo = ListaIsencao[0].Numprocesso;
-                            _data_processo_isencao = Convert.ToDateTime( ListaIsencao[0].dataprocesso);
+                            _data_processo_isencao = Convert.ToDateTime(ListaIsencao[0].dataprocesso);
                         } else {
                             SomaArea = imovel_Class.Soma_Area(_codigo);
                             if (SomaArea < 65) {
@@ -223,53 +245,133 @@ namespace GTI_Desktop.Forms {
                         throw ex;
                     }
 
+                } else {
+                    if (_tipo_certidao == TipoCertidao.ValorVenal) {
+                        _nomeReport = "CertidaoValorVenal";
+                        _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.ValorVenal);
+                        _controle = _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _codigo.ToString() + "-VV";
+                        Certidao_valor_venal cert = new Certidao_valor_venal();
+                        cert.Codigo = Convert.ToInt32(_codigo);
+                        cert.Ano = _ano_certidao;
+                        cert.Numero = _numero_certidao;
+                        cert.Data = DateTime.Now;
+                        cert.Inscricao = Inscricao.Text;
+                        cert.Nomecidadao = Nome.Text;
+                        cert.Logradouro = Endereco.Text;
+                        cert.Descbairro = Bairro.Text;
+                        cert.Li_quadras = Quadra.Text;
+                        cert.Li_lotes = Lote.Text;
+                        Exception ex = tributario_Class.Insert_Certidao_ValorVenal(cert);
+                        if (ex != null) {
+                            throw ex;
+                        }
+                    } else {
+                        if (_tipo_certidao == TipoCertidao.Debito) {
 
+                            //***Verifica débito
+                            Certidao_debito_detalhe dadosCertidao = tributario_Class.Certidao_Debito(_codigo);
+                            if (dadosCertidao.Tipo_Retorno == RetornoCertidaoDebito.Negativa) {
+                                sTipoCertidao = "NEGATIVA";
+                                sNao = "não ";
+                                nRet = 3;
+                                sSufixo = "CN";
+                                if (_tipo_cadastro == TipoCadastro.Imovel)
+                                    _nomeReport = "CertidaoDebitoImovel";
+                                else {
+                                    if (_tipo_cadastro == TipoCadastro.Empresa)
+                                        _nomeReport = "CertidaoDebitoEmpresa";
+                                }
+                            } else {
+                                if (dadosCertidao.Tipo_Retorno == RetornoCertidaoDebito.Positiva) {
+                                    sTipoCertidao = "POSITIVA";
+                                    nRet = 4;
+                                    sSufixo = "CP";
+                                    if (_tipo_cadastro == TipoCadastro.Imovel)
+                                        _nomeReport = "CertidaoDebitoImovel";
+                                    else {
+                                        if (_tipo_cadastro == TipoCadastro.Empresa)
+                                            _nomeReport = "CertidaoDebitoEmpresa";
+                                    }
+                                } else {
+                                    if (dadosCertidao.Tipo_Retorno == RetornoCertidaoDebito.NegativaPositiva) {
+                                        sTipoCertidao = "POSITIVA COM EFEITO NEGATIVA";
+                                        nRet = 5;
+                                        sSufixo = "PN";
+                                        if (_tipo_cadastro == TipoCadastro.Imovel)
+                                            _nomeReport = "CertidaoDebitoImovelPN";
+                                        else {
+                                            if (_tipo_cadastro == TipoCadastro.Empresa)
+                                                _nomeReport = "CertidaoDebitoEmpresaPN";
+                                        }
+                                    }
+                                }
+                            }
+                            sTributo = dadosCertidao.Descricao_Lancamentos;
+
+                            _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Debito);
+                            _controle = _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _codigo.ToString() + "-" + sSufixo;
+                            Certidao_debito cert = new Certidao_debito();
+                            cert.Codigo = Convert.ToInt32(_codigo);
+                            cert.Ano = (short)_ano_certidao;
+                            cert.Ret = nRet;
+                            cert.Numero = _numero_certidao;
+                            cert.Datagravada = DateTime.Now;
+                            cert.Inscricao =Inscricao.Text;
+                            cert.Nome = Nome.Text;
+                            cert.Logradouro = Endereco.Text;
+                            cert.Bairro = Bairro.Text;
+                            cert.Cidade = Cidade.Text;
+                            cert.Processo = Processo.Text;
+                            cert.Dataprocesso = _data_processo;
+                            cert.Atendente = gtiCore.Retorna_Last_User();
+                            cert.Cpf = sCPF;
+                            cert.Cnpj = sCNPJ;
+                            cert.Atividade = Atividade.Text;
+                            cert.Lancamento = dadosCertidao.Descricao_Lancamentos;
+                            Exception ex = tributario_Class.Insert_Certidao_Debito(cert);
+                            if (ex != null) {
+                                throw ex;
+                            }
+                        }
+                    }
+                }
+
+                if (_numero_certidao > 0) {
+                    _dados = new Report_Data() {
+                        Codigo = Convert.ToInt32(Codigo.Text),
+                        Inscricao = Inscricao.Text,
+                        Nome = Nome.Text,
+                        Cpf_cnpj = Doc.Text,
+                        Endereco = Endereco.Text,
+                        Nome_bairro = Bairro.Text,
+                        Quadra_original = Quadra.Text,
+                        Lote_original = Lote.Text,
+                        Nome_cidade = Cidade.Text,
+                        Cep = Cep.Text,
+                        Numero_Certidao = _numero_certidao.ToString("000000") + "/" + _ano_certidao.ToString(),
+                        Controle = _controle,
+                        Assinatura_Hide = Assinatura.Checked,
+                        Processo = Processo.Text,
+                        Data_Processo = _data_processo,
+                        UserId = _userId,
+                        Perc_Isencao = _percisencao,
+                        Data_Processo_Isencao = _data_processo_isencao,
+                        Processo_Isencao = _numero_processo,
+                        AnoIsencao = _ano_isencao,
+                        Area = SomaArea,
+                        Nao=sNao,
+                        TipoCertidao=sTipoCertidao,
+                        Tributos=sTributo,
+                        Atividade=sAtividade
+                        
+                    };
+                    ReportCR fRpt = new ReportCR(_nomeReport, _dados);
+                    fRpt.ShowDialog();
+                    ClearFields();
                 }
             }
-
-            if (_numero_certidao > 0) {
-                _dados = new Report_Data() {
-                    Codigo = Convert.ToInt32(Codigo.Text),
-                    Inscricao = Inscricao.Text,
-                    Nome = Nome.Text,
-                    Cpf_cnpj=Doc.Text,
-                    Endereco = Endereco.Text,
-                    Nome_bairro = Bairro.Text,
-                    Quadra_original = Quadra.Text,
-                    Lote_original = Lote.Text,
-                    Nome_cidade = Cidade.Text,
-                    Cep = Cep.Text,
-                    Numero_Certidao = _numero_certidao.ToString("000000") + "/" + _ano_certidao.ToString(),
-                    Controle = _controle,
-                    Assinatura_Hide = Assinatura.Checked,
-                    Processo = Processo.Text,
-                    Data_Processo=_data_processo,
-                    UserId = _userId,
-                    Perc_Isencao=_percisencao,
-                    Data_Processo_Isencao=_data_processo_isencao,
-                    Processo_Isencao=_numero_processo,
-                    AnoIsencao=_ano_isencao,
-                    Area=SomaArea
-                };
-                ReportCR fRpt = new ReportCR(_nomeReport, _dados);
-                fRpt.ShowDialog();
-                ClearFields();
-            }
         }
 
-        private void TipoList_SelectedIndexChanged(object sender, EventArgs e) {
-            ClearFields();
-        }
-
-        private void Codigo_TextChanged(object sender, EventArgs e) {
-            if (Codigo.Text != "")
-                ClearFields();
-        }
-
-        private void Processo_TextChanged(object sender, EventArgs e) {
-            if (Processo.Text != "")
-                ClearFields();
-        }
 
     }
 }

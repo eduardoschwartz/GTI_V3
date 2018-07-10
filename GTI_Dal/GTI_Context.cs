@@ -24,6 +24,7 @@ namespace GTI_Dal {
         public DbSet<Cep> Cep { get; set; }
         public DbSet<Processogti> Processogti { get; set; }
         public DbSet<Anexo> Anexo { get; set; }
+        public DbSet<anexo_log> Anexo_log { get; set; }
         public DbSet<Processo_historico> Processo_historico { get; set; }
         public DbSet<Processoend> Processoend { get; set; }
         public DbSet<Processodoc> Processodoc { get; set; }
