@@ -18,7 +18,7 @@ namespace GTI_Models.Models {
         public string Grupo { get; set; }
         public string Senha2 { get; set; }
         public int? Setor_atual { get; set; }
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Userbinary { get; set; }
     }
 
@@ -34,7 +34,7 @@ namespace GTI_Models.Models {
         public string Grupo { get; set; }
         public string Senha2 { get; set; }
         public int? Setor_atual { get; set; }
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Nome_setor { get; set; }
         public string Userbinary { get; set; }
     }

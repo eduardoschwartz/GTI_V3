@@ -116,7 +116,7 @@
             this.MainTreeView.CheckBoxes = true;
             this.MainTreeView.Cursor = System.Windows.Forms.Cursors.Hand;
             this.MainTreeView.FullRowSelect = true;
-            this.MainTreeView.Location = new System.Drawing.Point(1, 58);
+            this.MainTreeView.Location = new System.Drawing.Point(1, 60);
             this.MainTreeView.Name = "MainTreeView";
             this.MainTreeView.ShowNodeToolTips = true;
             this.MainTreeView.Size = new System.Drawing.Size(429, 424);

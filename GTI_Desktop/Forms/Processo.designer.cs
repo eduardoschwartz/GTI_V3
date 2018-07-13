@@ -62,7 +62,6 @@
             this.label29 = new System.Windows.Forms.Label();
             this.Req = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.AnexoObsText = new System.Windows.Forms.TextBox();
             this.MainListView = new System.Windows.Forms.ListView();
             this.Doc2Check = new System.Windows.Forms.CheckBox();
             this.CidadeLabel = new System.Windows.Forms.Label();
@@ -148,6 +147,12 @@
             this.AssuntoText = new System.Windows.Forms.TextBox();
             this.RequerentePanel = new System.Windows.Forms.GroupBox();
             this.PrintPanel = new Owf.Controls.A1Panel();
+            this.AnexoLogListView = new System.Windows.Forms.ListView();
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label30 = new System.Windows.Forms.Label();
             this.pnlCCusto.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -564,16 +569,6 @@
             this.columnHeader7.Text = "Número";
             this.columnHeader7.Width = 80;
             // 
-            // AnexoObsText
-            // 
-            this.AnexoObsText.Location = new System.Drawing.Point(7, 138);
-            this.AnexoObsText.Multiline = true;
-            this.AnexoObsText.Name = "AnexoObsText";
-            this.AnexoObsText.ReadOnly = true;
-            this.AnexoObsText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.AnexoObsText.Size = new System.Drawing.Size(513, 57);
-            this.AnexoObsText.TabIndex = 76;
-            // 
             // MainListView
             // 
             this.MainListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -589,7 +584,7 @@
             this.MainListView.MinimumSize = new System.Drawing.Size(200, 100);
             this.MainListView.MultiSelect = false;
             this.MainListView.Name = "MainListView";
-            this.MainListView.Size = new System.Drawing.Size(513, 100);
+            this.MainListView.Size = new System.Drawing.Size(513, 124);
             this.MainListView.TabIndex = 75;
             this.MainListView.UseCompatibleStateImageBehavior = false;
             this.MainListView.View = System.Windows.Forms.View.Details;
@@ -1064,10 +1059,13 @@
             this.AnexoDelButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Lime;
             this.AnexoDelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AnexoDelButton.Image = global::GTI_Desktop.Properties.Resources.delete;
-            this.AnexoDelButton.Location = new System.Drawing.Point(32, 199);
+            this.AnexoDelButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.AnexoDelButton.Location = new System.Drawing.Point(401, 163);
             this.AnexoDelButton.Name = "AnexoDelButton";
-            this.AnexoDelButton.Size = new System.Drawing.Size(19, 19);
+            this.AnexoDelButton.Size = new System.Drawing.Size(112, 19);
             this.AnexoDelButton.TabIndex = 22;
+            this.AnexoDelButton.Text = "Excluir um anexo";
+            this.AnexoDelButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.tTp.SetToolTip(this.AnexoDelButton, "Remover Anexo");
             this.AnexoDelButton.UseVisualStyleBackColor = false;
             this.AnexoDelButton.Click += new System.EventHandler(this.BtAnexoDel_Click);
@@ -1100,10 +1098,13 @@
             this.AnexoNovoButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Lime;
             this.AnexoNovoButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AnexoNovoButton.Image = global::GTI_Desktop.Properties.Resources.add_file;
-            this.AnexoNovoButton.Location = new System.Drawing.Point(7, 199);
+            this.AnexoNovoButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.AnexoNovoButton.Location = new System.Drawing.Point(283, 163);
             this.AnexoNovoButton.Name = "AnexoNovoButton";
-            this.AnexoNovoButton.Size = new System.Drawing.Size(19, 19);
+            this.AnexoNovoButton.Size = new System.Drawing.Size(112, 19);
             this.AnexoNovoButton.TabIndex = 20;
+            this.AnexoNovoButton.Text = "Incluir um anexo";
+            this.AnexoNovoButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.tTp.SetToolTip(this.AnexoNovoButton, "Adicionar Anexo");
             this.AnexoNovoButton.UseVisualStyleBackColor = false;
             this.AnexoNovoButton.Click += new System.EventHandler(this.BtAnexoNovo_Click);
@@ -1153,7 +1154,8 @@
             // 
             this.AnexoPanel.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.AnexoPanel.BorderColor = System.Drawing.Color.DimGray;
-            this.AnexoPanel.Controls.Add(this.AnexoObsText);
+            this.AnexoPanel.Controls.Add(this.label30);
+            this.AnexoPanel.Controls.Add(this.AnexoLogListView);
             this.AnexoPanel.Controls.Add(this.MainListView);
             this.AnexoPanel.Controls.Add(this.AnexoDelButton);
             this.AnexoPanel.Controls.Add(this.AnexoSairButton);
@@ -1163,11 +1165,11 @@
             this.AnexoPanel.GradientStartColor = System.Drawing.Color.PaleGreen;
             this.AnexoPanel.Image = null;
             this.AnexoPanel.ImageLocation = new System.Drawing.Point(4, 4);
-            this.AnexoPanel.Location = new System.Drawing.Point(45, 72);
+            this.AnexoPanel.Location = new System.Drawing.Point(45, 34);
             this.AnexoPanel.Name = "AnexoPanel";
             this.AnexoPanel.RoundCornerRadius = 9;
             this.AnexoPanel.ShadowOffSet = 9;
-            this.AnexoPanel.Size = new System.Drawing.Size(536, 232);
+            this.AnexoPanel.Size = new System.Drawing.Size(536, 303);
             this.AnexoPanel.TabIndex = 182;
             this.AnexoPanel.Visible = false;
             // 
@@ -1263,28 +1265,28 @@
             // arquivarToolStripMenuItem
             // 
             this.arquivarToolStripMenuItem.Name = "arquivarToolStripMenuItem";
-            this.arquivarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.arquivarToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.arquivarToolStripMenuItem.Text = "Arquivar";
             this.arquivarToolStripMenuItem.Click += new System.EventHandler(this.ArquivarToolStripMenuItem_Click);
             // 
             // cancelarToolStripMenuItem
             // 
             this.cancelarToolStripMenuItem.Name = "cancelarToolStripMenuItem";
-            this.cancelarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cancelarToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.cancelarToolStripMenuItem.Text = "Cancelar";
             this.cancelarToolStripMenuItem.Click += new System.EventHandler(this.CancelarToolStripMenuItem_Click);
             // 
             // reativarToolStripMenuItem
             // 
             this.reativarToolStripMenuItem.Name = "reativarToolStripMenuItem";
-            this.reativarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.reativarToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.reativarToolStripMenuItem.Text = "Reativar";
             this.reativarToolStripMenuItem.Click += new System.EventHandler(this.ReativarToolStripMenuItem_Click);
             // 
             // suspenderToolStripMenuItem
             // 
             this.suspenderToolStripMenuItem.Name = "suspenderToolStripMenuItem";
-            this.suspenderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.suspenderToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.suspenderToolStripMenuItem.Text = "Suspender";
             this.suspenderToolStripMenuItem.Click += new System.EventHandler(this.SuspenderToolStripMenuItem_Click);
             // 
@@ -1603,11 +1605,63 @@
             this.PrintPanel.TabIndex = 178;
             this.PrintPanel.Visible = false;
             // 
+            // AnexoLogListView
+            // 
+            this.AnexoLogListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.AnexoLogListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader8,
+            this.columnHeader10,
+            this.columnHeader11,
+            this.columnHeader12});
+            this.AnexoLogListView.FullRowSelect = true;
+            this.AnexoLogListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.AnexoLogListView.Location = new System.Drawing.Point(7, 190);
+            this.AnexoLogListView.MinimumSize = new System.Drawing.Size(200, 100);
+            this.AnexoLogListView.MultiSelect = false;
+            this.AnexoLogListView.Name = "AnexoLogListView";
+            this.AnexoLogListView.Size = new System.Drawing.Size(439, 100);
+            this.AnexoLogListView.TabIndex = 76;
+            this.AnexoLogListView.UseCompatibleStateImageBehavior = false;
+            this.AnexoLogListView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Data";
+            this.columnHeader8.Width = 70;
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "Número";
+            this.columnHeader10.Width = 80;
+            // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "Ocorrência";
+            this.columnHeader11.Width = 80;
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "Funcionário";
+            this.columnHeader12.Width = 180;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.BackColor = System.Drawing.Color.Transparent;
+            this.label30.Location = new System.Drawing.Point(10, 173);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(124, 13);
+            this.label30.TabIndex = 77;
+            this.label30.Text = "Histórico de ocorrências:";
+            // 
             // Processo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(640, 365);
+            this.Controls.Add(this.AnexoPanel);
             this.Controls.Add(this.ComplementoText);
             this.Controls.Add(this.NumProcText);
             this.Controls.Add(this.panel1);
@@ -1636,7 +1690,6 @@
             this.Controls.Add(this.AssuntoText);
             this.Controls.Add(this.RequerentePanel);
             this.Controls.Add(this.pnlCCusto);
-            this.Controls.Add(this.AnexoPanel);
             this.Controls.Add(this.DocPanel);
             this.Controls.Add(this.PrintPanel);
             this.Controls.Add(this.CidadaoPanel);
@@ -1713,7 +1766,6 @@
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.ColumnHeader Req;
         private System.Windows.Forms.ColumnHeader columnHeader7;
-        private System.Windows.Forms.TextBox AnexoObsText;
         public System.Windows.Forms.ListView MainListView;
         private System.Windows.Forms.CheckBox Doc2Check;
         private System.Windows.Forms.Label CidadeLabel;
@@ -1798,5 +1850,11 @@
         internal System.Windows.Forms.TextBox AssuntoText;
         private System.Windows.Forms.GroupBox RequerentePanel;
         private Owf.Controls.A1Panel PrintPanel;
+        private System.Windows.Forms.Label label30;
+        public System.Windows.Forms.ListView AnexoLogListView;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ColumnHeader columnHeader10;
+        private System.Windows.Forms.ColumnHeader columnHeader11;
+        private System.Windows.Forms.ColumnHeader columnHeader12;
     }
 }

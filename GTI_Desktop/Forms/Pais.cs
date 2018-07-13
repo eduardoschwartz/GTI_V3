@@ -5,10 +5,12 @@ using GTI_Models.Models;
 using GTI_Desktop.Classes;
 using GTI_Desktop.Properties;
 using System.Collections.Generic;
+using GTI_Models;
 
 namespace GTI_Desktop.Forms {
     public partial class Pais : Form {
-        string _connection = gtiCore.Connection_Name();
+
+          string _connection = gtiCore.Connection_Name();
 
         public Pais() {
             InitializeComponent();
@@ -31,6 +33,13 @@ namespace GTI_Desktop.Forms {
 
         private void BtAdd_Click(object sender, EventArgs e) {
             inputBox iBox = new inputBox();
+
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroPais_Alterar);
+            if (!bAllow) {
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             String sCod = iBox.Show("", "Informação", "Digite o nome do país.", 40);
             if (!string.IsNullOrEmpty(sCod)) {
                 Endereco_bll endereco_class = new Endereco_bll(_connection);
@@ -48,6 +57,12 @@ namespace GTI_Desktop.Forms {
 
         private void BtEdit_Click(object sender, EventArgs e) {
             if (lstMain.SelectedItem == null) return;
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroPais_Alterar);
+            if (!bAllow) {
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             inputBox iBox = new inputBox();
             String sCod = iBox.Show(lstMain.Text, "Informação", "Digite o nome do país.", 50);
             if (!string.IsNullOrEmpty(sCod)) {
@@ -68,6 +83,12 @@ namespace GTI_Desktop.Forms {
 
         private void BtDel_Click(object sender, EventArgs e) {
             if (lstMain.SelectedItem == null) return;
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroPais_Alterar);
+            if (!bAllow) {
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             if (MessageBox.Show("Excluir este país?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
                 Endereco_bll endereco_class = new Endereco_bll(_connection);
                 GTI_Models.Models.Pais reg = new GTI_Models.Models.Pais {

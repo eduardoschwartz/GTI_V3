@@ -44,6 +44,7 @@
             this.ClientSize = new System.Drawing.Size(655, 485);
             this.Controls.Add(this.crViewer);
             this.Name = "ReportCR";
+            this.ShowInTaskbar = false;
             this.Text = "ReportCR";
             this.ResumeLayout(false);
 

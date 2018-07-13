@@ -142,7 +142,7 @@ namespace GTI_Dal.Classes {
 
         public int Retorna_User_LoginId(string loginName) {
             using (var db = new GTI_Context(_connection)) {
-                int Sql = (from u in db.Usuario where u.Nomelogin == loginName select u.Id).FirstOrDefault();
+                int Sql = (from u in db.Usuario where u.Nomelogin == loginName select (int)u.Id).FirstOrDefault();
                 return Sql;
             }
         }
@@ -293,7 +293,7 @@ namespace GTI_Dal.Classes {
 
         public Exception SaveUserBinary(Usuario reg) {
             using (var db = new GTI_Context(_connection)) {
-                int nId = reg.Id;
+                int nId = (int)reg.Id;
                 Usuario b = db.Usuario.First(i => i.Id == nId);
                 b.Userbinary = reg.Userbinary;
                 try {

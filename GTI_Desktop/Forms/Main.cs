@@ -1,5 +1,6 @@
 ﻿using GTI_Bll.Classes;
 using GTI_Desktop.Classes;
+using GTI_Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,18 +11,6 @@ using System.Windows.Forms;
 namespace GTI_Desktop.Forms {
     public partial class Main : Form {
         string _connection = gtiCore.Connection_Name();
-
-        private enum TAcesso {
-            CadastroPais=1,
-            CadastroBairro=3,
-            CadastroProfissao = 6,
-            CadastroImovel=8,
-            CadastrofaceQuadra=12,
-            CadastroCidadao=14,
-            ExtratoContribuinte=16,
-            CadastroProcesso=17
-        }
-
         private const int CP_NOCLOSE_BUTTON = 0x200;
 
         protected override CreateParams CreateParams {
@@ -68,7 +57,6 @@ namespace GTI_Desktop.Forms {
                     ctlMDI = (MdiClient)ctl;
                     ctlMDI.BackColor = this.BackColor;
                 } catch  {
-                    // Catch and ignore the error if casting failed.
                 }
             }
         }
@@ -124,22 +112,7 @@ namespace GTI_Desktop.Forms {
             }
         }
         
-        private void MnuBairro_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroBairro);
-            if (bAllow) {
-                var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Bairro);
-                if (formToShow != null) {
-                    formToShow.Show();
-                } else {
-                    Forms.Bairro f1 = new Forms.Bairro {
-                        Tag = "Menu",
-                        MdiParent = this
-                    };
-                    f1.Show();
-                }
-            }else
-                MessageBox.Show("Acesso não permitido.","Erro",MessageBoxButtons.OK,MessageBoxIcon.Error);
-        }
+        
 
         private void MnuConfig_Click(object sender, EventArgs e) {
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Config);
@@ -174,7 +147,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void MnuCidadao_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroCidadao);
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCidadao);
             if (bAllow) {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Cidadao);
                 if (formToShow != null) {
@@ -190,39 +163,7 @@ namespace GTI_Desktop.Forms {
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void CadastroDeProfissõesToolStripMenuItem_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroProfissao);
-            if (bAllow) {
-                var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Profissao);
-                if (formToShow != null) {
-                    formToShow.Show();
-                } else {
-                    Profissao f1 = new Profissao {
-                        Tag = "Menu",
-                        MdiParent = this
-                    };
-                    f1.Show();
-                }
-            } else
-                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        private void CadastroDePaísesToolStripMenuItem_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroPais);
-            if (bAllow) {
-                var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Pais);
-                if (formToShow != null) {
-                    formToShow.Show();
-                } else {
-                    Pais f1 = new Pais {
-                        Tag = "Menu",
-                        MdiParent = this
-                    };
-                    f1.Show();
-                }
-            } else
-                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
+      
 
         private void DocumentaçãoParaProcessosToolStripMenuItem_Click(object sender, EventArgs e) {
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Processo_Documento);
@@ -311,7 +252,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void MnuControleProcesso_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroProcesso);
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroProcesso);
             if (bAllow) {
 
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Processo);
@@ -329,7 +270,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void MnuCadImob_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroImovel);
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroImovel);
             if (bAllow) {
                 gtiCore.Ocupado(this);
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Imovel);
@@ -424,7 +365,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void MnuExtrato_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.ExtratoContribuinte);
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.ExtratoContribuinte);
             if (bAllow) {
                 gtiCore.Ocupado(this);
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Extrato);
@@ -561,5 +502,57 @@ namespace GTI_Desktop.Forms {
                 f1.BringToFront();
             }
         }
+
+        private void mnuCadastroBairro_Click(object sender, EventArgs e) {
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroBairro);
+            if (bAllow) {
+                var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Bairro);
+                if (formToShow != null) {
+                    formToShow.Show();
+                } else {
+                    Forms.Bairro f1 = new Forms.Bairro {
+                        Tag = "Menu",
+                        MdiParent = this
+                    };
+                    f1.Show();
+                }
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void mnuCadastroPais_Click(object sender, EventArgs e) {
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroPais);
+            if (bAllow) {
+                var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Pais);
+                if (formToShow != null) {
+                    formToShow.Show();
+                } else {
+                    Pais f1 = new Pais {
+                        Tag = "Menu",
+                        MdiParent = this
+                    };
+                    f1.Show();
+                }
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void mnuCadastroProfissao_Click(object sender, EventArgs e) {
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroProfissao);
+            if (bAllow) {
+                var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Profissao);
+                if (formToShow != null) {
+                    formToShow.Show();
+                } else {
+                    Profissao f1 = new Profissao {
+                        Tag = "Menu",
+                        MdiParent = this
+                    };
+                    f1.Show();
+                }
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
     }//end class
 }

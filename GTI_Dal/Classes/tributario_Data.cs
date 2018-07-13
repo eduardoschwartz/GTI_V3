@@ -1219,7 +1219,8 @@ namespace GTI_Dal.Classes {
             using (var db = new Eicon_Context(ConfigurationManager.ConnectionStrings["GTIEicon"].ConnectionString)) {
                 decimal _mes_inicial = db.Tb_inter_encerramento_giss.OrderBy(c => c.Ano_competencia).ThenBy(c => c.Mes_competencia).Where(c => c.Num_cadastro == Codigo).Select(c => c.Mes_competencia).FirstOrDefault();
                 decimal _ano_inicial = db.Tb_inter_encerramento_giss.OrderBy(c => c.Ano_competencia).ThenBy(c => c.Mes_competencia).Where(c => c.Num_cadastro == Codigo).Select(c => c.Ano_competencia).FirstOrDefault();
-
+                if (_ano_inicial == 0)
+                    return null;
                 int _mes_anterior = 0, _ano_anterior = 0;
 
                 if (DateTime.Now.Month== 1){
@@ -1287,6 +1288,8 @@ namespace GTI_Dal.Classes {
 
         public int Competencias_Nao_Encerradas(List<CompetenciaISS>Lista) {
             int nCount = 0;
+            if (Lista == null)
+                return 0;
             for (int i = 0; i < Lista.Count; i++) {
                 if (Lista[i].Encerrada == false)
                     nCount++;

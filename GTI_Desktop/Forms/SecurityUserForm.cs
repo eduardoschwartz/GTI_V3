@@ -22,7 +22,7 @@ namespace GTI_Desktop.Forms {
             Sistema_bll sistema_Class = new Sistema_bll(_connection);
             List<usuarioStruct> Lista = sistema_Class.Lista_Usuarios();
             foreach (usuarioStruct item in Lista) {
-                comboList.Add(new CustomListBoxItem(item.Nome_completo, item.Id));
+                comboList.Add(new CustomListBoxItem(item.Nome_completo, (int)item.Id));
             }
 
             UsuarioComboBox.DataSource = comboList;

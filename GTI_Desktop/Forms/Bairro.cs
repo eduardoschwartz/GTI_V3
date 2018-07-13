@@ -1,5 +1,6 @@
 ﻿using GTI_Bll.Classes;
 using GTI_Desktop.Classes;
+using GTI_Models;
 using GTI_Models.Models;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace GTI_Desktop.Forms {
 
 
     public partial class Bairro : Form {
+
         string _connection = gtiCore.Connection_Name();
         public Bairro() {
             InitializeComponent();
@@ -71,6 +73,20 @@ namespace GTI_Desktop.Forms {
 
         private void BtAdd_Click(object sender, EventArgs e) {
             inputBox iBox = new inputBox();
+
+            bool bAllowLocal = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroBairro_Alterar_Local);
+            bool bAllowFora = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroBairro_Alterar_Fora);
+
+            if (!bAllowLocal && !bAllowFora) {
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (UFCombo.SelectedValue.ToString() == "SP" && Convert.ToInt32(CidadeCombo.SelectedValue) == 413 && !bAllowLocal) {
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             String sCod = iBox.Show("", "Informação", "Digite o nome do bairro.", 40);
             if (!string.IsNullOrEmpty(sCod)) {
                 Endereco_bll bairro_class = new Endereco_bll(_connection);
@@ -90,6 +106,19 @@ namespace GTI_Desktop.Forms {
 
         private void BtEdit_Click(object sender, EventArgs e) {
             if (BairroListBox.SelectedItem == null) return;
+            bool bAllowLocal = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroBairro_Alterar_Local);
+            bool bAllowFora = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroBairro_Alterar_Fora);
+
+            if (!bAllowLocal && !bAllowFora) {
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (UFCombo.SelectedValue.ToString() == "SP" && Convert.ToInt32(CidadeCombo.SelectedValue) == 413 && !bAllowLocal) {
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             inputBox iBox = new inputBox();
             String sCod = iBox.Show(BairroListBox.Text, "Informação", "Digite o nome do bairro.", 40);
             if (!string.IsNullOrEmpty(sCod)) {
@@ -111,6 +140,20 @@ namespace GTI_Desktop.Forms {
 
         private void BtDel_Click(object sender, EventArgs e) {
             if (BairroListBox.SelectedItem == null) return;
+
+            bool bAllowLocal = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroBairro_Alterar_Local);
+            bool bAllowFora = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroBairro_Alterar_Fora);
+
+            if (!bAllowLocal && !bAllowFora) {
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (UFCombo.SelectedValue.ToString() == "SP" && Convert.ToInt32(CidadeCombo.SelectedValue) == 413 && !bAllowLocal) {
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             if (MessageBox.Show("Excluir este bairro?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
                 Endereco_bll bairro_class = new Endereco_bll(_connection);
                 GTI_Models.Models.Bairro reg = new GTI_Models.Models.Bairro {

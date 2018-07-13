@@ -1,17 +1,15 @@
 ﻿using GTI_Bll.Classes;
 using GTI_Desktop.Classes;
-using GTI_Desktop.Properties;
+using GTI_Desktop.Datasets;
 using GTI_Models.Models;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using static GTI_Desktop.Classes.GtiTypes;
-using GTI_Desktop.Datasets;
-using System.Data;
-using Microsoft.Reporting.WinForms;
-using System.Drawing;
 
 namespace GTI_Desktop.Forms {
     public partial class Processo : Form {
@@ -198,7 +196,7 @@ namespace GTI_Desktop.Forms {
             ArquivaLabel.Text = EmptyDateText;
             CancelaLabel.Text = EmptyDateText;
             AnexoLabel.Text = "";
-            AnexoObsText.Text = "";
+            AnexoLogListView.Items.Clear();
             ObsText.Text = "";
             CodCidadaoLabel.Text = "000000";
             NomeCidadaoLabel.Text = "";
@@ -239,7 +237,6 @@ namespace GTI_Desktop.Forms {
                 Doc1Check.Focus();
             }
         }
-
 
         #endregion
 
@@ -372,7 +369,12 @@ namespace GTI_Desktop.Forms {
                         AnexoLabel.Text = MainListView.Items.Count.ToString() + " anexo(s)";
 
                         ProcessoStruct Proc = clsProcesso.Dados_Processo(nAnoProc, nNumeroProc);
-                        AnexoObsText.Text = Proc.ObsAnexo.ToString();
+                        Sistema_bll sistema_Class = new Sistema_bll(_connection);
+                        ListViewItem lvlog = new ListViewItem(DateTime.Now.ToString("dd/MM/yyyy"));
+                        lvlog.SubItems.Add(sNumProcesso);
+                        lvlog.SubItems.Add("Anexado");
+                        lvlog.SubItems.Add(sistema_Class.Retorna_User_FullName(gtiCore.Retorna_Last_User()));
+                        AnexoLogListView.Items.Add(lvlog);
 
                         if (ex != null) {
                             ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
@@ -412,7 +414,13 @@ namespace GTI_Desktop.Forms {
                         MainListView.Items.RemoveAt(MainListView.SelectedItems[0].Index);
                         AnexoLabel.Text = MainListView.Items.Count.ToString() + " anexo(s)";
                         ProcessoStruct Proc = clsProcesso.Dados_Processo(nAno, nNumero);
-                        AnexoObsText.Text = Proc.ObsAnexo.ToString();
+
+                        Sistema_bll sistema_Class = new Sistema_bll(_connection);
+                        ListViewItem lvlog = new ListViewItem(DateTime.Now.ToString("dd/MM/yyyy"));
+                        lvlog.SubItems.Add(sNumProcesso);
+                        lvlog.SubItems.Add("Removido");
+                        lvlog.SubItems.Add(sistema_Class.Retorna_User_FullName(gtiCore.Retorna_Last_User()));
+                        AnexoLogListView.Items.Add(lvlog);
                     }
                 }
             }
@@ -752,7 +760,6 @@ namespace GTI_Desktop.Forms {
 
         #region Functions
 
-
         private void LoadReg()
         {
             gtiCore.Ocupado(this);
@@ -827,7 +834,16 @@ namespace GTI_Desktop.Forms {
                 lvi.SubItems.Add(item.Complemento);
                 MainListView.Items.Add(lvi);
             }
-            AnexoObsText.Text = Reg.ObsAnexo;
+
+            foreach (var item in Reg.ListaAnexoLog) {
+                String sNumProc = item.Numero_anexo.ToString() + "-" + clsProcesso.DvProcesso(item.Numero_anexo).ToString() + "/" + item.Ano_anexo.ToString();
+                ListViewItem lvi = new ListViewItem(item.Data.ToString("dd/MM/yyyy"));
+                lvi.SubItems.Add(sNumProc);
+                lvi.SubItems.Add(item.Ocorrencia);
+                lvi.SubItems.Add(item.UserName);
+                AnexoLogListView.Items.Add(lvi);
+            }
+
             ObsArquiva = Reg.ObsArquiva;
             //pnlDoc.Show();
             DocListView.Items.Clear();
@@ -1036,7 +1052,7 @@ namespace GTI_Desktop.Forms {
             dRow["DataEntrada"] = DateTime.Parse(Reg.DataEntrada.ToString()).ToString("dd/MM/yyyy");
 
             Cidadao_bll clsCidadao = new Cidadao_bll(_connection);
-            CidadaoStruct Reg2 = clsCidadao.LoadReg(Reg.CodigoCidadao);
+            CidadaoStruct Reg2 = clsCidadao.LoadReg((int)Reg.CodigoCidadao);
 
             dRow["Requerente"] = Reg2.Nome;
             if (!string.IsNullOrEmpty(Reg2.Cnpj))
@@ -1102,7 +1118,7 @@ namespace GTI_Desktop.Forms {
                 dRow["Assunto"] = Reg.Complemento;
 
                 Cidadao_bll clsCidadao = new Cidadao_bll(_connection);
-                CidadaoStruct Reg2 = clsCidadao.LoadReg(Reg.CodigoCidadao);
+                CidadaoStruct Reg2 = clsCidadao.LoadReg((int)Reg.CodigoCidadao);
                 dRow["Requerente"] = Reg2.Nome;
                 if (!string.IsNullOrEmpty(Reg2.Cnpj))
                     dRow["Documento"] = Convert.ToUInt64(Reg2.Cnpj).ToString(@"00\.000\.000\/0000\-00");
@@ -1154,7 +1170,7 @@ namespace GTI_Desktop.Forms {
             ProcessoStruct Reg = clsProcesso.Dados_Processo(Ano_Processo, Num_Processo);
 
             Cidadao_bll clsCidadao = new Cidadao_bll(_connection);
-            CidadaoStruct Reg2 = clsCidadao.LoadReg(Reg.CodigoCidadao);
+            CidadaoStruct Reg2 = clsCidadao.LoadReg((int)Reg.CodigoCidadao);
 
             if (!string.IsNullOrEmpty(Reg2.Cnpj))
                 sDoc = Convert.ToUInt64(Reg2.Cnpj).ToString(@"00\.000\.000\/0000\-00");
@@ -1204,7 +1220,7 @@ namespace GTI_Desktop.Forms {
             ProcessoStruct Reg = clsProcesso.Dados_Processo(Ano_Processo, Num_Processo);
 
             Cidadao_bll clsCidadao = new Cidadao_bll(_connection);
-            CidadaoStruct Reg2 = clsCidadao.LoadReg(Reg.CodigoCidadao);
+            CidadaoStruct Reg2 = clsCidadao.LoadReg((int)Reg.CodigoCidadao);
 
             if (!string.IsNullOrEmpty(Reg2.Cnpj))
                 sDoc = Convert.ToUInt64(Reg2.Cnpj).ToString(@"00\.000\.000\/0000\-00");
@@ -1242,11 +1258,9 @@ namespace GTI_Desktop.Forms {
 
         }
 
-
         #endregion
 
         #region Endereco
-
 
         private void BtAddEndereco_Click(object sender, EventArgs e)
         {
@@ -1286,7 +1300,6 @@ namespace GTI_Desktop.Forms {
                 EnderecoListView.Items.RemoveAt(nIndex);
             }
         }
-
 
         #endregion
 
@@ -1351,8 +1364,6 @@ namespace GTI_Desktop.Forms {
             } else
                 DocListView.Items[e.Index].SubItems[2].Text = "";
         }
-
-
 
         #endregion
 

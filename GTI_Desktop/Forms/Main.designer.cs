@@ -55,11 +55,8 @@
             this.toolStripStatusLabel11 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuParametros = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuTerritorial = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuBairro = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuPaises = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuParametroDiversos = new System.Windows.Forms.ToolStripMenuItem();
-            this.cadastroDeProfissõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCadastroBairro = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCadastroPais = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuImobiliario = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCadastro = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCadastroImovel = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,6 +103,7 @@
             this.btExtrato = new System.Windows.Forms.ToolStripButton();
             this.btProtocolo = new System.Windows.Forms.ToolStripButton();
             this.AlvaraButton = new System.Windows.Forms.ToolStripButton();
+            this.CertidaoButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btConfig = new System.Windows.Forms.ToolStripButton();
             this.btSecurity = new System.Windows.Forms.ToolStripDropDownButton();
@@ -122,7 +120,7 @@
             this.optDv2 = new System.Windows.Forms.RadioButton();
             this.optDv1 = new System.Windows.Forms.RadioButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.CertidaoButton = new System.Windows.Forms.ToolStripButton();
+            this.mnuCadastroProfissao = new System.Windows.Forms.ToolStripMenuItem();
             this.sBar.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.topBar.SuspendLayout();
@@ -352,49 +350,26 @@
             // mnuParametros
             // 
             this.mnuParametros.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuTerritorial,
-            this.mnuParametroDiversos});
+            this.mnuCadastroBairro,
+            this.mnuCadastroPais,
+            this.mnuCadastroProfissao});
             this.mnuParametros.Name = "mnuParametros";
             this.mnuParametros.Size = new System.Drawing.Size(79, 20);
             this.mnuParametros.Text = "Parâmetros";
             // 
-            // mnuTerritorial
+            // mnuCadastroBairro
             // 
-            this.mnuTerritorial.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuBairro,
-            this.mnuPaises});
-            this.mnuTerritorial.Name = "mnuTerritorial";
-            this.mnuTerritorial.Size = new System.Drawing.Size(124, 22);
-            this.mnuTerritorial.Text = "Territorial";
+            this.mnuCadastroBairro.Name = "mnuCadastroBairro";
+            this.mnuCadastroBairro.Size = new System.Drawing.Size(193, 22);
+            this.mnuCadastroBairro.Text = "Cadastro de Bairros";
+            this.mnuCadastroBairro.Click += new System.EventHandler(this.mnuCadastroBairro_Click);
             // 
-            // mnuBairro
+            // mnuCadastroPais
             // 
-            this.mnuBairro.Name = "mnuBairro";
-            this.mnuBairro.Size = new System.Drawing.Size(176, 22);
-            this.mnuBairro.Text = "Cadastro de bairros";
-            this.mnuBairro.Click += new System.EventHandler(this.MnuBairro_Click);
-            // 
-            // mnuPaises
-            // 
-            this.mnuPaises.Name = "mnuPaises";
-            this.mnuPaises.Size = new System.Drawing.Size(176, 22);
-            this.mnuPaises.Text = "Cadastro de países";
-            this.mnuPaises.Click += new System.EventHandler(this.CadastroDePaísesToolStripMenuItem_Click);
-            // 
-            // mnuParametroDiversos
-            // 
-            this.mnuParametroDiversos.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cadastroDeProfissõesToolStripMenuItem});
-            this.mnuParametroDiversos.Name = "mnuParametroDiversos";
-            this.mnuParametroDiversos.Size = new System.Drawing.Size(124, 22);
-            this.mnuParametroDiversos.Text = "Diversos";
-            // 
-            // cadastroDeProfissõesToolStripMenuItem
-            // 
-            this.cadastroDeProfissõesToolStripMenuItem.Name = "cadastroDeProfissõesToolStripMenuItem";
-            this.cadastroDeProfissõesToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.cadastroDeProfissõesToolStripMenuItem.Text = "Cadastro de profissões";
-            this.cadastroDeProfissõesToolStripMenuItem.Click += new System.EventHandler(this.CadastroDeProfissõesToolStripMenuItem_Click);
+            this.mnuCadastroPais.Name = "mnuCadastroPais";
+            this.mnuCadastroPais.Size = new System.Drawing.Size(193, 22);
+            this.mnuCadastroPais.Text = "Cadastro de Países";
+            this.mnuCadastroPais.Click += new System.EventHandler(this.mnuCadastroPais_Click);
             // 
             // mnuImobiliario
             // 
@@ -793,6 +768,17 @@
             this.AlvaraButton.Text = "toolStripButton1";
             this.AlvaraButton.ToolTipText = "Emissão de alvará";
             // 
+            // CertidaoButton
+            // 
+            this.CertidaoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.CertidaoButton.Image = global::GTI_Desktop.Properties.Resources.if_Gnome_Application_Certificate_48_55221;
+            this.CertidaoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.CertidaoButton.Name = "CertidaoButton";
+            this.CertidaoButton.Size = new System.Drawing.Size(52, 52);
+            this.CertidaoButton.Text = "toolStripButton1";
+            this.CertidaoButton.ToolTipText = "Emissão de certidões";
+            this.CertidaoButton.Click += new System.EventHandler(this.CertidaoButton_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -950,16 +936,12 @@
             this.optDv1.UseVisualStyleBackColor = false;
             this.optDv1.CheckedChanged += new System.EventHandler(this.OptDv1_CheckedChanged);
             // 
-            // CertidaoButton
+            // mnuCadastroProfissao
             // 
-            this.CertidaoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.CertidaoButton.Image = global::GTI_Desktop.Properties.Resources.if_Gnome_Application_Certificate_48_55221;
-            this.CertidaoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.CertidaoButton.Name = "CertidaoButton";
-            this.CertidaoButton.Size = new System.Drawing.Size(52, 52);
-            this.CertidaoButton.Text = "toolStripButton1";
-            this.CertidaoButton.ToolTipText = "Emissão de certidões";
-            this.CertidaoButton.Click += new System.EventHandler(this.CertidaoButton_Click);
+            this.mnuCadastroProfissao.Name = "mnuCadastroProfissao";
+            this.mnuCadastroProfissao.Size = new System.Drawing.Size(193, 22);
+            this.mnuCadastroProfissao.Text = "Cadastro de Profissões";
+            this.mnuCadastroProfissao.Click += new System.EventHandler(this.mnuCadastroProfissao_Click);
             // 
             // Main
             // 
@@ -1018,8 +1000,7 @@
         public System.Windows.Forms.ToolStripStatusLabel LedRed;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mnuParametros;
-        private System.Windows.Forms.ToolStripMenuItem mnuTerritorial;
-        private System.Windows.Forms.ToolStripMenuItem mnuBairro;
+        private System.Windows.Forms.ToolStripMenuItem mnuCadastroBairro;
         private System.Windows.Forms.ToolStripMenuItem mnuImobiliario;
         private System.Windows.Forms.ToolStripMenuItem mnuCadastro;
         private System.Windows.Forms.ToolStripMenuItem mnuCadastroImovel;
@@ -1045,9 +1026,7 @@
         private System.Windows.Forms.ToolStripButton btProtocolo;
         private System.Windows.Forms.ToolStripButton btConfig;
         public System.Windows.Forms.ToolStripButton btSair;
-        private System.Windows.Forms.ToolStripMenuItem mnuParametroDiversos;
-        private System.Windows.Forms.ToolStripMenuItem cadastroDeProfissõesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mnuPaises;
+        private System.Windows.Forms.ToolStripMenuItem mnuCadastroPais;
         private System.Windows.Forms.ToolStripMenuItem tabelasBásicasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem documentaçãoParaProcessosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem despachosDosTrâmitesToolStripMenuItem;
@@ -1088,6 +1067,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel11;
         private System.Windows.Forms.ToolStripButton CertidaoButton;
+        private System.Windows.Forms.ToolStripMenuItem mnuCadastroProfissao;
     }
 }
 

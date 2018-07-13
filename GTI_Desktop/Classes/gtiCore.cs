@@ -11,6 +11,9 @@ using System.Collections;
 using System.IO;
 
 namespace GTI_Desktop.Classes {
+    /// <summary>
+    /// Classe que contêm as funções genéricas do sistema
+    /// </summary>
     public static class gtiCore {
         public enum eTweakMode { Normal, AllLetters, AllLettersAllCaps, AllLettersAllSmall, AlphaNumeric, AlphaNumericAllCaps, AlphaNumericAllSmall, IntegerPositive, DecimalPositive };
         public enum LocalEndereco { Imovel, Empresa, Cidadao }
@@ -365,6 +368,11 @@ namespace GTI_Desktop.Classes {
             return Encoding.Unicode.GetString(outputBuffer);
         }
 
+        /// <summary>
+        /// Retorna a string de acesso do usuário
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public static bool GetBinaryAccess(int index) {
             string _acesso = GtiTypes.UserBinary;
             if (_acesso.Substring(index - 1, 1) == "1")

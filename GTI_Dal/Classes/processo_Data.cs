@@ -368,10 +368,10 @@ namespace GTI_Dal.Classes {
             using (var db = new GTI_Context(_connection)) {
                 var reg = (from c in db.Processogti
                            join u in db.Usuario on c.Userid equals u.Id into uc from u in uc.DefaultIfEmpty()
-                           where c.Ano == nAno && c.Numero == nNumero select new ProcessoStruct { Ano= c.Ano,CodigoAssunto=c.Codassunto,AtendenteNome=u.Nomelogin,CentroCusto=c.Centrocusto,
+                           where c.Ano == nAno && c.Numero == nNumero select new ProcessoStruct { Ano= c.Ano,CodigoAssunto=c.Codassunto,AtendenteNome=u.Nomelogin,CentroCusto=(int)c.Centrocusto,
                            CodigoCidadao=(int)c.Codcidadao,Complemento=c.Complemento,DataArquivado=c.Dataarquiva,DataCancelado=c.Datacancel,DataEntrada=c.Dataentrada,DataReativacao=c.Datareativa,
                            DataSuspensao=c.Datasuspenso,Fisico=c.Fisico,Hora=c.Hora,Inscricao=(int)c.Insc,Interno=c.Interno,Numero=c.Numero,ObsArquiva=c.Obsa,
-                           ObsCancela=c.Obsc,ObsReativa=c.Obsr,ObsSuspensao=c.Obss,Observacao=c.Observacao,Origem=c.Origem,TipoEnd=c.Tipoend,AtendenteId=u.Id}).First();
+                           ObsCancela=c.Obsc,ObsReativa=c.Obsr,ObsSuspensao=c.Obss,Observacao=c.Observacao,Origem=c.Origem,TipoEnd=c.Tipoend,AtendenteId=(int)u.Id}).First();
                 ProcessoStruct row = new ProcessoStruct {
                     AtendenteNome = reg.AtendenteNome,
                     AtendenteId=reg.AtendenteId,
@@ -389,8 +389,9 @@ namespace GTI_Dal.Classes {
                 row.DataReativacao = reg.DataReativacao;
                 row.DataCancelado = reg.DataCancelado;
                 row.DataArquivado = reg.DataArquivado;
-                row.ListaAnexo = ListProcessoAnexo(nAno, nNumero);row.Anexo = ListProcessoAnexo(nAno, nNumero).Count().ToString() + " Anexo(s)";
-                //row.ObsAnexo = reg.ObsAnexo == null ? "" : reg.ObsAnexo.ToString().Trim();
+                row.ListaAnexo = ListProcessoAnexo(nAno, nNumero);
+                row.Anexo = ListProcessoAnexo(nAno, nNumero).Count().ToString() + " Anexo(s)";
+                row.ListaAnexoLog = ListProcessoAnexoLog(nAno, nNumero);
                 row.Interno = Convert.ToBoolean(reg.Interno);
                 row.Fisico = Convert.ToBoolean(reg.Fisico);
                 row.Origem = Convert.ToInt16(reg.Origem);
@@ -398,7 +399,7 @@ namespace GTI_Dal.Classes {
                     row.CentroCusto = 0;
                     row.CodigoCidadao = Convert.ToInt32(reg.CodigoCidadao);
                     Cidadao_Data clsCidadao = new Cidadao_Data(_connection);
-                    row.NomeCidadao = clsCidadao.Retorna_Cidadao(row.CodigoCidadao).Nomecidadao;
+                    row.NomeCidadao = clsCidadao.Retorna_Cidadao((int)row.CodigoCidadao).Nomecidadao;
                 } else {
                     row.CentroCusto = Convert.ToInt16(reg.CentroCusto);
                     row.CodigoCidadao = 0;
@@ -441,6 +442,17 @@ namespace GTI_Dal.Classes {
                            join u in db.Centrocusto on p.Centrocusto equals u.Codigo into pcu from u in pcu.DefaultIfEmpty()
                            where a.Ano == nAno && a.Numero == nNumero
                            select new ProcessoAnexoStruct { AnoAnexo = a.Anoanexo, NumeroAnexo = a.Numeroanexo, Complemento = p.Complemento, Requerente = c.Nomecidadao, CentroCusto = u.Descricao });
+                return Sql.ToList();
+            }
+        }
+
+        private List<Anexo_logStruct> ListProcessoAnexoLog(int nAno, int nNumero) {
+            using (var db = new GTI_Context(_connection)) {
+                var Sql = (from a in db.Anexo_log
+                           join u in db.Usuario on a.Userid equals u.Id into ac from u in ac.DefaultIfEmpty()
+                           where a.Ano == nAno && a.Numero == nNumero
+                           select new Anexo_logStruct {Ano=(short)nAno,Numero=(short)nNumero,Ano_anexo=a.Ano_anexo,Numero_anexo=a.Numero_anexo,
+                           Data=a.Data,Sid=a.Sid,Userid=a.Userid,Removido=a.Removido,Ocorrencia= a.Removido?"Removido":"Anexado",UserName=u.Nomecompleto});
                 return Sql.ToList();
             }
         }
@@ -523,8 +535,16 @@ namespace GTI_Dal.Classes {
                 }
                 Sistema_Data clsSistema = new Sistema_Data(_connection);
                 string sMsg = "O processo " + reg.Numeroanexo.ToString() + "-" + DvProcesso(reg.Numeroanexo) + "/" + reg.Anoanexo.ToString() + " foi desanexado por " + clsSistema.Retorna_User_FullName(usuario) + ".";
-                Processogti p = db.Processogti.First(i => i.Ano == reg.Ano && i.Numero == reg.Numero);
-                p.Obsanexo = p.Obsanexo == null ? sMsg : p.Obsanexo.Trim() + System.Environment.NewLine + sMsg;
+                Anexo_log p = new Anexo_log {
+                    Ano = reg.Ano,
+                    Numero = reg.Numero,
+                    Ano_anexo = reg.Anoanexo,
+                    Numero_anexo = reg.Numeroanexo,
+                    Data = DateTime.Now,
+                    Removido = true
+                };
+                p.Userid = clsSistema.Retorna_User_LoginId(usuario);
+                db.Anexo_log.Add(p);
                 try {
                     db.SaveChanges();
                 } catch (Exception ex) {
@@ -545,8 +565,16 @@ namespace GTI_Dal.Classes {
                 }
                 Sistema_Data clsSistema = new Sistema_Data(_connection);
                 string sMsg = "O processo " + reg.Numeroanexo.ToString() + "-" + DvProcesso(reg.Numeroanexo) + "/" + reg.Anoanexo.ToString() + " foi anexado por " + clsSistema.Retorna_User_FullName(usuario) + ".";
-                Processogti p = db.Processogti.First(i => i.Ano == reg.Ano && i.Numero == reg.Numero);
-                p.Obsanexo = p.Obsanexo == null ? sMsg : p.Obsanexo.Trim() + Environment.NewLine + sMsg;
+                Anexo_log p = new Anexo_log {
+                    Ano = reg.Ano,
+                    Numero = reg.Numero,
+                    Ano_anexo = reg.Anoanexo,
+                    Numero_anexo = reg.Numeroanexo,
+                    Data = DateTime.Now,
+                    Removido = false
+                };
+                p.Userid = clsSistema.Retorna_User_LoginId(usuario);
+                db.Anexo_log.Add(p);
                 try {
                     db.SaveChanges();
                 } catch (Exception ex) {

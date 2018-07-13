@@ -39,10 +39,9 @@ namespace GTI_Models.Models {
         [StringLength(250)]
         public string Obss { get; set; }
         public int? Insc { get; set; }
-        public string Obsanexo { get; set; }
         public int? Codcidadao { get; set; }
         public string Motivocancel { get; set; }
-        public int Centrocusto { get; set; }
+        public int? Centrocusto { get; set; }
         public string Tipoend { get; set; }
         public bool? Etiqueta { get; set; }
         public string Hora { get; set; }
@@ -57,25 +56,26 @@ namespace GTI_Models.Models {
         public string Message { get; set; }
         public bool Valido { get; set; }
         public string Complemento { get; set; }
-        public int AtendenteId { get; set; }
+        public int? AtendenteId { get; set; }
         public string AtendenteNome { get; set; }
         public string Assunto { get; set; }
         public string Hora { get; set; }
-        public int CodigoAssunto { get; set; }
+        public int? CodigoAssunto { get; set; }
         public string Observacao { get; set; }
-        public int Inscricao { get; set; }
+        public int? Inscricao { get; set; }
         public DateTime? DataEntrada { get; set; }
         public DateTime? DataSuspensao { get; set; }
         public DateTime? DataReativacao { get; set; }
         public DateTime? DataArquivado { get; set; }
         public DateTime? DataCancelado { get; set; }
         public List<ProcessoAnexoStruct> ListaAnexo { get; set; }
+        public List<Anexo_logStruct> ListaAnexoLog { get; set; }
         public string Anexo { get; set; }
         public bool Interno { get; set; }
         public bool Fisico { get; set; }
-        public int Origem { get; set; }
-        public int CentroCusto { get; set; }
-        public int CodigoCidadao { get; set; }
+        public int? Origem { get; set; }
+        public int? CentroCusto { get; set; }
+        public int? CodigoCidadao { get; set; }
         public string NomeCidadao { get; set; }
         public List<ProcessoEndStruct> ListaProcessoEndereco { get; set; }
         public string ObsArquiva { get; set; }
