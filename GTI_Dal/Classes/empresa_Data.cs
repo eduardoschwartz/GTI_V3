@@ -158,9 +158,11 @@ namespace GTI_Dal.Classes {
                 if (!string.IsNullOrEmpty(reg.Cpf) && reg.Cpf.Length > 10) {
                     row.Juridica = false;
                     row.Cpf_cnpj = reg.Cpf;
+                    row.Cpf = reg.Cpf;
                 } else {
                     if (!string.IsNullOrEmpty(reg.Cnpj) && reg.Cnpj.Length > 13) {
                         row.Cpf_cnpj = reg.Cnpj;
+                        row.Cnpj = reg.Cnpj;
                         row.Juridica = true;
                     }
                 }
@@ -218,7 +220,12 @@ namespace GTI_Dal.Classes {
                 if (reg.Cidade_codigo == 413) {
                     Endereco_Data Cep_Class = new Endereco_Data(_connection);
                     int nCep = Cep_Class.RetornaCep((int)reg.Endereco_codigo, (short)reg.Numero);
-                    row.Cep = nCep == 0 ? "00000000" : nCep.ToString("0000");
+                    if (nCep>0)
+                      row.Cep =  nCep.ToString("00000-000");
+                    else {
+                        row.Cep = reg.Cep;
+                    }
+                        
                 }
 
                 Imovel_Data imovel_Class = new Imovel_Data(_connection);
@@ -670,6 +677,22 @@ namespace GTI_Dal.Classes {
                 return null;
             }
         }
+
+        public int Retorna_Codigo_por_CPF(string CPF) {
+            using (var db = new GTI_Context(_connection)) {
+                int Sql = (from c in db.Mobiliario where c.Cpf==CPF select c.Codigomob).FirstOrDefault();
+                return Sql;
+            }
+        }
+
+        public int Retorna_Codigo_por_CNPJ(string CNPJ) {
+            using (var db = new GTI_Context(_connection)) {
+                int Sql = (from c in db.Mobiliario where c.Cnpj == CNPJ select c.Codigomob).FirstOrDefault();
+                return Sql;
+            }
+        }
+
+
 
     }
 }

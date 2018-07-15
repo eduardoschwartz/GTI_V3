@@ -706,6 +706,19 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Exception Inativar_imovel(int Codigo) {
+            using (var db = new GTI_Context(_connection)) {
+                Cadimob i= db.Cadimob.First(x => x.Codreduzido == Codigo);
+                i.Inativo = true;
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
 
     }//end class
 }

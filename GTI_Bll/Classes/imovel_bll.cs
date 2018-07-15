@@ -214,5 +214,16 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Imovel_Isencao(Codigo,Ano);
         }
 
+        /// <summary>
+        /// Inativar o imóvel especificado
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public Exception Inativar_imovel(int Codigo) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            Exception ex = obj.Inativar_imovel(Codigo);
+            return ex;
+        }
+
     }//end class
 }

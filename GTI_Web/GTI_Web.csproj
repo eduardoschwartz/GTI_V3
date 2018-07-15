@@ -111,6 +111,7 @@
     <Content Include="Pages\boletoBB.aspx" />
     <Content Include="Pages\certidaodebito.aspx" />
     <Content Include="Pages\certidaoendereco.aspx" />
+    <Content Include="Pages\certidaoinscricao.aspx" />
     <Content Include="Pages\certidaoisencao.aspx" />
     <Content Include="Pages\certidaovalorvenal.aspx" />
     <Content Include="Pages\cip.aspx" />
@@ -195,6 +196,13 @@
     </Compile>
     <Compile Include="Pages\certidaoendereco.aspx.designer.cs">
       <DependentUpon>certidaoendereco.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\certidaoinscricao.aspx.cs">
+      <DependentUpon>certidaoinscricao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\certidaoinscricao.aspx.designer.cs">
+      <DependentUpon>certidaoinscricao.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\certidaoisencao.aspx.cs">
       <DependentUpon>certidaoisencao.aspx</DependentUpon>
@@ -361,6 +369,18 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Report\CertidaoInscricaoAtiva.cs">
+      <DependentUpon>CertidaoInscricaoAtiva.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Report\CertidaoInscricaoEncerrada.cs">
+      <DependentUpon>CertidaoInscricaoEncerrada.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Report\CertidaoIsencaoProcesso.cs">
       <DependentUpon>CertidaoIsencaoProcesso.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -488,6 +508,14 @@
     <EmbeddedResource Include="Report\CertidaoDebitoImovel.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CertidaoDebitoImovel.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\CertidaoInscricaoAtiva.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CertidaoInscricaoAtiva.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\CertidaoInscricaoEncerrada.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CertidaoInscricaoEncerrada.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\CertidaoIsencaoProcesso.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

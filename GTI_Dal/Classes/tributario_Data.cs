@@ -1065,6 +1065,18 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Exception Insert_Certidao_Inscricao(Certidao_inscricao Reg) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Certidao_inscricao.Add(Reg);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
         public Certidao_debito Retorna_Certidao_Debito(int Ano, int Numero, int Codigo) {
             using (var db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Certidao_debito where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
@@ -1203,7 +1215,6 @@ namespace GTI_Dal.Classes {
             Certidao.Descricao_Lancamentos = _descricao_lancamento;
             return Certidao;
         }
-
 
         public SpCalculo Calculo_IPTU(int Codigo, int Ano) {
             using (var db = new GTI_Context(_connection)) {

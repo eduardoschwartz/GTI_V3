@@ -185,7 +185,7 @@
             this.tBar = new System.Windows.Forms.ToolStrip();
             this.btAdd = new System.Windows.Forms.ToolStripButton();
             this.btEdit = new System.Windows.Forms.ToolStripButton();
-            this.btDel = new System.Windows.Forms.ToolStripButton();
+            this.btInativar = new System.Windows.Forms.ToolStripButton();
             this.btFind = new System.Windows.Forms.ToolStripButton();
             this.btPrint = new System.Windows.Forms.ToolStripButton();
             this.btSair = new System.Windows.Forms.ToolStripButton();
@@ -2097,7 +2097,7 @@
             this.tBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btAdd,
             this.btEdit,
-            this.btDel,
+            this.btInativar,
             this.btFind,
             this.btPrint,
             this.btSair,
@@ -2131,15 +2131,15 @@
             this.btEdit.ToolTipText = "Alterar";
             this.btEdit.Click += new System.EventHandler(this.BtEdit_Click);
             // 
-            // btDel
+            // btInativar
             // 
-            this.btDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btDel.Image = global::GTI_Desktop.Properties.Resources.delete;
-            this.btDel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btDel.Name = "btDel";
-            this.btDel.Size = new System.Drawing.Size(23, 22);
-            this.btDel.ToolTipText = "Excluir";
-            this.btDel.Click += new System.EventHandler(this.btDel_Click);
+            this.btInativar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btInativar.Image = global::GTI_Desktop.Properties.Resources.delete;
+            this.btInativar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btInativar.Name = "btInativar";
+            this.btInativar.Size = new System.Drawing.Size(23, 22);
+            this.btInativar.ToolTipText = "Tornar o i móvel inativo";
+            this.btInativar.Click += new System.EventHandler(this.btDel_Click);
             // 
             // btFind
             // 
@@ -2510,7 +2510,7 @@
         private System.Windows.Forms.ToolStripButton btSair;
         private System.Windows.Forms.ToolStripButton btPrint;
         private System.Windows.Forms.ToolStripButton btFind;
-        private System.Windows.Forms.ToolStripButton btDel;
+        private System.Windows.Forms.ToolStripButton btInativar;
         private System.Windows.Forms.ToolStripButton btEdit;
         private System.Windows.Forms.ToolStripButton btAdd;
         private System.Windows.Forms.ToolStrip tBar;

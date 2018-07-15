@@ -11,6 +11,10 @@ namespace GTI_Dal {
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+
+            modelBuilder.Conventions.Remove<DecimalPropertyConvention>();
+            modelBuilder.Conventions.Add(new DecimalPropertyConvention(14, 4));
+
             base.OnModelCreating(modelBuilder);
         }
 
@@ -101,6 +105,7 @@ namespace GTI_Dal {
         public DbSet<Certidao_valor_venal> Certidao_valor_venal { get; set; }
         public DbSet<Certidao_isencao> Certidao_isencao { get; set; }
         public DbSet<Certidao_debito> Certidao_debito { get; set; }
+        public DbSet<Certidao_inscricao> Certidao_inscricao { get; set; }
         public DbSet<Parametros> Parametros { get; set; }
         public DbSet<Vwproprietarioduplicado> Vwproprietarioduplicado { get; set; }
         public DbSet<Isencao> Isencao { get; set; }

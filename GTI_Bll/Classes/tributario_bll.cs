@@ -646,6 +646,17 @@ namespace GTI_Bll.Classes {
         }
 
         /// <summary>
+        /// Insere na tabela certidao_inscricao
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Certidao_Inscricao(Certidao_inscricao Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Certidao_Inscricao(Reg);
+            return ex;
+        }
+
+        /// <summary>
         /// Insere na tabela certidao_debito
         /// </summary>
         /// <param name="Reg"></param>

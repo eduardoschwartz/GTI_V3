@@ -13,6 +13,7 @@
                 <li><a href="certidaovalorvenal.aspx" style="width: 600px">Certidão de valor venal</a></li>
                 <li><a href="certidaoisencao.aspx" style="width: 600px">Certidão de isenção de IPTU</a></li>
                 <li><a href="certidaodebito.aspx" style="width: 600px">Certidão de débito</a></li>
+                <li><a href="certidaoinscricao.aspx" style="width: 600px">Certidão de inscrição cadastral</a></li>
             </ul>
         </div>
 

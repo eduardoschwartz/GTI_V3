@@ -1,6 +1,7 @@
 ﻿using GTI_Bll.Classes;
 using GTI_Desktop.Classes;
 using GTI_Desktop.Properties;
+using GTI_Models;
 using GTI_Models.Models;
 using System;
 using System.Collections.Generic;
@@ -79,7 +80,7 @@ namespace GTI_Desktop.Forms {
 
             btAdd.Enabled = bStart;
             btEdit.Enabled = bStart;
-            btDel.Enabled = bStart;
+            btInativar.Enabled = bStart;
             btSair.Enabled = bStart;
             btPrint.Enabled = bStart;
             btFind.Enabled = bStart;
@@ -601,7 +602,7 @@ namespace GTI_Desktop.Forms {
             //TODO: Incluir área
             //TODO: Validar dados da área
         }
-
+       
         private void MnuHistorico_Click(object sender, EventArgs e) {
             //TODO: Histórico do imóvel
         }
@@ -755,7 +756,33 @@ namespace GTI_Desktop.Forms {
         }
 
         private void btDel_Click(object sender, EventArgs e) {
-            //TODO: Desativar/excluir  o imóvel
+            int Codigo = Convert.ToInt32(lblCod.Text);
+            if (Codigo == 0)
+                MessageBox.Show("Selecione um imóvel.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else {
+                bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroImovel_Inativar);
+                if (!bAllow)
+                    MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else {
+                    if (lblAtivo.Text == "INATIVO")
+                        MessageBox.Show("Este imóvel já esta inativo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else {
+                        if (MessageBox.Show("Inativar este imóvel?","Confirmação",MessageBoxButtons.YesNo,MessageBoxIcon.Question)==DialogResult.Yes) {
+                            Imovel_bll imovel_Class = new Imovel_bll(_connection);
+                            Exception ex = imovel_Class.Inativar_imovel(Codigo);
+                            if (ex != null) {
+                                ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                                eBox.ShowDialog();
+                            } else {
+                                lblAtivo.Text = "INATIVO";
+                                lblAtivo.ForeColor = Color.Red;
+                            }
+                        }
+                    }
+                }
+            }
         }
+
+
     }
 }
