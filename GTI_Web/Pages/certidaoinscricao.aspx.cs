@@ -84,7 +84,7 @@ namespace GTI_Web.Pages {
             sNome = Reg.Razao_social;
             sCPF = string.IsNullOrWhiteSpace( Reg.Cpf)  ? "" : Reg.Cpf;
             sCNPJ = string.IsNullOrWhiteSpace( Reg.Cnpj)  ? "" : Reg.Cnpj;
-            sRG = Reg.Rg;
+            sRG = Reg.Rg ?? "";
             sDoc = gtiCore.FormatarCpfCnpj( Reg.Cpf_cnpj);
             sProcAbertura = Reg.Numprocesso.ToString();
             dDataAbertura = Reg.Data_abertura;
@@ -95,7 +95,7 @@ namespace GTI_Web.Pages {
             sAtividade = Reg.Atividade_extenso;
 
 
-            if (Reg.Data_Encerramento == null) {
+            if (dDataEncerramento != null) {
                 crystalReport.Load(Server.MapPath("~/Report/CertidaoInscricaoEncerrada.rpt"));
                 sSufixo = "IE";
             } else {
@@ -119,8 +119,10 @@ namespace GTI_Web.Pages {
             cert.Cidade = sCidade;
             cert.Processo_abertura = sProcAbertura;
             cert.Data_abertura = Convert.ToDateTime( dDataAbertura);
-            cert.Processo_encerramento = sProcEncerramento;
-            cert.Data_encerramento =Convert.ToDateTime( dDataEncerramento);
+            if (dDataEncerramento != null) {
+                cert.Processo_encerramento = sProcEncerramento;
+                cert.Data_encerramento =  Convert.ToDateTime(dDataEncerramento);
+            }
             cert.Documento = sDoc;
             cert.Atividade = sAtividade;
 
@@ -141,8 +143,10 @@ namespace GTI_Web.Pages {
                 crystalReport.SetParameterValue("RG", sRG);
                 crystalReport.SetParameterValue("DATAABERTURA", dDataAbertura);
                 crystalReport.SetParameterValue("PROCESSOABERTURA", sProcAbertura);
-                crystalReport.SetParameterValue("DATAENCERRAMENTO", dDataEncerramento);
-                crystalReport.SetParameterValue("PROCESSOENCERRAMENTO", sProcEncerramento);
+                if (dDataEncerramento != null) {
+                    crystalReport.SetParameterValue("DATAENCERRAMENTO", dDataEncerramento);
+                    crystalReport.SetParameterValue("PROCESSOENCERRAMENTO", sProcEncerramento);
+                }
 
                 HttpContext.Current.Response.Buffer = false;
                 HttpContext.Current.Response.ClearContent();
@@ -159,7 +163,89 @@ namespace GTI_Web.Pages {
         }
 
         protected void ValidarButton_Click(object sender, EventArgs e) {
+            string sCod = Codigo.Text;
+            string sTipo = "";
+            lblMsg.Text = "";
+            int nPos = 0, nPos2 = 0, nCodigo = 0, nAno = 0, nNumero = 0;
+            if (sCod.Trim().Length < 8)
+                lblMsg.Text = "Código de validação inválido.";
+            else {
+                nPos = sCod.IndexOf("-");
+                if (nPos < 6)
+                    lblMsg.Text = "Código de validação inválido.";
+                else {
+                    nPos2 = sCod.IndexOf("/");
+                    if (nPos2 < 5 || nPos - nPos2 < 2)
+                        lblMsg.Text = "Código de validação inválido.";
+                    else {
+                        nCodigo = Convert.ToInt32(sCod.Substring(nPos2 + 1, nPos - nPos2 - 1));
+                        nAno = Convert.ToInt32(sCod.Substring(nPos2 - 4, 4));
+                        nNumero = Convert.ToInt32(sCod.Substring(0, 5));
+                        if (nAno < 2010 || nAno > DateTime.Now.Year + 1)
+                            lblMsg.Text = "Código de validação inválido.";
+                        else {
+                            sTipo = sCod.Substring(sCod.Length - 2, 2);
+                            if (sTipo == "IE" || sTipo == "IA" ) {
+                                Certidao_inscricao dados = Valida_Dados(nNumero, nAno, nCodigo);
+                                if (dados != null)
+                                    Exibe_Certidao_Inscricao(dados);
+                                else
+                                    lblMsg.Text = "Certidão não cadastrada.";
+                            } else {
+                                lblMsg.Text = "Código de validação inválido.";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        private Certidao_inscricao Valida_Dados(int Numero, int Ano, int Codigo) {
+            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
+            Certidao_inscricao dados = tributario_Class.Retorna_Certidao_Inscricao(Ano, Numero, Codigo);
+            return dados;
+        }
+
+        private void Exibe_Certidao_Inscricao(Certidao_inscricao dados) {
+            lblMsg.Text = "";
+            string sEndereco = dados.Endereco ;
+            string sTipo = "";
+            if (dados.Data_encerramento == null)
+                sTipo = "ABERTA";
+            else {
+                sTipo = "ENCERRADA";
+            }
+
+            Imovel_bll imovel_Class = new Imovel_bll("GTIconnection");
+
+            ReportDocument crystalReport = new ReportDocument();
+            crystalReport.Load(Server.MapPath("~/Report/CertidaoInscricaoValida.rpt"));
+            crystalReport.SetParameterValue("NUMCERTIDAO", dados.Numero.ToString("00000") + "/" + dados.Ano.ToString("0000"));
+            crystalReport.SetParameterValue("DATAEMISSAO", Convert.ToDateTime(dados.Data_emissao).ToString("dd/MM/yyyy") + " às " + Convert.ToDateTime(dados.Data_emissao).ToString("HH:mm:ss"));
+            crystalReport.SetParameterValue("ENDERECO", sEndereco);
+            crystalReport.SetParameterValue("CADASTRO", Convert.ToInt32(dados.Cadastro).ToString("000000"));
+            crystalReport.SetParameterValue("NOME", dados.Nome);
+            crystalReport.SetParameterValue("BAIRRO", dados.Bairro);
+            crystalReport.SetParameterValue("SITUACAO", sTipo);
+            crystalReport.SetParameterValue("ATIVIDADE", string.IsNullOrWhiteSpace(dados.Atividade) ? "N/A" : dados.Atividade);
+            crystalReport.SetParameterValue("PROCESSOABERTURA", dados.Processo_abertura);
+            crystalReport.SetParameterValue("DATAABERTURA", Convert.ToDateTime(dados.Data_abertura).ToString("dd/MM/yyyy"));
+            crystalReport.SetParameterValue("PROCESSOENCERRAMENTO",dados.Processo_encerramento??"N/A");
+            crystalReport.SetParameterValue("DATAENCERRAMENTO", dados.Data_encerramento==null?"N/A": Convert.ToDateTime(dados.Data_encerramento).ToString("dd/MM/yyyy"));
+
+            HttpContext.Current.Response.Buffer = false;
+            HttpContext.Current.Response.ClearContent();
+            HttpContext.Current.Response.ClearHeaders();
+
+            try {
+                crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true, "comp" + dados.Numero.ToString() + dados.Ano.ToString());
+            } catch {
+            } finally {
+                crystalReport.Close();
+                crystalReport.Dispose();
+            }
 
         }
+
     }
 }

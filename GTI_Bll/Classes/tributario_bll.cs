@@ -708,5 +708,18 @@ namespace GTI_Bll.Classes {
             return obj.Competencias_Nao_Encerradas(Lista);
         }
 
+        /// <summary>
+        ///Retorna os dados da certidão de inscrição 
+        /// </summary>
+        /// <param name="Ano"></param>
+        /// <param name="Numero"></param>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public Certidao_inscricao Retorna_Certidao_Inscricao(int Ano, int Numero, int Codigo) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Retorna_Certidao_Inscricao(Ano,Numero,Codigo);
+        }
+
+
     }//end class
 }

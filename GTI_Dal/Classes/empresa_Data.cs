@@ -680,14 +680,14 @@ namespace GTI_Dal.Classes {
 
         public int Retorna_Codigo_por_CPF(string CPF) {
             using (var db = new GTI_Context(_connection)) {
-                int Sql = (from c in db.Mobiliario where c.Cpf==CPF select c.Codigomob).FirstOrDefault();
+                int Sql = (from c in db.Mobiliario where c.Cpf==CPF orderby c.Codigomob descending select c.Codigomob).FirstOrDefault();
                 return Sql;
             }
         }
 
         public int Retorna_Codigo_por_CNPJ(string CNPJ) {
             using (var db = new GTI_Context(_connection)) {
-                int Sql = (from c in db.Mobiliario where c.Cnpj == CNPJ select c.Codigomob).FirstOrDefault();
+                int Sql = (from c in db.Mobiliario where c.Cnpj == CNPJ orderby c.Codigomob descending select c.Codigomob).FirstOrDefault();
                 return Sql;
             }
         }

@@ -16,14 +16,14 @@ namespace GTI_Web.Report {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class CertidaoInscricaoAtiva : ReportClass {
+    public class CertidaoInscricaoValida : ReportClass {
         
-        public CertidaoInscricaoAtiva() {
+        public CertidaoInscricaoValida() {
         }
         
         public override string ResourceName {
             get {
-                return "CertidaoInscricaoAtiva.rpt";
+                return "CertidaoInscricaoValida.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace GTI_Web.Report {
         
         public override string FullResourceName {
             get {
-                return "GTI_Web.Report.CertidaoInscricaoAtiva.rpt";
+                return "GTI_Web.Report.CertidaoInscricaoValida.rpt";
             }
             set {
                 // Do nothing
@@ -114,7 +114,7 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CONTROLE {
+        public CrystalDecisions.Shared.IParameterField Parameter_ENDERECO {
             get {
                 return this.DataDefinition.ParameterFields[2];
             }
@@ -122,7 +122,7 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ENDERECO {
+        public CrystalDecisions.Shared.IParameterField Parameter_CADASTRO {
             get {
                 return this.DataDefinition.ParameterFields[3];
             }
@@ -130,7 +130,7 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CADASTRO {
+        public CrystalDecisions.Shared.IParameterField Parameter_NOME {
             get {
                 return this.DataDefinition.ParameterFields[4];
             }
@@ -138,7 +138,7 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_NOME {
+        public CrystalDecisions.Shared.IParameterField Parameter_BAIRRO {
             get {
                 return this.DataDefinition.ParameterFields[5];
             }
@@ -146,7 +146,7 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_BAIRRO {
+        public CrystalDecisions.Shared.IParameterField Parameter_SITUACAO {
             get {
                 return this.DataDefinition.ParameterFields[6];
             }
@@ -154,7 +154,7 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_RG {
+        public CrystalDecisions.Shared.IParameterField Parameter_ATIVIDADE {
             get {
                 return this.DataDefinition.ParameterFields[7];
             }
@@ -162,7 +162,7 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DOCUMENTO {
+        public CrystalDecisions.Shared.IParameterField Parameter_PROCESSOABERTURA {
             get {
                 return this.DataDefinition.ParameterFields[8];
             }
@@ -170,7 +170,7 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CIDADE {
+        public CrystalDecisions.Shared.IParameterField Parameter_DATAABERTURA {
             get {
                 return this.DataDefinition.ParameterFields[9];
             }
@@ -178,7 +178,7 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ATIVIDADE {
+        public CrystalDecisions.Shared.IParameterField Parameter_PROCESSOENCERRAMENTO {
             get {
                 return this.DataDefinition.ParameterFields[10];
             }
@@ -186,25 +186,17 @@ namespace GTI_Web.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DATAABERTURA {
+        public CrystalDecisions.Shared.IParameterField Parameter_DATAENCERRAMENTO {
             get {
                 return this.DataDefinition.ParameterFields[11];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_PROCESSOABERTURA {
-            get {
-                return this.DataDefinition.ParameterFields[12];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedCertidaoInscricaoAtiva : Component, ICachedReport {
+    public class CachedCertidaoInscricaoValida : Component, ICachedReport {
         
-        public CachedCertidaoInscricaoAtiva() {
+        public CachedCertidaoInscricaoValida() {
         }
         
         [Browsable(false)]
@@ -241,7 +233,7 @@ namespace GTI_Web.Report {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            CertidaoInscricaoAtiva rpt = new CertidaoInscricaoAtiva();
+            CertidaoInscricaoValida rpt = new CertidaoInscricaoValida();
             rpt.Site = this.Site;
             return rpt;
         }

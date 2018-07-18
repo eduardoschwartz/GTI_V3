@@ -1084,6 +1084,13 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Certidao_inscricao Retorna_Certidao_Inscricao(int Ano, int Numero, int Codigo) {
+            using (var db = new GTI_Context(_connection)) {
+                var Sql = (from p in db.Certidao_inscricao where p.Ano == Ano && p.Numero == Numero && p.Cadastro == Codigo select p).FirstOrDefault();
+                return Sql;
+            }
+        }
+
         public Certidao_debito_detalhe Certidao_Debito(int Codigo) {
             TipoCadastro _tipo_Cadastro = Codigo < 100000 ? TipoCadastro.Imovel : Codigo >= 500000 ? TipoCadastro.Cidadao : TipoCadastro.Empresa;
             Certidao_debito_detalhe Certidao = new Certidao_debito_detalhe();
