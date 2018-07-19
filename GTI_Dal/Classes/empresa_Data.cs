@@ -678,16 +678,16 @@ namespace GTI_Dal.Classes {
             }
         }
 
-        public int Retorna_Codigo_por_CPF(string CPF) {
+        public List<int> Retorna_Codigo_por_CPF(string CPF) {
             using (var db = new GTI_Context(_connection)) {
-                int Sql = (from c in db.Mobiliario where c.Cpf==CPF orderby c.Codigomob descending select c.Codigomob).FirstOrDefault();
+                List<int> Sql = (from c in db.Mobiliario where c.Cpf==CPF orderby c.Codigomob select c.Codigomob).ToList();
                 return Sql;
             }
         }
 
-        public int Retorna_Codigo_por_CNPJ(string CNPJ) {
+        public List<int> Retorna_Codigo_por_CNPJ(string CNPJ) {
             using (var db = new GTI_Context(_connection)) {
-                int Sql = (from c in db.Mobiliario where c.Cnpj == CNPJ orderby c.Codigomob descending select c.Codigomob).FirstOrDefault();
+                List<int> Sql = (from c in db.Mobiliario where c.Cnpj == CNPJ orderby c.Codigomob descending select c.Codigomob).ToList();
                 return Sql;
             }
         }

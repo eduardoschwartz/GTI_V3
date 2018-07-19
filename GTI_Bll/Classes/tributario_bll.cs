@@ -720,6 +720,17 @@ namespace GTI_Bll.Classes {
             return obj.Retorna_Certidao_Inscricao(Ano,Numero,Codigo);
         }
 
+               /// <summary>
+        /// Inserir registro na tabela relatorio_inscricao
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Relatorio_Inscricao(Relatorio_inscricao Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Relatorio_Inscricao(Reg);
+            return ex;
+        }
+
 
     }//end class
 }

@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Data;
-using System.Text;
-using System.Security.Cryptography;
+﻿using CrystalDecisions.CrystalReports.Engine;
 using GTI_Bll.Classes;
-using GTI_Models.Models;
-using static GTI_Models.modelCore;
-using System.Web;
 using GTI_Models;
-using CrystalDecisions.CrystalReports.Engine;
+using GTI_Models.Models;
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Web;
 using UIWeb;
+using static GTI_Models.modelCore;
+using CrystalDecisions.Shared;
 
 namespace GTI_Web.Pages {
     public partial class certidaoinscricao : System.Web.UI.Page {
@@ -25,6 +22,7 @@ namespace GTI_Web.Pages {
                 txtCNPJ.Visible = false;
                 txtCPF.Text = "";
                 txtCNPJ.Text = "";
+                CodigoList.Items.Clear();
             }
         }
 
@@ -34,6 +32,7 @@ namespace GTI_Web.Pages {
                 txtCNPJ.Visible = true;
                 txtCPF.Text = "";
                 txtCNPJ.Text = "";
+                CodigoList.Items.Clear();
             }
         }
 
@@ -44,14 +43,10 @@ namespace GTI_Web.Pages {
             if (sCPF == "" && sCNPJ=="")
                 lblMsg.Text = "Digite o CPF/CNPJ da empresa.";
             else {
-                Empresa_bll empresa_Class = new Empresa_bll("GTIconnection");
-                if (sCPF != "")
-                    Codigo = empresa_Class.Retorna_Codigo_por_CPF(gtiCore.RetornaNumero( sCPF));
-                else {
-                    if (sCNPJ != "")
-                        Codigo = empresa_Class.Retorna_Codigo_por_CNPJ(gtiCore.RetornaNumero( sCNPJ));
+                
+                if (CodigoList.Items.Count > 0) {
+                    Codigo = Convert.ToInt32(CodigoList.Text);
                 }
-
                 lblMsg.Text = "";
                 if (Codigo > 0) {
                     if (txtimgcode.Text != Session["randomStr"].ToString())
@@ -59,7 +54,7 @@ namespace GTI_Web.Pages {
                     else
                         PrintReport(Codigo, TipoCadastro.Empresa);
                 } else {
-                    lblMsg.Text = "Empresa não cadastrada.";
+                    lblMsg.Text = "Selecione uma inscrição municipal da lista.";
                 }
             }
         }
@@ -94,13 +89,42 @@ namespace GTI_Web.Pages {
             }
             sAtividade = Reg.Atividade_extenso;
 
+            if (ExtratoCheckBox.Checked) {
+                int nSid = Grava_Extrato_Pagamento(Codigo);
+                TableLogOnInfos crtableLogoninfos = new TableLogOnInfos();
+                TableLogOnInfo crtableLogoninfo = new TableLogOnInfo();
+                ConnectionInfo crConnectionInfo = new ConnectionInfo();
+                Tables CrTables;
 
-            if (dDataEncerramento != null) {
-                crystalReport.Load(Server.MapPath("~/Report/CertidaoInscricaoEncerrada.rpt"));
-                sSufixo = "IE";
+                if (dDataEncerramento != null) {
+                    crystalReport.Load(Server.MapPath("~/Report/CertidaoInscricaoAtiva.rpt"));
+                    sSufixo = "XE";
+                } else {
+                    crystalReport.Load(Server.MapPath("~/Report/CertidaoInscricaoExtratoAtiva.rpt"));
+                    crystalReport.RecordSelectionFormula = "{Relatorio_Inscricao.Id}=" + nSid;
+
+                    crConnectionInfo.ServerName = "SKYNET";
+                    crConnectionInfo.DatabaseName = "Tributacao";
+                    crConnectionInfo.UserID = "gtisys";
+                    crConnectionInfo.Password = "everest";
+
+                    CrTables = crystalReport.Database.Tables;
+                    foreach (CrystalDecisions.CrystalReports.Engine.Table CrTable in CrTables) {
+                        crtableLogoninfo = CrTable.LogOnInfo;
+                        crtableLogoninfo.ConnectionInfo = crConnectionInfo;
+                        CrTable.ApplyLogOnInfo(crtableLogoninfo);
+                    }
+
+                    sSufixo = "XA";
+                }
             } else {
-                crystalReport.Load(Server.MapPath("~/Report/CertidaoInscricaoAtiva.rpt"));
-                sSufixo = "IA";
+                if (dDataEncerramento != null) {
+                    crystalReport.Load(Server.MapPath("~/Report/CertidaoInscricaoEncerrada.rpt"));
+                    sSufixo = "IE";
+                } else {
+                    crystalReport.Load(Server.MapPath("~/Report/CertidaoInscricaoAtiva.rpt"));
+                    sSufixo = "IA";
+                }
             }
 
             Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
@@ -154,7 +178,7 @@ namespace GTI_Web.Pages {
 
                 try {
                     crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true, "certidao" + _numero_certidao.ToString() + _ano_certidao.ToString());
-                } catch {
+                } catch (Exception ex2) {
                 } finally {
                     crystalReport.Close();
                     crystalReport.Dispose();
@@ -244,8 +268,75 @@ namespace GTI_Web.Pages {
                 crystalReport.Close();
                 crystalReport.Dispose();
             }
+        }
+
+        private int Grava_Extrato_Pagamento(int Codigo) {
+            int nSid = GetRandomNumber();
+            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
+            List<SpExtrato> ListaTributo = tributario_Class.Lista_Extrato_Tributo(Codigo, 1980, 2050, 0, 99, 0, 99, 0, 999, 0, 99, 0, 99, DateTime.Now, "Web");
+            List<SpExtrato> ListaParcela = tributario_Class.Lista_Extrato_Parcela(ListaTributo);
+
+            foreach (SpExtrato item in ListaParcela.Where(x=>(x.Codlancamento==2 ||x.Codlancamento==6 || x.Codlancamento==14) && x.Statuslanc<3) ) {
+                Relatorio_inscricao reg = new Relatorio_inscricao();
+                reg.Id = nSid;
+                reg.Ano = item.Anoexercicio;
+                reg.Codigo = item.Codreduzido;
+                reg.Complemento = item.Codcomplemento;
+                if (item.Datapagamento != null)
+                    reg.Data_Pagamento = Convert.ToDateTime(item.Datapagamento);
+                reg.Data_Vencimento = item.Datavencimento;
+                reg.Lancamento_Codigo = item.Codlancamento;
+                reg.Lancamento_Descricao = item.Desclancamento;
+                reg.Parcela = (byte)item.Numparcela;
+                reg.Sequencia= item.Seqlancamento;
+                reg.Valor_Pago = (decimal)item.Valorpagoreal;
+                Exception ex = tributario_Class.Insert_Relatorio_Inscricao(reg);
+                if (ex != null)
+                    throw ex;
+            }
+            
+            return nSid;
+        }
+
+
+        protected void VerificarButton_Click(object sender, EventArgs e) {
+            string sCPF = txtCPF.Text, sCNPJ = txtCNPJ.Text;
+            List<int> _codigos = new List<int>();
+            Empresa_bll empresa_Class = new Empresa_bll("GTIconnection");
+            if (sCPF != "")
+               _codigos = empresa_Class.Retorna_Codigo_por_CPF(gtiCore.RetornaNumero(sCPF));
+            else {
+                if (sCNPJ != "")
+                    _codigos = empresa_Class.Retorna_Codigo_por_CNPJ(gtiCore.RetornaNumero(sCNPJ));
+            }
+            CodigoList.Items.Clear();
+            foreach (int item in _codigos) {
+                CodigoList.Items.Add(item.ToString());
+            }
+            if (CodigoList.Items.Count > 0)
+                CodigoList.Items[0].Selected = true;
 
         }
+
+        protected void txtCPF_TextChanged(object sender, EventArgs e) {
+            if (CodigoList.Items.Count > 0)
+                CodigoList.Items.Clear();
+        }
+
+        protected void txtCNPJ_TextChanged(object sender, EventArgs e) {
+            if (CodigoList.Items.Count > 0)
+                CodigoList.Items.Clear();
+        }
+
+        //Function to get random number
+        private static readonly Random getrandom = new Random();
+        private static readonly object syncLock = new object();
+        public static int GetRandomNumber() {
+            lock (syncLock) { // synchronize
+                return getrandom.Next(1, 2000000);
+            }
+        }
+
 
     }
 }

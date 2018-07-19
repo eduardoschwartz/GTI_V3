@@ -83,6 +83,7 @@
     <Compile Include="Models\condominioarea.cs" />
     <Compile Include="Models\condominiounidade.cs" />
     <Compile Include="Models\debitoobservacao.cs" />
+    <Compile Include="Models\debitopago.cs" />
     <Compile Include="Models\debitoparcela.cs" />
     <Compile Include="Models\debitotributo.cs" />
     <Compile Include="Models\DEmpresa.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Models\processoend.cs" />
     <Compile Include="Models\processo_historico.cs" />
     <Compile Include="Models\proprietario.cs" />
+    <Compile Include="Models\relatorio_inscricao.cs" />
     <Compile Include="Models\security_event.cs" />
     <Compile Include="Models\segunda_via_web.cs" />
     <Compile Include="Models\sil.cs" />

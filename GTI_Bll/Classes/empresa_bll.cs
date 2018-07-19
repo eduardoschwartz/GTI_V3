@@ -415,21 +415,21 @@ namespace GTI_Bll.Classes {
         }
 
         /// <summary>
-        /// Retorna a inscrição cadastral da empresa através do nº de CPF
+        /// Retorna as inscrições cadastrais da empresa através do nº de CPF
         /// </summary>
         /// <param name="CPF"></param>
         /// <returns></returns>
-        public int Retorna_Codigo_por_CPF(string CPF) {
+        public List<int> Retorna_Codigo_por_CPF(string CPF) {
             Empresa_Data obj = new Empresa_Data(_connection);
             return obj.Retorna_Codigo_por_CPF(CPF);
         }
 
         /// <summary>
-        /// Retorna a inscrição cadastral da empresa através do nº de CNPJ
+        /// Retorna as inscrições cadastrais da empresa através do nº de CNPJ
         /// </summary>
         /// <param name="CNPJ"></param>
         /// <returns></returns>
-        public int Retorna_Codigo_por_CNPJ(string CNPJ) {
+        public List<int> Retorna_Codigo_por_CNPJ(string CNPJ) {
             Empresa_Data obj = new Empresa_Data(_connection);
             return obj.Retorna_Codigo_por_CNPJ(CNPJ);
         }

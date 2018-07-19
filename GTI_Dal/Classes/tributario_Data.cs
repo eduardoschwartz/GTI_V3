@@ -253,6 +253,8 @@ namespace GTI_Dal.Classes {
                         Codcomplemento = item.Codcomplemento,
                         Datavencimento = item.Datavencimento,
                         Datadebase = item.Datadebase,
+                        Datapagamento=item.Datapagamento,
+                        Codreduzido=item.Codreduzido,
                         Statuslanc = item.Statuslanc,
                         Situacao = item.Situacao,
                         Datainscricao = item.Datainscricao,
@@ -310,6 +312,8 @@ namespace GTI_Dal.Classes {
                         Datavencimento = item.Datavencimento,
                         Statuslanc = item.Statuslanc,
                         Situacao = item.Situacao,
+                        Datapagamento=item.Datapagamento,
+                        Codreduzido=item.Codreduzido,
                         Datainscricao = item.Datainscricao,
                         Certidao = item.Certidao,
                         Numlivro = item.Numlivro,
@@ -1314,6 +1318,19 @@ namespace GTI_Dal.Classes {
             }
             return nCount;
         }
+
+        public Exception Insert_Relatorio_Inscricao(Relatorio_inscricao Reg) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Relatorio_inscricao.Add(Reg);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
 
 
     }//end class

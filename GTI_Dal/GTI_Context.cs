@@ -110,6 +110,7 @@ namespace GTI_Dal {
         public DbSet<Vwproprietarioduplicado> Vwproprietarioduplicado { get; set; }
         public DbSet<Isencao> Isencao { get; set; }
         public DbSet<SpCalculo> SpCalculo { get; set; }
-        
+        public DbSet<Debitopago> Debitopago { get; set; }
+        public DbSet<Relatorio_inscricao> Relatorio_inscricao { get; set; }
     }
 }
