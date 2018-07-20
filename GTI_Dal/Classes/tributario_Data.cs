@@ -1331,7 +1331,17 @@ namespace GTI_Dal.Classes {
             }
         }
 
-
+        public Exception Excluir_Relatorio_Inscricao(int nSid) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Relatorio_inscricao.RemoveRange(db.Relatorio_inscricao.Where(i => i.Id == nSid));
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
 
     }//end class
 }

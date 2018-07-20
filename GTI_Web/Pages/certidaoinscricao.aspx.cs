@@ -60,6 +60,7 @@ namespace GTI_Web.Pages {
         }
 
         private void PrintReport(int Codigo, TipoCadastro _tipo_cadastro) {
+            int nSid = 0;
             ReportDocument crystalReport = new ReportDocument();
             string sComplemento = "", sQuadras = "", sLotes = "", sEndereco = "", sBairro = "", sInscricao = "", sNome = "", sCidade = "", sUF = "";
             string sData = "18/04/2012",  sCPF = "", sCNPJ = "", sAtividade = "", sRG = "", sProcAbertura = "", sSufixo = "", sProcEncerramento="", sDoc = "";
@@ -90,14 +91,14 @@ namespace GTI_Web.Pages {
             sAtividade = Reg.Atividade_extenso;
 
             if (ExtratoCheckBox.Checked) {
-                int nSid = Grava_Extrato_Pagamento(Codigo);
+                nSid = Grava_Extrato_Pagamento(Codigo);
                 TableLogOnInfos crtableLogoninfos = new TableLogOnInfos();
                 TableLogOnInfo crtableLogoninfo = new TableLogOnInfo();
                 ConnectionInfo crConnectionInfo = new ConnectionInfo();
                 Tables CrTables;
 
                 if (dDataEncerramento != null) {
-                    crystalReport.Load(Server.MapPath("~/Report/CertidaoInscricaoAtiva.rpt"));
+                    crystalReport.Load(Server.MapPath("~/Report/CertidaoInscricaoExtratoEncerrada.rpt"));
                     sSufixo = "XE";
                 } else {
                     crystalReport.Load(Server.MapPath("~/Report/CertidaoInscricaoExtratoAtiva.rpt"));
@@ -178,10 +179,16 @@ namespace GTI_Web.Pages {
 
                 try {
                     crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true, "certidao" + _numero_certidao.ToString() + _ano_certidao.ToString());
-                } catch (Exception ex2) {
+                } catch  {
                 } finally {
                     crystalReport.Close();
                     crystalReport.Dispose();
+                    if (ExtratoCheckBox.Checked) {
+                        Exception exDel = tributario_Class.Excluir_Relatorio_Inscricao(nSid);
+                        if (exDel != null)
+                            throw exDel;
+                    }
+
                 }
             }
         }
@@ -288,7 +295,7 @@ namespace GTI_Web.Pages {
                 reg.Lancamento_Codigo = item.Codlancamento;
                 reg.Lancamento_Descricao = item.Desclancamento;
                 reg.Parcela = (byte)item.Numparcela;
-                reg.Sequencia= item.Seqlancamento;
+                reg.Sequencia= (byte)item.Seqlancamento;
                 reg.Valor_Pago = (decimal)item.Valorpagoreal;
                 Exception ex = tributario_Class.Insert_Relatorio_Inscricao(reg);
                 if (ex != null)
@@ -297,7 +304,6 @@ namespace GTI_Web.Pages {
             
             return nSid;
         }
-
 
         protected void VerificarButton_Click(object sender, EventArgs e) {
             string sCPF = txtCPF.Text, sCNPJ = txtCNPJ.Text;

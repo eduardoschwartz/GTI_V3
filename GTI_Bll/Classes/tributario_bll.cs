@@ -720,7 +720,7 @@ namespace GTI_Bll.Classes {
             return obj.Retorna_Certidao_Inscricao(Ano,Numero,Codigo);
         }
 
-               /// <summary>
+        /// <summary>
         /// Inserir registro na tabela relatorio_inscricao
         /// </summary>
         /// <param name="Reg"></param>
@@ -730,6 +730,18 @@ namespace GTI_Bll.Classes {
             Exception ex = obj.Insert_Relatorio_Inscricao(Reg);
             return ex;
         }
+
+        /// <summary>
+        /// Excluir sid da tabela de relatorio_inscricao
+        /// </summary>
+        /// <param name="nSid"></param>
+        /// <returns></returns>
+        public Exception Excluir_Relatorio_Inscricao(int nSid) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Excluir_Relatorio_Inscricao(nSid);
+            return ex;
+        }
+
 
 
     }//end class

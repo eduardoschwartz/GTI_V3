@@ -369,6 +369,12 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Report\CertidaoInscricaoExtratoEncerrada.cs">
+      <DependentUpon>CertidaoInscricaoExtratoEncerrada.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Report\CertidaoInscricaoExtratoAtiva.cs">
       <DependentUpon>CertidaoInscricaoExtratoAtiva.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -520,6 +526,10 @@
     <EmbeddedResource Include="Report\CertidaoDebitoImovel.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CertidaoDebitoImovel.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\CertidaoInscricaoExtratoEncerrada.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CertidaoInscricaoExtratoEncerrada.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\CertidaoInscricaoExtratoAtiva.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -18,7 +18,7 @@ namespace GTI_Models.Models {
         public short Lancamento_Codigo { get; set; }
         [Key]
         [Column(Order = 5)]
-        public short Sequencia { get; set; }
+        public byte Sequencia { get; set; }
         [Key]
         [Column(Order = 6)]
         public byte Parcela { get; set; }
