@@ -111,6 +111,6 @@ namespace GTI_Dal {
         public DbSet<Isencao> Isencao { get; set; }
         public DbSet<SpCalculo> SpCalculo { get; set; }
         public DbSet<Debitopago> Debitopago { get; set; }
-        public DbSet<Relatorio_inscricao> Relatorio_inscricao { get; set; }
+        public DbSet<Certidao_inscricao_extrato> Certidao_inscricao_extrato { get; set; }
     }
 }

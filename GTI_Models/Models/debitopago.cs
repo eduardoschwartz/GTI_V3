@@ -42,39 +42,5 @@ namespace GTI_Models.Models {
         public string Contacorrente { get; set; }
     }
 
-    public class Extrato_Pagamento {
-        [Key]
-        [Column(Order = 1)]
-        public int Codigo { get; set; }
-        [Key]
-        [Column(Order = 2)]
-        public short Ano { get; set; }
-        [Key]
-        [Column(Order = 3)]
-        public short Lancamento_Codigo { get; set; }
-        [Key]
-        [Column(Order = 4)]
-        public short Sequencia_Lancamento { get; set; }
-        [Key]
-        [Column(Order = 5)]
-        public byte Parcela { get; set; }
-        [Key]
-        [Column(Order = 6)]
-        public byte Complemento { get; set; }
-        [Key]
-        [Column(Order = 7)]
-        public byte Sequencia_pagamento { get; set; }
-        public string Lancamento_Descricao { get; set; }
-        public short Tributo_Codigo { get; set; }
-        public string Tributo_Descricao { get; set; }
-        public DateTime Data_Vencimento { get; set; }
-        public DateTime Data_Pagamento { get; set; }
-        public DateTime Data_Recebimento { get; set; }
-        public decimal Valor_Pago { get; set; }
-        public short? Codigo_Banco { get; set; }
-        public int? Codigo_Agencia { get; set; }
-        public string Nome_Banco { get; set; }
-        public int? Numero_Documento { get; set; }
-    }
-
+    
 }

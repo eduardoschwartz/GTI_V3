@@ -64,7 +64,7 @@
 
 
                     <tr>
-                        <td class="auto-style3">&nbsp;&nbsp;
+                        <td class="panel">&nbsp;&nbsp;
                             <asp:Label ID="lblCod" runat="server" Text="Código do imóvel..:"></asp:Label>
                             &nbsp;
                             <asp:TextBox ID="txtCod" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="6" Width="70px"  onKeyPress="return formata(this, '§§§§§§', event)"></asp:TextBox>
@@ -72,7 +72,7 @@
 
                     </tr>
                     <tr>
-                        <td class="auto-style3">&nbsp;&nbsp;
+                        <td class="panel">&nbsp;&nbsp;
                             <asp:Label ID="Label1" runat="server" Text="Inscrição Cadastral..:"></asp:Label>
                             &nbsp;
                             <asp:TextBox ID="txtIC" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="25" Width="197px" onKeyPress="return formata(this, '§.§§.§§§§.§§§§§.§§.§§.§§§', event)"></asp:TextBox>
@@ -90,7 +90,7 @@
                             <img height="30" alt="" src="Turing.aspx" width="80" />
                             &nbsp;
                         </td>
-                        <td class="auto-style4">&nbsp;Digite o conteúdo da imagem
+                        <td class="panel">&nbsp;Digite o conteúdo da imagem
                             <br />
                             &nbsp;<asp:TextBox ID="txtimgcode" runat="server" ViewStateMode="Disabled" Width="147px" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px"></asp:TextBox>
                             &nbsp;&nbsp;&nbsp;      <asp:Button ID="btPrint" class="button1" runat="server" OnClick="btPrint_Click" Text="Imprimir" Width="100px" />

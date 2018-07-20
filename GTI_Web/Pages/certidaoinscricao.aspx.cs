@@ -90,8 +90,13 @@ namespace GTI_Web.Pages {
             }
             sAtividade = Reg.Atividade_extenso;
 
+            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
+            int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Debito);
+            int _ano_certidao = DateTime.Now.Year;
+
+
             if (ExtratoCheckBox.Checked) {
-                nSid = Grava_Extrato_Pagamento(Codigo);
+                
                 TableLogOnInfos crtableLogoninfos = new TableLogOnInfos();
                 TableLogOnInfo crtableLogoninfo = new TableLogOnInfo();
                 ConnectionInfo crConnectionInfo = new ConnectionInfo();
@@ -102,22 +107,22 @@ namespace GTI_Web.Pages {
                     sSufixo = "XE";
                 } else {
                     crystalReport.Load(Server.MapPath("~/Report/CertidaoInscricaoExtratoAtiva.rpt"));
-                    crystalReport.RecordSelectionFormula = "{Relatorio_Inscricao.Id}=" + nSid;
-
-                    crConnectionInfo.ServerName = "SKYNET";
-                    crConnectionInfo.DatabaseName = "Tributacao";
-                    crConnectionInfo.UserID = "gtisys";
-                    crConnectionInfo.Password = "everest";
-
-                    CrTables = crystalReport.Database.Tables;
-                    foreach (CrystalDecisions.CrystalReports.Engine.Table CrTable in CrTables) {
-                        crtableLogoninfo = CrTable.LogOnInfo;
-                        crtableLogoninfo.ConnectionInfo = crConnectionInfo;
-                        CrTable.ApplyLogOnInfo(crtableLogoninfo);
-                    }
-
                     sSufixo = "XA";
                 }
+                string Controle = Grava_Extrato_Pagamento(Codigo, _numero_certidao, _ano_certidao,sSufixo);
+                crystalReport.RecordSelectionFormula = "{Certidao_inscricao_extrato.Id}='" + Controle + "'";
+                crConnectionInfo.ServerName = "SKYNET";
+                crConnectionInfo.DatabaseName = "Tributacao";
+                crConnectionInfo.UserID = "gtisys";
+                crConnectionInfo.Password = "everest";
+
+                CrTables = crystalReport.Database.Tables;
+                foreach (CrystalDecisions.CrystalReports.Engine.Table CrTable in CrTables) {
+                    crtableLogoninfo = CrTable.LogOnInfo;
+                    crtableLogoninfo.ConnectionInfo = crConnectionInfo;
+                    CrTable.ApplyLogOnInfo(crtableLogoninfo);
+                }
+
             } else {
                 if (dDataEncerramento != null) {
                     crystalReport.Load(Server.MapPath("~/Report/CertidaoInscricaoEncerrada.rpt"));
@@ -127,10 +132,6 @@ namespace GTI_Web.Pages {
                     sSufixo = "IA";
                 }
             }
-
-            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
-            int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Debito);
-            int _ano_certidao = DateTime.Now.Year;
 
             Certidao_inscricao cert = new Certidao_inscricao();
             cert.Cadastro = Codigo;
@@ -179,16 +180,10 @@ namespace GTI_Web.Pages {
 
                 try {
                     crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true, "certidao" + _numero_certidao.ToString() + _ano_certidao.ToString());
-                } catch  {
+                } catch (Exception ex2){
                 } finally {
                     crystalReport.Close();
                     crystalReport.Dispose();
-                    if (ExtratoCheckBox.Checked) {
-                        Exception exDel = tributario_Class.Excluir_Relatorio_Inscricao(nSid);
-                        if (exDel != null)
-                            throw exDel;
-                    }
-
                 }
             }
         }
@@ -277,15 +272,15 @@ namespace GTI_Web.Pages {
             }
         }
 
-        private int Grava_Extrato_Pagamento(int Codigo) {
-            int nSid = GetRandomNumber();
+        private string Grava_Extrato_Pagamento(int Codigo, int NumeroCertidao,int AnoCertidao,string Sufixo) {
+            string Controle = NumeroCertidao.ToString("00000") + AnoCertidao.ToString("0000") + "/" + Codigo.ToString() + "-" + Sufixo;
             Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
             List<SpExtrato> ListaTributo = tributario_Class.Lista_Extrato_Tributo(Codigo, 1980, 2050, 0, 99, 0, 99, 0, 999, 0, 99, 0, 99, DateTime.Now, "Web");
             List<SpExtrato> ListaParcela = tributario_Class.Lista_Extrato_Parcela(ListaTributo);
-
+            
             foreach (SpExtrato item in ListaParcela.Where(x=>(x.Codlancamento==2 ||x.Codlancamento==6 || x.Codlancamento==14) && x.Statuslanc<3) ) {
-                Relatorio_inscricao reg = new Relatorio_inscricao();
-                reg.Id = nSid;
+                Certidao_inscricao_extrato reg = new Certidao_inscricao_extrato();
+                reg.Id = Controle;
                 reg.Ano = item.Anoexercicio;
                 reg.Codigo = item.Codreduzido;
                 reg.Complemento = item.Codcomplemento;
@@ -297,12 +292,12 @@ namespace GTI_Web.Pages {
                 reg.Parcela = (byte)item.Numparcela;
                 reg.Sequencia= (byte)item.Seqlancamento;
                 reg.Valor_Pago = (decimal)item.Valorpagoreal;
-                Exception ex = tributario_Class.Insert_Relatorio_Inscricao(reg);
+                Exception ex = tributario_Class.Insert_Certidao_Inscricao_Extrato(reg);
                 if (ex != null)
                     throw ex;
             }
             
-            return nSid;
+            return Controle;
         }
 
         protected void VerificarButton_Click(object sender, EventArgs e) {

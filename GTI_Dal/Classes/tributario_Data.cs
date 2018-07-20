@@ -324,15 +324,15 @@ namespace GTI_Dal.Classes {
                         Valorjuros = item.Valorjuros,
                         Valorcorrecao = item.Valorcorrecao,
                         Valortotal = item.Valortotal,
-                        Valorpago = item.Valorpago,
                         Numdocumento=item.Numdocumento,
-                        Valorpagoreal = item.Valorpagoreal,
                         Anoexecfiscal = item.Anoexecfiscal,
                         Numexecfiscal = item.Numexecfiscal,
                         Processocnj = item.Processocnj,
                         Prot_certidao = item.Prot_certidao,
                         Prot_dtremessa = item.Prot_dtremessa
                     };
+                    reg.Valorpago = item.Valorpago==null?0:item.Valorpago;
+                    reg.Valorpagoreal = item.Valorpagoreal==null?0:item.Valorpagoreal;
                     ListaDebito.Add(reg);
                 } else {
                     ListaDebito[x].Valortributo += item.Valortributo;
@@ -1319,10 +1319,10 @@ namespace GTI_Dal.Classes {
             return nCount;
         }
 
-        public Exception Insert_Relatorio_Inscricao(Relatorio_inscricao Reg) {
+        public Exception Insert_Certidao_Inscricao_Extrato(Certidao_inscricao_extrato Reg) {
             using (var db = new GTI_Context(_connection)) {
                 try {
-                    db.Relatorio_inscricao.Add(Reg);
+                    db.Certidao_inscricao_extrato.Add(Reg);
                     db.SaveChanges();
                 } catch (Exception ex) {
                     return ex;
@@ -1331,17 +1331,6 @@ namespace GTI_Dal.Classes {
             }
         }
 
-        public Exception Excluir_Relatorio_Inscricao(int nSid) {
-            using (var db = new GTI_Context(_connection)) {
-                try {
-                    db.Relatorio_inscricao.RemoveRange(db.Relatorio_inscricao.Where(i => i.Id == nSid));
-                    db.SaveChanges();
-                } catch (Exception ex) {
-                    return ex;
-                }
-                return null;
-            }
-        }
 
     }//end class
 }

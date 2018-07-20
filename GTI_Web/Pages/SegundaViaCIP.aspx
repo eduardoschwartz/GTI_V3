@@ -8,20 +8,7 @@
     <style type="text/css">
         
         
-        .auto-style3 {
-            width: 333px;
-        }
-        .auto-style4 {
-            width: 433px;
-            height: 35px;
-        }
-        .auto-style6 {
-            font-size: x-small;
-        }
-        .auto-style7 {
-            height: 35px;
-            width: 103px;
-        }
+      
     </style>
 
      <script>
@@ -70,7 +57,7 @@
 
 
                     <tr>
-                        <td class="auto-style3">&nbsp;&nbsp;
+                        <td class="panel">&nbsp;&nbsp;
                             <asp:Label ID="lblCod" runat="server" Text="Código do imóvel..:" Font-Size="X-Small"></asp:Label>
                             &nbsp;
                             <asp:TextBox ID="txtCod" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="6" Width="70px"  onKeyPress="return formata(this, '§§§§§§', event)"></asp:TextBox>
@@ -78,7 +65,7 @@
 
                     </tr>
                     <tr>
-                        <td class="auto-style3">&nbsp;&nbsp;
+                        <td class="panel">&nbsp;&nbsp;
                             <asp:Label ID="Label1" runat="server" Text="Inscrição Cadastral..:" Font-Size="X-Small"></asp:Label>
                             &nbsp;<asp:TextBox ID="txtIC" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="25" Width="197px" onKeyPress="return formata(this, '§.§§.§§§§.§§§§§.§§.§§.§§§', event)"></asp:TextBox>
                         </td>
@@ -92,10 +79,10 @@
                 <br />
                 <table border="0">
                     <tr>
-                        <td class="auto-style7">
+                        <td >
                             <img height="30" alt="" src="Turing.aspx" width="80" />
                         </td>
-                        <td class="auto-style4">&nbsp;<span class="auto-style6">Digite o conteúdo da imagem</span>
+                        <td >&nbsp;<span class="panel">Digite o conteúdo da imagem</span>
                             <br />
                             <asp:TextBox ID="txtimgcode" runat="server" ViewStateMode="Disabled" Width="171px" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px"></asp:TextBox>
                             &nbsp; <asp:Button ID="btPrint" class="button1" runat="server" OnClick="btPrint_Click" Text="Imprimir" Width="86px" />

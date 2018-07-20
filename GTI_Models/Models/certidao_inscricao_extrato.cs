@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GTI_Models.Models {
-    public class Relatorio_inscricao {
+    public class Certidao_inscricao_extrato {
         [Key]
         [Column(Order = 1)]
-        public int Id { get; set; }
+        public string Id { get; set; }
         [Key]
         [Column(Order = 2)]
         public int Codigo { get; set; }
@@ -27,7 +27,7 @@ namespace GTI_Models.Models {
         public byte Complemento { get; set; }
         public string Lancamento_Descricao { get; set; }
         public DateTime Data_Vencimento { get; set; }
-        public DateTime Data_Pagamento { get; set; }
+        public DateTime? Data_Pagamento { get; set; }
         public decimal Valor_Pago { get; set; }
     }
 }
