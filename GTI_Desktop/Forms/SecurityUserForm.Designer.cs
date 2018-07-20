@@ -55,13 +55,12 @@
             // GravarButton
             // 
             this.GravarButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.GravarButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.GravarButton.Image = global::GTI_Desktop.Properties.Resources.gravar;
             this.GravarButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.GravarButton.Location = new System.Drawing.Point(347, 30);
             this.GravarButton.Name = "GravarButton";
             this.GravarButton.Padding = new System.Windows.Forms.Padding(1, 0, 0, 0);
-            this.GravarButton.Size = new System.Drawing.Size(74, 22);
+            this.GravarButton.Size = new System.Drawing.Size(74, 24);
             this.GravarButton.TabIndex = 156;
             this.GravarButton.Text = "&Gravar ";
             this.GravarButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;

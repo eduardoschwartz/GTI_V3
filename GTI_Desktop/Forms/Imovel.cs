@@ -93,8 +93,6 @@ namespace GTI_Desktop.Forms {
             mnuMainP.Enabled = !bStart;
             mnuAdicionarA.Enabled = !bStart;
             mnuRemoverA.Enabled = !bStart;
-            mnuAddHistorico.Enabled = !bStart;
-            mnuRemoverHistorico.Enabled = !bStart;
             mnuViewHistorico.Enabled = !bStart;
             chkReside.AutoCheck = !bStart;
             chkImune.AutoCheck = !bStart;
@@ -186,20 +184,28 @@ namespace GTI_Desktop.Forms {
         }
 
         private void BtAdd_Click(object sender, EventArgs e) {
-            //TODO: Tela de novo imóvel
-            bAddNew = true;
-            ClearFields();
-            ControlBehaviour(false);
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroImovel_Novo);
+            if (bAllow) {
+                //TODO: Tela de novo imóvel
+                bAddNew = true;
+                ClearFields();
+                ControlBehaviour(false);
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void BtEdit_Click(object sender, EventArgs e) {
-            bAddNew = false;
-            if (String.IsNullOrEmpty(lblInscricao.Text))
-                MessageBox.Show("Nenhum imóvel carregado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else {
-                ControlBehaviour(false);
-                btCod.Focus();
-            }
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroImovel_Alterar_Total);
+            if (bAllow) {
+                bAddNew = false;
+                if (String.IsNullOrEmpty(lblInscricao.Text))
+                    MessageBox.Show("Nenhum imóvel carregado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else {
+                    ControlBehaviour(false);
+                    btCod.Focus();
+                }
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void BtGravar_Click(object sender, EventArgs e) {
@@ -783,6 +789,32 @@ namespace GTI_Desktop.Forms {
             }
         }
 
+        private void mnuAddHistorico_Click(object sender, EventArgs e) {
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroImovel_Alterar_Historico);
+            if (bAllow) {
+                if (String.IsNullOrEmpty(lblInscricao.Text))
+                    MessageBox.Show("Nenhum imóvel carregado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else {
 
+                }
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void mnuRemoverHistorico_Click(object sender, EventArgs e) {
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroImovel_Alterar_Historico);
+            if (bAllow) {
+                if (String.IsNullOrEmpty(lblInscricao.Text))
+                    MessageBox.Show("Nenhum imóvel carregado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else {
+                    if (HistoricoListView.Items.Count==0 && HistoricoListView.SelectedItems.Count>0)
+                        MessageBox.Show("Selecione um histórico.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else {
+
+                    }
+                }
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 }

@@ -52,11 +52,11 @@
             this.toolStripStatusLabel13 = new System.Windows.Forms.ToolStripStatusLabel();
             this.LedGreen = new System.Windows.Forms.ToolStripStatusLabel();
             this.LedRed = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel11 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuParametros = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCadastroBairro = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCadastroPais = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCadastroProfissao = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuImobiliario = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCadastro = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCadastroImovel = new System.Windows.Forms.ToolStripMenuItem();
@@ -120,7 +120,6 @@
             this.optDv2 = new System.Windows.Forms.RadioButton();
             this.optDv1 = new System.Windows.Forms.RadioButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.mnuCadastroProfissao = new System.Windows.Forms.ToolStripMenuItem();
             this.sBar.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.topBar.SuspendLayout();
@@ -129,7 +128,7 @@
             // 
             // sBar
             // 
-            this.sBar.BackColor = System.Drawing.SystemColors.Control;
+            this.sBar.BackColor = System.Drawing.Color.White;
             this.sBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel5,
             this.sbVersao,
@@ -150,8 +149,7 @@
             this.toolStripStatusLabel4,
             this.toolStripStatusLabel13,
             this.LedGreen,
-            this.LedRed,
-            this.toolStripStatusLabel11});
+            this.LedRed});
             this.sBar.Location = new System.Drawing.Point(0, 472);
             this.sBar.Name = "sBar";
             this.sBar.Size = new System.Drawing.Size(1054, 24);
@@ -323,15 +321,9 @@
             this.LedRed.Name = "LedRed";
             this.LedRed.Size = new System.Drawing.Size(20, 19);
             // 
-            // toolStripStatusLabel11
-            // 
-            this.toolStripStatusLabel11.Name = "toolStripStatusLabel11";
-            this.toolStripStatusLabel11.Size = new System.Drawing.Size(124, 19);
-            this.toolStripStatusLabel11.Text = "toolStripStatusLabel11";
-            // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.SystemColors.Control;
+            this.menuStrip1.BackColor = System.Drawing.Color.White;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuParametros,
             this.mnuImobiliario,
@@ -370,6 +362,13 @@
             this.mnuCadastroPais.Size = new System.Drawing.Size(193, 22);
             this.mnuCadastroPais.Text = "Cadastro de Países";
             this.mnuCadastroPais.Click += new System.EventHandler(this.mnuCadastroPais_Click);
+            // 
+            // mnuCadastroProfissao
+            // 
+            this.mnuCadastroProfissao.Name = "mnuCadastroProfissao";
+            this.mnuCadastroProfissao.Size = new System.Drawing.Size(193, 22);
+            this.mnuCadastroProfissao.Text = "Cadastro de Profissões";
+            this.mnuCadastroProfissao.Click += new System.EventHandler(this.mnuCadastroProfissao_Click);
             // 
             // mnuImobiliario
             // 
@@ -651,7 +650,7 @@
             // 
             // topBar
             // 
-            this.topBar.BackColor = System.Drawing.SystemColors.Control;
+            this.topBar.BackColor = System.Drawing.Color.White;
             this.topBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.topBar.ImageScalingSize = new System.Drawing.Size(48, 48);
             this.topBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -878,7 +877,7 @@
             this.a1Panel1.Controls.Add(this.optDv1);
             this.a1Panel1.Controls.Add(this.lblDV2);
             this.a1Panel1.Controls.Add(this.txtDV);
-            this.a1Panel1.GradientEndColor = System.Drawing.Color.Linen;
+            this.a1Panel1.GradientEndColor = System.Drawing.Color.White;
             this.a1Panel1.GradientStartColor = System.Drawing.Color.White;
             this.a1Panel1.Image = null;
             this.a1Panel1.ImageLocation = new System.Drawing.Point(4, 4);
@@ -935,13 +934,6 @@
             this.optDv1.Text = "Processo";
             this.optDv1.UseVisualStyleBackColor = false;
             this.optDv1.CheckedChanged += new System.EventHandler(this.OptDv1_CheckedChanged);
-            // 
-            // mnuCadastroProfissao
-            // 
-            this.mnuCadastroProfissao.Name = "mnuCadastroProfissao";
-            this.mnuCadastroProfissao.Size = new System.Drawing.Size(193, 22);
-            this.mnuCadastroProfissao.Text = "Cadastro de Profissões";
-            this.mnuCadastroProfissao.Click += new System.EventHandler(this.mnuCadastroProfissao_Click);
             // 
             // Main
             // 
@@ -1065,7 +1057,6 @@
         private System.Windows.Forms.ToolStripButton EmissaoGuiaButton;
         private System.Windows.Forms.ToolStripButton ConsultaDocButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel11;
         private System.Windows.Forms.ToolStripButton CertidaoButton;
         private System.Windows.Forms.ToolStripMenuItem mnuCadastroProfissao;
     }

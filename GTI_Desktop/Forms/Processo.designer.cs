@@ -106,6 +106,12 @@
             this.PrintDocButton = new System.Windows.Forms.Button();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.AnexoPanel = new Owf.Controls.A1Panel();
+            this.label30 = new System.Windows.Forms.Label();
+            this.AnexoLogListView = new System.Windows.Forms.ListView();
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tBar = new System.Windows.Forms.ToolStrip();
             this.AddButton = new System.Windows.Forms.ToolStripButton();
             this.EditButton = new System.Windows.Forms.ToolStripButton();
@@ -147,12 +153,6 @@
             this.AssuntoText = new System.Windows.Forms.TextBox();
             this.RequerentePanel = new System.Windows.Forms.GroupBox();
             this.PrintPanel = new Owf.Controls.A1Panel();
-            this.AnexoLogListView = new System.Windows.Forms.ListView();
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label30 = new System.Windows.Forms.Label();
             this.pnlCCusto.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -1173,6 +1173,57 @@
             this.AnexoPanel.TabIndex = 182;
             this.AnexoPanel.Visible = false;
             // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.BackColor = System.Drawing.Color.Transparent;
+            this.label30.Location = new System.Drawing.Point(10, 173);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(124, 13);
+            this.label30.TabIndex = 77;
+            this.label30.Text = "Histórico de ocorrências:";
+            // 
+            // AnexoLogListView
+            // 
+            this.AnexoLogListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.AnexoLogListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader8,
+            this.columnHeader10,
+            this.columnHeader11,
+            this.columnHeader12});
+            this.AnexoLogListView.FullRowSelect = true;
+            this.AnexoLogListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.AnexoLogListView.Location = new System.Drawing.Point(7, 190);
+            this.AnexoLogListView.MinimumSize = new System.Drawing.Size(200, 100);
+            this.AnexoLogListView.MultiSelect = false;
+            this.AnexoLogListView.Name = "AnexoLogListView";
+            this.AnexoLogListView.Size = new System.Drawing.Size(439, 100);
+            this.AnexoLogListView.TabIndex = 76;
+            this.AnexoLogListView.UseCompatibleStateImageBehavior = false;
+            this.AnexoLogListView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Data";
+            this.columnHeader8.Width = 70;
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "Número";
+            this.columnHeader10.Width = 80;
+            // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "Ocorrência";
+            this.columnHeader11.Width = 80;
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "Funcionário";
+            this.columnHeader12.Width = 180;
+            // 
             // tBar
             // 
             this.tBar.AllowMerge = false;
@@ -1605,63 +1656,11 @@
             this.PrintPanel.TabIndex = 178;
             this.PrintPanel.Visible = false;
             // 
-            // AnexoLogListView
-            // 
-            this.AnexoLogListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.AnexoLogListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader8,
-            this.columnHeader10,
-            this.columnHeader11,
-            this.columnHeader12});
-            this.AnexoLogListView.FullRowSelect = true;
-            this.AnexoLogListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.AnexoLogListView.Location = new System.Drawing.Point(7, 190);
-            this.AnexoLogListView.MinimumSize = new System.Drawing.Size(200, 100);
-            this.AnexoLogListView.MultiSelect = false;
-            this.AnexoLogListView.Name = "AnexoLogListView";
-            this.AnexoLogListView.Size = new System.Drawing.Size(439, 100);
-            this.AnexoLogListView.TabIndex = 76;
-            this.AnexoLogListView.UseCompatibleStateImageBehavior = false;
-            this.AnexoLogListView.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader8
-            // 
-            this.columnHeader8.Text = "Data";
-            this.columnHeader8.Width = 70;
-            // 
-            // columnHeader10
-            // 
-            this.columnHeader10.Text = "Número";
-            this.columnHeader10.Width = 80;
-            // 
-            // columnHeader11
-            // 
-            this.columnHeader11.Text = "Ocorrência";
-            this.columnHeader11.Width = 80;
-            // 
-            // columnHeader12
-            // 
-            this.columnHeader12.Text = "Funcionário";
-            this.columnHeader12.Width = 180;
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.BackColor = System.Drawing.Color.Transparent;
-            this.label30.Location = new System.Drawing.Point(10, 173);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(124, 13);
-            this.label30.TabIndex = 77;
-            this.label30.Text = "Histórico de ocorrências:";
-            // 
             // Processo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(640, 365);
-            this.Controls.Add(this.AnexoPanel);
             this.Controls.Add(this.ComplementoText);
             this.Controls.Add(this.NumProcText);
             this.Controls.Add(this.panel1);
@@ -1693,6 +1692,7 @@
             this.Controls.Add(this.DocPanel);
             this.Controls.Add(this.PrintPanel);
             this.Controls.Add(this.CidadaoPanel);
+            this.Controls.Add(this.AnexoPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Processo";

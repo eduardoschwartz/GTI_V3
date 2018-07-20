@@ -1,5 +1,6 @@
 ﻿using GTI_Bll.Classes;
 using GTI_Desktop.Classes;
+using GTI_Models;
 using GTI_Models.Models;
 using System;
 using System.Collections.Generic;
@@ -168,19 +169,29 @@ namespace GTI_Desktop.Forms {
         }
 
         private void BtAdd_Click(object sender, EventArgs e) {
-            bAddNew = true;
-            Clear_Reg();
-            ControlBehaviour(false);
-            txtNome.Focus();
+
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCidadao_Alterar_Total);
+            if (bAllow) {
+                bAddNew = true;
+                Clear_Reg();
+                ControlBehaviour(false);
+                txtNome.Focus();
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
 
         private void BtEdit_Click(object sender, EventArgs e) {
-            if (Convert.ToInt32(lblCod.Text) == 0)
-                MessageBox.Show("Selecione um cidadão.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else {
-                bAddNew = false;
-                ControlBehaviour(false);
-            }
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCidadao_Alterar_Total);
+            if (bAllow) {
+                if (Convert.ToInt32(lblCod.Text) == 0)
+                    MessageBox.Show("Selecione um cidadão.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else {
+                    bAddNew = false;
+                    ControlBehaviour(false);
+                }
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void BtGravar_Click(object sender, EventArgs e) {
@@ -456,20 +467,25 @@ namespace GTI_Desktop.Forms {
         }
 
         private void BtDel_Click(object sender, EventArgs e) {
-            int nCodigo = Convert.ToInt32(lblCod.Text);
-            if (nCodigo == 0)
-                MessageBox.Show("Selecione um cidadão.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else {
-                if (MessageBox.Show("Excluir este registro?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
-                    Cidadao_bll clsCidadao = new Cidadao_bll(_connection);
-                    Exception ex= clsCidadao.Excluir_cidadao(nCodigo);
-                    if (ex != null) {
-                        ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
-                        eBox.ShowDialog();
-                    } else
-                        Clear_Reg();
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCidadao_Alterar_Total);
+            if (bAllow) {
+                int nCodigo = Convert.ToInt32(lblCod.Text);
+                if (nCodigo == 0)
+                    MessageBox.Show("Selecione um cidadão.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else {
+                    if (MessageBox.Show("Excluir este registro?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+                        Cidadao_bll clsCidadao = new Cidadao_bll(_connection);
+                        Exception ex = clsCidadao.Excluir_cidadao(nCodigo);
+                        if (ex != null) {
+                            ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                            eBox.ShowDialog();
+                        } else
+                            Clear_Reg();
+                    }
                 }
-            }
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
 
         private void BtProfissao_Del_Click(object sender, EventArgs e) {

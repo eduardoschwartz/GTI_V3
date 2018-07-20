@@ -1,6 +1,7 @@
 ﻿using GTI_Bll.Classes;
 using GTI_Desktop.Classes;
 using GTI_Desktop.Datasets;
+using GTI_Models;
 using GTI_Models.Models;
 using Microsoft.Reporting.WinForms;
 using System;
@@ -149,34 +150,66 @@ namespace GTI_Desktop.Forms {
             CancelarButton.Enabled = !bStart;
             OpcaoButton.Enabled = bStart;
             TramitarButton.Enabled = bStart;
-            InscricaoText.ReadOnly = bStart;
+           
             ComplementoText.ReadOnly = bStart;
 
             if (!bAddNew) {
                 if (!gtiCore.IsEmptyDate(ArquivaLabel.Text) || !gtiCore.IsEmptyDate(CancelaLabel.Text) || !gtiCore.IsEmptyDate(SuspensaoLabel.Text))
-                    bStart = true;
-            }
+                   bStart = true;
 
-            Fisicocheckbox.Enabled = !bStart;
-            Internocheckbox.Enabled = !bStart;
-            ComOption.Enabled = !bStart;
-            ResOption.Enabled = !bStart;
-            ObsText.ReadOnly = bStart;
-            CidadaoEditButton.Enabled = !bStart;
-            DelEnderecoButton.Enabled = !bStart;
-            AddEnderecoButton.Enabled = !bStart;
-            AssuntoText.Visible = bStart;
-            AssuntoText.ReadOnly = true;
-            AssuntoCombo.Visible = !bStart;
-            OrigemText.Visible = bStart;
-            OrigemText.ReadOnly = true;
-            OrigemCombo.Visible = !bStart;
-            ObsText.ReadOnly = bStart;
-            NumProcText.ReadOnly = !bStart;
-            CCustoText.Visible = bStart;
-            CCustoText.ReadOnly = true;
-            CCustoCombo.Visible = !bStart;
-            DocListView.Enabled = !bStart;
+                bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroProcesso_Alterar_Avancado);
+                if (bAllow) {
+                    Fisicocheckbox.Enabled = !bStart;
+                    Internocheckbox.Enabled = !bStart;
+                    ComOption.Enabled = !bStart;
+                    ResOption.Enabled = !bStart;
+                    ObsText.ReadOnly = bStart;
+                    CidadaoEditButton.Enabled = !bStart;
+                    DelEnderecoButton.Enabled = !bStart;
+                    AddEnderecoButton.Enabled = !bStart;
+                    AssuntoText.Visible = bStart;
+                    AssuntoText.ReadOnly = true;
+                    AssuntoCombo.Visible = !bStart;
+                    InscricaoText.ReadOnly = bStart;
+                    OrigemText.Visible = bStart;
+                    OrigemText.ReadOnly = true;
+                    OrigemCombo.Visible = !bStart;
+                    ObsText.ReadOnly = bStart;
+                    NumProcText.ReadOnly = !bStart;
+                    CCustoText.Visible = bStart;
+                    CCustoText.ReadOnly = true;
+                    CCustoCombo.Visible = !bStart;
+                    DocListView.Enabled = !bStart;
+                } else {
+                    bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroProcesso_Alterar_Basico);
+                    if (bAllow) {
+                        ObsText.ReadOnly = bStart;
+                        InscricaoText.ReadOnly = bStart;
+                    }
+                }
+            } else {
+                Fisicocheckbox.Enabled = !bStart;
+                Internocheckbox.Enabled = !bStart;
+                ComOption.Enabled = !bStart;
+                ResOption.Enabled = !bStart;
+                ObsText.ReadOnly = bStart;
+                CidadaoEditButton.Enabled = !bStart;
+                DelEnderecoButton.Enabled = !bStart;
+                AddEnderecoButton.Enabled = !bStart;
+                AssuntoText.Visible = bStart;
+                AssuntoText.ReadOnly = true;
+                AssuntoCombo.Visible = !bStart;
+                InscricaoText.ReadOnly = bStart;
+                OrigemText.Visible = bStart;
+                OrigemText.ReadOnly = true;
+                OrigemCombo.Visible = !bStart;
+                ObsText.ReadOnly = bStart;
+                NumProcText.ReadOnly = !bStart;
+                CCustoText.Visible = bStart;
+                CCustoText.ReadOnly = true;
+                CCustoCombo.Visible = !bStart;
+                DocListView.Enabled = !bStart;
+            }
         }
 
         private void ClearFields()
@@ -244,21 +277,30 @@ namespace GTI_Desktop.Forms {
 
         private void BtAdd_Click(object sender, EventArgs e)
         {
-            bAddNew = true;
-            ClearFields();
-            NumProcText.Text = "";
-            ControlBehaviour(false);
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroProcesso_Novo);
+            if (bAllow) {
+                bAddNew = true;
+                ClearFields();
+                NumProcText.Text = "";
+                ControlBehaviour(false);
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void BtEdit_Click(object sender, EventArgs e)
         {
-            bAddNew = false;
-            if (String.IsNullOrEmpty(AssuntoText.Text))
-                MessageBox.Show("Nenhum processo carregado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else {
-                ControlBehaviour(false);
-                ObsText.Focus();
-            }
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroProcesso_Alterar_Avancado);
+            bool bAllow2 = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroProcesso_Alterar_Basico);
+            if (bAllow || bAllow2) {
+                bAddNew = false;
+                if (String.IsNullOrEmpty(AssuntoText.Text))
+                    MessageBox.Show("Nenhum processo carregado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else {
+                    ControlBehaviour(false);
+                    ObsText.Focus();
+                }
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void BtGravar_Click(object sender, EventArgs e)
@@ -272,22 +314,26 @@ namespace GTI_Desktop.Forms {
 
         private void BtTramitar_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(AssuntoText.Text)) {
-                MessageBox.Show("Nenhum processo carregado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroProcesso_Tramitar);
+            if (bAllow) {
+                if (String.IsNullOrEmpty(AssuntoText.Text)) {
+                    MessageBox.Show("Nenhum processo carregado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
-            var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Processo_Tramite);
-            if (formToShow != null)
-                formToShow.Show();
+                var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Processo_Tramite);
+                if (formToShow != null)
+                    formToShow.Show();
 
-            Processo_bll clsProcesso = new Processo_bll(_connection);
-            short nAnoProc = clsProcesso.ExtractAnoProcesso(NumProcText.Text);
-            int nNumeroProc = clsProcesso.NumProcessoNoDV(NumProcText.Text);
-            Forms.Processo_Tramite f1 = new Processo_Tramite(nAnoProc, nNumeroProc) {
-                Tag = this.Name
-            };
-            f1.ShowDialog();
+                Processo_bll clsProcesso = new Processo_bll(_connection);
+                short nAnoProc = clsProcesso.ExtractAnoProcesso(NumProcText.Text);
+                int nNumeroProc = clsProcesso.NumProcessoNoDV(NumProcText.Text);
+                Forms.Processo_Tramite f1 = new Processo_Tramite(nAnoProc, nNumeroProc) {
+                    Tag = this.Name
+                };
+                f1.ShowDialog();
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void BtFind_Click(object sender, EventArgs e)

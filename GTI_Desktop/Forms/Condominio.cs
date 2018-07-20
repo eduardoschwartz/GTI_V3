@@ -1,5 +1,6 @@
 ﻿using GTI_Bll.Classes;
 using GTI_Desktop.Classes;
+using GTI_Models;
 using GTI_Models.Models;
 using System;
 using System.Collections.Generic;
@@ -70,11 +71,19 @@ namespace GTI_Desktop.Forms {
         }
 
         private void AddButton_Click(object sender, EventArgs e) {
-            ControlBehaviour(false);
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCondominio_Alterar);
+            if (bAllow)
+                ControlBehaviour(false);
+            else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void EditButton_Click(object sender, EventArgs e) {
-            ControlBehaviour(false);
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCondominio_Alterar);
+            if (bAllow)
+                ControlBehaviour(false);
+            else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void SaveButton_Click(object sender, EventArgs e) {
@@ -298,13 +307,22 @@ namespace GTI_Desktop.Forms {
         }
 
         private void AdicionarMenuItem_Click(object sender, EventArgs e) {
-            AreaPanel.Enabled = false;
-            AreaEditPanel.Visible = true;
-            AreaEditPanel.BringToFront();
-            AreaConstruida.Focus();
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCondominio_Alterar);
+            if (bAllow) {
+                AreaPanel.Enabled = false;
+                AreaEditPanel.Visible = true;
+                AreaEditPanel.BringToFront();
+                AreaConstruida.Focus();
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void RemoverMenuItem_Click(object sender, EventArgs e) {
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCondominio_Alterar);
+            if (bAllow) {
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
 
         private void OkAreaButton_Click(object sender, EventArgs e) {
@@ -318,8 +336,21 @@ namespace GTI_Desktop.Forms {
         }
 
         private void AlterarMenuItem_Click(object sender, EventArgs e) {
-            AreaPanel.Enabled = false;
-            AreaEditPanel.Visible = true;
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCondominio_Alterar);
+            if (bAllow) {
+                AreaPanel.Enabled = false;
+                AreaEditPanel.Visible = true;
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void DelButton_Click(object sender, EventArgs e) {
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCondominio_Alterar);
+            if (bAllow)
+                //TODO Excluir condominio
+                bAllow = true;//apagar linha
+            else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

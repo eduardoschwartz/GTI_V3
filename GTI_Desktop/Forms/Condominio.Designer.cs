@@ -91,6 +91,9 @@
             this.UsoList = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
             this.PanelOutro = new Owf.Controls.A1Panel();
+            this.ProprietarioToolStrip = new System.Windows.Forms.ToolStrip();
+            this.TestadaAddButton = new System.Windows.Forms.ToolStripButton();
+            this.TestadaDelButton = new System.Windows.Forms.ToolStripButton();
             this.UnidadesButton = new System.Windows.Forms.Button();
             this.TestadaListView = new System.Windows.Forms.ListView();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -105,11 +108,14 @@
             this.label14 = new System.Windows.Forms.Label();
             this.AreaTerreno = new System.Windows.Forms.TextBox();
             this.tTp = new System.Windows.Forms.ToolTip(this.components);
+            this.CloseAreaButton = new System.Windows.Forms.Button();
             this.AreaPanel = new Owf.Controls.A1Panel();
             this.mnuAreas = new System.Windows.Forms.ToolStrip();
             this.OpcoesButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.AdicionarMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AlterarMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoverMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SairMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SomaArea = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
             this.AreaListView = new System.Windows.Forms.ListView();
@@ -120,11 +126,6 @@
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label60 = new System.Windows.Forms.Label();
-            this.CloseAreaButton = new System.Windows.Forms.Button();
-            this.SairMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.TestadaAddButton = new System.Windows.Forms.ToolStripButton();
-            this.TestadaDelButton = new System.Windows.Forms.ToolStripButton();
-            this.ProprietarioToolStrip = new System.Windows.Forms.ToolStrip();
             this.AreaEditPanel = new Owf.Controls.A1Panel();
             this.DataProcesso = new System.Windows.Forms.MaskedTextBox();
             this.DataAprova = new System.Windows.Forms.MaskedTextBox();
@@ -144,15 +145,14 @@
             this.AreaConstruida = new System.Windows.Forms.TextBox();
             this.label43 = new System.Windows.Forms.Label();
             this.CancelAreaButton = new System.Windows.Forms.Button();
-            this.AlterarMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tBar.SuspendLayout();
             this.PanelHeader.SuspendLayout();
             this.PanelLocal.SuspendLayout();
             this.PanelDados.SuspendLayout();
             this.PanelOutro.SuspendLayout();
+            this.ProprietarioToolStrip.SuspendLayout();
             this.AreaPanel.SuspendLayout();
             this.mnuAreas.SuspendLayout();
-            this.ProprietarioToolStrip.SuspendLayout();
             this.AreaEditPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -213,6 +213,7 @@
             this.DelButton.Name = "DelButton";
             this.DelButton.Size = new System.Drawing.Size(23, 22);
             this.DelButton.ToolTipText = "Excluir";
+            this.DelButton.Click += new System.EventHandler(this.DelButton_Click);
             // 
             // FindButton
             // 
@@ -1014,6 +1015,42 @@
             this.PanelOutro.TabIndex = 17;
             this.PanelOutro.TabStop = true;
             // 
+            // ProprietarioToolStrip
+            // 
+            this.ProprietarioToolStrip.BackColor = System.Drawing.Color.Transparent;
+            this.ProprietarioToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.ProprietarioToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.ProprietarioToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TestadaAddButton,
+            this.TestadaDelButton});
+            this.ProprietarioToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.ProprietarioToolStrip.Location = new System.Drawing.Point(587, 47);
+            this.ProprietarioToolStrip.Name = "ProprietarioToolStrip";
+            this.ProprietarioToolStrip.Size = new System.Drawing.Size(24, 48);
+            this.ProprietarioToolStrip.TabIndex = 24;
+            this.ProprietarioToolStrip.TabStop = true;
+            this.ProprietarioToolStrip.Text = "toolStrip2";
+            // 
+            // TestadaAddButton
+            // 
+            this.TestadaAddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TestadaAddButton.Image = global::GTI_Desktop.Properties.Resources.add;
+            this.TestadaAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TestadaAddButton.Name = "TestadaAddButton";
+            this.TestadaAddButton.Size = new System.Drawing.Size(22, 20);
+            this.TestadaAddButton.Text = "Adicionar testada";
+            this.TestadaAddButton.ToolTipText = "Adicionar nova testada";
+            // 
+            // TestadaDelButton
+            // 
+            this.TestadaDelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TestadaDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.TestadaDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TestadaDelButton.Name = "TestadaDelButton";
+            this.TestadaDelButton.Size = new System.Drawing.Size(22, 20);
+            this.TestadaDelButton.Text = "Excluir testada";
+            this.TestadaDelButton.ToolTipText = "Excluir a testada Selecionada";
+            // 
             // UnidadesButton
             // 
             this.UnidadesButton.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -1144,6 +1181,23 @@
             this.AreaTerreno.TabIndex = 18;
             this.AreaTerreno.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AreaTerreno_KeyPress);
             // 
+            // CloseAreaButton
+            // 
+            this.CloseAreaButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CloseAreaButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.CloseAreaButton.FlatAppearance.BorderSize = 0;
+            this.CloseAreaButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(255)))), ((int)(((byte)(230)))));
+            this.CloseAreaButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.CloseAreaButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CloseAreaButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.CloseAreaButton.Location = new System.Drawing.Point(406, 2);
+            this.CloseAreaButton.Name = "CloseAreaButton";
+            this.CloseAreaButton.Size = new System.Drawing.Size(15, 15);
+            this.CloseAreaButton.TabIndex = 177;
+            this.tTp.SetToolTip(this.CloseAreaButton, "Fechar a tela de áreas");
+            this.CloseAreaButton.UseVisualStyleBackColor = true;
+            this.CloseAreaButton.Click += new System.EventHandler(this.CloseAreaButton_Click);
+            // 
             // AreaPanel
             // 
             this.AreaPanel.BackColor = System.Drawing.SystemColors.Control;
@@ -1176,7 +1230,7 @@
             this.OpcoesButton});
             this.mnuAreas.Location = new System.Drawing.Point(338, 192);
             this.mnuAreas.Name = "mnuAreas";
-            this.mnuAreas.Size = new System.Drawing.Size(110, 25);
+            this.mnuAreas.Size = new System.Drawing.Size(79, 25);
             this.mnuAreas.TabIndex = 176;
             this.mnuAreas.Text = "toolStrip1";
             // 
@@ -1197,16 +1251,30 @@
             // AdicionarMenuItem
             // 
             this.AdicionarMenuItem.Name = "AdicionarMenuItem";
-            this.AdicionarMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.AdicionarMenuItem.Size = new System.Drawing.Size(125, 22);
             this.AdicionarMenuItem.Text = "Adicionar";
             this.AdicionarMenuItem.Click += new System.EventHandler(this.AdicionarMenuItem_Click);
+            // 
+            // AlterarMenuItem
+            // 
+            this.AlterarMenuItem.Name = "AlterarMenuItem";
+            this.AlterarMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.AlterarMenuItem.Text = "Alterar";
+            this.AlterarMenuItem.Click += new System.EventHandler(this.AlterarMenuItem_Click);
             // 
             // RemoverMenuItem
             // 
             this.RemoverMenuItem.Name = "RemoverMenuItem";
-            this.RemoverMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.RemoverMenuItem.Size = new System.Drawing.Size(125, 22);
             this.RemoverMenuItem.Text = "Remover";
             this.RemoverMenuItem.Click += new System.EventHandler(this.RemoverMenuItem_Click);
+            // 
+            // SairMenuItem
+            // 
+            this.SairMenuItem.Name = "SairMenuItem";
+            this.SairMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.SairMenuItem.Text = "Sair";
+            this.SairMenuItem.Click += new System.EventHandler(this.mnuSair_Click);
             // 
             // SomaArea
             // 
@@ -1291,66 +1359,6 @@
             this.label60.TabIndex = 173;
             this.label60.Text = "Áreas do imóvel";
             this.label60.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // CloseAreaButton
-            // 
-            this.CloseAreaButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CloseAreaButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.CloseAreaButton.FlatAppearance.BorderSize = 0;
-            this.CloseAreaButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(255)))), ((int)(((byte)(230)))));
-            this.CloseAreaButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.CloseAreaButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CloseAreaButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.CloseAreaButton.Location = new System.Drawing.Point(406, 2);
-            this.CloseAreaButton.Name = "CloseAreaButton";
-            this.CloseAreaButton.Size = new System.Drawing.Size(15, 15);
-            this.CloseAreaButton.TabIndex = 177;
-            this.tTp.SetToolTip(this.CloseAreaButton, "Fechar a tela de áreas");
-            this.CloseAreaButton.UseVisualStyleBackColor = true;
-            this.CloseAreaButton.Click += new System.EventHandler(this.CloseAreaButton_Click);
-            // 
-            // SairMenuItem
-            // 
-            this.SairMenuItem.Name = "SairMenuItem";
-            this.SairMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.SairMenuItem.Text = "Sair";
-            this.SairMenuItem.Click += new System.EventHandler(this.mnuSair_Click);
-            // 
-            // TestadaAddButton
-            // 
-            this.TestadaAddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TestadaAddButton.Image = global::GTI_Desktop.Properties.Resources.add;
-            this.TestadaAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TestadaAddButton.Name = "TestadaAddButton";
-            this.TestadaAddButton.Size = new System.Drawing.Size(22, 20);
-            this.TestadaAddButton.Text = "Adicionar testada";
-            this.TestadaAddButton.ToolTipText = "Adicionar nova testada";
-            // 
-            // TestadaDelButton
-            // 
-            this.TestadaDelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TestadaDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.TestadaDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TestadaDelButton.Name = "TestadaDelButton";
-            this.TestadaDelButton.Size = new System.Drawing.Size(22, 20);
-            this.TestadaDelButton.Text = "Excluir testada";
-            this.TestadaDelButton.ToolTipText = "Excluir a testada Selecionada";
-            // 
-            // ProprietarioToolStrip
-            // 
-            this.ProprietarioToolStrip.BackColor = System.Drawing.Color.Transparent;
-            this.ProprietarioToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.ProprietarioToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.ProprietarioToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TestadaAddButton,
-            this.TestadaDelButton});
-            this.ProprietarioToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.ProprietarioToolStrip.Location = new System.Drawing.Point(587, 47);
-            this.ProprietarioToolStrip.Name = "ProprietarioToolStrip";
-            this.ProprietarioToolStrip.Size = new System.Drawing.Size(24, 48);
-            this.ProprietarioToolStrip.TabIndex = 24;
-            this.ProprietarioToolStrip.TabStop = true;
-            this.ProprietarioToolStrip.Text = "toolStrip2";
             // 
             // AreaEditPanel
             // 
@@ -1570,13 +1578,6 @@
             this.CancelAreaButton.UseVisualStyleBackColor = false;
             this.CancelAreaButton.Click += new System.EventHandler(this.CancelAreaButton_Click);
             // 
-            // AlterarMenuItem
-            // 
-            this.AlterarMenuItem.Name = "AlterarMenuItem";
-            this.AlterarMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.AlterarMenuItem.Text = "Alterar";
-            this.AlterarMenuItem.Click += new System.EventHandler(this.AlterarMenuItem_Click);
-            // 
             // Condominio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1604,12 +1605,12 @@
             this.PanelDados.PerformLayout();
             this.PanelOutro.ResumeLayout(false);
             this.PanelOutro.PerformLayout();
+            this.ProprietarioToolStrip.ResumeLayout(false);
+            this.ProprietarioToolStrip.PerformLayout();
             this.AreaPanel.ResumeLayout(false);
             this.AreaPanel.PerformLayout();
             this.mnuAreas.ResumeLayout(false);
             this.mnuAreas.PerformLayout();
-            this.ProprietarioToolStrip.ResumeLayout(false);
-            this.ProprietarioToolStrip.PerformLayout();
             this.AreaEditPanel.ResumeLayout(false);
             this.AreaEditPanel.PerformLayout();
             this.ResumeLayout(false);

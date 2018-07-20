@@ -32,6 +32,7 @@ namespace GTI_Desktop.Forms {
                 CustomFormat = "dd/MM/yyyy",
                 Name = "sbDataBase"
             };
+            topBar.Renderer = new MySR();
             t.CloseUp += new System.EventHandler(SbDataBase_CloseUp);
             sBar.Items.Insert(17, new ToolStripControlHost(t));
             sbMaquina.Text = Environment.MachineName;
@@ -476,17 +477,22 @@ namespace GTI_Desktop.Forms {
         }
 
         private void mnuCadastroCondominio_Click(object sender, EventArgs e) {
-            var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Condominio);
-            if (formToShow != null) {
-                formToShow.Show();
-            } else {
-                Forms.Condominio f1 = new Forms.Condominio {
-                    Tag = "Menu",
-                    MdiParent = this
-                };
-                f1.Show();
-                f1.BringToFront();
-            }
+
+            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCondominio);
+            if (bAllow) {
+                var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Condominio);
+                if (formToShow != null) {
+                    formToShow.Show();
+                } else {
+                    Forms.Condominio f1 = new Forms.Condominio {
+                        Tag = "Menu",
+                        MdiParent = this
+                    };
+                    f1.Show();
+                    f1.BringToFront();
+                }
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void CertidaoButton_Click(object sender, EventArgs e) {

@@ -111,7 +111,7 @@ namespace GTI_Web.Pages {
                 }
                 string Controle = Grava_Extrato_Pagamento(Codigo, _numero_certidao, _ano_certidao,sSufixo);
                 crystalReport.RecordSelectionFormula = "{Certidao_inscricao_extrato.Id}='" + Controle + "'";
-                crConnectionInfo.ServerName = "SKYNET";
+                crConnectionInfo.ServerName = "200.232.123.115";
                 crConnectionInfo.DatabaseName = "Tributacao";
                 crConnectionInfo.UserID = "gtisys";
                 crConnectionInfo.Password = "everest";
