@@ -243,7 +243,6 @@ namespace GTI_Web.Pages {
             return dados;
         }
 
-
         private void Exibe_Certidao_Debito(Certidao_debito dados) {
             lblMsg.Text = "";
             string sEndereco = dados.Logradouro + ", " + dados.Numero.ToString();
