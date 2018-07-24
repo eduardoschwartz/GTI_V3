@@ -225,5 +225,34 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        /// <summary>
+        /// Retorna o código reduzido através da inscrição cadastral ou zero se não existir
+        /// </summary>
+        /// <param name="distrito"></param>
+        /// <param name="setor"></param>
+        /// <param name="quadra"></param>
+        /// <param name="lote"></param>
+        /// <param name="face"></param>
+        /// <param name="unidade"></param>
+        /// <param name="subunidade"></param>
+        /// <returns></returns>
+        public int Retorna_Imovel_Inscricao(int distrito, int setor, int quadra, int lote, int face, int unidade, int subunidade) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Retorna_Imovel_Inscricao(distrito,setor,quadra,lote,face,unidade,subunidade);
+        }
+
+        /// <summary>
+        /// Retorna a lista de faces de quadra
+        /// </summary>
+        /// <param name="distrito"></param>
+        /// <param name="setor"></param>
+        /// <param name="quadra"></param>
+        /// <param name="face"></param>
+        /// <returns></returns>
+        public List<FacequadraStruct> Lista_FaceQuadra(int distrito, int setor, int quadra, int face) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Lista_FaceQuadra(distrito, setor, quadra, face);
+        }
+
     }//end class
 }

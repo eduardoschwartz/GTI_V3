@@ -1,6 +1,5 @@
 ﻿using GTI_Bll.Classes;
 using GTI_Desktop.Classes;
-using GTI_Desktop.Properties;
 using GTI_Models;
 using GTI_Models.Models;
 using System;
@@ -186,6 +185,10 @@ namespace GTI_Desktop.Forms {
         private void BtAdd_Click(object sender, EventArgs e) {
             bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroImovel_Novo);
             if (bAllow) {
+
+                Imovel_Novo _imovel_Novo = new Imovel_Novo();
+                _imovel_Novo.ShowDialog();
+
                 //TODO: Tela de novo imóvel
                 bAddNew = true;
                 ClearFields();

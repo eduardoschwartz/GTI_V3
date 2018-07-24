@@ -152,6 +152,26 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public List<FacequadraStruct> Lista_FaceQuadra(int distrito,int setor,int quadra,int face) {
+            using (var db = new GTI_Context(_connection)) {
+                var reg = (from f in db.Facequadra
+                           join l in db.Logradouro on f.Codlogr equals l.Codlogradouro into lf from l in lf.DefaultIfEmpty()
+                           where f.Coddistrito==distrito && f.Codsetor==setor  && f.Codquadra==quadra && f.Codface==face
+                           select new FacequadraStruct { Agrupamento=f.Codagrupa,Logradouro_codigo=f.Codlogr,Logradouro_nome=l.Endereco });
+
+                List<FacequadraStruct> Lista = new List<FacequadraStruct>();
+                foreach (var query in reg) {
+                    FacequadraStruct Linha = new FacequadraStruct {
+                        Logradouro_codigo = query.Logradouro_codigo,
+                        Logradouro_nome = query.Logradouro_nome,
+                        Agrupamento=query.Agrupamento
+                    };
+                    Lista.Add(Linha);
+                }
+                return Lista;
+            }
+        }
+
         public bool Existe_Imovel(int nCodigo) {
             bool bRet = false;
             using (var db = new GTI_Context(_connection)) {
@@ -161,6 +181,14 @@ namespace GTI_Dal.Classes {
                 }
             }
             return bRet;
+        }
+
+        public int Retorna_Imovel_Inscricao(int distrito,int setor,int quadra,int lote,int face,int unidade,int subunidade) {
+            int nRet = 0;
+            using (var db = new GTI_Context(_connection)) {
+                nRet = (from a in db.Cadimob where a.Distrito == distrito && a.Setor==setor && a.Quadra==quadra && a.Lote==lote && a.Seq==face && a.Unidade==unidade&& a.Subunidade==subunidade select a.Codreduzido).FirstOrDefault();
+            }
+            return nRet;
         }
 
         public EnderecoStruct Dados_Endereco(int Codigo, dalCore.TipoEndereco Tipo) {

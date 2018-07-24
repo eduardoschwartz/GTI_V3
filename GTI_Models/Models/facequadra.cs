@@ -22,4 +22,24 @@ namespace GTI_Models.Models {
         public short? Codagrupanovo { get; set; }
         public string Alterado { get; set; }
     }
+
+    public class FacequadraStruct {
+        [Key]
+        [Column(Order = 1)]
+        public short Distrito { get; set; }
+        [Key]
+        [Column(Order = 2)]
+        public short Setor { get; set; }
+        [Key]
+        [Column(Order = 3)]
+        public short Quadra { get; set; }
+        [Key]
+        [Column(Order = 4)]
+        public short Face { get; set; }
+        public int? Logradouro_codigo { get; set; }
+        public string Logradouro_nome { get; set; }
+        public short? Agrupamento { get; set; }
+    }
+
+
 }

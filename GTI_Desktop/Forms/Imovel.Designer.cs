@@ -1441,21 +1441,21 @@
             // mnuAddHistorico
             // 
             this.mnuAddHistorico.Name = "mnuAddHistorico";
-            this.mnuAddHistorico.Size = new System.Drawing.Size(180, 22);
+            this.mnuAddHistorico.Size = new System.Drawing.Size(125, 22);
             this.mnuAddHistorico.Text = "Adicionar";
             this.mnuAddHistorico.Click += new System.EventHandler(this.mnuAddHistorico_Click);
             // 
             // mnuRemoverHistorico
             // 
             this.mnuRemoverHistorico.Name = "mnuRemoverHistorico";
-            this.mnuRemoverHistorico.Size = new System.Drawing.Size(180, 22);
+            this.mnuRemoverHistorico.Size = new System.Drawing.Size(125, 22);
             this.mnuRemoverHistorico.Text = "Remover";
             this.mnuRemoverHistorico.Click += new System.EventHandler(this.mnuRemoverHistorico_Click);
             // 
             // mnuViewHistorico
             // 
             this.mnuViewHistorico.Name = "mnuViewHistorico";
-            this.mnuViewHistorico.Size = new System.Drawing.Size(180, 22);
+            this.mnuViewHistorico.Size = new System.Drawing.Size(125, 22);
             this.mnuViewHistorico.Text = "Visualizar";
             // 
             // HistoricoListView
@@ -2389,10 +2389,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(762, 377);
+            this.Controls.Add(this.pnlArea);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.tabImovel);
             this.Controls.Add(this.tBar);
-            this.Controls.Add(this.pnlArea);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Imovel";
