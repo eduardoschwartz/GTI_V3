@@ -116,6 +116,7 @@
     <Content Include="Pages\certidaovalorvenal.aspx" />
     <Content Include="Pages\cip.aspx" />
     <Content Include="Pages\cipendereco.aspx" />
+    <Content Include="Pages\cpv_pagto.aspx" />
     <Content Include="Pages\dadosEmpresa.aspx" />
     <Content Include="Pages\damweb.aspx" />
     <Content Include="Pages\damwebend2.aspx" />
@@ -232,6 +233,13 @@
     <Compile Include="Pages\cipendereco.aspx.designer.cs">
       <DependentUpon>cipendereco.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\cpv_pagto.aspx.cs">
+      <DependentUpon>cpv_pagto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\cpv_pagto.aspx.designer.cs">
+      <DependentUpon>cpv_pagto.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\dadosEmpresa.aspx.cs">
       <DependentUpon>dadosEmpresa.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -345,6 +353,12 @@
       <DependentUpon>wait.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\ComprovantePagamento.cs">
+      <DependentUpon>ComprovantePagamento.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Report\CertidaoDebitoEmpresa.cs">
       <DependentUpon>CertidaoDebitoEmpresa.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -511,6 +525,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Report\ComprovantePagamento.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComprovantePagamento.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\CertidaoDebitoEmpresa.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CertidaoDebitoEmpresa.cs</LastGenOutput>

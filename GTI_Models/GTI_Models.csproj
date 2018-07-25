@@ -65,6 +65,7 @@
     <Compile Include="Models\assunto.cs" />
     <Compile Include="Models\assuntodoc.cs" />
     <Compile Include="Models\bairro.cs" />
+    <Compile Include="Models\banco.cs" />
     <Compile Include="Models\boleto.cs" />
     <Compile Include="Models\boletoguia.cs" />
     <Compile Include="Models\cadimob.cs" />

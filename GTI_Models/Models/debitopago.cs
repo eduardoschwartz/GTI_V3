@@ -42,5 +42,37 @@ namespace GTI_Models.Models {
         public string Contacorrente { get; set; }
     }
 
-    
+    public class DebitoPagoStruct {
+        [Key]
+        [Column(Order = 1)]
+        public int Codigo { get; set; }
+        [Key]
+        [Column(Order = 2)]
+        public short Ano { get; set; }
+        [Key]
+        [Column(Order = 3)]
+        public short Lancamento { get; set; }
+        [Key]
+        [Column(Order = 4)]
+        public short Sequencia { get; set; }
+        [Key]
+        [Column(Order = 5)]
+        public byte Parcela { get; set; }
+        [Key]
+        [Column(Order = 6)]
+        public byte Complemento { get; set; }
+        [Key]
+        [Column(Order = 7)]
+        public byte Sequencia_Pagamento { get; set; }
+        public DateTime Data_Pagamento { get; set; }
+        public DateTime Data_Recebimento { get; set; }
+        public decimal Valor_Pago { get; set; }
+        public short? Banco_Codigo { get; set; }
+        public string Banco_Nome { get; set; }
+        public int? Codigo_Agencia { get; set; }
+        public DateTime? Restituido { get; set; }
+        public int? Numero_Documento { get; set; }
+        public decimal? Valor_Pago_Real { get; set; }
+    }
+
 }

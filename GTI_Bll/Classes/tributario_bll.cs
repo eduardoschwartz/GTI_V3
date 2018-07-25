@@ -731,8 +731,15 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
-      
-
+        /// <summary>
+        /// Retorna dados do pagamento através do nº do documento 
+        /// </summary>
+        /// <param name="nNumDocumento"></param>
+        /// <returns></returns>
+        public DebitoPagoStruct Retorna_DebitoPago_Documento(int nNumDocumento) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Retorna_DebitoPago_Documento(nNumDocumento);
+        }
 
 
     }//end class

@@ -1331,6 +1331,38 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public DebitoPagoStruct Retorna_DebitoPago_Documento(int nNumDocumento) {
+            DebitoPagoStruct ret = null;
+            using (var db = new GTI_Context(_connection)) {
+                var reg = (from m in db.Debitopago
+                           join b in db.Banco on m.Codbanco equals b.Codbanco into bm from b in bm.DefaultIfEmpty()
+                           where m.Numdocumento == nNumDocumento select new DebitoPagoStruct { Ano = m.Anoexercicio,Banco_Codigo=m.Codbanco,Banco_Nome=b.Nomebanco,
+                           Codigo=m.Codreduzido,Codigo_Agencia=m.Codagencia,Complemento=m.Codcomplemento,Data_Pagamento=m.Datapagamento,Data_Recebimento=m.Datarecebimento,
+                           Lancamento=m.Codlancamento,Parcela=m.Numparcela,Restituido=m.Restituido,Sequencia=m.Seqlancamento,Sequencia_Pagamento=m.Seqpag,Valor_Pago=m.Valorpago,Valor_Pago_Real=m.Valorpagoreal});
+
+                foreach (DebitoPagoStruct item in reg) {
+                    ret = new DebitoPagoStruct();
+                    ret.Ano = item.Ano;
+                    ret.Banco_Codigo = item.Banco_Codigo;
+                    ret.Banco_Nome = item.Banco_Nome;
+                    ret.Codigo_Agencia = item.Codigo_Agencia;
+                    ret.Complemento = item.Complemento;
+                    ret.Data_Pagamento = item.Data_Pagamento;
+                    ret.Data_Recebimento = item.Data_Recebimento;
+                    ret.Lancamento = item.Lancamento;
+                    ret.Numero_Documento = item.Numero_Documento;
+                    ret.Parcela = item.Parcela;
+                    ret.Restituido = item.Restituido;
+                    ret.Sequencia = item.Sequencia;
+                    ret.Sequencia_Pagamento = item.Sequencia_Pagamento;
+                    ret.Valor_Pago = item.Valor_Pago;
+                    ret.Valor_Pago_Real = item.Valor_Pago_Real;
+                }           
+
+                return ret;
+            }
+        }
+
 
     }//end class
 }
