@@ -25,7 +25,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void TabImovel_DrawItem(object sender, DrawItemEventArgs e) {
-            TabPage page = tabImovel.TabPages[e.Index];
+            TabPage page = ImovelTab.TabPages[e.Index];
             e.Graphics.FillRectangle(new SolidBrush(page.BackColor), e.Bounds);
 
             Rectangle paddedBounds = e.Bounds;
@@ -35,145 +35,145 @@ namespace GTI_Desktop.Forms {
         }
 
         private void ClearFields() {
-            lblInscricao.Text = "";
-            lblSomaArea.Text = "0,00";
-            txtMatricula.Text = "";
-            txtNomeCond.Text = "";
-            optMT1.Checked = true;
-            optMT2.Checked = false;
-            optEnd1.Checked = false;
-            optEnd2.Checked = false;
-            optEnd3.Checked = false;
-            lvProp.Items.Clear();
-            lvTestada.Items.Clear();
-            lvArea.Items.Clear();
-            txtNumero.Text = "";
-            txtComplemento.Text = "";
-            lblDistrito.Text = "0";
-            lblSetor.Text = "00";
-            txtQuadra.Text = "0000";
-            txtLote.Text = "00000";
-            txtFace.Text = "00";
-            txtUnidade.Text = "00";
-            txtSubUnidade.Text = "000";
-            txtLogradouro.Text = "";
-            txtQuadras.Text = "";
-            txtLotes.Text = "";
-            lblAtivo.Text = "";
-            chkReside.Checked = false;
-            chkImune.Checked = false;
-            chkCIP.Checked = false;
-            cmbBenfeitoria.SelectedIndex = -1;
-            cmbCategoria.SelectedIndex = -1;
-            cmbPedologia.SelectedIndex = -1;
-            cmbSituacao.SelectedIndex = -1;
-            cmbTopografia.SelectedIndex = -1;
-            cmbUso.SelectedIndex = -1;
-            cmbTipo.SelectedIndex = -1;
-            cmbUsoC.SelectedIndex = -1;
-            cmbCategoriaC.SelectedIndex = -1;
+            Inscricao.Text = "";
+            SomaArea.Text = "0,00";
+            Matricula.Text = "";
+            Condominio.Text = "";
+            MT1Check.Checked = true;
+            MT2Check.Checked = false;
+            End1Option.Checked = true;
+            End2Option.Checked = false;
+            End3Option.Checked = false;
+            ProprietarioListView.Items.Clear();
+            TestadaListView.Items.Clear();
+            AreaListView.Items.Clear();
+            Numero.Text = "";
+            Complemento.Text = "";
+            Distrito.Text = "0";
+            Setor.Text = "00";
+            Quadra.Text = "0000";
+            Lote.Text = "00000";
+            Face.Text = "00";
+            Unidade.Text = "00";
+            SubUnidade.Text = "000";
+            Logradouro.Text = "";
+            Quadras.Text = "";
+            Lotes.Text = "";
+            Ativo.Text = "";
+            ResideCheck.Checked = false;
+            ImuneCheck.Checked = false;
+            IsentoCIPCheck.Checked = false;
+            BenfeitoriaList.SelectedIndex = -1;
+            CategoriaTerrenoList.SelectedIndex = -1;
+            PedologiaList.SelectedIndex = -1;
+            SituacaoList.SelectedIndex = -1;
+            TopografiaList.SelectedIndex = -1;
+            UsoTerrenoList.SelectedIndex = -1;
+            TipoConstrucaoList.SelectedIndex = -1;
+            UsoConstrucaoList.SelectedIndex = -1;
+            CategoriaConstrucaoList.SelectedIndex = -1;
         }
 
         private void ControlBehaviour(bool bStart) {
             Color cor_enabled = Color.White,cor_disabled = SystemColors.ButtonFace ;
 
-            btAdd.Enabled = bStart;
-            btEdit.Enabled = bStart;
-            btInativar.Enabled = bStart;
-            btSair.Enabled = bStart;
-            btPrint.Enabled = bStart;
-            btFind.Enabled = bStart;
-            btGravar.Enabled = !bStart;
-            btCancelar.Enabled = !bStart;
-            btCod.Enabled = bStart;
-            mnuAddP.Enabled = !bStart;
-            mnuDelP.Enabled = !bStart;
-            mnuViewP.Enabled = !bStart;
-            mnuMainP.Enabled = !bStart;
-            mnuAdicionarA.Enabled = !bStart;
-            mnuRemoverA.Enabled = !bStart;
-            mnuViewHistorico.Enabled = !bStart;
-            chkReside.AutoCheck = !bStart;
-            chkImune.AutoCheck = !bStart;
-            chkCIP.AutoCheck = !bStart;
-            optMT1.AutoCheck = !bStart;
-            optMT2.AutoCheck= !bStart;
-            btLocalImovel.Enabled = !bStart;
-            txtQuadras.ReadOnly = bStart;
-            txtQuadras.BackColor = bStart ? cor_disabled : cor_enabled;
-            txtLotes.ReadOnly = bStart;
-            txtLotes.BackColor = bStart ? cor_disabled : cor_enabled;
-            txtMatricula.ReadOnly = bStart;
-            txtMatricula.BackColor = bStart ? cor_disabled : cor_enabled;
-            pnlArea.Visible = false;
-            optEnd1.AutoCheck = !bStart;
-            optEnd2.AutoCheck = !bStart;
-            optEnd3.AutoCheck = !bStart;
-            btEndEntrega.Enabled = !bStart;
-            btAddTestada.Enabled = !bStart;
-            btDelTestada.Enabled = !bStart;
-            txtTestada_Face.ReadOnly = bStart;
-            txtTestada_Face.BackColor = bStart ? cor_disabled : cor_enabled;
-            txtTestada_Metro.ReadOnly = bStart;
-            txtTestada_Metro.BackColor = bStart ? cor_disabled : cor_enabled;
-            txtAreaTerreno.ReadOnly = bStart;
-            txtAreaTerreno.BackColor = bStart ? cor_disabled : cor_enabled;
-            txtFracao.ReadOnly = bStart;
-            txtFracao.BackColor = bStart ? cor_disabled : cor_enabled;
+            NovoButton.Enabled = bStart;
+            AlterarButton.Enabled = bStart;
+            InativarButton.Enabled = bStart;
+            SairButton.Enabled = bStart;
+            ImprimirButton.Enabled = bStart;
+            LocalizarButton.Enabled = bStart;
+            GravarButton.Enabled = !bStart;
+            CancelarButton.Enabled = !bStart;
+            CodigoButton.Enabled = bStart;
+            AdicionarProprietarioMenu.Enabled = !bStart;
+            RemoverProprietarioMenu.Enabled = !bStart;
+            ConsultarProprietarioMenu.Enabled = !bStart;
+            PrincipalProprietarioMenu.Enabled = !bStart;
+            AdicionarAreaMenu.Enabled = !bStart;
+            RemoverAreaMenu.Enabled = !bStart;
+            VisualizarHistoricoMenu.Enabled = !bStart;
+            ResideCheck.AutoCheck = !bStart;
+            ImuneCheck.AutoCheck = !bStart;
+            IsentoCIPCheck.AutoCheck = !bStart;
+            MT1Check.AutoCheck = !bStart;
+            MT2Check.AutoCheck= !bStart;
+            LocalImovelButton.Enabled = !bStart;
+            Quadras.ReadOnly = bStart;
+            Quadras.BackColor = bStart ? cor_disabled : cor_enabled;
+            Lotes.ReadOnly = bStart;
+            Lotes.BackColor = bStart ? cor_disabled : cor_enabled;
+            Matricula.ReadOnly = bStart;
+            Matricula.BackColor = bStart ? cor_disabled : cor_enabled;
+            AreaPnl.Visible = false;
+            End1Option.AutoCheck = !bStart;
+            End2Option.AutoCheck = !bStart;
+            End3Option.AutoCheck = !bStart;
+            EndEntregaButton.Enabled = !bStart;
+            AddTestada.Enabled = !bStart;
+            DelTestada.Enabled = !bStart;
+            Testada_Face.ReadOnly = bStart;
+            Testada_Face.BackColor = bStart ? cor_disabled : cor_enabled;
+            Testada_Metro.ReadOnly = bStart;
+            Testada_Metro.BackColor = bStart ? cor_disabled : cor_enabled;
+            AreaTerreno.ReadOnly = bStart;
+            AreaTerreno.BackColor = bStart ? cor_disabled : cor_enabled;
+            FracaoIdeal.ReadOnly = bStart;
+            FracaoIdeal.BackColor = bStart ? cor_disabled : cor_enabled;
 
-            cmbBenfeitoria.Visible = !bStart;
-            cmbCategoria.Visible = !bStart;
-            cmbPedologia.Visible = !bStart;
-            cmbSituacao.Visible = !bStart;
-            cmbTopografia.Visible = !bStart;
-            cmbUso.Visible = !bStart;
-            lblBenfeitoria.Visible = bStart;
-            lblCategoria.Visible = bStart;
-            lblPedologia.Visible = bStart;
-            lblSituacao.Visible = bStart;
-            lblTopografia.Visible = bStart;
-            lblUsoTerreno.Visible = bStart;
+            BenfeitoriaList.Visible = !bStart;
+            CategoriaTerrenoList.Visible = !bStart;
+            PedologiaList.Visible = !bStart;
+            SituacaoList.Visible = !bStart;
+            TopografiaList.Visible = !bStart;
+            UsoTerrenoList.Visible = !bStart;
+            Benfeitoria.Visible = bStart;
+            Categoria.Visible = bStart;
+            Pedologia.Visible = bStart;
+            Situacao.Visible = bStart;
+            Topografia.Visible = bStart;
+            UsoTerreno.Visible = bStart;
 
 
         }
 
         private void Carrega_Lista() {
             Imovel_bll clsImovel = new Imovel_bll(_connection);
-            cmbCategoria.DataSource = clsImovel.Lista_Categoria_Propriedade();
-            cmbCategoria.DisplayMember = "Desccategprop";
-            cmbCategoria.ValueMember = "Codcategprop";
+            CategoriaTerrenoList.DataSource = clsImovel.Lista_Categoria_Propriedade();
+            CategoriaTerrenoList.DisplayMember = "Desccategprop";
+            CategoriaTerrenoList.ValueMember = "Codcategprop";
 
-            cmbTopografia.DataSource = clsImovel.Lista_Topografia();
-            cmbTopografia.DisplayMember = "Desctopografia";
-            cmbTopografia.ValueMember = "Codtopografia";
+            TopografiaList.DataSource = clsImovel.Lista_Topografia();
+            TopografiaList.DisplayMember = "Desctopografia";
+            TopografiaList.ValueMember = "Codtopografia";
 
-            cmbSituacao.DataSource = clsImovel.Lista_Situacao();
-            cmbSituacao.DisplayMember = "Descsituacao";
-            cmbSituacao.ValueMember = "Codsituacao";
+            SituacaoList.DataSource = clsImovel.Lista_Situacao();
+            SituacaoList.DisplayMember = "Descsituacao";
+            SituacaoList.ValueMember = "Codsituacao";
 
-            cmbBenfeitoria.DataSource = clsImovel.Lista_Benfeitoria();
-            cmbBenfeitoria.DisplayMember = "Descbenfeitoria";
-            cmbBenfeitoria.ValueMember = "Codbenfeitoria";
+            BenfeitoriaList.DataSource = clsImovel.Lista_Benfeitoria();
+            BenfeitoriaList.DisplayMember = "Descbenfeitoria";
+            BenfeitoriaList.ValueMember = "Codbenfeitoria";
 
-            cmbPedologia.DataSource = clsImovel.Lista_Pedologia();
-            cmbPedologia.DisplayMember = "Descpedologia";
-            cmbPedologia.ValueMember = "Codpedologia";
+            PedologiaList.DataSource = clsImovel.Lista_Pedologia();
+            PedologiaList.DisplayMember = "Descpedologia";
+            PedologiaList.ValueMember = "Codpedologia";
 
-            cmbUso.DataSource = clsImovel.Lista_uso_terreno();
-            cmbUso.DisplayMember = "Descusoterreno";
-            cmbUso.ValueMember = "Codusoterreno";
+            UsoTerrenoList.DataSource = clsImovel.Lista_uso_terreno();
+            UsoTerrenoList.DisplayMember = "Descusoterreno";
+            UsoTerrenoList.ValueMember = "Codusoterreno";
 
-            cmbUsoC.DataSource = clsImovel.Lista_Uso_Construcao();
-            cmbUsoC.DisplayMember = "Descusoconstr";
-            cmbUsoC.ValueMember = "Codusoconstr";
+            UsoConstrucaoList.DataSource = clsImovel.Lista_Uso_Construcao();
+            UsoConstrucaoList.DisplayMember = "Descusoconstr";
+            UsoConstrucaoList.ValueMember = "Codusoconstr";
 
-            cmbCategoriaC.DataSource = clsImovel.Lista_Categoria_Construcao();
-            cmbCategoriaC.DisplayMember = "Desccategconstr";
-            cmbCategoriaC.ValueMember = "Codcategconstr";
+            CategoriaConstrucaoList.DataSource = clsImovel.Lista_Categoria_Construcao();
+            CategoriaConstrucaoList.DisplayMember = "Desccategconstr";
+            CategoriaConstrucaoList.ValueMember = "Codcategconstr";
 
-            cmbTipo.DataSource = clsImovel.Lista_Tipo_Construcao();
-            cmbTipo.DisplayMember = "Desctipoconstr";
-            cmbTipo.ValueMember = "Codtipoconstr";
+            TipoConstrucaoList.DataSource = clsImovel.Lista_Tipo_Construcao();
+            TipoConstrucaoList.DisplayMember = "Desctipoconstr";
+            TipoConstrucaoList.ValueMember = "Codtipoconstr";
 
         }
 
@@ -185,14 +185,23 @@ namespace GTI_Desktop.Forms {
         private void BtAdd_Click(object sender, EventArgs e) {
             bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroImovel_Novo);
             if (bAllow) {
-
-                Imovel_Novo _imovel_Novo = new Imovel_Novo();
-                _imovel_Novo.ShowDialog();
-
-                //TODO: Tela de novo imóvel
-                bAddNew = true;
-                ClearFields();
-                ControlBehaviour(false);
+                //using (var form = new Imovel_Novo()) {
+                //    var result = form.ShowDialog(this);
+                //    if (result == DialogResult.OK) {
+                //        ClearFields();
+                //        Inscricao.Text = form.ReturnInscricao;
+                //        Distrito.Text = Inscricao.Text.Substring(0, 1);
+                //        Setor.Text = Inscricao.Text.Substring(2, 2);
+                //        Quadra.Text = Inscricao.Text.Substring(5, 4);
+                //        Lote.Text = Inscricao.Text.Substring(10, 5);
+                //        Face.Text = Inscricao.Text.Substring(16, 2);
+                //        Unidade.Text = Inscricao.Text.Substring(19, 2);
+                //        SubUnidade.Text = Inscricao.Text.Substring(22, 3);
+                //        Condominio.Text = form.ReturnCondominio;
+                        bAddNew = true;
+                        ControlBehaviour(false);
+                //    }
+                //}
             } else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -201,11 +210,11 @@ namespace GTI_Desktop.Forms {
             bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroImovel_Alterar_Total);
             if (bAllow) {
                 bAddNew = false;
-                if (String.IsNullOrEmpty(lblInscricao.Text))
+                if (String.IsNullOrEmpty(Inscricao.Text))
                     MessageBox.Show("Nenhum imóvel carregado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else {
                     ControlBehaviour(false);
-                    btCod.Focus();
+                    CodigoButton.Focus();
                 }
             } else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -241,7 +250,7 @@ namespace GTI_Desktop.Forms {
                 Imovel_bll clsImovel = new Imovel_bll(_connection);
                 if (clsImovel.Existe_Imovel(Convert.ToInt32(sCod))) {
                     int Codigo = Convert.ToInt32(sCod);
-                    lblCod.Text = Codigo.ToString("000000");
+                    this.Codigo.Text = Codigo.ToString("000000");
                     ClearFields();
                     CarregaImovel(Codigo);
                     CarregaCondominio();
@@ -257,12 +266,12 @@ namespace GTI_Desktop.Forms {
         }
 
         private void LvProp_ItemMouseHover(object sender, ListViewItemMouseHoverEventArgs e) {
-            if (lvProp.SelectedIndices.Count > 0)
-                lvProp.Items[lvProp.SelectedIndices[0]].ToolTipText = lvProp.Items[lvProp.SelectedIndices[0]].Tag.ToString();
+            if (ProprietarioListView.SelectedIndices.Count > 0)
+                ProprietarioListView.Items[ProprietarioListView.SelectedIndices[0]].ToolTipText = ProprietarioListView.Items[ProprietarioListView.SelectedIndices[0]].Tag.ToString();
         }
 
         private void LvProp_MouseHover(object sender, EventArgs e) {
-            lvProp.Focus();
+            ProprietarioListView.Focus();
         }
 
         private bool ValidateReg() {
@@ -284,7 +293,7 @@ namespace GTI_Desktop.Forms {
                         MessageBox.Show("Código não cadastrado!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     else {
                         bool bFind = false;
-                        foreach (ListViewItem item in lvProp.Items) {
+                        foreach (ListViewItem item in ProprietarioListView.Items) {
                             if (item.Tag.ToString() == sCod) {
                                 bFind = true;
                                 break;
@@ -293,21 +302,21 @@ namespace GTI_Desktop.Forms {
                         if (bFind)
                             MessageBox.Show("Código já cadastrado no imóvel.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         else {
-                            if (lvProp.Groups["groupPP"].Items.Count > 0)
-                                nContaP = lvProp.Groups["groupPP"].Items.Count;
+                            if (ProprietarioListView.Groups["groupPP"].Items.Count > 0)
+                                nContaP = ProprietarioListView.Groups["groupPP"].Items.Count;
                             else
                                 nContaP = 0;
 
                             string sNome = clsCidadao.Retorna_Nome_Cidadao(nCod);
                             ListViewItem lvItem = new ListViewItem {
-                                Group = lvProp.Groups["groupPP"]
+                                Group = ProprietarioListView.Groups["groupPP"]
                             };
                             if (nContaP == 0)
                                 lvItem.Text = sNome + " (Principal)";
                             else
                                 lvItem.Text = sNome;
                             lvItem.Tag = sCod;
-                            lvProp.Items.Add(lvItem);
+                            ProprietarioListView.Items.Add(lvItem);
                         }
                     }
                 }
@@ -327,7 +336,7 @@ namespace GTI_Desktop.Forms {
                         MessageBox.Show("Código não cadastrado!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     else {
                         bool bFind = false;
-                        foreach (ListViewItem item in lvProp.Items) {
+                        foreach (ListViewItem item in ProprietarioListView.Items) {
                             if (item.Tag.ToString() == sCod) {
                                 bFind = true;
                                 break;
@@ -338,11 +347,11 @@ namespace GTI_Desktop.Forms {
                         else {
                             string sNome = clsCidadao.Retorna_Nome_Cidadao(nCod);
                             ListViewItem lvItem = new ListViewItem {
-                                Group = lvProp.Groups["groupPS"],
+                                Group = ProprietarioListView.Groups["groupPS"],
                                 Text = sNome,
                                 Tag = sCod
                             };
-                            lvProp.Items.Add(lvItem);
+                            ProprietarioListView.Items.Add(lvItem);
                         }
                     }
                 }
@@ -350,19 +359,19 @@ namespace GTI_Desktop.Forms {
         }
 
         private void MnuRemover_Click(object sender, EventArgs e) {
-            if(lvProp.SelectedItems.Count==0)
+            if(ProprietarioListView.SelectedItems.Count==0)
                 MessageBox.Show("Selecione o cidadão a ser removido.","Atenção",MessageBoxButtons.OK,MessageBoxIcon.Error);
             else {
                 if (MessageBox.Show("Remover este cidadão?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) 
-                    lvProp.SelectedItems[0].Remove();
+                    ProprietarioListView.SelectedItems[0].Remove();
             }
         }
 
         private void MnuConsultar_Click(object sender, EventArgs e) {
-            if (lvProp.SelectedItems.Count == 0)
+            if (ProprietarioListView.SelectedItems.Count == 0)
                 MessageBox.Show("Selecione o cidadão que deseja consultar.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
-                int nCod = Convert.ToInt32(lvProp.SelectedItems[0].Tag.ToString());
+                int nCod = Convert.ToInt32(ProprietarioListView.SelectedItems[0].Tag.ToString());
                 Cidadao f1 = (Cidadao)Application.OpenForms["Cidadao"];
                 if (f1 != null) 
                     f1.Close();
@@ -377,25 +386,25 @@ namespace GTI_Desktop.Forms {
         private void MnuPrincipal_Click(object sender, EventArgs e) {
             int nContaP = 0;
 
-            if (lvProp.SelectedItems.Count == 0)
+            if (ProprietarioListView.SelectedItems.Count == 0)
                 MessageBox.Show("Selecione o cidadão a ser promovido.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
-                if (lvProp.SelectedItems[0].Group.Name == "groupPS")
+                if (ProprietarioListView.SelectedItems[0].Group.Name == "groupPS")
                     MessageBox.Show("Proprietário solidário não pode ser o proprietário principal do imóvel. É necessário remover ele do grupo solidário e adicioná-lo ao grupo proprietário.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else {
                     //verifica se o grupo principal esta criado
-                    if (lvProp.Groups["groupPP"].Items.Count > 0)
-                        nContaP = lvProp.Groups["groupPP"].Items.Count;
+                    if (ProprietarioListView.Groups["groupPP"].Items.Count > 0)
+                        nContaP = ProprietarioListView.Groups["groupPP"].Items.Count;
                     //porque se existir remove o atributo do proprietário principal
                     if (nContaP > 0) {
-                        foreach (ListViewItem item in lvProp.Groups["groupPP"].Items) {
+                        foreach (ListViewItem item in ProprietarioListView.Groups["groupPP"].Items) {
                             if (item.Text.Contains("(Principal)")) {
                                 item.Text = item.Text.Substring(0, item.Text.IndexOf("("));
                                 break;
                             }
                         }
                     }
-                    lvProp.SelectedItems[0].Text = lvProp.SelectedItems[0].Text + " (Principal)";
+                    ProprietarioListView.SelectedItems[0].Text = ProprietarioListView.SelectedItems[0].Text + " (Principal)";
                 }
             }
         }
@@ -405,61 +414,61 @@ namespace GTI_Desktop.Forms {
                 Id_pais = 1,
                 Sigla_uf = "SP",
                 Id_cidade = 413,
-                Id_bairro = string.IsNullOrWhiteSpace(txtBairro.Text) ? 0 : Convert.ToInt32(txtBairro.Tag.ToString())
+                Id_bairro = string.IsNullOrWhiteSpace(Bairro.Text) ? 0 : Convert.ToInt32(Bairro.Tag.ToString())
             };
-            if (txtLogradouro.Tag == null) txtLogradouro.Tag = "0";
-            if (string.IsNullOrWhiteSpace(txtLogradouro.Tag.ToString()))
-                txtLogradouro.Tag = "0";
-            reg.Id_logradouro = string.IsNullOrWhiteSpace(txtLogradouro.Text) ? 0 : Convert.ToInt32(txtLogradouro.Tag.ToString());
-            reg.Nome_logradouro = reg.Id_cidade != 413 ? txtLogradouro.Text : "";
-            reg.Numero_imovel = txtNumero.Text == "" ? 0 : Convert.ToInt32(txtNumero.Text);
-            reg.Complemento = txtComplemento.Text;
+            if (Logradouro.Tag == null) Logradouro.Tag = "0";
+            if (string.IsNullOrWhiteSpace(Logradouro.Tag.ToString()))
+                Logradouro.Tag = "0";
+            reg.Id_logradouro = string.IsNullOrWhiteSpace(Logradouro.Text) ? 0 : Convert.ToInt32(Logradouro.Tag.ToString());
+            reg.Nome_logradouro = reg.Id_cidade != 413 ? Logradouro.Text : "";
+            reg.Numero_imovel = Numero.Text == "" ? 0 : Convert.ToInt32(Numero.Text);
+            reg.Complemento = Complemento.Text;
             reg.Email ="";
             
 
             Forms.Endereco f1 = new Forms.Endereco(reg,true,true );
             f1.ShowDialog();
             if (!f1.EndRetorno.Cancelar) {
-                txtBairro.Text = f1.EndRetorno.Nome_bairro;
-                txtBairro.Tag = f1.EndRetorno.Id_bairro.ToString();
-                txtLogradouro.Text = f1.EndRetorno.Nome_logradouro;
-                txtLogradouro.Tag = f1.EndRetorno.Id_logradouro.ToString();
-                txtNumero.Text = f1.EndRetorno.Numero_imovel.ToString();
-                txtComplemento.Text = f1.EndRetorno.Complemento;
-                txtCep.Text = f1.EndRetorno.Cep.ToString("00000-000");
+                Bairro.Text = f1.EndRetorno.Nome_bairro;
+                Bairro.Tag = f1.EndRetorno.Id_bairro.ToString();
+                Logradouro.Text = f1.EndRetorno.Nome_logradouro;
+                Logradouro.Tag = f1.EndRetorno.Id_logradouro.ToString();
+                Numero.Text = f1.EndRetorno.Numero_imovel.ToString();
+                Complemento.Text = f1.EndRetorno.Complemento;
+                Cep.Text = f1.EndRetorno.Cep.ToString("00000-000");
             }
         }
 
         private void BtEndEntrega_Click(object sender, EventArgs e) {
             GTI_Models.Models.Endereco reg = new GTI_Models.Models.Endereco {
                 Id_pais = 1,
-                Sigla_uf = txtUF_EE.Text == "" ? "SP" : txtUF_EE.Text,
-                Id_cidade = string.IsNullOrWhiteSpace(txtCidade_EE.Text) ? 413 : Convert.ToInt32(txtCidade_EE.Tag.ToString()),
-                Id_bairro = string.IsNullOrWhiteSpace(txtBairro_EE.Text) ? 0 : Convert.ToInt32(txtBairro_EE.Tag.ToString())
+                Sigla_uf = UF_EE.Text == "" ? "SP" : UF_EE.Text,
+                Id_cidade = string.IsNullOrWhiteSpace(Cidade_EE.Text) ? 413 : Convert.ToInt32(Cidade_EE.Tag.ToString()),
+                Id_bairro = string.IsNullOrWhiteSpace(Bairro_EE.Text) ? 0 : Convert.ToInt32(Bairro_EE.Tag.ToString())
             };
-            if (txtLogradouro_EE.Tag == null) txtLogradouro_EE.Tag = "0";
-            if (string.IsNullOrWhiteSpace(txtLogradouro_EE.Tag.ToString()))
-                txtLogradouro_EE.Tag = "0";
-            reg.Id_logradouro = string.IsNullOrWhiteSpace(txtLogradouro_EE.Text) ? 0 : Convert.ToInt32(txtLogradouro_EE.Tag.ToString());
-            reg.Nome_logradouro = reg.Id_cidade != 413 ? txtLogradouro_EE.Text : "";
-            reg.Numero_imovel = txtNumero_EE.Text == "" ? 0 : Convert.ToInt32(txtNumero_EE.Text);
-            reg.Complemento = txtComplemento_EE.Text;
+            if (Logradouro_EE.Tag == null) Logradouro_EE.Tag = "0";
+            if (string.IsNullOrWhiteSpace(Logradouro_EE.Tag.ToString()))
+                Logradouro_EE.Tag = "0";
+            reg.Id_logradouro = string.IsNullOrWhiteSpace(Logradouro_EE.Text) ? 0 : Convert.ToInt32(Logradouro_EE.Tag.ToString());
+            reg.Nome_logradouro = reg.Id_cidade != 413 ? Logradouro_EE.Text : "";
+            reg.Numero_imovel = Numero_EE.Text == "" ? 0 : Convert.ToInt32(Numero_EE.Text);
+            reg.Complemento = Complemento_EE.Text;
             reg.Email = "";
 
 
             Endereco f1 = new Endereco(reg, false, true);
             f1.ShowDialog();
             if (!f1.EndRetorno.Cancelar) {
-                txtUF_EE.Text = f1.EndRetorno.Sigla_uf;
-                txtCidade_EE.Text = f1.EndRetorno.Nome_cidade;
-                txtCidade_EE.Tag = f1.EndRetorno.Id_cidade.ToString();
-                txtBairro_EE.Text = f1.EndRetorno.Nome_bairro;
-                txtBairro_EE.Tag = f1.EndRetorno.Id_bairro.ToString();
-                txtLogradouro_EE.Text = f1.EndRetorno.Nome_logradouro;
-                txtLogradouro_EE.Tag = f1.EndRetorno.Id_logradouro.ToString();
-                txtNumero_EE.Text = f1.EndRetorno.Numero_imovel.ToString();
-                txtComplemento_EE.Text = f1.EndRetorno.Complemento;
-                txtCEP_EE.Text = f1.EndRetorno.Cep.ToString("00000-000");
+                UF_EE.Text = f1.EndRetorno.Sigla_uf;
+                Cidade_EE.Text = f1.EndRetorno.Nome_cidade;
+                Cidade_EE.Tag = f1.EndRetorno.Id_cidade.ToString();
+                Bairro_EE.Text = f1.EndRetorno.Nome_bairro;
+                Bairro_EE.Tag = f1.EndRetorno.Id_bairro.ToString();
+                Logradouro_EE.Text = f1.EndRetorno.Nome_logradouro;
+                Logradouro_EE.Tag = f1.EndRetorno.Id_logradouro.ToString();
+                Numero_EE.Text = f1.EndRetorno.Numero_imovel.ToString();
+                Complemento_EE.Text = f1.EndRetorno.Complemento;
+                CEP_EE.Text = f1.EndRetorno.Cep.ToString("00000-000");
             }
         }
 
@@ -480,15 +489,15 @@ namespace GTI_Desktop.Forms {
         }
 
         private void BtAddTestada_Click(object sender, EventArgs e) {
-            if(txtTestada_Face.Text.Trim()=="")
+            if(Testada_Face.Text.Trim()=="")
                 MessageBox.Show("Digite o nº da face.","Atenção",MessageBoxButtons.OK,MessageBoxIcon.Error);
             else {
-                if(gtiCore.ExtractNumber( txtTestada_Metro.Text.Trim())=="")
+                if(gtiCore.ExtractNumber( Testada_Metro.Text.Trim())=="")
                     MessageBox.Show("Digite o comprimento da testada.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else {
                     bool bFind = false;
-                    foreach (ListViewItem item in lvTestada.Items) {
-                        if (Convert.ToInt32(item.Text) == Convert.ToInt32(txtTestada_Face.Text)) {
+                    foreach (ListViewItem item in TestadaListView.Items) {
+                        if (Convert.ToInt32(item.Text) == Convert.ToInt32(Testada_Face.Text)) {
                             bFind = true;
                             break;
                         }
@@ -496,38 +505,39 @@ namespace GTI_Desktop.Forms {
                     if (bFind)
                         MessageBox.Show("Face já cadastrada.", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     else {
-                        ListViewItem reg = new ListViewItem(Convert.ToInt32(txtTestada_Face.Text).ToString("00"));
-                        reg.SubItems.Add( string.Format("{0:0.00}", Convert.ToDecimal(txtTestada_Metro.Text)));
-                        lvTestada.Items.Add(reg);
+                        ListViewItem reg = new ListViewItem(Convert.ToInt32(Testada_Face.Text).ToString("00"));
+                        reg.SubItems.Add( string.Format("{0:0.00}", Convert.ToDecimal(Testada_Metro.Text)));
+                        TestadaListView.Items.Add(reg);
                     }
                 }
             }
         }
 
         private void BtDelTestada_Click(object sender, EventArgs e) {
-            if (lvTestada.SelectedItems.Count == 0)
+            if (TestadaListView.SelectedItems.Count == 0)
                 MessageBox.Show("Selecione a testada a ser removida.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
-                lvTestada.SelectedItems[0].Remove();
+                TestadaListView.SelectedItems[0].Remove();
         }
 
         private void MnuAddArea_Click(object sender, EventArgs e) {
+
         }
 
         private void BtCancelPnlArea_Click(object sender, EventArgs e) {
-            pnlArea.Visible = false;
-            pnlTop.Enabled = true;
-            tabImovel.Enabled = true;
-            tBar.Enabled = true;
+            AreaPnl.Visible = false;
+            TopPanel.Enabled = true;
+            ImovelTab.Enabled = true;
+            BarToolStrip.Enabled = true;
         }
 
         private void MnuAdicionarA_Click(object sender, EventArgs e) {
-            tabImovel.Enabled = false;
-            tBar.Enabled = false;
-            pnlTop.Enabled = false;
-            pnlArea.Visible = true;
-            pnlArea.BringToFront();
-            txtAreaConstruida.Focus();
+            ImovelTab.Enabled = false;
+            BarToolStrip.Enabled = false;
+            TopPanel.Enabled = false;
+            AreaPnl.Visible = true;
+            AreaPnl.BringToFront();
+            AreaConstruida.Focus();
         }
 
         private void TxtNumProcesso_KeyPress(object sender, KeyPressEventArgs e) {
@@ -535,10 +545,10 @@ namespace GTI_Desktop.Forms {
                 const char Delete = (char)8;
                 const char Minus = (char)45;
                 const char Barra = (char)47;
-                if (e.KeyChar == Minus && txtNumProcesso.Text.Contains("-"))
+                if (e.KeyChar == Minus && ProcessoArea.Text.Contains("-"))
                     e.Handled = true;
                 else {
-                    if (e.KeyChar == Barra && txtNumProcesso.Text.Contains("/"))
+                    if (e.KeyChar == Barra && ProcessoArea.Text.Contains("/"))
                         e.Handled = true;
                     else
                         e.Handled = !Char.IsDigit(e.KeyChar) && e.KeyChar != Delete && e.KeyChar != Barra && e.KeyChar != Minus;
@@ -608,23 +618,85 @@ namespace GTI_Desktop.Forms {
         }
 
         private void BtOkPnlArea_Click(object sender, EventArgs e) {
-            //TODO: Incluir área
-            //TODO: Validar dados da área
+            decimal area = 0;
+            int Pavimento = 0;
+
+            try {
+                area = decimal.Parse(AreaConstruida.Text);
+            } catch {
+                MessageBox.Show("Digite o valor da área.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (area == 0) {
+                MessageBox.Show("Digite o valor da área.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!gtiCore.IsEmptyDate(DataAprovacao.Text)  && !gtiCore.IsDate(DataAprovacao.Text) ) {
+                MessageBox.Show("Data de aprovação inválida.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if(!string.IsNullOrWhiteSpace(ProcessoArea.Text)) {
+                Processo_bll processo_Class = new Processo_bll(_connection);
+                Exception ex = processo_Class.ValidaProcesso(ProcessoArea.Text);
+                if (ex != null) {
+                    ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                    eBox.ShowDialog();
+                    return;
+                }
+                int Numero = processo_Class.NumProcessoNoDV(ProcessoArea.Text);
+                int Ano = processo_Class.ExtractAnoProcesso(ProcessoArea.Text);
+                bool Existe = processo_Class.Existe_Processo(Ano, Numero);
+                if (!Existe) {
+                    MessageBox.Show("Número de processo inválido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            try {
+                Pavimento = int.Parse(QtdePavimentos.Text);
+            } catch {
+                QtdePavimentos.Text = "1";
+            }
+
+            ListViewItem lvItem = new ListViewItem("00");
+            lvItem.SubItems.Add(string.Format("{0:0.00}", area));
+            lvItem.SubItems.Add(UsoConstrucaoList.Text);
+            lvItem.SubItems.Add(TipoConstrucaoList.Text);
+            lvItem.SubItems.Add(CategoriaConstrucaoList.Text);
+            lvItem.SubItems.Add(QtdePavimentos.Text);
+            AreaListView.Items.Add(lvItem);
+            Renumera_Sequencia_Area();
+
+            AreaPnl.Visible = false;
+            TopPanel.Enabled = true;
+            ImovelTab.Enabled = true;
+            BarToolStrip.Enabled = true;
         }
-       
+
+
+        private void Renumera_Sequencia_Area() {
+            int n = 1;
+            foreach (ListViewItem item in AreaListView.Items) {
+                item.Text = n.ToString("00");
+                n++;
+            }
+        }
+
+
         private void MnuHistorico_Click(object sender, EventArgs e) {
             //TODO: Histórico do imóvel
         }
 
         private void CarregaImovel(int Codigo) {
-            if (String.IsNullOrEmpty(lblCod.Text)) return;
+            if (string.IsNullOrEmpty(this.Codigo.Text)) return;
             
             Imovel_bll clsImovel = new Imovel_bll(_connection);
             ImovelStruct regImovel = clsImovel.Dados_Imovel(Codigo);
             if (regImovel.Codigo == 0)
                 MessageBox.Show("Imóvel não cadastrado", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
-                lblCod.Text = Codigo.ToString("000000");
+                this.Codigo.Text = Codigo.ToString("000000");
                 StringBuilder sInscricao = new StringBuilder();
                 sInscricao.Append(regImovel.Distrito.ToString() + ".");
                 sInscricao.Append(regImovel.Setor.ToString("00") + ".");
@@ -633,52 +705,52 @@ namespace GTI_Desktop.Forms {
                 sInscricao.Append(regImovel.Seq.ToString("00") + ".");
                 sInscricao.Append(regImovel.Unidade.ToString("00") + ".");
                 sInscricao.Append(regImovel.SubUnidade.ToString("000"));
-                lblInscricao.Text = sInscricao.ToString();
-                txtNomeCond.Text = "[" + regImovel.NomeCondominio.ToString() + "]";
-                chkImune.Checked = Convert.ToBoolean(regImovel.Imunidade);
-                chkReside.Checked = Convert.ToBoolean(regImovel.ResideImovel);
+                Inscricao.Text = sInscricao.ToString();
+                Condominio.Text = "[" + regImovel.NomeCondominio.ToString() + "]";
+                ImuneCheck.Checked = Convert.ToBoolean(regImovel.Imunidade);
+                ResideCheck.Checked = Convert.ToBoolean(regImovel.ResideImovel);
                 if (Convert.ToBoolean(regImovel.Inativo)) {
-                    lblAtivo.Text = "INATIVO";
-                    lblAtivo.ForeColor = Color.Red;
+                    Ativo.Text = "INATIVO";
+                    Ativo.ForeColor = Color.Red;
                 } else {
-                    lblAtivo.Text = "ATIVO";
-                    lblAtivo.ForeColor = Color.Green;
+                    Ativo.Text = "ATIVO";
+                    Ativo.ForeColor = Color.Green;
                 }
 
-                optMT1.Checked = regImovel.TipoMat == "M" ? true : false;
-                optMT2.Checked = regImovel.TipoMat == "T" ? true : false;
-                txtMatricula.Text = regImovel.NumMatricula.ToString();
-                lblDistrito.Text = regImovel.Distrito.ToString();
-                lblSetor.Text = regImovel.Setor.ToString("00");
-                txtFace.Text = regImovel.Seq.ToString("00");
-                txtQuadra.Text = regImovel.Quadra.ToString("0000");
-                txtLote.Text = regImovel.Lote.ToString("00000");
-                txtFace.Text = regImovel.Seq.ToString("00");
-                txtUnidade.Text = regImovel.Unidade.ToString("00");
-                txtSubUnidade.Text = regImovel.SubUnidade.ToString("000");
-                txtComplemento.Text = regImovel.Complemento.ToString();
-                txtNumero.Text = regImovel.Numero.ToString();
-                txtLogradouro.Text = regImovel.NomeLogradouro.ToString();
-                txtLogradouro.Tag = regImovel.CodigoLogradouro.ToString();
-                txtBairro.Text = regImovel.NomeBairro.ToString();
-                txtBairro.Tag = regImovel.CodigoBairro.ToString();
-                txtQuadras.Text = regImovel.QuadraOriginal.ToString();
-                txtLotes.Text = regImovel.LoteOriginal.ToString();
-                txtCep.Text =  Convert.ToInt32(regImovel.Cep.ToString()).ToString("00000-000");
-                txtFracao.Text = string.Format("{0:0.00}", regImovel.FracaoIdeal);
-                txtAreaTerreno.Text = string.Format("{0:0.00}", regImovel.Area_Terreno);
-                cmbBenfeitoria.SelectedValue = regImovel.Benfeitoria == 0 ? -1 : regImovel.Benfeitoria;
-                cmbCategoria.SelectedValue = regImovel.Categoria == 0 ? -1 : regImovel.Categoria;
-                cmbPedologia.SelectedValue = regImovel.Pedologia == 0 ? -1 : regImovel.Pedologia;
-                cmbSituacao.SelectedValue = regImovel.Situacao == 0 ? -1 : regImovel.Situacao;
-                cmbTopografia.SelectedValue = regImovel.Topografia == 0 ? -1 : regImovel.Topografia;
-                cmbUso.SelectedValue = regImovel.Uso_terreno == 0 ? -1 : regImovel.Uso_terreno;
-                lblBenfeitoria.Text = regImovel.Benfeitoria_Nome;
-                lblCategoria.Text = regImovel.Categoria_Nome;
-                lblPedologia.Text = regImovel.Pedologia_Nome;
-                lblSituacao.Text = regImovel.Situacao_Nome;
-                lblTopografia.Text = regImovel.Topografia_Nome;
-                lblUsoTerreno.Text = regImovel.Uso_terreno_Nome;
+                MT1Check.Checked = regImovel.TipoMat == "M" ? true : false;
+                MT2Check.Checked = regImovel.TipoMat == "T" ? true : false;
+                Matricula.Text = regImovel.NumMatricula.ToString();
+                Distrito.Text = regImovel.Distrito.ToString();
+                Setor.Text = regImovel.Setor.ToString("00");
+                Face.Text = regImovel.Seq.ToString("00");
+                Quadra.Text = regImovel.Quadra.ToString("0000");
+                Lote.Text = regImovel.Lote.ToString("00000");
+                Face.Text = regImovel.Seq.ToString("00");
+                Unidade.Text = regImovel.Unidade.ToString("00");
+                SubUnidade.Text = regImovel.SubUnidade.ToString("000");
+                Complemento.Text = regImovel.Complemento.ToString();
+                Numero.Text = regImovel.Numero.ToString();
+                Logradouro.Text = regImovel.NomeLogradouro.ToString();
+                Logradouro.Tag = regImovel.CodigoLogradouro.ToString();
+                Bairro.Text = regImovel.NomeBairro.ToString();
+                Bairro.Tag = regImovel.CodigoBairro.ToString();
+                Quadras.Text = regImovel.QuadraOriginal.ToString();
+                Lotes.Text = regImovel.LoteOriginal.ToString();
+                Cep.Text =  Convert.ToInt32(regImovel.Cep.ToString()).ToString("00000-000");
+                FracaoIdeal.Text = string.Format("{0:0.00}", regImovel.FracaoIdeal);
+                AreaTerreno.Text = string.Format("{0:0.00}", regImovel.Area_Terreno);
+                BenfeitoriaList.SelectedValue = regImovel.Benfeitoria == 0 ? -1 : regImovel.Benfeitoria;
+                CategoriaTerrenoList.SelectedValue = regImovel.Categoria == 0 ? -1 : regImovel.Categoria;
+                PedologiaList.SelectedValue = regImovel.Pedologia == 0 ? -1 : regImovel.Pedologia;
+                SituacaoList.SelectedValue = regImovel.Situacao == 0 ? -1 : regImovel.Situacao;
+                TopografiaList.SelectedValue = regImovel.Topografia == 0 ? -1 : regImovel.Topografia;
+                UsoTerrenoList.SelectedValue = regImovel.Uso_terreno == 0 ? -1 : regImovel.Uso_terreno;
+                Benfeitoria.Text = regImovel.Benfeitoria_Nome;
+                Categoria.Text = regImovel.Categoria_Nome;
+                Pedologia.Text = regImovel.Pedologia_Nome;
+                Situacao.Text = regImovel.Situacao_Nome;
+                Topografia.Text = regImovel.Topografia_Nome;
+                UsoTerreno.Text = regImovel.Uso_terreno_Nome;
 
 
                 //Carrega proprietário
@@ -686,15 +758,15 @@ namespace GTI_Desktop.Forms {
                 foreach (ProprietarioStruct reg in Lista) {
                     ListViewItem lvItem = new ListViewItem();
                     if (reg.Tipo == "P")
-                        lvItem.Group = lvProp.Groups["groupPP"];
+                        lvItem.Group = ProprietarioListView.Groups["groupPP"];
                     else
-                        lvItem.Group = lvProp.Groups["groupPS"];
+                        lvItem.Group = ProprietarioListView.Groups["groupPS"];
                     if (reg.Principal == true)
                         lvItem.Text = reg.Nome + " (Principal)";
                     else
                         lvItem.Text = reg.Nome;
                     lvItem.Tag = reg.Codigo.ToString();
-                    lvProp.Items.Add(lvItem);
+                    ProprietarioListView.Items.Add(lvItem);
                 }
 
                 //Carrega testada
@@ -702,31 +774,31 @@ namespace GTI_Desktop.Forms {
                 foreach (GTI_Models.Models.Testada reg in ListaT) {
                     ListViewItem lvItem = new ListViewItem(reg.Numface.ToString("00"));
                     lvItem.SubItems.Add(string.Format("{0:0.00}", (decimal)reg.Areatestada));
-                    lvTestada.Items.Add(lvItem);
+                    TestadaListView.Items.Add(lvItem);
                 }
 
                 //Carrega Endereço de Entrega
-                optEnd1.Checked = false;optEnd2.Checked = false;optEnd3.Checked = false;
+                End1Option.Checked = false;End2Option.Checked = false;End3Option.Checked = false;
                 if (regImovel.EE_TipoEndereco == 0)
-                    optEnd1.Checked = true;
+                    End1Option.Checked = true;
                 else if (regImovel.EE_TipoEndereco == 1)
-                    optEnd2.Checked = true;
+                    End2Option.Checked = true;
                 else
-                    optEnd3.Checked = true;
+                    End3Option.Checked = true;
 
                 bllCore.TipoEndereco Tipoend = regImovel.EE_TipoEndereco == 0 ? bllCore.TipoEndereco.Local : regImovel.EE_TipoEndereco == 1 ? bllCore.TipoEndereco.Proprietario : bllCore.TipoEndereco.Entrega;
                 EnderecoStruct regEntrega = clsImovel.Dados_Endereco(Codigo, Tipoend);
                 if (regEntrega != null) {
-                    txtLogradouro_EE.Text = regEntrega.Endereco.ToString();
-                    txtLogradouro_EE.Tag = regEntrega.CodLogradouro.ToString();
-                    txtNumero_EE.Text = regEntrega.Numero.ToString();
-                    txtComplemento_EE.Text = regEntrega.Complemento.ToString();
-                    txtUF_EE.Text = regEntrega.UF.ToString();
-                    txtCidade_EE.Text = regEntrega.NomeCidade.ToString();
-                    txtCidade_EE.Tag = regEntrega.CodigoCidade.ToString();
-                    txtBairro_EE.Text = regEntrega.NomeBairro.ToString();
-                    txtBairro_EE.Tag = regEntrega.CodigoBairro.ToString();
-                    txtCEP_EE.Text = regEntrega.Cep==null?"00000-000":  Convert.ToInt32(regEntrega.Cep.ToString()).ToString("00000-000");
+                    Logradouro_EE.Text = regEntrega.Endereco.ToString();
+                    Logradouro_EE.Tag = regEntrega.CodLogradouro.ToString();
+                    Numero_EE.Text = regEntrega.Numero.ToString();
+                    Complemento_EE.Text = regEntrega.Complemento.ToString();
+                    UF_EE.Text = regEntrega.UF.ToString();
+                    Cidade_EE.Text = regEntrega.NomeCidade.ToString();
+                    Cidade_EE.Tag = regEntrega.CodigoCidade.ToString();
+                    Bairro_EE.Text = regEntrega.NomeBairro.ToString();
+                    Bairro_EE.Tag = regEntrega.CodigoBairro.ToString();
+                    CEP_EE.Text = regEntrega.Cep==null?"00000-000":  Convert.ToInt32(regEntrega.Cep.ToString()).ToString("00000-000");
                 }
 
                 //Carrega Área
@@ -741,19 +813,19 @@ namespace GTI_Desktop.Forms {
                     lvItem.SubItems.Add(reg.Categoria_Nome);
                     lvItem.SubItems.Add(reg.Pavimentos.ToString());
                     lvItem.Tag = reg.Seq.ToString();
-                    lvArea.Items.Add(lvItem);
+                    AreaListView.Items.Add(lvItem);
                     SomaArea += (decimal)reg.Area;
                     n++;
                 }
-                lblSomaArea.Text = string.Format("{0:0.00}", SomaArea);
+                this.SomaArea.Text = string.Format("{0:0.00}", SomaArea);
                 //TODO: Ler CIP, Imunidade 
                 //TODO: Carregar valor do IPTU
             }
         }
 
         private void CarregaCondominio() {
-            if (String.IsNullOrEmpty(lblCod.Text)) return;
-            int nCodigo = Convert.ToInt32(lblCod.Text);
+            if (String.IsNullOrEmpty(Codigo.Text)) return;
+            int nCodigo = Convert.ToInt32(Codigo.Text);
             Imovel_bll clsImovel = new Imovel_bll(_connection);
             CondominioStruct regImovel = clsImovel.Dados_Condominio(62);
             List<AreaStruct> ListaArea = clsImovel.Lista_Area_Condominio(62);
@@ -765,7 +837,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void btDel_Click(object sender, EventArgs e) {
-            int Codigo = Convert.ToInt32(lblCod.Text);
+            int Codigo = Convert.ToInt32(this.Codigo.Text);
             if (Codigo == 0)
                 MessageBox.Show("Selecione um imóvel.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
@@ -773,7 +845,7 @@ namespace GTI_Desktop.Forms {
                 if (!bAllow)
                     MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else {
-                    if (lblAtivo.Text == "INATIVO")
+                    if (Ativo.Text == "INATIVO")
                         MessageBox.Show("Este imóvel já esta inativo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     else {
                         if (MessageBox.Show("Inativar este imóvel?","Confirmação",MessageBoxButtons.YesNo,MessageBoxIcon.Question)==DialogResult.Yes) {
@@ -783,8 +855,8 @@ namespace GTI_Desktop.Forms {
                                 ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
                                 eBox.ShowDialog();
                             } else {
-                                lblAtivo.Text = "INATIVO";
-                                lblAtivo.ForeColor = Color.Red;
+                                Ativo.Text = "INATIVO";
+                                Ativo.ForeColor = Color.Red;
                             }
                         }
                     }
@@ -795,7 +867,7 @@ namespace GTI_Desktop.Forms {
         private void mnuAddHistorico_Click(object sender, EventArgs e) {
             bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroImovel_Alterar_Historico);
             if (bAllow) {
-                if (String.IsNullOrEmpty(lblInscricao.Text))
+                if (String.IsNullOrEmpty(Inscricao.Text))
                     MessageBox.Show("Nenhum imóvel carregado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else {
 
@@ -807,7 +879,7 @@ namespace GTI_Desktop.Forms {
         private void mnuRemoverHistorico_Click(object sender, EventArgs e) {
             bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroImovel_Alterar_Historico);
             if (bAllow) {
-                if (String.IsNullOrEmpty(lblInscricao.Text))
+                if (String.IsNullOrEmpty(Inscricao.Text))
                     MessageBox.Show("Nenhum imóvel carregado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else {
                     if (HistoricoListView.Items.Count==0 && HistoricoListView.SelectedItems.Count>0)
