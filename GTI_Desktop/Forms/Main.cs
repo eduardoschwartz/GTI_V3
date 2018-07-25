@@ -148,7 +148,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void MnuCidadao_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCidadao);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroCidadao);
             if (bAllow) {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Cidadao);
                 if (formToShow != null) {
@@ -253,7 +253,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void MnuControleProcesso_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroProcesso);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroProcesso);
             if (bAllow) {
 
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Processo);
@@ -271,7 +271,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void MnuCadImob_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroImovel);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroImovel);
             if (bAllow) {
                 gtiCore.Ocupado(this);
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Imovel);
@@ -366,7 +366,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void MnuExtrato_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.ExtratoContribuinte);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.ExtratoContribuinte);
             if (bAllow) {
                 gtiCore.Ocupado(this);
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Extrato);
@@ -478,7 +478,7 @@ namespace GTI_Desktop.Forms {
 
         private void mnuCadastroCondominio_Click(object sender, EventArgs e) {
 
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCondominio);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroCondominio);
             if (bAllow) {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Condominio);
                 if (formToShow != null) {
@@ -510,7 +510,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void mnuCadastroBairro_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroBairro);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroBairro);
             if (bAllow) {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Bairro);
                 if (formToShow != null) {
@@ -527,7 +527,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void mnuCadastroPais_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroPais);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroPais);
             if (bAllow) {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Pais);
                 if (formToShow != null) {
@@ -544,7 +544,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void mnuCadastroProfissao_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroProfissao);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroProfissao);
             if (bAllow) {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Profissao);
                 if (formToShow != null) {

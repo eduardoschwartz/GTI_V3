@@ -24,8 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("Proprietários", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("Proprietário Solidário", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Proprietários", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Proprietário Solidário", System.Windows.Forms.HorizontalAlignment.Left);
             this.MT2Check = new System.Windows.Forms.RadioButton();
             this.End3Option = new System.Windows.Forms.RadioButton();
             this.End2Option = new System.Windows.Forms.RadioButton();
@@ -696,13 +696,13 @@
             this.ProprietarioListView.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.ProprietarioListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
-            listViewGroup5.Header = "Proprietários";
-            listViewGroup5.Name = "groupPP";
-            listViewGroup6.Header = "Proprietário Solidário";
-            listViewGroup6.Name = "groupPS";
+            listViewGroup1.Header = "Proprietários";
+            listViewGroup1.Name = "groupPP";
+            listViewGroup2.Header = "Proprietário Solidário";
+            listViewGroup2.Name = "groupPS";
             this.ProprietarioListView.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup5,
-            listViewGroup6});
+            listViewGroup1,
+            listViewGroup2});
             this.ProprietarioListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.ProprietarioListView.HideSelection = false;
             this.ProprietarioListView.HoverSelection = true;
@@ -879,21 +879,23 @@
             // AdicionarAreaMenu
             // 
             this.AdicionarAreaMenu.Name = "AdicionarAreaMenu";
-            this.AdicionarAreaMenu.Size = new System.Drawing.Size(180, 22);
+            this.AdicionarAreaMenu.Size = new System.Drawing.Size(125, 22);
             this.AdicionarAreaMenu.Text = "Adicionar";
             this.AdicionarAreaMenu.Click += new System.EventHandler(this.MnuAdicionarA_Click);
             // 
             // AlterarAreaMenu
             // 
             this.AlterarAreaMenu.Name = "AlterarAreaMenu";
-            this.AlterarAreaMenu.Size = new System.Drawing.Size(180, 22);
+            this.AlterarAreaMenu.Size = new System.Drawing.Size(125, 22);
             this.AlterarAreaMenu.Text = "Alterar";
+            this.AlterarAreaMenu.Click += new System.EventHandler(this.AlterarAreaMenu_Click);
             // 
             // RemoverAreaMenu
             // 
             this.RemoverAreaMenu.Name = "RemoverAreaMenu";
-            this.RemoverAreaMenu.Size = new System.Drawing.Size(180, 22);
+            this.RemoverAreaMenu.Size = new System.Drawing.Size(125, 22);
             this.RemoverAreaMenu.Text = "Remover";
+            this.RemoverAreaMenu.Click += new System.EventHandler(this.RemoverAreaMenu_Click);
             // 
             // SomaArea
             // 
@@ -1439,21 +1441,21 @@
             // AdicionarHistoricoMenu
             // 
             this.AdicionarHistoricoMenu.Name = "AdicionarHistoricoMenu";
-            this.AdicionarHistoricoMenu.Size = new System.Drawing.Size(180, 22);
+            this.AdicionarHistoricoMenu.Size = new System.Drawing.Size(125, 22);
             this.AdicionarHistoricoMenu.Text = "Adicionar";
             this.AdicionarHistoricoMenu.Click += new System.EventHandler(this.mnuAddHistorico_Click);
             // 
             // RemoverHistoricoMenu
             // 
             this.RemoverHistoricoMenu.Name = "RemoverHistoricoMenu";
-            this.RemoverHistoricoMenu.Size = new System.Drawing.Size(180, 22);
+            this.RemoverHistoricoMenu.Size = new System.Drawing.Size(125, 22);
             this.RemoverHistoricoMenu.Text = "Remover";
             this.RemoverHistoricoMenu.Click += new System.EventHandler(this.mnuRemoverHistorico_Click);
             // 
             // VisualizarHistoricoMenu
             // 
             this.VisualizarHistoricoMenu.Name = "VisualizarHistoricoMenu";
-            this.VisualizarHistoricoMenu.Size = new System.Drawing.Size(180, 22);
+            this.VisualizarHistoricoMenu.Size = new System.Drawing.Size(125, 22);
             this.VisualizarHistoricoMenu.Text = "Visualizar";
             // 
             // HistoricoListView
@@ -2367,10 +2369,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(762, 377);
-            this.Controls.Add(this.AreaPnl);
             this.Controls.Add(this.TopPanel);
             this.Controls.Add(this.ImovelTab);
             this.Controls.Add(this.BarToolStrip);
+            this.Controls.Add(this.AreaPnl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Imovel";

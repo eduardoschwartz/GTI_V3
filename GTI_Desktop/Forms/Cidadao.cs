@@ -170,7 +170,7 @@ namespace GTI_Desktop.Forms {
 
         private void BtAdd_Click(object sender, EventArgs e) {
 
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCidadao_Alterar_Total);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroCidadao_Alterar_Total);
             if (bAllow) {
                 bAddNew = true;
                 Clear_Reg();
@@ -182,7 +182,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void BtEdit_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCidadao_Alterar_Total);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroCidadao_Alterar_Total);
             if (bAllow) {
                 if (Convert.ToInt32(lblCod.Text) == 0)
                     MessageBox.Show("Selecione um cidadão.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -467,7 +467,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void BtDel_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCidadao_Alterar_Total);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroCidadao_Alterar_Total);
             if (bAllow) {
                 int nCodigo = Convert.ToInt32(lblCod.Text);
                 if (nCodigo == 0)

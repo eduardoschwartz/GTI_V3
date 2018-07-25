@@ -71,7 +71,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void AddButton_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCondominio_Alterar);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroCondominio_Alterar);
             if (bAllow)
                 ControlBehaviour(false);
             else
@@ -79,7 +79,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void EditButton_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCondominio_Alterar);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroCondominio_Alterar);
             if (bAllow)
                 ControlBehaviour(false);
             else
@@ -307,7 +307,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void AdicionarMenuItem_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCondominio_Alterar);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroCondominio_Alterar);
             if (bAllow) {
                 AreaPanel.Enabled = false;
                 AreaEditPanel.Visible = true;
@@ -318,7 +318,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void RemoverMenuItem_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCondominio_Alterar);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroCondominio_Alterar);
             if (bAllow) {
             } else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -336,7 +336,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void AlterarMenuItem_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCondominio_Alterar);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroCondominio_Alterar);
             if (bAllow) {
                 AreaPanel.Enabled = false;
                 AreaEditPanel.Visible = true;
@@ -345,7 +345,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void DelButton_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroCondominio_Alterar);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroCondominio_Alterar);
             if (bAllow)
                 //TODO Excluir condominio
                 bAllow = true;//apagar linha

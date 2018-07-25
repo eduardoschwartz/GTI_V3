@@ -34,7 +34,7 @@ namespace GTI_Desktop.Forms {
         private void BtAdd_Click(object sender, EventArgs e) {
             inputBox iBox = new inputBox();
 
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroPais_Alterar);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroPais_Alterar);
             if (!bAllow) {
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -57,7 +57,7 @@ namespace GTI_Desktop.Forms {
 
         private void BtEdit_Click(object sender, EventArgs e) {
             if (lstMain.SelectedItem == null) return;
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroPais_Alterar);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroPais_Alterar);
             if (!bAllow) {
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -83,7 +83,7 @@ namespace GTI_Desktop.Forms {
 
         private void BtDel_Click(object sender, EventArgs e) {
             if (lstMain.SelectedItem == null) return;
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroPais_Alterar);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroPais_Alterar);
             if (!bAllow) {
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

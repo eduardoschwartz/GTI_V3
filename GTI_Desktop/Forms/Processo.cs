@@ -157,7 +157,7 @@ namespace GTI_Desktop.Forms {
                 if (!gtiCore.IsEmptyDate(ArquivaLabel.Text) || !gtiCore.IsEmptyDate(CancelaLabel.Text) || !gtiCore.IsEmptyDate(SuspensaoLabel.Text))
                    bStart = true;
 
-                bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroProcesso_Alterar_Avancado);
+                bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroProcesso_Alterar_Avancado);
                 if (bAllow) {
                     Fisicocheckbox.Enabled = !bStart;
                     Internocheckbox.Enabled = !bStart;
@@ -181,7 +181,7 @@ namespace GTI_Desktop.Forms {
                     CCustoCombo.Visible = !bStart;
                     DocListView.Enabled = !bStart;
                 } else {
-                    bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroProcesso_Alterar_Basico);
+                    bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroProcesso_Alterar_Basico);
                     if (bAllow) {
                         ObsText.ReadOnly = bStart;
                         InscricaoText.ReadOnly = bStart;
@@ -277,7 +277,7 @@ namespace GTI_Desktop.Forms {
 
         private void BtAdd_Click(object sender, EventArgs e)
         {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroProcesso_Novo);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroProcesso_Novo);
             if (bAllow) {
                 bAddNew = true;
                 ClearFields();
@@ -289,8 +289,8 @@ namespace GTI_Desktop.Forms {
 
         private void BtEdit_Click(object sender, EventArgs e)
         {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroProcesso_Alterar_Avancado);
-            bool bAllow2 = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroProcesso_Alterar_Basico);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroProcesso_Alterar_Avancado);
+            bool bAllow2 = gtiCore.GetBinaryAccess((int)TAcesso.CadastroProcesso_Alterar_Basico);
             if (bAllow || bAllow2) {
                 bAddNew = false;
                 if (String.IsNullOrEmpty(AssuntoText.Text))
@@ -314,7 +314,7 @@ namespace GTI_Desktop.Forms {
 
         private void BtTramitar_Click(object sender, EventArgs e)
         {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroProcesso_Tramitar);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroProcesso_Tramitar);
             if (bAllow) {
                 if (String.IsNullOrEmpty(AssuntoText.Text)) {
                     MessageBox.Show("Nenhum processo carregado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);

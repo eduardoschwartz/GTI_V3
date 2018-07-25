@@ -74,8 +74,8 @@ namespace GTI_Desktop.Forms {
         private void BtAdd_Click(object sender, EventArgs e) {
             inputBox iBox = new inputBox();
 
-            bool bAllowLocal = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroBairro_Alterar_Local);
-            bool bAllowFora = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroBairro_Alterar_Fora);
+            bool bAllowLocal = gtiCore.GetBinaryAccess((int)TAcesso.CadastroBairro_Alterar_Local);
+            bool bAllowFora = gtiCore.GetBinaryAccess((int)TAcesso.CadastroBairro_Alterar_Fora);
 
             if (!bAllowLocal && !bAllowFora) {
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -106,8 +106,8 @@ namespace GTI_Desktop.Forms {
 
         private void BtEdit_Click(object sender, EventArgs e) {
             if (BairroListBox.SelectedItem == null) return;
-            bool bAllowLocal = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroBairro_Alterar_Local);
-            bool bAllowFora = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroBairro_Alterar_Fora);
+            bool bAllowLocal = gtiCore.GetBinaryAccess((int)TAcesso.CadastroBairro_Alterar_Local);
+            bool bAllowFora = gtiCore.GetBinaryAccess((int)TAcesso.CadastroBairro_Alterar_Fora);
 
             if (!bAllowLocal && !bAllowFora) {
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -141,8 +141,8 @@ namespace GTI_Desktop.Forms {
         private void BtDel_Click(object sender, EventArgs e) {
             if (BairroListBox.SelectedItem == null) return;
 
-            bool bAllowLocal = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroBairro_Alterar_Local);
-            bool bAllowFora = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroBairro_Alterar_Fora);
+            bool bAllowLocal = gtiCore.GetBinaryAccess((int)TAcesso.CadastroBairro_Alterar_Local);
+            bool bAllowFora = gtiCore.GetBinaryAccess((int)TAcesso.CadastroBairro_Alterar_Fora);
 
             if (!bAllowLocal && !bAllowFora) {
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);

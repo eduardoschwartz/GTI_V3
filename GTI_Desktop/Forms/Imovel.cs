@@ -183,7 +183,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void BtAdd_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroImovel_Novo);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroImovel_Novo);
             if (bAllow) {
                 //using (var form = new Imovel_Novo()) {
                 //    var result = form.ShowDialog(this);
@@ -207,7 +207,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void BtEdit_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroImovel_Alterar_Total);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroImovel_Alterar_Total);
             if (bAllow) {
                 bAddNew = false;
                 if (String.IsNullOrEmpty(Inscricao.Text))
@@ -665,6 +665,9 @@ namespace GTI_Desktop.Forms {
             lvItem.SubItems.Add(TipoConstrucaoList.Text);
             lvItem.SubItems.Add(CategoriaConstrucaoList.Text);
             lvItem.SubItems.Add(QtdePavimentos.Text);
+            lvItem.SubItems[2].Tag = UsoConstrucaoList.SelectedValue.ToString();
+            lvItem.SubItems[3].Tag = TipoConstrucaoList.SelectedValue.ToString();
+            lvItem.SubItems[4].Tag = CategoriaConstrucaoList.SelectedValue.ToString();
             AreaListView.Items.Add(lvItem);
             Renumera_Sequencia_Area();
 
@@ -813,6 +816,9 @@ namespace GTI_Desktop.Forms {
                     lvItem.SubItems.Add(reg.Categoria_Nome);
                     lvItem.SubItems.Add(reg.Pavimentos.ToString());
                     lvItem.Tag = reg.Seq.ToString();
+                    lvItem.SubItems[2].Tag = reg.Uso_Codigo.ToString();
+                    lvItem.SubItems[3].Tag = reg.Tipo_Codigo.ToString();
+                    lvItem.SubItems[4].Tag = reg.Categoria_Codigo.ToString();
                     AreaListView.Items.Add(lvItem);
                     SomaArea += (decimal)reg.Area;
                     n++;
@@ -841,7 +847,7 @@ namespace GTI_Desktop.Forms {
             if (Codigo == 0)
                 MessageBox.Show("Selecione um imóvel.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
-                bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroImovel_Inativar);
+                bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroImovel_Inativar);
                 if (!bAllow)
                     MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else {
@@ -865,7 +871,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void mnuAddHistorico_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroImovel_Alterar_Historico);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroImovel_Alterar_Historico);
             if (bAllow) {
                 if (String.IsNullOrEmpty(Inscricao.Text))
                     MessageBox.Show("Nenhum imóvel carregado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -877,7 +883,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void mnuRemoverHistorico_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)modelCore.TAcesso.CadastroImovel_Alterar_Historico);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroImovel_Alterar_Historico);
             if (bAllow) {
                 if (String.IsNullOrEmpty(Inscricao.Text))
                     MessageBox.Show("Nenhum imóvel carregado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -891,5 +897,36 @@ namespace GTI_Desktop.Forms {
             } else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+        private void RemoverAreaMenu_Click(object sender, EventArgs e) {
+            if (AreaListView.Items.Count == 0 || AreaListView.SelectedItems.Count == 0)
+                MessageBox.Show("Selecione uma área.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else {
+                if (MessageBox.Show("Remover esta área?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+                    AreaListView.SelectedItems[0].Remove();
+                    Renumera_Sequencia_Area();
+                }
+            }
+        }
+
+        private void AlterarAreaMenu_Click(object sender, EventArgs e) {
+            if (AreaListView.Items.Count == 0 || AreaListView.SelectedItems.Count == 0)
+                MessageBox.Show("Selecione uma área.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else {
+                ImovelTab.Enabled = false;
+                BarToolStrip.Enabled = false;
+                TopPanel.Enabled = false;
+                AreaPnl.Visible = true;
+                AreaPnl.BringToFront();
+                ListViewItem item = AreaListView.SelectedItems[0];
+                AreaConstruida.Text = item.SubItems[1].Text;
+                UsoConstrucaoList.SelectedValue = Convert.ToInt16(item.SubItems[2].Tag.ToString());
+                TipoConstrucaoList.SelectedValue = Convert.ToInt16(item.SubItems[3].Tag.ToString());
+                CategoriaConstrucaoList.SelectedValue = Convert.ToInt16(item.SubItems[4].Tag.ToString());
+
+                AreaConstruida.Focus();
+            }
+        }
+
     }
 }
