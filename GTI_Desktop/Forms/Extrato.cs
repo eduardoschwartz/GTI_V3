@@ -275,15 +275,16 @@ namespace GTI_Desktop.Forms {
                 }
 
             }
-            if (ExtratoDataGrid.DisplayedRowCount(true) == 0)
+            if (ExtratoDataGrid.DisplayedRowCount(true) == 0) {
                 MessageBox.Show("Não existem registros a serem exibidos.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-            int FirstLine = GetFirstVisibleRow();
-            if (ExtratoDataGrid.Rows.Count > 0 && FirstLine > -1) ExtratoDataGrid.FirstDisplayedScrollingRowIndex = FirstLine;
-            Atualiza_Total();
-            ExtratoDataGrid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
-
-            gtiCore.Liberado(this);
+                gtiCore.Liberado(this);
+            } else {
+                int FirstLine = GetFirstVisibleRow();
+                if (ExtratoDataGrid.Rows.Count > 0 && FirstLine > -1) ExtratoDataGrid.FirstDisplayedScrollingRowIndex = FirstLine;
+                Atualiza_Total();
+                ExtratoDataGrid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+                gtiCore.Liberado(this);
+            }
         }
 
         private void Ajustar_Cores(int Index) {

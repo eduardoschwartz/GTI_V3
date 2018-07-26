@@ -26,6 +26,8 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Proprietários", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Proprietário Solidário", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.MT2Check = new System.Windows.Forms.RadioButton();
             this.End3Option = new System.Windows.Forms.RadioButton();
             this.End2Option = new System.Windows.Forms.RadioButton();
@@ -206,6 +208,8 @@
             this.label46 = new System.Windows.Forms.Label();
             this.AreaConstruida = new System.Windows.Forms.TextBox();
             this.label43 = new System.Windows.Forms.Label();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.IptuChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.a1Panel1.SuspendLayout();
             this.EnderecoEntregaTab.SuspendLayout();
             this.a1Panel3.SuspendLayout();
@@ -225,6 +229,8 @@
             this.ImovelTab.SuspendLayout();
             this.BarToolStrip.SuspendLayout();
             this.AreaPnl.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IptuChart)).BeginInit();
             this.SuspendLayout();
             // 
             // MT2Check
@@ -1333,7 +1339,7 @@
             // 
             this.ValorIPTU.AutoSize = true;
             this.ValorIPTU.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ValorIPTU.Location = new System.Drawing.Point(82, 109);
+            this.ValorIPTU.Location = new System.Drawing.Point(154, 53);
             this.ValorIPTU.Name = "ValorIPTU";
             this.ValorIPTU.Size = new System.Drawing.Size(45, 13);
             this.ValorIPTU.TabIndex = 176;
@@ -1343,7 +1349,7 @@
             // 
             this.AnoIPTUList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.AnoIPTUList.FormattingEnabled = true;
-            this.AnoIPTUList.Location = new System.Drawing.Point(12, 104);
+            this.AnoIPTUList.Location = new System.Drawing.Point(110, 76);
             this.AnoIPTUList.Name = "AnoIPTUList";
             this.AnoIPTUList.Size = new System.Drawing.Size(63, 21);
             this.AnoIPTUList.TabIndex = 175;
@@ -2077,6 +2083,7 @@
             this.ImovelTab.Controls.Add(this.EnderecoEntregaTab);
             this.ImovelTab.Controls.Add(this.DadosTerrenoTab);
             this.ImovelTab.Controls.Add(this.DadosConstrucaoTab);
+            this.ImovelTab.Controls.Add(this.tabPage1);
             this.ImovelTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.ImovelTab.Location = new System.Drawing.Point(7, 66);
             this.ImovelTab.Name = "ImovelTab";
@@ -2364,6 +2371,31 @@
             this.label43.TabIndex = 21;
             this.label43.Text = "Área em m²...:";
             // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.IptuChart);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(747, 257);
+            this.tabPage1.TabIndex = 6;
+            this.tabPage1.Text = "Dados do ITU/IPTU";
+            // 
+            // IptuChart
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.IptuChart.ChartAreas.Add(chartArea1);
+            this.IptuChart.Location = new System.Drawing.Point(6, 11);
+            this.IptuChart.Name = "IptuChart";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Name = "Series1";
+            this.IptuChart.Series.Add(series1);
+            this.IptuChart.Size = new System.Drawing.Size(733, 243);
+            this.IptuChart.TabIndex = 178;
+            this.IptuChart.Text = "chart1";
+            this.IptuChart.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IptuChart_MouseMove);
+            // 
             // Imovel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2413,6 +2445,8 @@
             this.BarToolStrip.PerformLayout();
             this.AreaPnl.ResumeLayout(false);
             this.AreaPnl.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.IptuChart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2600,5 +2634,7 @@
         private System.Windows.Forms.ToolStripMenuItem RemoverHistoricoMenu;
         private System.Windows.Forms.ToolStripMenuItem VisualizarHistoricoMenu;
         private System.Windows.Forms.ToolStripMenuItem AlterarAreaMenu;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart IptuChart;
     }
 }

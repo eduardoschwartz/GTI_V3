@@ -80,6 +80,7 @@
     <Compile Include="Models\cidade.cs" />
     <Compile Include="Models\Cnaesubclasse.cs" />
     <Compile Include="Models\comercio_eletronico.cs" />
+    <Compile Include="Models\comprovante_pagamento.cs" />
     <Compile Include="Models\condominio.cs" />
     <Compile Include="Models\condominioarea.cs" />
     <Compile Include="Models\condominiounidade.cs" />

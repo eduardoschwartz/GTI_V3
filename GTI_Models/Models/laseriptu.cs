@@ -20,7 +20,7 @@ namespace GTI_Models.Models {
         public decimal? Valortotalparc { get; set; }
         public decimal? Valortotalunica { get; set; }
         public decimal? Valortotalunica2 { get; set; }
-        public decimal Valortotalunica3 { get; set; }
+        public decimal? Valortotalunica3 { get; set; }
         public short? Qtdeparc { get; set; }
         public decimal? Txexpparc { get; set; }
         public decimal? Txexpunica { get; set; }

@@ -136,7 +136,7 @@ namespace GTI_Desktop.Forms {
                         _codigo = Convert.ToInt32(Codigo.Text);
                         _tipo_cadastro = sistema_Class.Tipo_Cadastro(_codigo);
                         int _ano = processo_Class.ExtractAnoProcesso(Processo.Text);
-                        int _numero = processo_Class.NumProcessoNoDV(Processo.Text);
+                        int _numero = processo_Class.ExtractNumeroProcessoNoDV(Processo.Text);
                         _data_processo = processo_Class.Data_Processo(_ano, _numero);
 
                         Tipo_Certidao(TipoList.SelectedIndex,_codigo);

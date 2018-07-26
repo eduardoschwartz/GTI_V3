@@ -66,7 +66,7 @@ namespace GTI_Desktop.Forms {
             ProcessoFilter Reg = new ProcessoFilter();
             if (!String.IsNullOrEmpty(NumeroProcesso.Text)) {
                 Reg.Ano = processo_Class.ExtractAnoProcesso(NumeroProcesso.Text);
-                Reg.Numero = processo_Class.NumProcessoNoDV(NumeroProcesso.Text);
+                Reg.Numero = processo_Class.ExtractNumeroProcessoNoDV(NumeroProcesso.Text);
                 Reg.SNumProcesso = NumeroProcesso.Text;
             } else {
                 Reg.Ano = 0;

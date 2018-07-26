@@ -327,7 +327,7 @@ namespace GTI_Desktop.Forms {
 
                 Processo_bll clsProcesso = new Processo_bll(_connection);
                 short nAnoProc = clsProcesso.ExtractAnoProcesso(NumProcText.Text);
-                int nNumeroProc = clsProcesso.NumProcessoNoDV(NumProcText.Text);
+                int nNumeroProc = clsProcesso.ExtractNumeroProcessoNoDV(NumProcText.Text);
                 Forms.Processo_Tramite f1 = new Processo_Tramite(nAnoProc, nNumeroProc) {
                     Tag = this.Name
                 };
@@ -387,7 +387,7 @@ namespace GTI_Desktop.Forms {
                 if (ex == null) {
                     if (MessageBox.Show("Deseja anexar o processo: " + sData + "?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
                         int nAnoAnexo = clsProcesso.ExtractAnoProcesso(sData);
-                        int nNumeroAnexo = clsProcesso.NumProcessoNoDV(sData);
+                        int nNumeroAnexo = clsProcesso.ExtractNumeroProcessoNoDV(sData);
                         ProcessoStruct reg = clsProcesso.Dados_Processo(nAnoAnexo, nNumeroAnexo);
                         string sNumProcesso = reg.SNumero;
                         foreach (ListViewItem item in MainListView.Items) {
@@ -403,7 +403,7 @@ namespace GTI_Desktop.Forms {
                         MainListView.Items.Add(lvi);
 
                         short nAnoProc = clsProcesso.ExtractAnoProcesso(NumProcText.Text);
-                        int nNumeroProc = clsProcesso.NumProcessoNoDV(NumProcText.Text);
+                        int nNumeroProc = clsProcesso.ExtractNumeroProcessoNoDV(NumProcText.Text);
 
                         GTI_Models.Models.Anexo reg_anexo = new GTI_Models.Models.Anexo {
                             Ano = nAnoProc,
@@ -444,10 +444,10 @@ namespace GTI_Desktop.Forms {
                     Processo_bll clsProcesso = new Processo_bll(_connection);
                     string sNumProcesso = MainListView.SelectedItems[0].Text;
                     short nAno = clsProcesso.ExtractAnoProcesso(sNumProcesso);
-                    int nNumero = clsProcesso.NumProcessoNoDV(sNumProcesso);
+                    int nNumero = clsProcesso.ExtractNumeroProcessoNoDV(sNumProcesso);
                     GTI_Models.Models.Anexo reganexo = new GTI_Models.Models.Anexo {
                         Ano = clsProcesso.ExtractAnoProcesso(NumProcText.Text),
-                        Numero = clsProcesso.NumProcessoNoDV(NumProcText.Text),
+                        Numero = clsProcesso.ExtractNumeroProcessoNoDV(NumProcText.Text),
                         Anoanexo = nAno,
                         Numeroanexo = nNumero
                     };
@@ -482,7 +482,7 @@ namespace GTI_Desktop.Forms {
             if (!string.IsNullOrEmpty(NumProcText.Text)) {
 
                 Processo_bll clsProcesso = new Processo_bll(_connection);
-                ProcessoCidadaoStruct row = clsProcesso.Processo_cidadao_old(clsProcesso.ExtractAnoProcesso(NumProcText.Text), clsProcesso.NumProcessoNoDV(NumProcText.Text));
+                ProcessoCidadaoStruct row = clsProcesso.Processo_cidadao_old(clsProcesso.ExtractAnoProcesso(NumProcText.Text), clsProcesso.ExtractNumeroProcessoNoDV(NumProcText.Text));
                 if (row == null) {
                     MessageBox.Show("Cidadão original não gravado para este processo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
@@ -537,7 +537,7 @@ namespace GTI_Desktop.Forms {
                             ArquivaLabel.Text = EmptyDateText;
                             Processo_bll clsProcesso = new Processo_bll(_connection);
                             short Ano_Processo = clsProcesso.ExtractAnoProcesso(NumProcText.Text);
-                            int Num_Processo = clsProcesso.NumProcessoNoDV(NumProcText.Text);
+                            int Num_Processo = clsProcesso.ExtractNumeroProcessoNoDV(NumProcText.Text);
                             string sHist = "Cancelamento do processo --> " + ObsCancela;
                             clsProcesso.Incluir_Historico_Processo(Ano_Processo, Num_Processo, sHist, gtiCore.Retorna_Last_User());
                             clsProcesso.Cancelar_Processo(Ano_Processo, Num_Processo, ObsCancela);
@@ -574,7 +574,7 @@ namespace GTI_Desktop.Forms {
                             CancelaLabel.Text = EmptyDateText;
                             Processo_bll clsProcesso = new Processo_bll(_connection);
                             short Ano_Processo = clsProcesso.ExtractAnoProcesso(NumProcText.Text);
-                            int Num_Processo = clsProcesso.NumProcessoNoDV(NumProcText.Text);
+                            int Num_Processo = clsProcesso.ExtractNumeroProcessoNoDV(NumProcText.Text);
                             string sHist = "Reativação do processo --> " + ObsReativa;
                             clsProcesso.Incluir_Historico_Processo(Ano_Processo, Num_Processo, sHist, gtiCore.Retorna_Last_User());
                             clsProcesso.Reativar_Processo(Ano_Processo, Num_Processo, ObsReativa);
@@ -614,7 +614,7 @@ namespace GTI_Desktop.Forms {
                                 CancelaLabel.Text = EmptyDateText;
                                 Processo_bll clsProcesso = new Processo_bll(_connection);
                                 short Ano_Processo = clsProcesso.ExtractAnoProcesso(NumProcText.Text);
-                                int Num_Processo = clsProcesso.NumProcessoNoDV(NumProcText.Text);
+                                int Num_Processo = clsProcesso.ExtractNumeroProcessoNoDV(NumProcText.Text);
                                 string sHist = "Suspenção do processo --> " + ObsSuspende;
                                 clsProcesso.Incluir_Historico_Processo(Ano_Processo, Num_Processo, sHist, gtiCore.Retorna_Last_User());
                                 clsProcesso.Suspender_Processo(Ano_Processo, Num_Processo, ObsReativa);
@@ -654,7 +654,7 @@ namespace GTI_Desktop.Forms {
                             CancelaLabel.Text = EmptyDateText;
                             Processo_bll clsProcesso = new Processo_bll(_connection);
                             short Ano_Processo = clsProcesso.ExtractAnoProcesso(NumProcText.Text);
-                            int Num_Processo = clsProcesso.NumProcessoNoDV(NumProcText.Text);
+                            int Num_Processo = clsProcesso.ExtractNumeroProcessoNoDV(NumProcText.Text);
                             string sHist = "Arquivação do processo --> " + ObsSuspende;
                             clsProcesso.Incluir_Historico_Processo(Ano_Processo, Num_Processo, sHist, gtiCore.Retorna_Last_User());
                             clsProcesso.Arquivar_Processo(Ano_Processo, Num_Processo, ObsReativa);
@@ -810,7 +810,7 @@ namespace GTI_Desktop.Forms {
         {
             gtiCore.Ocupado(this);
             Processo_bll clsProcesso = new Processo_bll(_connection);
-            ProcessoStruct Reg = clsProcesso.Dados_Processo(clsProcesso.ExtractAnoProcesso(NumProcText.Text), clsProcesso.NumProcessoNoDV(NumProcText.Text));
+            ProcessoStruct Reg = clsProcesso.Dados_Processo(clsProcesso.ExtractAnoProcesso(NumProcText.Text), clsProcesso.ExtractNumeroProcessoNoDV(NumProcText.Text));
             AssuntoCombo.SelectedValue = Convert.ToInt32(Reg.CodigoAssunto);
             AssuntoText.Text = AssuntoCombo.Text;
             ComplementoText.Text = Reg.Complemento;
@@ -1087,7 +1087,7 @@ namespace GTI_Desktop.Forms {
 
             Processo_bll clsProcesso = new Processo_bll(_connection);
             short Ano_Processo = clsProcesso.ExtractAnoProcesso(NumProcText.Text);
-            int Num_Processo = clsProcesso.NumProcessoNoDV(NumProcText.Text);
+            int Num_Processo = clsProcesso.ExtractNumeroProcessoNoDV(NumProcText.Text);
 
             ProcessoStruct Reg = clsProcesso.Dados_Processo(Ano_Processo, Num_Processo);
             dRow["AnoProcesso"] = Ano_Processo;
@@ -1144,7 +1144,7 @@ namespace GTI_Desktop.Forms {
 
             Processo_bll clsProcesso = new Processo_bll(_connection);
             short Ano_Processo = clsProcesso.ExtractAnoProcesso(NumProcText.Text);
-            int Num_Processo = clsProcesso.NumProcessoNoDV(NumProcText.Text);
+            int Num_Processo = clsProcesso.ExtractNumeroProcessoNoDV(NumProcText.Text);
             ProcessoStruct Reg = clsProcesso.Dados_Processo(Ano_Processo, Num_Processo);
             int nSeq = 1;
             if (Reg.ListaProcessoEndereco.Count == 0) {
@@ -1212,7 +1212,7 @@ namespace GTI_Desktop.Forms {
 
             Processo_bll clsProcesso = new Processo_bll(_connection);
             short Ano_Processo = clsProcesso.ExtractAnoProcesso(NumProcText.Text);
-            int Num_Processo = clsProcesso.NumProcessoNoDV(NumProcText.Text);
+            int Num_Processo = clsProcesso.ExtractNumeroProcessoNoDV(NumProcText.Text);
             ProcessoStruct Reg = clsProcesso.Dados_Processo(Ano_Processo, Num_Processo);
 
             Cidadao_bll clsCidadao = new Cidadao_bll(_connection);
@@ -1262,7 +1262,7 @@ namespace GTI_Desktop.Forms {
 
             Processo_bll clsProcesso = new Processo_bll(_connection);
             short Ano_Processo = clsProcesso.ExtractAnoProcesso(NumProcText.Text);
-            int Num_Processo = clsProcesso.NumProcessoNoDV(NumProcText.Text);
+            int Num_Processo = clsProcesso.ExtractNumeroProcessoNoDV(NumProcText.Text);
             ProcessoStruct Reg = clsProcesso.Dados_Processo(Ano_Processo, Num_Processo);
 
             Cidadao_bll clsCidadao = new Cidadao_bll(_connection);

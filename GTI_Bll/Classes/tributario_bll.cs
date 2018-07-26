@@ -741,6 +741,16 @@ namespace GTI_Bll.Classes {
             return obj.Retorna_DebitoPago_Documento(nNumDocumento);
         }
 
+        /// <summary>
+        /// Insere dados do comprovante de pagamento
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Comprovante_Pagamento(Comprovante_pagamento Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Insert_Comprovante_Pagamento(Reg);
+        }
+
 
     }//end class
 }

@@ -5,7 +5,7 @@ namespace GTI_Models {
     /// Classe que contêm os tipos utilizados no sistema
     /// </summary>
     public class modelCore {
-        public enum TipoCertidao { Endereco, ValorVenal, Isencao, Debito }
+        public enum TipoCertidao { Endereco, ValorVenal, Isencao, Debito, Comprovante_Pagamento }
         public enum TipoCadastro { Imovel, Empresa, Cidadao }
         public enum RetornoCertidaoDebito { Negativa, Positiva, NegativaPositiva}
     }

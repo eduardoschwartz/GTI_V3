@@ -953,6 +953,10 @@ namespace GTI_Dal.Classes {
                         else {
                             if (tipo_certidao == TipoCertidao.Debito)
                                 Sql = Sql.Where(c => c.Nomeparam == "CDB");
+                            else {
+                                if (tipo_certidao == TipoCertidao.Comprovante_Pagamento)
+                                    Sql = Sql.Where(c => c.Nomeparam == "CPAGTO");
+                            }
                         }
                     }
                 }
@@ -987,10 +991,40 @@ namespace GTI_Dal.Classes {
                         else {
                             if (tipo_certidao == TipoCertidao.Debito)
                                 p = db.Parametros.First(i => i.Nomeparam == "CDB");
+                            else {
+                                if (tipo_certidao == TipoCertidao.Comprovante_Pagamento)
+                                    p = db.Parametros.First(i => i.Nomeparam == "CPAGTO");
+                            }
                         }
                     }
                 }
                 p.Valparam = Valor.ToString();
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Exception Insert_Comprovante_Pagamento(Comprovante_pagamento Reg) {
+            using (var db = new GTI_Context(_connection)) {
+                object[] Parametros = new object[10];
+                Parametros[0] = new SqlParameter { ParameterName = "@Ano", SqlDbType = SqlDbType.Int, SqlValue = Reg.Ano };
+                Parametros[1] = new SqlParameter { ParameterName = "@Numero", SqlDbType = SqlDbType.Int, SqlValue = Reg.Numero };
+                Parametros[2] = new SqlParameter { ParameterName = "@Controle", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Controle };
+                Parametros[3] = new SqlParameter { ParameterName = "@Data_emissao", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Data_emissao };
+                Parametros[4] = new SqlParameter { ParameterName = "@Banco", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Numero };
+                Parametros[5] = new SqlParameter { ParameterName = "@Nome", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Nome };
+                Parametros[6] = new SqlParameter { ParameterName = "@Data_pagamento", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Data_pagamento };
+                Parametros[7] = new SqlParameter { ParameterName = "@Valor", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Valor };
+                Parametros[8] = new SqlParameter { ParameterName = "@Documento", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Documento };
+                Parametros[9] = new SqlParameter { ParameterName = "@Cpfcnpj", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Cpfcnpj };
+
+                db.Database.ExecuteSqlCommand("INSERT INTO comprovante_pagamento(ano,numero,controle,data_emissao,banco,nome,data_pagamento,valor,documento,cpfcnpj) VALUES(@ano,@numero," +
+                                              "@controle,@data_emissao,@banco,@nome,@data_pagamento,@valor,@documento,@cpfcnpj)", Parametros);
+
                 try {
                     db.SaveChanges();
                 } catch (Exception ex) {
@@ -1341,22 +1375,24 @@ namespace GTI_Dal.Classes {
                            Lancamento=m.Codlancamento,Parcela=m.Numparcela,Restituido=m.Restituido,Sequencia=m.Seqlancamento,Sequencia_Pagamento=m.Seqpag,Valor_Pago=m.Valorpago,Valor_Pago_Real=m.Valorpagoreal});
 
                 foreach (DebitoPagoStruct item in reg) {
-                    ret = new DebitoPagoStruct();
-                    ret.Ano = item.Ano;
-                    ret.Banco_Codigo = item.Banco_Codigo;
-                    ret.Banco_Nome = item.Banco_Nome;
-                    ret.Codigo_Agencia = item.Codigo_Agencia;
-                    ret.Complemento = item.Complemento;
-                    ret.Data_Pagamento = item.Data_Pagamento;
-                    ret.Data_Recebimento = item.Data_Recebimento;
-                    ret.Lancamento = item.Lancamento;
-                    ret.Numero_Documento = item.Numero_Documento;
-                    ret.Parcela = item.Parcela;
-                    ret.Restituido = item.Restituido;
-                    ret.Sequencia = item.Sequencia;
-                    ret.Sequencia_Pagamento = item.Sequencia_Pagamento;
-                    ret.Valor_Pago = item.Valor_Pago;
-                    ret.Valor_Pago_Real = item.Valor_Pago_Real;
+                    ret = new DebitoPagoStruct {
+                        Codigo = item.Codigo,
+                        Ano = item.Ano,
+                        Banco_Codigo = item.Banco_Codigo,
+                        Banco_Nome = item.Banco_Nome,
+                        Codigo_Agencia = item.Codigo_Agencia,
+                        Complemento = item.Complemento,
+                        Data_Pagamento = item.Data_Pagamento,
+                        Data_Recebimento = item.Data_Recebimento,
+                        Lancamento = item.Lancamento,
+                        Numero_Documento = item.Numero_Documento,
+                        Parcela = item.Parcela,
+                        Restituido = item.Restituido,
+                        Sequencia = item.Sequencia,
+                        Sequencia_Pagamento = item.Sequencia_Pagamento,
+                        Valor_Pago = item.Valor_Pago,
+                        Valor_Pago_Real = item.Valor_Pago_Real
+                    };
                 }           
 
                 return ret;

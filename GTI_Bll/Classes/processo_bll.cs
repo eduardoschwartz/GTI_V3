@@ -258,11 +258,25 @@ namespace GTI_Bll.Classes {
 
         ///<summary> Retorna o número do processo sem o dígito verificador.
         ///</summary>
-        public int NumProcessoNoDV(string NumProc) {
+        public int ExtractNumeroProcessoNoDV(string NumProc) {
             if (NumProc.Contains("-"))
                 return Convert.ToInt32(NumProc.Substring(0, NumProc.IndexOf("-")));
             else
                 return Convert.ToInt32(NumProc.Substring(0, NumProc.IndexOf("/") - 1));
+        }
+
+        /// <summary>
+        /// Insere o digito verificador nos números de processo que foam gravados sem.
+        /// </summary>
+        /// <param name="Numero_Processo_sem_DV"></param>
+        /// <returns></returns>
+        public string Retorna_Processo_com_DV(string Numero_Processo_sem_DV) {
+            string sAno;
+            int nNumero, nDv;
+            sAno = bllCore.StringRight(Numero_Processo_sem_DV, 4);
+            nNumero = ExtractNumeroProcessoNoDV(Numero_Processo_sem_DV);
+            nDv = DvProcesso(nNumero);
+            return nNumero.ToString() + "-" + nDv.ToString() + "/" + sAno;
         }
 
         ///<summary> Extrai o ano do processo de um número de processo.

@@ -174,6 +174,16 @@ namespace GTI_Bll.Classes {
         }
 
         /// <summary>
+        /// Retorna os dados IPTU de um imóvel em todos os anos
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public List<Laseriptu> Dados_IPTU(int Codigo) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Dados_IPTU(Codigo);
+        }
+
+        /// <summary>
         /// Soma das áreas construidas do imóvel
         /// </summary>
         /// <param name="Codigo"></param>

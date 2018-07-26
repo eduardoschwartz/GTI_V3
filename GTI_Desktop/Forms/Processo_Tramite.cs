@@ -363,7 +363,7 @@ Adicionar:;
             if (!bReadOnly) {
                 lvMain.SelectedItems[0].SubItems[11].Text = f1.ReturnText;
                 int Ano = processo_Class.ExtractAnoProcesso(lblNumProc.Text);
-                int Numero = processo_Class.NumProcessoNoDV(lblNumProc.Text);
+                int Numero = processo_Class.ExtractNumeroProcessoNoDV(lblNumProc.Text);
                 int Seq = Convert.ToInt16(lvMain.SelectedItems[0].SubItems[1].Text);
                 Exception ex = processo_Class.Alterar_Observacao_Tramite(Ano, Numero, Seq, txtObs.Text);
                 if (ex != null) {
@@ -439,7 +439,7 @@ Alterar:;
                 if (MessageBox.Show("Alterar o despacho?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
                     Processo_bll clsProcesso = new Processo_bll(_connection);
                     int Ano = clsProcesso.ExtractAnoProcesso(lblNumProc.Text);
-                    int Numero = clsProcesso.NumProcessoNoDV(lblNumProc.Text);
+                    int Numero = clsProcesso.ExtractNumeroProcessoNoDV(lblNumProc.Text);
                     int Seq = Convert.ToInt16(lvMain.SelectedItems[0].SubItems[1].Text);
                     clsProcesso.Alterar_Despacho(Ano, Numero, Seq, Convert.ToInt16(cmbDespacho.SelectedValue));
                     lvMain.SelectedItems[0].SubItems[7].Text = cmbDespacho.Text;
@@ -537,7 +537,7 @@ Receber:;
             bool bReceber = lblEnvRec.Text == "Recebimento de Processo" ? true : false;
             Processo_bll clsProcesso = new Processo_bll(_connection);
             int Ano = clsProcesso.ExtractAnoProcesso(lblNumProc.Text);
-            int Numero = clsProcesso.NumProcessoNoDV(lblNumProc.Text);
+            int Numero = clsProcesso.ExtractNumeroProcessoNoDV(lblNumProc.Text);
             int Seq = Convert.ToInt16(lvMain.SelectedItems[0].SubItems[1].Text);
             short CCusto = Convert.ToInt16(lvMain.SelectedItems[0].SubItems[2].Text);
             DateTime Data = Convert.ToDateTime(lblData.Text);

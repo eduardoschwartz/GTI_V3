@@ -1,17 +1,19 @@
 ﻿using GTI_Bll.Classes;
 using GTI_Desktop.Classes;
-using GTI_Models;
 using GTI_Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace GTI_Desktop.Forms {
     public partial class Imovel : Form {
+        Point? prevPosition = null;
+        ToolTip tooltip = new ToolTip();
 
-        bool bAddNew ;
+        bool bAddNew,bNovaArea;
         string _connection = gtiCore.Connection_Name();
 
         public Imovel() {
@@ -35,10 +37,14 @@ namespace GTI_Desktop.Forms {
         }
 
         private void ClearFields() {
+            IptuChart.Series.Clear();
+            
+            bNovaArea = false;
             Inscricao.Text = "";
             SomaArea.Text = "0,00";
             Matricula.Text = "";
             Condominio.Text = "";
+            AnoIPTUList.Items.Clear();
             MT1Check.Checked = true;
             MT2Check.Checked = false;
             End1Option.Checked = true;
@@ -106,6 +112,7 @@ namespace GTI_Desktop.Forms {
             Matricula.ReadOnly = bStart;
             Matricula.BackColor = bStart ? cor_disabled : cor_enabled;
             AreaPnl.Visible = false;
+            OkAreaButton.Enabled = !bStart;
             End1Option.AutoCheck = !bStart;
             End2Option.AutoCheck = !bStart;
             End3Option.AutoCheck = !bStart;
@@ -520,10 +527,6 @@ namespace GTI_Desktop.Forms {
                 TestadaListView.SelectedItems[0].Remove();
         }
 
-        private void MnuAddArea_Click(object sender, EventArgs e) {
-
-        }
-
         private void BtCancelPnlArea_Click(object sender, EventArgs e) {
             AreaPnl.Visible = false;
             TopPanel.Enabled = true;
@@ -531,14 +534,6 @@ namespace GTI_Desktop.Forms {
             BarToolStrip.Enabled = true;
         }
 
-        private void MnuAdicionarA_Click(object sender, EventArgs e) {
-            ImovelTab.Enabled = false;
-            BarToolStrip.Enabled = false;
-            TopPanel.Enabled = false;
-            AreaPnl.Visible = true;
-            AreaPnl.BringToFront();
-            AreaConstruida.Focus();
-        }
 
         private void TxtNumProcesso_KeyPress(object sender, KeyPressEventArgs e) {
             if (e.KeyChar != (char)Keys.Return && e.KeyChar != (char)Keys.Tab) {
@@ -645,7 +640,7 @@ namespace GTI_Desktop.Forms {
                     eBox.ShowDialog();
                     return;
                 }
-                int Numero = processo_Class.NumProcessoNoDV(ProcessoArea.Text);
+                int Numero = processo_Class.ExtractNumeroProcessoNoDV(ProcessoArea.Text);
                 int Ano = processo_Class.ExtractAnoProcesso(ProcessoArea.Text);
                 bool Existe = processo_Class.Existe_Processo(Ano, Numero);
                 if (!Existe) {
@@ -659,16 +654,32 @@ namespace GTI_Desktop.Forms {
                 QtdePavimentos.Text = "1";
             }
 
-            ListViewItem lvItem = new ListViewItem("00");
-            lvItem.SubItems.Add(string.Format("{0:0.00}", area));
-            lvItem.SubItems.Add(UsoConstrucaoList.Text);
-            lvItem.SubItems.Add(TipoConstrucaoList.Text);
-            lvItem.SubItems.Add(CategoriaConstrucaoList.Text);
-            lvItem.SubItems.Add(QtdePavimentos.Text);
-            lvItem.SubItems[2].Tag = UsoConstrucaoList.SelectedValue.ToString();
-            lvItem.SubItems[3].Tag = TipoConstrucaoList.SelectedValue.ToString();
-            lvItem.SubItems[4].Tag = CategoriaConstrucaoList.SelectedValue.ToString();
-            AreaListView.Items.Add(lvItem);
+            if (bNovaArea) {
+                ListViewItem lvItem = new ListViewItem("00");
+                lvItem.SubItems.Add(string.Format("{0:0.00}", area));
+                lvItem.SubItems.Add(UsoConstrucaoList.Text);
+                lvItem.SubItems.Add(TipoConstrucaoList.Text);
+                lvItem.SubItems.Add(CategoriaConstrucaoList.Text);
+                lvItem.SubItems.Add(QtdePavimentos.Text);
+                lvItem.SubItems.Add(DataAprovacao.Text);
+                lvItem.SubItems.Add(ProcessoArea.Text);
+                lvItem.SubItems[2].Tag = UsoConstrucaoList.SelectedValue.ToString();
+                lvItem.SubItems[3].Tag = TipoConstrucaoList.SelectedValue.ToString();
+                lvItem.SubItems[4].Tag = CategoriaConstrucaoList.SelectedValue.ToString();
+                AreaListView.Items.Add(lvItem);
+            } else {
+                int idx = AreaListView.SelectedItems[0].Index;
+                AreaListView.Items[idx].SubItems[1].Text = string.Format("{0:0.00}", area);
+                AreaListView.Items[idx].SubItems[2].Text= UsoConstrucaoList.Text;
+                AreaListView.Items[idx].SubItems[3].Text= TipoConstrucaoList.Text;
+                AreaListView.Items[idx].SubItems[4].Text= CategoriaConstrucaoList.Text;
+                AreaListView.Items[idx].SubItems[5].Text= QtdePavimentos.Text;
+                AreaListView.Items[idx].SubItems[6].Text= DataAprovacao.Text;
+                AreaListView.Items[idx].SubItems[7].Text = ProcessoArea.Text;
+                AreaListView.Items[idx].SubItems[2].Tag = UsoConstrucaoList.SelectedValue.ToString();
+                AreaListView.Items[idx].SubItems[3].Tag = TipoConstrucaoList.SelectedValue.ToString();
+                AreaListView.Items[idx].SubItems[4].Tag = CategoriaConstrucaoList.SelectedValue.ToString();
+            }
             Renumera_Sequencia_Area();
 
             AreaPnl.Visible = false;
@@ -677,7 +688,6 @@ namespace GTI_Desktop.Forms {
             BarToolStrip.Enabled = true;
         }
 
-
         private void Renumera_Sequencia_Area() {
             int n = 1;
             foreach (ListViewItem item in AreaListView.Items) {
@@ -685,7 +695,6 @@ namespace GTI_Desktop.Forms {
                 n++;
             }
         }
-
 
         private void MnuHistorico_Click(object sender, EventArgs e) {
             //TODO: Histórico do imóvel
@@ -815,17 +824,33 @@ namespace GTI_Desktop.Forms {
                     lvItem.SubItems.Add(reg.Tipo_Nome);
                     lvItem.SubItems.Add(reg.Categoria_Nome);
                     lvItem.SubItems.Add(reg.Pavimentos.ToString());
+                    if(reg.Data_Aprovacao!=null)
+                        lvItem.SubItems.Add(Convert.ToDateTime(reg.Data_Aprovacao).ToString("dd/MM/yyyy"));
+                    else
+                        lvItem.SubItems.Add("");
+                    if (string.IsNullOrWhiteSpace(reg.Numero_Processo))
+                        lvItem.SubItems.Add("");
+                    else {
+                        if (reg.Numero_Processo.Contains("-"))//se já tiver DV não precisa inserir novamente
+                            lvItem.SubItems.Add(reg.Numero_Processo);
+                        else {
+                            Processo_bll processo_Class = new Processo_bll(_connection);
+                            lvItem.SubItems.Add(processo_Class.Retorna_Processo_com_DV(reg.Numero_Processo));//corrige o DV
+                        }
+                    }
                     lvItem.Tag = reg.Seq.ToString();
                     lvItem.SubItems[2].Tag = reg.Uso_Codigo.ToString();
                     lvItem.SubItems[3].Tag = reg.Tipo_Codigo.ToString();
                     lvItem.SubItems[4].Tag = reg.Categoria_Codigo.ToString();
                     AreaListView.Items.Add(lvItem);
-                    SomaArea += (decimal)reg.Area;
+                    SomaArea += reg.Area;
                     n++;
                 }
                 this.SomaArea.Text = string.Format("{0:0.00}", SomaArea);
                 //TODO: Ler CIP, Imunidade 
-                //TODO: Carregar valor do IPTU
+
+                DrawGraph(Codigo);
+                
             }
         }
 
@@ -909,10 +934,21 @@ namespace GTI_Desktop.Forms {
             }
         }
 
+        private void MnuAdicionarA_Click(object sender, EventArgs e) {
+            bNovaArea = true;
+            ImovelTab.Enabled = false;
+            BarToolStrip.Enabled = false;
+            TopPanel.Enabled = false;
+            AreaPnl.Visible = true;
+            AreaPnl.BringToFront();
+            AreaConstruida.Focus();
+        }
+
         private void AlterarAreaMenu_Click(object sender, EventArgs e) {
             if (AreaListView.Items.Count == 0 || AreaListView.SelectedItems.Count == 0)
                 MessageBox.Show("Selecione uma área.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
+                bNovaArea = false;
                 ImovelTab.Enabled = false;
                 BarToolStrip.Enabled = false;
                 TopPanel.Enabled = false;
@@ -923,10 +959,101 @@ namespace GTI_Desktop.Forms {
                 UsoConstrucaoList.SelectedValue = Convert.ToInt16(item.SubItems[2].Tag.ToString());
                 TipoConstrucaoList.SelectedValue = Convert.ToInt16(item.SubItems[3].Tag.ToString());
                 CategoriaConstrucaoList.SelectedValue = Convert.ToInt16(item.SubItems[4].Tag.ToString());
-
+                QtdePavimentos.Text = item.SubItems[5].Text;
+                DataAprovacao.Text = item.SubItems[6].Text;
+                ProcessoArea.Text = item.SubItems[7].Text;
                 AreaConstruida.Focus();
             }
         }
+
+        private void IptuChart_MouseMove(object sender, MouseEventArgs e) {
+            var pos = e.Location;
+            if (prevPosition.HasValue && pos == prevPosition.Value)
+                return;
+            tooltip.RemoveAll();
+            prevPosition = pos;
+            var results = IptuChart.HitTest(pos.X, pos.Y, false,
+                                            ChartElementType.DataPoint);
+            foreach (var result in results) {
+                if (result.ChartElementType == ChartElementType.DataPoint) {
+                    var prop = result.Object as DataPoint;
+                    if (prop != null) {
+                        var pointXPixel = result.ChartArea.AxisX.ValueToPixelPosition(prop.XValue);
+                        var pointYPixel = result.ChartArea.AxisY.ValueToPixelPosition(prop.YValues[0]);
+
+                        // check if the cursor is really close to the point (2 pixels around the point)
+                        if (Math.Abs(pos.X - pointXPixel) < 10 &&
+                            Math.Abs(pos.Y - pointYPixel) < 10) {
+                            tooltip.Show("Exercício: " + prop.XValue + Environment.NewLine + ", Valor: R$" + string.Format("{0:0.00}", prop.YValues[0]), this.IptuChart,
+                                            pos.X, pos.Y - 15);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void DrawGraph(int Codigo) {
+            IptuChart.Update();
+            Series seriesTraffic = new Series();
+            //seriesTraffic.Color = Color.Red;
+            IptuChart.ChartAreas[0].Area3DStyle.Enable3D = true;
+            seriesTraffic.ChartType = SeriesChartType.Bubble;
+            seriesTraffic.BorderWidth = 2;
+
+            Tributario_bll tributario_Class = new Tributario_bll(_connection);
+            List<SpExtrato> listaExtrato = tributario_Class.Lista_Extrato_Tributo(Codigo: Codigo);
+            int[] xValues=new int[0];
+            decimal[] yValues = new decimal[0];
+            int nSize = 0;
+            foreach  (SpExtrato item in listaExtrato) {
+                bool bFind = false;
+                for (int i = 0; i < xValues.Length; i++) {
+                    if (xValues[i] == item.Anoexercicio) {
+                        bFind = true;
+                        break;
+                    }
+                }
+                if (!bFind) {
+                    Array.Resize(ref xValues, nSize + 1);
+                    Array.Resize(ref yValues, nSize + 1);
+                    xValues[nSize] = item.Anoexercicio;
+                    nSize++;
+                }
+            }
+
+            for (int i = 0; i < xValues.Length; i++) {
+                decimal nSoma = 0;
+                foreach (SpExtrato item in listaExtrato) {
+                    if (item.Anoexercicio == xValues[i] && (item.Codlancamento==1 || item.Codlancamento==29)  && item.Numparcela>0 && item.Statuslanc!=5 )
+                        nSoma += item.Valortributo;
+                    else {
+                        if (item.Anoexercicio > xValues[i])
+                            break;
+                    }
+                }
+                yValues[i] = nSoma;
+            }
+
+
+            for (int i = 0; i < xValues.Length; i++) {
+                seriesTraffic.Points.AddXY(xValues[i], yValues[i]);
+            }
+            IptuChart.BackColor = Color.Bisque;
+            IptuChart.ChartAreas[0].BackColor = Color.LightSalmon;
+            IptuChart.ChartAreas[0].AxisY.Minimum = 0;
+            IptuChart.ChartAreas[0].AxisX.Minimum = xValues[0];
+            IptuChart.ChartAreas[0].AxisX.Maximum = xValues[xValues.Length-1];
+            IptuChart.Series.Add(seriesTraffic);
+            IptuChart.ChartAreas[0].AxisX.LabelStyle.Enabled = true;
+            IptuChart.ChartAreas[0].AxisY.LabelStyle.Enabled = true;
+            IptuChart.ChartAreas[0].AxisX.IsStartedFromZero = false;
+            IptuChart.Series[0].IsValueShownAsLabel = true;
+            IptuChart.ChartAreas[0].AxisX.Interval = 1;
+            IptuChart.ChartAreas[0].AxisY.IntervalAutoMode = IntervalAutoMode.VariableCount;
+            IptuChart.Series[0].LabelAngle = 90;
+
+        }
+
 
     }
 }
