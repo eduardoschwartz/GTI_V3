@@ -130,6 +130,7 @@
     <Content Include="Pages\SegundaViaCIPFim.aspx" />
     <Content Include="Pages\SegundaViaIPTU.aspx" />
     <Content Include="Pages\SegundaViaIPTUFim.aspx" />
+    <Content Include="Pages\situacao_pagto.aspx" />
     <Content Include="Pages\Turing.aspx" />
     <Content Include="Pages\wait.aspx" />
     <Content Include="SqlServerTypes\readme.htm" />
@@ -168,6 +169,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsDAM.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\dsSituacaoPagto.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsSituacaoPagto.xsd</DependentUpon>
     </Compile>
     <Compile Include="gtiCore.cs" />
     <Compile Include="Pages\alvara_vre.aspx.cs">
@@ -338,6 +344,13 @@
     <Compile Include="Pages\SegundaViaIPTUFim.aspx.designer.cs">
       <DependentUpon>SegundaViaIPTUFim.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\situacao_pagto.aspx.cs">
+      <DependentUpon>situacao_pagto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\situacao_pagto.aspx.designer.cs">
+      <DependentUpon>situacao_pagto.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Turing.aspx.cs">
       <DependentUpon>Turing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -353,6 +366,12 @@
       <DependentUpon>wait.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\SituacaoPagamento.cs">
+      <DependentUpon>SituacaoPagamento.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Report\ComprovantePagamento.cs">
       <DependentUpon>ComprovantePagamento.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -514,6 +533,17 @@
       <DependentUpon>dsDAM.xsd</DependentUpon>
     </Content>
     <Content Include="Deca\DECA2018.pdf" />
+    <Content Include="DataSets\dsSituacaoPagto.xsc">
+      <DependentUpon>dsSituacaoPagto.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\dsSituacaoPagto.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsSituacaoPagto.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\dsSituacaoPagto.xss">
+      <DependentUpon>dsSituacaoPagto.xsd</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Pages\default.Master" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
@@ -525,6 +555,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Report\SituacaoPagamento.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SituacaoPagamento.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\ComprovantePagamento.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ComprovantePagamento.cs</LastGenOutput>

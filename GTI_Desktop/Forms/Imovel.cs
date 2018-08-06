@@ -1038,15 +1038,21 @@ namespace GTI_Desktop.Forms {
             for (int i = 0; i < xValues.Length; i++) {
                 seriesTraffic.Points.AddXY(xValues[i], yValues[i]);
             }
-            IptuChart.BackColor = Color.Bisque;
+            //IptuChart.BackColor = Color.Bisque;
+            IptuChart.BackGradientStyle = GradientStyle.TopBottom;
+            IptuChart.BackColor = Color.LightSkyBlue;
+            IptuChart.BackSecondaryColor = Color.WhiteSmoke;
             IptuChart.ChartAreas[0].BackColor = Color.LightSalmon;
             IptuChart.ChartAreas[0].AxisY.Minimum = 0;
             IptuChart.ChartAreas[0].AxisX.Minimum = xValues[0];
             IptuChart.ChartAreas[0].AxisX.Maximum = xValues[xValues.Length-1];
             IptuChart.Series.Add(seriesTraffic);
+            IptuChart.ChartAreas[0].AxisX.MajorGrid.LineColor=Color.LightSteelBlue;
+            IptuChart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.LightSeaGreen;
             IptuChart.ChartAreas[0].AxisX.LabelStyle.Enabled = true;
             IptuChart.ChartAreas[0].AxisY.LabelStyle.Enabled = true;
             IptuChart.ChartAreas[0].AxisX.IsStartedFromZero = false;
+            IptuChart.ChartAreas[0].AxisY.LabelStyle.Format = "R$ #0.00";
             IptuChart.Series[0].IsValueShownAsLabel = true;
             IptuChart.ChartAreas[0].AxisX.Interval = 1;
             IptuChart.ChartAreas[0].AxisY.IntervalAutoMode = IntervalAutoMode.VariableCount;

@@ -40,14 +40,21 @@ namespace GTI_Web.Pages {
                             if (txtimgcode.Text != Session["randomStr"].ToString())
                                 lblMsg.Text = "Código da imagem inválido";
                             else {
-                                //Verifica competência en
-                                Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
-                                int _holes = tributario_Class.Competencias_Nao_Encerradas(tributario_Class.Resumo_CompetenciaISS(Codigo));
-                                if (_holes == 0) {
+                                string Regime = empresa_Class.RegimeEmpresa(Codigo);
+                                if (Regime == "V") {
+                                    //Verifica competência en
+                                    Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
+                                    int _holes = tributario_Class.Competencias_Nao_Encerradas(tributario_Class.Resumo_CompetenciaISS(Codigo));
+                                    if (_holes == 0) {
+                                        lblMsg.Text = "";
+                                        PrintReport(Codigo, TipoCadastro.Empresa);
+                                    } else
+                                        lblMsg.Text = "A empresa possui uma ou mais competências não encerradas.";
+                                } else {
                                     lblMsg.Text = "";
                                     PrintReport(Codigo, TipoCadastro.Empresa);
-                                } else
-                                    lblMsg.Text = "A empresa possui uma ou mais competências não encerradas.";
+                                }
+
                             }
                         }
                     } else {

@@ -60,7 +60,6 @@ namespace GTI_Web.Pages {
         }
 
         private void PrintReport(int Codigo, TipoCadastro _tipo_cadastro) {
-            int nSid = 0;
             ReportDocument crystalReport = new ReportDocument();
             string sComplemento = "", sQuadras = "", sLotes = "", sEndereco = "", sBairro = "", sInscricao = "", sNome = "", sCidade = "", sUF = "";
             string sData = "18/04/2012",  sCPF = "", sCNPJ = "", sAtividade = "", sRG = "", sProcAbertura = "", sSufixo = "", sProcEncerramento="", sDoc = "";

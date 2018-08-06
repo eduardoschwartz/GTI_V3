@@ -4,7 +4,7 @@
     <link href="../css/gti.css" rel="stylesheet" />
 
 
-        <div id="content" style="width: 600px">
+        <div id="content" style="width: auto">
             <h3>Serviços disponíveis</h3>
             <br />
             <br />
@@ -21,6 +21,7 @@
                 <li><a href="alvara_vre.aspx?d=gti" style="width: 600px">Alvará Via Rápida Empresa (VRE)</a></li>
                 <li><a href="gticertidao.aspx?d=gti" style="width: 600px">Emissão de certidões / Verificar autenticidade</a></li>
                 <li><a href="cpv_pagto.aspx?d=gti" style="width: 600px">Impressão de comprovante de pagamento</a></li>
+                <li><a href="situacao_pagto.aspx?d=gti" style="width: 600px">Situação dos débitos ref. a ISS Fixo, Taxa de Licença e Vig.Sanitária.</a></li>
             </ul>
         </div>
 

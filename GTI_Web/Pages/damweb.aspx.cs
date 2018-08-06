@@ -416,7 +416,7 @@ namespace UIWeb.Pages {
             }
 
             foreach (var item in ListaParcela) {
-                if (item.Statuslanc == 3 || item.Statuslanc == 19 || item.Statuslanc == 38 || item.Statuslanc == 39) {
+                if (item.Statuslanc == 3 || item.Statuslanc == 19 || item.Statuslanc == 38 || item.Statuslanc == 39 ) {
                     DebitoStructure reg = new DebitoStructure();
                     reg.Codigo_Reduzido = item.Codreduzido;
                     reg.Ano_Exercicio = item.Anoexercicio;
@@ -455,11 +455,11 @@ namespace UIWeb.Pages {
                             item.Numero_Parcela.ToString(), item.Complemento.ToString(), Convert.ToDateTime(item.Data_Vencimento).ToString("dd/MM/yyyy"),
                             item.Soma_Principal.ToString("#0.00"), item.Soma_Juros.ToString("#0.00"), item.Soma_Multa.ToString("#0.00"),
                             item.Soma_Correcao.ToString("#0.00"), item.Soma_Total.ToString("#0.00"), item.Data_Ajuizamento == DateTime.MinValue || item.Data_Ajuizamento==null? "NÃO" : "SIM", item.Codigo_Situacao ==38| item.Codigo_Situacao == 39 ? "SIM" : "NÃO");
-                nSomaPrincipal += (decimal)item.Soma_Principal;
-                nSomaJuros += (decimal)item.Soma_Juros;
-                nSomaMulta += (decimal)item.Soma_Multa;
-                nSomaCorrecao += (decimal)item.Soma_Correcao;
-                nSomaTotal += (decimal)item.Soma_Total;
+                nSomaPrincipal += item.Soma_Principal;
+                nSomaJuros += item.Soma_Juros;
+                nSomaMulta += item.Soma_Multa;
+                nSomaCorrecao += item.Soma_Correcao;
+                nSomaTotal += item.Soma_Total;
             }
 
             grdMain.DataSource = dt;
@@ -494,8 +494,6 @@ namespace UIWeb.Pages {
                 Response.Write("<script>alert('A guia já foi gerada!');</script>");
                 return;
             }
-
-
 
             if (TableResumo.Rows[0].Cells[1].Text == "0,00")
                 lblMsg2.Text = "Selecione os débitos que deseja pagar.";
@@ -554,7 +552,6 @@ namespace UIWeb.Pages {
                   GeraGuia();
             }
                 
-
         }
 
         private void GeraGuia() {
