@@ -1093,6 +1093,7 @@
             this.Controls.Add(this.txtRG);
             this.Controls.Add(this.txtNome);
             this.Controls.Add(this.mskCPF);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Cidadao";

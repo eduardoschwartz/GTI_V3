@@ -523,6 +523,9 @@
     <EmbeddedResource Include="Forms\Imovel_Novo.resx">
       <DependentUpon>Imovel_Novo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\inputBox.resx">
+      <DependentUpon>inputBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Lancamento.resx">
       <DependentUpon>Lancamento.cs</DependentUpon>
     </EmbeddedResource>

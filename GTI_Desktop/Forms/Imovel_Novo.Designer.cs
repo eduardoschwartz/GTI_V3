@@ -185,6 +185,7 @@
             this.Controls.Add(this.label48);
             this.Controls.Add(this.TipoList);
             this.Controls.Add(this.label46);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Imovel_Novo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

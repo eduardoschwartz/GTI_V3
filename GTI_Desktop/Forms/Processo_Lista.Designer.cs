@@ -639,6 +639,7 @@
             this.Controls.Add(this.MainListView);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tBar);
+            this.DoubleBuffered = true;
             this.MaximizeBox = false;
             this.Name = "Processo_Lista";
             this.ShowInTaskbar = false;

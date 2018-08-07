@@ -1693,6 +1693,7 @@
             this.Controls.Add(this.PrintPanel);
             this.Controls.Add(this.CidadaoPanel);
             this.Controls.Add(this.AnexoPanel);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Processo";

@@ -39,6 +39,7 @@
             // 
             this.ClientSize = new System.Drawing.Size(675, 457);
             this.Controls.Add(this.reportViewer);
+            this.DoubleBuffered = true;
             this.Name = "Report";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

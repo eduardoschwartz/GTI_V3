@@ -224,6 +224,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tBar);
             this.Controls.Add(this.tvMain);
+            this.DoubleBuffered = true;
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(492, 298);
             this.Name = "Processo_Local";

@@ -226,6 +226,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.MainListView);
             this.Controls.Add(this.panel1);
+            this.DoubleBuffered = true;
             this.MaximizeBox = false;
             this.Name = "Cidadao_Lista";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

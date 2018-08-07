@@ -65,6 +65,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(373, 482);
             this.Controls.Add(this.MainListView);
+            this.DoubleBuffered = true;
             this.MaximizeBox = false;
             this.Name = "SecurityEventForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

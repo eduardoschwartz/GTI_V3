@@ -1981,7 +1981,7 @@
             this.ProprietarioToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.ProprietarioToolStrip.Location = new System.Drawing.Point(333, 29);
             this.ProprietarioToolStrip.Name = "ProprietarioToolStrip";
-            this.ProprietarioToolStrip.Size = new System.Drawing.Size(32, 67);
+            this.ProprietarioToolStrip.Size = new System.Drawing.Size(24, 48);
             this.ProprietarioToolStrip.TabIndex = 226;
             this.ProprietarioToolStrip.Text = "toolStrip2";
             // 
@@ -1991,7 +1991,7 @@
             this.ProprietarioAddButton.Image = global::GTI_Desktop.Properties.Resources.add;
             this.ProprietarioAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ProprietarioAddButton.Name = "ProprietarioAddButton";
-            this.ProprietarioAddButton.Size = new System.Drawing.Size(30, 20);
+            this.ProprietarioAddButton.Size = new System.Drawing.Size(22, 20);
             this.ProprietarioAddButton.Text = "Adicionar proprietário";
             this.ProprietarioAddButton.ToolTipText = "Adicionar novo proprietário";
             // 
@@ -2001,7 +2001,7 @@
             this.ProprietarioDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
             this.ProprietarioDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ProprietarioDelButton.Name = "ProprietarioDelButton";
-            this.ProprietarioDelButton.Size = new System.Drawing.Size(30, 20);
+            this.ProprietarioDelButton.Size = new System.Drawing.Size(22, 20);
             this.ProprietarioDelButton.Text = "Excluir proprietário";
             this.ProprietarioDelButton.ToolTipText = "Excluir o proprietário Selecionado";
             // 
@@ -2938,6 +2938,7 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.tBar);
             this.Controls.Add(this.a1Panel1);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Empresa";

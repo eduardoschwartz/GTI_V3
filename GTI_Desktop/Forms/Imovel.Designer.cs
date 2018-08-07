@@ -75,11 +75,10 @@
             this.CancelAreaButton = new System.Windows.Forms.Button();
             this.DadosTerrenoTab = new System.Windows.Forms.TabPage();
             this.a1Panel5 = new Owf.Controls.A1Panel();
-            this.AreasButton = new System.Windows.Forms.ToolStrip();
-            this.OpcoesAreaButton = new System.Windows.Forms.ToolStripDropDownButton();
-            this.AdicionarAreaMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.AlterarAreaMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.RemoverAreaMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.AreasBar = new System.Windows.Forms.ToolStrip();
+            this.AddAreaButton = new System.Windows.Forms.ToolStripButton();
+            this.EditAreaButton = new System.Windows.Forms.ToolStripButton();
+            this.DelAreaButton = new System.Windows.Forms.ToolStripButton();
             this.SomaArea = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
             this.AreaListView = new System.Windows.Forms.ListView();
@@ -125,14 +124,16 @@
             this.ImuneCheck = new System.Windows.Forms.CheckBox();
             this.label63 = new System.Windows.Forms.Label();
             this.a1Panel7 = new Owf.Controls.A1Panel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.HistoricoButton = new System.Windows.Forms.ToolStripDropDownButton();
-            this.AdicionarHistoricoMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.RemoverHistoricoMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.VisualizarHistoricoMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.HistoricoBar = new System.Windows.Forms.ToolStrip();
+            this.AddHistoricoButton = new System.Windows.Forms.ToolStripButton();
+            this.EditHistoricoButton = new System.Windows.Forms.ToolStripButton();
+            this.DelHistoricoButton = new System.Windows.Forms.ToolStripButton();
+            this.ZoomHistoricoButton = new System.Windows.Forms.ToolStripButton();
             this.HistoricoListView = new System.Windows.Forms.ListView();
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label47 = new System.Windows.Forms.Label();
             this.Quadras = new System.Windows.Forms.TextBox();
             this.a1Panel2 = new Owf.Controls.A1Panel();
@@ -183,6 +184,8 @@
             this.a1Panel6 = new Owf.Controls.A1Panel();
             this.label40 = new System.Windows.Forms.Label();
             this.ImovelTab = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.IptuChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.BarToolStrip = new System.Windows.Forms.ToolStrip();
             this.NovoButton = new System.Windows.Forms.ToolStripButton();
@@ -208,29 +211,27 @@
             this.label46 = new System.Windows.Forms.Label();
             this.AreaConstruida = new System.Windows.Forms.TextBox();
             this.label43 = new System.Windows.Forms.Label();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.IptuChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.a1Panel1.SuspendLayout();
             this.EnderecoEntregaTab.SuspendLayout();
             this.a1Panel3.SuspendLayout();
             this.DadosTerrenoTab.SuspendLayout();
             this.a1Panel5.SuspendLayout();
-            this.AreasButton.SuspendLayout();
+            this.AreasBar.SuspendLayout();
             this.a1Panel4.SuspendLayout();
             this.DadosConstrucaoTab.SuspendLayout();
             this.a1Panel8.SuspendLayout();
             this.a1Panel7.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.HistoricoBar.SuspendLayout();
             this.a1Panel2.SuspendLayout();
             this.TopPanel.SuspendLayout();
             this.ProprietarioTab.SuspendLayout();
             this.ProprietarioButton.SuspendLayout();
             this.a1Panel6.SuspendLayout();
             this.ImovelTab.SuspendLayout();
-            this.BarToolStrip.SuspendLayout();
-            this.AreaPnl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IptuChart)).BeginInit();
+            this.BarToolStrip.SuspendLayout();
+            this.AreaPnl.SuspendLayout();
             this.SuspendLayout();
             // 
             // MT2Check
@@ -841,7 +842,7 @@
             // a1Panel5
             // 
             this.a1Panel5.BorderColor = System.Drawing.Color.Gray;
-            this.a1Panel5.Controls.Add(this.AreasButton);
+            this.a1Panel5.Controls.Add(this.AreasBar);
             this.a1Panel5.Controls.Add(this.SomaArea);
             this.a1Panel5.Controls.Add(this.label42);
             this.a1Panel5.Controls.Add(this.AreaListView);
@@ -858,50 +859,49 @@
             this.a1Panel5.Size = new System.Drawing.Size(437, 233);
             this.a1Panel5.TabIndex = 158;
             // 
-            // AreasButton
+            // AreasBar
             // 
-            this.AreasButton.Dock = System.Windows.Forms.DockStyle.None;
-            this.AreasButton.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.AreasButton.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.OpcoesAreaButton});
-            this.AreasButton.Location = new System.Drawing.Point(338, 192);
-            this.AreasButton.Name = "AreasButton";
-            this.AreasButton.Size = new System.Drawing.Size(79, 25);
-            this.AreasButton.TabIndex = 176;
-            this.AreasButton.Text = "toolStrip1";
+            this.AreasBar.Dock = System.Windows.Forms.DockStyle.None;
+            this.AreasBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.AreasBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AddAreaButton,
+            this.EditAreaButton,
+            this.DelAreaButton});
+            this.AreasBar.Location = new System.Drawing.Point(352, 190);
+            this.AreasBar.Name = "AreasBar";
+            this.AreasBar.Size = new System.Drawing.Size(72, 25);
+            this.AreasBar.TabIndex = 176;
+            this.AreasBar.Text = "toolStrip1";
             // 
-            // OpcoesAreaButton
+            // AddAreaButton
             // 
-            this.OpcoesAreaButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AdicionarAreaMenu,
-            this.AlterarAreaMenu,
-            this.RemoverAreaMenu});
-            this.OpcoesAreaButton.Image = global::GTI_Desktop.Properties.Resources.option;
-            this.OpcoesAreaButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.OpcoesAreaButton.Name = "OpcoesAreaButton";
-            this.OpcoesAreaButton.Size = new System.Drawing.Size(76, 22);
-            this.OpcoesAreaButton.Text = "Opções";
+            this.AddAreaButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.AddAreaButton.Image = global::GTI_Desktop.Properties.Resources.add;
+            this.AddAreaButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AddAreaButton.Name = "AddAreaButton";
+            this.AddAreaButton.Size = new System.Drawing.Size(23, 22);
+            this.AddAreaButton.Text = "Adicionar área";
+            this.AddAreaButton.Click += new System.EventHandler(this.MnuAdicionarA_Click);
             // 
-            // AdicionarAreaMenu
+            // EditAreaButton
             // 
-            this.AdicionarAreaMenu.Name = "AdicionarAreaMenu";
-            this.AdicionarAreaMenu.Size = new System.Drawing.Size(125, 22);
-            this.AdicionarAreaMenu.Text = "Adicionar";
-            this.AdicionarAreaMenu.Click += new System.EventHandler(this.MnuAdicionarA_Click);
+            this.EditAreaButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.EditAreaButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
+            this.EditAreaButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.EditAreaButton.Name = "EditAreaButton";
+            this.EditAreaButton.Size = new System.Drawing.Size(23, 22);
+            this.EditAreaButton.Text = "Alterar área selecionada";
+            this.EditAreaButton.Click += new System.EventHandler(this.AlterarAreaMenu_Click);
             // 
-            // AlterarAreaMenu
+            // DelAreaButton
             // 
-            this.AlterarAreaMenu.Name = "AlterarAreaMenu";
-            this.AlterarAreaMenu.Size = new System.Drawing.Size(125, 22);
-            this.AlterarAreaMenu.Text = "Alterar";
-            this.AlterarAreaMenu.Click += new System.EventHandler(this.AlterarAreaMenu_Click);
-            // 
-            // RemoverAreaMenu
-            // 
-            this.RemoverAreaMenu.Name = "RemoverAreaMenu";
-            this.RemoverAreaMenu.Size = new System.Drawing.Size(125, 22);
-            this.RemoverAreaMenu.Text = "Remover";
-            this.RemoverAreaMenu.Click += new System.EventHandler(this.RemoverAreaMenu_Click);
+            this.DelAreaButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.DelAreaButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.DelAreaButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DelAreaButton.Name = "DelAreaButton";
+            this.DelAreaButton.Size = new System.Drawing.Size(23, 22);
+            this.DelAreaButton.Text = "Excluir área selecionada";
+            this.DelAreaButton.Click += new System.EventHandler(this.RemoverAreaMenu_Click);
             // 
             // SomaArea
             // 
@@ -1404,7 +1404,7 @@
             // a1Panel7
             // 
             this.a1Panel7.BorderColor = System.Drawing.Color.Gray;
-            this.a1Panel7.Controls.Add(this.toolStrip1);
+            this.a1Panel7.Controls.Add(this.HistoricoBar);
             this.a1Panel7.Controls.Add(this.HistoricoListView);
             this.a1Panel7.Controls.Add(this.label47);
             this.a1Panel7.GradientEndColor = System.Drawing.SystemColors.Control;
@@ -1419,73 +1419,98 @@
             this.a1Panel7.Size = new System.Drawing.Size(491, 227);
             this.a1Panel7.TabIndex = 159;
             // 
-            // toolStrip1
+            // HistoricoBar
             // 
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.HistoricoButton});
-            this.toolStrip1.Location = new System.Drawing.Point(392, 185);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(79, 25);
-            this.toolStrip1.TabIndex = 178;
-            this.toolStrip1.Text = "toolStrip1";
+            this.HistoricoBar.Dock = System.Windows.Forms.DockStyle.None;
+            this.HistoricoBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.HistoricoBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AddHistoricoButton,
+            this.EditHistoricoButton,
+            this.DelHistoricoButton,
+            this.ZoomHistoricoButton});
+            this.HistoricoBar.Location = new System.Drawing.Point(381, 185);
+            this.HistoricoBar.Name = "HistoricoBar";
+            this.HistoricoBar.Size = new System.Drawing.Size(95, 25);
+            this.HistoricoBar.TabIndex = 178;
+            this.HistoricoBar.Text = "toolStrip1";
             // 
-            // HistoricoButton
+            // AddHistoricoButton
             // 
-            this.HistoricoButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AdicionarHistoricoMenu,
-            this.RemoverHistoricoMenu,
-            this.VisualizarHistoricoMenu});
-            this.HistoricoButton.Image = global::GTI_Desktop.Properties.Resources.option;
-            this.HistoricoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.HistoricoButton.Name = "HistoricoButton";
-            this.HistoricoButton.Size = new System.Drawing.Size(76, 22);
-            this.HistoricoButton.Text = "Opções";
-            this.HistoricoButton.Click += new System.EventHandler(this.MnuHistorico_Click);
+            this.AddHistoricoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.AddHistoricoButton.Image = global::GTI_Desktop.Properties.Resources.add;
+            this.AddHistoricoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AddHistoricoButton.Name = "AddHistoricoButton";
+            this.AddHistoricoButton.Size = new System.Drawing.Size(23, 22);
+            this.AddHistoricoButton.Text = "toolStripButton1";
+            this.AddHistoricoButton.ToolTipText = "Adicionar histórico";
             // 
-            // AdicionarHistoricoMenu
+            // EditHistoricoButton
             // 
-            this.AdicionarHistoricoMenu.Name = "AdicionarHistoricoMenu";
-            this.AdicionarHistoricoMenu.Size = new System.Drawing.Size(125, 22);
-            this.AdicionarHistoricoMenu.Text = "Adicionar";
-            this.AdicionarHistoricoMenu.Click += new System.EventHandler(this.mnuAddHistorico_Click);
+            this.EditHistoricoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.EditHistoricoButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
+            this.EditHistoricoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.EditHistoricoButton.Name = "EditHistoricoButton";
+            this.EditHistoricoButton.Size = new System.Drawing.Size(23, 22);
+            this.EditHistoricoButton.Text = "toolStripButton1";
+            this.EditHistoricoButton.ToolTipText = "Alterar o histórico selecionado";
             // 
-            // RemoverHistoricoMenu
+            // DelHistoricoButton
             // 
-            this.RemoverHistoricoMenu.Name = "RemoverHistoricoMenu";
-            this.RemoverHistoricoMenu.Size = new System.Drawing.Size(125, 22);
-            this.RemoverHistoricoMenu.Text = "Remover";
-            this.RemoverHistoricoMenu.Click += new System.EventHandler(this.mnuRemoverHistorico_Click);
+            this.DelHistoricoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.DelHistoricoButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.DelHistoricoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DelHistoricoButton.Name = "DelHistoricoButton";
+            this.DelHistoricoButton.Size = new System.Drawing.Size(23, 22);
+            this.DelHistoricoButton.Text = "toolStripButton2";
+            this.DelHistoricoButton.ToolTipText = "Excluir histórico selecionado";
             // 
-            // VisualizarHistoricoMenu
+            // ZoomHistoricoButton
             // 
-            this.VisualizarHistoricoMenu.Name = "VisualizarHistoricoMenu";
-            this.VisualizarHistoricoMenu.Size = new System.Drawing.Size(125, 22);
-            this.VisualizarHistoricoMenu.Text = "Visualizar";
+            this.ZoomHistoricoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ZoomHistoricoButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.ZoomHistoricoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ZoomHistoricoButton.Name = "ZoomHistoricoButton";
+            this.ZoomHistoricoButton.Size = new System.Drawing.Size(23, 22);
+            this.ZoomHistoricoButton.Text = "toolStripButton3";
+            this.ZoomHistoricoButton.ToolTipText = "Visualizar histórico selecionado";
             // 
             // HistoricoListView
             // 
             this.HistoricoListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader6,
-            this.columnHeader7});
+            this.columnHeader7,
+            this.columnHeader12,
+            this.columnHeader13});
+            this.HistoricoListView.FullRowSelect = true;
             this.HistoricoListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.HistoricoListView.HideSelection = false;
             this.HistoricoListView.Location = new System.Drawing.Point(6, 24);
             this.HistoricoListView.Name = "HistoricoListView";
             this.HistoricoListView.Size = new System.Drawing.Size(470, 158);
             this.HistoricoListView.TabIndex = 30;
             this.HistoricoListView.UseCompatibleStateImageBehavior = false;
+            this.HistoricoListView.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader6
             // 
-            this.columnHeader6.Text = "Face";
-            this.columnHeader6.Width = 90;
+            this.columnHeader6.Text = "Sq";
+            this.columnHeader6.Width = 30;
             // 
             // columnHeader7
             // 
-            this.columnHeader7.Text = "Metros";
-            this.columnHeader7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.columnHeader7.Width = 90;
+            this.columnHeader7.Text = "Data";
+            this.columnHeader7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader7.Width = 75;
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "Histórico";
+            this.columnHeader12.Width = 200;
+            // 
+            // columnHeader13
+            // 
+            this.columnHeader13.Text = "Nome do usuário";
+            this.columnHeader13.Width = 140;
             // 
             // label47
             // 
@@ -2092,6 +2117,31 @@
             this.ImovelTab.TabIndex = 0;
             this.ImovelTab.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.TabImovel_DrawItem);
             // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.IptuChart);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(747, 257);
+            this.tabPage1.TabIndex = 6;
+            this.tabPage1.Text = "Dados do ITU/IPTU";
+            // 
+            // IptuChart
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.IptuChart.ChartAreas.Add(chartArea1);
+            this.IptuChart.Location = new System.Drawing.Point(6, 11);
+            this.IptuChart.Name = "IptuChart";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Name = "Series1";
+            this.IptuChart.Series.Add(series1);
+            this.IptuChart.Size = new System.Drawing.Size(733, 243);
+            this.IptuChart.TabIndex = 178;
+            this.IptuChart.Text = "chart1";
+            this.IptuChart.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IptuChart_MouseMove);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -2371,31 +2421,6 @@
             this.label43.TabIndex = 21;
             this.label43.Text = "Área em m²...:";
             // 
-            // tabPage1
-            // 
-            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage1.Controls.Add(this.IptuChart);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(747, 257);
-            this.tabPage1.TabIndex = 6;
-            this.tabPage1.Text = "Dados do ITU/IPTU";
-            // 
-            // IptuChart
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.IptuChart.ChartAreas.Add(chartArea1);
-            this.IptuChart.Location = new System.Drawing.Point(6, 11);
-            this.IptuChart.Name = "IptuChart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Name = "Series1";
-            this.IptuChart.Series.Add(series1);
-            this.IptuChart.Size = new System.Drawing.Size(733, 243);
-            this.IptuChart.TabIndex = 178;
-            this.IptuChart.Text = "chart1";
-            this.IptuChart.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IptuChart_MouseMove);
-            // 
             // Imovel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2405,6 +2430,7 @@
             this.Controls.Add(this.ImovelTab);
             this.Controls.Add(this.BarToolStrip);
             this.Controls.Add(this.AreaPnl);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Imovel";
@@ -2420,8 +2446,8 @@
             this.DadosTerrenoTab.ResumeLayout(false);
             this.a1Panel5.ResumeLayout(false);
             this.a1Panel5.PerformLayout();
-            this.AreasButton.ResumeLayout(false);
-            this.AreasButton.PerformLayout();
+            this.AreasBar.ResumeLayout(false);
+            this.AreasBar.PerformLayout();
             this.a1Panel4.ResumeLayout(false);
             this.a1Panel4.PerformLayout();
             this.DadosConstrucaoTab.ResumeLayout(false);
@@ -2429,8 +2455,8 @@
             this.a1Panel8.PerformLayout();
             this.a1Panel7.ResumeLayout(false);
             this.a1Panel7.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.HistoricoBar.ResumeLayout(false);
+            this.HistoricoBar.PerformLayout();
             this.a1Panel2.ResumeLayout(false);
             this.a1Panel2.PerformLayout();
             this.TopPanel.ResumeLayout(false);
@@ -2441,12 +2467,12 @@
             this.ProprietarioButton.PerformLayout();
             this.a1Panel6.ResumeLayout(false);
             this.ImovelTab.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.IptuChart)).EndInit();
             this.BarToolStrip.ResumeLayout(false);
             this.BarToolStrip.PerformLayout();
             this.AreaPnl.ResumeLayout(false);
             this.AreaPnl.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.IptuChart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2596,10 +2622,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.Label SomaArea;
         private System.Windows.Forms.Label label42;
-        private System.Windows.Forms.ToolStrip AreasButton;
-        private System.Windows.Forms.ToolStripDropDownButton OpcoesAreaButton;
-        private System.Windows.Forms.ToolStripMenuItem AdicionarAreaMenu;
-        private System.Windows.Forms.ToolStripMenuItem RemoverAreaMenu;
+        private System.Windows.Forms.ToolStrip AreasBar;
         private System.Windows.Forms.ToolStrip ProprietarioButton;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem AdicionarProprietarioMenu;
@@ -2628,13 +2651,17 @@
         private System.Windows.Forms.Label ValorIPTU;
         private System.Windows.Forms.ComboBox AnoIPTUList;
         private System.Windows.Forms.Label label52;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripDropDownButton HistoricoButton;
-        private System.Windows.Forms.ToolStripMenuItem AdicionarHistoricoMenu;
-        private System.Windows.Forms.ToolStripMenuItem RemoverHistoricoMenu;
-        private System.Windows.Forms.ToolStripMenuItem VisualizarHistoricoMenu;
-        private System.Windows.Forms.ToolStripMenuItem AlterarAreaMenu;
+        private System.Windows.Forms.ToolStrip HistoricoBar;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.DataVisualization.Charting.Chart IptuChart;
+        private System.Windows.Forms.ColumnHeader columnHeader12;
+        private System.Windows.Forms.ColumnHeader columnHeader13;
+        private System.Windows.Forms.ToolStripButton AddHistoricoButton;
+        private System.Windows.Forms.ToolStripButton DelHistoricoButton;
+        private System.Windows.Forms.ToolStripButton ZoomHistoricoButton;
+        private System.Windows.Forms.ToolStripButton AddAreaButton;
+        private System.Windows.Forms.ToolStripButton EditAreaButton;
+        private System.Windows.Forms.ToolStripButton DelAreaButton;
+        private System.Windows.Forms.ToolStripButton EditHistoricoButton;
     }
 }

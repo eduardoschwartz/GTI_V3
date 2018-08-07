@@ -1287,7 +1287,8 @@ namespace GTI_Dal.Classes {
                     _ano_anterior = DateTime.Now.Year ;
                 }
 
-                DateTime _data_30dias = DateTime.Now.AddDays(-31);
+                //DateTime _data_30dias = DateTime.Now.AddDays(-31);
+                DateTime _data_30dias = DateTime.Now.AddDays(-40);
 
                 int _mes_final = _data_30dias.Month;
                 int _ano_final = _data_30dias.Year;

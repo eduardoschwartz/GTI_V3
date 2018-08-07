@@ -129,6 +129,7 @@
             this.ClientSize = new System.Drawing.Size(433, 485);
             this.Controls.Add(this.MainTreeView);
             this.Controls.Add(this.a1Panel1);
+            this.DoubleBuffered = true;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(449, 524);
             this.Name = "SecurityUserForm";

@@ -82,6 +82,17 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Area(Codigo);
         }
 
+        /// <summary>
+        /// Lista do histórico do imóvel
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public List<HistoricoStruct> Lista_Historico(int Codigo) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Lista_Historico(Codigo);
+        }
+
+
         public List<Usoconstr> Lista_Uso_Construcao() {
             Imovel_Data obj = new Imovel_Data(_connection);
             return obj.Lista_Uso_Construcao();

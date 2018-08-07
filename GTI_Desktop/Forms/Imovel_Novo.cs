@@ -170,7 +170,12 @@ namespace GTI_Desktop.Forms {
                 return;
             }
 
-            if(TipoList.SelectedIndex==0 && (unidade>0 || subunidade > 0)) {
+            if (lote > 10000) {
+                MessageBox.Show("Nº de lote inválido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (TipoList.SelectedIndex==0 && (unidade>0 || subunidade > 0)) {
                 MessageBox.Show("Imóvel normal não pode ter número de unidade ou subunidade", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }

@@ -1109,6 +1109,7 @@
             this.Controls.Add(this.GridPanel);
             this.Controls.Add(this.sBar);
             this.Controls.Add(this.a1Panel2);
+            this.DoubleBuffered = true;
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(850, 400);
             this.Name = "Extrato";

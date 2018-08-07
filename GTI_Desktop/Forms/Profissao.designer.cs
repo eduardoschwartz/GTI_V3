@@ -113,6 +113,7 @@
             this.ClientSize = new System.Drawing.Size(311, 320);
             this.Controls.Add(this.tBar);
             this.Controls.Add(this.lstMain);
+            this.DoubleBuffered = true;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(327, 517);
             this.MinimumSize = new System.Drawing.Size(327, 359);

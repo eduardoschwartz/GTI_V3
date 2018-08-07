@@ -154,6 +154,7 @@
             this.ClientSize = new System.Drawing.Size(752, 450);
             this.Controls.Add(this.MainListView);
             this.Controls.Add(this.panel1);
+            this.DoubleBuffered = true;
             this.Name = "Usuario_Lista";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Usuario_Lista";

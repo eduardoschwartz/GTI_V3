@@ -760,6 +760,7 @@
             this.Controls.Add(this.labelreq);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lvMain);
+            this.DoubleBuffered = true;
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(690, 368);
             this.Name = "Processo_Tramite";

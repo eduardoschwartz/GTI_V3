@@ -701,7 +701,6 @@ namespace GTI_Dal.Classes {
             }
         }
 
-
         public bool Verifica_Imunidade(int Codigo) {
             using (var db = new GTI_Context(_connection)) {
                 Cadimob Sql = (from c in db.Cadimob where c.Codreduzido == Codigo select c).FirstOrDefault();
@@ -752,6 +751,28 @@ namespace GTI_Dal.Classes {
                     return ex;
                 }
                 return null;
+            }
+        }
+
+        public List<HistoricoStruct> Lista_Historico(int Codigo) {
+            using (var db = new GTI_Context(_connection)) {
+                var reg = (from h in db.Historico
+                           join u in db.Usuario on h.Userid equals u.Id into hu from u in hu.DefaultIfEmpty()
+                           where h.Codreduzido == Codigo orderby h.Seq select new HistoricoStruct {
+                               Codigo=Codigo,Data=h.Datahist2,Seq=h.Seq,Descricao=h.Deschist,Usuario_Codigo=(int)h.Userid,Usuario_Nome =u.Nomecompleto
+                           }).ToList();
+                List<HistoricoStruct> Lista = new List<HistoricoStruct>();
+                foreach (var item in reg) {
+                    Lista.Add(new HistoricoStruct {
+                        Codigo = item.Codigo,
+                        Seq = item.Seq,
+                        Data = item.Data,
+                        Descricao = item.Descricao,
+                        Usuario_Codigo = item.Usuario_Codigo,
+                        Usuario_Nome = item.Usuario_Nome
+                    });
+                }
+                return Lista;
             }
         }
 

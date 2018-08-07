@@ -27,11 +27,11 @@
             this.tBar = new System.Windows.Forms.ToolStrip();
             this.BtAll = new System.Windows.Forms.ToolStripButton();
             this.BtNone = new System.Windows.Forms.ToolStripButton();
+            this.BtCancel = new System.Windows.Forms.ToolStripButton();
             this.BtSair = new System.Windows.Forms.ToolStripButton();
             this.LstMain = new System.Windows.Forms.CheckedListBox();
             this.a1Panel1 = new Owf.Controls.A1Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.BtCancel = new System.Windows.Forms.ToolStripButton();
             this.tBar.SuspendLayout();
             this.a1Panel1.SuspendLayout();
             this.SuspendLayout();
@@ -76,6 +76,16 @@
             this.BtNone.ToolTipText = "Desmarcar todos os ítens";
             this.BtNone.Click += new System.EventHandler(this.BtNone_Click);
             // 
+            // BtCancel
+            // 
+            this.BtCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.BtCancel.Image = global::GTI_Desktop.Properties.Resources.cancel2;
+            this.BtCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BtCancel.Name = "BtCancel";
+            this.BtCancel.Size = new System.Drawing.Size(23, 22);
+            this.BtCancel.Text = "toolStripButton1";
+            this.BtCancel.ToolTipText = "Cancelar operação";
+            // 
             // BtSair
             // 
             this.BtSair.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -113,16 +123,6 @@
             this.a1Panel1.Size = new System.Drawing.Size(259, 284);
             this.a1Panel1.TabIndex = 29;
             // 
-            // BtCancel
-            // 
-            this.BtCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.BtCancel.Image = global::GTI_Desktop.Properties.Resources.cancel2;
-            this.BtCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BtCancel.Name = "BtCancel";
-            this.BtCancel.Size = new System.Drawing.Size(23, 22);
-            this.BtCancel.Text = "toolStripButton1";
-            this.BtCancel.ToolTipText = "Cancelar operação";
-            // 
             // SelectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -131,6 +131,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.a1Panel1);
             this.Controls.Add(this.tBar);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "SelectForm";
             this.ShowInTaskbar = false;

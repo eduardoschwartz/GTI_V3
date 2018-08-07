@@ -43,6 +43,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(655, 485);
             this.Controls.Add(this.crViewer);
+            this.DoubleBuffered = true;
             this.Name = "ReportCR";
             this.ShowInTaskbar = false;
             this.Text = "ReportCR";

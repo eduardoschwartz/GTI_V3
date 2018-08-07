@@ -589,6 +589,7 @@
             this.Controls.Add(this.Label2);
             this.Controls.Add(this.Nome);
             this.Controls.Add(this.pnlEnd);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Escritorio_Contabil";

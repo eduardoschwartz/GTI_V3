@@ -111,6 +111,7 @@
             this.ClientSize = new System.Drawing.Size(304, 299);
             this.Controls.Add(this.tBar);
             this.Controls.Add(this.lstMain);
+            this.DoubleBuffered = true;
             this.MaximizeBox = false;
             this.Name = "Pais";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

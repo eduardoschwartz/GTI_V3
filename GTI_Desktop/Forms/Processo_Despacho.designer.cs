@@ -127,6 +127,7 @@
             this.ClientSize = new System.Drawing.Size(304, 299);
             this.Controls.Add(this.lstMain);
             this.Controls.Add(this.tBar);
+            this.DoubleBuffered = true;
             this.MaximizeBox = false;
             this.Name = "Processo_Despacho";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

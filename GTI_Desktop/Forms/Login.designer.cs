@@ -45,9 +45,9 @@
             this.txtServer = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.LoginToolStrip = new System.Windows.Forms.ToolStrip();
-            this.LoginButton = new System.Windows.Forms.ToolStripButton();
-            this.SenhaButton = new System.Windows.Forms.ToolStripButton();
             this.SairButton = new System.Windows.Forms.ToolStripButton();
+            this.SenhaButton = new System.Windows.Forms.ToolStripButton();
+            this.LoginButton = new System.Windows.Forms.ToolStripButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.tBar.SuspendLayout();
@@ -278,20 +278,20 @@
             this.LoginToolStrip.TabIndex = 77;
             this.LoginToolStrip.Text = "toolStrip1";
             // 
-            // LoginButton
+            // SairButton
             // 
-            this.LoginButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.LoginButton.AutoSize = false;
-            this.LoginButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.LoginButton.ForeColor = System.Drawing.Color.Navy;
-            this.LoginButton.Image = global::GTI_Desktop.Properties.Resources.OK;
-            this.LoginButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.LoginButton.Name = "LoginButton";
-            this.LoginButton.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.LoginButton.Size = new System.Drawing.Size(63, 22);
-            this.LoginButton.Text = "Entrar";
-            this.LoginButton.ToolTipText = "Acessar o sistema";
-            this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
+            this.SairButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.SairButton.AutoSize = false;
+            this.SairButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.SairButton.ForeColor = System.Drawing.Color.Navy;
+            this.SairButton.Image = global::GTI_Desktop.Properties.Resources.Exit;
+            this.SairButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SairButton.Name = "SairButton";
+            this.SairButton.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.SairButton.Size = new System.Drawing.Size(63, 22);
+            this.SairButton.Text = "Sair";
+            this.SairButton.ToolTipText = "Trocar a senha";
+            this.SairButton.Click += new System.EventHandler(this.SairButton_Click);
             // 
             // SenhaButton
             // 
@@ -308,20 +308,20 @@
             this.SenhaButton.ToolTipText = "Trocar a senha";
             this.SenhaButton.Click += new System.EventHandler(this.SenhaButton_Click);
             // 
-            // SairButton
+            // LoginButton
             // 
-            this.SairButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.SairButton.AutoSize = false;
-            this.SairButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.SairButton.ForeColor = System.Drawing.Color.Navy;
-            this.SairButton.Image = global::GTI_Desktop.Properties.Resources.Exit;
-            this.SairButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SairButton.Name = "SairButton";
-            this.SairButton.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.SairButton.Size = new System.Drawing.Size(63, 22);
-            this.SairButton.Text = "Sair";
-            this.SairButton.ToolTipText = "Trocar a senha";
-            this.SairButton.Click += new System.EventHandler(this.SairButton_Click);
+            this.LoginButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.LoginButton.AutoSize = false;
+            this.LoginButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.LoginButton.ForeColor = System.Drawing.Color.Navy;
+            this.LoginButton.Image = global::GTI_Desktop.Properties.Resources.OK;
+            this.LoginButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.LoginButton.Name = "LoginButton";
+            this.LoginButton.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.LoginButton.Size = new System.Drawing.Size(63, 22);
+            this.LoginButton.Text = "Entrar";
+            this.LoginButton.ToolTipText = "Acessar o sistema";
+            this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
             // panel2
             // 
@@ -350,6 +350,7 @@
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox1);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
             this.Name = "Login";

@@ -42,8 +42,8 @@
             this.LocalComboBox = new System.Windows.Forms.ComboBox();
             this.LocalTextBox = new System.Windows.Forms.TextBox();
             this.a1Panel1 = new Owf.Controls.A1Panel();
-            this.label4 = new System.Windows.Forms.Label();
             this.LocalListBox = new System.Windows.Forms.CheckedListBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.tBar.SuspendLayout();
             this.a1Panel1.SuspendLayout();
             this.SuspendLayout();
@@ -251,6 +251,16 @@
             this.a1Panel1.Size = new System.Drawing.Size(485, 210);
             this.a1Panel1.TabIndex = 166;
             // 
+            // LocalListBox
+            // 
+            this.LocalListBox.CheckOnClick = true;
+            this.LocalListBox.FormattingEnabled = true;
+            this.LocalListBox.Location = new System.Drawing.Point(3, 18);
+            this.LocalListBox.Name = "LocalListBox";
+            this.LocalListBox.Size = new System.Drawing.Size(474, 184);
+            this.LocalListBox.TabIndex = 1;
+            this.LocalListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.LocalListBox_ItemCheck);
+            // 
             // label4
             // 
             this.label4.BackColor = System.Drawing.Color.Maroon;
@@ -261,16 +271,6 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Permissão de trâmite de processos nos seguintes locais";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // LocalListBox
-            // 
-            this.LocalListBox.CheckOnClick = true;
-            this.LocalListBox.FormattingEnabled = true;
-            this.LocalListBox.Location = new System.Drawing.Point(3, 18);
-            this.LocalListBox.Name = "LocalListBox";
-            this.LocalListBox.Size = new System.Drawing.Size(474, 184);
-            this.LocalListBox.TabIndex = 1;
-            this.LocalListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.LocalListBox_ItemCheck);
             // 
             // Usuario
             // 
@@ -289,6 +289,7 @@
             this.Controls.Add(this.NomeLoginTextBox);
             this.Controls.Add(this.NomeCompletoTextBox);
             this.Controls.Add(this.tBar);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Usuario";

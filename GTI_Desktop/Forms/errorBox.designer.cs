@@ -101,6 +101,7 @@
             this.Controls.Add(this.btOk);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.txtMsg);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ErrorBox";
             this.ShowInTaskbar = false;

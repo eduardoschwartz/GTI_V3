@@ -143,6 +143,7 @@
             this.ClientSize = new System.Drawing.Size(516, 340);
             this.Controls.Add(this.a1Panel1);
             this.Controls.Add(this.lvMain);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Documento_Detalhe";

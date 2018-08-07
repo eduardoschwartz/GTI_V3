@@ -67,6 +67,7 @@
             this.ClientSize = new System.Drawing.Size(367, 398);
             this.Controls.Add(this.MainList);
             this.Controls.Add(this.tBar);
+            this.DoubleBuffered = true;
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(200, 300);
             this.Name = "Escritorio_Contabil_Lista";

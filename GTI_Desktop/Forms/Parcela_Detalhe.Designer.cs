@@ -910,6 +910,7 @@
             this.Controls.Add(this.Label24);
             this.Controls.Add(this.Label1);
             this.Controls.Add(this.lvTributo);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

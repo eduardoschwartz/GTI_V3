@@ -316,6 +316,7 @@ namespace GTI_Desktop.Forms {
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbUF);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Endereco";
             this.ShowInTaskbar = false;

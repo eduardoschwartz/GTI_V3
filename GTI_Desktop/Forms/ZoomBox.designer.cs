@@ -72,6 +72,7 @@
             this.ClientSize = new System.Drawing.Size(422, 256);
             this.Controls.Add(this.txtZoom);
             this.Controls.Add(this.tBar);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "ZoomBox";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

@@ -19,6 +19,8 @@ namespace GTI_Desktop.Forms {
         public Imovel() {
             gtiCore.Ocupado(this);
             InitializeComponent();
+            HistoricoBar.Renderer = new MySR();
+            AreasBar.Renderer = new MySR();
             ClearFields();
             Carrega_Lista();
             bAddNew = false;
@@ -78,6 +80,8 @@ namespace GTI_Desktop.Forms {
             TipoConstrucaoList.SelectedIndex = -1;
             UsoConstrucaoList.SelectedIndex = -1;
             CategoriaConstrucaoList.SelectedIndex = -1;
+            ImovelTab.SelectedTab = ImovelTab.TabPages[0];
+            Refresh();
         }
 
         private void ControlBehaviour(bool bStart) {
@@ -96,9 +100,13 @@ namespace GTI_Desktop.Forms {
             RemoverProprietarioMenu.Enabled = !bStart;
             ConsultarProprietarioMenu.Enabled = !bStart;
             PrincipalProprietarioMenu.Enabled = !bStart;
-            AdicionarAreaMenu.Enabled = !bStart;
-            RemoverAreaMenu.Enabled = !bStart;
-            VisualizarHistoricoMenu.Enabled = !bStart;
+            AddAreaButton.Enabled = !bStart;
+            EditAreaButton.Enabled = !bStart;
+            DelAreaButton.Enabled = !bStart;
+            AddHistoricoButton.Enabled = !bStart;
+            EditHistoricoButton.Enabled = !bStart;
+            DelHistoricoButton.Enabled = !bStart;
+            ZoomHistoricoButton.Enabled = true;
             ResideCheck.AutoCheck = !bStart;
             ImuneCheck.AutoCheck = !bStart;
             IsentoCIPCheck.AutoCheck = !bStart;
@@ -192,23 +200,23 @@ namespace GTI_Desktop.Forms {
         private void BtAdd_Click(object sender, EventArgs e) {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroImovel_Novo);
             if (bAllow) {
-                //using (var form = new Imovel_Novo()) {
-                //    var result = form.ShowDialog(this);
-                //    if (result == DialogResult.OK) {
-                //        ClearFields();
-                //        Inscricao.Text = form.ReturnInscricao;
-                //        Distrito.Text = Inscricao.Text.Substring(0, 1);
-                //        Setor.Text = Inscricao.Text.Substring(2, 2);
-                //        Quadra.Text = Inscricao.Text.Substring(5, 4);
-                //        Lote.Text = Inscricao.Text.Substring(10, 5);
-                //        Face.Text = Inscricao.Text.Substring(16, 2);
-                //        Unidade.Text = Inscricao.Text.Substring(19, 2);
-                //        SubUnidade.Text = Inscricao.Text.Substring(22, 3);
-                //        Condominio.Text = form.ReturnCondominio;
+                using (var form = new Imovel_Novo()) {
+                    var result = form.ShowDialog(this);
+                    if (result == DialogResult.OK) {
+                        ClearFields();
+                        Inscricao.Text = form.ReturnInscricao;
+                        Distrito.Text = Inscricao.Text.Substring(0, 1);
+                        Setor.Text = Inscricao.Text.Substring(2, 2);
+                        Quadra.Text = Inscricao.Text.Substring(5, 4);
+                        Lote.Text = Inscricao.Text.Substring(10, 5);
+                        Face.Text = Inscricao.Text.Substring(16, 2);
+                        Unidade.Text = Inscricao.Text.Substring(19, 2);
+                        SubUnidade.Text = Inscricao.Text.Substring(22, 3);
+                        Condominio.Text = form.ReturnCondominio;
                         bAddNew = true;
                         ControlBehaviour(false);
-                //    }
-                //}
+                    }
+                }
             } else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -534,7 +542,6 @@ namespace GTI_Desktop.Forms {
             BarToolStrip.Enabled = true;
         }
 
-
         private void TxtNumProcesso_KeyPress(object sender, KeyPressEventArgs e) {
             if (e.KeyChar != (char)Keys.Return && e.KeyChar != (char)Keys.Tab) {
                 const char Delete = (char)8;
@@ -816,8 +823,8 @@ namespace GTI_Desktop.Forms {
                 //Carrega Área
                 short n = 1;
                 decimal SomaArea = 0;
-                List<GTI_Models.Models.AreaStruct> ListaA = clsImovel.Lista_Area(Codigo);
-                foreach (GTI_Models.Models.AreaStruct reg in ListaA) {
+                List<AreaStruct> ListaA = clsImovel.Lista_Area(Codigo);
+                foreach (AreaStruct reg in ListaA) {
                     ListViewItem lvItem = new ListViewItem(n.ToString("00"));
                     lvItem.SubItems.Add(string.Format("{0:0.00}", (decimal)reg.Area));
                     lvItem.SubItems.Add(reg.Uso_Nome);
@@ -846,7 +853,25 @@ namespace GTI_Desktop.Forms {
                     SomaArea += reg.Area;
                     n++;
                 }
+                if (AreaListView.Items.Count > 0)
+                    AreaListView.Items[0].Selected = true;
                 this.SomaArea.Text = string.Format("{0:0.00}", SomaArea);
+
+                //Carrega Histórico
+                n = 1;
+                List<HistoricoStruct> ListaH = clsImovel.Lista_Historico(Codigo);
+                foreach (HistoricoStruct reg in ListaH) {
+                    ListViewItem lvItem = new ListViewItem(n.ToString("000"));
+                    lvItem.SubItems.Add( Convert.ToDateTime(reg.Data).ToString("dd/MM/yyyy"));
+                    lvItem.SubItems.Add(reg.Descricao);
+                    lvItem.SubItems.Add(reg.Usuario_Nome);
+                    lvItem.Tag = reg.Usuario_Codigo.ToString();
+                    HistoricoListView.Items.Add(lvItem);
+                    n++;
+                }
+                if (HistoricoListView.Items.Count > 0)
+                    HistoricoListView.Items[0].Selected = true;
+
                 //TODO: Ler CIP, Imunidade 
 
                 DrawGraph(Codigo);
@@ -990,6 +1015,10 @@ namespace GTI_Desktop.Forms {
                     }
                 }
             }
+        }
+
+        private void OpcoesAreaButton_Click(object sender, EventArgs e) {
+
         }
 
         private void DrawGraph(int Codigo) {

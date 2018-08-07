@@ -210,6 +210,7 @@
             this.Controls.Add(this.txtCompleto);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lstMain);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Tributo";
