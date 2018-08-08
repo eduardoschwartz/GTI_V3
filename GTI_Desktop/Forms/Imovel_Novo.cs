@@ -181,13 +181,12 @@ namespace GTI_Desktop.Forms {
             }
 
             Imovel_bll imovel_Class = new Imovel_bll(_connection);
-            int nCodigo = imovel_Class.Retorna_Imovel_Inscricao(distrito, setor, quadra, lote, face, unidade, subunidade);
-            if (nCodigo > 0) {
+            int nCodigo = imovel_Class.Existe_Imovel(distrito, setor, quadra, lote, unidade, subunidade);
+            if (nCodigo>0) {
                 MessageBox.Show("Já existe um imóvel com esta inscrição cadastral (" + nCodigo.ToString("000000") + ")", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
             } else {
-
-                List<FacequadraStruct> listaFace = imovel_Class.Lista_FaceQuadra(distrito, setor, quadra, face);
-                if (listaFace.Count == 0) {
+               bool ExisteFace = imovel_Class.Existe_Face_Quadra(distrito, setor, quadra, face);
+                if (!ExisteFace) {
                     MessageBox.Show("Face de quadra não cadastrada.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 } else {
                     DialogResult = DialogResult.OK;

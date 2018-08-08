@@ -40,7 +40,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.Distrito = new System.Windows.Forms.Label();
             this.Quadra = new System.Windows.Forms.TextBox();
             this.Lote = new System.Windows.Forms.TextBox();
             this.Face = new System.Windows.Forms.TextBox();
@@ -145,6 +144,7 @@
             this.AreaConstruida = new System.Windows.Forms.TextBox();
             this.label43 = new System.Windows.Forms.Label();
             this.CancelAreaButton = new System.Windows.Forms.Button();
+            this.Distrito = new System.Windows.Forms.TextBox();
             this.tBar.SuspendLayout();
             this.PanelHeader.SuspendLayout();
             this.PanelLocal.SuspendLayout();
@@ -331,17 +331,6 @@
             this.label8.TabIndex = 141;
             this.label8.Text = "Face:";
             // 
-            // Distrito
-            // 
-            this.Distrito.AutoSize = true;
-            this.Distrito.BackColor = System.Drawing.Color.Transparent;
-            this.Distrito.ForeColor = System.Drawing.Color.Navy;
-            this.Distrito.Location = new System.Drawing.Point(63, 31);
-            this.Distrito.Name = "Distrito";
-            this.Distrito.Size = new System.Drawing.Size(13, 13);
-            this.Distrito.TabIndex = 144;
-            this.Distrito.Text = "0";
-            // 
             // Quadra
             // 
             this.Quadra.BackColor = System.Drawing.Color.White;
@@ -405,7 +394,7 @@
             this.Nome.MaxLength = 40;
             this.Nome.Name = "Nome";
             this.Nome.Size = new System.Drawing.Size(403, 20);
-            this.Nome.TabIndex = 1;
+            this.Nome.TabIndex = 0;
             // 
             // Setor
             // 
@@ -427,6 +416,7 @@
             this.PanelHeader.BackColor = System.Drawing.SystemColors.Control;
             this.PanelHeader.BorderColor = System.Drawing.Color.DimGray;
             this.PanelHeader.BorderWidth = 0;
+            this.PanelHeader.Controls.Add(this.Distrito);
             this.PanelHeader.Controls.Add(this.ProprietarioButton);
             this.PanelHeader.Controls.Add(this.ProprietarioCodigo);
             this.PanelHeader.Controls.Add(this.label26);
@@ -436,7 +426,6 @@
             this.PanelHeader.Controls.Add(this.Face);
             this.PanelHeader.Controls.Add(this.Lote);
             this.PanelHeader.Controls.Add(this.Quadra);
-            this.PanelHeader.Controls.Add(this.Distrito);
             this.PanelHeader.Controls.Add(this.label8);
             this.PanelHeader.Controls.Add(this.label7);
             this.PanelHeader.Controls.Add(this.label6);
@@ -1578,18 +1567,32 @@
             this.CancelAreaButton.UseVisualStyleBackColor = false;
             this.CancelAreaButton.Click += new System.EventHandler(this.CancelAreaButton_Click);
             // 
+            // Distrito
+            // 
+            this.Distrito.BackColor = System.Drawing.Color.White;
+            this.Distrito.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Distrito.ForeColor = System.Drawing.Color.Navy;
+            this.Distrito.Location = new System.Drawing.Point(56, 28);
+            this.Distrito.MaxLength = 1;
+            this.Distrito.Name = "Distrito";
+            this.Distrito.ReadOnly = true;
+            this.Distrito.Size = new System.Drawing.Size(32, 20);
+            this.Distrito.TabIndex = 1;
+            this.Distrito.Text = "0";
+            this.Distrito.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Condominio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(636, 402);
-            this.Controls.Add(this.AreaPanel);
             this.Controls.Add(this.PanelOutro);
             this.Controls.Add(this.PanelDados);
             this.Controls.Add(this.PanelLocal);
             this.Controls.Add(this.PanelHeader);
             this.Controls.Add(this.tBar);
             this.Controls.Add(this.AreaEditPanel);
+            this.Controls.Add(this.AreaPanel);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -1636,7 +1639,6 @@
         internal System.Windows.Forms.Label label6;
         internal System.Windows.Forms.Label label7;
         internal System.Windows.Forms.Label label8;
-        internal System.Windows.Forms.Label Distrito;
         private System.Windows.Forms.TextBox Quadra;
         private System.Windows.Forms.TextBox Lote;
         private System.Windows.Forms.TextBox Face;
@@ -1742,5 +1744,6 @@
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.Button CancelAreaButton;
         private System.Windows.Forms.ToolStripMenuItem AlterarMenuItem;
+        private System.Windows.Forms.TextBox Distrito;
     }
 }

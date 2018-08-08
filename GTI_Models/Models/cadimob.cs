@@ -57,6 +57,8 @@ namespace GTI_Models.Models {
         public int CodigoCondominio { get; set; }
         public string NomeCondominio { get; set; }
         public bool? Imunidade { get; set; }
+        public bool? Cip { get; set; }
+        public bool? Conjugado { get; set; }
         public string TipoMat { get; set; }
         public long? NumMatricula { get; set; }
         public int? CodigoLogradouro { get; set; }

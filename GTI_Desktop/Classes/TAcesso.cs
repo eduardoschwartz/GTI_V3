@@ -23,6 +23,7 @@
         CadastroProcesso_Novo = 21,
         CadastroImovel_Novo = 22,
         CadastroCondominio = 23,
-        CadastroCondominio_Alterar = 24
+        CadastroCondominio_Alterar = 24,
+        CadastroImovel_IPTU=25
     }
 }

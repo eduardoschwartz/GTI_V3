@@ -24,7 +24,7 @@ namespace GTI_Bll.Classes {
 
         public List<ProprietarioStruct> Lista_Proprietario(int CodigoImovel, bool Principal = false) {
             Imovel_Data obj = new Imovel_Data(_connection);
-            return obj.Lista_Proprietario(CodigoImovel,Principal);
+            return obj.Lista_Proprietario(CodigoImovel, Principal);
         }
 
         public List<LogradouroStruct> Lista_Logradouro(String Filter = "") {
@@ -32,9 +32,43 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Logradouro(Filter);
         }
 
+        /// <summary>
+        /// Verifica se existe o imóvel informado
+        /// </summary>
+        /// <param name="nCodigo"></param>
+        /// <returns></returns>
         public bool Existe_Imovel(int nCodigo) {
             Imovel_Data obj = new Imovel_Data(_connection);
             return obj.Existe_Imovel(nCodigo);
+        }
+
+        /// <summary>
+        /// Verifica e o imóvelk existe
+        /// </summary>
+        /// <param name="distrito"></param>
+        /// <param name="setor"></param>
+        /// <param name="quadra"></param>
+        /// <param name="lote"></param>
+        /// <param name="unidade"></param>
+        /// <param name="subunidade"></param>
+        /// <returns></returns>
+        public int Existe_Imovel(int distrito, int setor, int quadra, int lote, int unidade, int subunidade) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Existe_Imovel(distrito,setor,quadra,lote,unidade,subunidade);
+        }
+
+
+        /// <summary>
+        /// Verifica se existe a Face informada
+        /// </summary>
+        /// <param name="Distrito"></param>
+        /// <param name="Setor"></param>
+        /// <param name="Quadra"></param>
+        /// <param name="Face"></param>
+        /// <returns></returns>
+        public bool Existe_Face_Quadra(int Distrito, int Setor, int Quadra, int Face) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Existe_Face_Quadra(Distrito,Setor,Quadra,Face);
         }
 
         public EnderecoStruct Dados_Endereco(int Codigo, bllCore.TipoEndereco Tipo) {
@@ -273,6 +307,26 @@ namespace GTI_Bll.Classes {
         public List<FacequadraStruct> Lista_FaceQuadra(int distrito, int setor, int quadra, int face) {
             Imovel_Data obj = new Imovel_Data(_connection);
             return obj.Lista_FaceQuadra(distrito, setor, quadra, face);
+        }
+
+        /// <summary>
+        /// Retorna o proximo código disponivel de imóvel
+        /// </summary>
+        /// <returns></returns>
+        public int Retorna_Codigo_Disponivel() {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Retorna_Codigo_Disponivel();
+        }
+
+        /// <summary>
+        /// Incluir um novo imóvel
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Incluir_Imovel(Cadimob reg) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            Exception ex = obj.Incluir_Imovel(reg);
+            return ex;
         }
 
     }//end class

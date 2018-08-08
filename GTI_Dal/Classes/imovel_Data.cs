@@ -46,6 +46,7 @@ namespace GTI_Dal.Classes {
                 row.CodigoCondominio = reg.CodigoCondominio;
                 row.NomeCondominio = reg.NomeCondominio.ToString();
                 row.Imunidade = reg.Imunidade == null ? false : Convert.ToBoolean(reg.Imunidade);
+                row.Cip = reg.Cip == null ? false : Convert.ToBoolean(reg.Cip);
                 row.ResideImovel = reg.ResideImovel == null ? false : Convert.ToBoolean(reg.ResideImovel);
                 row.Inativo = reg.Inativo == null ? false : Convert.ToBoolean(reg.Inativo);
                 if (reg.TipoMat == null || reg.TipoMat == "M")
@@ -181,6 +182,14 @@ namespace GTI_Dal.Classes {
                 }
             }
             return bRet;
+        }
+
+        public int Existe_Imovel(int distrito, int setor, int quadra, int lote, int unidade, int subunidade) {
+            int nRet = 0;
+            using (var db = new GTI_Context(_connection)) {
+                nRet = (from a in db.Cadimob where a.Distrito == distrito && a.Setor == setor && a.Quadra == quadra && a.Lote == lote && a.Unidade == unidade && a.Subunidade == subunidade select a.Codreduzido).FirstOrDefault();
+            }
+            return nRet;
         }
 
         public int Retorna_Imovel_Inscricao(int distrito,int setor,int quadra,int lote,int face,int unidade,int subunidade) {
@@ -775,6 +784,40 @@ namespace GTI_Dal.Classes {
                 return Lista;
             }
         }
+
+        public bool Existe_Face_Quadra(int Distrito,int Setor,int Quadra,int Face) {
+            bool bRet = false;
+            using (var db = new GTI_Context(_connection)) {
+                var existingReg = db.Facequadra.Count(a => a.Coddistrito == Distrito && a.Codsetor==Setor && a.Codquadra==Quadra && a.Codface==Face);
+                if (existingReg != 0) {
+                    bRet = true;
+                }
+            }
+            return bRet;
+        }
+
+        public int Retorna_Codigo_Disponivel() {
+            int maxCod = 0;
+            using (var db = new GTI_Context(_connection)) {
+                maxCod = (from c in db.Cadimob select c.Codreduzido).Max();
+                maxCod = Convert.ToInt32(maxCod + 1);
+            }
+            return maxCod;
+        }
+
+        public Exception Incluir_Imovel(Cadimob reg) {
+            using (var db = new GTI_Context(_connection)) {
+                db.Cadimob.Add(reg);
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+
 
 
     }//end class

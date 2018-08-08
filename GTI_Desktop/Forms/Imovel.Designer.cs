@@ -117,9 +117,6 @@
             this.label33 = new System.Windows.Forms.Label();
             this.DadosConstrucaoTab = new System.Windows.Forms.TabPage();
             this.a1Panel8 = new Owf.Controls.A1Panel();
-            this.ValorIPTU = new System.Windows.Forms.Label();
-            this.AnoIPTUList = new System.Windows.Forms.ComboBox();
-            this.label52 = new System.Windows.Forms.Label();
             this.IsentoCIPCheck = new System.Windows.Forms.CheckBox();
             this.ImuneCheck = new System.Windows.Forms.CheckBox();
             this.label63 = new System.Windows.Forms.Label();
@@ -152,11 +149,6 @@
             this.Codigo = new System.Windows.Forms.Label();
             this.Ativo = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.SubUnidade = new System.Windows.Forms.TextBox();
-            this.Unidade = new System.Windows.Forms.TextBox();
-            this.Face = new System.Windows.Forms.TextBox();
-            this.Lote = new System.Windows.Forms.TextBox();
-            this.Quadra = new System.Windows.Forms.TextBox();
             this.Setor = new System.Windows.Forms.Label();
             this.Distrito = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -170,6 +162,11 @@
             this.Inscricao = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.TopPanel = new Owf.Controls.A1Panel();
+            this.SubUnidade = new System.Windows.Forms.Label();
+            this.Unidade = new System.Windows.Forms.Label();
+            this.Face = new System.Windows.Forms.Label();
+            this.Lote = new System.Windows.Forms.Label();
+            this.Quadra = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.Label2 = new System.Windows.Forms.Label();
             this.ProprietarioTab = new System.Windows.Forms.TabPage();
@@ -211,6 +208,8 @@
             this.label46 = new System.Windows.Forms.Label();
             this.AreaConstruida = new System.Windows.Forms.TextBox();
             this.label43 = new System.Windows.Forms.Label();
+            this.IPTUButton = new System.Windows.Forms.Button();
+            this.ConjugadoCheck = new System.Windows.Forms.CheckBox();
             this.a1Panel1.SuspendLayout();
             this.EnderecoEntregaTab.SuspendLayout();
             this.a1Panel3.SuspendLayout();
@@ -257,6 +256,7 @@
             this.End3Option.TabIndex = 13;
             this.End3Option.Text = "Entrega";
             this.End3Option.UseVisualStyleBackColor = true;
+            this.End3Option.CheckedChanged += new System.EventHandler(this.End3Option_CheckedChanged);
             // 
             // End2Option
             // 
@@ -269,6 +269,7 @@
             this.End2Option.TabIndex = 12;
             this.End2Option.Text = "Proprietário";
             this.End2Option.UseVisualStyleBackColor = true;
+            this.End2Option.CheckedChanged += new System.EventHandler(this.End2Option_CheckedChanged);
             // 
             // End1Option
             // 
@@ -283,6 +284,7 @@
             this.End1Option.TabStop = true;
             this.End1Option.Text = "Imóvel";
             this.End1Option.UseVisualStyleBackColor = true;
+            this.End1Option.CheckedChanged += new System.EventHandler(this.End1Option_CheckedChanged);
             // 
             // label28
             // 
@@ -1316,9 +1318,7 @@
             // a1Panel8
             // 
             this.a1Panel8.BorderColor = System.Drawing.Color.Gray;
-            this.a1Panel8.Controls.Add(this.ValorIPTU);
-            this.a1Panel8.Controls.Add(this.AnoIPTUList);
-            this.a1Panel8.Controls.Add(this.label52);
+            this.a1Panel8.Controls.Add(this.ConjugadoCheck);
             this.a1Panel8.Controls.Add(this.IsentoCIPCheck);
             this.a1Panel8.Controls.Add(this.ImuneCheck);
             this.a1Panel8.Controls.Add(this.label63);
@@ -1334,36 +1334,6 @@
             this.a1Panel8.ShadowOffSet = 7;
             this.a1Panel8.Size = new System.Drawing.Size(220, 227);
             this.a1Panel8.TabIndex = 160;
-            // 
-            // ValorIPTU
-            // 
-            this.ValorIPTU.AutoSize = true;
-            this.ValorIPTU.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ValorIPTU.Location = new System.Drawing.Point(154, 53);
-            this.ValorIPTU.Name = "ValorIPTU";
-            this.ValorIPTU.Size = new System.Drawing.Size(45, 13);
-            this.ValorIPTU.TabIndex = 176;
-            this.ValorIPTU.Text = "R$ 0,00";
-            // 
-            // AnoIPTUList
-            // 
-            this.AnoIPTUList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.AnoIPTUList.FormattingEnabled = true;
-            this.AnoIPTUList.Location = new System.Drawing.Point(110, 76);
-            this.AnoIPTUList.Name = "AnoIPTUList";
-            this.AnoIPTUList.Size = new System.Drawing.Size(63, 21);
-            this.AnoIPTUList.TabIndex = 175;
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline);
-            this.label52.ForeColor = System.Drawing.Color.Black;
-            this.label52.Location = new System.Drawing.Point(10, 86);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(94, 13);
-            this.label52.TabIndex = 174;
-            this.label52.Text = "Valor do IPTU em:";
             // 
             // IsentoCIPCheck
             // 
@@ -1443,6 +1413,7 @@
             this.AddHistoricoButton.Size = new System.Drawing.Size(23, 22);
             this.AddHistoricoButton.Text = "toolStripButton1";
             this.AddHistoricoButton.ToolTipText = "Adicionar histórico";
+            this.AddHistoricoButton.Click += new System.EventHandler(this.AddHistoricoButton_Click);
             // 
             // EditHistoricoButton
             // 
@@ -1453,6 +1424,7 @@
             this.EditHistoricoButton.Size = new System.Drawing.Size(23, 22);
             this.EditHistoricoButton.Text = "toolStripButton1";
             this.EditHistoricoButton.ToolTipText = "Alterar o histórico selecionado";
+            this.EditHistoricoButton.Click += new System.EventHandler(this.EditHistoricoButton_Click);
             // 
             // DelHistoricoButton
             // 
@@ -1463,6 +1435,7 @@
             this.DelHistoricoButton.Size = new System.Drawing.Size(23, 22);
             this.DelHistoricoButton.Text = "toolStripButton2";
             this.DelHistoricoButton.ToolTipText = "Excluir histórico selecionado";
+            this.DelHistoricoButton.Click += new System.EventHandler(this.DelHistoricoButton_Click);
             // 
             // ZoomHistoricoButton
             // 
@@ -1473,6 +1446,7 @@
             this.ZoomHistoricoButton.Size = new System.Drawing.Size(23, 22);
             this.ZoomHistoricoButton.Text = "toolStripButton3";
             this.ZoomHistoricoButton.ToolTipText = "Visualizar histórico selecionado";
+            this.ZoomHistoricoButton.Click += new System.EventHandler(this.ZoomHistoricoButton_Click);
             // 
             // HistoricoListView
             // 
@@ -1490,6 +1464,7 @@
             this.HistoricoListView.TabIndex = 30;
             this.HistoricoListView.UseCompatibleStateImageBehavior = false;
             this.HistoricoListView.View = System.Windows.Forms.View.Details;
+            this.HistoricoListView.DoubleClick += new System.EventHandler(this.ZoomHistoricoButton_Click);
             // 
             // columnHeader6
             // 
@@ -1734,76 +1709,6 @@
             this.label20.TabIndex = 151;
             this.label20.Text = "Situação:";
             // 
-            // SubUnidade
-            // 
-            this.SubUnidade.BackColor = System.Drawing.Color.White;
-            this.SubUnidade.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.SubUnidade.ForeColor = System.Drawing.Color.Navy;
-            this.SubUnidade.Location = new System.Drawing.Point(574, 28);
-            this.SubUnidade.Name = "SubUnidade";
-            this.SubUnidade.ReadOnly = true;
-            this.SubUnidade.Size = new System.Drawing.Size(39, 20);
-            this.SubUnidade.TabIndex = 150;
-            this.SubUnidade.TabStop = false;
-            this.SubUnidade.Text = "000";
-            this.SubUnidade.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // Unidade
-            // 
-            this.Unidade.BackColor = System.Drawing.Color.White;
-            this.Unidade.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Unidade.ForeColor = System.Drawing.Color.Navy;
-            this.Unidade.Location = new System.Drawing.Point(460, 28);
-            this.Unidade.Name = "Unidade";
-            this.Unidade.ReadOnly = true;
-            this.Unidade.Size = new System.Drawing.Size(39, 20);
-            this.Unidade.TabIndex = 149;
-            this.Unidade.TabStop = false;
-            this.Unidade.Text = "00";
-            this.Unidade.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // Face
-            // 
-            this.Face.BackColor = System.Drawing.Color.White;
-            this.Face.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Face.ForeColor = System.Drawing.Color.Navy;
-            this.Face.Location = new System.Drawing.Point(365, 28);
-            this.Face.Name = "Face";
-            this.Face.ReadOnly = true;
-            this.Face.Size = new System.Drawing.Size(39, 20);
-            this.Face.TabIndex = 148;
-            this.Face.TabStop = false;
-            this.Face.Text = "00";
-            this.Face.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // Lote
-            // 
-            this.Lote.BackColor = System.Drawing.Color.White;
-            this.Lote.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Lote.ForeColor = System.Drawing.Color.Navy;
-            this.Lote.Location = new System.Drawing.Point(286, 28);
-            this.Lote.Name = "Lote";
-            this.Lote.ReadOnly = true;
-            this.Lote.Size = new System.Drawing.Size(39, 20);
-            this.Lote.TabIndex = 147;
-            this.Lote.TabStop = false;
-            this.Lote.Text = "00000";
-            this.Lote.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // Quadra
-            // 
-            this.Quadra.BackColor = System.Drawing.Color.White;
-            this.Quadra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Quadra.ForeColor = System.Drawing.Color.Navy;
-            this.Quadra.Location = new System.Drawing.Point(210, 28);
-            this.Quadra.Name = "Quadra";
-            this.Quadra.ReadOnly = true;
-            this.Quadra.Size = new System.Drawing.Size(39, 20);
-            this.Quadra.TabIndex = 146;
-            this.Quadra.TabStop = false;
-            this.Quadra.Text = "0000";
-            this.Quadra.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // Setor
             // 
             this.Setor.AutoSize = true;
@@ -1934,15 +1839,15 @@
             this.TopPanel.BackColor = System.Drawing.SystemColors.Control;
             this.TopPanel.BorderColor = System.Drawing.Color.DimGray;
             this.TopPanel.BorderWidth = 0;
-            this.TopPanel.Controls.Add(this.CodigoButton);
-            this.TopPanel.Controls.Add(this.Codigo);
-            this.TopPanel.Controls.Add(this.Ativo);
-            this.TopPanel.Controls.Add(this.label20);
             this.TopPanel.Controls.Add(this.SubUnidade);
             this.TopPanel.Controls.Add(this.Unidade);
             this.TopPanel.Controls.Add(this.Face);
             this.TopPanel.Controls.Add(this.Lote);
             this.TopPanel.Controls.Add(this.Quadra);
+            this.TopPanel.Controls.Add(this.CodigoButton);
+            this.TopPanel.Controls.Add(this.Codigo);
+            this.TopPanel.Controls.Add(this.Ativo);
+            this.TopPanel.Controls.Add(this.label20);
             this.TopPanel.Controls.Add(this.Setor);
             this.TopPanel.Controls.Add(this.Distrito);
             this.TopPanel.Controls.Add(this.label10);
@@ -1965,6 +1870,61 @@
             this.TopPanel.Name = "TopPanel";
             this.TopPanel.Size = new System.Drawing.Size(760, 58);
             this.TopPanel.TabIndex = 154;
+            // 
+            // SubUnidade
+            // 
+            this.SubUnidade.AutoSize = true;
+            this.SubUnidade.BackColor = System.Drawing.Color.Transparent;
+            this.SubUnidade.ForeColor = System.Drawing.Color.Navy;
+            this.SubUnidade.Location = new System.Drawing.Point(575, 31);
+            this.SubUnidade.Name = "SubUnidade";
+            this.SubUnidade.Size = new System.Drawing.Size(15, 13);
+            this.SubUnidade.TabIndex = 159;
+            this.SubUnidade.Text = "oi";
+            // 
+            // Unidade
+            // 
+            this.Unidade.AutoSize = true;
+            this.Unidade.BackColor = System.Drawing.Color.Transparent;
+            this.Unidade.ForeColor = System.Drawing.Color.Navy;
+            this.Unidade.Location = new System.Drawing.Point(466, 31);
+            this.Unidade.Name = "Unidade";
+            this.Unidade.Size = new System.Drawing.Size(19, 13);
+            this.Unidade.TabIndex = 158;
+            this.Unidade.Text = "00";
+            // 
+            // Face
+            // 
+            this.Face.AutoSize = true;
+            this.Face.BackColor = System.Drawing.Color.Transparent;
+            this.Face.ForeColor = System.Drawing.Color.Navy;
+            this.Face.Location = new System.Drawing.Point(370, 31);
+            this.Face.Name = "Face";
+            this.Face.Size = new System.Drawing.Size(19, 13);
+            this.Face.TabIndex = 157;
+            this.Face.Text = "00";
+            // 
+            // Lote
+            // 
+            this.Lote.AutoSize = true;
+            this.Lote.BackColor = System.Drawing.Color.Transparent;
+            this.Lote.ForeColor = System.Drawing.Color.Navy;
+            this.Lote.Location = new System.Drawing.Point(292, 31);
+            this.Lote.Name = "Lote";
+            this.Lote.Size = new System.Drawing.Size(37, 13);
+            this.Lote.TabIndex = 156;
+            this.Lote.Text = "00000";
+            // 
+            // Quadra
+            // 
+            this.Quadra.AutoSize = true;
+            this.Quadra.BackColor = System.Drawing.Color.Transparent;
+            this.Quadra.ForeColor = System.Drawing.Color.Navy;
+            this.Quadra.Location = new System.Drawing.Point(215, 31);
+            this.Quadra.Name = "Quadra";
+            this.Quadra.Size = new System.Drawing.Size(31, 13);
+            this.Quadra.TabIndex = 155;
+            this.Quadra.Text = "0000";
             // 
             // label1
             // 
@@ -2120,6 +2080,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.IPTUButton);
             this.tabPage1.Controls.Add(this.IptuChart);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -2140,6 +2101,7 @@
             this.IptuChart.Size = new System.Drawing.Size(733, 243);
             this.IptuChart.TabIndex = 178;
             this.IptuChart.Text = "chart1";
+            this.IptuChart.Visible = false;
             this.IptuChart.MouseMove += new System.Windows.Forms.MouseEventHandler(this.IptuChart_MouseMove);
             // 
             // toolStripSeparator1
@@ -2421,6 +2383,32 @@
             this.label43.TabIndex = 21;
             this.label43.Text = "Área em m²...:";
             // 
+            // IPTUButton
+            // 
+            this.IPTUButton.ForeColor = System.Drawing.Color.Maroon;
+            this.IPTUButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.IPTUButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.IPTUButton.Location = new System.Drawing.Point(313, 113);
+            this.IPTUButton.Name = "IPTUButton";
+            this.IPTUButton.Size = new System.Drawing.Size(151, 28);
+            this.IPTUButton.TabIndex = 179;
+            this.IPTUButton.Text = "Visualizar dados do ITPU";
+            this.IPTUButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.IPTUButton.UseVisualStyleBackColor = true;
+            this.IPTUButton.Click += new System.EventHandler(this.IPTUButton_Click);
+            // 
+            // ConjugadoCheck
+            // 
+            this.ConjugadoCheck.AutoCheck = false;
+            this.ConjugadoCheck.AutoSize = true;
+            this.ConjugadoCheck.ForeColor = System.Drawing.Color.Black;
+            this.ConjugadoCheck.Location = new System.Drawing.Point(13, 77);
+            this.ConjugadoCheck.Name = "ConjugadoCheck";
+            this.ConjugadoCheck.Size = new System.Drawing.Size(77, 17);
+            this.ConjugadoCheck.TabIndex = 34;
+            this.ConjugadoCheck.Text = "Conjugado";
+            this.ConjugadoCheck.UseVisualStyleBackColor = true;
+            // 
             // Imovel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2524,11 +2512,6 @@
         internal System.Windows.Forms.Label Codigo;
         internal System.Windows.Forms.Label Ativo;
         internal System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TextBox SubUnidade;
-        private System.Windows.Forms.TextBox Unidade;
-        private System.Windows.Forms.TextBox Face;
-        private System.Windows.Forms.TextBox Lote;
-        private System.Windows.Forms.TextBox Quadra;
         internal System.Windows.Forms.Label Setor;
         internal System.Windows.Forms.Label Distrito;
         internal System.Windows.Forms.Label label10;
@@ -2648,9 +2631,6 @@
         private System.Windows.Forms.TextBox ProcessoArea;
         private System.Windows.Forms.Button OkAreaButton;
         internal System.Windows.Forms.MaskedTextBox DataAprovacao;
-        private System.Windows.Forms.Label ValorIPTU;
-        private System.Windows.Forms.ComboBox AnoIPTUList;
-        private System.Windows.Forms.Label label52;
         private System.Windows.Forms.ToolStrip HistoricoBar;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.DataVisualization.Charting.Chart IptuChart;
@@ -2663,5 +2643,12 @@
         private System.Windows.Forms.ToolStripButton EditAreaButton;
         private System.Windows.Forms.ToolStripButton DelAreaButton;
         private System.Windows.Forms.ToolStripButton EditHistoricoButton;
+        internal System.Windows.Forms.Label SubUnidade;
+        internal System.Windows.Forms.Label Unidade;
+        internal System.Windows.Forms.Label Face;
+        internal System.Windows.Forms.Label Lote;
+        internal System.Windows.Forms.Label Quadra;
+        private System.Windows.Forms.Button IPTUButton;
+        private System.Windows.Forms.CheckBox ConjugadoCheck;
     }
 }
