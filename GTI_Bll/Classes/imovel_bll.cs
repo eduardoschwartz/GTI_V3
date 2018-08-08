@@ -329,5 +329,61 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        /// <summary>
+        /// Alterar o imóvel selecionado
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Alterar_Imovel(Cadimob reg) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            Exception ex = obj.Alterar_Imovel(reg);
+            return ex;
+        }
+
+        /// <summary>
+        /// Grava os proprietários do imóvel
+        /// </summary>
+        /// <param name="Lista"></param>
+        /// <returns></returns>
+        public Exception Incluir_Proprietario(List<Proprietario> Lista) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            Exception ex = obj.Incluir_Proprietario(Lista);
+            return ex;
+        }
+
+        /// <summary>
+        /// Grava as testadas do imóvel
+        /// </summary>
+        /// <param name="testadas"></param>
+        /// <returns></returns>
+        public Exception Incluir_Testada(List<Testada> testadas) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            Exception ex = obj.Incluir_Testada(testadas);
+            return ex;
+        }
+
+        /// <summary>
+        /// Grava os históricos do imóvel
+        /// </summary>
+        /// <param name="historicos"></param>
+        /// <returns></returns>
+        public Exception Incluir_Historico(List<Historico> historicos) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            Exception ex = obj.Incluir_Historico(historicos);
+            return ex;
+        }
+
+        /// <summary>
+        /// Grava as áreas do imóvel
+        /// </summary>
+        /// <param name="areas"></param>
+        /// <returns></returns>
+        public Exception Incluir_Area(List<Areas> areas) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            Exception ex = obj.Incluir_Area(areas);
+            return ex;
+        }
+
+
     }//end class
 }

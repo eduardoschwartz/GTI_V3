@@ -127,6 +127,7 @@ namespace GTI_Desktop.Forms {
             ResideCheck.AutoCheck = !bStart;
             ImuneCheck.AutoCheck = !bStart;
             IsentoCIPCheck.AutoCheck = !bStart;
+            ConjugadoCheck.AutoCheck = !bStart;
             MT1Check.AutoCheck = !bStart;
             MT2Check.AutoCheck= !bStart;
             LocalImovelButton.Enabled = !bStart;
@@ -277,7 +278,10 @@ namespace GTI_Desktop.Forms {
             reg.Dt_codsituacao = (short)SituacaoList.SelectedValue;
             reg.Dt_codtopog = (short)TopografiaList.SelectedValue;
             reg.Dt_codusoterreno = (short)UsoTerrenoList.SelectedValue;
-            reg.Dt_fracaoideal = Convert.ToDecimal(FracaoIdeal.Text);
+            if (FracaoIdeal.Text != "")
+                reg.Dt_fracaoideal = Convert.ToDecimal(FracaoIdeal.Text);
+            else
+                reg.Dt_fracaoideal = 0;
             reg.Ee_tipoend = End1Option.Checked ? (short)0 : End2Option.Checked ? (short)1 : (short)2;
             reg.Imune = ImuneCheck.Checked;
             reg.Inativo = Ativo.Text == "ATIVO" ? false : true;
@@ -290,7 +294,10 @@ namespace GTI_Desktop.Forms {
             reg.Li_quadras = Quadras.Text;
             reg.Li_uf = "SP";
             reg.Lote = Convert.ToInt32(Lote.Text);
-            reg.Nummat = Convert.ToInt32(Matricula.Text);
+            if (Matricula.Text != "")
+                reg.Nummat = Convert.ToInt32(Matricula.Text);
+            else
+                reg.Nummat = 0;
             reg.Quadra = Convert.ToInt16(Quadra.Text);
             reg.Resideimovel = ResideCheck.Checked;
             reg.Seq = Convert.ToInt16(Face.Text);
@@ -301,19 +308,112 @@ namespace GTI_Desktop.Forms {
 
             Imovel_bll imovel_Class = new Imovel_bll(_connection);
             Exception ex;
-
+            
             if (bAddNew) {
                 reg.Codreduzido = imovel_Class.Retorna_Codigo_Disponivel();
                 ex = imovel_Class.Incluir_Imovel(reg);
                 if (ex != null) {
                     ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
                     eBox.ShowDialog();
+                    goto Final;
                 } else {
                     Codigo.Text = reg.Codreduzido.ToString("000000");
                 }
             } else {
                 reg.Codreduzido = Convert.ToInt32(Codigo.Text);
+                ex = imovel_Class.Alterar_Imovel(reg);
+                if (ex != null) {
+                    ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                    eBox.ShowDialog();
+                    goto Final;
+                } 
             }
+            int nCodReduzido = reg.Codreduzido;
+
+            //grava proprietário
+            List<Proprietario> Lista = new List<Proprietario>();
+            foreach (ListViewItem item in ProprietarioListView.Items) {
+                Proprietario regProp = new Proprietario();
+                regProp.Codreduzido = nCodReduzido;
+                regProp.Codcidadao = Convert.ToInt32(item.Tag.ToString());
+                regProp.Principal = item.Text.Substring(item.Text.Length - 1, 1) == ")" ? true : false;
+                regProp.Tipoprop = item.Group.Name == "groupPP" ? "P" : "C";
+                Lista.Add(regProp);
+            }
+            ex = imovel_Class.Incluir_Proprietario(Lista);
+            if (ex != null) {
+                ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                eBox.ShowDialog();
+                goto Final;
+            }
+
+            //grava testada
+            List<Testada> ListaTestada = new List<Testada>();
+            foreach (ListViewItem item in TestadaListView.Items) {
+                Testada regT = new Testada();
+                regT.Codreduzido = nCodReduzido;
+                regT.Numface = Convert.ToInt16(item.Text.ToString());
+                regT.Areatestada = Convert.ToDecimal(item.SubItems[1].Text.ToString()); 
+                ListaTestada.Add(regT);
+            }
+            if (ListaTestada.Count > 0) {
+                ex = imovel_Class.Incluir_Testada(ListaTestada);
+                if (ex != null) {
+                    ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                    eBox.ShowDialog();
+                    goto Final;
+                }
+            }
+
+            //grava historico
+            List<Historico> ListaHist = new List<Historico>();
+            foreach (ListViewItem item in HistoricoListView.Items) {
+                Historico regH = new Historico();
+                regH.Codreduzido = nCodReduzido;
+                regH.Seq = Convert.ToInt16(item.Text.ToString());
+                regH.Datahist2 = Convert.ToDateTime(item.SubItems[1].Text.ToString());
+                regH.Deschist = item.SubItems[2].Text;
+                regH.Userid = Convert.ToInt32(item.Tag.ToString());
+                ListaHist.Add(regH);
+            }
+            if (ListaHist.Count > 0) {
+                ex = imovel_Class.Incluir_Historico(ListaHist);
+                if (ex != null) {
+                    ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                    eBox.ShowDialog();
+                    goto Final;
+                }
+            }
+
+            //grava area
+            List<Areas> ListaArea = new List<Areas>();
+            foreach (ListViewItem item in AreaListView.Items) {
+                Areas regA = new Areas();
+                regA.Codreduzido = nCodReduzido;
+                regA.Seqarea = Convert.ToInt16(item.Text.ToString());
+                regA.Areaconstr = Convert.ToDecimal(item.SubItems[1].Text.ToString());
+                regA.Usoconstr = Convert.ToInt16(item.SubItems[2].Tag.ToString());
+                regA.Tipoconstr = Convert.ToInt16(item.SubItems[3].Tag.ToString());
+                regA.Catconstr = Convert.ToInt16(item.SubItems[4].Tag.ToString());
+                regA.Tipoarea = "";
+                regA.Qtdepav = Convert.ToInt16(item.SubItems[5].Text);
+                regA.Dataaprova = Convert.ToDateTime(item.SubItems[6].Text);
+                regA.Numprocesso = item.SubItems[7].Text;
+                ListaArea.Add(regA);
+            }
+            if (ListaArea.Count > 0) {
+                ex = imovel_Class.Incluir_Area(ListaArea);
+                if (ex != null) {
+                    ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                    eBox.ShowDialog();
+                    goto Final;
+                }
+            }
+
+
+
+
+            Final:;
             ControlBehaviour(true);
         }
 
@@ -371,7 +471,7 @@ namespace GTI_Desktop.Forms {
 
             if (AreaTerreno.Text == "")
                 AreaTerreno.Text = "0";
-            if (Convert.ToInt32(AreaTerreno.Text) == 0) {
+            if (Convert.ToDecimal(AreaTerreno.Text) == 0) {
                 MessageBox.Show("Digite a área do terreno.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
@@ -408,14 +508,14 @@ namespace GTI_Desktop.Forms {
                 return false;
             }
 
-            if(BenfeitoriaList.SelectedIndex==-1||CategoriaTerrenoList.SelectedIndex==-1||PedologiaList.SelectedIndex==-1||SituacaoList.SelectedIndex==-1|| TopografiaList.SelectedIndex == -1 || UsoTerrenoList.SelectedIndex == 1) {
+            if(BenfeitoriaList.SelectedIndex==-1||CategoriaTerrenoList.SelectedIndex==-1||PedologiaList.SelectedIndex==-1||SituacaoList.SelectedIndex==-1|| TopografiaList.SelectedIndex == -1 || UsoTerrenoList.SelectedIndex == -1) {
                 MessageBox.Show("Selecione todas as opções dos dados do terreno.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             
             if(Condominio.Tag == null) Condominio.Tag="999";
-            if (FracaoIdeal.Text == "") FracaoIdeal.Text = "0";
-            
+                   
+
             return true;
         }
 
@@ -564,9 +664,6 @@ namespace GTI_Desktop.Forms {
             reg.Numero_imovel = Numero.Text == "" ? 0 : Convert.ToInt32(Numero.Text);
             reg.Complemento = Complemento.Text;
             reg.Email ="";
-            if (End1Option.Checked) {
-                Carrega_Endereco_Entrega_Imovel();
-            }
 
             Forms.Endereco f1 = new Forms.Endereco(reg,true,true );
             f1.ShowDialog();
@@ -578,6 +675,9 @@ namespace GTI_Desktop.Forms {
                 Numero.Text = f1.EndRetorno.Numero_imovel.ToString();
                 Complemento.Text = f1.EndRetorno.Complemento;
                 Cep.Text = f1.EndRetorno.Cep.ToString("00000-000");
+                if (End1Option.Checked) {
+                    Carrega_Endereco_Entrega_Imovel();
+                }
             }
         }
 
@@ -1338,25 +1438,26 @@ namespace GTI_Desktop.Forms {
             for (int i = 0; i < xValues.Length; i++) {
                 seriesTraffic.Points.AddXY(xValues[i], yValues[i]);
             }
-            //IptuChart.BackColor = Color.Bisque;
-            IptuChart.BackGradientStyle = GradientStyle.TopBottom;
-            IptuChart.BackColor = Color.LightSkyBlue;
-            IptuChart.BackSecondaryColor = Color.WhiteSmoke;
-            IptuChart.ChartAreas[0].BackColor = Color.LightSalmon;
-            IptuChart.ChartAreas[0].AxisY.Minimum = 0;
-            IptuChart.ChartAreas[0].AxisX.Minimum = xValues[0];
-            IptuChart.ChartAreas[0].AxisX.Maximum = xValues[xValues.Length-1];
-            IptuChart.Series.Add(seriesTraffic);
-            IptuChart.ChartAreas[0].AxisX.MajorGrid.LineColor=Color.LightSteelBlue;
-            IptuChart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.LightSeaGreen;
-            IptuChart.ChartAreas[0].AxisX.LabelStyle.Enabled = true;
-            IptuChart.ChartAreas[0].AxisY.LabelStyle.Enabled = true;
-            IptuChart.ChartAreas[0].AxisX.IsStartedFromZero = false;
-            IptuChart.ChartAreas[0].AxisY.LabelStyle.Format = "R$ #0.00";
-            IptuChart.Series[0].IsValueShownAsLabel = true;
-            IptuChart.ChartAreas[0].AxisX.Interval = 1;
-            IptuChart.ChartAreas[0].AxisY.IntervalAutoMode = IntervalAutoMode.VariableCount;
-            IptuChart.Series[0].LabelAngle = 90;
+            if (xValues.Length > 0) {
+                IptuChart.BackGradientStyle = GradientStyle.TopBottom;
+                IptuChart.BackColor = Color.LightSkyBlue;
+                IptuChart.BackSecondaryColor = Color.WhiteSmoke;
+                IptuChart.ChartAreas[0].BackColor = Color.LightSalmon;
+                IptuChart.ChartAreas[0].AxisY.Minimum = 0;
+                IptuChart.ChartAreas[0].AxisX.Minimum = xValues[0];
+                IptuChart.ChartAreas[0].AxisX.Maximum = xValues[xValues.Length - 1];
+                IptuChart.Series.Add(seriesTraffic);
+                IptuChart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.LightSteelBlue;
+                IptuChart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.LightSeaGreen;
+                IptuChart.ChartAreas[0].AxisX.LabelStyle.Enabled = true;
+                IptuChart.ChartAreas[0].AxisY.LabelStyle.Enabled = true;
+                IptuChart.ChartAreas[0].AxisX.IsStartedFromZero = false;
+                IptuChart.ChartAreas[0].AxisY.LabelStyle.Format = "R$ #0.00";
+                IptuChart.Series[0].IsValueShownAsLabel = true;
+                IptuChart.ChartAreas[0].AxisX.Interval = 1;
+                IptuChart.ChartAreas[0].AxisY.IntervalAutoMode = IntervalAutoMode.VariableCount;
+                IptuChart.Series[0].LabelAngle = 90;
+            }
             gtiCore.Liberado(this);
         }
 

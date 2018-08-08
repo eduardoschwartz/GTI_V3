@@ -1,6 +1,8 @@
 ﻿using GTI_Models.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace GTI_Dal.Classes {
@@ -807,7 +809,49 @@ namespace GTI_Dal.Classes {
 
         public Exception Incluir_Imovel(Cadimob reg) {
             using (var db = new GTI_Context(_connection)) {
-                db.Cadimob.Add(reg);
+                object[] Parametros = new object[35];
+                Parametros[0] = new SqlParameter { ParameterName = "@Cip", SqlDbType = SqlDbType.Bit, SqlValue = reg.Cip };
+                Parametros[1] = new SqlParameter { ParameterName = "@Codcondominio", SqlDbType = SqlDbType.Int, SqlValue = reg.Codcondominio };
+                Parametros[2] = new SqlParameter { ParameterName = "@Conjugado", SqlDbType = SqlDbType.Bit, SqlValue = reg.Conjugado };
+                Parametros[3] = new SqlParameter { ParameterName = "@Datainclusao", SqlDbType = SqlDbType.SmallDateTime, SqlValue = reg.Datainclusao };
+                Parametros[4] = new SqlParameter { ParameterName = "@Dc_qtdeedif", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Dc_qtdeedif };
+                Parametros[5] = new SqlParameter { ParameterName = "@Distrito", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Distrito };
+                Parametros[6] = new SqlParameter { ParameterName = "@Dt_areaterreno", SqlDbType = SqlDbType.Decimal, SqlValue = reg.Dt_areaterreno };
+                Parametros[7] = new SqlParameter { ParameterName = "@Dt_codbenf", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Dt_codbenf };
+                Parametros[8] = new SqlParameter { ParameterName = "@Dt_codcategprop", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Dt_codcategprop };
+                Parametros[9] = new SqlParameter { ParameterName = "@Dt_codpedol", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Dt_codpedol };
+                Parametros[10] = new SqlParameter { ParameterName = "@Dt_codsituacao", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Dt_codsituacao };
+                Parametros[11] = new SqlParameter { ParameterName = "@Dt_codtopog", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Dt_codtopog };
+                Parametros[12] = new SqlParameter { ParameterName = "@Dt_codusoterreno", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Dt_codusoterreno };
+                Parametros[13] = new SqlParameter { ParameterName = "@Dt_fracaoIdeal",  SqlDbType = SqlDbType.Decimal, SqlValue = reg.Dt_fracaoideal };
+                Parametros[14] = new SqlParameter { ParameterName = "@EE_tipoend", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Ee_tipoend };
+                Parametros[15] = new SqlParameter { ParameterName = "@Imune", SqlDbType = SqlDbType.Bit, SqlValue = reg.Imune };
+                Parametros[16] = new SqlParameter { ParameterName = "@Inativo", SqlDbType = SqlDbType.Bit, SqlValue = reg.Inativo };
+                Parametros[17] = new SqlParameter { ParameterName = "@Li_cep", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Li_cep };
+                Parametros[18] = new SqlParameter { ParameterName = "@Li_codbairro", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Li_codbairro };
+                Parametros[19] = new SqlParameter { ParameterName = "@Li_codcidade", SqlDbType = SqlDbType.Int, SqlValue = reg.Li_codcidade };
+                Parametros[20] = new SqlParameter { ParameterName = "@Li_compl", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Li_compl };
+                Parametros[21] = new SqlParameter { ParameterName = "@Li_lotes", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Li_lotes };
+                Parametros[22] = new SqlParameter { ParameterName = "@Li_num", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Li_num };
+                Parametros[23] = new SqlParameter { ParameterName = "@Li_quadras", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Li_quadras };
+                Parametros[24] = new SqlParameter { ParameterName = "@Li_uf", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Li_uf };
+                Parametros[25] = new SqlParameter { ParameterName = "@Lote", SqlDbType = SqlDbType.Int, SqlValue = reg.Lote };
+                Parametros[26] = new SqlParameter { ParameterName = "@Nummat", SqlDbType = SqlDbType.Int, SqlValue = reg.Nummat };
+                Parametros[27] = new SqlParameter { ParameterName = "@Quadra", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Quadra };
+                Parametros[28] = new SqlParameter { ParameterName = "@Resideimovel", SqlDbType = SqlDbType.Bit, SqlValue = reg.Resideimovel };
+                Parametros[29] = new SqlParameter { ParameterName = "@Seq", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Seq };
+                Parametros[30] = new SqlParameter { ParameterName = "@Setor", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Setor };
+                Parametros[31] = new SqlParameter { ParameterName = "@Subunidade", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Subunidade };
+                Parametros[32] = new SqlParameter { ParameterName = "@Tipomat", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Tipomat };
+                Parametros[33] = new SqlParameter { ParameterName = "@Unidade", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Unidade };
+                Parametros[34] = new SqlParameter { ParameterName = "@Codreduzido", SqlDbType = SqlDbType.Int, SqlValue = reg.Codreduzido };
+
+                db.Database.ExecuteSqlCommand("INSERT INTO cadimob(dv,cip,codcondominio,conjugado,datainclusao,dc_qtdeedif,distrito,dt_areaterreno,dt_codbenf,dt_codcategprop,dt_codpedol," +
+                    "dt_codsituacao,dt_codtopog,dt_codusoterreno,dt_fracaoideal,ee_tipoend,imune,inativo,li_cep,li_codbairro,li_codcidade,li_compl,li_lotes,li_num,li_quadras,li_uf," +
+                    "lote,nummat,quadra,resideimovel,seq,setor,subunidade,tipomat,unidade,codreduzido) VALUES(0,@cip, @codcondominio, @conjugado, @datainclusao, @dc_qtdeedif, @distrito, @dt_areaterreno," +
+                    "@dt_codbenf,@dt_codcategprop,@dt_codpedol,@dt_codsituacao,@dt_codtopog,@dt_codusoterreno,@dt_fracaoideal,@ee_tipoend,@imune,@inativo,@li_cep,@li_codbairro,@li_codcidade," +
+                    "@li_compl,@li_lotes,@li_num,@li_quadras,@li_uf,@lote,@nummat,@quadra,@resideimovel,@seq,@setor,@subunidade,@tipomat,@unidade,@codreduzido)", Parametros);
+
                 try {
                     db.SaveChanges();
                 } catch (Exception ex) {
@@ -817,8 +861,153 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Exception Alterar_Imovel(Cadimob reg) {
+            using (var db = new GTI_Context(_connection)) {
+                Cadimob b = db.Cadimob.First(i => i.Codreduzido == reg.Codreduzido);
+                b.Cip = reg.Cip;
+                b.Codcondominio = reg.Codcondominio;
+                b.Conjugado = reg.Conjugado;
+                b.Dc_qtdeedif = reg.Dc_qtdeedif;
+                b.Dt_areaterreno = reg.Dt_areaterreno;
+                b.Dt_codbenf = reg.Dt_codbenf;
+                b.Dt_codcategprop = reg.Dt_codcategprop;
+                b.Dt_codpedol = reg.Dt_codpedol;
+                b.Dt_codsituacao = reg.Dt_codsituacao;
+                b.Dt_codtopog = reg.Dt_codtopog;
+                b.Dt_codusoterreno = reg.Dt_codusoterreno;
+                b.Dt_fracaoideal = reg.Dt_fracaoideal;
+                b.Ee_tipoend = reg.Ee_tipoend;
+                b.Imune = reg.Imune;
+                b.Inativo = reg.Inativo;
+                b.Li_cep = reg.Li_cep;
+                b.Li_codbairro = reg.Li_codbairro;
+                b.Li_codcidade = reg.Li_codcidade;
+                b.Li_compl = reg.Li_compl;
+                b.Li_lotes = reg.Li_lotes;
+                b.Li_num = reg.Li_num;
+                b.Li_quadras = reg.Li_quadras;
+                b.Li_uf = reg.Li_uf;
+                b.Nummat = reg.Nummat;
+                b.Resideimovel = reg.Resideimovel;
+                b.Tipomat = reg.Tipomat;
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
 
+        public Exception Incluir_Proprietario(List<Proprietario> Lista) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Database.ExecuteSqlCommand("DELETE FROM proprietario WHERE Codreduzido=@Codreduzido",
+                        new SqlParameter("@Codreduzido", Lista[0].Codreduzido));
+                } catch (Exception ex) {
+                    return ex;
+                }
+                foreach (Proprietario item in Lista) {
+                    Proprietario reg = new Proprietario {
+                        Codcidadao = item.Codcidadao,
+                        Codreduzido = item.Codreduzido,
+                        Tipoprop = item.Tipoprop,
+                        Principal=item.Principal
+                    };
+                    db.Proprietario.Add(reg);
+                    try {
+                        db.SaveChanges();
+                    } catch (Exception ex) {
+                        return ex;
+                    }
+                }
+                return null;
+            }
+        }
 
+        public Exception Incluir_Testada(List<Testada> testadas) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Database.ExecuteSqlCommand("DELETE FROM TESTADA WHERE Codreduzido=@Codreduzido",
+                        new SqlParameter("@Codreduzido", testadas[0].Codreduzido));
+                } catch (Exception ex) {
+                    return ex;
+                }
+                foreach (Testada item in testadas) {
+                    Testada reg = new Testada {
+                        Codreduzido = item.Codreduzido,
+                        Numface = item.Numface,
+                        Areatestada = item.Areatestada
+                    };
+                    db.Testada.Add(reg);
+                    try {
+                        db.SaveChanges();
+                    } catch (Exception ex) {
+                        return ex;
+                    }
+                }
+                return null;
+            }
+        }
+
+        public Exception Incluir_Historico(List<Historico> historicos) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Database.ExecuteSqlCommand("DELETE FROM HISTORICO WHERE Codreduzido=@Codreduzido",
+                        new SqlParameter("@Codreduzido", historicos[0].Codreduzido));
+                } catch (Exception ex) {
+                    return ex;
+                }
+                foreach (Historico item in historicos) {
+                    Historico reg = new Historico {
+                        Codreduzido = item.Codreduzido,
+                        Seq = item.Seq,
+                        Datahist2 = item.Datahist2,
+                        Deschist=item.Deschist,
+                        Userid=item.Userid
+                    };
+                    db.Historico.Add(reg);
+                    try {
+                        db.SaveChanges();
+                    } catch (Exception ex) {
+                        return ex;
+                    }
+                }
+                return null;
+            }
+        }
+
+        public Exception Incluir_Area(List<Areas> areas) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Database.ExecuteSqlCommand("DELETE FROM AREAS WHERE Codreduzido=@Codreduzido",
+                        new SqlParameter("@Codreduzido", areas[0].Codreduzido));
+                } catch (Exception ex) {
+                    return ex;
+                }
+                foreach (Areas item in areas) {
+                    Areas reg = new Areas {
+                        Codreduzido = item.Codreduzido,
+                        Areaconstr = item.Areaconstr,
+                        Catconstr = item.Catconstr,
+                        Dataaprova = item.Dataaprova,
+                        Numprocesso = item.Numprocesso,
+                        Qtdepav=item.Qtdepav,
+                        Seqarea=item.Seqarea,
+                        Tipoarea=item.Tipoarea,
+                        Tipoconstr=item.Tipoconstr,
+                        Usoconstr=item.Usoconstr
+                    };
+                    db.Areas.Add(reg);
+                    try {
+                        db.SaveChanges();
+                    } catch (Exception ex) {
+                        return ex;
+                    }
+                }
+                return null;
+            }
+        }
 
     }//end class
 }
