@@ -25,7 +25,6 @@ namespace UIWeb.Pages {
                 String s = Request.QueryString["d"];
                 lblVenctoDam.Text =this.Decrypt(s);
 
-
                 if (!DateTime.TryParse(lblVenctoDam.Text, out DataDAM)) {
                     Response.Redirect("~/Pages/gtiMenu.aspx");
                 } else {

@@ -117,6 +117,7 @@
             this.label33 = new System.Windows.Forms.Label();
             this.DadosConstrucaoTab = new System.Windows.Forms.TabPage();
             this.a1Panel8 = new Owf.Controls.A1Panel();
+            this.ConjugadoCheck = new System.Windows.Forms.CheckBox();
             this.IsentoCIPCheck = new System.Windows.Forms.CheckBox();
             this.ImuneCheck = new System.Windows.Forms.CheckBox();
             this.label63 = new System.Windows.Forms.Label();
@@ -182,6 +183,7 @@
             this.label40 = new System.Windows.Forms.Label();
             this.ImovelTab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.IPTUButton = new System.Windows.Forms.Button();
             this.IptuChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.BarToolStrip = new System.Windows.Forms.ToolStrip();
@@ -208,8 +210,6 @@
             this.label46 = new System.Windows.Forms.Label();
             this.AreaConstruida = new System.Windows.Forms.TextBox();
             this.label43 = new System.Windows.Forms.Label();
-            this.IPTUButton = new System.Windows.Forms.Button();
-            this.ConjugadoCheck = new System.Windows.Forms.CheckBox();
             this.a1Panel1.SuspendLayout();
             this.EnderecoEntregaTab.SuspendLayout();
             this.a1Panel3.SuspendLayout();
@@ -1335,6 +1335,18 @@
             this.a1Panel8.Size = new System.Drawing.Size(220, 227);
             this.a1Panel8.TabIndex = 160;
             // 
+            // ConjugadoCheck
+            // 
+            this.ConjugadoCheck.AutoCheck = false;
+            this.ConjugadoCheck.AutoSize = true;
+            this.ConjugadoCheck.ForeColor = System.Drawing.Color.Black;
+            this.ConjugadoCheck.Location = new System.Drawing.Point(13, 77);
+            this.ConjugadoCheck.Name = "ConjugadoCheck";
+            this.ConjugadoCheck.Size = new System.Drawing.Size(77, 17);
+            this.ConjugadoCheck.TabIndex = 34;
+            this.ConjugadoCheck.Text = "Conjugado";
+            this.ConjugadoCheck.UseVisualStyleBackColor = true;
+            // 
             // IsentoCIPCheck
             // 
             this.IsentoCIPCheck.AutoCheck = false;
@@ -2088,6 +2100,20 @@
             this.tabPage1.TabIndex = 6;
             this.tabPage1.Text = "Dados do ITU/IPTU";
             // 
+            // IPTUButton
+            // 
+            this.IPTUButton.ForeColor = System.Drawing.Color.Maroon;
+            this.IPTUButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.IPTUButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.IPTUButton.Location = new System.Drawing.Point(313, 113);
+            this.IPTUButton.Name = "IPTUButton";
+            this.IPTUButton.Size = new System.Drawing.Size(151, 28);
+            this.IPTUButton.TabIndex = 179;
+            this.IPTUButton.Text = "Visualizar dados do ITPU";
+            this.IPTUButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.IPTUButton.UseVisualStyleBackColor = true;
+            this.IPTUButton.Click += new System.EventHandler(this.IPTUButton_Click);
+            // 
             // IptuChart
             // 
             chartArea1.Name = "ChartArea1";
@@ -2383,41 +2409,15 @@
             this.label43.TabIndex = 21;
             this.label43.Text = "Área em m²...:";
             // 
-            // IPTUButton
-            // 
-            this.IPTUButton.ForeColor = System.Drawing.Color.Maroon;
-            this.IPTUButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.IPTUButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.IPTUButton.Location = new System.Drawing.Point(313, 113);
-            this.IPTUButton.Name = "IPTUButton";
-            this.IPTUButton.Size = new System.Drawing.Size(151, 28);
-            this.IPTUButton.TabIndex = 179;
-            this.IPTUButton.Text = "Visualizar dados do ITPU";
-            this.IPTUButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.IPTUButton.UseVisualStyleBackColor = true;
-            this.IPTUButton.Click += new System.EventHandler(this.IPTUButton_Click);
-            // 
-            // ConjugadoCheck
-            // 
-            this.ConjugadoCheck.AutoCheck = false;
-            this.ConjugadoCheck.AutoSize = true;
-            this.ConjugadoCheck.ForeColor = System.Drawing.Color.Black;
-            this.ConjugadoCheck.Location = new System.Drawing.Point(13, 77);
-            this.ConjugadoCheck.Name = "ConjugadoCheck";
-            this.ConjugadoCheck.Size = new System.Drawing.Size(77, 17);
-            this.ConjugadoCheck.TabIndex = 34;
-            this.ConjugadoCheck.Text = "Conjugado";
-            this.ConjugadoCheck.UseVisualStyleBackColor = true;
-            // 
             // Imovel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(762, 377);
+            this.Controls.Add(this.AreaPnl);
             this.Controls.Add(this.TopPanel);
             this.Controls.Add(this.ImovelTab);
             this.Controls.Add(this.BarToolStrip);
-            this.Controls.Add(this.AreaPnl);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;

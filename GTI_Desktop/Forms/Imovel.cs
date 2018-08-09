@@ -410,9 +410,6 @@ namespace GTI_Desktop.Forms {
                 }
             }
 
-
-
-
             Final:;
             ControlBehaviour(true);
         }
@@ -1183,6 +1180,9 @@ namespace GTI_Desktop.Forms {
         }
 
         private void MnuAdicionarA_Click(object sender, EventArgs e) {
+            CategoriaConstrucaoList.SelectedIndex = 0;
+            UsoConstrucaoList.SelectedIndex = 0;
+            TipoConstrucaoList.SelectedIndex = 0;
             bNovaArea = true;
             ImovelTab.Enabled = false;
             BarToolStrip.Enabled = false;
@@ -1395,7 +1395,6 @@ namespace GTI_Desktop.Forms {
             gtiCore.Ocupado(this);
             IptuChart.Update();
             Series seriesTraffic = new Series();
-            //seriesTraffic.Color = Color.Red;
             IptuChart.ChartAreas[0].Area3DStyle.Enable3D = true;
             seriesTraffic.ChartType = SeriesChartType.Bubble;
             seriesTraffic.BorderWidth = 2;
@@ -1433,7 +1432,6 @@ namespace GTI_Desktop.Forms {
                 }
                 yValues[i] = nSoma;
             }
-
 
             for (int i = 0; i < xValues.Length; i++) {
                 seriesTraffic.Points.AddXY(xValues[i], yValues[i]);

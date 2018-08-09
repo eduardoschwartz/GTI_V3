@@ -45,14 +45,24 @@
                 <tr>
                     <td  style="width: 95px">Inscrição Municipal..:</td>
                     <td>
-                <asp:TextBox ID="txtIM" runat="server" Width="83px"  BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" onKeyPress="return formata(this, '§§§§§§', event)"></asp:TextBox>
+                <asp:TextBox ID="txtIM" runat="server" Width="83px"  BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" onKeyPress="return formata(this, '§§§§§§', event)" style="margin-left: 1.6em"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
-                    <td  style="width: 95px">Número do CNPJ....:</td>
-                    <td>
-                <asp:TextBox ID="txtCNPJ" runat="server" Width="188px"  BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" onKeyPress="return formata(this, '§§.§§§.§§§/§§§§-§§', event)"></asp:TextBox>
-                    </td>
+                   <td class="panel" style="height: 51px">&nbsp;
+                        <asp:RadioButton ID="optCPF" runat="server" AutoPostBack="True" Checked="True" GroupName="optDoc" OnCheckedChanged="optCPF_CheckedChanged" Text="CPF" />
+                        &nbsp;&nbsp;
+                        <asp:RadioButton ID="optCNPJ" runat="server" AutoPostBack="True" GroupName="optDoc" OnCheckedChanged="optCNPJ_CheckedChanged" Text="CNPJ" />
+                        </td> <td class="panel" style="height: 51px">&nbsp;&nbsp;
+                         <asp:Label ID="Label3" runat="server" Text="CPF/CNPJ:"></asp:Label>
+                            &nbsp;
+                        &nbsp;
+                            <asp:TextBox ID="txtCPF" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="14" Width="166px" TabIndex="1"  onKeyPress="return formata(this, '§§§.§§§.§§§-§§', event)" OnTextChanged="txtCPF_TextChanged"></asp:TextBox>
+                            
+                            <asp:TextBox ID="txtCNPJ" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="18" onKeyPress="return formata(this, '§§.§§§.§§§/§§§§-§§', event)" TabIndex="1" Visible="False" Width="166px" OnTextChanged="txtCNPJ_TextChanged"></asp:TextBox>
+                        &nbsp;&nbsp;&nbsp;
+                         
+                        </td>
                 </tr>
                 <tr>
                     <td  style="width: 95px">&nbsp;</td>

@@ -72,7 +72,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td><asp:CheckBox ID="ExtratoCheckBox" runat="server" ForeColor="#006600" Text="  Exibir o resumo dos pagamentos  na certidão" ToolTip="Marque esta opção para exibir o resumo dos pagamentos na certidão" /><br />
+                        <td><asp:CheckBox ID="ExtratoCheckBox" runat="server" ForeColor="#006600" Text="  Exibir o resumo dos pagamentos  na certidão" ToolTip="Marque esta opção para exibir o resumo dos pagamentos na certidão" Enabled="False" /><br />
                             <br />
                         </td>
                     </tr>
@@ -100,6 +100,11 @@
                          <asp:TextBox ID="Codigo" runat="server" Width="147px" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="20" ></asp:TextBox>
                          &nbsp;
                          <asp:Button ID="ValidarButton" class="button1" runat="server" Text="Validar" OnClick="ValidarButton_Click" />
+                         <br />
+                         <br />
+                         <br />
+                         <br />
+                         <br />
                      </td>
                  </tr>
                 

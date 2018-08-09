@@ -26,11 +26,11 @@ namespace UIWeb.Pages {
             lblMsg.Text = "";
             ClearTable();
             Empresa_bll empresa_class = new Empresa_bll("GTIconnection");
-            if (string.IsNullOrWhiteSpace(txtIM.Text) && string.IsNullOrWhiteSpace(txtCNPJ.Text))
-                lblMsg.Text = "Erro: Informação necessária.";
+            if (string.IsNullOrWhiteSpace(txtIM.Text) && string.IsNullOrWhiteSpace(txtCNPJ.Text) && string.IsNullOrWhiteSpace(txtCPF.Text))
+                lblMsg.Text = "Digite IM ou CPF ou CNPJ.";
             else {
-                if (!string.IsNullOrWhiteSpace(txtIM.Text) && !string.IsNullOrWhiteSpace(txtCNPJ.Text))
-                    lblMsg.Text = "Erro: Digite a inscrição municipal ou o cnpj da empresa.";
+                if (!string.IsNullOrWhiteSpace(txtIM.Text) && !string.IsNullOrWhiteSpace(txtCNPJ.Text) && !string.IsNullOrWhiteSpace(txtCPF.Text))
+                    lblMsg.Text = "Erro: Digite a inscrição municipal ou o CPF ou o cNPJ da empresa.";
 
                 else {
                     if (!string.IsNullOrWhiteSpace(txtIM.Text)) {
@@ -39,10 +39,40 @@ namespace UIWeb.Pages {
                         else
                             FillTable();
                     } else {
-                        string sCnpj = txtCNPJ.Text.PadLeft(14, '0');
-                        sCnpj = gtiCore.RetornaNumero(sCnpj);
-                        int nCodigo = empresa_class.ExisteEmpresaCnpj(sCnpj);
-                        if (!string.IsNullOrWhiteSpace(sCnpj) && nCodigo == 0)
+
+                        if (optCPF.Checked && txtCPF.Text.Length < 14) {
+                            lblMsg.Text = "CPF inválido!";
+                            return;
+                        }
+                        if (optCNPJ.Checked && txtCNPJ.Text.Length < 18) {
+                            lblMsg.Text = "CNPJ inválido!";
+                            return;
+                        }
+                        string num_cpf_cnpj = "";
+                        int nCodigo = 0;
+                        if (optCPF.Checked) {
+                            num_cpf_cnpj = gtiCore.RetornaNumero(txtCPF.Text);
+                            if (!gtiCore.ValidaCpf(num_cpf_cnpj)) {
+                                lblMsg.Text = "CPF inválido!";
+                                return;
+                            } else {
+                                List<int> ListaCPF = empresa_class.Retorna_Codigo_por_CPF(num_cpf_cnpj);
+                                if(ListaCPF.Count>0)
+                                    nCodigo = ListaCPF[0];
+                            }
+                        } else {
+                            num_cpf_cnpj = gtiCore.RetornaNumero(txtCNPJ.Text);
+                            if (!gtiCore.ValidaCNPJ(num_cpf_cnpj)) {
+                                lblMsg.Text = "CNPJ inválido!";
+                                return;
+                            } else {
+                                List<int> ListaCNPJ = empresa_class.Retorna_Codigo_por_CNPJ(num_cpf_cnpj);
+                                if (ListaCNPJ.Count > 0)
+                                    nCodigo = ListaCNPJ[0];
+                            }
+                        }
+
+                        if (nCodigo == 0)
                             lblMsg.Text = "Erro: Cadastro inexistente.";
                         else {
                             txtIM.Text = nCodigo.ToString("000000");
@@ -263,9 +293,35 @@ namespace UIWeb.Pages {
             }
         }
 
+        protected void optCPF_CheckedChanged(object sender, EventArgs e) {
+            if (optCPF.Checked) {
+                txtCPF.Visible = true;
+                txtCNPJ.Visible = false;
+                txtCPF.Text = "";
+                txtCNPJ.Text = "";
+                txtIM.Text = "";
+            }
+        }
 
+        protected void optCNPJ_CheckedChanged(object sender, EventArgs e) {
+            if (optCNPJ.Checked) {
+                txtCPF.Visible = false;
+                txtCNPJ.Visible = true;
+                txtCPF.Text = "";
+                txtCNPJ.Text = "";
+                txtIM.Text = "";
+            }
+        }
 
+        protected void txtCPF_TextChanged(object sender, EventArgs e) {
+            txtCNPJ.Text = "";
+            txtIM.Text = "";
+        }
 
+        protected void txtCNPJ_TextChanged(object sender, EventArgs e) {
+            txtCPF.Text = "";
+            txtIM.Text = "";
+        }
     }
 
 }
