@@ -56,8 +56,7 @@ namespace GTI_Bll.Classes {
             Imovel_Data obj = new Imovel_Data(_connection);
             return obj.Existe_Imovel(distrito,setor,quadra,lote,unidade,subunidade);
         }
-
-
+        
         /// <summary>
         /// Verifica se existe a Face informada
         /// </summary>
@@ -125,8 +124,7 @@ namespace GTI_Bll.Classes {
             Imovel_Data obj = new Imovel_Data(_connection);
             return obj.Lista_Historico(Codigo);
         }
-
-
+        
         public List<Usoconstr> Lista_Uso_Construcao() {
             Imovel_Data obj = new Imovel_Data(_connection);
             return obj.Lista_Uso_Construcao();
@@ -185,8 +183,7 @@ namespace GTI_Bll.Classes {
             Imovel_Data obj = new Imovel_Data(_connection);
             return obj.Lista_Testada_Condominio(Codigo);
         }
-
-
+        
         /// <summary>
         /// Lista das unidades do condomínio
         /// </summary>
@@ -310,10 +307,19 @@ namespace GTI_Bll.Classes {
         }
 
         /// <summary>
-        /// Retorna o proximo código disponivel de imóvel
+        /// Retorna o próximo código disponivel de imóvel
         /// </summary>
         /// <returns></returns>
         public int Retorna_Codigo_Disponivel() {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Retorna_Codigo_Disponivel();
+        }
+
+        /// <summary>
+        /// Retorna o próximo código disponível de condomínio
+        /// </summary>
+        /// <returns></returns>
+        public int Retorna_Codigo_Condominio_Disponivel() {
             Imovel_Data obj = new Imovel_Data(_connection);
             return obj.Retorna_Codigo_Disponivel();
         }
@@ -330,6 +336,17 @@ namespace GTI_Bll.Classes {
         }
 
         /// <summary>
+        /// Incluir um novo condomínio
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Incluir_Condominio(Condominio reg) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            Exception ex = obj.Incluir_Condominio(reg);
+            return ex;
+        }
+        
+        /// <summary>
         /// Alterar o imóvel selecionado
         /// </summary>
         /// <param name="reg"></param>
@@ -337,6 +354,17 @@ namespace GTI_Bll.Classes {
         public Exception Alterar_Imovel(Cadimob reg) {
             Imovel_Data obj = new Imovel_Data(_connection);
             Exception ex = obj.Alterar_Imovel(reg);
+            return ex;
+        }
+
+        /// <summary>
+        /// Alterar o condomínio selecionado
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Alterar_Condominio(Condominio reg) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            Exception ex = obj.Alterar_Condominio(reg);
             return ex;
         }
 
@@ -363,6 +391,17 @@ namespace GTI_Bll.Classes {
         }
 
         /// <summary>
+        /// Grava as testadas do condomínio
+        /// </summary>
+        /// <param name="testadas"></param>
+        /// <returns></returns>
+        public Exception Incluir_Testada_Condominio(List<Testadacondominio> testadas) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            Exception ex = obj.Incluir_Testada_Condominio(testadas);
+            return ex;
+        }
+
+        /// <summary>
         /// Grava os históricos do imóvel
         /// </summary>
         /// <param name="historicos"></param>
@@ -384,6 +423,16 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        /// <summary>
+        /// Grava as áreas do condomínio
+        /// </summary>
+        /// <param name="areas"></param>
+        /// <returns></returns>
+        public Exception Incluir_Area_Condominio(List<Condominioarea> areas) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            Exception ex = obj.Incluir_Area_Condominio(areas);
+            return ex;
+        }
 
     }//end class
 }

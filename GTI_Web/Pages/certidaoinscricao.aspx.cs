@@ -61,7 +61,7 @@ namespace GTI_Web.Pages {
 
         private void PrintReport(int Codigo, TipoCadastro _tipo_cadastro) {
             ReportDocument crystalReport = new ReportDocument();
-            string sComplemento = "", sQuadras = "", sLotes = "", sEndereco = "", sBairro = "", sInscricao = "", sNome = "", sCidade = "", sUF = "";
+            string sComplemento = "", sQuadras = "", sLotes = "", sEndereco = "", sBairro = "",  sNome = "", sCidade = "", sUF = "";
             string sData = "18/04/2012",  sCPF = "", sCNPJ = "", sAtividade = "", sRG = "", sProcAbertura = "", sSufixo = "", sProcEncerramento="", sDoc = "";
             short nNumeroImovel = 0;
             DateTime dDataProc = Convert.ToDateTime(sData);
@@ -179,7 +179,7 @@ namespace GTI_Web.Pages {
 
                 try {
                     crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true, "certidao" + _numero_certidao.ToString() + _ano_certidao.ToString());
-                } catch (Exception ex2){
+                } catch {
                 } finally {
                     crystalReport.Close();
                     crystalReport.Dispose();

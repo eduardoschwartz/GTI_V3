@@ -22,7 +22,7 @@ namespace UIWeb.Pages {
             if (FileUpload1.PostedFile.ContentType.CompareTo("text/xml") == 0) {
                 try {
                     UploadArquivo();
-                } catch (Exception ex){
+                } catch {
                     throw;
                 }
             } else {
@@ -89,7 +89,7 @@ namespace UIWeb.Pages {
             }
             grdMain.DataSource = dt;
             grdMain.DataBind();
-            } catch  (Exception ex){
+            } catch  {
                 Statuslbl.Text = "Arquivo inválido";
                 throw;
             }

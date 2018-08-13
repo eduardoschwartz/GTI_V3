@@ -807,6 +807,15 @@ namespace GTI_Dal.Classes {
             return maxCod;
         }
 
+        public int Retorna_Codigo_Condominio_Disponivel() {
+            int maxCod = 0;
+            using (var db = new GTI_Context(_connection)) {
+                maxCod = (from c in db.Condominio select c.Cd_codigo).Max();
+                maxCod = Convert.ToInt32(maxCod + 1);
+            }
+            return maxCod;
+        }
+
         public Exception Incluir_Imovel(Cadimob reg) {
             using (var db = new GTI_Context(_connection)) {
                 object[] Parametros = new object[35];
@@ -852,6 +861,88 @@ namespace GTI_Dal.Classes {
                     "@dt_codbenf,@dt_codcategprop,@dt_codpedol,@dt_codsituacao,@dt_codtopog,@dt_codusoterreno,@dt_fracaoideal,@ee_tipoend,@imune,@inativo,@li_cep,@li_codbairro,@li_codcidade," +
                     "@li_compl,@li_lotes,@li_num,@li_quadras,@li_uf,@lote,@nummat,@quadra,@resideimovel,@seq,@setor,@subunidade,@tipomat,@unidade,@codreduzido)", Parametros);
 
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Exception Incluir_Condominio(Condominio reg) {
+            using (var db = new GTI_Context(_connection)) {
+                object[] Parametros = new object[26];
+                Parametros[0] = new SqlParameter { ParameterName = "@cd_codigo", SqlDbType = SqlDbType.Int, SqlValue = reg.Cd_codigo };
+                Parametros[1] = new SqlParameter { ParameterName = "@cd_nomecond", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Cd_nomecond };
+                Parametros[2] = new SqlParameter { ParameterName = "@cd_distrito", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Cd_distrito };
+                Parametros[3] = new SqlParameter { ParameterName = "@cd_setor", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Cd_setor };
+                Parametros[4] = new SqlParameter { ParameterName = "@cd_quadra", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Cd_quadra };
+                Parametros[5] = new SqlParameter { ParameterName = "@cd_lote", SqlDbType = SqlDbType.Int, SqlValue = reg.Cd_lote };
+                Parametros[6] = new SqlParameter { ParameterName = "@cd_seq", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Cd_seq };
+                Parametros[7] = new SqlParameter { ParameterName = "@cd_num", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Cd_num };
+                Parametros[8] = new SqlParameter { ParameterName = "@cd_compl", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Cd_compl };
+                Parametros[9] = new SqlParameter { ParameterName = "@cd_uf", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Cd_uf };
+                Parametros[10] = new SqlParameter { ParameterName = "@cd_codcidade", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Cd_codcidade };
+                Parametros[11] = new SqlParameter { ParameterName = "@cd_codbairro", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Cd_codbairro };
+                Parametros[12] = new SqlParameter { ParameterName = "@cd_cep", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Cd_cep };
+                Parametros[13] = new SqlParameter { ParameterName = "@cd_quadras", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Cd_quadras };
+                Parametros[14] = new SqlParameter { ParameterName = "@cd_lotes", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Cd_lotes };
+                Parametros[15] = new SqlParameter { ParameterName = "@cd_areaterreno", SqlDbType = SqlDbType.Decimal, SqlValue = reg.Cd_areaterreno };
+                Parametros[16] = new SqlParameter { ParameterName = "@cd_codusoterreno", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Cd_codusoterreno };
+                Parametros[17] = new SqlParameter { ParameterName = "@cd_codbenf", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Cd_codbenf };
+                Parametros[18] = new SqlParameter { ParameterName = "@cd_codtopog", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Cd_codtopog };
+                Parametros[19] = new SqlParameter { ParameterName = "@cd_codcategprop", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Cd_codcategprop };
+                Parametros[20] = new SqlParameter { ParameterName = "@cd_codsituacao", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Cd_codsituacao };
+                Parametros[21] = new SqlParameter { ParameterName = "@cd_codpedol", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Cd_codpedol };
+                Parametros[22] = new SqlParameter { ParameterName = "@cd_areatotconstr", SqlDbType = SqlDbType.Decimal, SqlValue = reg.Cd_areatotconstr };
+                Parametros[23] = new SqlParameter { ParameterName = "@cd_numunid", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Cd_numunid };
+                Parametros[24] = new SqlParameter { ParameterName = "@cd_prop", SqlDbType = SqlDbType.Int, SqlValue = reg.Cd_prop };
+                Parametros[25] = new SqlParameter { ParameterName = "@cd_fracao", SqlDbType = SqlDbType.Decimal, SqlValue = reg.Cd_fracao };
+
+                db.Database.ExecuteSqlCommand("INSERT INTO condominio(cd_cogdigo,cd_nomecond,cd_distrito,cd_setor,cd_quadra,cd_lote,cd_seq,cd_num,cd_compl,cd_uf,cd_codcidade," +
+                    "cd_codbairro,cd_cep,cd_quadras,cd_lotes,cd_areaterreno,cd_codusoterreno,cd_codbenf,cd_codtopog,cd_codcategprop,cd_codsituacao,cd_codpedol,cd_arratotconstr," +
+                    "cd_numunid,cd_prop,cd_fracao) VALUES(@cd_codigo, @cd_nomecond, @cd_distrito, @cd_setor, @cd_quadra, @cd_lote, @cd_seq, @cd_num, @cd_compl,@cd_uf, @cd_codcidade, " +
+                    "@cd_codbairro,@cd_cep,@cd_quadras,@cd_lotes,@cd_areaterreno,@cd_codusoterreno,@cd_codbenf,@cd_codtopog,@cd_codcategprop,@cd_codsituacao,@cd_codpedol,@cd_arratotconstr," +
+                    "@cd_numunid,@cd_prop,@cd_fracao)", Parametros);
+
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Exception Alterar_Condominio(Condominio reg) {
+            using (var db = new GTI_Context(_connection)) {
+                Condominio b = db.Condominio.First(i => i.Cd_codigo == reg.Cd_codigo);
+                b.Cd_areaterreno = reg.Cd_areaterreno;
+                b.Cd_areatotconstr = reg.Cd_areatotconstr;
+                b.Cd_cep = reg.Cd_cep;
+                b.Cd_codbairro = reg.Cd_codbairro;
+                b.Cd_codbenf = reg.Cd_codbenf;
+                b.Cd_codcategprop = reg.Cd_codcategprop;
+                b.Cd_codcidade = reg.Cd_codcidade;
+                b.Cd_codpedol = reg.Cd_codpedol;
+                b.Cd_codsituacao = reg.Cd_codsituacao;
+                b.Cd_codtopog = reg.Cd_codtopog;
+                b.Cd_codusoterreno = reg.Cd_codusoterreno;
+                b.Cd_compl = reg.Cd_compl;
+                b.Cd_distrito = reg.Cd_distrito;
+                b.Cd_fracao = reg.Cd_fracao;
+                b.Cd_lote = reg.Cd_lote;
+                b.Cd_lotes = reg.Cd_lotes;
+                b.Cd_nomecond = reg.Cd_nomecond;
+                b.Cd_num = reg.Cd_num;
+                b.Cd_numunid = reg.Cd_numunid;
+                b.Cd_prop = reg.Cd_prop;
+                b.Cd_quadra = reg.Cd_quadra;
+                b.Cd_quadras = reg.Cd_quadras;
+                b.Cd_seq = reg.Cd_seq;
+                b.Cd_setor = reg.Cd_setor;
+                b.Cd_uf = reg.Cd_uf;
                 try {
                     db.SaveChanges();
                 } catch (Exception ex) {
@@ -950,6 +1041,31 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Exception Incluir_Testada_Condominio(List<Testadacondominio> testadas) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Database.ExecuteSqlCommand("DELETE FROM TESTADACONDOMINIO WHERE CODCOND=@Codreduzido",
+                        new SqlParameter("@Codreduzido", testadas[0].Codcond));
+                } catch (Exception ex) {
+                    return ex;
+                }
+                foreach (Testadacondominio item in testadas) {
+                    Testadacondominio reg = new Testadacondominio {
+                        Codcond = item.Codcond,
+                        Numface = item.Numface,
+                        Areatestada = item.Areatestada
+                    };
+                    db.Testadacondominio.Add(reg);
+                    try {
+                        db.SaveChanges();
+                    } catch (Exception ex) {
+                        return ex;
+                    }
+                }
+                return null;
+            }
+        }
+
         public Exception Incluir_Historico(List<Historico> historicos) {
             using (var db = new GTI_Context(_connection)) {
                 try {
@@ -1009,5 +1125,36 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Exception Incluir_Area_Condominio(List<Condominioarea> areas) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Database.ExecuteSqlCommand("DELETE FROM Condominioarea WHERE Codcondominio=@Codreduzido",
+                        new SqlParameter("@Codreduzido", areas[0].Codcondominio));
+                } catch (Exception ex) {
+                    return ex;
+                }
+                foreach (Condominioarea item in areas) {
+                    Condominioarea reg = new Condominioarea {
+                        Codcondominio = item.Codcondominio,
+                        Areaconstr = item.Areaconstr,
+                        Catconstr = item.Catconstr,
+                        Dataaprova = item.Dataaprova,
+                        Numprocesso = item.Numprocesso,
+                        Qtdepav = item.Qtdepav,
+                        Seqarea = item.Seqarea,
+                        Tipoarea = item.Tipoarea,
+                        Tipoconstr = item.Tipoconstr,
+                        Usoconstr = item.Usoconstr
+                    };
+                    db.CondominioArea.Add(reg);
+                    try {
+                        db.SaveChanges();
+                    } catch (Exception ex) {
+                        return ex;
+                    }
+                }
+                return null;
+            }
+        }
     }//end class
 }

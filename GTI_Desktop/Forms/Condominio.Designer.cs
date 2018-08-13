@@ -141,6 +141,8 @@
             this.AreaConstruida = new System.Windows.Forms.TextBox();
             this.label43 = new System.Windows.Forms.Label();
             this.CancelAreaButton = new System.Windows.Forms.Button();
+            this.QtdeUnidade = new System.Windows.Forms.TextBox();
+            this.AtualizarUnidade = new System.Windows.Forms.Button();
             this.tBar.SuspendLayout();
             this.PanelHeader.SuspendLayout();
             this.PanelLocal.SuspendLayout();
@@ -230,7 +232,7 @@
             this.SairButton.Size = new System.Drawing.Size(23, 22);
             this.SairButton.Text = "toolStripButton5";
             this.SairButton.ToolTipText = "Sair";
-            this.SairButton.Click += new System.EventHandler(this.btSair_Click);
+            this.SairButton.Click += new System.EventHandler(this.BtSair_Click);
             // 
             // SaveButton
             // 
@@ -446,11 +448,11 @@
             this.Distrito.Location = new System.Drawing.Point(56, 28);
             this.Distrito.MaxLength = 1;
             this.Distrito.Name = "Distrito";
-            this.Distrito.ReadOnly = true;
             this.Distrito.Size = new System.Drawing.Size(32, 20);
             this.Distrito.TabIndex = 1;
             this.Distrito.Text = "0";
             this.Distrito.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Distrito.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Distrito_KeyPress);
             // 
             // ProprietarioButton
             // 
@@ -466,6 +468,7 @@
             this.ProprietarioButton.Size = new System.Drawing.Size(19, 19);
             this.ProprietarioButton.TabIndex = 6;
             this.ProprietarioButton.UseVisualStyleBackColor = true;
+            this.ProprietarioButton.Click += new System.EventHandler(this.ProprietarioButton_Click);
             // 
             // ProprietarioCodigo
             // 
@@ -989,6 +992,8 @@
             // PanelOutro
             // 
             this.PanelOutro.BorderColor = System.Drawing.Color.Gray;
+            this.PanelOutro.Controls.Add(this.AtualizarUnidade);
+            this.PanelOutro.Controls.Add(this.QtdeUnidade);
             this.PanelOutro.Controls.Add(this.ProprietarioToolStrip);
             this.PanelOutro.Controls.Add(this.UnidadesButton);
             this.PanelOutro.Controls.Add(this.TestadaListView);
@@ -1022,9 +1027,9 @@
             this.TestadaAddButton,
             this.TestadaDelButton});
             this.ProprietarioToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.ProprietarioToolStrip.Location = new System.Drawing.Point(587, 47);
+            this.ProprietarioToolStrip.Location = new System.Drawing.Point(594, 47);
             this.ProprietarioToolStrip.Name = "ProprietarioToolStrip";
-            this.ProprietarioToolStrip.Size = new System.Drawing.Size(32, 67);
+            this.ProprietarioToolStrip.Size = new System.Drawing.Size(24, 48);
             this.ProprietarioToolStrip.TabIndex = 24;
             this.ProprietarioToolStrip.TabStop = true;
             this.ProprietarioToolStrip.Text = "toolStrip2";
@@ -1035,7 +1040,7 @@
             this.TestadaAddButton.Image = global::GTI_Desktop.Properties.Resources.add;
             this.TestadaAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TestadaAddButton.Name = "TestadaAddButton";
-            this.TestadaAddButton.Size = new System.Drawing.Size(30, 20);
+            this.TestadaAddButton.Size = new System.Drawing.Size(22, 20);
             this.TestadaAddButton.Text = "Adicionar testada";
             this.TestadaAddButton.ToolTipText = "Adicionar nova testada";
             this.TestadaAddButton.Click += new System.EventHandler(this.TestadaAddButton_Click);
@@ -1046,7 +1051,7 @@
             this.TestadaDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
             this.TestadaDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TestadaDelButton.Name = "TestadaDelButton";
-            this.TestadaDelButton.Size = new System.Drawing.Size(30, 20);
+            this.TestadaDelButton.Size = new System.Drawing.Size(22, 20);
             this.TestadaDelButton.Text = "Excluir testada";
             this.TestadaDelButton.ToolTipText = "Excluir a testada Selecionada";
             this.TestadaDelButton.Click += new System.EventHandler(this.TestadaDelButton_Click);
@@ -1059,20 +1064,21 @@
             this.UnidadesButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(255)))), ((int)(((byte)(230)))));
             this.UnidadesButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.UnidadesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.UnidadesButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
-            this.UnidadesButton.Location = new System.Drawing.Point(383, 62);
+            this.UnidadesButton.Image = global::GTI_Desktop.Properties.Resources.leftarrow;
+            this.UnidadesButton.Location = new System.Drawing.Point(371, 88);
             this.UnidadesButton.Name = "UnidadesButton";
             this.UnidadesButton.Size = new System.Drawing.Size(19, 19);
             this.UnidadesButton.TabIndex = 22;
             this.tTp.SetToolTip(this.UnidadesButton, "Cadastras as subunidades de cada unidade");
             this.UnidadesButton.UseVisualStyleBackColor = true;
+            this.UnidadesButton.Click += new System.EventHandler(this.UnidadesButton_Click);
             // 
             // TestadaListView
             // 
             this.TestadaListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader3,
             this.columnHeader4});
-            this.TestadaListView.Location = new System.Drawing.Point(417, 31);
+            this.TestadaListView.Location = new System.Drawing.Point(424, 31);
             this.TestadaListView.Name = "TestadaListView";
             this.TestadaListView.Size = new System.Drawing.Size(167, 77);
             this.TestadaListView.TabIndex = 23;
@@ -1093,7 +1099,7 @@
             this.UnidadesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
-            this.UnidadesListView.Location = new System.Drawing.Point(210, 31);
+            this.UnidadesListView.Location = new System.Drawing.Point(198, 33);
             this.UnidadesListView.Name = "UnidadesListView";
             this.UnidadesListView.Size = new System.Drawing.Size(167, 77);
             this.UnidadesListView.TabIndex = 21;
@@ -1115,9 +1121,10 @@
             this.Unidades.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Unidades.ForeColor = System.Drawing.Color.Navy;
             this.Unidades.Location = new System.Drawing.Point(103, 88);
+            this.Unidades.MaxLength = 3;
             this.Unidades.Name = "Unidades";
             this.Unidades.ReadOnly = true;
-            this.Unidades.Size = new System.Drawing.Size(83, 20);
+            this.Unidades.Size = new System.Drawing.Size(55, 20);
             this.Unidades.TabIndex = 20;
             this.Unidades.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Unidades_KeyPress);
             // 
@@ -1545,18 +1552,48 @@
             this.CancelAreaButton.UseVisualStyleBackColor = false;
             this.CancelAreaButton.Click += new System.EventHandler(this.CancelAreaButton_Click);
             // 
+            // QtdeUnidade
+            // 
+            this.QtdeUnidade.BackColor = System.Drawing.Color.White;
+            this.QtdeUnidade.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.QtdeUnidade.ForeColor = System.Drawing.Color.Navy;
+            this.QtdeUnidade.Location = new System.Drawing.Point(371, 69);
+            this.QtdeUnidade.MaxLength = 3;
+            this.QtdeUnidade.Name = "QtdeUnidade";
+            this.QtdeUnidade.ReadOnly = true;
+            this.QtdeUnidade.Size = new System.Drawing.Size(39, 20);
+            this.QtdeUnidade.TabIndex = 181;
+            this.QtdeUnidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.QtdeUnidade_KeyPress);
+            // 
+            // AtualizarUnidade
+            // 
+            this.AtualizarUnidade.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AtualizarUnidade.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.AtualizarUnidade.FlatAppearance.BorderSize = 0;
+            this.AtualizarUnidade.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(255)))), ((int)(((byte)(230)))));
+            this.AtualizarUnidade.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.AtualizarUnidade.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AtualizarUnidade.Image = global::GTI_Desktop.Properties.Resources.refresh_16x16;
+            this.AtualizarUnidade.Location = new System.Drawing.Point(167, 89);
+            this.AtualizarUnidade.Name = "AtualizarUnidade";
+            this.AtualizarUnidade.Size = new System.Drawing.Size(19, 19);
+            this.AtualizarUnidade.TabIndex = 182;
+            this.tTp.SetToolTip(this.AtualizarUnidade, "Atualizar a lista de unidades");
+            this.AtualizarUnidade.UseVisualStyleBackColor = true;
+            this.AtualizarUnidade.Click += new System.EventHandler(this.AtualizarUnidade_Click);
+            // 
             // Condominio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(636, 402);
-            this.Controls.Add(this.AreaPanel);
             this.Controls.Add(this.PanelOutro);
             this.Controls.Add(this.PanelDados);
             this.Controls.Add(this.PanelLocal);
             this.Controls.Add(this.PanelHeader);
             this.Controls.Add(this.tBar);
             this.Controls.Add(this.AreaEditPanel);
+            this.Controls.Add(this.AreaPanel);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -1705,5 +1742,7 @@
         private System.Windows.Forms.ToolStripButton EditAreaButton;
         private System.Windows.Forms.ToolStripButton DelAreaButton;
         private System.Windows.Forms.ToolStripButton SairAreaButton;
+        private System.Windows.Forms.TextBox QtdeUnidade;
+        private System.Windows.Forms.Button AtualizarUnidade;
     }
 }
