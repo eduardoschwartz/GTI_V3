@@ -23,17 +23,15 @@ namespace UIWeb {
                     lblmsg.Text = "Código do imóvel inválido!";
                     return;
                 }
-                else
-                {
+                else {
                     if(String.IsNullOrWhiteSpace(txtIC.Text))
                     {
                         lblmsg.Text = "Inscrição cadastral obrigatória!";
                         return;
                     }
-                    else
-                    {
+                    else {
                         ImovelStruct reg = imovel_Class.Dados_Imovel(Num);
-                        if (gtiCore.RetornaNumero( txtIC.Text) != reg.Inscricao)
+                        if (gtiCore.RetornaNumero( txtIC.Text) != gtiCore.RetornaNumero(reg.Inscricao))
                         {
                             lblmsg.Text = "Inscrição cadastral inválida!";
                             return;

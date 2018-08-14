@@ -91,6 +91,8 @@
             this.UsoList = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
             this.PanelOutro = new Owf.Controls.A1Panel();
+            this.AtualizarUnidade = new System.Windows.Forms.Button();
+            this.QtdeUnidade = new System.Windows.Forms.TextBox();
             this.ProprietarioToolStrip = new System.Windows.Forms.ToolStrip();
             this.TestadaAddButton = new System.Windows.Forms.ToolStripButton();
             this.TestadaDelButton = new System.Windows.Forms.ToolStripButton();
@@ -141,8 +143,6 @@
             this.AreaConstruida = new System.Windows.Forms.TextBox();
             this.label43 = new System.Windows.Forms.Label();
             this.CancelAreaButton = new System.Windows.Forms.Button();
-            this.QtdeUnidade = new System.Windows.Forms.TextBox();
-            this.AtualizarUnidade = new System.Windows.Forms.Button();
             this.tBar.SuspendLayout();
             this.PanelHeader.SuspendLayout();
             this.PanelLocal.SuspendLayout();
@@ -975,7 +975,7 @@
             this.UsoList.Location = new System.Drawing.Point(93, 24);
             this.UsoList.Name = "UsoList";
             this.UsoList.Size = new System.Drawing.Size(196, 21);
-            this.UsoList.TabIndex = 183;
+            this.UsoList.TabIndex = 10;
             // 
             // label19
             // 
@@ -1017,6 +1017,36 @@
             this.PanelOutro.Size = new System.Drawing.Size(634, 124);
             this.PanelOutro.TabIndex = 17;
             this.PanelOutro.TabStop = true;
+            // 
+            // AtualizarUnidade
+            // 
+            this.AtualizarUnidade.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AtualizarUnidade.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.AtualizarUnidade.FlatAppearance.BorderSize = 0;
+            this.AtualizarUnidade.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(255)))), ((int)(((byte)(230)))));
+            this.AtualizarUnidade.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.AtualizarUnidade.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AtualizarUnidade.Image = global::GTI_Desktop.Properties.Resources.refresh_16x16;
+            this.AtualizarUnidade.Location = new System.Drawing.Point(167, 89);
+            this.AtualizarUnidade.Name = "AtualizarUnidade";
+            this.AtualizarUnidade.Size = new System.Drawing.Size(19, 19);
+            this.AtualizarUnidade.TabIndex = 182;
+            this.tTp.SetToolTip(this.AtualizarUnidade, "Atualizar a lista de unidades");
+            this.AtualizarUnidade.UseVisualStyleBackColor = true;
+            this.AtualizarUnidade.Click += new System.EventHandler(this.AtualizarUnidade_Click);
+            // 
+            // QtdeUnidade
+            // 
+            this.QtdeUnidade.BackColor = System.Drawing.Color.White;
+            this.QtdeUnidade.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.QtdeUnidade.ForeColor = System.Drawing.Color.Navy;
+            this.QtdeUnidade.Location = new System.Drawing.Point(371, 69);
+            this.QtdeUnidade.MaxLength = 3;
+            this.QtdeUnidade.Name = "QtdeUnidade";
+            this.QtdeUnidade.ReadOnly = true;
+            this.QtdeUnidade.Size = new System.Drawing.Size(39, 20);
+            this.QtdeUnidade.TabIndex = 181;
+            this.QtdeUnidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.QtdeUnidade_KeyPress);
             // 
             // ProprietarioToolStrip
             // 
@@ -1099,6 +1129,7 @@
             this.UnidadesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
+            this.UnidadesListView.FullRowSelect = true;
             this.UnidadesListView.Location = new System.Drawing.Point(198, 33);
             this.UnidadesListView.Name = "UnidadesListView";
             this.UnidadesListView.Size = new System.Drawing.Size(167, 77);
@@ -1551,36 +1582,6 @@
             this.CancelAreaButton.TabIndex = 38;
             this.CancelAreaButton.UseVisualStyleBackColor = false;
             this.CancelAreaButton.Click += new System.EventHandler(this.CancelAreaButton_Click);
-            // 
-            // QtdeUnidade
-            // 
-            this.QtdeUnidade.BackColor = System.Drawing.Color.White;
-            this.QtdeUnidade.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.QtdeUnidade.ForeColor = System.Drawing.Color.Navy;
-            this.QtdeUnidade.Location = new System.Drawing.Point(371, 69);
-            this.QtdeUnidade.MaxLength = 3;
-            this.QtdeUnidade.Name = "QtdeUnidade";
-            this.QtdeUnidade.ReadOnly = true;
-            this.QtdeUnidade.Size = new System.Drawing.Size(39, 20);
-            this.QtdeUnidade.TabIndex = 181;
-            this.QtdeUnidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.QtdeUnidade_KeyPress);
-            // 
-            // AtualizarUnidade
-            // 
-            this.AtualizarUnidade.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.AtualizarUnidade.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.AtualizarUnidade.FlatAppearance.BorderSize = 0;
-            this.AtualizarUnidade.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(255)))), ((int)(((byte)(230)))));
-            this.AtualizarUnidade.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.AtualizarUnidade.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AtualizarUnidade.Image = global::GTI_Desktop.Properties.Resources.refresh_16x16;
-            this.AtualizarUnidade.Location = new System.Drawing.Point(167, 89);
-            this.AtualizarUnidade.Name = "AtualizarUnidade";
-            this.AtualizarUnidade.Size = new System.Drawing.Size(19, 19);
-            this.AtualizarUnidade.TabIndex = 182;
-            this.tTp.SetToolTip(this.AtualizarUnidade, "Atualizar a lista de unidades");
-            this.AtualizarUnidade.UseVisualStyleBackColor = true;
-            this.AtualizarUnidade.Click += new System.EventHandler(this.AtualizarUnidade_Click);
             // 
             // Condominio
             // 

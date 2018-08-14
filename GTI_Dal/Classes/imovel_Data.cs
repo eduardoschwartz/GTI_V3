@@ -1156,5 +1156,32 @@ namespace GTI_Dal.Classes {
                 return null;
             }
         }
+
+        public Exception Incluir_Unidade_Condominio(List<Condominiounidade> unidades) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Database.ExecuteSqlCommand("DELETE FROM Condominiounidade WHERE Cd_codigo=@Codreduzido",
+                        new SqlParameter("@Codreduzido", unidades[0].Cd_codigo));
+                } catch (Exception ex) {
+                    return ex;
+                }
+                foreach (Condominiounidade item in unidades) {
+                    Condominiounidade reg = new Condominiounidade {
+                        Cd_codigo = item.Cd_codigo,
+                        Cd_unidade = item.Cd_unidade,
+                        Cd_subunidades = item.Cd_subunidades
+                    };
+                    db.CondominioUnidade.Add(reg);
+                    try {
+                        db.SaveChanges();
+                    } catch (Exception ex) {
+                        return ex;
+                    }
+                }
+                return null;
+            }
+        }
+
+
     }//end class
 }

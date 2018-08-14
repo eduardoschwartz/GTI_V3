@@ -82,6 +82,7 @@ namespace GTI_Desktop.Forms {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroCondominio_Alterar);
             if (bAllow) {
                 bAddNew = true;
+                ClearReg();
                 ControlBehaviour(false);
             } else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -244,6 +245,9 @@ namespace GTI_Desktop.Forms {
             TestadaListView.Items.Clear();
             AreaListView.Items.Clear();
             SomaArea.Text = "0,00";
+            AreaTerreno.Text = "";
+            AreaConstruida.Text = "";
+            Unidades.Text = "";
         }
 
         private void CarregaDados(int Codigo) {
@@ -282,7 +286,7 @@ namespace GTI_Desktop.Forms {
             AreaPredial.Text = Convert.ToDecimal(reg.Area_Construida).ToString("#0.00");
             AreaTerreno.Text = Convert.ToDecimal(reg.Area_Terreno).ToString("#0.00");
             Unidades.Text = reg.Qtde_Unidade.ToString();
-
+            
             List<Testadacondominio> ListaTestada = imovel_Class.Lista_Testada_Condominio(Codigo);
             foreach (Testadacondominio Testada in ListaTestada) {
                 ListViewItem lvItem = new ListViewItem(Testada.Numface.ToString("00"));
@@ -293,12 +297,11 @@ namespace GTI_Desktop.Forms {
             List<Condominiounidade> ListaUnidade = imovel_Class.Lista_Unidade_Condominio(Codigo);
             foreach (Condominiounidade Unidade in ListaUnidade) {
                 ListViewItem lvItem = new ListViewItem(Unidade.Cd_unidade.ToString("00"));
-                lvItem.SubItems.Add(Unidade.Cd_subunidades.ToString("00"));
+                lvItem.SubItems.Add(Unidade.Cd_subunidades.ToString("000"));
                 UnidadesListView.Items.Add(lvItem);
             }
 
             short n = 1;
-            decimal SomaArea = 0;
             List<AreaStruct> ListaArea = imovel_Class.Lista_Area_Condominio(Codigo);
             foreach (AreaStruct regA in ListaArea) {
                 ListViewItem lvItem = new ListViewItem(n.ToString("00"));
@@ -326,13 +329,13 @@ namespace GTI_Desktop.Forms {
                 lvItem.SubItems[3].Tag = regA.Tipo_Codigo.ToString();
                 lvItem.SubItems[4].Tag = regA.Categoria_Codigo.ToString();
                 AreaListView.Items.Add(lvItem);
-                SomaArea += regA.Area;
                 n++;
             }
-            this.SomaArea.Text = string.Format("{0:0.00}", SomaArea);
-
+           
         }
 
+       
+        
         private void AreasButton_Click(object sender, EventArgs e) {
             if (AddButton.Enabled && Convert.ToInt32(CodigoCondominio.Text) == 0)
                 MessageBox.Show("Selecione um condomínio.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -350,6 +353,7 @@ namespace GTI_Desktop.Forms {
         private void CloseAreaButton_Click(object sender, EventArgs e) {
             AreasButton.Checked = false;
             AreasButton_Click(null, null);
+            
         }
 
         private void MnuSair_Click(object sender, EventArgs e) {
@@ -559,6 +563,7 @@ namespace GTI_Desktop.Forms {
             PanelLocal.Enabled = true;
             PanelOutro.Enabled = true;
             tBar.Enabled = true;
+            
         }
 
         private bool ValidateReg() {
@@ -600,16 +605,18 @@ namespace GTI_Desktop.Forms {
                 return false;
             }
 
-            Imovel_bll imovel_Class = new Imovel_bll(_connection);
-            int nCodigo = imovel_Class.Existe_Imovel(distrito, setor, quadra, lote,0,  0);
-            if (nCodigo > 0) {
-                MessageBox.Show("Já existe um imóvel com esta inscrição cadastral (" + nCodigo.ToString("000000") + ")", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            } else {
-                bool ExisteFace = imovel_Class.Existe_Face_Quadra(distrito, setor, quadra, face);
-                if (!ExisteFace) {
-                    MessageBox.Show("Face de quadra não cadastrada.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (bAddNew) {
+                Imovel_bll imovel_Class = new Imovel_bll(_connection);
+                int nCodigo = imovel_Class.Existe_Imovel(distrito, setor, quadra, lote, 0, 0);
+                if (nCodigo > 0) {
+                    MessageBox.Show("Já existe um imóvel com esta inscrição cadastral (" + nCodigo.ToString("000000") + ")", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
+                } else {
+                    bool ExisteFace = imovel_Class.Existe_Face_Quadra(distrito, setor, quadra, face);
+                    if (!ExisteFace) {
+                        MessageBox.Show("Face de quadra não cadastrada.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
                 }
             }
 
@@ -639,6 +646,14 @@ namespace GTI_Desktop.Forms {
                 MessageBox.Show("Digite a área do terreno.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+
+            if (AreaPredial.Text == "")
+                AreaPredial.Text = "0";
+            if (Convert.ToDecimal(AreaPredial.Text) == 0) {
+                MessageBox.Show("Digite a área da construção.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
 
             bool bFind = false;
             foreach (ListViewItem item in TestadaListView.Items) {
@@ -684,10 +699,6 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void UnidadesButton_Click(object sender, EventArgs e) {
-
-        }
-
         private void QtdeUnidade_KeyPress(object sender, KeyPressEventArgs e) {
             const char Delete = (char)8;
             e.Handled = !Char.IsDigit(e.KeyChar) && e.KeyChar != Delete;
@@ -698,13 +709,70 @@ namespace GTI_Desktop.Forms {
             e.Handled = !Char.IsDigit(e.KeyChar) && e.KeyChar != Delete;
         }
 
+        private void UnidadesButton_Click(object sender, EventArgs e) {
+            if(UnidadesListView.SelectedItems.Count==0)
+                MessageBox.Show("Selecione uma unidade.","Erro",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            else {
+                if(QtdeUnidade.Text=="")
+                    MessageBox.Show("Digite a quantidade de subunidades para a unidade selecionada.","Erro",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                else {
+                    UnidadesListView.SelectedItems[0].SubItems[1].Text = Convert.ToInt32(QtdeUnidade.Text).ToString("000");
+                }
+            }
+        }
+
         private void AtualizarUnidade_Click(object sender, EventArgs e) {
-            
+            int nQtde = 0;
+            try {
+                nQtde = Int32.Parse(Unidades.Text);
+            } catch {
+                MessageBox.Show("Quantidade de unidades inválida.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            Imovel_bll imovel_Class = new Imovel_bll(_connection);
+            if (nQtde > UnidadesListView.Items.Count) {
+                int QtdeAcrescentar = nQtde- UnidadesListView.Items.Count  ;
+                int Inicio = UnidadesListView.Items.Count + 1;
+                int Final = Inicio + QtdeAcrescentar;
+                for (int i = Inicio; i < Final; i++) {
+                    ListViewItem lvItem = new ListViewItem(i.ToString("00"));
+                    lvItem.SubItems.Add("000");
+                    UnidadesListView.Items.Add(lvItem);
+                }
+                return;
+            } else {
+                int distrito = 0, setor = 0, quadra = 0, lote = 0, face = 0,Codigo=0;
+                distrito = Int32.Parse(Distrito.Text);
+                setor = Int32.Parse(Setor.Text);
+                quadra = Int32.Parse(Quadra.Text);
+                lote = Int32.Parse(Lote.Text);
+                face = Int32.Parse(Face.Text);
+                bool bFind = false;
+                foreach (ListViewItem item in UnidadesListView.Items) {
+                    Codigo= imovel_Class.Existe_Imovel(distrito, setor, quadra, lote, Convert.ToInt32(item.Text), Convert.ToInt32(item.SubItems[1].Text));
+                    if (Codigo > 0) {
+                        bFind = true;
+                        break;
+                    }
+                }
+                if (bFind)
+                    MessageBox.Show("Existem imóveis cadastrados neste condomínio (Ex: " + Codigo.ToString() +"). Exclua-os antes de reduzir a lista de unidades.","Erro",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                else {
+                    UnidadesListView.Items.Clear();
+                    for (int i = 1; i < Int32.Parse(Unidades.Text); i++) {
+                        ListViewItem lvItem = new ListViewItem(i.ToString("00"));
+                        lvItem.SubItems.Add("000");
+                        UnidadesListView.Items.Add(lvItem);
+                    }
+                }
+
+            }
         }
 
         private void SaveReg() {
             GTI_Models.Models.Condominio reg = new GTI_Models.Models.Condominio();
             reg.Cd_areaterreno = Convert.ToDecimal(AreaTerreno.Text);
+            reg.Cd_areatotconstr = Convert.ToDecimal(AreaPredial.Text);
             reg.Cd_cep = CEP.Text;
             reg.Cd_codbairro= Convert.ToInt16(Bairro.Tag.ToString());
             reg.Cd_codbenf = (short)BenfeitoriaList.SelectedValue;
@@ -794,6 +862,25 @@ namespace GTI_Desktop.Forms {
                     goto Final;
                 }
             }
+
+            //grava unidades
+            List<Condominiounidade> ListaUnidade = new List<Condominiounidade>();
+            foreach (ListViewItem item in UnidadesListView.Items) {
+                Condominiounidade regT = new Condominiounidade();
+                regT.Cd_codigo = nCodReduzido;
+                regT.Cd_unidade = Convert.ToInt16(item.Text.ToString());
+                regT.Cd_subunidades = Convert.ToInt16(item.SubItems[1].Text.ToString());
+                ListaUnidade.Add(regT);
+            }
+            if (ListaUnidade.Count > 0) {
+                ex = imovel_Class.Incluir_Unidade_Condominio(ListaUnidade);
+                if (ex != null) {
+                    ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                    eBox.ShowDialog();
+                    goto Final;
+                }
+            }
+
 
             Final:;
             ControlBehaviour(true);

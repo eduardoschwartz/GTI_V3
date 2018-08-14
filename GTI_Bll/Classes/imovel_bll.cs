@@ -434,5 +434,17 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        /// <summary>
+        /// Grava as unidades do condomínio
+        /// </summary>
+        /// <param name="unidades"></param>
+        /// <returns></returns>
+        public Exception Incluir_Unidade_Condominio(List<Condominiounidade> unidades) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            Exception ex = obj.Incluir_Unidade_Condominio(unidades);
+            return ex;
+        }
+
+
     }//end class
 }
