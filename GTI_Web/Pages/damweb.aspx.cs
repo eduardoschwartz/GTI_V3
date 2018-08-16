@@ -189,7 +189,7 @@ namespace UIWeb.Pages {
             lblValidate.Text = "";
 
 
-            if (optCPF.Checked && txtCPF.Text.Length < 14) {
+            if (optCPF.Checked && gtiCore.RetornaNumero( txtCPF.Text).Length < 11) {
                 lblmsg.Text = "CPF inválido!";
                 ShowResult(false);
                 return;

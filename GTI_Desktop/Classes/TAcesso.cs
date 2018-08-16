@@ -24,6 +24,7 @@
         CadastroImovel_Novo = 22,
         CadastroCondominio = 23,
         CadastroCondominio_Alterar = 24,
-        CadastroImovel_IPTU=25
+        CadastroImovel_IPTU=25,
+        Carta_Cobranca=26
     }
 }

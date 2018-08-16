@@ -134,6 +134,14 @@
     <Compile Include="Classes\gtiTypes.cs" />
     <Compile Include="Classes\ListViewColumnSorter.cs" />
     <Compile Include="Classes\TAcesso.cs" />
+    <Compile Include="Datasets\dsCartaCobranca.cs">
+      <DependentUpon>dsCartaCobranca.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\dsCartaCobranca.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsCartaCobranca.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Datasets\dsProcessoDoc.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -157,6 +165,12 @@
     </Compile>
     <Compile Include="Forms\Bairro.designer.cs">
       <DependentUpon>Bairro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Carta_Cobranca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Carta_Cobranca.Designer.cs">
+      <DependentUpon>Carta_Cobranca.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Certidao.cs">
       <SubType>Form</SubType>
@@ -411,6 +425,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Report\Carta_Cobranca_Envelope.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Carta_Cobranca_Envelope.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\CertidaoDebitoEmpresa.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -480,6 +500,9 @@
     </Compile>
     <EmbeddedResource Include="Forms\Bairro.resx">
       <DependentUpon>Bairro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Carta_Cobranca.resx">
+      <DependentUpon>Carta_Cobranca.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Certidao.resx">
       <DependentUpon>Certidao.cs</DependentUpon>
@@ -609,6 +632,10 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\Carta_Cobranca_Envelope.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Carta_Cobranca_Envelope.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\CertidaoDebitoEmpresa.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CertidaoDebitoEmpresa.cs</LastGenOutput>
@@ -658,6 +685,17 @@
     <EmbeddedResource Include="User_Controls\ctlTributoEditor.resx">
       <DependentUpon>ctlTributoEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Datasets\dsCartaCobranca.xsc">
+      <DependentUpon>dsCartaCobranca.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsCartaCobranca.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsCartaCobranca.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\dsCartaCobranca.xss">
+      <DependentUpon>dsCartaCobranca.xsd</DependentUpon>
+    </None>
     <None Include="Datasets\dsProcessoDoc.xsc">
       <DependentUpon>dsProcessoDoc.xsd</DependentUpon>
     </None>

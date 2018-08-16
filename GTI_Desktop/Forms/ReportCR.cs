@@ -3,6 +3,7 @@ using GTI_Desktop.Classes;
 using GTI_Desktop.Report;
 using GTI_Models.Models;
 using System;
+using System.Data;
 using System.Windows.Forms;
 using static GTI_Models.modelCore;
 
@@ -10,12 +11,12 @@ namespace GTI_Desktop.Forms {
     public partial class ReportCR : Form {
         private string _connection = gtiCore.Connection_Name();
 
-        public ReportCR(String ReportName,Report_Data Dados) {
+        public ReportCR(String ReportName,Report_Data Dados, DataSet Ds ) {
             InitializeComponent();
-            showReport(ReportName,Dados);
+            showReport(ReportName,Dados,Ds);
         }
 
-        private void showReport(String _nome,Report_Data _dados) {
+        private void showReport(String _nome,Report_Data _dados, DataSet Ds ) {
             crViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             string _usuario = Properties.Settings.Default.LastUser;
 
@@ -222,6 +223,14 @@ namespace GTI_Desktop.Forms {
                     rpt_cdebitoempresapn.RecordSelectionFormula = "{Assinatura.Usuario}='" + _usuario + "'";
                     crViewer.ReportSource = rpt_cdebitoempresapn;
                     break;
+                case "Carta_Cobranca_Envelope":
+                    Text = "Carta de Cobrança";
+                    Carta_Cobranca_Envelope rpt_carta_cobranca_envelope = new Carta_Cobranca_Envelope();
+                    rpt_carta_cobranca_envelope.SetDatabaseLogon(gtiCore.Ul, gtiCore.Up, Properties.Settings.Default.ServerName, Properties.Settings.Default.DataBaseReal);
+                    rpt_carta_cobranca_envelope.SetDataSource(Ds);
+                    crViewer.ReportSource = rpt_carta_cobranca_envelope;
+                    break;
+
                 default:
                     break;
             }

@@ -11,7 +11,7 @@ namespace GTI_Desktop.Forms {
             InitializeComponent();
             if(!ShowDialog) {
                 Main MdiForm = (Main)Application.OpenForms["MainForm"];
-                this.MdiParent = MdiForm;
+                MdiParent = MdiForm;
             }
             ShowReport(ReportName,Ds,nTable,rParam);
         }
@@ -24,17 +24,17 @@ namespace GTI_Desktop.Forms {
                 reportViewer.LocalReport.DataSources.Clear();
                 reportViewer.LocalReport.DataSources.Add(rds);
                 reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                this.reportViewer.ZoomMode = ZoomMode.PageWidth;
-                this.reportViewer.LocalReport.Refresh();
+                reportViewer.ZoomMode = ZoomMode.PageWidth;
+                reportViewer.LocalReport.Refresh();
                 if(rParam != null)
-                    this.reportViewer.LocalReport.SetParameters(rParam);
+                    reportViewer.LocalReport.SetParameters(rParam);
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
         }
 
         private void Report_Load(object sender, EventArgs e) {
-            this.reportViewer.RefreshReport();
+            reportViewer.RefreshReport();
         }
 
     }

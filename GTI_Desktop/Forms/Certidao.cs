@@ -365,7 +365,7 @@ namespace GTI_Desktop.Forms {
                         Atividade=sAtividade
                         
                     };
-                    ReportCR fRpt = new ReportCR(_nomeReport, _dados);
+                    ReportCR fRpt = new ReportCR(_nomeReport, _dados,null);
                     fRpt.ShowDialog();
                     ClearFields();
                 }

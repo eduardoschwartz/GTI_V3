@@ -54,25 +54,25 @@
             this.LedRed = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuParametros = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuCadastroBairro = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuCadastroPais = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuCadastroProfissao = new System.Windows.Forms.ToolStripMenuItem();
+            this.CadastroBairroMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.CadastroPaisMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.CadastroProfissaoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuImobiliario = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCadastro = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuCadastroImovel = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuCadastroCondominio = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFaceQuadra = new System.Windows.Forms.ToolStripMenuItem();
+            this.CadastroImovelMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.CadastroCondominioMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.FaceQuadraMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMobiliario = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMobiliarioCadastro = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEmpresa = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEscritorioContabil = new System.Windows.Forms.ToolStripMenuItem();
+            this.CadastroEmpresaMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.EscritorioContabilMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAtendimento = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuCidadao = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuExtrato = new System.Windows.Forms.ToolStripMenuItem();
+            this.CadastroCidadaoMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExtratoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTributario = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTributarioTabelas = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuCadastroLancamento = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuTributos = new System.Windows.Forms.ToolStripMenuItem();
+            this.CadastroLancamentoMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.CadastroTributosMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuProtocolo = new System.Windows.Forms.ToolStripMenuItem();
             this.tabelasBásicasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.documentaçãoParaProcessosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,11 +81,11 @@
             this.localDeTramitaçãoDeProcessosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuControleProcesso = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOutros = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuConfig = new System.Windows.Forms.ToolStripMenuItem();
+            this.ConfigMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSecurity = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuCadastroUsuario = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuCadastroEvento = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuAtribuicaoAcesso = new System.Windows.Forms.ToolStripMenuItem();
+            this.CadastroUsuariosMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.CadastroEventoMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.AtribuicaoAcessoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuJanela = new System.Windows.Forms.ToolStripMenuItem();
             this.minimizarTodasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restaurarTodasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -120,6 +120,8 @@
             this.optDv2 = new System.Windows.Forms.RadioButton();
             this.optDv1 = new System.Windows.Forms.RadioButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.dividaAtivaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CartaCobrancaMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.sBar.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.topBar.SuspendLayout();
@@ -342,33 +344,33 @@
             // mnuParametros
             // 
             this.mnuParametros.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuCadastroBairro,
-            this.mnuCadastroPais,
-            this.mnuCadastroProfissao});
+            this.CadastroBairroMenu,
+            this.CadastroPaisMenu,
+            this.CadastroProfissaoMenu});
             this.mnuParametros.Name = "mnuParametros";
             this.mnuParametros.Size = new System.Drawing.Size(79, 20);
             this.mnuParametros.Text = "Parâmetros";
             // 
-            // mnuCadastroBairro
+            // CadastroBairroMenu
             // 
-            this.mnuCadastroBairro.Name = "mnuCadastroBairro";
-            this.mnuCadastroBairro.Size = new System.Drawing.Size(193, 22);
-            this.mnuCadastroBairro.Text = "Cadastro de Bairros";
-            this.mnuCadastroBairro.Click += new System.EventHandler(this.mnuCadastroBairro_Click);
+            this.CadastroBairroMenu.Name = "CadastroBairroMenu";
+            this.CadastroBairroMenu.Size = new System.Drawing.Size(193, 22);
+            this.CadastroBairroMenu.Text = "Cadastro de Bairros";
+            this.CadastroBairroMenu.Click += new System.EventHandler(this.mnuCadastroBairro_Click);
             // 
-            // mnuCadastroPais
+            // CadastroPaisMenu
             // 
-            this.mnuCadastroPais.Name = "mnuCadastroPais";
-            this.mnuCadastroPais.Size = new System.Drawing.Size(193, 22);
-            this.mnuCadastroPais.Text = "Cadastro de Países";
-            this.mnuCadastroPais.Click += new System.EventHandler(this.mnuCadastroPais_Click);
+            this.CadastroPaisMenu.Name = "CadastroPaisMenu";
+            this.CadastroPaisMenu.Size = new System.Drawing.Size(193, 22);
+            this.CadastroPaisMenu.Text = "Cadastro de Países";
+            this.CadastroPaisMenu.Click += new System.EventHandler(this.mnuCadastroPais_Click);
             // 
-            // mnuCadastroProfissao
+            // CadastroProfissaoMenu
             // 
-            this.mnuCadastroProfissao.Name = "mnuCadastroProfissao";
-            this.mnuCadastroProfissao.Size = new System.Drawing.Size(193, 22);
-            this.mnuCadastroProfissao.Text = "Cadastro de Profissões";
-            this.mnuCadastroProfissao.Click += new System.EventHandler(this.mnuCadastroProfissao_Click);
+            this.CadastroProfissaoMenu.Name = "CadastroProfissaoMenu";
+            this.CadastroProfissaoMenu.Size = new System.Drawing.Size(193, 22);
+            this.CadastroProfissaoMenu.Text = "Cadastro de Profissões";
+            this.CadastroProfissaoMenu.Click += new System.EventHandler(this.mnuCadastroProfissao_Click);
             // 
             // mnuImobiliario
             // 
@@ -381,32 +383,32 @@
             // mnuCadastro
             // 
             this.mnuCadastro.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuCadastroImovel,
-            this.mnuCadastroCondominio,
-            this.mnuFaceQuadra});
+            this.CadastroImovelMenu,
+            this.CadastroCondominioMenu,
+            this.FaceQuadraMenu});
             this.mnuCadastro.Name = "mnuCadastro";
-            this.mnuCadastro.Size = new System.Drawing.Size(121, 22);
+            this.mnuCadastro.Size = new System.Drawing.Size(180, 22);
             this.mnuCadastro.Text = "Cadastro";
             // 
-            // mnuCadastroImovel
+            // CadastroImovelMenu
             // 
-            this.mnuCadastroImovel.Name = "mnuCadastroImovel";
-            this.mnuCadastroImovel.Size = new System.Drawing.Size(156, 22);
-            this.mnuCadastroImovel.Text = "Imóvel";
-            this.mnuCadastroImovel.Click += new System.EventHandler(this.MnuCadImob_Click);
+            this.CadastroImovelMenu.Name = "CadastroImovelMenu";
+            this.CadastroImovelMenu.Size = new System.Drawing.Size(180, 22);
+            this.CadastroImovelMenu.Text = "Imóvel";
+            this.CadastroImovelMenu.Click += new System.EventHandler(this.MnuCadImob_Click);
             // 
-            // mnuCadastroCondominio
+            // CadastroCondominioMenu
             // 
-            this.mnuCadastroCondominio.Name = "mnuCadastroCondominio";
-            this.mnuCadastroCondominio.Size = new System.Drawing.Size(156, 22);
-            this.mnuCadastroCondominio.Text = "Condomínios";
-            this.mnuCadastroCondominio.Click += new System.EventHandler(this.mnuCadastroCondominio_Click);
+            this.CadastroCondominioMenu.Name = "CadastroCondominioMenu";
+            this.CadastroCondominioMenu.Size = new System.Drawing.Size(180, 22);
+            this.CadastroCondominioMenu.Text = "Condomínios";
+            this.CadastroCondominioMenu.Click += new System.EventHandler(this.mnuCadastroCondominio_Click);
             // 
-            // mnuFaceQuadra
+            // FaceQuadraMenu
             // 
-            this.mnuFaceQuadra.Name = "mnuFaceQuadra";
-            this.mnuFaceQuadra.Size = new System.Drawing.Size(156, 22);
-            this.mnuFaceQuadra.Text = "Face de Quadra";
+            this.FaceQuadraMenu.Name = "FaceQuadraMenu";
+            this.FaceQuadraMenu.Size = new System.Drawing.Size(180, 22);
+            this.FaceQuadraMenu.Text = "Face de Quadra";
             // 
             // mnuMobiliario
             // 
@@ -419,53 +421,54 @@
             // mnuMobiliarioCadastro
             // 
             this.mnuMobiliarioCadastro.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuEmpresa,
-            this.mnuEscritorioContabil});
+            this.CadastroEmpresaMenu,
+            this.EscritorioContabilMenu});
             this.mnuMobiliarioCadastro.Name = "mnuMobiliarioCadastro";
-            this.mnuMobiliarioCadastro.Size = new System.Drawing.Size(121, 22);
+            this.mnuMobiliarioCadastro.Size = new System.Drawing.Size(180, 22);
             this.mnuMobiliarioCadastro.Text = "Cadastro";
             // 
-            // mnuEmpresa
+            // CadastroEmpresaMenu
             // 
-            this.mnuEmpresa.Name = "mnuEmpresa";
-            this.mnuEmpresa.Size = new System.Drawing.Size(169, 22);
-            this.mnuEmpresa.Text = "Empresa";
-            this.mnuEmpresa.Click += new System.EventHandler(this.MnuEmpresa_Click);
+            this.CadastroEmpresaMenu.Name = "CadastroEmpresaMenu";
+            this.CadastroEmpresaMenu.Size = new System.Drawing.Size(180, 22);
+            this.CadastroEmpresaMenu.Text = "Empresa";
+            this.CadastroEmpresaMenu.Click += new System.EventHandler(this.MnuEmpresa_Click);
             // 
-            // mnuEscritorioContabil
+            // EscritorioContabilMenu
             // 
-            this.mnuEscritorioContabil.Name = "mnuEscritorioContabil";
-            this.mnuEscritorioContabil.Size = new System.Drawing.Size(169, 22);
-            this.mnuEscritorioContabil.Text = "Escritório contábil";
-            this.mnuEscritorioContabil.Click += new System.EventHandler(this.mnuEscritorioContabil_Click);
+            this.EscritorioContabilMenu.Name = "EscritorioContabilMenu";
+            this.EscritorioContabilMenu.Size = new System.Drawing.Size(180, 22);
+            this.EscritorioContabilMenu.Text = "Escritório contábil";
+            this.EscritorioContabilMenu.Click += new System.EventHandler(this.mnuEscritorioContabil_Click);
             // 
             // mnuAtendimento
             // 
             this.mnuAtendimento.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuCidadao,
-            this.mnuExtrato});
+            this.CadastroCidadaoMenu,
+            this.ExtratoMenu});
             this.mnuAtendimento.Name = "mnuAtendimento";
             this.mnuAtendimento.Size = new System.Drawing.Size(89, 20);
             this.mnuAtendimento.Text = "Atendimento";
             // 
-            // mnuCidadao
+            // CadastroCidadaoMenu
             // 
-            this.mnuCidadao.Name = "mnuCidadao";
-            this.mnuCidadao.Size = new System.Drawing.Size(195, 22);
-            this.mnuCidadao.Text = "Cadastro de cidadão";
-            this.mnuCidadao.Click += new System.EventHandler(this.MnuCidadao_Click);
+            this.CadastroCidadaoMenu.Name = "CadastroCidadaoMenu";
+            this.CadastroCidadaoMenu.Size = new System.Drawing.Size(195, 22);
+            this.CadastroCidadaoMenu.Text = "Cadastro de cidadão";
+            this.CadastroCidadaoMenu.Click += new System.EventHandler(this.MnuCidadao_Click);
             // 
-            // mnuExtrato
+            // ExtratoMenu
             // 
-            this.mnuExtrato.Name = "mnuExtrato";
-            this.mnuExtrato.Size = new System.Drawing.Size(195, 22);
-            this.mnuExtrato.Text = "Extrato do contribuinte";
-            this.mnuExtrato.Click += new System.EventHandler(this.MnuExtrato_Click);
+            this.ExtratoMenu.Name = "ExtratoMenu";
+            this.ExtratoMenu.Size = new System.Drawing.Size(195, 22);
+            this.ExtratoMenu.Text = "Extrato do contribuinte";
+            this.ExtratoMenu.Click += new System.EventHandler(this.MnuExtrato_Click);
             // 
             // mnuTributario
             // 
             this.mnuTributario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuTributarioTabelas});
+            this.mnuTributarioTabelas,
+            this.dividaAtivaToolStripMenuItem});
             this.mnuTributario.Name = "mnuTributario";
             this.mnuTributario.Size = new System.Drawing.Size(70, 20);
             this.mnuTributario.Text = "Tributário";
@@ -473,25 +476,25 @@
             // mnuTributarioTabelas
             // 
             this.mnuTributarioTabelas.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuCadastroLancamento,
-            this.mnuTributos});
+            this.CadastroLancamentoMenu,
+            this.CadastroTributosMenu});
             this.mnuTributarioTabelas.Name = "mnuTributarioTabelas";
-            this.mnuTributarioTabelas.Size = new System.Drawing.Size(113, 22);
+            this.mnuTributarioTabelas.Size = new System.Drawing.Size(180, 22);
             this.mnuTributarioTabelas.Text = "Tabelas";
             // 
-            // mnuCadastroLancamento
+            // CadastroLancamentoMenu
             // 
-            this.mnuCadastroLancamento.Name = "mnuCadastroLancamento";
-            this.mnuCadastroLancamento.Size = new System.Drawing.Size(208, 22);
-            this.mnuCadastroLancamento.Text = "Cadastro de lançamentos";
-            this.mnuCadastroLancamento.Click += new System.EventHandler(this.MnuCadastroLancamento_Click);
+            this.CadastroLancamentoMenu.Name = "CadastroLancamentoMenu";
+            this.CadastroLancamentoMenu.Size = new System.Drawing.Size(208, 22);
+            this.CadastroLancamentoMenu.Text = "Cadastro de lançamentos";
+            this.CadastroLancamentoMenu.Click += new System.EventHandler(this.MnuCadastroLancamento_Click);
             // 
-            // mnuTributos
+            // CadastroTributosMenu
             // 
-            this.mnuTributos.Name = "mnuTributos";
-            this.mnuTributos.Size = new System.Drawing.Size(208, 22);
-            this.mnuTributos.Text = "Cadastro de tributos";
-            this.mnuTributos.Click += new System.EventHandler(this.MnuTributos_Click);
+            this.CadastroTributosMenu.Name = "CadastroTributosMenu";
+            this.CadastroTributosMenu.Size = new System.Drawing.Size(208, 22);
+            this.CadastroTributosMenu.Text = "Cadastro de tributos";
+            this.CadastroTributosMenu.Click += new System.EventHandler(this.MnuTributos_Click);
             // 
             // mnuProtocolo
             // 
@@ -551,49 +554,49 @@
             // mnuOutros
             // 
             this.mnuOutros.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuConfig,
+            this.ConfigMenu,
             this.mnuSecurity});
             this.mnuOutros.Name = "mnuOutros";
             this.mnuOutros.Size = new System.Drawing.Size(55, 20);
             this.mnuOutros.Text = "Outros";
             // 
-            // mnuConfig
+            // ConfigMenu
             // 
-            this.mnuConfig.Name = "mnuConfig";
-            this.mnuConfig.Size = new System.Drawing.Size(146, 22);
-            this.mnuConfig.Text = "Configuração";
-            this.mnuConfig.Click += new System.EventHandler(this.MnuConfig_Click);
+            this.ConfigMenu.Name = "ConfigMenu";
+            this.ConfigMenu.Size = new System.Drawing.Size(180, 22);
+            this.ConfigMenu.Text = "Configuração";
+            this.ConfigMenu.Click += new System.EventHandler(this.MnuConfig_Click);
             // 
             // mnuSecurity
             // 
             this.mnuSecurity.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuCadastroUsuario,
-            this.mnuCadastroEvento,
-            this.mnuAtribuicaoAcesso});
+            this.CadastroUsuariosMenu,
+            this.CadastroEventoMenu,
+            this.AtribuicaoAcessoMenu});
             this.mnuSecurity.Name = "mnuSecurity";
-            this.mnuSecurity.Size = new System.Drawing.Size(146, 22);
+            this.mnuSecurity.Size = new System.Drawing.Size(180, 22);
             this.mnuSecurity.Text = "Segurança";
             // 
-            // mnuCadastroUsuario
+            // CadastroUsuariosMenu
             // 
-            this.mnuCadastroUsuario.Name = "mnuCadastroUsuario";
-            this.mnuCadastroUsuario.Size = new System.Drawing.Size(188, 22);
-            this.mnuCadastroUsuario.Text = "Cadastro de usuários";
-            this.mnuCadastroUsuario.Click += new System.EventHandler(this.mnuCadastroUsuario_Click);
+            this.CadastroUsuariosMenu.Name = "CadastroUsuariosMenu";
+            this.CadastroUsuariosMenu.Size = new System.Drawing.Size(188, 22);
+            this.CadastroUsuariosMenu.Text = "Cadastro de usuários";
+            this.CadastroUsuariosMenu.Click += new System.EventHandler(this.mnuCadastroUsuario_Click);
             // 
-            // mnuCadastroEvento
+            // CadastroEventoMenu
             // 
-            this.mnuCadastroEvento.Name = "mnuCadastroEvento";
-            this.mnuCadastroEvento.Size = new System.Drawing.Size(188, 22);
-            this.mnuCadastroEvento.Text = "Eventos do sistema";
-            this.mnuCadastroEvento.Click += new System.EventHandler(this.mnuCadastroEvento_Click);
+            this.CadastroEventoMenu.Name = "CadastroEventoMenu";
+            this.CadastroEventoMenu.Size = new System.Drawing.Size(188, 22);
+            this.CadastroEventoMenu.Text = "Eventos do sistema";
+            this.CadastroEventoMenu.Click += new System.EventHandler(this.mnuCadastroEvento_Click);
             // 
-            // mnuAtribuicaoAcesso
+            // AtribuicaoAcessoMenu
             // 
-            this.mnuAtribuicaoAcesso.Name = "mnuAtribuicaoAcesso";
-            this.mnuAtribuicaoAcesso.Size = new System.Drawing.Size(188, 22);
-            this.mnuAtribuicaoAcesso.Text = "Atribuição de acessos";
-            this.mnuAtribuicaoAcesso.Click += new System.EventHandler(this.mnuAtribuicaoAcesso_Click);
+            this.AtribuicaoAcessoMenu.Name = "AtribuicaoAcessoMenu";
+            this.AtribuicaoAcessoMenu.Size = new System.Drawing.Size(188, 22);
+            this.AtribuicaoAcessoMenu.Text = "Atribuição de acessos";
+            this.AtribuicaoAcessoMenu.Click += new System.EventHandler(this.mnuAtribuicaoAcesso_Click);
             // 
             // mnuJanela
             // 
@@ -611,40 +614,40 @@
             // minimizarTodasToolStripMenuItem
             // 
             this.minimizarTodasToolStripMenuItem.Name = "minimizarTodasToolStripMenuItem";
-            this.minimizarTodasToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.minimizarTodasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.minimizarTodasToolStripMenuItem.Text = "Minimizar todas";
             this.minimizarTodasToolStripMenuItem.Click += new System.EventHandler(this.MinimizarTodasToolStripMenuItem_Click);
             // 
             // restaurarTodasToolStripMenuItem
             // 
             this.restaurarTodasToolStripMenuItem.Name = "restaurarTodasToolStripMenuItem";
-            this.restaurarTodasToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.restaurarTodasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.restaurarTodasToolStripMenuItem.Text = "Restaurar todas";
             this.restaurarTodasToolStripMenuItem.Click += new System.EventHandler(this.RestaurarTodasToolStripMenuItem_Click);
             // 
             // fecharTodasToolStripMenuItem
             // 
             this.fecharTodasToolStripMenuItem.Name = "fecharTodasToolStripMenuItem";
-            this.fecharTodasToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.fecharTodasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.fecharTodasToolStripMenuItem.Text = "Fechar todas";
             this.fecharTodasToolStripMenuItem.Click += new System.EventHandler(this.FecharTodasToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(156, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
             // 
             // emCascataToolStripMenuItem
             // 
             this.emCascataToolStripMenuItem.Name = "emCascataToolStripMenuItem";
-            this.emCascataToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.emCascataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.emCascataToolStripMenuItem.Text = "Em cascata";
             this.emCascataToolStripMenuItem.Click += new System.EventHandler(this.EmCascataToolStripMenuItem_Click);
             // 
             // ladoALadoToolStripMenuItem
             // 
             this.ladoALadoToolStripMenuItem.Name = "ladoALadoToolStripMenuItem";
-            this.ladoALadoToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.ladoALadoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ladoALadoToolStripMenuItem.Text = "Lado a lado";
             this.ladoALadoToolStripMenuItem.Click += new System.EventHandler(this.LadoALadoToolStripMenuItem_Click);
             // 
@@ -935,6 +938,21 @@
             this.optDv1.UseVisualStyleBackColor = false;
             this.optDv1.CheckedChanged += new System.EventHandler(this.OptDv1_CheckedChanged);
             // 
+            // dividaAtivaToolStripMenuItem
+            // 
+            this.dividaAtivaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CartaCobrancaMenu});
+            this.dividaAtivaToolStripMenuItem.Name = "dividaAtivaToolStripMenuItem";
+            this.dividaAtivaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dividaAtivaToolStripMenuItem.Text = "Divida Ativa";
+            // 
+            // CartaCobrancaMenu
+            // 
+            this.CartaCobrancaMenu.Name = "CartaCobrancaMenu";
+            this.CartaCobrancaMenu.Size = new System.Drawing.Size(180, 22);
+            this.CartaCobrancaMenu.Text = "Carta de cobrança";
+            this.CartaCobrancaMenu.Click += new System.EventHandler(this.CartaCobrancaMenu_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -992,18 +1010,18 @@
         public System.Windows.Forms.ToolStripStatusLabel LedRed;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mnuParametros;
-        private System.Windows.Forms.ToolStripMenuItem mnuCadastroBairro;
+        private System.Windows.Forms.ToolStripMenuItem CadastroBairroMenu;
         private System.Windows.Forms.ToolStripMenuItem mnuImobiliario;
         private System.Windows.Forms.ToolStripMenuItem mnuCadastro;
-        private System.Windows.Forms.ToolStripMenuItem mnuCadastroImovel;
-        private System.Windows.Forms.ToolStripMenuItem mnuFaceQuadra;
+        private System.Windows.Forms.ToolStripMenuItem CadastroImovelMenu;
+        private System.Windows.Forms.ToolStripMenuItem FaceQuadraMenu;
         private System.Windows.Forms.ToolStripMenuItem mnuMobiliario;
         private System.Windows.Forms.ToolStripMenuItem mnuAtendimento;
-        private System.Windows.Forms.ToolStripMenuItem mnuCidadao;
+        private System.Windows.Forms.ToolStripMenuItem CadastroCidadaoMenu;
         private System.Windows.Forms.ToolStripMenuItem mnuTributario;
         private System.Windows.Forms.ToolStripMenuItem mnuProtocolo;
         private System.Windows.Forms.ToolStripMenuItem mnuOutros;
-        private System.Windows.Forms.ToolStripMenuItem mnuConfig;
+        private System.Windows.Forms.ToolStripMenuItem ConfigMenu;
         private System.Windows.Forms.ToolStripMenuItem mnuJanela;
         private System.Windows.Forms.ToolStripMenuItem minimizarTodasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem restaurarTodasToolStripMenuItem;
@@ -1018,7 +1036,7 @@
         private System.Windows.Forms.ToolStripButton btProtocolo;
         private System.Windows.Forms.ToolStripButton btConfig;
         public System.Windows.Forms.ToolStripButton btSair;
-        private System.Windows.Forms.ToolStripMenuItem mnuCadastroPais;
+        private System.Windows.Forms.ToolStripMenuItem CadastroPaisMenu;
         private System.Windows.Forms.ToolStripMenuItem tabelasBásicasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem documentaçãoParaProcessosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem despachosDosTrâmitesToolStripMenuItem;
@@ -1035,30 +1053,32 @@
         private System.Windows.Forms.Label lblDV;
         private System.Windows.Forms.Label lblDV3;
         private System.Windows.Forms.ToolStripMenuItem mnuTributarioTabelas;
-        private System.Windows.Forms.ToolStripMenuItem mnuCadastroLancamento;
-        private System.Windows.Forms.ToolStripMenuItem mnuTributos;
+        private System.Windows.Forms.ToolStripMenuItem CadastroLancamentoMenu;
+        private System.Windows.Forms.ToolStripMenuItem CadastroTributosMenu;
         private System.Windows.Forms.ToolStripButton btExtrato;
-        private System.Windows.Forms.ToolStripMenuItem mnuExtrato;
+        private System.Windows.Forms.ToolStripMenuItem ExtratoMenu;
         private System.Windows.Forms.ToolStripMenuItem mnuMobiliarioCadastro;
-        private System.Windows.Forms.ToolStripMenuItem mnuEmpresa;
-        private System.Windows.Forms.ToolStripMenuItem mnuEscritorioContabil;
+        private System.Windows.Forms.ToolStripMenuItem CadastroEmpresaMenu;
+        private System.Windows.Forms.ToolStripMenuItem EscritorioContabilMenu;
         public System.Windows.Forms.ToolStripStatusLabel sbDataBase;
         private System.Windows.Forms.ToolStripMenuItem mnuSecurity;
-        private System.Windows.Forms.ToolStripMenuItem mnuCadastroUsuario;
-        private System.Windows.Forms.ToolStripMenuItem mnuCadastroEvento;
-        private System.Windows.Forms.ToolStripMenuItem mnuAtribuicaoAcesso;
+        private System.Windows.Forms.ToolStripMenuItem CadastroUsuariosMenu;
+        private System.Windows.Forms.ToolStripMenuItem CadastroEventoMenu;
+        private System.Windows.Forms.ToolStripMenuItem AtribuicaoAcessoMenu;
         private System.Windows.Forms.ToolStripDropDownButton btSecurity;
         private System.Windows.Forms.ToolStripMenuItem CadastroUsuarioMenu;
         private System.Windows.Forms.ToolStripMenuItem EventosDoSistemaMenu;
         private System.Windows.Forms.ToolStripMenuItem AtribuicaoDeAcessoMenu;
-        private System.Windows.Forms.ToolStripMenuItem mnuCadastroCondominio;
+        private System.Windows.Forms.ToolStripMenuItem CadastroCondominioMenu;
         private System.Windows.Forms.ToolStripButton AlvaraButton;
         private System.Windows.Forms.ToolStripButton ParcelamentoButton;
         private System.Windows.Forms.ToolStripButton EmissaoGuiaButton;
         private System.Windows.Forms.ToolStripButton ConsultaDocButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton CertidaoButton;
-        private System.Windows.Forms.ToolStripMenuItem mnuCadastroProfissao;
+        private System.Windows.Forms.ToolStripMenuItem CadastroProfissaoMenu;
+        private System.Windows.Forms.ToolStripMenuItem dividaAtivaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CartaCobrancaMenu;
     }
 }
 

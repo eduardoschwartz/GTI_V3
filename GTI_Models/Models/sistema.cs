@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 
 namespace GTI_Models.Models {
     public class Sistema {
