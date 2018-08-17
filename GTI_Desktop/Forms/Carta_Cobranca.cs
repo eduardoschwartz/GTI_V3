@@ -150,7 +150,7 @@ namespace GTI_Desktop.Forms {
             for (int i = 0; i < Lista_Codigos.Count; i++) {
                 DataRow dRow = dTableHeader.NewRow();
                 dRow["Codigo"] = Lista_Codigos[i];
-                dRow["Grupo"] = i % 2;
+                dRow["Grupo"] = 1;
                 dRow["Nome"] = "Kelly Debby";
                 dTableHeader.Rows.Add(dRow);
             }
