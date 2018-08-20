@@ -172,7 +172,7 @@ namespace GTI_Dal.Classes {
                 row.Cidade_nome = reg.Cidade_nome;
                 row.UF = reg.UF;
                 row.Endereco_codigo = reg.Endereco_codigo;
-                row.Endereco_nome = reg.Endereco_nome;
+                row.Endereco_nome = reg.Endereco_nome==null?reg.Nome_logradouro:reg.Endereco_nome;
                 row.Numero = reg.Numero;
                 row.Complemento = reg.Complemento;
 

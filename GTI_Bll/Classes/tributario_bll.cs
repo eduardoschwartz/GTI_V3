@@ -699,7 +699,7 @@ namespace GTI_Bll.Classes {
         }
 
         /// <summary>
-        /// Retorna a qtde meses nas quais a compet~encia não foi encerrada
+        /// Retorna a qtde de meses nas quais a competência não foi encerrada
         /// </summary>
         /// <param name="Lista"></param>
         /// <returns></returns>

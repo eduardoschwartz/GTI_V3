@@ -5,6 +5,8 @@ using GTI_Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace GTI_Desktop.Forms {
@@ -37,6 +39,18 @@ namespace GTI_Desktop.Forms {
                             gtiCore.Ocupado(this);
                             List<SpExtrato>Lista_Debitos= Gera_Matriz(_codigo_ini, _codigo_fim, Convert.ToDateTime(DataVencto.Text));
                             List<int> Lista_Codigos = Separa_Codigos(Lista_Debitos);
+
+
+                            string sDir = AppDomain.CurrentDomain.BaseDirectory;
+                            Encoding ANSI = Encoding.Default;
+                            using (StreamWriter sw = new StreamWriter(sDir + "\\cartacobranca.txt", false, ANSI)) {
+                                foreach (int item in Lista_Codigos) {
+                                    sw.Write(item.ToString() + Environment.NewLine);
+                                }
+                                sw.Flush();
+                                sw.Close();
+                            }
+
                             gtiCore.Liberado(this);
                             PrintReport(Lista_Debitos,Lista_Codigos);
                         }
@@ -56,7 +70,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private List<SpExtrato> Gera_Matriz(int _codigo_ini,int _codigo_fim,DateTime _data_vencto) {
-            int _total = _codigo_fim - _codigo_ini,_pos=1;
+            int _total = _codigo_fim - _codigo_ini+1,_pos=1;
             List<SpExtrato> Lista_Resumo = new List<SpExtrato>();
             PBar.Value = 0;
             Tributario_bll tributario_Class = new Tributario_bll(_connection);
