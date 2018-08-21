@@ -61,14 +61,14 @@ namespace GTI_Bll.Classes {
         /// <summary>Retorna os dados principais do contribuinte.
         /// </summary>
         public Contribuinte_Header_Struct Contribuinte_Header(int Codigo) {
-            dalCore.LocalEndereco Tipo;
+            TipoCadastro Tipo;
             Sistema_Data obj = new Sistema_Data(_connection);
             if (Codigo < 100000)
-                Tipo = dalCore.LocalEndereco.Imovel;
+                Tipo = TipoCadastro.Imovel;
             else if (Codigo >= 100000 && Codigo < 500000)
-                Tipo = dalCore.LocalEndereco.Empresa;
+                Tipo = TipoCadastro.Empresa;
             else
-                Tipo = dalCore.LocalEndereco.Cidadao;
+                Tipo = TipoCadastro.Cidadao;
 
             return obj.Contribuinte_Header(Codigo, Tipo);
         }

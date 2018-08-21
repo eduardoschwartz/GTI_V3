@@ -14,11 +14,12 @@ namespace GTI_Dal.Classes {
             _connection = sConnection;
         }
 
-        public Contribuinte_Header_Struct Contribuinte_Header(int Codigo, dalCore.LocalEndereco Tipo) {
+        public Contribuinte_Header_Struct Contribuinte_Header(int Codigo, TipoCadastro Tipo) {
             Contribuinte_Header_Struct reg = new Contribuinte_Header_Struct {
-                Codigo = Codigo
+                Codigo = Codigo,
+                Tipo = Tipo
             };
-            if (Tipo == dalCore.LocalEndereco.Imovel) {
+            if (Tipo == TipoCadastro.Imovel) {
                 Imovel_Data imovel_Class = new Imovel_Data(_connection);
                 bool Existe = imovel_Class.Existe_Imovel(Codigo);
                 if (!Existe)
@@ -37,7 +38,9 @@ namespace GTI_Dal.Classes {
                 reg.Cep = RegImovel.Cep;
                 reg.Quadra_original = RegImovel.QuadraOriginal;
                 reg.Lote_original = RegImovel.LoteOriginal;
-            } else if (Tipo == dalCore.LocalEndereco.Empresa) {
+                reg.Atividade = "N/A";
+                
+            } else if (Tipo == TipoCadastro.Empresa) {
                 Empresa_Data empresa_Class = new Empresa_Data(_connection);
                 bool Existe = empresa_Class.Existe_Empresa(Codigo);
                 if (!Existe)
@@ -56,6 +59,7 @@ namespace GTI_Dal.Classes {
                 reg.Cep = regEmpresa.Cep;
                 reg.Quadra_original = "N/A";
                 reg.Lote_original = "N/A";
+                reg.Atividade = regEmpresa.Atividade_extenso;
             } else {
                 Cidadao_Data cidadao_Class = new Cidadao_Data(_connection);
                 bool Existe = cidadao_Class.ExisteCidadao(Codigo);
@@ -74,6 +78,7 @@ namespace GTI_Dal.Classes {
                 reg.Cep = regCidadao.Cep.ToString();
                 reg.Quadra_original = "N/A";
                 reg.Lote_original = "N/A";
+                reg.Atividade = "N/A";
             }
 
             return reg;

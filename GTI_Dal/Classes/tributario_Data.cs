@@ -779,10 +779,9 @@ namespace GTI_Dal.Classes {
             string sNumDoc2 = nNumDoc.ToString() + dalCore.RetornaDVDocumento(nNumDoc).ToString();
             string sNumDoc3 = nNumDoc.ToString() + dalCore.Modulo11(nNumDoc.ToString("0000000000000")).ToString();
 
-            dalCore.TipoContribuinte tpContribuinte = nCodigo < 100000 ?
-                dalCore.TipoContribuinte.Imovel : nCodigo >= 100000 && nCodigo < 400000 ? dalCore.TipoContribuinte.Empresa : dalCore.TipoContribuinte.Cidadao;
-            dalCore.LocalEndereco Local = nCodigo < 100000 ?
-                dalCore.LocalEndereco.Imovel : nCodigo >= 100000 && nCodigo < 400000 ? dalCore.LocalEndereco.Empresa : dalCore.LocalEndereco.Cidadao;
+//            dalCore.TipoContribuinte tpContribuinte = nCodigo < 100000 ?
+//                dalCore.TipoContribuinte.Imovel : nCodigo >= 100000 && nCodigo < 400000 ? dalCore.TipoContribuinte.Empresa : dalCore.TipoContribuinte.Cidadao;
+            TipoCadastro Local = nCodigo < 100000 ? TipoCadastro.Imovel : nCodigo >= 100000 && nCodigo < 400000 ? TipoCadastro.Empresa : TipoCadastro.Cidadao;
 
 
             Sistema_Data sistema_Class = new Sistema_Data("GTIconnection");
@@ -1399,6 +1398,73 @@ namespace GTI_Dal.Classes {
                 }           
 
                 return ret;
+            }
+        }
+
+        public Exception Insert_Carta_Cobranca(Carta_cobranca Reg) {
+            using(var db=new GTI_Context(_connection)) {
+                object[] Parametros = new object[20];
+                Parametros[0] = new SqlParameter { ParameterName = "@remessa", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Remessa };
+                Parametros[1] = new SqlParameter { ParameterName = "@codigo", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codigo };
+                Parametros[2] = new SqlParameter { ParameterName = "@parcela", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Parcela };
+                Parametros[3] = new SqlParameter { ParameterName = "@total_parcela", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Total_Parcela };
+                Parametros[4] = new SqlParameter { ParameterName = "@parcela_label", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Parcela_Label };
+                Parametros[5] = new SqlParameter { ParameterName = "@nome", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Nome };
+                Parametros[6] = new SqlParameter { ParameterName = "@cpf_cnpj", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Cpf_cnpj };
+                Parametros[7] = new SqlParameter { ParameterName = "@endereco", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Endereco };
+                Parametros[8] = new SqlParameter { ParameterName = "@bairro", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Bairro };
+                Parametros[9] = new SqlParameter { ParameterName = "@cidade", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Cidade };
+                Parametros[10] = new SqlParameter { ParameterName = "@cep", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Cep };
+                Parametros[11] = new SqlParameter { ParameterName = "@data_vencimento", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Data_Vencimento };
+                Parametros[12] = new SqlParameter { ParameterName = "@data_documento", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Data_Documento };
+                Parametros[13] = new SqlParameter { ParameterName = "@inscricao", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Inscricao };
+                Parametros[14] = new SqlParameter { ParameterName = "@lote", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Lote };
+                Parametros[15] = new SqlParameter { ParameterName = "@quadra", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Quadra };
+                Parametros[16] = new SqlParameter { ParameterName = "@atividade", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Atividade };
+                Parametros[17] = new SqlParameter { ParameterName = "@numero_documento", SqlDbType = SqlDbType.Int, SqlValue = Reg.Numero_Documento };
+                Parametros[18] = new SqlParameter { ParameterName = "@nosso_numero", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Nosso_Numero };
+                Parametros[19] = new SqlParameter { ParameterName = "@valor_boleto", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Valor_Boleto };
+
+                db.Database.ExecuteSqlCommand("INSERT INTO carta_cobranca(remessa,codigo,parcela,total_parcela,parcela_label,nome,cpf_cnpj,endereco,bairro,cidade,cep,data_vencimento," +
+                    "data_documento,inscricao,lote,quadra,atividade,numero_documento,nosso_numero,valor_boleto) VALUES(@remessa,@codigo,@parcela,@total_parcela,@parcela_label,@nome,@cpf_cnpj,@endereco,@bairro," +
+                    "@cidade,@cep,@data_vencimento,@data_documento,@inscricao,@lote,@quadra,@atividade,@numero_documento,@nosso_numero,@valor_boleto)", Parametros);
+
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Exception Insert_Carta_Cobranca_Exclusao(Carta_cobranca_exclusao Reg) {
+            using (var db = new GTI_Context(_connection)) {
+                object[] Parametros = new object[2];
+                Parametros[0] = new SqlParameter { ParameterName = "@remessa", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Remessa };
+                Parametros[1] = new SqlParameter { ParameterName = "@codigo", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codigo };
+                db.Database.ExecuteSqlCommand("INSERT INTO carta_cobranca_exclusao(remessa,codigo) VALUES(@remessa,@codigo)", Parametros);
+
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Exception Excluir_Carta_Cobranca(int Remessa) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Carta_cobranca_exclusao.RemoveRange(db.Carta_cobranca_exclusao.Where(i => i.Remessa == Remessa));
+                    db.SaveChanges();
+                    db.Carta_cobranca.RemoveRange(db.Carta_cobranca.Where(i => i.Remessa == Remessa));
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
             }
         }
 

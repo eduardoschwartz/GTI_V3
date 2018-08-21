@@ -1,10 +1,12 @@
 ﻿using System;
+using static GTI_Models.modelCore;
 
 namespace GTI_Models.Models {
     public class Sistema {
     }
 
     public class Contribuinte_Header_Struct {
+        public TipoCadastro Tipo { get; set; }
         public int Codigo { get; set; }
         public string Nome { get; set; }
         public string Cpf_cnpj { get; set; }
@@ -18,6 +20,7 @@ namespace GTI_Models.Models {
         public string Nome_uf { get; set; }
         public string Quadra_original { get; set; }
         public string Lote_original { get; set; }
+        public string Atividade { get; set; }
     }
 
     public class Report_Data {

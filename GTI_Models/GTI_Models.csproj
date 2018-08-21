@@ -69,6 +69,8 @@
     <Compile Include="Models\boleto.cs" />
     <Compile Include="Models\boletoguia.cs" />
     <Compile Include="Models\cadimob.cs" />
+    <Compile Include="Models\carta_cobranca.cs" />
+    <Compile Include="Models\carta_cobranca_exclusao.cs" />
     <Compile Include="Models\categconstr.cs" />
     <Compile Include="Models\cep.cs" />
     <Compile Include="Models\certidao_debito.cs" />

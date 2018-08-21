@@ -751,6 +751,39 @@ namespace GTI_Bll.Classes {
             return obj.Insert_Comprovante_Pagamento(Reg);
         }
 
+        /// <summary>
+        /// Insere dados na tabela carta_cobranca
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Carta_Cobranca(Carta_cobranca Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Carta_Cobranca(Reg);
+            return ex;
+        }
+
+        /// <summary>
+        /// Exclui uma remessa de Cartas de cobrança
+        /// </summary>
+        /// <param name="Remessa"></param>
+        /// <returns></returns>
+        public Exception Excluir_Carta_Cobranca(int Remessa) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Excluir_Carta_Cobranca(Remessa);
+            return ex;
+
+        }
+
+        /// <summary>
+        /// Insere os códigos que não foram emitidos carta de cobrança por falta de cep ou cpf
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Carta_Cobranca_Exclusao(Carta_cobranca_exclusao Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Carta_Cobranca_Exclusao(Reg);
+            return ex;
+        }
 
     }//end class
 }

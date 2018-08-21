@@ -115,5 +115,7 @@ namespace GTI_Dal {
         public DbSet<Certidao_inscricao_extrato> Certidao_inscricao_extrato { get; set; }
         public DbSet<Comprovante_pagamento> Comprovante_pagamento { get; set; }
         public DbSet<Historico> Historico { get; set; }
+        public DbSet<Carta_cobranca> Carta_cobranca { get; set; }
+        public DbSet<Carta_cobranca_exclusao> Carta_cobranca_exclusao { get; set; }
     }
 }

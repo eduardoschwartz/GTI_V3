@@ -27,10 +27,11 @@
             this.Label1 = new System.Windows.Forms.Label();
             this.CodigoFinal = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.PrintButton = new System.Windows.Forms.Button();
+            this.CalcularButton = new System.Windows.Forms.Button();
             this.PBar = new System.Windows.Forms.ProgressBar();
             this.label3 = new System.Windows.Forms.Label();
             this.DataVencto = new System.Windows.Forms.MaskedTextBox();
+            this.PrintButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // CodigoInicio
@@ -69,20 +70,20 @@
             this.label2.TabIndex = 39;
             this.label2.Text = "Até:";
             // 
-            // PrintButton
+            // CalcularButton
             // 
-            this.PrintButton.ForeColor = System.Drawing.Color.Navy;
-            this.PrintButton.Image = global::GTI_Desktop.Properties.Resources.print;
-            this.PrintButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.PrintButton.Location = new System.Drawing.Point(263, 79);
-            this.PrintButton.Name = "PrintButton";
-            this.PrintButton.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.PrintButton.Size = new System.Drawing.Size(76, 24);
-            this.PrintButton.TabIndex = 3;
-            this.PrintButton.Text = "Imprimir";
-            this.PrintButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.PrintButton.UseVisualStyleBackColor = true;
-            this.PrintButton.Click += new System.EventHandler(this.PrintButton_Click);
+            this.CalcularButton.ForeColor = System.Drawing.Color.Navy;
+            this.CalcularButton.Image = global::GTI_Desktop.Properties.Resources.download;
+            this.CalcularButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.CalcularButton.Location = new System.Drawing.Point(266, 52);
+            this.CalcularButton.Name = "CalcularButton";
+            this.CalcularButton.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
+            this.CalcularButton.Size = new System.Drawing.Size(76, 24);
+            this.CalcularButton.TabIndex = 3;
+            this.CalcularButton.Text = "Calcular";
+            this.CalcularButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.CalcularButton.UseVisualStyleBackColor = true;
+            this.CalcularButton.Click += new System.EventHandler(this.CalcularButton_Click);
             // 
             // PBar
             // 
@@ -110,15 +111,31 @@
             this.DataVencto.Size = new System.Drawing.Size(74, 20);
             this.DataVencto.TabIndex = 2;
             // 
+            // PrintButton
+            // 
+            this.PrintButton.ForeColor = System.Drawing.Color.Navy;
+            this.PrintButton.Image = global::GTI_Desktop.Properties.Resources.print;
+            this.PrintButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.PrintButton.Location = new System.Drawing.Point(266, 82);
+            this.PrintButton.Name = "PrintButton";
+            this.PrintButton.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
+            this.PrintButton.Size = new System.Drawing.Size(76, 24);
+            this.PrintButton.TabIndex = 43;
+            this.PrintButton.Text = "Imprimir";
+            this.PrintButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.PrintButton.UseVisualStyleBackColor = true;
+            this.PrintButton.Click += new System.EventHandler(this.PrintButton_Click);
+            // 
             // Carta_Cobranca
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(363, 115);
+            this.Controls.Add(this.PrintButton);
             this.Controls.Add(this.DataVencto);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.PBar);
-            this.Controls.Add(this.PrintButton);
+            this.Controls.Add(this.CalcularButton);
             this.Controls.Add(this.CodigoFinal);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.CodigoInicio);
@@ -142,9 +159,10 @@
         internal System.Windows.Forms.Label Label1;
         private System.Windows.Forms.TextBox CodigoFinal;
         internal System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button PrintButton;
+        private System.Windows.Forms.Button CalcularButton;
         private System.Windows.Forms.ProgressBar PBar;
         internal System.Windows.Forms.Label label3;
         private System.Windows.Forms.MaskedTextBox DataVencto;
+        private System.Windows.Forms.Button PrintButton;
     }
 }
