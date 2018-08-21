@@ -8,6 +8,7 @@ namespace GTI_Models {
         public enum TipoCertidao { Endereco, ValorVenal, Isencao, Debito, Comprovante_Pagamento }
         public enum TipoCadastro { Imovel, Empresa, Cidadao }
         public enum RetornoCertidaoDebito { Negativa, Positiva, NegativaPositiva}
+        public enum TipoEndereco { Local, Proprietario, Entrega }
     }
 
     public class CompetenciaISS {

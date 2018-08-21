@@ -24,7 +24,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void CalcularButton_Click(object sender, EventArgs e) {
-            if (MessageBox.Show("Efetuar o cálculo das cartas de cobrança?", "Confirmação", MessageBoxButtons.OK, MessageBoxIcon.Question,MessageBoxDefaultButton.Button2) == DialogResult.No) return;
+            if (MessageBox.Show("Efetuar o cálculo das cartas de cobrança?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question,MessageBoxDefaultButton.Button2) == DialogResult.No) return;
 
             if (CodigoInicio.Text == "") CodigoInicio.Text = "0";
             if (CodigoFinal.Text == "") CodigoFinal.Text = "0";
@@ -65,7 +65,8 @@ namespace GTI_Desktop.Forms {
 
         private void Gera_Matriz(int _codigo_ini,int _codigo_fim,DateTime _data_vencto) {
             int _total = _codigo_fim - _codigo_ini+1,_pos=1,_numero_documento=16453214;
-            short _remessa = 1;
+            short _remessa = 0;
+            Exception ex = null;
             List<SpExtrato> Lista_Resumo = new List<SpExtrato>();
             List<SpExtrato> Lista_Final = new List<SpExtrato>();
 
@@ -76,21 +77,51 @@ namespace GTI_Desktop.Forms {
             Empresa_bll empresa_Class = new Empresa_bll(_connection);
             Cidadao_bll cidadao_Class = new Cidadao_bll(_connection);
 
-            Exception ex = tributario_Class.Excluir_Carta_Cobranca(_remessa);
-            if (ex != null) {
-                ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
-                eBox.ShowDialog();
-            }
-
             PBar.Value = 0;
+            //Exception ex = tributario_Class.Excluir_Carta_Cobranca(_remessa);
+            //if (ex != null) {
+            //    ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+            //    eBox.ShowDialog();
+            //}
             
             for (int _codigo_atual = _codigo_ini; _codigo_atual < _codigo_fim+1; _codigo_atual++) {
                 if (_stop) break;
-                if (_pos % 10 == 0) {
+                if (_pos % 100 == 0) {
                     PBar.Value = _pos * 100 / _total;
                     Refresh();
                 }
 
+
+                if (_codigo_atual <= 5000)
+                    _remessa = 1;
+                else {
+                    if(_codigo_atual>5000 && _codigo_atual <= 10000) {
+                        _remessa = 2;
+                    } else {
+                        if(_codigo_atual>10000 && _codigo_atual <= 15000) {
+                            _remessa = 3;
+                        } else {
+                            if(_codigo_atual>15000 && _codigo_atual <= 20000) {
+                                _remessa = 4;
+                            } else {
+                                if(_codigo_atual>20000 && _codigo_atual <= 25000) {
+                                    _remessa = 5;
+                                } else {
+                                    if(_codigo_atual>25000 && _codigo_atual <= 30000) {
+                                        _remessa = 6;
+                                    } else {
+                                        if(_codigo_atual>30000 && _codigo_atual <= 40000) {
+                                            _remessa = 7;
+                                        } else {
+                                            _remessa = 8;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
                 List<SpExtrato> Lista_Extrato_Tributo = tributario_Class.Lista_Extrato_Tributo(Codigo: _codigo_atual,Status1:3,Status2:3);
                 if (Lista_Extrato_Tributo.Count == 0)
                     goto Proximo;
@@ -144,8 +175,12 @@ namespace GTI_Desktop.Forms {
                 }
 
                 //Dados contribuinte
-                string _nome = "", _cpfcnpj = "", _endereco = "", _bairro = "", _cidade = "", _cep = "", _inscricao = "", _lote = "", _quadra = "", _atividade = "",  _convenio = "2873532",_complemento="";
+                string _nome = "", _cpfcnpj = "", _endereco = "", _bairro = "", _cidade = "", _cep = "", _inscricao = "", _lote = "", _quadra = "", _atividade = "";
+                string _convenio = "2873532", _complemento = "", _complemento_entrega = "", _endereco_entrega = "", _bairro_entrega = "", _cidade_entrega = "", _cep_entrega = "";
+
                 Contribuinte_Header_Struct dados = sistema_Class.Contribuinte_Header(_codigo_atual);
+                if (dados == null)
+                    goto Proximo;
                 TipoCadastro _tipo = dados.Tipo;
                 _nome = dados.Nome;
                 _cpfcnpj = dados.Cpf_cnpj;
@@ -161,20 +196,42 @@ namespace GTI_Desktop.Forms {
 
                 //Endereço de Entrega
                 if (_tipo == TipoCadastro.Imovel) {
-                    EnderecoStruct endImovel = imovel_Class.Dados_Endereco(_codigo_atual, bllCore.TipoEndereco.Entrega);
+                    EnderecoStruct endImovel = imovel_Class.Dados_Endereco(_codigo_atual, dados.TipoEndereco);
+                    _complemento_entrega = endImovel.Complemento == "" ? "" : " " + endImovel.Complemento;
+                    _endereco_entrega = endImovel.Endereco + ", " + endImovel.Numero.ToString() + _complemento;
+                    _bairro_entrega = endImovel.NomeBairro;
+                    _cidade_entrega = endImovel.NomeCidade + "/" + endImovel.UF;
+                    _cep_entrega = endImovel.Cep;
                 } else {
                     if (_tipo == TipoCadastro.Empresa) {
                         mobiliarioendentrega endEmpresa = empresa_Class.Empresa_Endereco_entrega(_codigo_atual);
+                        _complemento_entrega = endEmpresa.Complemento == "" ? "" : " " + endEmpresa.Complemento;
+                        _endereco_entrega = endEmpresa.Nomelogradouro + ", " + endEmpresa.Numimovel.ToString() + _complemento;
+                        _bairro_entrega = endEmpresa.Descbairro;
+                        _cidade_entrega = endEmpresa.Desccidade + "/" + endEmpresa.Uf;
+                        _cep_entrega = endEmpresa.Cep;
                     } else {
                         if (_tipo == TipoCadastro.Cidadao) {
                             CidadaoStruct endCidadao = cidadao_Class.LoadReg(_codigo_atual);
+                            if (endCidadao.EtiquetaR == "S") {
+                                _complemento_entrega = endCidadao.ComplementoR == "" ? "" : " " + endCidadao.ComplementoR;
+                                _endereco_entrega = endCidadao.EtiquetaR + ", " + endCidadao.NumeroR.ToString() + _complemento;
+                                _bairro_entrega = endCidadao.NomeBairroR;
+                                _cidade_entrega = endCidadao.NomeCidadeR + "/" + endCidadao.UfR;
+                                _cep_entrega = endCidadao.CepR.ToString();
+                            } else {
+                                _complemento_entrega = endCidadao.ComplementoC == "" ? "" : " " + endCidadao.ComplementoC;
+                                _endereco_entrega = endCidadao.EtiquetaC + ", " + endCidadao.NumeroC.ToString() + _complemento;
+                                _bairro_entrega = endCidadao.NomeBairroC;
+                                _cidade_entrega = endCidadao.NomeCidadeC + "/" + endCidadao.UfC;
+                                _cep_entrega = endCidadao.CepR.ToString();
+                            }
                         }
                     }
                 }
 
-
                 //Se não tiver CEP ou CPF grava exclusão e passa para o próximo
-                if(_cpfcnpj=="" || _cep == "") {
+                if(string.IsNullOrWhiteSpace( _cpfcnpj) || string.IsNullOrWhiteSpace(_cep_entrega)) {
                     Carta_cobranca_exclusao regE = new Carta_cobranca_exclusao();
                     regE.Remessa = _remessa;
                     regE.Codigo = _codigo_atual;
@@ -194,18 +251,22 @@ namespace GTI_Desktop.Forms {
                 Reg.Parcela = 1;
                 Reg.Total_Parcela = 1;
                 Reg.Parcela_Label = Reg.Parcela.ToString("00") + "/" + Reg.Total_Parcela.ToString("00");
-                Reg.Nome = _nome;
+                Reg.Nome = _nome.Length>50?_nome.Substring(0,50):_nome;
                 Reg.Cpf_cnpj = _cpfcnpj;
                 Reg.Endereco = _endereco;
-                Reg.Bairro = _bairro;
-                Reg.Cidade = _cidade;
-                Reg.Cep = _cep;
+                Reg.Bairro = _bairro??"";
+                Reg.Cidade = _cidade??"";
+                Reg.Cep = _cep??"";
+                Reg.Endereco_Entrega = _endereco_entrega;
+                Reg.Bairro_Entrega = _bairro_entrega ?? "";
+                Reg.Cidade_Entrega = _cidade_entrega??"";
+                Reg.Cep_Entrega = _cep_entrega;
                 Reg.Data_Vencimento = Convert.ToDateTime("25/10/2018");
                 Reg.Data_Documento = DateTime.Now;
                 Reg.Inscricao = _inscricao;
-                Reg.Lote = _lote;
-                Reg.Quadra = _quadra;
-                Reg.Atividade = _atividade;
+                Reg.Lote = _lote.Length>15?_lote.Substring(0,15):_lote;
+                Reg.Quadra = _quadra.Length>15?_quadra.Substring(0,15):_quadra  ;
+                Reg.Atividade = _atividade.Length>50?_atividade.Substring(0,50):_atividade;
                 Reg.Numero_Documento = _numero_documento;
                 Reg.Nosso_Numero = _convenio + _numero_documento.ToString("0000000000");
                 Reg.Valor_Boleto = _valor_boleto;
@@ -264,7 +325,6 @@ namespace GTI_Desktop.Forms {
                 dTableHeader.Rows.Add(dRow);
             }
 
-
             foreach (SpExtrato item in Lista_Debitos) {
                 DataRow dRow = dTable.NewRow();
                 dRow["Codigo"] = item.Codreduzido;
@@ -283,7 +343,6 @@ namespace GTI_Desktop.Forms {
             gtiCore.Liberado(this);
             ReportCR fRpt = new ReportCR("Carta_Cobranca_Envelope", null,Ds);
             fRpt.ShowDialog();
-
 
         }
 

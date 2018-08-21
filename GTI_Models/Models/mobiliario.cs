@@ -97,7 +97,7 @@ namespace GTI_Models.Models {
         public string Homepage { get; set; }
         public short? Horario { get; set; }
         public string Horario_Nome { get; set; }
-        public DateTime Data_abertura { get; set; }
+        public DateTime? Data_abertura { get; set; }
         public string Numprocesso { get; set; }
         public DateTime? Dataprocesso { get; set; }
         public DateTime? Data_Encerramento { get; set; }

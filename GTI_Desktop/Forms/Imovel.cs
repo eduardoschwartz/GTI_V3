@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using static GTI_Models.modelCore;
 
 namespace GTI_Desktop.Forms {
     public partial class Imovel : Form {
@@ -1028,7 +1029,7 @@ namespace GTI_Desktop.Forms {
                 else
                     End3Option.Checked = true;
 
-                bllCore.TipoEndereco Tipoend = regImovel.EE_TipoEndereco == 0 ? bllCore.TipoEndereco.Local : regImovel.EE_TipoEndereco == 1 ? bllCore.TipoEndereco.Proprietario : bllCore.TipoEndereco.Entrega;
+                TipoEndereco Tipoend = regImovel.EE_TipoEndereco == 0 ? TipoEndereco.Local : regImovel.EE_TipoEndereco == 1 ? TipoEndereco.Proprietario : TipoEndereco.Entrega;
                 EnderecoStruct regEntrega = clsImovel.Dados_Endereco(Codigo, Tipoend);
                 if (regEntrega != null) {
                     Logradouro_EE.Text = regEntrega.Endereco.ToString();

@@ -3,6 +3,7 @@ using GTI_Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using static GTI_Models.modelCore;
 
 namespace UIWeb.Pages {
     public partial class damwebend2 : System.Web.UI.Page {
@@ -26,7 +27,7 @@ namespace UIWeb.Pages {
                         
                         int nTipoEndereco = imovel_Class.Dados_Imovel(nCodigo).EE_TipoEndereco;
                         nTipoEndereco = 0;
-                        EnderecoStruct reg = imovel_Class.Dados_Endereco(nCodigo, nTipoEndereco==0?bllCore.TipoEndereco.Local:nTipoEndereco==1?bllCore.TipoEndereco.Entrega:bllCore.TipoEndereco.Proprietario);
+                        EnderecoStruct reg = imovel_Class.Dados_Endereco(nCodigo, nTipoEndereco==0?TipoEndereco.Local:nTipoEndereco==1?TipoEndereco.Entrega:TipoEndereco.Proprietario);
                         txtNome.Text = imovel_Class.Lista_Proprietario(nCodigo, true)[0].Nome;
                         txtEndereco.Text = reg.Endereco + ", " + reg.Numero.ToString() + " " + reg.Complemento + " " + reg.NomeBairro ;
                         txtCidade.Text = reg.NomeCidade;

@@ -11,7 +11,6 @@ namespace GTI_Dal.Classes {
     public class dalCore {
 
         public enum LocalEndereco { Imovel, Empresa, Cidadao }
-        public enum TipoEndereco { Local, Proprietario, Entrega }
         public enum TipoContribuinte {Imovel, Empresa, Cidadao }
         
 

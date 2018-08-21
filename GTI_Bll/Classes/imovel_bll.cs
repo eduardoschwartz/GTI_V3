@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GTI_Models.Models;
 using GTI_Dal.Classes;
 using GTI_Bll.Classes;
+using static GTI_Models.modelCore;
 
 namespace GTI_Bll.Classes {
     public class Imovel_bll {
@@ -70,9 +71,9 @@ namespace GTI_Bll.Classes {
             return obj.Existe_Face_Quadra(Distrito,Setor,Quadra,Face);
         }
 
-        public EnderecoStruct Dados_Endereco(int Codigo, bllCore.TipoEndereco Tipo) {
+        public EnderecoStruct Dados_Endereco(int Codigo, TipoEndereco Tipo) {
             Imovel_Data obj = new Imovel_Data(_connection);
-            return obj.Dados_Endereco(Codigo,(dalCore.TipoEndereco)Tipo);
+            return obj.Dados_Endereco(Codigo,Tipo);
         }
 
         public List<Categprop> Lista_Categoria_Propriedade() {

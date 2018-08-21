@@ -322,7 +322,7 @@ namespace GTI_Desktop.Forms {
             else 
                 StatusEmpresa.ForeColor = Color.Blue;
 
-            DataAbertura.Text = Reg.Data_abertura.ToString("dd/MM/yyyy");
+            DataAbertura.Text = Convert.ToDateTime( Reg.Data_abertura).ToString("dd/MM/yyyy");
             NumProcessoAbertura.Text = Reg.Numprocesso;
             if(gtiCore.IsDate(Reg.Dataprocesso.ToString()))
                 DataProcessoAbertura.Text=Convert.ToDateTime(Reg.Dataprocesso).ToString("dd/MM/yyyy");

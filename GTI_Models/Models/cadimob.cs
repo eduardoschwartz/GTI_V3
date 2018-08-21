@@ -54,7 +54,7 @@ namespace GTI_Models.Models {
         public short Seq { get; set; }
         public short Unidade { get; set; }
         public short SubUnidade { get; set; }
-        public int CodigoCondominio { get; set; }
+        public int? CodigoCondominio { get; set; }
         public string NomeCondominio { get; set; }
         public bool? Imunidade { get; set; }
         public bool? Cip { get; set; }
@@ -72,7 +72,7 @@ namespace GTI_Models.Models {
         public bool? Inativo { get; set; }
         public bool? ResideImovel { get; set; }
         public string Cep { get; set; }
-        public short EE_TipoEndereco { get; set; }
+        public short? EE_TipoEndereco { get; set; }
         public decimal? FracaoIdeal { get; set; }
         public decimal? Area_Terreno { get; set; }
         public short? Uso_terreno { get; set; }

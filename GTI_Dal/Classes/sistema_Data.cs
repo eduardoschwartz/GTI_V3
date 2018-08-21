@@ -39,7 +39,8 @@ namespace GTI_Dal.Classes {
                 reg.Quadra_original = RegImovel.QuadraOriginal;
                 reg.Lote_original = RegImovel.LoteOriginal;
                 reg.Atividade = "N/A";
-                
+                reg.TipoEndereco = RegImovel.EE_TipoEndereco == 0 ? TipoEndereco.Local : RegImovel.EE_TipoEndereco == 1 ? TipoEndereco.Proprietario : TipoEndereco.Entrega;
+
             } else if (Tipo == TipoCadastro.Empresa) {
                 Empresa_Data empresa_Class = new Empresa_Data(_connection);
                 bool Existe = empresa_Class.Existe_Empresa(Codigo);
@@ -70,7 +71,7 @@ namespace GTI_Dal.Classes {
                 reg.Inscricao = "N/A";
                 reg.Cpf_cnpj = regCidadao.Cpf;
                 reg.Endereco = regCidadao.Nomelogradouro;
-                reg.Numero = (short)regCidadao.Numimovel;
+                reg.Numero =regCidadao.Numimovel==null?(short)0:  (short)regCidadao.Numimovel;
                 reg.Complemento = regCidadao.Complemento;
                 reg.Nome_bairro = regCidadao.Nomebairro;
                 reg.Nome_cidade = regCidadao.Nomecidade;

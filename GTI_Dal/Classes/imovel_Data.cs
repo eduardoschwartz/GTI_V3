@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using static GTI_Models.modelCore;
 
 namespace GTI_Dal.Classes {
     public class Imovel_Data {
@@ -45,8 +46,8 @@ namespace GTI_Dal.Classes {
                 row.Unidade = reg.Unidade;
                 row.SubUnidade = reg.SubUnidade;
                 row.Inscricao = reg.Distrito.ToString() + "." + reg.Setor.ToString("00") + "." + reg.Quadra.ToString("0000") + "." + reg.Lote.ToString("00000") + "." + reg.Seq.ToString("00") + "." + reg.Unidade.ToString("00") + "." + reg.SubUnidade.ToString("000");
-                row.CodigoCondominio = reg.CodigoCondominio;
-                row.NomeCondominio = reg.NomeCondominio.ToString();
+                row.CodigoCondominio = reg.CodigoCondominio==null?0:reg.CodigoCondominio;
+                row.NomeCondominio =  reg.NomeCondominio??"";
                 row.Imunidade = reg.Imunidade == null ? false : Convert.ToBoolean(reg.Imunidade);
                 row.Cip = reg.Cip == null ? false : Convert.ToBoolean(reg.Cip);
                 row.ResideImovel = reg.ResideImovel == null ? false : Convert.ToBoolean(reg.ResideImovel);
@@ -74,7 +75,7 @@ namespace GTI_Dal.Classes {
                 row.Uso_terreno_Nome = reg.Uso_terreno_Nome;
                 row.EE_TipoEndereco = reg.EE_TipoEndereco;
 
-                EnderecoStruct regEnd = Dados_Endereco(nCodigo, dalCore.TipoEndereco.Local);
+                EnderecoStruct regEnd = Dados_Endereco(nCodigo, TipoEndereco.Local);
                 row.CodigoLogradouro = regEnd.CodLogradouro;
                 row.NomeLogradouro = regEnd.Endereco;
                 row.Numero = regEnd.Numero;
@@ -202,10 +203,10 @@ namespace GTI_Dal.Classes {
             return nRet;
         }
 
-        public EnderecoStruct Dados_Endereco(int Codigo, dalCore.TipoEndereco Tipo) {
+        public EnderecoStruct Dados_Endereco(int Codigo, TipoEndereco Tipo) {
             EnderecoStruct regEnd = new EnderecoStruct();
             using (var db = new GTI_Context(_connection)) {
-                if (Tipo == dalCore.TipoEndereco.Local) {
+                if (Tipo == TipoEndereco.Local) {
                     var reg = (from i in db.Cadimob
                                join b in db.Bairro on i.Li_codbairro equals b.Codbairro into ib from b in ib.DefaultIfEmpty()
                                join fq in db.Facequadra on new { p1 = i.Distrito, p2 = i.Setor, p3 = i.Quadra, p4 = i.Seq } equals new { p1 = fq.Coddistrito, p2 = fq.Codsetor, p3 = fq.Codquadra, p4 = fq.Codface } into ifq from fq in ifq.DefaultIfEmpty()
@@ -231,7 +232,7 @@ namespace GTI_Dal.Classes {
                         Endereco_Data clsCep = new Endereco_Data(_connection);
                         regEnd.Cep = clsCep.RetornaCep(Convert.ToInt32(reg.Codlogr), Convert.ToInt16(reg.Li_num)) == 0 ? "14870000" : clsCep.RetornaCep(Convert.ToInt32(reg.Codlogr), Convert.ToInt16(reg.Li_num)).ToString("0000");
                     }
-                } else if (Tipo == dalCore.TipoEndereco.Entrega) {
+                } else if (Tipo ==TipoEndereco.Entrega) {
                     var reg = (from ee in db.Endentrega
                                join b in db.Bairro on new { p1 = ee.Ee_uf, p2 = ee.Ee_cidade, p3 = ee.Ee_bairro } equals new { p1 = b.Siglauf, p2 = (short?)b.Codcidade, p3 = (short?)b.Codbairro } into eeb from b in eeb.DefaultIfEmpty()
                                join c in db.Cidade on new { p1 = ee.Ee_uf, p2 = ee.Ee_cidade } equals new { p1 = c.Siglauf, p2 = (short?)c.Codcidade } into eec from c in eec.DefaultIfEmpty()
@@ -244,9 +245,9 @@ namespace GTI_Dal.Classes {
                         return regEnd;
                     else {
                         regEnd.CodigoBairro = reg.Ee_bairro;
-                        regEnd.NomeBairro = reg.Descbairro.ToString();
-                        regEnd.CodigoCidade = reg.Ee_cidade;
-                        regEnd.NomeCidade = reg.Desccidade;
+                        regEnd.NomeBairro = reg.Descbairro==null?"": reg.Descbairro.ToString();
+                        regEnd.CodigoCidade = reg.Ee_cidade==null?0: reg.Ee_cidade;
+                        regEnd.NomeCidade = reg.Descbairro==null?"": reg.Desccidade;
                         regEnd.UF = "SP";
                         regEnd.CodLogradouro = reg.Ee_codlog;
                         regEnd.Endereco = reg.Ee_nomelog.ToString();
@@ -259,7 +260,7 @@ namespace GTI_Dal.Classes {
                         Endereco_Data clsCep = new Endereco_Data(_connection);
                         regEnd.Cep = clsCep.RetornaCep(Convert.ToInt32(regEnd.CodLogradouro), Convert.ToInt16(reg.Ee_numimovel)) == 0 ? "00000000" : clsCep.RetornaCep(Convert.ToInt32(regEnd.CodLogradouro), Convert.ToInt16(reg.Ee_numimovel)).ToString("0000");
                     }
-                } else if (Tipo == dalCore.TipoEndereco.Proprietario) {
+                } else if (Tipo == TipoEndereco.Proprietario) {
                     List<ProprietarioStruct> _lista_proprietario = Lista_Proprietario(Codigo, true);
                     int _codigo_proprietario = _lista_proprietario[0].Codigo;
                     Cidadao_Data clsCidadao = new Cidadao_Data(_connection);
