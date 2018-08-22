@@ -32,5 +32,7 @@ namespace GTI_Models.Models {
         public int Numero_Documento { get; set; }
         public string Nosso_Numero { get; set; }
         public decimal Valor_Boleto { get; set; }
+        public string Digitavel { get; set; }
+        public string Codbarra { get; set; }
     }
 }

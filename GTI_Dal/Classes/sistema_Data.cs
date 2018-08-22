@@ -38,7 +38,7 @@ namespace GTI_Dal.Classes {
                 reg.Cep = RegImovel.Cep;
                 reg.Quadra_original = RegImovel.QuadraOriginal;
                 reg.Lote_original = RegImovel.LoteOriginal;
-                reg.Atividade = "N/A";
+                reg.Atividade = "";
                 reg.TipoEndereco = RegImovel.EE_TipoEndereco == 0 ? TipoEndereco.Local : RegImovel.EE_TipoEndereco == 1 ? TipoEndereco.Proprietario : TipoEndereco.Entrega;
 
             } else if (Tipo == TipoCadastro.Empresa) {
@@ -49,7 +49,7 @@ namespace GTI_Dal.Classes {
 
                 EmpresaStruct regEmpresa = empresa_Class.Retorna_Empresa(Codigo);
                 reg.Nome = regEmpresa.Razao_social;
-                reg.Inscricao = "N/A";
+                reg.Inscricao = "";
                 reg.Cpf_cnpj = regEmpresa.Cpf_cnpj;
                 reg.Endereco = regEmpresa.Endereco_nome;
                 reg.Numero = (short)regEmpresa.Numero;
@@ -58,8 +58,8 @@ namespace GTI_Dal.Classes {
                 reg.Nome_cidade = regEmpresa.Cidade_nome;
                 reg.Nome_uf = regEmpresa.UF;
                 reg.Cep = regEmpresa.Cep;
-                reg.Quadra_original = "N/A";
-                reg.Lote_original = "N/A";
+                reg.Quadra_original = "";
+                reg.Lote_original = "";
                 reg.Atividade = regEmpresa.Atividade_extenso;
             } else {
                 Cidadao_Data cidadao_Class = new Cidadao_Data(_connection);
@@ -68,7 +68,7 @@ namespace GTI_Dal.Classes {
                     return null;
                 Cidadao regCidadao = cidadao_Class.Retorna_Cidadao(Codigo);
                 reg.Nome = regCidadao.Nomecidadao;
-                reg.Inscricao = "N/A";
+                reg.Inscricao = "";
                 reg.Cpf_cnpj = regCidadao.Cpf;
                 reg.Endereco = regCidadao.Nomelogradouro;
                 reg.Numero =regCidadao.Numimovel==null?(short)0:  (short)regCidadao.Numimovel;
@@ -77,9 +77,9 @@ namespace GTI_Dal.Classes {
                 reg.Nome_cidade = regCidadao.Nomecidade;
                 reg.Nome_uf = regCidadao.Siglauf;
                 reg.Cep = regCidadao.Cep.ToString();
-                reg.Quadra_original = "N/A";
-                reg.Lote_original = "N/A";
-                reg.Atividade = "N/A";
+                reg.Quadra_original = "";
+                reg.Lote_original = "";
+                reg.Atividade = "";
             }
 
             return reg;

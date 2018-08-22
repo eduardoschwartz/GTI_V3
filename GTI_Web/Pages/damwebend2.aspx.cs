@@ -25,7 +25,7 @@ namespace UIWeb.Pages {
                         //Imóvel
                         Imovel_bll imovel_Class = new Imovel_bll("GTIconnection");
                         
-                        int nTipoEndereco = imovel_Class.Dados_Imovel(nCodigo).EE_TipoEndereco;
+                        int nTipoEndereco = (int)imovel_Class.Dados_Imovel(nCodigo).EE_TipoEndereco;
                         nTipoEndereco = 0;
                         EnderecoStruct reg = imovel_Class.Dados_Endereco(nCodigo, nTipoEndereco==0?TipoEndereco.Local:nTipoEndereco==1?TipoEndereco.Entrega:TipoEndereco.Proprietario);
                         txtNome.Text = imovel_Class.Lista_Proprietario(nCodigo, true)[0].Nome;

@@ -65,7 +65,7 @@ namespace GTI_Desktop.Forms {
 
         private void Gera_Matriz(int _codigo_ini,int _codigo_fim,DateTime _data_vencto) {
             int _total = _codigo_fim - _codigo_ini+1,_pos=1,_numero_documento=16453214;
-            short _remessa = 0;
+            short _remessa = 1;
             Exception ex = null;
             List<SpExtrato> Lista_Resumo = new List<SpExtrato>();
             List<SpExtrato> Lista_Final = new List<SpExtrato>();
@@ -78,48 +78,17 @@ namespace GTI_Desktop.Forms {
             Cidadao_bll cidadao_Class = new Cidadao_bll(_connection);
 
             PBar.Value = 0;
-            //Exception ex = tributario_Class.Excluir_Carta_Cobranca(_remessa);
-            //if (ex != null) {
-            //    ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
-            //    eBox.ShowDialog();
-            //}
-            
+            ex = tributario_Class.Excluir_Carta_Cobranca(_remessa);
+            if (ex != null) {
+                ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                eBox.ShowDialog();
+            }
+
             for (int _codigo_atual = _codigo_ini; _codigo_atual < _codigo_fim+1; _codigo_atual++) {
                 if (_stop) break;
                 if (_pos % 100 == 0) {
                     PBar.Value = _pos * 100 / _total;
                     Refresh();
-                }
-
-
-                if (_codigo_atual <= 5000)
-                    _remessa = 1;
-                else {
-                    if(_codigo_atual>5000 && _codigo_atual <= 10000) {
-                        _remessa = 2;
-                    } else {
-                        if(_codigo_atual>10000 && _codigo_atual <= 15000) {
-                            _remessa = 3;
-                        } else {
-                            if(_codigo_atual>15000 && _codigo_atual <= 20000) {
-                                _remessa = 4;
-                            } else {
-                                if(_codigo_atual>20000 && _codigo_atual <= 25000) {
-                                    _remessa = 5;
-                                } else {
-                                    if(_codigo_atual>25000 && _codigo_atual <= 30000) {
-                                        _remessa = 6;
-                                    } else {
-                                        if(_codigo_atual>30000 && _codigo_atual <= 40000) {
-                                            _remessa = 7;
-                                        } else {
-                                            _remessa = 8;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
                 }
                 
                 List<SpExtrato> Lista_Extrato_Tributo = tributario_Class.Lista_Extrato_Tributo(Codigo: _codigo_atual,Status1:3,Status2:3);
@@ -177,6 +146,8 @@ namespace GTI_Desktop.Forms {
                 //Dados contribuinte
                 string _nome = "", _cpfcnpj = "", _endereco = "", _bairro = "", _cidade = "", _cep = "", _inscricao = "", _lote = "", _quadra = "", _atividade = "";
                 string _convenio = "2873532", _complemento = "", _complemento_entrega = "", _endereco_entrega = "", _bairro_entrega = "", _cidade_entrega = "", _cep_entrega = "";
+                
+                DateTime _data_vencimento= Convert.ToDateTime("25/10/2018");
 
                 Contribuinte_Header_Struct dados = sistema_Class.Contribuinte_Header(_codigo_atual);
                 if (dados == null)
@@ -215,23 +186,28 @@ namespace GTI_Desktop.Forms {
                             CidadaoStruct endCidadao = cidadao_Class.LoadReg(_codigo_atual);
                             if (endCidadao.EtiquetaR == "S") {
                                 _complemento_entrega = endCidadao.ComplementoR == "" ? "" : " " + endCidadao.ComplementoR;
-                                _endereco_entrega = endCidadao.EtiquetaR + ", " + endCidadao.NumeroR.ToString() + _complemento;
+                                _endereco_entrega = endCidadao.EnderecoR + ", " + endCidadao.NumeroR.ToString() + _complemento;
                                 _bairro_entrega = endCidadao.NomeBairroR;
                                 _cidade_entrega = endCidadao.NomeCidadeR + "/" + endCidadao.UfR;
                                 _cep_entrega = endCidadao.CepR.ToString();
                             } else {
                                 _complemento_entrega = endCidadao.ComplementoC == "" ? "" : " " + endCidadao.ComplementoC;
-                                _endereco_entrega = endCidadao.EtiquetaC + ", " + endCidadao.NumeroC.ToString() + _complemento;
+                                _endereco_entrega = endCidadao.EnderecoC + ", " + endCidadao.NumeroC.ToString() + _complemento;
                                 _bairro_entrega = endCidadao.NomeBairroC;
                                 _cidade_entrega = endCidadao.NomeCidadeC + "/" + endCidadao.UfC;
                                 _cep_entrega = endCidadao.CepR.ToString();
                             }
+                            _endereco = _endereco_entrega;
+                            _bairro = _bairro_entrega;
+                            _cidade = _cidade_entrega;
+                            _cep = _cep_entrega;
+
                         }
                     }
                 }
 
                 //Se não tiver CEP ou CPF grava exclusão e passa para o próximo
-                if(string.IsNullOrWhiteSpace( _cpfcnpj) || string.IsNullOrWhiteSpace(_cep_entrega)) {
+                if(string.IsNullOrWhiteSpace( _cpfcnpj) || string.IsNullOrWhiteSpace(_cep_entrega) || _cep_entrega=="00000000") {
                     Carta_cobranca_exclusao regE = new Carta_cobranca_exclusao();
                     regE.Remessa = _remessa;
                     regE.Codigo = _codigo_atual;
@@ -243,8 +219,32 @@ namespace GTI_Desktop.Forms {
                     goto Proximo;
                 }
 
-                //****** GRAVA HEADER **************
+                //gera código de barras
+                DateTime _data_base = Convert.ToDateTime("07/10/1997");
+                TimeSpan ts = _data_vencimento - _data_base;
+                int _fator_vencto = ts.Days;
+                string _quinto_grupo = String.Format("{0:D4}", _fator_vencto);
+                string _valor_boleto_str = string.Format("{0:0.00}", _valor_boleto);
+                _quinto_grupo += string.Format("{0:D10}", Convert.ToInt64(gtiCore.RetornaNumero(_valor_boleto_str)));
+                string _barra = "0019" + _quinto_grupo + String.Format("{0:D13}", Convert.ToInt32(_convenio));
+                _barra += String.Format("{0:D10}", _numero_documento) + "17";
 
+                string _campo1 = "0019" + _barra.Substring(19, 5);
+                string _digitavel = _campo1 + gtiCore.Calculo_DV10(_campo1).ToString();
+                string _campo2 = _barra.Substring(23, 10);
+                _digitavel += _campo2 + gtiCore.Calculo_DV10(_campo2).ToString();
+                string _campo3 = _barra.Substring(33, 10);
+                _digitavel += _campo3 + gtiCore.Calculo_DV10(_campo3).ToString();
+                string _campo5 = _quinto_grupo;
+                string _campo4 = gtiCore.Calculo_DV11(_barra).ToString();
+                _digitavel += _campo4 + _campo5;
+                _barra = _barra.Substring(0, 4) + _campo4 + _barra.Substring(4,_barra.Length-4)  ;
+                string _digitavel2 = _digitavel.Substring(0, 5) + "." + _digitavel.Substring(5, 5) + " " + _digitavel.Substring(10, 5) + "." + _digitavel.Substring(15, 6) + " ";
+                _digitavel2 += _digitavel.Substring(21, 5) + "." + _digitavel.Substring(26, 6) + " " + _digitavel.Substring(32, 1) + " " + gtiCore.StringRight(_digitavel, 14);
+                _barra = gtiCore.Gera2of5Str(_barra);
+
+
+                //****** GRAVA HEADER **************
                 Carta_cobranca Reg = new Carta_cobranca();
                 Reg.Remessa = _remessa;
                 Reg.Codigo = _codigo_atual;
@@ -261,7 +261,7 @@ namespace GTI_Desktop.Forms {
                 Reg.Bairro_Entrega = _bairro_entrega ?? "";
                 Reg.Cidade_Entrega = _cidade_entrega??"";
                 Reg.Cep_Entrega = _cep_entrega;
-                Reg.Data_Vencimento = Convert.ToDateTime("25/10/2018");
+                Reg.Data_Vencimento = _data_vencimento;
                 Reg.Data_Documento = DateTime.Now;
                 Reg.Inscricao = _inscricao;
                 Reg.Lote = _lote.Length>15?_lote.Substring(0,15):_lote;
@@ -270,6 +270,9 @@ namespace GTI_Desktop.Forms {
                 Reg.Numero_Documento = _numero_documento;
                 Reg.Nosso_Numero = _convenio + _numero_documento.ToString("0000000000");
                 Reg.Valor_Boleto = _valor_boleto;
+                Reg.Digitavel = _digitavel2;
+                Reg.Codbarra = _barra;
+
                 ex = tributario_Class.Insert_Carta_Cobranca(Reg);
                 if (ex != null) {
                     ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);

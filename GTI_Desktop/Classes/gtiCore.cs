@@ -504,8 +504,68 @@ namespace GTI_Desktop.Classes {
             return Result;
         }
 
-
         #endregion
+
+        public static int Calculo_DV10(string sValue) {
+            int nDV = 0,intNumero = 0,intTotalNumero = 0,intMultiplicador = 2;
+
+            for (int intContador = sValue.Length; intContador > 0; intContador--) {
+                intNumero = Convert.ToInt32(sValue.Substring(intContador - 1, 1)) * intMultiplicador;
+                if (intNumero > 9)
+                    intNumero = Convert.ToInt32(intNumero.ToString().Substring(0, 1)) + Convert.ToInt32(intNumero.ToString().Substring(1, 1));
+
+                intTotalNumero += intNumero;
+                intMultiplicador = intMultiplicador == 2 ? 1 : 2;
+            }
+
+            int DezenaSuperior = intTotalNumero < 10 ? 10 : (10 * (Convert.ToInt32(intTotalNumero.ToString().Substring(0, 1)) + 1));
+            int intResto = DezenaSuperior - intTotalNumero;
+            if (intResto == 0 || intResto == 10)
+                nDV = 0;
+            else
+                nDV = intResto;
+            return nDV;
+        }
+
+        public static int Calculo_DV11(String sValue) {
+            int nDV = 0, intNumero = 0, intTotalNumero = 0,intMultiplicador = 2;
+
+            for (int intContador = sValue.Length; intContador > 0; intContador--) {
+                intNumero = Convert.ToInt32(sValue.Substring(intContador - 1, 1)) * intMultiplicador;
+                intTotalNumero += intNumero;
+                intMultiplicador = intMultiplicador < 9 ? intMultiplicador + 1 : 2;
+            }
+            int intResto = (intTotalNumero * 10) % 11;
+            if (intResto == 0 || intResto == 10)
+                nDV = 1;
+            else
+                nDV = intResto;
+            return nDV;
+        }
+
+        public static string Gera2of5Str(string sCodigo_Barra) {
+            string DataToEncode = ""; string DataToPrint = ""; char StartCode = (char)203; char StopCode = (char)204; int CurrentChar = 0;
+            DataToEncode = sCodigo_Barra;
+            if (DataToEncode.Length % 2 == 1)
+                DataToEncode = "0" + DataToEncode;
+            for (int i = 0; i < DataToEncode.Length; i += 2) {
+                CurrentChar = Convert.ToInt32(DataToEncode.Substring(i, 2));
+                if (CurrentChar < 94)
+                    DataToPrint += Convert.ToChar(CurrentChar + 33);
+                else if (CurrentChar > 93)
+                    DataToPrint += Convert.ToChar(CurrentChar + 103);
+            }
+
+            return StartCode + DataToPrint + StopCode;
+        }
+
+        public static String RetornaNumero(String Numero) {
+            if (String.IsNullOrEmpty(Numero))
+                return "0";
+            else
+                return Regex.Replace(Numero, @"[^\d]", "");
+        }
+
 
     }
 

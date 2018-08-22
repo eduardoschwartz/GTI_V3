@@ -117,7 +117,7 @@ namespace UIWeb.Pages {
             IM.Text = reg.Codigo.ToString();
             RAZAOSOCIAL.Text = reg.Razao_social;
             IE.Text = reg.Inscricao_estadual;
-            DATAABERTURA.Text = reg.Data_abertura.ToString("dd/MM/yyyy");
+            DATAABERTURA.Text = Convert.ToDateTime(reg.Data_abertura).ToString("dd/MM/yyyy");
             DATAENCERRAMENTO.Text = String.IsNullOrEmpty(reg.Data_Encerramento.ToString()) ? "" : Convert.ToDateTime(reg.Data_Encerramento).ToString("dd/MM/yyyy");
             SITUACAO.Text = reg.Situacao;
             ENDERECO.Text = reg.Endereco_nome + ", " + reg.Numero + " " + reg.Complemento + " ";
