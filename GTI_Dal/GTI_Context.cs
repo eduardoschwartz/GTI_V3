@@ -117,5 +117,6 @@ namespace GTI_Dal {
         public DbSet<Historico> Historico { get; set; }
         public DbSet<Carta_cobranca> Carta_cobranca { get; set; }
         public DbSet<Carta_cobranca_exclusao> Carta_cobranca_exclusao { get; set; }
+        public DbSet<Carta_cobranca_detalhe> Carta_cobranca_detalhe { get; set; }
     }
 }

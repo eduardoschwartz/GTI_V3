@@ -11,12 +11,12 @@ namespace GTI_Desktop.Forms {
     public partial class ReportCR : Form {
         private string _connection = gtiCore.Connection_Name();
 
-        public ReportCR(String ReportName,Report_Data Dados, DataSet Ds ) {
+        public ReportCR(String ReportName,Report_Data Dados, DataSet Ds,int Valor1=0) {
             InitializeComponent();
-            showReport(ReportName,Dados,Ds);
+            showReport(ReportName,Dados,Ds,Valor1);
         }
 
-        private void showReport(String _nome,Report_Data _dados, DataSet Ds ) {
+        private void showReport(String _nome,Report_Data _dados, DataSet Ds, int Valor1 ) {
             crViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             string _usuario = Properties.Settings.Default.LastUser;
 
@@ -228,6 +228,7 @@ namespace GTI_Desktop.Forms {
                     Carta_Cobranca_Envelope rpt_carta_cobranca_envelope = new Carta_Cobranca_Envelope();
                     rpt_carta_cobranca_envelope.SetDatabaseLogon(gtiCore.Ul, gtiCore.Up, Properties.Settings.Default.ServerName, Properties.Settings.Default.DataBaseReal);
                     rpt_carta_cobranca_envelope.SetDataSource(Ds);
+                    rpt_carta_cobranca_envelope.RecordSelectionFormula = "{Carta_Cobranca.Remessa}=" + Valor1;
                     crViewer.ReportSource = rpt_carta_cobranca_envelope;
                     break;
 

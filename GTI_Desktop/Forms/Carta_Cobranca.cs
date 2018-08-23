@@ -14,6 +14,7 @@ namespace GTI_Desktop.Forms {
     public partial class Carta_Cobranca : Form {
         private string _connection = gtiCore.Connection_Name();
         private bool _stop = false;
+        short _remessa = 1;
 
         public Carta_Cobranca() {
             InitializeComponent();
@@ -65,7 +66,7 @@ namespace GTI_Desktop.Forms {
 
         private void Gera_Matriz(int _codigo_ini,int _codigo_fim,DateTime _data_vencto) {
             int _total = _codigo_fim - _codigo_ini+1,_pos=1,_numero_documento=16453214;
-            short _remessa = 1;
+            
             Exception ex = null;
             List<SpExtrato> Lista_Resumo = new List<SpExtrato>();
             List<SpExtrato> Lista_Final = new List<SpExtrato>();
@@ -130,7 +131,7 @@ namespace GTI_Desktop.Forms {
                         reg.Valorjuros = item.Valorjuros;
                         reg.Valormulta = item.Valormulta;
                         reg.Valorcorrecao = item.Valorcorrecao;
-                        reg.Valortotal = item.Valorcorrecao;
+                        reg.Valortotal = item.Valortotal;
                         Lista_Final.Add(reg);
                     }
                 }
@@ -219,7 +220,7 @@ namespace GTI_Desktop.Forms {
                     goto Proximo;
                 }
 
-                //gera código de barras
+                //***** GERA CÓDIGO DE BARRAS *****
                 DateTime _data_base = Convert.ToDateTime("07/10/1997");
                 TimeSpan ts = _data_vencimento - _data_base;
                 int _fator_vencto = ts.Days;
@@ -228,7 +229,6 @@ namespace GTI_Desktop.Forms {
                 _quinto_grupo += string.Format("{0:D10}", Convert.ToInt64(gtiCore.RetornaNumero(_valor_boleto_str)));
                 string _barra = "0019" + _quinto_grupo + String.Format("{0:D13}", Convert.ToInt32(_convenio));
                 _barra += String.Format("{0:D10}", _numero_documento) + "17";
-
                 string _campo1 = "0019" + _barra.Substring(19, 5);
                 string _digitavel = _campo1 + gtiCore.Calculo_DV10(_campo1).ToString();
                 string _campo2 = _barra.Substring(23, 10);
@@ -239,11 +239,12 @@ namespace GTI_Desktop.Forms {
                 string _campo4 = gtiCore.Calculo_DV11(_barra).ToString();
                 _digitavel += _campo4 + _campo5;
                 _barra = _barra.Substring(0, 4) + _campo4 + _barra.Substring(4,_barra.Length-4)  ;
-                string _digitavel2 = _digitavel.Substring(0, 5) + "." + _digitavel.Substring(5, 5) + " " + _digitavel.Substring(10, 5) + "." + _digitavel.Substring(15, 6) + " ";
-                _digitavel2 += _digitavel.Substring(21, 5) + "." + _digitavel.Substring(26, 6) + " " + _digitavel.Substring(32, 1) + " " + gtiCore.StringRight(_digitavel, 14);
-                _barra = gtiCore.Gera2of5Str(_barra);
-
-
+                //**Resultado final**
+                string _linha_digitavel = _digitavel.Substring(0, 5) + "." + _digitavel.Substring(5, 5) + " " + _digitavel.Substring(10, 5) + "." + _digitavel.Substring(15, 6) + " ";
+                _linha_digitavel += _digitavel.Substring(21, 5) + "." + _digitavel.Substring(26, 6) + " " + _digitavel.Substring(32, 1) + " " + gtiCore.StringRight(_digitavel, 14);
+                string _codigo_barra = gtiCore.Gera2of5Str(_barra);
+                //**********************************
+                
                 //****** GRAVA HEADER **************
                 Carta_cobranca Reg = new Carta_cobranca();
                 Reg.Remessa = _remessa;
@@ -270,8 +271,8 @@ namespace GTI_Desktop.Forms {
                 Reg.Numero_Documento = _numero_documento;
                 Reg.Nosso_Numero = _convenio + _numero_documento.ToString("0000000000");
                 Reg.Valor_Boleto = _valor_boleto;
-                Reg.Digitavel = _digitavel2;
-                Reg.Codbarra = _barra;
+                Reg.Digitavel = _linha_digitavel;
+                Reg.Codbarra = _codigo_barra;
 
                 ex = tributario_Class.Insert_Carta_Cobranca(Reg);
                 if (ex != null) {
@@ -279,6 +280,26 @@ namespace GTI_Desktop.Forms {
                     eBox.ShowDialog();
                 }
                 _numero_documento++;
+
+                //****** GRAVA DETALHE**************
+
+                foreach (SpExtrato item in Lista_Final) {
+                    Carta_cobranca_detalhe RegDet = new Carta_cobranca_detalhe();
+                    RegDet.Codigo = _codigo_atual;
+                    RegDet.Remessa = _remessa;
+                    RegDet.Ano = item.Anoexercicio;
+                    RegDet.Parcela = 1;
+                    RegDet.Principal = item.Valortributo;
+                    RegDet.Juros = item.Valorjuros;
+                    RegDet.Multa = item.Valormulta;
+                    RegDet.Correcao = item.Valorcorrecao;
+                    RegDet.Total = item.Valortotal;
+                    ex = tributario_Class.Insert_Carta_Cobranca_Detalhe(RegDet);
+                    if (ex != null) {
+                        ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                        eBox.ShowDialog();
+                    }
+                }
 
                 //**********************************
                 Proximo:;
@@ -288,7 +309,7 @@ namespace GTI_Desktop.Forms {
             PBar.Value = 100;
             return;
         }
-
+        
         private void Carta_Cobranca_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Escape) {
                 if (MessageBox.Show("Deseja cancelar a rotina?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
@@ -296,23 +317,6 @@ namespace GTI_Desktop.Forms {
                 }
             }
         }
-
-       /* private List<int> Separa_Codigos(List<SpExtrato> Lista) {
-            List<int> ListaCodigo = new List<int>();
-            foreach (SpExtrato item in Lista) {
-                bool _find = false;
-                for (int i = 0; i < ListaCodigo.Count; i++) {
-                    if (ListaCodigo[i] == item.Codreduzido) {
-                        _find = true;
-                        break;
-                    }
-                }
-                if (!_find)
-                    ListaCodigo.Add(item.Codreduzido);
-            }
-
-            return ListaCodigo;
-        }*/
 
         private void PrintReportOLD(List<SpExtrato>Lista_Debitos,List<int>Lista_Codigos) {
             gtiCore.Ocupado(this);
@@ -345,12 +349,13 @@ namespace GTI_Desktop.Forms {
 
             gtiCore.Liberado(this);
             ReportCR fRpt = new ReportCR("Carta_Cobranca_Envelope", null,Ds);
+            
             fRpt.ShowDialog();
 
         }
 
         private void PrintReport() {
-            ReportCR fRpt = new ReportCR("Carta_Cobranca_Envelope", null, null);
+            ReportCR fRpt = new ReportCR("Carta_Cobranca_Envelope", null, null,_remessa);
             fRpt.ShowDialog();
         }
 

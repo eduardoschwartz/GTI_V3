@@ -1465,6 +1465,8 @@ namespace GTI_Dal.Classes {
                 try {
                     db.Carta_cobranca_exclusao.RemoveRange(db.Carta_cobranca_exclusao.Where(i => i.Remessa == Remessa));
                     db.SaveChanges();
+                    db.Carta_cobranca_detalhe.RemoveRange(db.Carta_cobranca_detalhe.Where(i => i.Remessa == Remessa));
+                    db.SaveChanges();
                     db.Carta_cobranca.RemoveRange(db.Carta_cobranca.Where(i => i.Remessa == Remessa));
                     db.SaveChanges();
                 } catch (Exception ex) {
@@ -1473,6 +1475,32 @@ namespace GTI_Dal.Classes {
                 return null;
             }
         }
+
+        public Exception Insert_Carta_Cobranca_Detalhe(Carta_cobranca_detalhe Reg) {
+            using (var db = new GTI_Context(_connection)) {
+                object[] Parametros = new object[9];
+                Parametros[0] = new SqlParameter { ParameterName = "@remessa", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Remessa };
+                Parametros[1] = new SqlParameter { ParameterName = "@codigo", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codigo };
+                Parametros[2] = new SqlParameter { ParameterName = "@parcela", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Parcela };
+                Parametros[3] = new SqlParameter { ParameterName = "@ano", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Ano };
+                Parametros[4] = new SqlParameter { ParameterName = "@principal", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Principal };
+                Parametros[5] = new SqlParameter { ParameterName = "@juros", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Juros };
+                Parametros[6] = new SqlParameter { ParameterName = "@multa", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Multa };
+                Parametros[7] = new SqlParameter { ParameterName = "@correcao", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Correcao };
+                Parametros[8] = new SqlParameter { ParameterName = "@total", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Total };
+
+                db.Database.ExecuteSqlCommand("INSERT INTO carta_cobranca_detalhe(remessa,codigo,parcela,ano,principal,juros,multa,correcao,total) " +
+                    "VALUES(@remessa,@codigo,@parcela,@ano,@principal,@juros,@multa,@correcao,@total)", Parametros);
+
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
 
 
     }//end class

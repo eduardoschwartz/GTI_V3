@@ -785,5 +785,18 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        /// <summary>
+        /// Insere os detalhes da carta de cobrança
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Carta_Cobranca_Detalhe(Carta_cobranca_detalhe Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Carta_Cobranca_Detalhe(Reg);
+            return ex;
+        }
+
+
+
     }//end class
 }
