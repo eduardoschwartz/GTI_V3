@@ -796,7 +796,16 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
-
+        /// <summary>
+        /// Insere na tabela numdocumento - utilizado quando o número do documento é pre definido pela rotina e não pelo sistema.
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Documento_Existente(Numdocumento Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Documento_Existente(Reg);
+            return ex;
+        }
 
     }//end class
 }

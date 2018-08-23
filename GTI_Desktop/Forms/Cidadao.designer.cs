@@ -410,7 +410,6 @@
             // btObservação
             // 
             this.btObservação.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btObservação.Image = global::GTI_Desktop.Properties.Resources.Historico;
             this.btObservação.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btObservação.Name = "btObservação";
             this.btObservação.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);

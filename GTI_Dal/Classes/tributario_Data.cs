@@ -757,6 +757,23 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Exception Insert_Documento_Existente(Numdocumento Reg) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Database.ExecuteSqlCommand("INSERT INTO numdocumento(numdocumento,datadocumento,valorguia,emissor,registrado) VALUES(@numdocumento,@datadocumento,@valorguia,@emissor,@registrado)",
+                        new SqlParameter("@numdocumento", Reg.numdocumento),
+                        new SqlParameter("@datadocumento", Reg.Datadocumento),
+                        new SqlParameter("@valorguia", Reg.Valorguia),
+                        new SqlParameter("@emissor", Reg.Emissor),
+                        new SqlParameter("@registrado", Reg.Registrado));
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+
         public Exception Insert_Parcela_Documento(Parceladocumento Reg) {
             using (var db = new GTI_Context(_connection)) {
                 try {

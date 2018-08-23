@@ -1,18 +1,29 @@
-﻿using GTI_Bll.Classes;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
+using GTI_Bll.Classes;
 using GTI_Desktop.Classes;
 using GTI_Desktop.Report;
 using GTI_Models.Models;
 using System;
 using System.Data;
 using System.Windows.Forms;
-using static GTI_Models.modelCore;
 
 namespace GTI_Desktop.Forms {
     public partial class ReportCR : Form {
         private string _connection = gtiCore.Connection_Name();
+        TableLogOnInfos crtableLogoninfos = new TableLogOnInfos();
+        TableLogOnInfo crtableLogoninfo = new TableLogOnInfo();
+        ConnectionInfo crConnectionInfo = new ConnectionInfo();
+        Tables CrTables;
 
         public ReportCR(String ReportName,Report_Data Dados, DataSet Ds,int Valor1=0) {
             InitializeComponent();
+
+            crConnectionInfo.ServerName = Properties.Settings.Default.ServerName;
+            crConnectionInfo.DatabaseName = "Tributacao";
+            crConnectionInfo.UserID = gtiCore.Ul;
+            crConnectionInfo.Password = gtiCore.Up;
+
             showReport(ReportName,Dados,Ds,Valor1);
         }
 
@@ -224,10 +235,13 @@ namespace GTI_Desktop.Forms {
                     crViewer.ReportSource = rpt_cdebitoempresapn;
                     break;
                 case "Carta_Cobranca_Envelope":
-                    Text = "Carta de Cobrança";
                     Carta_Cobranca_Envelope rpt_carta_cobranca_envelope = new Carta_Cobranca_Envelope();
-                    rpt_carta_cobranca_envelope.SetDatabaseLogon(gtiCore.Ul, gtiCore.Up, Properties.Settings.Default.ServerName, Properties.Settings.Default.DataBaseReal);
-                    rpt_carta_cobranca_envelope.SetDataSource(Ds);
+                    CrTables = rpt_carta_cobranca_envelope.Database.Tables;
+                    foreach (CrystalDecisions.CrystalReports.Engine.Table CrTable in CrTables) {
+                        crtableLogoninfo = CrTable.LogOnInfo;
+                        crtableLogoninfo.ConnectionInfo = crConnectionInfo;
+                        CrTable.ApplyLogOnInfo(crtableLogoninfo);
+                    }
                     rpt_carta_cobranca_envelope.RecordSelectionFormula = "{Carta_Cobranca.Remessa}=" + Valor1;
                     crViewer.ReportSource = rpt_carta_cobranca_envelope;
                     break;
