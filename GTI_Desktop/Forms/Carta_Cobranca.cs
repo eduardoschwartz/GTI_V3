@@ -65,7 +65,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void Gera_Matriz(int _codigo_ini, int _codigo_fim, DateTime _data_vencto) {
-            int _total = _codigo_fim - _codigo_ini + 1, _pos = 1, _numero_documento = 5100002; //5.100.000 até 5.400.000
+            int _total = _codigo_fim - _codigo_ini + 1, _pos = 1, _numero_documento = 5182307; //5.100.000 até 5.400.000
 
             Exception ex = null;
             List<SpExtrato> Lista_Resumo = new List<SpExtrato>();
@@ -141,7 +141,7 @@ namespace GTI_Desktop.Forms {
                 //Soma o boleto
                 decimal _valor_boleto = 0;
                 foreach (SpExtrato item in Lista_Final) {
-                    _valor_boleto += item.Valortotal;
+                    _valor_boleto +=  Convert.ToDecimal( string.Format("{0:0.00}",item.Valortotal));
                 }
 
                 //Dados contribuinte
