@@ -22,6 +22,7 @@ namespace GTI_Models.Models {
         public string Lote_original { get; set; }
         public string Atividade { get; set; }
         public TipoEndereco TipoEndereco { get; set; }
+        public bool Ativo { get; set; }
     }
 
     public class Report_Data {

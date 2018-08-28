@@ -40,7 +40,7 @@ namespace GTI_Dal.Classes {
                 reg.Lote_original = RegImovel.LoteOriginal;
                 reg.Atividade = "";
                 reg.TipoEndereco = RegImovel.EE_TipoEndereco == 0 ? TipoEndereco.Local : RegImovel.EE_TipoEndereco == 1 ? TipoEndereco.Proprietario : TipoEndereco.Entrega;
-
+                reg.Ativo = (bool)RegImovel.Inativo  ? false : true;
             } else if (Tipo == TipoCadastro.Empresa) {
                 Empresa_Data empresa_Class = new Empresa_Data(_connection);
                 bool Existe = empresa_Class.Existe_Empresa(Codigo);
@@ -61,6 +61,7 @@ namespace GTI_Dal.Classes {
                 reg.Quadra_original = "";
                 reg.Lote_original = "";
                 reg.Atividade = regEmpresa.Atividade_extenso;
+                reg.Ativo = regEmpresa.Data_Encerramento == null ? true : false;
             } else {
                 Cidadao_Data cidadao_Class = new Cidadao_Data(_connection);
                 bool Existe = cidadao_Class.ExisteCidadao(Codigo);
@@ -80,6 +81,7 @@ namespace GTI_Dal.Classes {
                 reg.Quadra_original = "";
                 reg.Lote_original = "";
                 reg.Atividade = "";
+                reg.Ativo = true;
             }
 
             return reg;

@@ -127,6 +127,7 @@
     <Compile Include="Models\situacaolancamento.cs" />
     <Compile Include="Models\spCalculo.cs" />
     <Compile Include="Models\spExtrato.cs" />
+    <Compile Include="Models\spExtrato_carta.cs" />
     <Compile Include="Models\tb_inter_encerramento_giss.cs" />
     <Compile Include="Models\testada.cs" />
     <Compile Include="Models\Testadacondominio.cs" />

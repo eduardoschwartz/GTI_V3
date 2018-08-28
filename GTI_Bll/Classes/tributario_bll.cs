@@ -229,12 +229,31 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Extrato_Tributo(Codigo,Ano1,Ano2,Lancamento1,Lancamento2,Sequencia1,Sequencia2,Parcela1,Parcela2,Complemento1,Complemento2,Status1,Status2,Data_Atualizacao,Usuario);
         }
 
+        ///<summary> Retorna todas as linhas da spExtrato_carta
+        ///</summary>
+        public List<SpExtrato_carta> Lista_Extrato_Tributo_Carta(int Codigo = 3, short Ano1 = 1990, short Ano2 = 2050, short Lancamento1 = 1, short Lancamento2 = 99, short Sequencia1 = 0, short Sequencia2 = 9999,
+            short Parcela1 = 0, short Parcela2 = 999, short Complemento1 = 0, short Complemento2 = 999, short Status1 = 0, short Status2 = 99, DateTime? Data_Atualizacao = null, string Usuario = "") {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Lista_Extrato_Tributo_Carta(Codigo, Ano1, Ano2, Lancamento1, Lancamento2, Sequencia1, Sequencia2, Parcela1, Parcela2, Complemento1, Complemento2, Status1, Status2, Data_Atualizacao, Usuario);
+        }
+
+
+
         ///<summary> Agrupa as linhas da spExtratoNew por parcela
         ///</summary>
         public List<SpExtrato> Lista_Extrato_Parcela(List<SpExtrato> Lista_Debito) {
             Tributario_Data obj = new Tributario_Data(_connection);
             return obj.Lista_Extrato_Parcela(Lista_Debito);
         }
+
+        ///<summary> Agrupa as linhas da spExtrato_Carta por parcela
+        ///</summary>
+        public List<SpExtrato_carta> Lista_Extrato_Parcela_Carta(List<SpExtrato_carta> Lista_Debito) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Lista_Extrato_Parcela_Carta(Lista_Debito);
+        }
+
+
 
         ///<summary> Retorna os tipos de status dos lançamentos
         ///</summary>
@@ -805,6 +824,18 @@ namespace GTI_Bll.Classes {
             Tributario_Data obj = new Tributario_Data(_connection);
             Exception ex = obj.Insert_Documento_Existente(Reg);
             return ex;
+        }
+
+        /// <summary>
+        /// Retorna a lista dos códigos que possuem débito para carta de cobrança
+        /// </summary>
+        /// <param name="_codigo_inicial"></param>
+        /// <param name="_codigo_final"></param>
+        /// <param name="_data_vencimento"></param>
+        /// <returns></returns>
+        public List<int> Lista_Codigo_Carta(int _codigo_inicial, int _codigo_final, DateTime _data_vencimento) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Lista_Codigo_Carta(_codigo_inicial,_codigo_final,_data_vencimento);
         }
 
     }//end class

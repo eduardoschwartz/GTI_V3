@@ -78,6 +78,7 @@ namespace GTI_Dal {
         public DbSet<Tributolancamento> Tributolancamento { get; set; }
         public DbSet<Tributoaliquota> Tributoaliquota { get; set; }
         public DbSet<SpExtrato> SpExtrato { get; set; }
+        public DbSet<SpExtrato_carta> SpExtrato_carta { get; set; }
         public DbSet<Situacaolancamento> Situacaolancamento { get; set; }
         public DbSet<Debitotributo> Debitotributo { get; set; }
         public DbSet<Obsparcela> Obsparcela { get; set; }
