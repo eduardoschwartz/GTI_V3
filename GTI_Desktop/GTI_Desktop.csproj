@@ -358,6 +358,12 @@
     <Compile Include="Forms\Profissao.designer.cs">
       <DependentUpon>Profissao.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Registro_Bancario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Registro_Bancario.Designer.cs">
+      <DependentUpon>Registro_Bancario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Report.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -596,6 +602,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Profissao.resx">
       <DependentUpon>Profissao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Registro_Bancario.resx">
+      <DependentUpon>Registro_Bancario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Report.resx">
       <DependentUpon>Report.cs</DependentUpon>

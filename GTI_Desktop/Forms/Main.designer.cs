@@ -73,6 +73,8 @@
             this.mnuTributarioTabelas = new System.Windows.Forms.ToolStripMenuItem();
             this.CadastroLancamentoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.CadastroTributosMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.dividaAtivaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CartaCobrancaMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuProtocolo = new System.Windows.Forms.ToolStripMenuItem();
             this.tabelasBásicasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.documentaçãoParaProcessosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -120,8 +122,8 @@
             this.optDv2 = new System.Windows.Forms.RadioButton();
             this.optDv1 = new System.Windows.Forms.RadioButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.dividaAtivaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CartaCobrancaMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.bancosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RegistroBancarioMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.sBar.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.topBar.SuspendLayout();
@@ -387,27 +389,27 @@
             this.CadastroCondominioMenu,
             this.FaceQuadraMenu});
             this.mnuCadastro.Name = "mnuCadastro";
-            this.mnuCadastro.Size = new System.Drawing.Size(180, 22);
+            this.mnuCadastro.Size = new System.Drawing.Size(121, 22);
             this.mnuCadastro.Text = "Cadastro";
             // 
             // CadastroImovelMenu
             // 
             this.CadastroImovelMenu.Name = "CadastroImovelMenu";
-            this.CadastroImovelMenu.Size = new System.Drawing.Size(180, 22);
+            this.CadastroImovelMenu.Size = new System.Drawing.Size(156, 22);
             this.CadastroImovelMenu.Text = "Imóvel";
             this.CadastroImovelMenu.Click += new System.EventHandler(this.MnuCadImob_Click);
             // 
             // CadastroCondominioMenu
             // 
             this.CadastroCondominioMenu.Name = "CadastroCondominioMenu";
-            this.CadastroCondominioMenu.Size = new System.Drawing.Size(180, 22);
+            this.CadastroCondominioMenu.Size = new System.Drawing.Size(156, 22);
             this.CadastroCondominioMenu.Text = "Condomínios";
             this.CadastroCondominioMenu.Click += new System.EventHandler(this.mnuCadastroCondominio_Click);
             // 
             // FaceQuadraMenu
             // 
             this.FaceQuadraMenu.Name = "FaceQuadraMenu";
-            this.FaceQuadraMenu.Size = new System.Drawing.Size(180, 22);
+            this.FaceQuadraMenu.Size = new System.Drawing.Size(156, 22);
             this.FaceQuadraMenu.Text = "Face de Quadra";
             // 
             // mnuMobiliario
@@ -424,20 +426,20 @@
             this.CadastroEmpresaMenu,
             this.EscritorioContabilMenu});
             this.mnuMobiliarioCadastro.Name = "mnuMobiliarioCadastro";
-            this.mnuMobiliarioCadastro.Size = new System.Drawing.Size(180, 22);
+            this.mnuMobiliarioCadastro.Size = new System.Drawing.Size(121, 22);
             this.mnuMobiliarioCadastro.Text = "Cadastro";
             // 
             // CadastroEmpresaMenu
             // 
             this.CadastroEmpresaMenu.Name = "CadastroEmpresaMenu";
-            this.CadastroEmpresaMenu.Size = new System.Drawing.Size(180, 22);
+            this.CadastroEmpresaMenu.Size = new System.Drawing.Size(169, 22);
             this.CadastroEmpresaMenu.Text = "Empresa";
             this.CadastroEmpresaMenu.Click += new System.EventHandler(this.MnuEmpresa_Click);
             // 
             // EscritorioContabilMenu
             // 
             this.EscritorioContabilMenu.Name = "EscritorioContabilMenu";
-            this.EscritorioContabilMenu.Size = new System.Drawing.Size(180, 22);
+            this.EscritorioContabilMenu.Size = new System.Drawing.Size(169, 22);
             this.EscritorioContabilMenu.Text = "Escritório contábil";
             this.EscritorioContabilMenu.Click += new System.EventHandler(this.mnuEscritorioContabil_Click);
             // 
@@ -468,7 +470,8 @@
             // 
             this.mnuTributario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuTributarioTabelas,
-            this.dividaAtivaToolStripMenuItem});
+            this.dividaAtivaToolStripMenuItem,
+            this.bancosToolStripMenuItem});
             this.mnuTributario.Name = "mnuTributario";
             this.mnuTributario.Size = new System.Drawing.Size(70, 20);
             this.mnuTributario.Text = "Tributário";
@@ -495,6 +498,21 @@
             this.CadastroTributosMenu.Size = new System.Drawing.Size(208, 22);
             this.CadastroTributosMenu.Text = "Cadastro de tributos";
             this.CadastroTributosMenu.Click += new System.EventHandler(this.MnuTributos_Click);
+            // 
+            // dividaAtivaToolStripMenuItem
+            // 
+            this.dividaAtivaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CartaCobrancaMenu});
+            this.dividaAtivaToolStripMenuItem.Name = "dividaAtivaToolStripMenuItem";
+            this.dividaAtivaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dividaAtivaToolStripMenuItem.Text = "Divida Ativa";
+            // 
+            // CartaCobrancaMenu
+            // 
+            this.CartaCobrancaMenu.Name = "CartaCobrancaMenu";
+            this.CartaCobrancaMenu.Size = new System.Drawing.Size(180, 22);
+            this.CartaCobrancaMenu.Text = "Carta de cobrança";
+            this.CartaCobrancaMenu.Click += new System.EventHandler(this.CartaCobrancaMenu_Click);
             // 
             // mnuProtocolo
             // 
@@ -563,7 +581,7 @@
             // ConfigMenu
             // 
             this.ConfigMenu.Name = "ConfigMenu";
-            this.ConfigMenu.Size = new System.Drawing.Size(180, 22);
+            this.ConfigMenu.Size = new System.Drawing.Size(146, 22);
             this.ConfigMenu.Text = "Configuração";
             this.ConfigMenu.Click += new System.EventHandler(this.MnuConfig_Click);
             // 
@@ -574,7 +592,7 @@
             this.CadastroEventoMenu,
             this.AtribuicaoAcessoMenu});
             this.mnuSecurity.Name = "mnuSecurity";
-            this.mnuSecurity.Size = new System.Drawing.Size(180, 22);
+            this.mnuSecurity.Size = new System.Drawing.Size(146, 22);
             this.mnuSecurity.Text = "Segurança";
             // 
             // CadastroUsuariosMenu
@@ -614,40 +632,40 @@
             // minimizarTodasToolStripMenuItem
             // 
             this.minimizarTodasToolStripMenuItem.Name = "minimizarTodasToolStripMenuItem";
-            this.minimizarTodasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.minimizarTodasToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.minimizarTodasToolStripMenuItem.Text = "Minimizar todas";
             this.minimizarTodasToolStripMenuItem.Click += new System.EventHandler(this.MinimizarTodasToolStripMenuItem_Click);
             // 
             // restaurarTodasToolStripMenuItem
             // 
             this.restaurarTodasToolStripMenuItem.Name = "restaurarTodasToolStripMenuItem";
-            this.restaurarTodasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.restaurarTodasToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.restaurarTodasToolStripMenuItem.Text = "Restaurar todas";
             this.restaurarTodasToolStripMenuItem.Click += new System.EventHandler(this.RestaurarTodasToolStripMenuItem_Click);
             // 
             // fecharTodasToolStripMenuItem
             // 
             this.fecharTodasToolStripMenuItem.Name = "fecharTodasToolStripMenuItem";
-            this.fecharTodasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fecharTodasToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.fecharTodasToolStripMenuItem.Text = "Fechar todas";
             this.fecharTodasToolStripMenuItem.Click += new System.EventHandler(this.FecharTodasToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(156, 6);
             // 
             // emCascataToolStripMenuItem
             // 
             this.emCascataToolStripMenuItem.Name = "emCascataToolStripMenuItem";
-            this.emCascataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.emCascataToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.emCascataToolStripMenuItem.Text = "Em cascata";
             this.emCascataToolStripMenuItem.Click += new System.EventHandler(this.EmCascataToolStripMenuItem_Click);
             // 
             // ladoALadoToolStripMenuItem
             // 
             this.ladoALadoToolStripMenuItem.Name = "ladoALadoToolStripMenuItem";
-            this.ladoALadoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ladoALadoToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.ladoALadoToolStripMenuItem.Text = "Lado a lado";
             this.ladoALadoToolStripMenuItem.Click += new System.EventHandler(this.LadoALadoToolStripMenuItem_Click);
             // 
@@ -938,20 +956,20 @@
             this.optDv1.UseVisualStyleBackColor = false;
             this.optDv1.CheckedChanged += new System.EventHandler(this.OptDv1_CheckedChanged);
             // 
-            // dividaAtivaToolStripMenuItem
+            // bancosToolStripMenuItem
             // 
-            this.dividaAtivaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CartaCobrancaMenu});
-            this.dividaAtivaToolStripMenuItem.Name = "dividaAtivaToolStripMenuItem";
-            this.dividaAtivaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.dividaAtivaToolStripMenuItem.Text = "Divida Ativa";
+            this.bancosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RegistroBancarioMenu});
+            this.bancosToolStripMenuItem.Name = "bancosToolStripMenuItem";
+            this.bancosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bancosToolStripMenuItem.Text = "Bancos";
             // 
-            // CartaCobrancaMenu
+            // RegistroBancarioMenu
             // 
-            this.CartaCobrancaMenu.Name = "CartaCobrancaMenu";
-            this.CartaCobrancaMenu.Size = new System.Drawing.Size(180, 22);
-            this.CartaCobrancaMenu.Text = "Carta de cobrança";
-            this.CartaCobrancaMenu.Click += new System.EventHandler(this.CartaCobrancaMenu_Click);
+            this.RegistroBancarioMenu.Name = "RegistroBancarioMenu";
+            this.RegistroBancarioMenu.Size = new System.Drawing.Size(180, 22);
+            this.RegistroBancarioMenu.Text = "Registro bancário";
+            this.RegistroBancarioMenu.Click += new System.EventHandler(this.RegistroBancarioMenu_Click);
             // 
             // Main
             // 
@@ -1079,6 +1097,8 @@
         private System.Windows.Forms.ToolStripMenuItem CadastroProfissaoMenu;
         private System.Windows.Forms.ToolStripMenuItem dividaAtivaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CartaCobrancaMenu;
+        private System.Windows.Forms.ToolStripMenuItem bancosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RegistroBancarioMenu;
     }
 }
 

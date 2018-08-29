@@ -14,7 +14,7 @@ namespace GTI_Desktop.Forms {
     public partial class Carta_Cobranca : Form {
         private string _connection = gtiCore.Connection_Name();
         private bool _stop = false;
-        short _remessa = 1;
+        short _remessa = 2;
 
         public Carta_Cobranca() {
             InitializeComponent();
@@ -65,7 +65,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void Gera_Matriz(int _codigo_ini, int _codigo_fim, DateTime _data_vencto) {
-            int _total = _codigo_fim - _codigo_ini + 1, _pos = 1, _numero_documento = 5100001; //5.100.001 até 5.400.000
+            int _total = _codigo_fim - _codigo_ini + 1, _pos = 1, _numero_documento = 5101848; //5.100.001 até 5.400.000
 
             Exception ex = null;
             List<SpExtrato_carta> Lista_Resumo = new List<SpExtrato_carta>();
@@ -89,7 +89,15 @@ namespace GTI_Desktop.Forms {
    //         }
 
             for (int _codigo_atual = _codigo_ini; _codigo_atual < _codigo_fim+1; _codigo_atual++) {
-               
+
+                if (_stop) break;
+                if (_pos % 10 == 0) {
+                    PBar.Value = _pos * 100 / _total;
+                    PBar.Update();
+                    Refresh();
+                    Application.DoEvents();
+                }
+
                 bool bFind = false;
                 for (int i = 0; i < _lista_codigos.Count; i++) {
                     if (_codigo_atual == _lista_codigos[i]) {
@@ -99,14 +107,7 @@ namespace GTI_Desktop.Forms {
                 }
                 if (!bFind) goto Proximo;
                 
-
-                if (_stop) break;
-                if (_pos % 50 == 0) {
-                    PBar.Value = _pos * 100 / _total;
-                    PBar.Update();
-                    Refresh();
-                }
-
+                
                 if (_codigo_atual > 100000 && _codigo_atual < 300000) {
                     if (empresa_Class.EmpresaSuspensa(_codigo_atual))
                         goto Proximo;

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using GTI_Models.Models;
-using GTI_Dal.Classes;
+﻿using GTI_Dal.Classes;
 using GTI_Models;
-using static GTI_Models.modelCore;
+using GTI_Models.Models;
+using System;
+using System.Collections.Generic;
 
 namespace GTI_Bll.Classes {
     public class Tributario_bll {
