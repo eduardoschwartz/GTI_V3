@@ -911,7 +911,6 @@ namespace GTI_Dal.Classes {
             }
         }
 
-
         public Exception Insert_Parcela_Documento(Parceladocumento Reg) {
             using (var db = new GTI_Context(_connection)) {
                 try {
@@ -1657,6 +1656,31 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public List<Carta_cobranca> Lista_Carta_Cobranca(int s) {
+            using (var db = new GTI_Context(_connection)) {
+                var reg = (from t in db.Carta_cobranca  orderby t.Numero_Documento select new { t.Bairro, t.Cep,t.Cidade,t.Codigo,t.Cpf_cnpj,t.Data_Documento,
+                    t.Data_Vencimento,t.Endereco,t.Nome,t.Nosso_Numero,t.Numero_Documento,t.Valor_Boleto }).ToList();
+                List<Carta_cobranca> Lista = new List<Carta_cobranca>();
+                foreach (var item in reg) {
+                    Carta_cobranca Linha = new Carta_cobranca {
+                        Bairro=item.Bairro,
+                        Cep=item.Cep,
+                        Cidade=item.Cidade,
+                        Codigo = item.Codigo,
+                        Cpf_cnpj=item.Cpf_cnpj,
+                        Data_Documento=item.Data_Documento,
+                        Data_Vencimento=item.Data_Vencimento,
+                        Endereco=item.Endereco,
+                        Nome=item.Nome,
+                        Nosso_Numero=item.Nosso_Numero,
+                        Numero_Documento=item.Numero_Documento,
+                        Valor_Boleto = item.Valor_Boleto
+                    };
+                    Lista.Add(Linha);
+                }
+                return Lista;
+            }
+        }
 
 
     }//end class

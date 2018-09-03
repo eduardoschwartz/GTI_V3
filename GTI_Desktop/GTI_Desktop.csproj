@@ -322,6 +322,12 @@
     <Compile Include="Forms\Processo_Assunto.designer.cs">
       <DependentUpon>Processo_Assunto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Processo_Atraso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Processo_Atraso.Designer.cs">
+      <DependentUpon>Processo_Atraso.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Processo_Despacho.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -584,6 +590,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Processo_Assunto.resx">
       <DependentUpon>Processo_Assunto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Processo_Atraso.resx">
+      <DependentUpon>Processo_Atraso.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Processo_Despacho.resx">
       <DependentUpon>Processo_Despacho.cs</DependentUpon>

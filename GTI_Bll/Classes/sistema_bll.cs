@@ -192,5 +192,26 @@ namespace GTI_Bll.Classes {
             return obj.Tipo_Cadastro(Codigo);
         }
 
+        /// <summary>
+        /// Retorna o último número de remessa para o arquivo de registro bancário
+        /// </summary>
+        /// <returns></returns>
+        public int Retorna_Ultima_Remessa_Cobranca() {
+            Sistema_Data obj = new Sistema_Data(_connection);
+            return obj.Retorna_Ultima_Remessa_Cobranca();
+        }
+
+        /// <summary>
+        /// Incrementa o campo COBRANCA na tabela parametros
+        /// </summary>
+        /// <returns></returns>
+        public Exception Atualiza_Codigo_Remessa_Cobranca() {
+            Sistema_Data obj = new Sistema_Data(_connection);
+            Exception ex = obj.Atualiza_Codigo_Remessa_Cobranca();
+            return ex;
+        }
+
+
+
     }
 }

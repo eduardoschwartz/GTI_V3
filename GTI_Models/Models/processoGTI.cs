@@ -75,6 +75,7 @@ namespace GTI_Models.Models {
         public bool Fisico { get; set; }
         public int? Origem { get; set; }
         public int? CentroCusto { get; set; }
+        public string CentroCustoNome { get; set; }
         public int? CodigoCidadao { get; set; }
         public string NomeCidadao { get; set; }
         public List<ProcessoEndStruct> ListaProcessoEndereco { get; set; }
@@ -159,6 +160,7 @@ namespace GTI_Models.Models {
         public int CodLogradouro { get; set; }
         public int NumEnd { get; set; }
         public string Complemento { get; set; }
+        public bool? Arquivado { get; set; }
     }
 
     public class UsuariocentroCusto {

@@ -100,13 +100,36 @@ namespace GTI_Dal.Classes {
             return _tipo_cadastro;
         }
 
+        public int Retorna_Ultima_Remessa_Cobranca() {
+            using (var db = new GTI_Context(_connection)) {
+                var Sql = (from c in db.Parametros where c.Nomeparam=="COBRANCA" select c.Valparam).FirstOrDefault();
+                return Convert.ToInt32(Sql);
+            }
+        }
+
+        public Exception Atualiza_Codigo_Remessa_Cobranca( ) {
+            Parametros p = null;
+            using (var db = new GTI_Context(_connection)) {
+                var _sql = (from c in db.Parametros where c.Nomeparam == "COBRANCA" select c.Valparam).FirstOrDefault();
+                int _valor = Convert.ToInt32(_sql) + 1;
+
+                p = db.Parametros.First(i => i.Nomeparam == "COBRANCA");
+                p.Valparam = _valor.ToString();
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
 
 
 
 
-    #region Security
+        #region Security
 
-    public Exception Alterar_Senha(Usuario reg) {
+        public Exception Alterar_Senha(Usuario reg) {
             using (var db = new GTI_Context(_connection)) {
                 string sLogin = reg.Nomelogin;
                 Usuario b = db.Usuario.First(i => i.Nomelogin == sLogin);

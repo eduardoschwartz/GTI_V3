@@ -75,6 +75,8 @@
             this.CadastroTributosMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.dividaAtivaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CartaCobrancaMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.bancosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RegistroBancarioMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuProtocolo = new System.Windows.Forms.ToolStripMenuItem();
             this.tabelasBásicasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.documentaçãoParaProcessosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -122,8 +124,8 @@
             this.optDv2 = new System.Windows.Forms.RadioButton();
             this.optDv1 = new System.Windows.Forms.RadioButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.bancosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RegistroBancarioMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ProcessoAtrasoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.sBar.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.topBar.SuspendLayout();
@@ -482,7 +484,7 @@
             this.CadastroLancamentoMenu,
             this.CadastroTributosMenu});
             this.mnuTributarioTabelas.Name = "mnuTributarioTabelas";
-            this.mnuTributarioTabelas.Size = new System.Drawing.Size(180, 22);
+            this.mnuTributarioTabelas.Size = new System.Drawing.Size(137, 22);
             this.mnuTributarioTabelas.Text = "Tabelas";
             // 
             // CadastroLancamentoMenu
@@ -504,21 +506,37 @@
             this.dividaAtivaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CartaCobrancaMenu});
             this.dividaAtivaToolStripMenuItem.Name = "dividaAtivaToolStripMenuItem";
-            this.dividaAtivaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dividaAtivaToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.dividaAtivaToolStripMenuItem.Text = "Divida Ativa";
             // 
             // CartaCobrancaMenu
             // 
             this.CartaCobrancaMenu.Name = "CartaCobrancaMenu";
-            this.CartaCobrancaMenu.Size = new System.Drawing.Size(180, 22);
+            this.CartaCobrancaMenu.Size = new System.Drawing.Size(170, 22);
             this.CartaCobrancaMenu.Text = "Carta de cobrança";
             this.CartaCobrancaMenu.Click += new System.EventHandler(this.CartaCobrancaMenu_Click);
+            // 
+            // bancosToolStripMenuItem
+            // 
+            this.bancosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RegistroBancarioMenu});
+            this.bancosToolStripMenuItem.Name = "bancosToolStripMenuItem";
+            this.bancosToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.bancosToolStripMenuItem.Text = "Bancos";
+            // 
+            // RegistroBancarioMenu
+            // 
+            this.RegistroBancarioMenu.Name = "RegistroBancarioMenu";
+            this.RegistroBancarioMenu.Size = new System.Drawing.Size(166, 22);
+            this.RegistroBancarioMenu.Text = "Registro bancário";
+            this.RegistroBancarioMenu.Click += new System.EventHandler(this.RegistroBancarioMenu_Click);
             // 
             // mnuProtocolo
             // 
             this.mnuProtocolo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tabelasBásicasToolStripMenuItem,
-            this.mnuControleProcesso});
+            this.mnuControleProcesso,
+            this.relatóriosToolStripMenuItem});
             this.mnuProtocolo.Name = "mnuProtocolo";
             this.mnuProtocolo.Size = new System.Drawing.Size(71, 20);
             this.mnuProtocolo.Text = "Protocolo";
@@ -956,20 +974,20 @@
             this.optDv1.UseVisualStyleBackColor = false;
             this.optDv1.CheckedChanged += new System.EventHandler(this.OptDv1_CheckedChanged);
             // 
-            // bancosToolStripMenuItem
+            // relatóriosToolStripMenuItem
             // 
-            this.bancosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.RegistroBancarioMenu});
-            this.bancosToolStripMenuItem.Name = "bancosToolStripMenuItem";
-            this.bancosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.bancosToolStripMenuItem.Text = "Bancos";
+            this.relatóriosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ProcessoAtrasoMenu});
+            this.relatóriosToolStripMenuItem.Name = "relatóriosToolStripMenuItem";
+            this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.relatóriosToolStripMenuItem.Text = "Relatórios";
             // 
-            // RegistroBancarioMenu
+            // ProcessoAtrasoMenu
             // 
-            this.RegistroBancarioMenu.Name = "RegistroBancarioMenu";
-            this.RegistroBancarioMenu.Size = new System.Drawing.Size(180, 22);
-            this.RegistroBancarioMenu.Text = "Registro bancário";
-            this.RegistroBancarioMenu.Click += new System.EventHandler(this.RegistroBancarioMenu_Click);
+            this.ProcessoAtrasoMenu.Name = "ProcessoAtrasoMenu";
+            this.ProcessoAtrasoMenu.Size = new System.Drawing.Size(181, 22);
+            this.ProcessoAtrasoMenu.Text = "Processos em atraso";
+            this.ProcessoAtrasoMenu.Click += new System.EventHandler(this.ProcessoAtrasoMenu_Click);
             // 
             // Main
             // 
@@ -1099,6 +1117,8 @@
         private System.Windows.Forms.ToolStripMenuItem CartaCobrancaMenu;
         private System.Windows.Forms.ToolStripMenuItem bancosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RegistroBancarioMenu;
+        private System.Windows.Forms.ToolStripMenuItem relatóriosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ProcessoAtrasoMenu;
     }
 }
 

@@ -594,5 +594,22 @@ namespace GTI_Desktop.Forms {
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        private void ProcessoAtrasoMenu_Click(object sender, EventArgs e) {
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.Carta_Cobranca);
+            if (bAllow) {
+                var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Processo_Atraso);
+                if (formToShow != null) {
+                    formToShow.Show();
+                } else {
+                    Processo_Atraso f1 = new Processo_Atraso {
+                        Tag = "Menu",
+                        MdiParent = this
+                    };
+                    f1.Show();
+                }
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
     }//end class
 }

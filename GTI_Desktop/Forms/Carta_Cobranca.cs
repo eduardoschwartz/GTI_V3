@@ -14,7 +14,7 @@ namespace GTI_Desktop.Forms {
     public partial class Carta_Cobranca : Form {
         private string _connection = gtiCore.Connection_Name();
         private bool _stop = false;
-        short _remessa = 2;
+        short _remessa = 1;
 
         public Carta_Cobranca() {
             InitializeComponent();
@@ -65,7 +65,8 @@ namespace GTI_Desktop.Forms {
         }
 
         private void Gera_Matriz(int _codigo_ini, int _codigo_fim, DateTime _data_vencto) {
-            int _total = _codigo_fim - _codigo_ini + 1, _pos = 1, _numero_documento = 5101848; //5.100.001 até 5.400.000
+            int _total = _codigo_fim - _codigo_ini + 1, _pos = 1, _numero_documento = 5108165; //5.100.001 até 5.400.000
+            DateTime _data_vencimento = Convert.ToDateTime("15/10/2018");
 
             Exception ex = null;
             List<SpExtrato_carta> Lista_Resumo = new List<SpExtrato_carta>();
@@ -81,12 +82,12 @@ namespace GTI_Desktop.Forms {
             List<int> _lista_codigos = tributario_Class.Lista_Codigo_Carta(_codigo_ini, _codigo_fim, _data_vencto);
             
 
-            PBar.Value = 0;
-   //         ex = tributario_Class.Excluir_Carta_Cobranca(_remessa);
- //           if (ex != null) {
- //               ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
-  //              eBox.ShowDialog();
-   //         }
+            //PBar.Value = 0;
+            //ex = tributario_Class.Excluir_Carta_Cobranca(_remessa);
+            //if (ex != null) {
+            //    ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+            //    eBox.ShowDialog();
+            //}
 
             for (int _codigo_atual = _codigo_ini; _codigo_atual < _codigo_fim+1; _codigo_atual++) {
 
@@ -170,7 +171,7 @@ namespace GTI_Desktop.Forms {
                 string _nome = "", _cpfcnpj = "", _endereco = "", _bairro = "", _cidade = "", _cep = "", _inscricao = "", _lote = "", _quadra = "", _atividade = "";
                 string _convenio = "2873532", _complemento = "", _complemento_entrega = "", _endereco_entrega = "", _bairro_entrega = "", _cidade_entrega = "", _cep_entrega = "";
                 
-                DateTime _data_vencimento= Convert.ToDateTime("15/10/2018");
+                
 
                 Contribuinte_Header_Struct dados = sistema_Class.Contribuinte_Header(_codigo_atual);
                 if (dados == null)

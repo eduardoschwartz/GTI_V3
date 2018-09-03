@@ -837,5 +837,16 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Codigo_Carta(_codigo_inicial,_codigo_final,_data_vencimento);
         }
 
+        /// <summary>
+        /// Retorna os registros da tabela carta_cobranca
+        /// </summary>
+        /// <param name="Remessa"></param>
+        /// <returns></returns>
+        public List<Carta_cobranca> Lista_Carta_Cobranca(int Remessa) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Lista_Carta_Cobranca(Remessa);
+        }
+
+
     }//end class
 }

@@ -851,10 +851,11 @@ Inicio:;
                            join a in db.Assunto on p.Codassunto equals a.Codigo into ap from a in ap.DefaultIfEmpty()
                            join e in db.Processoend on new { P1 = p.Ano, P2 = p.Numero } equals new { P1 = e.Ano, P2 = e.Numprocesso } into ep from e in ep.DefaultIfEmpty()
                            join l in db.Logradouro on e.Codlogr equals l.Codlogradouro into le from l in le.DefaultIfEmpty()
+                           join u in db.Centrocusto on p.Centrocusto equals u.Codigo into pu from u in pu.DefaultIfEmpty()
                            select new ProcessoStruct {
                                Ano = p.Ano, Numero = p.Numero, NomeCidadao = c.Nomecidadao, Assunto = a.Nome, DataEntrada = p.Dataentrada, DataCancelado = p.Datacancel,
                                DataReativacao = p.Datareativa, DataArquivado = p.Dataarquiva, DataSuspensao = p.Datasuspenso, Interno = p.Interno, Fisico = p.Fisico, LogradouroNome = l.Endereco,
-                               LogradouroNumero = e.Numero
+                               LogradouroNumero = e.Numero,Complemento=p.Complemento,CentroCustoNome= u.Descricao 
                            }); 
                 if (!string.IsNullOrWhiteSpace(Filter.SNumProcesso))
                     Sql = Sql.Where(c => c.Ano == Filter.Ano && c.Numero==Filter.Numero);
@@ -862,6 +863,10 @@ Inicio:;
                     Sql = Sql.Where(c => c.Ano >= Filter.AnoIni);
                 if (Filter.AnoFim > 0)
                     Sql = Sql.Where(c => c.Ano <= Filter.AnoFim);
+                if (Filter.Arquivado ==false)
+                    Sql = Sql.Where(c => c.DataArquivado == null);
+                if (Filter.Arquivado == true)
+                    Sql = Sql.Where(c => c.DataArquivado != null);
 
                 return Sql.ToList();
             }
