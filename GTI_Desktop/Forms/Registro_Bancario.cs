@@ -90,7 +90,7 @@ namespace GTI_Desktop.Forms {
             int _qtde_registro_lote = (_qtde_boletos * 2) + 2;
             string _codigo_banco = "001",_lote="0001",_tipo="5",_uso_febraban1=" ".PadLeft(9,' '), _uso_febraban2 = " ".PadLeft(217, ' '),_qtde_registro = _qtde_registro_lote.ToString().PadLeft(6,'0');
 
-            string _trailer_lote = _codigo_banco + _lote + _tipo + _uso_febraban1 + _qtde_registro + _uso_febraban2;
+            string _trailer_lote = _codigo_banco + _lote + _tipo + _uso_febraban1 + _qtde_registro_lote + _uso_febraban2;
             sw.Write(_trailer_lote + Environment.NewLine);
 
             //Trailer Arquivo
@@ -107,8 +107,8 @@ namespace GTI_Desktop.Forms {
         private void Grava_Registro_01() {
             Tributario_bll tributario_Class = new Tributario_bll(_connection);
             int _contador = 1;
-            string _codigo_banco = "001", _lote = "0001", _tipo = "3", _seqreg,_codigo_segmento="P",_uso_febraban1=" ",_codigo_movimento="01",_agencia="00269",_dvagencia="0";
-            string _conta = "74000".PadLeft(12, '0'),_dvconta="4",_nosso_numero,_codigo_carteira="7",_forma_cadastro="1",_tipo_documento="1",_id_emissao="2",_id_distribuicao="2";
+            string _codigo_banco = "001", _lote = "0001", _tipo = "3", _seqreg,_codigo_segmento,_uso_febraban1=" ",_codigo_movimento="01",_agencia="00269",_dvagencia="0";
+            string _conta = "74000".PadLeft(12, '0'),_dvconta="4 ",_nosso_numero,_codigo_carteira="7",_forma_cadastro="1",_tipo_documento="1",_id_emissao="2",_id_distribuicao="2";
             string _numero_doc,_data_vencimento,_valor_nominal,_agencia_cobranca="00000",_dv_agencia_cobranca="0",_especie_titulo="01",_aceite="N",_data_emissao,_codigo_juros="0";
             string _data_juros = "0".PadLeft(8, '0'), _juros_mora = "0".PadLeft(15, '0'),_codigo_desconto="0",_data_desconto= "0".PadLeft(8, '0'),_valor_desconto= "0".PadLeft(15, '0');
             string _valor_IOF = "0".PadLeft(15, '0'),_valor_abatimento= "0".PadLeft(15, '0'),_identifica_titulo,_codigo_protesto="3",_dias_protesto="00",_codigo_baixa="0";
@@ -118,6 +118,7 @@ namespace GTI_Desktop.Forms {
             _qtde_registros = Lista.Count;
             foreach (Carta_cobranca item in Lista) {
                 //*** Segmento P ***
+                _codigo_segmento = "P";
                 _seqreg = _contador.ToString().PadLeft(5, '0');
                 _nosso_numero = item.Nosso_Numero.PadRight(20, ' ');
                 _numero_doc= item.Numero_Documento.ToString().PadRight(15, ' ');
@@ -127,54 +128,45 @@ namespace GTI_Desktop.Forms {
                 _identifica_titulo = item.Numero_Documento.ToString().PadRight(25, ' ');
 
                 _segmentoP = _codigo_banco + _lote + _tipo + _seqreg + _codigo_segmento + _uso_febraban1 + _codigo_movimento + _agencia + _dvagencia + _conta + _dvconta + _nosso_numero;
-                _segmentoP += _codigo_carteira + _forma_cadastro + _tipo_documento + _id_emissao + _id_distribuicao + _nosso_numero + _data_vencimento + _valor_nominal + _agencia_cobranca;
+                _segmentoP += _codigo_carteira + _forma_cadastro + _tipo_documento + _id_emissao + _id_distribuicao + _numero_doc + _data_vencimento + _valor_nominal + _agencia_cobranca;
                 _segmentoP += _dv_agencia_cobranca + _especie_titulo + _aceite + _data_emissao + _codigo_juros + _data_juros + _juros_mora + _codigo_desconto + _data_desconto + _valor_desconto;
                 _segmentoP += _valor_IOF + _valor_abatimento + _identifica_titulo + _codigo_protesto + _dias_protesto + _codigo_baixa + _dias_baixa + _codigo_moeda + _numero_contrato + _uso_livre;
 
                 sw.Write(_segmentoP + Environment.NewLine);
 
                 //*** Segmento Q ***
+                _contador++;
+                string _endereco, _tipo_inscricao, _numero_inscricao, _nome, _bairro, _cep, _cidade,_uf,_tipo_inscricao_sacado="0",_numero_inscricao_sacado;
+                string _nome_sacado,_banco_correponde="000",_nosso_numero_banco_corr,_uso_febraban2;
 
+                _seqreg = _contador.ToString().PadLeft(5, '0');
+                _codigo_segmento = "Q";
+                _tipo_inscricao = item.Cpf_cnpj.Length == 11 ? "1" : "2";
+                _numero_inscricao = item.Cpf_cnpj.PadLeft(15,'0');
+                _numero_inscricao_sacado = item.Cpf_cnpj.PadLeft(15, '0');
+                _nome = item.Nome.Length > 40 ? item.Nome.Substring(0, 40) : item.Nome.PadRight(40, ' ');
+                _nome_sacado =  " ".PadRight(40, ' ');
+                _nosso_numero_banco_corr = " ".PadRight(20, ' ');
+                _uso_febraban2 = " ".PadRight(8, ' ');
+                _endereco = item.Endereco.Length > 40 ? item.Endereco.Substring(0, 40) : item.Endereco.PadRight(40, ' ');
+                _endereco = _endereco.TrimEnd('\r', '\n');
+                _bairro = item.Bairro.Length > 15 ? item.Bairro.Substring(0, 15) : item.Bairro.PadRight(15, ' ');
+                _cep = gtiCore.RetornaNumero(item.Cep);
+                _cep = _cep.Length < 5 ? "00000000":_cep.PadLeft(8,'0');
+                _cidade = item.Cidade.Substring(0, item.Cidade.Length - 3);
+                _cidade = _cidade.Length > 15 ? _cidade.Substring(0, 15) : _cidade.PadRight(15, ' ');
+                _uf = item.Cidade.Substring(item.Cidade.Length - 2, 2);
+
+                _segmentoQ = _codigo_banco + _lote + _tipo + _seqreg + _codigo_segmento + _uso_febraban1 + _codigo_movimento + _tipo_inscricao + _numero_inscricao + _nome;
+                _segmentoQ += _endereco + _bairro + _cep + _cidade + _uf + _tipo_inscricao_sacado + _numero_inscricao_sacado + _nome_sacado + _banco_correponde ;
+                _segmentoQ+= _nosso_numero_banco_corr+_uso_febraban2;
+
+                sw.Write(_segmentoQ + Environment.NewLine);
+
+                _contador++;
             }
 
         }
 
     }
 }
-/*
-     
-    
-    nContador = nContador + 1
-    With aSegmentoQ(1)
-        .nCodigoBanco = "001"
-        .nLote = "0001"
-        .nTipo = "3"
-        .nSeqReg = FillLeft(CStr(nContador), 5)
-        .sCodSegmento = "Q"
-        .sUsoFebraban1 = " "
-        .nCodMovimento = "01"
-        .nTipoInscricao = aBoletos(nPosReg).nTipoInscricao
-        .nNumeroInscricao = FillLeft(aBoletos(nPosReg).nNumeroInscricao, 15)
-        .sNome = FillSpace(aBoletos(nPosReg).sNome, 40)
-        .sEndereco = FillSpace(aBoletos(nPosReg).sEndereco, 40)
-        .sBairro = FillSpace(aBoletos(nPosReg).sBairro, 15)
-        If Len(aBoletos(nPosReg).sCep) < 5 Then
-            .nCep = "00000"
-            .nCepsufixo = "000"
-        Else
-            .nCep = aBoletos(nPosReg).sCep
-            .nCepsufixo = aBoletos(nPosReg).sSufixoCep
-        End If
-        
-        .sCidade = FillSpace(aBoletos(nPosReg).sCidade, 15)
-        .sUF = aBoletos(nPosReg).sUF
-        .nipoInscricaoSacado = "0"
-        .nNumeroInscricaoSacado = FillLeft("0", 15)
-        .sNomeSacado = FillSpace(" ", 40)
-        .nBancoCorresponde = "000"
-        .sNossoNumeroBancoCorr = FillSpace(" ", 20)
-        .sUsoFebraban2 = FillSpace(" ", 8)
-        
-        sSegmentoQ = .nCodigoBanco & .nLote & .nTipo & .nSeqReg & .sCodSegmento & .sUsoFebraban1 & .nCodMovimento & .nTipoInscricao & .nNumeroInscricao & .sNome & .sEndereco & .sBairro
-        sSegmentoQ = sSegmentoQ & .nCep & .nCepsufixo & .sCidade & .sUF & .nipoInscricaoSacado & .nNumeroInscricaoSacado & .sNomeSacado & .nBancoCorresponde & .sNossoNumeroBancoCorr & .sUsoFebraban2
-    */
