@@ -578,7 +578,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void RegistroBancarioMenu_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.Carta_Cobranca);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.Registro_Bancario);
             if (bAllow) {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Registro_Bancario);
                 if (formToShow != null) {
@@ -595,7 +595,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void ProcessoAtrasoMenu_Click(object sender, EventArgs e) {
-            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.Carta_Cobranca);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.Registro_Bancario);
             if (bAllow) {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Processo_Atraso);
                 if (formToShow != null) {

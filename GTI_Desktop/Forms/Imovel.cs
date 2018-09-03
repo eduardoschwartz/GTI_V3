@@ -235,12 +235,26 @@ namespace GTI_Desktop.Forms {
                         Unidade.Text = Inscricao.Text.Substring(19, 2);
                         SubUnidade.Text = Inscricao.Text.Substring(22, 3);
                         Condominio.Text = form.ReturnCondominio;
+                        int _condominio = form.ReturnCondominioCodigo;
+                        this.Condominio.Tag = _condominio.ToString();
+                        if (_condominio > 0)
+                            Carrega_Dados_Condominio(_condominio);
                         bAddNew = true;
                         ControlBehaviour(false);
                     }
                 }
             } else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void Carrega_Dados_Condominio(int _codigo_condominio) {
+            Imovel_bll imovel_Class = new Imovel_bll(_connection);
+            CondominioStruct regImovel = imovel_Class.Dados_Condominio(_codigo_condominio);
+            
+
+
+            List<AreaStruct> ListaArea = imovel_Class.Lista_Area_Condominio(_codigo_condominio);
+
         }
 
         private void BtEdit_Click(object sender, EventArgs e) {
@@ -435,7 +449,6 @@ namespace GTI_Desktop.Forms {
                     ControlBehaviour(true);
                     ClearFields();
                     CarregaImovel(Codigo);
-                    CarregaCondominio();
                 } else
                     MessageBox.Show("Imóvel não cadastrado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 gtiCore.Liberado(this);
@@ -1097,19 +1110,6 @@ namespace GTI_Desktop.Forms {
                     HistoricoListView.Items[0].Selected = true;
 
                 
-            }
-        }
-
-        private void CarregaCondominio() {
-            if (String.IsNullOrEmpty(Codigo.Text)) return;
-            int nCodigo = Convert.ToInt32(Codigo.Text);
-            Imovel_bll clsImovel = new Imovel_bll(_connection);
-            CondominioStruct regImovel = clsImovel.Dados_Condominio(62);
-            List<AreaStruct> ListaArea = clsImovel.Lista_Area_Condominio(62);
-            if (regImovel.Codigo == 0)
-                MessageBox.Show("Imóvel não cadastrado", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else {
-                StringBuilder sInscricao = new StringBuilder();
             }
         }
 

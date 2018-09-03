@@ -100,6 +100,7 @@ namespace GTI_Desktop.Forms {
 
         public string ReturnInscricao { get; set; }
         public string ReturnCondominio { get; set; }
+        public int ReturnCondominioCodigo { get; set; }
         string _connection = gtiCore.Connection_Name();
         List<Condominiounidade> Condominios = new List<Condominiounidade>();
         List<GTI_Models.Models.Condominio> lista_condominios = new List<GTI_Models.Models.Condominio>();
@@ -189,9 +190,17 @@ namespace GTI_Desktop.Forms {
                 if (!ExisteFace) {
                     MessageBox.Show("Face de quadra não cadastrada.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 } else {
+                    CustomListBoxItem _condominio = (CustomListBoxItem)TipoList.SelectedItem;
                     DialogResult = DialogResult.OK;
                     ReturnInscricao = Inscricao.Text;
-                    ReturnCondominio = TipoList.SelectedIndex == 0 ? "[NÃO CADASTRADO]" : TipoList.Text;
+                    if (TipoList.SelectedIndex == 0) {
+                        ReturnCondominio = "[NÃO CADASTRADO]";
+                        ReturnCondominioCodigo = 0;
+                    } else {
+                        ReturnCondominio = _condominio._name;
+                        ReturnCondominioCodigo = _condominio._value;
+                    }
+
                     Close();
                 }
             }
