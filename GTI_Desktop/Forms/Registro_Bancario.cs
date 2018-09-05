@@ -88,9 +88,10 @@ namespace GTI_Desktop.Forms {
 
         private void Grava_Trailer(int _qtde_boletos) {
             int _qtde_registro_lote = (_qtde_boletos * 2) + 2;
-            string _codigo_banco = "001",_lote="0001",_tipo="5",_uso_febraban1=" ".PadLeft(9,' '), _uso_febraban2 = " ".PadLeft(217, ' '),_qtde_registro = _qtde_registro_lote.ToString().PadLeft(6,'0');
+            string _codigo_banco = "001", _lote = "0001", _tipo = "5", _uso_febraban1 = " ".PadLeft(9, ' '), _uso_febraban2 = " ".PadLeft(217, ' '), _qtde_registro_lote_str;
+            _qtde_registro_lote_str = _qtde_registro_lote.ToString().PadLeft(6, '0');
 
-            string _trailer_lote = _codigo_banco + _lote + _tipo + _uso_febraban1 + _qtde_registro_lote + _uso_febraban2;
+            string _trailer_lote = _codigo_banco + _lote + _tipo + _uso_febraban1 + _qtde_registro_lote_str + _uso_febraban2;
             sw.Write(_trailer_lote + Environment.NewLine);
 
             //Trailer Arquivo
@@ -127,6 +128,9 @@ namespace GTI_Desktop.Forms {
                 _data_emissao= item.Data_Documento.Day.ToString("00") + item.Data_Documento.Month.ToString("00") + item.Data_Documento.Year.ToString("0000");
                 _identifica_titulo = item.Numero_Documento.ToString().PadRight(25, ' ');
 
+
+//                if (item.Numero_Documento == 5109804)
+ //                   _segmentoP = "h";
                 _segmentoP = _codigo_banco + _lote + _tipo + _seqreg + _codigo_segmento + _uso_febraban1 + _codigo_movimento + _agencia + _dvagencia + _conta + _dvconta + _nosso_numero;
                 _segmentoP += _codigo_carteira + _forma_cadastro + _tipo_documento + _id_emissao + _id_distribuicao + _numero_doc + _data_vencimento + _valor_nominal + _agencia_cobranca;
                 _segmentoP += _dv_agencia_cobranca + _especie_titulo + _aceite + _data_emissao + _codigo_juros + _data_juros + _juros_mora + _codigo_desconto + _data_desconto + _valor_desconto;
@@ -148,7 +152,7 @@ namespace GTI_Desktop.Forms {
                 _nome_sacado =  " ".PadRight(40, ' ');
                 _nosso_numero_banco_corr = " ".PadRight(20, ' ');
                 _uso_febraban2 = " ".PadRight(8, ' ');
-                _endereco = item.Endereco.Length > 40 ? item.Endereco.Substring(0, 40) : item.Endereco.PadRight(40, ' ');
+                _endereco = item.Endereco.TrimEnd().Length > 40 ? item.Endereco.Substring(0, 40) : item.Endereco.TrimEnd().PadRight(40, ' ');
                 _endereco = _endereco.TrimEnd('\r', '\n');
                 _bairro = item.Bairro.Length > 15 ? item.Bairro.Substring(0, 15) : item.Bairro.PadRight(15, ' ');
                 _cep = gtiCore.RetornaNumero(item.Cep);
