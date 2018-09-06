@@ -214,6 +214,12 @@
     <Compile Include="Forms\Empresa.Designer.cs">
       <DependentUpon>Empresa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Empresa_Atividade.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Empresa_Atividade.Designer.cs">
+      <DependentUpon>Empresa_Atividade.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Endereco.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -536,6 +542,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Empresa.resx">
       <DependentUpon>Empresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Empresa_Atividade.resx">
+      <DependentUpon>Empresa_Atividade.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Endereco.resx">
       <DependentUpon>Endereco.cs</DependentUpon>
@@ -935,6 +944,7 @@
     <None Include="Resources\rita.jpg" />
     <None Include="Resources\rosangela.jpg" />
     <None Include="Resources\solange.jpg" />
+    <None Include="Resources\zoomer.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

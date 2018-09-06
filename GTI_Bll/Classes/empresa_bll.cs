@@ -434,7 +434,14 @@ namespace GTI_Bll.Classes {
             return obj.Retorna_Codigo_por_CNPJ(CNPJ);
         }
 
-
+        /// <summary>
+        /// Retorna lista de atividades das empresas
+        /// </summary>
+        /// <returns></returns>
+        public List<Atividade> Lista_Atividade() {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Lista_Atividade();
+        }
 
     }
 }

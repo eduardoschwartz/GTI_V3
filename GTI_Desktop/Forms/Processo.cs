@@ -669,7 +669,7 @@ namespace GTI_Desktop.Forms {
         {
             bool bReadOnly = false;
             if (AddButton.Enabled) bReadOnly = true;
-            ZoomBox f1 = new ZoomBox("Observação do processo", this, ObsText.Text, bReadOnly);
+            ZoomBox f1 = new ZoomBox("Observação do processo", this, ObsText.Text, bReadOnly,5000);
             f1.ShowDialog();
             ObsText.Text = f1.ReturnText;
         }

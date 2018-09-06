@@ -216,7 +216,7 @@
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.a1Panel9 = new Owf.Controls.A1Panel();
-            this.button12 = new System.Windows.Forms.Button();
+            this.AtividadePrincipalButton = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.textBox30 = new System.Windows.Forms.TextBox();
             this.label73 = new System.Windows.Forms.Label();
@@ -1968,7 +1968,7 @@
             this.ProprietarioToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.ProprietarioToolStrip.Location = new System.Drawing.Point(333, 29);
             this.ProprietarioToolStrip.Name = "ProprietarioToolStrip";
-            this.ProprietarioToolStrip.Size = new System.Drawing.Size(32, 67);
+            this.ProprietarioToolStrip.Size = new System.Drawing.Size(24, 48);
             this.ProprietarioToolStrip.TabIndex = 226;
             this.ProprietarioToolStrip.Text = "toolStrip2";
             // 
@@ -1978,7 +1978,7 @@
             this.ProprietarioAddButton.Image = global::GTI_Desktop.Properties.Resources.add;
             this.ProprietarioAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ProprietarioAddButton.Name = "ProprietarioAddButton";
-            this.ProprietarioAddButton.Size = new System.Drawing.Size(30, 20);
+            this.ProprietarioAddButton.Size = new System.Drawing.Size(22, 20);
             this.ProprietarioAddButton.Text = "Adicionar proprietário";
             this.ProprietarioAddButton.ToolTipText = "Adicionar novo proprietário";
             this.ProprietarioAddButton.Click += new System.EventHandler(this.ProprietarioAddButton_Click);
@@ -1989,7 +1989,7 @@
             this.ProprietarioDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
             this.ProprietarioDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ProprietarioDelButton.Name = "ProprietarioDelButton";
-            this.ProprietarioDelButton.Size = new System.Drawing.Size(30, 20);
+            this.ProprietarioDelButton.Size = new System.Drawing.Size(22, 20);
             this.ProprietarioDelButton.Text = "Excluir proprietário";
             this.ProprietarioDelButton.ToolTipText = "Excluir o proprietário Selecionado";
             this.ProprietarioDelButton.Click += new System.EventHandler(this.ProprietarioDelButton_Click);
@@ -2533,7 +2533,7 @@
             // a1Panel9
             // 
             this.a1Panel9.BorderColor = System.Drawing.Color.Gray;
-            this.a1Panel9.Controls.Add(this.button12);
+            this.a1Panel9.Controls.Add(this.AtividadePrincipalButton);
             this.a1Panel9.Controls.Add(this.button11);
             this.a1Panel9.Controls.Add(this.textBox30);
             this.a1Panel9.Controls.Add(this.label73);
@@ -2561,16 +2561,17 @@
             this.a1Panel9.Size = new System.Drawing.Size(739, 106);
             this.a1Panel9.TabIndex = 222;
             // 
-            // button12
+            // AtividadePrincipalButton
             // 
-            this.button12.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button12.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.button12.Location = new System.Drawing.Point(662, 26);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(23, 22);
-            this.button12.TabIndex = 240;
-            this.button12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button12.UseVisualStyleBackColor = true;
+            this.AtividadePrincipalButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AtividadePrincipalButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.AtividadePrincipalButton.Location = new System.Drawing.Point(662, 26);
+            this.AtividadePrincipalButton.Name = "AtividadePrincipalButton";
+            this.AtividadePrincipalButton.Size = new System.Drawing.Size(23, 22);
+            this.AtividadePrincipalButton.TabIndex = 240;
+            this.AtividadePrincipalButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.AtividadePrincipalButton, "Selecione a atividade principal");
+            this.AtividadePrincipalButton.UseVisualStyleBackColor = true;
             // 
             // button11
             // 
@@ -3154,7 +3155,7 @@
         private System.Windows.Forms.Label label80;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button AtividadePrincipalButton;
         private System.Windows.Forms.Button button11;
         internal System.Windows.Forms.TextBox textBox30;
         private System.Windows.Forms.Label label73;

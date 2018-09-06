@@ -333,8 +333,6 @@ namespace GTI_Desktop.Forms {
             }
            
         }
-
-       
         
         private void AreasButton_Click(object sender, EventArgs e) {
             if (AddButton.Enabled && Convert.ToInt32(CodigoCondominio.Text) == 0)

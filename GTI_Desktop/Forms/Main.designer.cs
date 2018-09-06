@@ -84,6 +84,8 @@
             this.assuntosDoProcessoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.localDeTramitaçãoDeProcessosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuControleProcesso = new System.Windows.Forms.ToolStripMenuItem();
+            this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ProcessoAtrasoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOutros = new System.Windows.Forms.ToolStripMenuItem();
             this.ConfigMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSecurity = new System.Windows.Forms.ToolStripMenuItem();
@@ -124,8 +126,8 @@
             this.optDv2 = new System.Windows.Forms.RadioButton();
             this.optDv1 = new System.Windows.Forms.RadioButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ProcessoAtrasoMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabelasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AtividadeEmpresaMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.sBar.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.topBar.SuspendLayout();
@@ -417,7 +419,8 @@
             // mnuMobiliario
             // 
             this.mnuMobiliario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuMobiliarioCadastro});
+            this.mnuMobiliarioCadastro,
+            this.tabelasToolStripMenuItem});
             this.mnuMobiliario.Name = "mnuMobiliario";
             this.mnuMobiliario.Size = new System.Drawing.Size(73, 20);
             this.mnuMobiliario.Text = "Mobiliário";
@@ -428,20 +431,20 @@
             this.CadastroEmpresaMenu,
             this.EscritorioContabilMenu});
             this.mnuMobiliarioCadastro.Name = "mnuMobiliarioCadastro";
-            this.mnuMobiliarioCadastro.Size = new System.Drawing.Size(121, 22);
+            this.mnuMobiliarioCadastro.Size = new System.Drawing.Size(180, 22);
             this.mnuMobiliarioCadastro.Text = "Cadastro";
             // 
             // CadastroEmpresaMenu
             // 
             this.CadastroEmpresaMenu.Name = "CadastroEmpresaMenu";
-            this.CadastroEmpresaMenu.Size = new System.Drawing.Size(169, 22);
+            this.CadastroEmpresaMenu.Size = new System.Drawing.Size(180, 22);
             this.CadastroEmpresaMenu.Text = "Empresa";
             this.CadastroEmpresaMenu.Click += new System.EventHandler(this.MnuEmpresa_Click);
             // 
             // EscritorioContabilMenu
             // 
             this.EscritorioContabilMenu.Name = "EscritorioContabilMenu";
-            this.EscritorioContabilMenu.Size = new System.Drawing.Size(169, 22);
+            this.EscritorioContabilMenu.Size = new System.Drawing.Size(180, 22);
             this.EscritorioContabilMenu.Text = "Escritório contábil";
             this.EscritorioContabilMenu.Click += new System.EventHandler(this.mnuEscritorioContabil_Click);
             // 
@@ -586,6 +589,21 @@
             this.mnuControleProcesso.Size = new System.Drawing.Size(191, 22);
             this.mnuControleProcesso.Text = "Controle de processos";
             this.mnuControleProcesso.Click += new System.EventHandler(this.MnuControleProcesso_Click);
+            // 
+            // relatóriosToolStripMenuItem
+            // 
+            this.relatóriosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ProcessoAtrasoMenu});
+            this.relatóriosToolStripMenuItem.Name = "relatóriosToolStripMenuItem";
+            this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.relatóriosToolStripMenuItem.Text = "Relatórios";
+            // 
+            // ProcessoAtrasoMenu
+            // 
+            this.ProcessoAtrasoMenu.Name = "ProcessoAtrasoMenu";
+            this.ProcessoAtrasoMenu.Size = new System.Drawing.Size(181, 22);
+            this.ProcessoAtrasoMenu.Text = "Processos em atraso";
+            this.ProcessoAtrasoMenu.Click += new System.EventHandler(this.ProcessoAtrasoMenu_Click);
             // 
             // mnuOutros
             // 
@@ -974,20 +992,20 @@
             this.optDv1.UseVisualStyleBackColor = false;
             this.optDv1.CheckedChanged += new System.EventHandler(this.OptDv1_CheckedChanged);
             // 
-            // relatóriosToolStripMenuItem
+            // tabelasToolStripMenuItem
             // 
-            this.relatóriosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ProcessoAtrasoMenu});
-            this.relatóriosToolStripMenuItem.Name = "relatóriosToolStripMenuItem";
-            this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.relatóriosToolStripMenuItem.Text = "Relatórios";
+            this.tabelasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AtividadeEmpresaMenu});
+            this.tabelasToolStripMenuItem.Name = "tabelasToolStripMenuItem";
+            this.tabelasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tabelasToolStripMenuItem.Text = "Tabelas";
             // 
-            // ProcessoAtrasoMenu
+            // AtividadeEmpresaMenu
             // 
-            this.ProcessoAtrasoMenu.Name = "ProcessoAtrasoMenu";
-            this.ProcessoAtrasoMenu.Size = new System.Drawing.Size(181, 22);
-            this.ProcessoAtrasoMenu.Text = "Processos em atraso";
-            this.ProcessoAtrasoMenu.Click += new System.EventHandler(this.ProcessoAtrasoMenu_Click);
+            this.AtividadeEmpresaMenu.Name = "AtividadeEmpresaMenu";
+            this.AtividadeEmpresaMenu.Size = new System.Drawing.Size(203, 22);
+            this.AtividadeEmpresaMenu.Text = "Atividades das empresas";
+            this.AtividadeEmpresaMenu.Click += new System.EventHandler(this.AtividadeEmpresaMenu_Click);
             // 
             // Main
             // 
@@ -1119,6 +1137,8 @@
         private System.Windows.Forms.ToolStripMenuItem RegistroBancarioMenu;
         private System.Windows.Forms.ToolStripMenuItem relatóriosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ProcessoAtrasoMenu;
+        private System.Windows.Forms.ToolStripMenuItem tabelasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AtividadeEmpresaMenu;
     }
 }
 

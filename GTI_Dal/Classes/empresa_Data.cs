@@ -275,6 +275,13 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public List<Atividade> Lista_Atividade() {
+            using (var db = new GTI_Context(_connection)) {
+                var Sql = (from h in db.Atividade orderby h.Descatividade select h).ToList();
+                return Sql;
+            }
+        }
+
         public List<string> Lista_Placas(int Codigo) {
             using (var db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Mobiliarioplaca where p.Codigo==Codigo orderby p.placa select  p.placa).Distinct().ToList();
