@@ -691,7 +691,8 @@ namespace GTI_Dal.Classes {
                         Codigo = item.Codigo,
                         Inscricao = item.Distrito.ToString() + "." + item.Setor.ToString("00") + "." + item.Quadra.ToString("0000") + "." + item.Lote.ToString("00000") + "." + item.Seq.ToString("00") + "." + item.Unidade.ToString("00") + "." + item.SubUnidade.ToString("000"),
                         Proprietario_Codigo =item.Proprietario_Codigo,Proprietario_Nome=item.Proprietario_Nome,CodigoLogradouro=item.CodigoLogradouro,NomeLogradouro=item.NomeLogradouro,Numero=item.Numero,NomeCondominio=item.NomeCondominio,
-                        CodigoBairro=item.CodigoBairro ,NomeBairro=item.NomeBairro,CodigoCondominio=item.CodigoCondominio,Complemento=item.Complemento
+                        CodigoBairro=item.CodigoBairro ,NomeBairro=item.NomeBairro,CodigoCondominio=item.CodigoCondominio,Complemento=item.Complemento,Distrito=item.Distrito,Setor=item.Setor,Quadra=item.Quadra,Lote=item.Lote,Seq=item.Seq,
+                        Unidade=item.Unidade,SubUnidade=item.SubUnidade
                     };
                     Lista.Add(Linha);
                 }

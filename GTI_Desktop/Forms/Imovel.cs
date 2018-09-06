@@ -250,10 +250,98 @@ namespace GTI_Desktop.Forms {
         private void Carrega_Dados_Condominio(int _codigo_condominio) {
             Imovel_bll imovel_Class = new Imovel_bll(_connection);
             CondominioStruct regImovel = imovel_Class.Dados_Condominio(_codigo_condominio);
-            
+            Logradouro.Text = regImovel.Nome_Logradouro;
+            Logradouro.Tag = regImovel.Codigo_Logradouro.ToString();
+            Numero.Text = regImovel.Numero.ToString();
+            Complemento.Text = regImovel.Complemento;
+            Bairro.Text =  regImovel.Nome_Bairro;
+            Bairro.Tag = regImovel.Codigo_Bairro;
+            Lotes.Text = regImovel.Lote_Original;
+            Quadras.Text = regImovel.Quadra_Original;
+            Cep.Text = regImovel.Cep;
+            AreaTerreno.Text = string.Format("{0:0.00}", regImovel.Area_Terreno); 
+            UsoTerreno.Text = regImovel.Uso_terreno_Nome;
+            Situacao.Text = regImovel.Situacao_Nome;
+            Pedologia.Text = regImovel.Pedologia_Nome;
+            Benfeitoria.Text = regImovel.Benfeitoria_Nome;
+            Topografia.Text = regImovel.Topografia_Nome;
+            Categoria.Text = regImovel.Categoria_Nome;
+            BenfeitoriaList.SelectedValue = regImovel.Benfeitoria == 0 ? -1 : regImovel.Benfeitoria;
+            CategoriaTerrenoList.SelectedValue = regImovel.Categoria == 0 ? -1 : regImovel.Categoria;
+            PedologiaList.SelectedValue = regImovel.Pedologia == 0 ? -1 : regImovel.Pedologia;
+            SituacaoList.SelectedValue = regImovel.Situacao == 0 ? -1 : regImovel.Situacao;
+            TopografiaList.SelectedValue = regImovel.Topografia == 0 ? -1 : regImovel.Topografia;
+            UsoTerrenoList.SelectedValue = regImovel.Uso_terreno == 0 ? -1 : regImovel.Uso_terreno;
+            FracaoIdeal.Text = string.Format("{0:0.00}", regImovel.Fracao_Ideal);
+
+            Cidadao_bll cidadao_Class = new Cidadao_bll(_connection);
+            string sNome = cidadao_Class.Retorna_Nome_Cidadao((int)regImovel.Codigo_Proprietario);
+            ListViewItem lvProp = new ListViewItem {
+                Group = ProprietarioListView.Groups["groupPP"]
+            };
+            lvProp.Text = sNome + " (Principal)";
+            lvProp.Tag = regImovel.Codigo_Proprietario.ToString();
+            ProprietarioListView.Items.Add(lvProp);
 
 
             List<AreaStruct> ListaArea = imovel_Class.Lista_Area_Condominio(_codigo_condominio);
+            short n = 1;
+            decimal SomaArea = 0;
+            foreach (AreaStruct reg in ListaArea) {
+                ListViewItem lvItem = new ListViewItem(n.ToString("00"));
+                lvItem.SubItems.Add(string.Format("{0:0.00}", (decimal)reg.Area));
+                lvItem.SubItems.Add(reg.Uso_Nome);
+                lvItem.SubItems.Add(reg.Tipo_Nome);
+                lvItem.SubItems.Add(reg.Categoria_Nome);
+                lvItem.SubItems.Add(reg.Pavimentos.ToString());
+                if (reg.Data_Aprovacao != null)
+                    lvItem.SubItems.Add(Convert.ToDateTime(reg.Data_Aprovacao).ToString("dd/MM/yyyy"));
+                else
+                    lvItem.SubItems.Add("");
+                if (string.IsNullOrWhiteSpace(reg.Numero_Processo))
+                    lvItem.SubItems.Add("");
+                else {
+                    if (reg.Numero_Processo.Contains("-"))//se já tiver DV não precisa inserir novamente
+                        lvItem.SubItems.Add(reg.Numero_Processo);
+                    else {
+                        Processo_bll processo_Class = new Processo_bll(_connection);
+                        lvItem.SubItems.Add(processo_Class.Retorna_Processo_com_DV(reg.Numero_Processo));//corrige o DV
+                    }
+                }
+                lvItem.Tag = reg.Seq.ToString();
+                lvItem.SubItems[2].Tag = reg.Uso_Codigo.ToString();
+                lvItem.SubItems[3].Tag = reg.Tipo_Codigo.ToString();
+                lvItem.SubItems[4].Tag = reg.Categoria_Codigo.ToString();
+                AreaListView.Items.Add(lvItem);
+                SomaArea += reg.Area;
+                n++;
+            }
+            if (AreaListView.Items.Count > 0)
+                AreaListView.Items[0].Selected = true;
+            this.SomaArea.Text = string.Format("{0:0.00}", SomaArea);
+
+            EnderecoStruct regEntrega = imovel_Class.Dados_Endereco(regImovel.Codigo, TipoEndereco.Local);
+            if (regEntrega != null) {
+                Logradouro_EE.Text = regEntrega.Endereco.ToString();
+                Logradouro_EE.Tag = regEntrega.CodLogradouro.ToString();
+                Numero_EE.Text = regEntrega.Numero.ToString();
+                Complemento_EE.Text = regEntrega.Complemento.ToString();
+                UF_EE.Text = regEntrega.UF.ToString();
+                Cidade_EE.Text = regEntrega.NomeCidade.ToString();
+                Cidade_EE.Tag = regEntrega.CodigoCidade.ToString();
+                Bairro_EE.Text = regEntrega.NomeBairro.ToString();
+                Bairro_EE.Tag = regEntrega.CodigoBairro.ToString();
+                CEP_EE.Text = regEntrega.Cep == null ? "00000-000" : Convert.ToInt32(regEntrega.Cep.ToString()).ToString("00000-000");
+            }
+
+            //Carrega testada
+            List<GTI_Models.Models.Testada> ListaT = imovel_Class.Lista_Testada(regImovel.Codigo);
+            foreach (GTI_Models.Models.Testada reg in ListaT) {
+                ListViewItem lvItem = new ListViewItem(reg.Numface.ToString("00"));
+                lvItem.SubItems.Add(string.Format("{0:0.00}", (decimal)reg.Areatestada));
+                TestadaListView.Items.Add(lvItem);
+            }
+
 
         }
 

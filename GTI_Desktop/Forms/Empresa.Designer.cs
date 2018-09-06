@@ -62,7 +62,6 @@
             this.SilAddButton = new System.Windows.Forms.ToolStripButton();
             this.SilEditButton = new System.Windows.Forms.ToolStripButton();
             this.SilDelButton = new System.Windows.Forms.ToolStripButton();
-            this.FindSilButton = new System.Windows.Forms.ToolStripButton();
             this.label9 = new System.Windows.Forms.Label();
             this.SILList = new System.Windows.Forms.ListBox();
             this.NomeFantasia = new System.Windows.Forms.TextBox();
@@ -73,7 +72,6 @@
             this.VeiculosToolStrip = new System.Windows.Forms.ToolStrip();
             this.PlacaOKButton = new System.Windows.Forms.ToolStripButton();
             this.PlacaCancelButton = new System.Windows.Forms.ToolStripButton();
-            this.Placa = new System.Windows.Forms.TextBox();
             this.label77 = new System.Windows.Forms.Label();
             this.PlacaLista = new System.Windows.Forms.ListBox();
             this.PontoAgencia = new System.Windows.Forms.TextBox();
@@ -254,6 +252,7 @@
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Placa = new System.Windows.Forms.MaskedTextBox();
             this.a1Panel1.SuspendLayout();
             this.CodigoToolStrip.SuspendLayout();
             this.tBar.SuspendLayout();
@@ -688,12 +687,11 @@
             this.SilToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SilAddButton,
             this.SilEditButton,
-            this.SilDelButton,
-            this.FindSilButton});
+            this.SilDelButton});
             this.SilToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.SilToolStrip.Location = new System.Drawing.Point(285, 181);
+            this.SilToolStrip.Location = new System.Drawing.Point(307, 181);
             this.SilToolStrip.Name = "SilToolStrip";
-            this.SilToolStrip.Size = new System.Drawing.Size(95, 25);
+            this.SilToolStrip.Size = new System.Drawing.Size(72, 25);
             this.SilToolStrip.TabIndex = 206;
             this.SilToolStrip.Text = "toolStrip2";
             // 
@@ -706,6 +704,7 @@
             this.SilAddButton.Size = new System.Drawing.Size(23, 22);
             this.SilAddButton.Text = "toolStripButton1";
             this.SilAddButton.ToolTipText = "Adicionar novo SIL";
+            this.SilAddButton.Click += new System.EventHandler(this.SilAddButton_Click);
             // 
             // SilEditButton
             // 
@@ -716,6 +715,7 @@
             this.SilEditButton.Size = new System.Drawing.Size(23, 22);
             this.SilEditButton.Text = "toolStripButton2";
             this.SilEditButton.ToolTipText = "Alterar o SIL selecionado";
+            this.SilEditButton.Click += new System.EventHandler(this.SilEditButton_Click);
             // 
             // SilDelButton
             // 
@@ -726,16 +726,7 @@
             this.SilDelButton.Size = new System.Drawing.Size(23, 22);
             this.SilDelButton.Text = "toolStripButton3";
             this.SilDelButton.ToolTipText = "Excluir o SIL Selecionado";
-            // 
-            // FindSilButton
-            // 
-            this.FindSilButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.FindSilButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.FindSilButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.FindSilButton.Name = "FindSilButton";
-            this.FindSilButton.Size = new System.Drawing.Size(23, 22);
-            this.FindSilButton.Text = "toolStripButton1";
-            this.FindSilButton.ToolTipText = "Exibir dados do Sil selecionado";
+            this.SilDelButton.Click += new System.EventHandler(this.SilDelButton_Click);
             // 
             // label9
             // 
@@ -800,8 +791,8 @@
             // a1Panel12
             // 
             this.a1Panel12.BorderColor = System.Drawing.Color.Gray;
-            this.a1Panel12.Controls.Add(this.VeiculosToolStrip);
             this.a1Panel12.Controls.Add(this.Placa);
+            this.a1Panel12.Controls.Add(this.VeiculosToolStrip);
             this.a1Panel12.Controls.Add(this.label77);
             this.a1Panel12.Controls.Add(this.PlacaLista);
             this.a1Panel12.GradientEndColor = System.Drawing.SystemColors.Control;
@@ -836,25 +827,19 @@
             this.PlacaOKButton.Name = "PlacaOKButton";
             this.PlacaOKButton.Size = new System.Drawing.Size(23, 22);
             this.PlacaOKButton.Text = "toolStripButton4";
+            this.PlacaOKButton.ToolTipText = "Adicionar placa";
+            this.PlacaOKButton.Click += new System.EventHandler(this.PlacaOKButton_Click);
             // 
             // PlacaCancelButton
             // 
             this.PlacaCancelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.PlacaCancelButton.Image = global::GTI_Desktop.Properties.Resources.cancel2;
+            this.PlacaCancelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
             this.PlacaCancelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.PlacaCancelButton.Name = "PlacaCancelButton";
             this.PlacaCancelButton.Size = new System.Drawing.Size(23, 22);
             this.PlacaCancelButton.Text = "toolStripButton5";
-            // 
-            // Placa
-            // 
-            this.Placa.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.Placa.Location = new System.Drawing.Point(5, 85);
-            this.Placa.MaxLength = 8;
-            this.Placa.Name = "Placa";
-            this.Placa.Size = new System.Drawing.Size(97, 20);
-            this.Placa.TabIndex = 19;
-            this.Placa.TabStop = false;
+            this.PlacaCancelButton.ToolTipText = "Remover a placa selecionada";
+            this.PlacaCancelButton.Click += new System.EventHandler(this.PlacaCancelButton_Click);
             // 
             // label77
             // 
@@ -1503,6 +1488,7 @@
             this.EnderecoentregaButton.Size = new System.Drawing.Size(23, 22);
             this.EnderecoentregaButton.Text = "toolStripButton2";
             this.EnderecoentregaButton.ToolTipText = "Alterar o endereço de entrega";
+            this.EnderecoentregaButton.Click += new System.EventHandler(this.EnderecoentregaButton_Click);
             // 
             // MesmoEndereco
             // 
@@ -1751,6 +1737,7 @@
             this.EnderecoButton.Size = new System.Drawing.Size(23, 22);
             this.EnderecoButton.Text = "toolStripButton2";
             this.EnderecoButton.ToolTipText = "Alterar o endereço de localização";
+            this.EnderecoButton.Click += new System.EventHandler(this.EnderecoButton_Click);
             // 
             // CodigoImovel
             // 
@@ -1981,7 +1968,7 @@
             this.ProprietarioToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.ProprietarioToolStrip.Location = new System.Drawing.Point(333, 29);
             this.ProprietarioToolStrip.Name = "ProprietarioToolStrip";
-            this.ProprietarioToolStrip.Size = new System.Drawing.Size(24, 48);
+            this.ProprietarioToolStrip.Size = new System.Drawing.Size(32, 67);
             this.ProprietarioToolStrip.TabIndex = 226;
             this.ProprietarioToolStrip.Text = "toolStrip2";
             // 
@@ -1991,9 +1978,10 @@
             this.ProprietarioAddButton.Image = global::GTI_Desktop.Properties.Resources.add;
             this.ProprietarioAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ProprietarioAddButton.Name = "ProprietarioAddButton";
-            this.ProprietarioAddButton.Size = new System.Drawing.Size(22, 20);
+            this.ProprietarioAddButton.Size = new System.Drawing.Size(30, 20);
             this.ProprietarioAddButton.Text = "Adicionar proprietário";
             this.ProprietarioAddButton.ToolTipText = "Adicionar novo proprietário";
+            this.ProprietarioAddButton.Click += new System.EventHandler(this.ProprietarioAddButton_Click);
             // 
             // ProprietarioDelButton
             // 
@@ -2001,9 +1989,10 @@
             this.ProprietarioDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
             this.ProprietarioDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ProprietarioDelButton.Name = "ProprietarioDelButton";
-            this.ProprietarioDelButton.Size = new System.Drawing.Size(22, 20);
+            this.ProprietarioDelButton.Size = new System.Drawing.Size(30, 20);
             this.ProprietarioDelButton.Text = "Excluir proprietário";
             this.ProprietarioDelButton.ToolTipText = "Excluir o proprietário Selecionado";
+            this.ProprietarioDelButton.Click += new System.EventHandler(this.ProprietarioDelButton_Click);
             // 
             // ProprietarioList
             // 
@@ -2930,6 +2919,14 @@
             this.columnHeader8.Text = "Usuário";
             this.columnHeader8.Width = 150;
             // 
+            // Placa
+            // 
+            this.Placa.Location = new System.Drawing.Point(5, 84);
+            this.Placa.Mask = ">LLL-0000";
+            this.Placa.Name = "Placa";
+            this.Placa.Size = new System.Drawing.Size(97, 20);
+            this.Placa.TabIndex = 202;
+            // 
             // Empresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3166,7 +3163,6 @@
         internal System.Windows.Forms.Label DataProcessoAbertura;
         internal System.Windows.Forms.Label label7;
         private Owf.Controls.A1Panel a1Panel12;
-        private System.Windows.Forms.TextBox Placa;
         private System.Windows.Forms.Label label77;
         private System.Windows.Forms.ListBox PlacaLista;
         private System.Windows.Forms.TextBox PontoAgencia;
@@ -3205,7 +3201,6 @@
         private System.Windows.Forms.ToolStripButton SilDelButton;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ListBox SILList;
-        private System.Windows.Forms.ToolStripButton FindSilButton;
         private System.Windows.Forms.ToolStrip EnderecoToolStrip;
         private System.Windows.Forms.ToolStripButton FotoButton;
         private System.Windows.Forms.ToolStripButton EnderecoButton;
@@ -3233,5 +3228,6 @@
         private System.Windows.Forms.ToolStripButton ProfissionalAddButton;
         private System.Windows.Forms.ToolStripButton ProfissionalDelButton;
         private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.MaskedTextBox Placa;
     }
 }
