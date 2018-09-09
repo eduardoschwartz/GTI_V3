@@ -362,7 +362,6 @@ namespace GTI_Dal.Classes {
 
         }
 
-
         public List<SpExtrato> Lista_Extrato_Parcela(List<SpExtrato> Lista_Tributo) {
             List<SpExtrato> ListaDebito = new List<SpExtrato>();
 
@@ -713,6 +712,34 @@ namespace GTI_Dal.Classes {
             using (var db = new GTI_Context(_connection)) {
                 try {
                     db.Segunda_via_web.Add(Reg);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Exception Insert_Atividade(Atividade Reg) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    db.Atividade.Add(Reg);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Exception Alterar_Atividade(Atividade reg) {
+            using (var db = new GTI_Context(_connection)) {
+                Atividade b = db.Atividade.First(i => i.Codatividade == reg.Codatividade);
+                b.Descatividade = reg.Descatividade;
+                b.Valoraliq1 = reg.Valoraliq1;
+                b.Valoraliq2 = reg.Valoraliq2;
+                b.Valoraliq3 = reg.Valoraliq3;
+                try {
                     db.SaveChanges();
                 } catch (Exception ex) {
                     return ex;

@@ -847,6 +847,27 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Carta_Cobranca(Remessa);
         }
 
+        /// <summary>
+        /// Inserir nova atividade
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Atividade(Atividade Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Atividade(Reg);
+            return ex;
+        }
+
+        /// <summary>
+        /// Alterar atividade
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Alterar_Atividade(Atividade Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Alterar_Atividade(Reg);
+            return ex;
+        }
 
     }//end class
 }

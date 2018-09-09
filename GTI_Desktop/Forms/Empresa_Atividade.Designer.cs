@@ -46,10 +46,10 @@
             this.AddButton = new System.Windows.Forms.ToolStripButton();
             this.EditButton = new System.Windows.Forms.ToolStripButton();
             this.DelButton = new System.Windows.Forms.ToolStripButton();
-            this.SairButton = new System.Windows.Forms.ToolStripButton();
             this.SelecionarButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.PrintButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.SairButton = new System.Windows.Forms.ToolStripButton();
             this.GravarButton = new System.Windows.Forms.ToolStripButton();
             this.CancelarButton = new System.Windows.Forms.ToolStripButton();
             this.tBar.SuspendLayout();
@@ -118,7 +118,7 @@
             // Codigo
             // 
             this.Codigo.Location = new System.Drawing.Point(64, 313);
-            this.Codigo.MaxLength = 6;
+            this.Codigo.MaxLength = 5;
             this.Codigo.Name = "Codigo";
             this.Codigo.Size = new System.Drawing.Size(52, 20);
             this.Codigo.TabIndex = 1;
@@ -259,17 +259,6 @@
             this.DelButton.Text = "toolStripButton3";
             this.DelButton.ToolTipText = "Excluir atividade";
             // 
-            // SairButton
-            // 
-            this.SairButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SairButton.Image = global::GTI_Desktop.Properties.Resources.Exit;
-            this.SairButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SairButton.Name = "SairButton";
-            this.SairButton.Size = new System.Drawing.Size(23, 22);
-            this.SairButton.Text = "toolStripButton5";
-            this.SairButton.ToolTipText = "Sair";
-            this.SairButton.Click += new System.EventHandler(this.SairButton_Click);
-            // 
             // SelecionarButton
             // 
             this.SelecionarButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -280,11 +269,6 @@
             this.SelecionarButton.Text = "toolStripButton1";
             this.SelecionarButton.ToolTipText = "Selecionar atividade da empresa";
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
             // PrintButton
             // 
             this.PrintButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -294,6 +278,22 @@
             this.PrintButton.Size = new System.Drawing.Size(23, 22);
             this.PrintButton.Text = "toolStripButton1";
             this.PrintButton.ToolTipText = "Imprimir atividades";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // SairButton
+            // 
+            this.SairButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SairButton.Image = global::GTI_Desktop.Properties.Resources.Exit;
+            this.SairButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SairButton.Name = "SairButton";
+            this.SairButton.Size = new System.Drawing.Size(23, 22);
+            this.SairButton.Text = "toolStripButton5";
+            this.SairButton.ToolTipText = "Sair";
+            this.SairButton.Click += new System.EventHandler(this.SairButton_Click);
             // 
             // GravarButton
             // 
