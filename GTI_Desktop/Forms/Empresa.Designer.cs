@@ -56,6 +56,7 @@
             this.Ttp = new System.Windows.Forms.ToolTip(this.components);
             this.ContadorEmailButton = new System.Windows.Forms.Button();
             this.RemoveContadorButon = new System.Windows.Forms.Button();
+            this.AtividadePrincipalButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.DGtab = new System.Windows.Forms.TabPage();
             this.SilToolStrip = new System.Windows.Forms.ToolStrip();
@@ -69,6 +70,7 @@
             this.SimplesToolStrip = new System.Windows.Forms.ToolStrip();
             this.SimplesButton = new System.Windows.Forms.ToolStripButton();
             this.a1Panel12 = new Owf.Controls.A1Panel();
+            this.Placa = new System.Windows.Forms.MaskedTextBox();
             this.VeiculosToolStrip = new System.Windows.Forms.ToolStrip();
             this.PlacaOKButton = new System.Windows.Forms.ToolStripButton();
             this.PlacaCancelButton = new System.Windows.Forms.ToolStripButton();
@@ -216,8 +218,6 @@
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.a1Panel9 = new Owf.Controls.A1Panel();
-            this.AtividadePrincipalButton = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
             this.textBox30 = new System.Windows.Forms.TextBox();
             this.label73 = new System.Windows.Forms.Label();
             this.textBox29 = new System.Windows.Forms.TextBox();
@@ -230,11 +230,10 @@
             this.label68 = new System.Windows.Forms.Label();
             this.textBox26 = new System.Windows.Forms.TextBox();
             this.label67 = new System.Windows.Forms.Label();
-            this.textBox23 = new System.Windows.Forms.TextBox();
+            this.Atividade_Principal = new System.Windows.Forms.TextBox();
             this.label66 = new System.Windows.Forms.Label();
             this.label65 = new System.Windows.Forms.Label();
             this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.HStab = new System.Windows.Forms.TabPage();
             this.ProcessosListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -252,7 +251,6 @@
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Placa = new System.Windows.Forms.MaskedTextBox();
             this.a1Panel1.SuspendLayout();
             this.CodigoToolStrip.SuspendLayout();
             this.tBar.SuspendLayout();
@@ -619,6 +617,19 @@
             this.Ttp.SetToolTip(this.RemoveContadorButon, "Remover contador do cadastro da empresa");
             this.RemoveContadorButon.UseVisualStyleBackColor = true;
             // 
+            // AtividadePrincipalButton
+            // 
+            this.AtividadePrincipalButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AtividadePrincipalButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.AtividadePrincipalButton.Location = new System.Drawing.Point(662, 26);
+            this.AtividadePrincipalButton.Name = "AtividadePrincipalButton";
+            this.AtividadePrincipalButton.Size = new System.Drawing.Size(23, 22);
+            this.AtividadePrincipalButton.TabIndex = 240;
+            this.AtividadePrincipalButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.AtividadePrincipalButton, "Selecione a atividade principal");
+            this.AtividadePrincipalButton.UseVisualStyleBackColor = true;
+            this.AtividadePrincipalButton.Click += new System.EventHandler(this.AtividadePrincipalButton_Click);
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.DGtab);
@@ -804,6 +815,14 @@
             this.a1Panel12.ShadowOffSet = 3;
             this.a1Panel12.Size = new System.Drawing.Size(112, 140);
             this.a1Panel12.TabIndex = 199;
+            // 
+            // Placa
+            // 
+            this.Placa.Location = new System.Drawing.Point(5, 84);
+            this.Placa.Mask = ">LLL-0000";
+            this.Placa.Name = "Placa";
+            this.Placa.Size = new System.Drawing.Size(97, 20);
+            this.Placa.TabIndex = 202;
             // 
             // VeiculosToolStrip
             // 
@@ -2534,7 +2553,6 @@
             // 
             this.a1Panel9.BorderColor = System.Drawing.Color.Gray;
             this.a1Panel9.Controls.Add(this.AtividadePrincipalButton);
-            this.a1Panel9.Controls.Add(this.button11);
             this.a1Panel9.Controls.Add(this.textBox30);
             this.a1Panel9.Controls.Add(this.label73);
             this.a1Panel9.Controls.Add(this.textBox29);
@@ -2547,11 +2565,10 @@
             this.a1Panel9.Controls.Add(this.label68);
             this.a1Panel9.Controls.Add(this.textBox26);
             this.a1Panel9.Controls.Add(this.label67);
-            this.a1Panel9.Controls.Add(this.textBox23);
+            this.a1Panel9.Controls.Add(this.Atividade_Principal);
             this.a1Panel9.Controls.Add(this.label66);
             this.a1Panel9.Controls.Add(this.label65);
             this.a1Panel9.Controls.Add(this.button7);
-            this.a1Panel9.Controls.Add(this.button8);
             this.a1Panel9.GradientEndColor = System.Drawing.SystemColors.Control;
             this.a1Panel9.GradientStartColor = System.Drawing.SystemColors.Control;
             this.a1Panel9.Image = null;
@@ -2560,29 +2577,6 @@
             this.a1Panel9.Name = "a1Panel9";
             this.a1Panel9.Size = new System.Drawing.Size(739, 106);
             this.a1Panel9.TabIndex = 222;
-            // 
-            // AtividadePrincipalButton
-            // 
-            this.AtividadePrincipalButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.AtividadePrincipalButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.AtividadePrincipalButton.Location = new System.Drawing.Point(662, 26);
-            this.AtividadePrincipalButton.Name = "AtividadePrincipalButton";
-            this.AtividadePrincipalButton.Size = new System.Drawing.Size(23, 22);
-            this.AtividadePrincipalButton.TabIndex = 240;
-            this.AtividadePrincipalButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Ttp.SetToolTip(this.AtividadePrincipalButton, "Selecione a atividade principal");
-            this.AtividadePrincipalButton.UseVisualStyleBackColor = true;
-            // 
-            // button11
-            // 
-            this.button11.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button11.Image = global::GTI_Desktop.Properties.Resources.add;
-            this.button11.Location = new System.Drawing.Point(688, 72);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(23, 22);
-            this.button11.TabIndex = 239;
-            this.button11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button11.UseVisualStyleBackColor = true;
             // 
             // textBox30
             // 
@@ -2728,17 +2722,17 @@
             this.label67.TabIndex = 228;
             this.label67.Text = "Valor da Aliquota.....:";
             // 
-            // textBox23
+            // Atividade_Principal
             // 
-            this.textBox23.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox23.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox23.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox23.Location = new System.Drawing.Point(122, 27);
-            this.textBox23.MaxLength = 50;
-            this.textBox23.Name = "textBox23";
-            this.textBox23.Size = new System.Drawing.Size(534, 20);
-            this.textBox23.TabIndex = 225;
-            this.textBox23.TabStop = false;
+            this.Atividade_Principal.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.Atividade_Principal.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.Atividade_Principal.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.Atividade_Principal.Location = new System.Drawing.Point(122, 27);
+            this.Atividade_Principal.MaxLength = 50;
+            this.Atividade_Principal.Name = "Atividade_Principal";
+            this.Atividade_Principal.Size = new System.Drawing.Size(534, 20);
+            this.Atividade_Principal.TabIndex = 225;
+            this.Atividade_Principal.TabStop = false;
             // 
             // label66
             // 
@@ -2774,17 +2768,6 @@
             this.button7.TabIndex = 195;
             this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button7.UseVisualStyleBackColor = true;
-            // 
-            // button8
-            // 
-            this.button8.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button8.Image = global::GTI_Desktop.Properties.Resources.add;
-            this.button8.Location = new System.Drawing.Point(688, 26);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(23, 22);
-            this.button8.TabIndex = 194;
-            this.button8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button8.UseVisualStyleBackColor = true;
             // 
             // HStab
             // 
@@ -2919,14 +2902,6 @@
             // 
             this.columnHeader8.Text = "Usuário";
             this.columnHeader8.Width = 150;
-            // 
-            // Placa
-            // 
-            this.Placa.Location = new System.Drawing.Point(5, 84);
-            this.Placa.Mask = ">LLL-0000";
-            this.Placa.Name = "Placa";
-            this.Placa.Size = new System.Drawing.Size(97, 20);
-            this.Placa.TabIndex = 202;
             // 
             // Empresa
             // 
@@ -3139,11 +3114,10 @@
         private System.Windows.Forms.Label label68;
         internal System.Windows.Forms.TextBox textBox26;
         private System.Windows.Forms.Label label67;
-        internal System.Windows.Forms.TextBox textBox23;
+        internal System.Windows.Forms.TextBox Atividade_Principal;
         private System.Windows.Forms.Label label66;
         private System.Windows.Forms.Label label65;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
         private System.Windows.Forms.TabPage HStab;
         private Owf.Controls.A1Panel a1Panel11;
         private System.Windows.Forms.ListView listView3;
@@ -3156,7 +3130,6 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button AtividadePrincipalButton;
-        private System.Windows.Forms.Button button11;
         internal System.Windows.Forms.TextBox textBox30;
         private System.Windows.Forms.Label label73;
         internal System.Windows.Forms.Label DataProcessoEncerramento;

@@ -282,6 +282,14 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public string Retorna_Nome_Atividade(int id_atividade) {
+            using (var db = new GTI_Context(_connection)) {
+                var Sql = (from h in db.Atividade where h.Codatividade==id_atividade select h.Descatividade).FirstOrDefault();
+                return Sql;
+            }
+        }
+
+
         public List<string> Lista_Placas(int Codigo) {
             using (var db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Mobiliarioplaca where p.Codigo==Codigo orderby p.placa select  p.placa).Distinct().ToList();
@@ -699,6 +707,30 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public bool Existe_Atividade_Empresa(int id_Atividade) {
+            int _contador = 0;
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    _contador = (from p in db.Mobiliario where p.Codatividade == id_Atividade select p.Codigomob).Count();
+                } catch {
+                  
+                }
+                return _contador > 0 ? true : false;
+            }
+        }
+
+        public Exception Excluir_Atividade(int id_atividade) {
+            using (var db = new GTI_Context(_connection)) {
+                try {
+                    Atividade b = db.Atividade.First(i => i.Codatividade == id_atividade);
+                    db.Atividade.Remove(b);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
 
 
     }

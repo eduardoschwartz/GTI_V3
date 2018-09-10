@@ -70,6 +70,7 @@
             this.MainListView.TabIndex = 0;
             this.MainListView.UseCompatibleStateImageBehavior = false;
             this.MainListView.View = System.Windows.Forms.View.Details;
+            this.MainListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.MainListView_ColumnClick);
             this.MainListView.SelectedIndexChanged += new System.EventHandler(this.MainListView_SelectedIndexChanged);
             // 
             // columnHeader1
@@ -258,6 +259,7 @@
             this.DelButton.Size = new System.Drawing.Size(23, 22);
             this.DelButton.Text = "toolStripButton3";
             this.DelButton.ToolTipText = "Excluir atividade";
+            this.DelButton.Click += new System.EventHandler(this.DelButton_Click);
             // 
             // SelecionarButton
             // 
@@ -268,6 +270,7 @@
             this.SelecionarButton.Size = new System.Drawing.Size(23, 22);
             this.SelecionarButton.Text = "toolStripButton1";
             this.SelecionarButton.ToolTipText = "Selecionar atividade da empresa";
+            this.SelecionarButton.Click += new System.EventHandler(this.SelecionarButton_Click);
             // 
             // PrintButton
             // 
@@ -278,6 +281,7 @@
             this.PrintButton.Size = new System.Drawing.Size(23, 22);
             this.PrintButton.Text = "toolStripButton1";
             this.PrintButton.ToolTipText = "Imprimir atividades";
+            this.PrintButton.Click += new System.EventHandler(this.PrintButton_Click);
             // 
             // toolStripSeparator1
             // 

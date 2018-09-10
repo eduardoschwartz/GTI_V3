@@ -443,5 +443,44 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Atividade();
         }
 
+        /// <summary>
+        /// Verifica se a atividade pode ser excluida ou se esta sendo utilizada por alguma empresa
+        /// </summary>
+        /// <param name="id_atividade"></param>
+        /// <returns></returns>
+        private Exception Atividade_em_uso(int id_atividade) {
+            Exception AppEx = null;
+            Empresa_Data obj = new Empresa_Data(_connection);
+            bool bAtividade = obj.Existe_Atividade_Empresa(id_atividade);
+            if (bAtividade)
+                AppEx = new Exception("Exclusão não permitida. Atividade em uso.");
+            return AppEx;
+        }
+
+        /// <summary>
+        /// Excluir atividade
+        /// </summary>
+        /// <param name="id_atividade"></param>
+        /// <returns></returns>
+        public Exception Excluir_Atividade(int id_atividade) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            Exception ex = Atividade_em_uso(id_atividade);
+            if (ex == null)
+                ex = obj.Excluir_Atividade(id_atividade);
+            return ex;
+        }
+
+        /// <summary>
+        /// retorna a descrição da atividade principal
+        /// </summary>
+        /// <param name="id_atividade"></param>
+        /// <returns></returns>
+        public string Retorna_Nome_Atividade(int id_atividade) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Retorna_Nome_Atividade(id_atividade);
+        }
+
+
+
     }
 }

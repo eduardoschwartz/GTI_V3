@@ -647,5 +647,20 @@ namespace GTI_Desktop.Forms {
             else
                 ProprietarioList.Items.Remove(ProprietarioList.SelectedItem);
         }
+
+        private void AtividadePrincipalButton_Click(object sender, EventArgs e) {
+            if(Atividade_Principal.Tag==null || Atividade_Principal.Tag.ToString()=="")
+                Atividade_Principal.Tag = "0";
+            Empresa_Atividade f1 = new Empresa_Atividade(Convert.ToInt32(Atividade_Principal.Tag.ToString()));
+            f1.Tag = Name;
+            var result = f1.ShowDialog(this);
+            if (result == DialogResult.OK) {
+                int _id_atividade = f1.ReturnValue;
+                Empresa_bll empresa_Class = new Empresa_bll(_connection);
+                string _nome_atividade = empresa_Class.Retorna_Nome_Atividade(_id_atividade);
+                Atividade_Principal.Text=_id_atividade.ToString() + " - " + _nome_atividade;
+                Atividade_Principal.Tag = _id_atividade.ToString();
+            }
+        }
     }
 }

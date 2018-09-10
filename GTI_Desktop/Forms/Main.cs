@@ -618,7 +618,7 @@ namespace GTI_Desktop.Forms {
                 if (formToShow != null) {
                     formToShow.Show();
                 } else {
-                    Empresa_Atividade f1 = new Empresa_Atividade {
+                    Empresa_Atividade f1 = new Empresa_Atividade(0) {
                         Tag = "Menu",
                         MdiParent = this
                     };

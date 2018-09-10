@@ -9,10 +9,16 @@ using System.Windows.Forms;
 namespace GTI_Desktop.Forms {
     public partial class Empresa_Atividade : Form {
         string _connection = gtiCore.Connection_Name();
+        public int ReturnValue { get; set; }
+        int OriginValue = 0;
         bool bAddNew;
+        ListViewColumnSorter lvwColumnSorter;
 
-        public Empresa_Atividade() {
+        public Empresa_Atividade(int Origin_Value) {
             InitializeComponent();
+            OriginValue = Origin_Value;
+            lvwColumnSorter = new ListViewColumnSorter();
+            MainListView.ListViewItemSorter = lvwColumnSorter;
             tBar.Renderer = new MySR();
             Carrega_Lista();
             ControlBehaviour(true);
@@ -94,7 +100,17 @@ namespace GTI_Desktop.Forms {
                 lvItem.SubItems.Add(string.Format("{0:0.00}", item.Valoraliq3));
                 MainListView.Items.Add(lvItem);
             }
-            MainListView.Items[0].Selected = true;
+            if(OriginValue==0)
+                MainListView.Items[0].Selected = true;
+            else {
+                for (int i = 0; i < MainListView.Items.Count; i++) {
+                    if (Convert.ToInt32(MainListView.Items[i].Text) == OriginValue) {
+                        MainListView.Items[i].Selected = true;
+                        MainListView_SelectedIndexChanged(null, null);
+                        break;
+                    }
+                }
+            }
         }
 
         private void MainListView_SelectedIndexChanged(object sender, EventArgs e) {
@@ -143,9 +159,22 @@ namespace GTI_Desktop.Forms {
                             if (_aliq2 == 0 && _aliq3 > 0)
                                 MessageBox.Show("Não é possível cadastar aliquota 3 sem cadastrar a aliquota 2", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             else {
-                                Gravar_Atividade();
-                                ControlBehaviour(true);
-                                bAddNew = false;
+                                bool _find = false;
+                                if (!bAddNew) goto Continue;
+                                for (int i = 0; i < MainListView.Items.Count; i++) {
+                                    if(Convert.ToInt32(MainListView.Items[i].Text) == _codigo) {
+                                        _find = true;
+                                        break;
+                                    }
+                                }
+                                Continue:;
+                                if (_find && bAddNew)
+                                    MessageBox.Show("Código já cadatsrado", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                else {
+                                    Gravar_Atividade();
+                                    ControlBehaviour(true);
+                                    bAddNew = false;
+                                }
                             }
                         }
                     }
@@ -237,5 +266,56 @@ namespace GTI_Desktop.Forms {
             }
         }
 
+        private void MainListView_ColumnClick(object sender, ColumnClickEventArgs e) {
+            if (e.Column == lvwColumnSorter.SortColumn) {
+                if (lvwColumnSorter.Order == SortOrder.Ascending)
+                    lvwColumnSorter.Order = SortOrder.Descending;
+                else
+                    lvwColumnSorter.Order = SortOrder.Ascending;
+            } else {
+                lvwColumnSorter.SortColumn = e.Column;
+                lvwColumnSorter.Order = SortOrder.Ascending;
+            }
+            MainListView.Sort();
+        }
+
+        private void PrintButton_Click(object sender, EventArgs e) {
+            //TODO Imprimir atividades
+        }
+
+        private void DelButton_Click(object sender, EventArgs e) {
+            int _codigo = 0;
+            int.TryParse(Codigo.Text, out _codigo);
+            
+            if (_codigo == 0)
+                MessageBox.Show("Selecione uma atividade.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else {
+                if (MessageBox.Show("Excluir este atividade?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+                    Empresa_bll empresa_Class = new Empresa_bll(_connection);
+                    Exception ex = empresa_Class.Excluir_Atividade(_codigo);
+                    if (ex != null) {
+                        ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                        eBox.ShowDialog();
+                    } else {
+                        MainListView.Items.Remove(MainListView.SelectedItems[0]);
+                        MainListView.Items[0].Selected = true;
+                        MainListView_SelectedIndexChanged(null, null);
+                        ClearReg();
+                    }
+                }
+            }
+        }
+
+        private void SelecionarButton_Click(object sender, EventArgs e) {
+            ListView.SelectedIndexCollection col = MainListView.SelectedIndices;
+            if (col.Count > 0) {
+                DialogResult = DialogResult.OK;
+                ReturnValue = Convert.ToInt32(MainListView.Items[col[0]].Text);
+                Close();
+            } else {
+                MessageBox.Show("Selecione uma Atividade.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+        }
     }
 }

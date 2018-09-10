@@ -723,8 +723,13 @@ namespace GTI_Dal.Classes {
         public Exception Insert_Atividade(Atividade Reg) {
             using (var db = new GTI_Context(_connection)) {
                 try {
-                    db.Atividade.Add(Reg);
-                    db.SaveChanges();
+                    db.Database.ExecuteSqlCommand("INSERT INTO atividade(codatividade,descatividade,valoraliq1,valoraliq2,valoraliq3) " +
+                        "VALUES(@codatividade, @descatividade, @valoraliq1, @valoraliq2, @valoraliq3)",
+                        new SqlParameter("@codatividade", Reg.Codatividade),
+                        new SqlParameter("@descatividade", Reg.Descatividade),
+                        new SqlParameter("@valoraliq1", Reg.Valoraliq1),
+                        new SqlParameter("@valoraliq2", Reg.Valoraliq2),
+                        new SqlParameter("@valoraliq3", Reg.Valoraliq3));
                 } catch (Exception ex) {
                     return ex;
                 }
