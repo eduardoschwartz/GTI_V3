@@ -20,4 +20,15 @@ namespace GTI_Models.Models {
         public int Subclasse { get; set; }
         public string Descricao { get; set; }
     }
+
+    public class CnaeStruct {
+        public string CNAE { get; set; }
+        public int Divisao { get; set; }
+        public int Grupo { get; set; }
+        public int Classe { get; set; }
+        public int Subclasse { get; set; }
+        public string Descricao { get; set; }
+        public bool Principal { get; set; }
+    }
+
 }

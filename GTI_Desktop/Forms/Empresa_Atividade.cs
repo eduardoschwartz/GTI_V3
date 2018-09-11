@@ -10,6 +10,7 @@ namespace GTI_Desktop.Forms {
     public partial class Empresa_Atividade : Form {
         string _connection = gtiCore.Connection_Name();
         public int ReturnValue { get; set; }
+        public string ReturnAliquota { get; set; }
         int OriginValue = 0;
         bool bAddNew;
         ListViewColumnSorter lvwColumnSorter;
@@ -309,8 +310,33 @@ namespace GTI_Desktop.Forms {
         private void SelecionarButton_Click(object sender, EventArgs e) {
             ListView.SelectedIndexCollection col = MainListView.SelectedIndices;
             if (col.Count > 0) {
+                decimal _aliq1 = 0, _aliq2 = 0, _aliq3 = 0;
+                decimal.TryParse(Aliquota1.Text, out _aliq1);
+                decimal.TryParse(Aliquota2.Text, out _aliq2);
+                decimal.TryParse(Aliquota3.Text, out _aliq3);
+
                 DialogResult = DialogResult.OK;
                 ReturnValue = Convert.ToInt32(MainListView.Items[col[0]].Text);
+
+
+                if (_aliq2 > 0) {
+                    MessageBoxManager.Yes = string.Format("{0:0.00}", _aliq1);
+                    MessageBoxManager.No = string.Format("{0:0.00}", _aliq2);
+                    MessageBoxManager.Cancel = string.Format("{0:0.00}", _aliq3);
+                    MessageBoxManager.Register();
+                    DialogResult a = MessageBox.Show("Selecione a aliquota.", "Atenção", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Hand);
+                    if (a == DialogResult.Yes)
+                        ReturnAliquota = Aliquota1.Text;
+                    else {
+                        if (a == DialogResult.No)
+                            ReturnAliquota = Aliquota2.Text;
+                        else
+                            ReturnAliquota = Aliquota3.Text;
+                    }
+                    MessageBoxManager.Unregister();
+                } else
+                    ReturnAliquota = Aliquota1.Text;
+
                 Close();
             } else {
                 MessageBox.Show("Selecione uma Atividade.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

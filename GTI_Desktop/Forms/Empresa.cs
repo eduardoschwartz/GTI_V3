@@ -12,6 +12,7 @@ namespace GTI_Desktop.Forms {
         bool bAddNew;
         string _connection = gtiCore.Connection_Name();
         int hoveredIndex = -1;
+        List<CnaeStruct> Lista_Cnae;
 
         public Empresa() {
             gtiCore.Ocupado(this);
@@ -24,6 +25,7 @@ namespace GTI_Desktop.Forms {
             SilToolStrip.Renderer = new MySR();
             EnderecoToolStrip.Renderer =new MySR();
             EnderecoentregaToolStrip.Renderer = new MySR();
+            
             CarregaLista();
             ClearFields();
             bAddNew = false;
@@ -166,7 +168,7 @@ namespace GTI_Desktop.Forms {
             ProfissionalNome.Text = "";
             ProfissionalRegistro.Text = "";
             ProfissionalConselho.Text = "";
-
+            Cnae.Text = "";
         }
 
         private void CarregaLista() {
@@ -199,8 +201,12 @@ namespace GTI_Desktop.Forms {
         }
 
         private void EditButton_Click(object sender, EventArgs e) {
-            bAddNew = false;
-            ControlBehaviour(false);
+            if (Convert.ToInt32(Codigo.Text) == 0)
+                MessageBox.Show("Selecione uma empresa.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else {
+                bAddNew = false;
+                ControlBehaviour(false);
+            }
         }
 
         private void PessoaList_SelectedIndexChanged(object sender, EventArgs e) {
@@ -446,6 +452,11 @@ namespace GTI_Desktop.Forms {
             ProfissionalConselho.Text = Reg.Prof_responsavel_conselho;
             ProfissionalRegistro.Text = Reg.Prof_responsavel_registro;
 
+            //CNAE
+            Lista_Cnae = empresa_Class.ListaCnae(Codigo);
+
+
+
         }
 
         private void EnderecoentregaButton_Click(object sender, EventArgs e) {
@@ -649,17 +660,33 @@ namespace GTI_Desktop.Forms {
         }
 
         private void AtividadePrincipalButton_Click(object sender, EventArgs e) {
-            if(Atividade_Principal.Tag==null || Atividade_Principal.Tag.ToString()=="")
-                Atividade_Principal.Tag = "0";
-            Empresa_Atividade f1 = new Empresa_Atividade(Convert.ToInt32(Atividade_Principal.Tag.ToString()));
-            f1.Tag = Name;
-            var result = f1.ShowDialog(this);
-            if (result == DialogResult.OK) {
-                int _id_atividade = f1.ReturnValue;
-                Empresa_bll empresa_Class = new Empresa_bll(_connection);
-                string _nome_atividade = empresa_Class.Retorna_Nome_Atividade(_id_atividade);
-                Atividade_Principal.Text=_id_atividade.ToString() + " - " + _nome_atividade;
-                Atividade_Principal.Tag = _id_atividade.ToString();
+            if (Convert.ToInt32(Codigo.Text) == 0 && !bAddNew)
+                MessageBox.Show("Selecione uma empresa.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else {
+                if (Atividade_Principal.Tag == null || Atividade_Principal.Tag.ToString() == "")
+                    Atividade_Principal.Tag = "0";
+                Empresa_Atividade f1 = new Empresa_Atividade(Convert.ToInt32(Atividade_Principal.Tag.ToString()));
+                f1.Tag = Name;
+                var result = f1.ShowDialog(this);
+                if (result == DialogResult.OK) {
+                    int _id_atividade = f1.ReturnValue;
+                    Empresa_bll empresa_Class = new Empresa_bll(_connection);
+                    string _nome_atividade = empresa_Class.Retorna_Nome_Atividade(_id_atividade);
+                    Atividade_Principal.Text = _id_atividade.ToString() + " - " + _nome_atividade;
+                    Atividade_Principal.Tag = _id_atividade.ToString();
+                    Aliquota.Text = f1.ReturnAliquota;
+                }
+            }
+        }
+
+        private void CnaeButton_Click(object sender, EventArgs e) {
+            if (Convert.ToInt32(Codigo.Text) == 0 && !bAddNew)
+                MessageBox.Show("Selecione uma empresa.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else {
+                if (Lista_Cnae == null)
+                    Lista_Cnae = new List<CnaeStruct>();
+                Empresa_Cnae frm = new Empresa_Cnae(Lista_Cnae);
+                frm.ShowDialog(this);
             }
         }
     }

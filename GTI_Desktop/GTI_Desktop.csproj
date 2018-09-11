@@ -69,9 +69,6 @@
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="DropDownContainer">
-      <HintPath>..\..\DropDownCo213899112009\DropDownContainer\DropDownContainer\bin\Release\DropDownContainer.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -81,7 +78,9 @@
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="MessageBoxManager">
+      <HintPath>Files\MessageBoxManager\bin\Release\MessageBoxManager.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -190,6 +189,12 @@
     <Compile Include="Forms\Cidadao_Lista.designer.cs">
       <DependentUpon>Cidadao_Lista.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Cnae.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Cnae.Designer.cs">
+      <DependentUpon>Cnae.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Condominio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -219,6 +224,12 @@
     </Compile>
     <Compile Include="Forms\Empresa_Atividade.Designer.cs">
       <DependentUpon>Empresa_Atividade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Empresa_Cnae.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Empresa_Cnae.Designer.cs">
+      <DependentUpon>Empresa_Cnae.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Endereco.cs">
       <SubType>Form</SubType>
@@ -531,6 +542,9 @@
     <EmbeddedResource Include="Forms\Cidadao_Lista.resx">
       <DependentUpon>Cidadao_Lista.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Cnae.resx">
+      <DependentUpon>Cnae.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Condominio.resx">
       <DependentUpon>Condominio.cs</DependentUpon>
     </EmbeddedResource>
@@ -545,6 +559,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Empresa_Atividade.resx">
       <DependentUpon>Empresa_Atividade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Empresa_Cnae.resx">
+      <DependentUpon>Empresa_Cnae.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Endereco.resx">
       <DependentUpon>Endereco.cs</DependentUpon>

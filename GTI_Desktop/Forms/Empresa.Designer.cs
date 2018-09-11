@@ -54,8 +54,9 @@
             this.StatusEmpresa = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.Ttp = new System.Windows.Forms.ToolTip(this.components);
-            this.ContadorEmailButton = new System.Windows.Forms.Button();
             this.RemoveContadorButon = new System.Windows.Forms.Button();
+            this.ContadorEmailButton = new System.Windows.Forms.Button();
+            this.CnaeButton = new System.Windows.Forms.Button();
             this.AtividadePrincipalButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.DGtab = new System.Windows.Forms.TabPage();
@@ -218,7 +219,7 @@
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.a1Panel9 = new Owf.Controls.A1Panel();
-            this.textBox30 = new System.Windows.Forms.TextBox();
+            this.Cnae = new System.Windows.Forms.TextBox();
             this.label73 = new System.Windows.Forms.Label();
             this.textBox29 = new System.Windows.Forms.TextBox();
             this.label72 = new System.Windows.Forms.Label();
@@ -228,12 +229,11 @@
             this.label69 = new System.Windows.Forms.Label();
             this.textBox27 = new System.Windows.Forms.TextBox();
             this.label68 = new System.Windows.Forms.Label();
-            this.textBox26 = new System.Windows.Forms.TextBox();
+            this.Aliquota = new System.Windows.Forms.TextBox();
             this.label67 = new System.Windows.Forms.Label();
             this.Atividade_Principal = new System.Windows.Forms.TextBox();
             this.label66 = new System.Windows.Forms.Label();
             this.label65 = new System.Windows.Forms.Label();
-            this.button7 = new System.Windows.Forms.Button();
             this.HStab = new System.Windows.Forms.TabPage();
             this.ProcessosListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -489,7 +489,7 @@
             this.tBar.Location = new System.Drawing.Point(0, 404);
             this.tBar.Name = "tBar";
             this.tBar.Padding = new System.Windows.Forms.Padding(6, 0, 1, 0);
-            this.tBar.Size = new System.Drawing.Size(766, 25);
+            this.tBar.Size = new System.Drawing.Size(767, 25);
             this.tBar.TabIndex = 156;
             this.tBar.Text = "toolStrip1";
             // 
@@ -595,6 +595,16 @@
             this.toolStripLabel1.Size = new System.Drawing.Size(61, 22);
             this.toolStripLabel1.Text = "Situação..:";
             // 
+            // RemoveContadorButon
+            // 
+            this.RemoveContadorButon.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.RemoveContadorButon.Location = new System.Drawing.Point(314, 28);
+            this.RemoveContadorButon.Name = "RemoveContadorButon";
+            this.RemoveContadorButon.Size = new System.Drawing.Size(25, 21);
+            this.RemoveContadorButon.TabIndex = 232;
+            this.Ttp.SetToolTip(this.RemoveContadorButon, "Remover contador do cadastro da empresa");
+            this.RemoveContadorButon.UseVisualStyleBackColor = true;
+            // 
             // ContadorEmailButton
             // 
             this.ContadorEmailButton.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -607,21 +617,24 @@
             this.Ttp.SetToolTip(this.ContadorEmailButton, "Enviar email para o contador");
             this.ContadorEmailButton.UseVisualStyleBackColor = true;
             // 
-            // RemoveContadorButon
+            // CnaeButton
             // 
-            this.RemoveContadorButon.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.RemoveContadorButon.Location = new System.Drawing.Point(314, 28);
-            this.RemoveContadorButon.Name = "RemoveContadorButon";
-            this.RemoveContadorButon.Size = new System.Drawing.Size(25, 21);
-            this.RemoveContadorButon.TabIndex = 232;
-            this.Ttp.SetToolTip(this.RemoveContadorButon, "Remover contador do cadastro da empresa");
-            this.RemoveContadorButon.UseVisualStyleBackColor = true;
+            this.CnaeButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CnaeButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.CnaeButton.Location = new System.Drawing.Point(698, 73);
+            this.CnaeButton.Name = "CnaeButton";
+            this.CnaeButton.Size = new System.Drawing.Size(23, 22);
+            this.CnaeButton.TabIndex = 241;
+            this.CnaeButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.CnaeButton, "Selecione a atividade principal");
+            this.CnaeButton.UseVisualStyleBackColor = true;
+            this.CnaeButton.Click += new System.EventHandler(this.CnaeButton_Click);
             // 
             // AtividadePrincipalButton
             // 
             this.AtividadePrincipalButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.AtividadePrincipalButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.AtividadePrincipalButton.Location = new System.Drawing.Point(662, 26);
+            this.AtividadePrincipalButton.Location = new System.Drawing.Point(698, 25);
             this.AtividadePrincipalButton.Name = "AtividadePrincipalButton";
             this.AtividadePrincipalButton.Size = new System.Drawing.Size(23, 22);
             this.AtividadePrincipalButton.TabIndex = 240;
@@ -2453,7 +2466,7 @@
             // 
             this.listView3.Location = new System.Drawing.Point(6, 23);
             this.listView3.Name = "listView3";
-            this.listView3.Size = new System.Drawing.Size(650, 56);
+            this.listView3.Size = new System.Drawing.Size(686, 56);
             this.listView3.TabIndex = 225;
             this.listView3.UseCompatibleStateImageBehavior = false;
             // 
@@ -2473,7 +2486,7 @@
             // 
             this.button13.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button13.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.button13.Location = new System.Drawing.Point(662, 51);
+            this.button13.Location = new System.Drawing.Point(698, 51);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(23, 22);
             this.button13.TabIndex = 195;
@@ -2484,7 +2497,7 @@
             // 
             this.button14.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button14.Image = global::GTI_Desktop.Properties.Resources.add;
-            this.button14.Location = new System.Drawing.Point(662, 23);
+            this.button14.Location = new System.Drawing.Point(698, 23);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(23, 22);
             this.button14.TabIndex = 194;
@@ -2511,7 +2524,7 @@
             // 
             this.listView2.Location = new System.Drawing.Point(6, 23);
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(650, 56);
+            this.listView2.Size = new System.Drawing.Size(686, 56);
             this.listView2.TabIndex = 225;
             this.listView2.UseCompatibleStateImageBehavior = false;
             // 
@@ -2531,7 +2544,7 @@
             // 
             this.button9.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button9.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.button9.Location = new System.Drawing.Point(662, 51);
+            this.button9.Location = new System.Drawing.Point(698, 51);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(23, 22);
             this.button9.TabIndex = 195;
@@ -2542,7 +2555,7 @@
             // 
             this.button10.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button10.Image = global::GTI_Desktop.Properties.Resources.add;
-            this.button10.Location = new System.Drawing.Point(662, 23);
+            this.button10.Location = new System.Drawing.Point(698, 23);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(23, 22);
             this.button10.TabIndex = 194;
@@ -2552,8 +2565,9 @@
             // a1Panel9
             // 
             this.a1Panel9.BorderColor = System.Drawing.Color.Gray;
+            this.a1Panel9.Controls.Add(this.Cnae);
+            this.a1Panel9.Controls.Add(this.CnaeButton);
             this.a1Panel9.Controls.Add(this.AtividadePrincipalButton);
-            this.a1Panel9.Controls.Add(this.textBox30);
             this.a1Panel9.Controls.Add(this.label73);
             this.a1Panel9.Controls.Add(this.textBox29);
             this.a1Panel9.Controls.Add(this.label72);
@@ -2563,12 +2577,11 @@
             this.a1Panel9.Controls.Add(this.label69);
             this.a1Panel9.Controls.Add(this.textBox27);
             this.a1Panel9.Controls.Add(this.label68);
-            this.a1Panel9.Controls.Add(this.textBox26);
+            this.a1Panel9.Controls.Add(this.Aliquota);
             this.a1Panel9.Controls.Add(this.label67);
             this.a1Panel9.Controls.Add(this.Atividade_Principal);
             this.a1Panel9.Controls.Add(this.label66);
             this.a1Panel9.Controls.Add(this.label65);
-            this.a1Panel9.Controls.Add(this.button7);
             this.a1Panel9.GradientEndColor = System.Drawing.SystemColors.Control;
             this.a1Panel9.GradientStartColor = System.Drawing.SystemColors.Control;
             this.a1Panel9.Image = null;
@@ -2578,17 +2591,18 @@
             this.a1Panel9.Size = new System.Drawing.Size(739, 106);
             this.a1Panel9.TabIndex = 222;
             // 
-            // textBox30
+            // Cnae
             // 
-            this.textBox30.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox30.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox30.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox30.Location = new System.Drawing.Point(584, 73);
-            this.textBox30.MaxLength = 50;
-            this.textBox30.Name = "textBox30";
-            this.textBox30.Size = new System.Drawing.Size(72, 20);
-            this.textBox30.TabIndex = 238;
-            this.textBox30.TabStop = false;
+            this.Cnae.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.Cnae.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.Cnae.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.Cnae.Location = new System.Drawing.Point(612, 73);
+            this.Cnae.MaxLength = 50;
+            this.Cnae.Name = "Cnae";
+            this.Cnae.ReadOnly = true;
+            this.Cnae.Size = new System.Drawing.Size(85, 20);
+            this.Cnae.TabIndex = 242;
+            this.Cnae.TabStop = false;
             // 
             // label73
             // 
@@ -2596,18 +2610,18 @@
             this.label73.BackColor = System.Drawing.Color.Transparent;
             this.label73.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label73.ForeColor = System.Drawing.Color.Black;
-            this.label73.Location = new System.Drawing.Point(533, 79);
+            this.label73.Location = new System.Drawing.Point(550, 76);
             this.label73.Name = "label73";
-            this.label73.Size = new System.Drawing.Size(45, 13);
+            this.label73.Size = new System.Drawing.Size(56, 13);
             this.label73.TabIndex = 237;
-            this.label73.Text = "CNAE..:";
+            this.label73.Text = "CNAE(s)..:";
             // 
             // textBox29
             // 
             this.textBox29.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.textBox29.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.textBox29.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox29.Location = new System.Drawing.Point(459, 73);
+            this.textBox29.Location = new System.Drawing.Point(473, 73);
             this.textBox29.MaxLength = 50;
             this.textBox29.Name = "textBox29";
             this.textBox29.Size = new System.Drawing.Size(45, 20);
@@ -2620,7 +2634,7 @@
             this.label72.BackColor = System.Drawing.Color.Transparent;
             this.label72.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label72.ForeColor = System.Drawing.Color.Black;
-            this.label72.Location = new System.Drawing.Point(414, 79);
+            this.label72.Location = new System.Drawing.Point(428, 76);
             this.label72.Name = "label72";
             this.label72.Size = new System.Drawing.Size(39, 13);
             this.label72.TabIndex = 235;
@@ -2644,7 +2658,7 @@
             this.label71.BackColor = System.Drawing.Color.Transparent;
             this.label71.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label71.ForeColor = System.Drawing.Color.Black;
-            this.label71.Location = new System.Drawing.Point(265, 79);
+            this.label71.Location = new System.Drawing.Point(265, 76);
             this.label71.Name = "label71";
             this.label71.Size = new System.Drawing.Size(52, 13);
             this.label71.TabIndex = 233;
@@ -2656,7 +2670,7 @@
             this.label70.BackColor = System.Drawing.Color.Transparent;
             this.label70.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label70.ForeColor = System.Drawing.Color.Navy;
-            this.label70.Location = new System.Drawing.Point(230, 79);
+            this.label70.Location = new System.Drawing.Point(235, 76);
             this.label70.Name = "label70";
             this.label70.Size = new System.Drawing.Size(13, 13);
             this.label70.TabIndex = 232;
@@ -2668,7 +2682,7 @@
             this.label69.BackColor = System.Drawing.Color.Transparent;
             this.label69.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label69.ForeColor = System.Drawing.Color.Black;
-            this.label69.Location = new System.Drawing.Point(187, 79);
+            this.label69.Location = new System.Drawing.Point(187, 76);
             this.label69.Name = "label69";
             this.label69.Size = new System.Drawing.Size(42, 13);
             this.label69.TabIndex = 231;
@@ -2682,7 +2696,7 @@
             this.textBox27.Location = new System.Drawing.Point(122, 50);
             this.textBox27.MaxLength = 50;
             this.textBox27.Name = "textBox27";
-            this.textBox27.Size = new System.Drawing.Size(534, 20);
+            this.textBox27.Size = new System.Drawing.Size(575, 20);
             this.textBox27.TabIndex = 229;
             this.textBox27.TabStop = false;
             // 
@@ -2692,23 +2706,24 @@
             this.label68.BackColor = System.Drawing.Color.Transparent;
             this.label68.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label68.ForeColor = System.Drawing.Color.Black;
-            this.label68.Location = new System.Drawing.Point(12, 55);
+            this.label68.Location = new System.Drawing.Point(12, 53);
             this.label68.Name = "label68";
             this.label68.Size = new System.Drawing.Size(106, 13);
             this.label68.TabIndex = 230;
             this.label68.Text = "Atividade p/Extenso:";
             // 
-            // textBox26
+            // Aliquota
             // 
-            this.textBox26.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox26.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox26.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox26.Location = new System.Drawing.Point(122, 73);
-            this.textBox26.MaxLength = 50;
-            this.textBox26.Name = "textBox26";
-            this.textBox26.Size = new System.Drawing.Size(59, 20);
-            this.textBox26.TabIndex = 227;
-            this.textBox26.TabStop = false;
+            this.Aliquota.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.Aliquota.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.Aliquota.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.Aliquota.Location = new System.Drawing.Point(122, 73);
+            this.Aliquota.MaxLength = 50;
+            this.Aliquota.Name = "Aliquota";
+            this.Aliquota.ReadOnly = true;
+            this.Aliquota.Size = new System.Drawing.Size(59, 20);
+            this.Aliquota.TabIndex = 227;
+            this.Aliquota.TabStop = false;
             // 
             // label67
             // 
@@ -2716,7 +2731,7 @@
             this.label67.BackColor = System.Drawing.Color.Transparent;
             this.label67.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label67.ForeColor = System.Drawing.Color.Black;
-            this.label67.Location = new System.Drawing.Point(12, 79);
+            this.label67.Location = new System.Drawing.Point(11, 76);
             this.label67.Name = "label67";
             this.label67.Size = new System.Drawing.Size(105, 13);
             this.label67.TabIndex = 228;
@@ -2730,7 +2745,7 @@
             this.Atividade_Principal.Location = new System.Drawing.Point(122, 27);
             this.Atividade_Principal.MaxLength = 50;
             this.Atividade_Principal.Name = "Atividade_Principal";
-            this.Atividade_Principal.Size = new System.Drawing.Size(534, 20);
+            this.Atividade_Principal.Size = new System.Drawing.Size(575, 20);
             this.Atividade_Principal.TabIndex = 225;
             this.Atividade_Principal.TabStop = false;
             // 
@@ -2757,17 +2772,6 @@
             this.label65.TabIndex = 224;
             this.label65.Text = "Atividade Principal/Taxa de Licença de Funcionamento";
             this.label65.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // button7
-            // 
-            this.button7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button7.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.button7.Location = new System.Drawing.Point(659, 72);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(23, 22);
-            this.button7.TabIndex = 195;
-            this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button7.UseVisualStyleBackColor = true;
             // 
             // HStab
             // 
@@ -2907,7 +2911,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(766, 429);
+            this.ClientSize = new System.Drawing.Size(767, 429);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.tBar);
             this.Controls.Add(this.a1Panel1);
@@ -3112,12 +3116,11 @@
         private System.Windows.Forms.Label label69;
         internal System.Windows.Forms.TextBox textBox27;
         private System.Windows.Forms.Label label68;
-        internal System.Windows.Forms.TextBox textBox26;
+        internal System.Windows.Forms.TextBox Aliquota;
         private System.Windows.Forms.Label label67;
         internal System.Windows.Forms.TextBox Atividade_Principal;
         private System.Windows.Forms.Label label66;
         private System.Windows.Forms.Label label65;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.TabPage HStab;
         private Owf.Controls.A1Panel a1Panel11;
         private System.Windows.Forms.ListView listView3;
@@ -3130,7 +3133,6 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button AtividadePrincipalButton;
-        internal System.Windows.Forms.TextBox textBox30;
         private System.Windows.Forms.Label label73;
         internal System.Windows.Forms.Label DataProcessoEncerramento;
         internal System.Windows.Forms.Label label10;
@@ -3203,5 +3205,7 @@
         private System.Windows.Forms.ToolStripButton ProfissionalDelButton;
         private System.Windows.Forms.Label label62;
         private System.Windows.Forms.MaskedTextBox Placa;
+        private System.Windows.Forms.Button CnaeButton;
+        internal System.Windows.Forms.TextBox Cnae;
     }
 }

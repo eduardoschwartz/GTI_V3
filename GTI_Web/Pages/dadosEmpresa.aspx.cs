@@ -157,8 +157,8 @@ namespace UIWeb.Pages {
             string sCnae = "";
             sCnae2 = "";
             foreach (CnaeStruct cnae in ListaCnae) {
-                sCnae += cnae.Cnae + "-" + cnae.Descricao + System.Environment.NewLine;
-                sCnae2 += cnae.Cnae + "-" + cnae.Descricao + System.Environment.NewLine;
+                sCnae += cnae.CNAE + "-" + cnae.Descricao + System.Environment.NewLine;
+                sCnae2 += cnae.CNAE + "-" + cnae.Descricao + System.Environment.NewLine;
             }
             if (!string.IsNullOrWhiteSpace(sCnae2))
                 sCnae2 = sCnae2.Substring(0, sCnae2.Length - 1);

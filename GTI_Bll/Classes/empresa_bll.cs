@@ -347,7 +347,7 @@ namespace GTI_Bll.Classes {
         /// <returns></returns>
         public List<CnaeStruct> ListaCnae(int nCodigo) {
             Empresa_Data obj = new Empresa_Data(_connection);
-            return obj.ListaCnae(nCodigo);
+            return obj.Lista_Cnae_Empresa(nCodigo);
         }
 
         /// <summary>
@@ -479,6 +479,27 @@ namespace GTI_Bll.Classes {
             Empresa_Data obj = new Empresa_Data(_connection);
             return obj.Retorna_Nome_Atividade(id_atividade);
         }
+
+        /// <summary>
+        /// Lista todos os Cnaes cadastrados
+        /// </summary>
+        /// <returns></returns>
+        public List<CnaeStruct> Lista_Cnae() {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Lista_Cnae();
+        }
+
+        public CnaeStruct Separa_Cnae(string _cnae) {
+            CnaeStruct _reg = new CnaeStruct();
+            int _divisao = 0, _grupo = 0, _classe = 0, _subclasse = 0;
+            _divisao = Convert.ToInt32(_cnae.Substring(0,2));
+            _grupo = Convert.ToInt32(_cnae.Substring(2, 1));
+
+
+            return _reg;
+
+//            Linha.CNAE = reg.Divisao.ToString("00") + reg.Grupo.ToString("0") + reg.Classe.ToString("00").Substring(0, 1) + "-" + reg.Classe.ToString("00").Substring(1, 1) + "/" + reg.Subclasse.ToString("00");
+       // }1111-1/11
 
 
 

@@ -289,7 +289,6 @@ namespace GTI_Dal.Classes {
             }
         }
 
-
         public List<string> Lista_Placas(int Codigo) {
             using (var db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Mobiliarioplaca where p.Codigo==Codigo orderby p.placa select  p.placa).Distinct().ToList();
@@ -525,23 +524,44 @@ namespace GTI_Dal.Classes {
             }
         }
 
-        public List<CnaeStruct> ListaCnae(int nCodigo) {
+        public List<CnaeStruct> Lista_Cnae_Empresa(int nCodigo) {
             List<CnaeStruct> Lista = new List<CnaeStruct>();
             using (var db = new GTI_Context(_connection)) {
                 var rows = (from m in db.Mobiliariocnae join c in db.Cnaesubclasse on
                             new { p1 = m.Divisao, p2 = m.Grupo, p3 = m.Classe, p4 = m.Subclasse } equals
                             new { p1 = c.Divisao, p2 = c.Grupo, p3 = c.Classe, p4 = c.Subclasse }
                             where m.Codmobiliario == nCodigo
-                            select new { m.Cnae, c.Descricao });
+                            select new { m.Cnae, c.Descricao,m.Principal });
                 foreach (var reg in rows) {
                     CnaeStruct Linha = new CnaeStruct();
-                    Linha.Cnae = reg.Cnae;
+                    Linha.CNAE = reg.Cnae;
                     Linha.Descricao = reg.Descricao;
+                    Linha.Principal = reg.Principal == 1 ? true : false;
                     Lista.Add(Linha);
                 }
                 return Lista;
             }
         }
+
+        public List<CnaeStruct> Lista_Cnae() {
+            List<CnaeStruct> Lista = new List<CnaeStruct>();
+            using (var db = new GTI_Context(_connection)) {
+                var rows = (from c in db.Cnaesubclasse 
+                            select new { c.Divisao, c.Grupo, c.Classe,c.Subclasse,c.Descricao });
+                foreach (var reg in rows) {
+                    CnaeStruct Linha = new CnaeStruct();
+                    Linha.Divisao = reg.Divisao;
+                    Linha.Grupo = reg.Grupo;
+                    Linha.Classe = reg.Classe;
+                    Linha.Subclasse = reg.Subclasse;
+                    Linha.Descricao = reg.Descricao;
+                    Linha.CNAE = reg.Divisao.ToString("00") + reg.Grupo.ToString("0") + reg.Classe.ToString("00").Substring(0,1) + "-" + reg.Classe.ToString("00").Substring(1,1) +"/"+ reg.Subclasse.ToString("00");
+                    Lista.Add(Linha);
+                }
+                return Lista;
+            }
+        }
+
 
         public SilStructure CarregaSil(int Codigo) {
             using (var db = new GTI_Context(_connection)) {
