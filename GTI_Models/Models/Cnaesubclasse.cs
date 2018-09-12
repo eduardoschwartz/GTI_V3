@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GTI_Models.Models {
-    public class Cnaesubclasse {
+    public class cnaesubclasse {
         [Key]
         [Column(Order = 1)]
         public string Secao { get; set; }
@@ -29,6 +29,9 @@ namespace GTI_Models.Models {
         public int Subclasse { get; set; }
         public string Descricao { get; set; }
         public bool Principal { get; set; }
+        public int Criterio { get; set; }
+        public int Qtde { get; set; }
+        public decimal Valor { get; set; }
     }
 
 }

@@ -82,7 +82,9 @@
     <Compile Include="Models\certidao_valor_venal.cs" />
     <Compile Include="Models\cidadao.cs" />
     <Compile Include="Models\cidade.cs" />
-    <Compile Include="Models\Cnaesubclasse.cs" />
+    <Compile Include="Models\cnaecriterio.cs" />
+    <Compile Include="Models\cnaecriteriodesc.cs" />
+    <Compile Include="Models\cnaesubclasse.cs" />
     <Compile Include="Models\comercio_eletronico.cs" />
     <Compile Include="Models\comprovante_pagamento.cs" />
     <Compile Include="Models\condominio.cs" />

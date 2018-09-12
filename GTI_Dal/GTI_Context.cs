@@ -92,7 +92,7 @@ namespace GTI_Dal {
         public DbSet<Escritoriocontabil> Escritoriocontabil { get; set; }
         public DbSet<DEmpresa> DEmpresa { get; set; }
         public DbSet<Mobiliariocnae> Mobiliariocnae { get; set; }
-        public DbSet<Cnaesubclasse> Cnaesubclasse { get; set; }
+        public DbSet<cnaesubclasse> Cnaesubclasse { get; set; }
         public DbSet<Boletoguia> Boletoguia { get; set; }
         public DbSet<Boleto> Boleto { get; set; }
         public DbSet<Segunda_via_web> Segunda_via_web { get; set; }
@@ -120,5 +120,7 @@ namespace GTI_Dal {
         public DbSet<Carta_cobranca_exclusao> Carta_cobranca_exclusao { get; set; }
         public DbSet<Carta_cobranca_detalhe> Carta_cobranca_detalhe { get; set; }
         public DbSet<Atividade> Atividade { get; set; }
+        public DbSet<Cnaecriterio> Cnaecriterio { get; set; }
+        public DbSet<Cnaecriteriodesc> Cnaecriteriodesc { get; set; }
     }
 }

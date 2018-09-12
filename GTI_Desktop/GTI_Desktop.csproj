@@ -231,6 +231,12 @@
     <Compile Include="Forms\Empresa_Cnae.Designer.cs">
       <DependentUpon>Empresa_Cnae.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Empresa_VS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Empresa_VS.Designer.cs">
+      <DependentUpon>Empresa_VS.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Endereco.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -562,6 +568,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Empresa_Cnae.resx">
       <DependentUpon>Empresa_Cnae.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Empresa_VS.resx">
+      <DependentUpon>Empresa_VS.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Endereco.resx">
       <DependentUpon>Endereco.cs</DependentUpon>

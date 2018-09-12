@@ -102,7 +102,7 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "CNAE";
-            this.columnHeader1.Width = 81;
+            this.columnHeader1.Width = 80;
             // 
             // columnHeader2
             // 

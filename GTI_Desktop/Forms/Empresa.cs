@@ -457,6 +457,15 @@ namespace GTI_Desktop.Forms {
             Lista_Cnae = empresa_Class.Lista_Cnae_Empresa(Codigo);
             Lista_Cnae_VS = empresa_Class.Lista_Cnae_Empresa_VS(Codigo);
 
+            foreach (CnaeStruct item in Lista_Cnae_VS) {
+                ListViewItem lvItem = new ListViewItem(item.CNAE);
+                lvItem.SubItems.Add(item.Descricao);
+                lvItem.SubItems.Add(item.Criterio.ToString("00"));
+                lvItem.SubItems.Add(item.Qtde.ToString("00"));
+                lvItem.SubItems.Add(string.Format("{0:0.00}", item.Valor));
+                AtividadeVSListView.Items.Add(lvItem);
+            }
+
         }
 
         private void EnderecoentregaButton_Click(object sender, EventArgs e) {
@@ -697,5 +706,34 @@ namespace GTI_Desktop.Forms {
                 }
             }
         }
+
+        private void CnaeVSButton_Click(object sender, EventArgs e) {
+            if (Convert.ToInt32(Codigo.Text) == 0 && !bAddNew)
+                MessageBox.Show("Selecione uma empresa.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else {
+                if (Lista_Cnae_VS == null) Lista_Cnae_VS = new List<CnaeStruct>();
+                Empresa_VS frm = new Empresa_VS(Lista_Cnae, Lista_Cnae_VS); 
+                frm.ShowDialog(this);
+                CnaeStruct itemVS = frm.Item_VS;
+                if (itemVS != null)
+                    Lista_Cnae_VS.Add(itemVS);
+                
+
+                AtividadeVSListView.Items.Clear();
+                foreach (CnaeStruct item in Lista_Cnae_VS) {
+                    ListViewItem lvItem = new ListViewItem(item.CNAE);
+                    lvItem.SubItems.Add(item.Descricao);
+                    lvItem.SubItems.Add(item.Criterio.ToString("00"));
+                    lvItem.SubItems.Add(item.Qtde.ToString("00"));
+                    lvItem.SubItems.Add(string.Format("{0:0.00}", item.Valor));
+                    AtividadeVSListView.Items.Add(lvItem);
+                }
+            }
+        }
+
+
+
+
+
     }
 }

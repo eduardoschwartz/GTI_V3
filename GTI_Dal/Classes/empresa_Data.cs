@@ -550,7 +550,7 @@ namespace GTI_Dal.Classes {
                             new { p1 = m.Divisao, p2 = m.Grupo, p3 = m.Classe, p4 = m.Subclasse } equals
                             new { p1 = c.Divisao, p2 = c.Grupo, p3 = c.Classe, p4 = c.Subclasse }
                             where m.Codmobiliario == nCodigo
-                            select new { m.Divisao,m.Grupo,m.Classe,m.Subclasse, c.Descricao });
+                            select new { m.Divisao,m.Grupo,m.Classe,m.Subclasse, c.Descricao,m.Criterio,m.Qtde,m.Valor });
                 foreach (var reg in rows) {
                     CnaeStruct Linha = new CnaeStruct();
                     Linha.Divisao = reg.Divisao;
@@ -558,6 +558,9 @@ namespace GTI_Dal.Classes {
                     Linha.Classe = reg.Classe;
                     Linha.Subclasse = reg.Subclasse;
                     Linha.Descricao = reg.Descricao;
+                    Linha.Criterio = reg.Criterio;
+                    Linha.Qtde = reg.Qtde;
+                    Linha.Valor = reg.Valor;
                     Linha.CNAE = dalCore.Unifica_Cnae(reg.Divisao, reg.Grupo, reg.Classe, reg.Subclasse);
                     Lista.Add(Linha);
                 }
