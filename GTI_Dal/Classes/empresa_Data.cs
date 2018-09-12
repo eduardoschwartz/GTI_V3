@@ -543,6 +543,28 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public List<CnaeStruct> Lista_Cnae_Empresa_VS(int nCodigo) {
+            List<CnaeStruct> Lista = new List<CnaeStruct>();
+            using (var db = new GTI_Context(_connection)) {
+                var rows = (from m in db.Mobiliarioatividadevs2 join c in db.Cnaesubclasse on
+                            new { p1 = m.Divisao, p2 = m.Grupo, p3 = m.Classe, p4 = m.Subclasse } equals
+                            new { p1 = c.Divisao, p2 = c.Grupo, p3 = c.Classe, p4 = c.Subclasse }
+                            where m.Codmobiliario == nCodigo
+                            select new { m.Divisao,m.Grupo,m.Classe,m.Subclasse, c.Descricao });
+                foreach (var reg in rows) {
+                    CnaeStruct Linha = new CnaeStruct();
+                    Linha.Divisao = reg.Divisao;
+                    Linha.Grupo = reg.Grupo;
+                    Linha.Classe = reg.Classe;
+                    Linha.Subclasse = reg.Subclasse;
+                    Linha.Descricao = reg.Descricao;
+                    Linha.CNAE = dalCore.Unifica_Cnae(reg.Divisao, reg.Grupo, reg.Classe, reg.Subclasse);
+                    Lista.Add(Linha);
+                }
+                return Lista;
+            }
+        }
+
         public List<CnaeStruct> Lista_Cnae() {
             List<CnaeStruct> Lista = new List<CnaeStruct>();
             using (var db = new GTI_Context(_connection)) {
@@ -555,13 +577,12 @@ namespace GTI_Dal.Classes {
                     Linha.Classe = reg.Classe;
                     Linha.Subclasse = reg.Subclasse;
                     Linha.Descricao = reg.Descricao;
-                    Linha.CNAE = reg.Divisao.ToString("00") + reg.Grupo.ToString("0") + reg.Classe.ToString("00").Substring(0,1) + "-" + reg.Classe.ToString("00").Substring(1,1) +"/"+ reg.Subclasse.ToString("00");
+                    Linha.CNAE = dalCore.Unifica_Cnae(reg.Divisao, reg.Grupo, reg.Classe, reg.Subclasse);
                     Lista.Add(Linha);
                 }
                 return Lista;
             }
         }
-
 
         public SilStructure CarregaSil(int Codigo) {
             using (var db = new GTI_Context(_connection)) {

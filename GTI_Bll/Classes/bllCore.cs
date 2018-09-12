@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 
 namespace GTI_Bll.Classes {
     public static class bllCore {
 
-        
-        
+
+        public static string ExtractNumber(string original) {
+            return new string(original.Where(c => Char.IsDigit(c)).ToArray());
+        }
+
         public static System.Boolean IsNumeric(System.Object Expression) {
             if (Expression == null || Expression is DateTime)
                 return false;

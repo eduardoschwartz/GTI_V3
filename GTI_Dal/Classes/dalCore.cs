@@ -216,5 +216,11 @@ namespace GTI_Dal.Classes {
             return str.Trim();
         }
 
+        public static string Unifica_Cnae(int _divisao,int _grupo,int _classe,int _subclasse) {
+            return _divisao.ToString("00") + _grupo.ToString("0") + _classe.ToString("00").Substring(0, 1) + "-" + _classe.ToString("00").Substring(1, 1) + "/" + _subclasse.ToString("00");
+        }
+
+
+
     }
 }

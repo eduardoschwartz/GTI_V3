@@ -347,7 +347,7 @@ namespace GTI_Bll.Classes {
         /// <returns></returns>
         public List<CnaeStruct> ListaCnae(int nCodigo) {
             Empresa_Data obj = new Empresa_Data(_connection);
-            return obj.Lista_Cnae_Empresa(nCodigo);
+            return obj.Lista_Cnae();
         }
 
         /// <summary>
@@ -480,6 +480,22 @@ namespace GTI_Bll.Classes {
             return obj.Retorna_Nome_Atividade(id_atividade);
         }
 
+
+        /// <summary>
+        /// Separa o Cnae em suas partes
+        /// </summary>
+        /// <param name="_cnae"></param>
+        /// <returns></returns>
+        public CnaeStruct Separa_Cnae(string _cnae) {
+            CnaeStruct _reg = new CnaeStruct();
+            _reg.CNAE = _cnae;
+            _reg.Divisao = Convert.ToInt32(_cnae.Substring(0,2));
+            _reg.Grupo = Convert.ToInt32(_cnae.Substring(2, 1));
+            _reg.Classe = Convert.ToInt32(bllCore.ExtractNumber( _cnae.Substring(3, 3)));
+            _reg.Subclasse = Convert.ToInt32(_cnae.Substring(7, 2));
+            return _reg;
+        }
+
         /// <summary>
         /// Lista todos os Cnaes cadastrados
         /// </summary>
@@ -489,19 +505,25 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Cnae();
         }
 
-        public CnaeStruct Separa_Cnae(string _cnae) {
-            CnaeStruct _reg = new CnaeStruct();
-            int _divisao = 0, _grupo = 0, _classe = 0, _subclasse = 0;
-            _divisao = Convert.ToInt32(_cnae.Substring(0,2));
-            _grupo = Convert.ToInt32(_cnae.Substring(2, 1));
+        /// <summary>
+        /// Retorna os Cnaes de uma empresa
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public List<CnaeStruct> Lista_Cnae_Empresa(int Codigo) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Lista_Cnae_Empresa(Codigo);
+        }
 
-
-            return _reg;
-
-//            Linha.CNAE = reg.Divisao.ToString("00") + reg.Grupo.ToString("0") + reg.Classe.ToString("00").Substring(0, 1) + "-" + reg.Classe.ToString("00").Substring(1, 1) + "/" + reg.Subclasse.ToString("00");
-       // }1111-1/11
-
-
+        /// <summary>
+        /// retorna os Cnaes de VS de uma empresa
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public List<CnaeStruct> Lista_Cnae_Empresa_VS(int Codigo) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Lista_Cnae_Empresa_VS(Codigo);
+        }
 
     }
 }

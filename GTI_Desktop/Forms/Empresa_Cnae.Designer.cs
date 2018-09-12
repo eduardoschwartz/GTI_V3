@@ -24,12 +24,12 @@
         /// </summary>
         private void InitializeComponent() {
             this.CnaeToolStrip = new System.Windows.Forms.ToolStrip();
-            this.MainListView = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.AddButton = new System.Windows.Forms.ToolStripButton();
             this.DelButton = new System.Windows.Forms.ToolStripButton();
             this.ExitButton = new System.Windows.Forms.ToolStripButton();
+            this.MainListView = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CnaeToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,31 +49,6 @@
             this.CnaeToolStrip.Size = new System.Drawing.Size(590, 25);
             this.CnaeToolStrip.TabIndex = 27;
             this.CnaeToolStrip.Text = "toolStrip1";
-            // 
-            // MainListView
-            // 
-            this.MainListView.CheckBoxes = true;
-            this.MainListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2});
-            this.MainListView.FullRowSelect = true;
-            this.MainListView.Location = new System.Drawing.Point(5, 5);
-            this.MainListView.MultiSelect = false;
-            this.MainListView.Name = "MainListView";
-            this.MainListView.Size = new System.Drawing.Size(579, 132);
-            this.MainListView.TabIndex = 26;
-            this.MainListView.UseCompatibleStateImageBehavior = false;
-            this.MainListView.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "CNAE";
-            this.columnHeader1.Width = 81;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Descrição";
-            this.columnHeader2.Width = 460;
             // 
             // AddButton
             // 
@@ -95,6 +70,7 @@
             this.DelButton.Size = new System.Drawing.Size(23, 22);
             this.DelButton.Text = "toolStripButton3";
             this.DelButton.ToolTipText = "Remover Cnae";
+            this.DelButton.Click += new System.EventHandler(this.DelButton_Click);
             // 
             // ExitButton
             // 
@@ -106,6 +82,32 @@
             this.ExitButton.Text = "toolStripButton5";
             this.ExitButton.ToolTipText = "Retornar a lista à empresa";
             this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
+            // 
+            // MainListView
+            // 
+            this.MainListView.CheckBoxes = true;
+            this.MainListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.MainListView.FullRowSelect = true;
+            this.MainListView.Location = new System.Drawing.Point(5, 5);
+            this.MainListView.MultiSelect = false;
+            this.MainListView.Name = "MainListView";
+            this.MainListView.Size = new System.Drawing.Size(579, 132);
+            this.MainListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.MainListView.TabIndex = 26;
+            this.MainListView.UseCompatibleStateImageBehavior = false;
+            this.MainListView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "CNAE";
+            this.columnHeader1.Width = 81;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Descrição";
+            this.columnHeader2.Width = 460;
             // 
             // Empresa_Cnae
             // 

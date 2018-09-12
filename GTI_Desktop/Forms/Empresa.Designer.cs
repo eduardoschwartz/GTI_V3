@@ -211,7 +211,7 @@
             this.a1Panel11 = new Owf.Controls.A1Panel();
             this.listView3 = new System.Windows.Forms.ListView();
             this.label74 = new System.Windows.Forms.Label();
-            this.button13 = new System.Windows.Forms.Button();
+            this.CnaeVSButton = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.a1Panel10 = new Owf.Controls.A1Panel();
             this.listView2 = new System.Windows.Forms.ListView();
@@ -2451,7 +2451,7 @@
             this.a1Panel11.BorderColor = System.Drawing.Color.Gray;
             this.a1Panel11.Controls.Add(this.listView3);
             this.a1Panel11.Controls.Add(this.label74);
-            this.a1Panel11.Controls.Add(this.button13);
+            this.a1Panel11.Controls.Add(this.CnaeVSButton);
             this.a1Panel11.Controls.Add(this.button14);
             this.a1Panel11.GradientEndColor = System.Drawing.SystemColors.Control;
             this.a1Panel11.GradientStartColor = System.Drawing.SystemColors.Control;
@@ -2482,16 +2482,17 @@
             this.label74.Text = "Atividades de Vigilância Sanitária";
             this.label74.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button13
+            // CnaeVSButton
             // 
-            this.button13.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button13.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.button13.Location = new System.Drawing.Point(698, 51);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(23, 22);
-            this.button13.TabIndex = 195;
-            this.button13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button13.UseVisualStyleBackColor = true;
+            this.CnaeVSButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CnaeVSButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.CnaeVSButton.Location = new System.Drawing.Point(698, 51);
+            this.CnaeVSButton.Name = "CnaeVSButton";
+            this.CnaeVSButton.Size = new System.Drawing.Size(23, 22);
+            this.CnaeVSButton.TabIndex = 195;
+            this.CnaeVSButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.CnaeVSButton, "Cadastra os Cnaes para vigilância sanitária");
+            this.CnaeVSButton.UseVisualStyleBackColor = true;
             // 
             // button14
             // 
@@ -3125,7 +3126,7 @@
         private Owf.Controls.A1Panel a1Panel11;
         private System.Windows.Forms.ListView listView3;
         private System.Windows.Forms.Label label74;
-        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button CnaeVSButton;
         private System.Windows.Forms.Button button14;
         private Owf.Controls.A1Panel a1Panel10;
         private System.Windows.Forms.ListView listView2;

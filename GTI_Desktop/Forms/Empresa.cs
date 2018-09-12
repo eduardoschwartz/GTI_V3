@@ -13,6 +13,7 @@ namespace GTI_Desktop.Forms {
         string _connection = gtiCore.Connection_Name();
         int hoveredIndex = -1;
         List<CnaeStruct> Lista_Cnae;
+        List<CnaeStruct> Lista_Cnae_VS;
 
         public Empresa() {
             gtiCore.Ocupado(this);
@@ -453,9 +454,8 @@ namespace GTI_Desktop.Forms {
             ProfissionalRegistro.Text = Reg.Prof_responsavel_registro;
 
             //CNAE
-            Lista_Cnae = empresa_Class.ListaCnae(Codigo);
-
-
+            Lista_Cnae = empresa_Class.Lista_Cnae_Empresa(Codigo);
+            Lista_Cnae_VS = empresa_Class.Lista_Cnae_Empresa_VS(Codigo);
 
         }
 
@@ -683,10 +683,18 @@ namespace GTI_Desktop.Forms {
             if (Convert.ToInt32(Codigo.Text) == 0 && !bAddNew)
                 MessageBox.Show("Selecione uma empresa.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
-                if (Lista_Cnae == null)
-                    Lista_Cnae = new List<CnaeStruct>();
-                Empresa_Cnae frm = new Empresa_Cnae(Lista_Cnae);
+                if (Lista_Cnae == null) Lista_Cnae = new List<CnaeStruct>();
+                if (Lista_Cnae_VS == null) Lista_Cnae_VS = new List<CnaeStruct>();
+                Empresa_Cnae frm = new Empresa_Cnae(Lista_Cnae,Lista_Cnae_VS);
                 frm.ShowDialog(this);
+                Lista_Cnae = frm.Lista_Cnae;
+                Cnae.Text = "";
+                foreach (CnaeStruct item in Lista_Cnae) {
+                    if (item.Principal == true) {
+                        Cnae.Text = item.CNAE;
+                        break;
+                    }
+                }
             }
         }
     }
