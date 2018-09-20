@@ -395,6 +395,13 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Certidao_inscricao Certidao_inscricao_gravada(int Ano,int Numero) {
+            using (var db = new GTI_Context(_connection)) {
+                var Sql = (from c in db.Certidao_inscricao where c.Ano == Ano && c.Numero==Numero select c).FirstOrDefault();
+                return Sql;
+            }
+        }
+
         public Exception Incluir_escritorio(Escritoriocontabil reg) {
             using (var db = new GTI_Context(_connection)) {
                 object[] Parametros = new object[17];

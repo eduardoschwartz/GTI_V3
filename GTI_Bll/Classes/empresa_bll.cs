@@ -525,5 +525,17 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Cnae_Empresa_VS(Codigo);
         }
 
+        /// <summary>
+        /// Dados da certidão de inscrição
+        /// </summary>
+        /// <param name="Ano"></param>
+        /// <param name="Numero"></param>
+        /// <returns></returns>
+        public Certidao_inscricao Certidao_inscricao_gravada(int Ano, int Numero) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Certidao_inscricao_gravada(Ano,Numero);
+        }
+
+
     }
 }

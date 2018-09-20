@@ -109,7 +109,15 @@ namespace GTI_Web.Pages {
             }
             List<CnaeStruct> Lista_Cnae2 = empresa_Class.Lista_Cnae_Empresa_VS(Codigo);
             foreach (CnaeStruct item in Lista_Cnae) {
-                sAtividade2 += item.CNAE + "-" + item.Descricao + "; ";
+                bool _find = false;
+                for (int i = 0; i < Lista_Cnae.Count; i++) {
+                    if (item.CNAE == Lista_Cnae[i].CNAE) {
+                        _find = true;
+                        break;
+                    }
+                }
+                if(!_find)
+                    sAtividade2 += item.CNAE + "-" + item.Descricao + "; ";
             }
 
 
@@ -169,6 +177,18 @@ namespace GTI_Web.Pages {
             }
             cert.Documento = sDoc;
             cert.Atividade = sAtividade;
+            cert.Area = Convert.ToDecimal( sArea);
+            cert.Atividade_secundaria = sAtividade2;
+            cert.Cep = sCep;
+            cert.Complemento = sComplemento;
+            cert.Email = sEmail;
+            cert.Inscricao_estadual = sInscEstadual;
+            cert.Mei = sMei;
+            cert.Nome_fantasia = sFantasia;
+            cert.Situacao = sSituacao;
+            cert.Taxa_licenca = sTaxaLicenca;
+            cert.Telefone = sFone.Length>30? sFone.Substring(0,30)  : sFone;
+            cert.Vigilancia_sanitaria = sVigilancia;
 
             Exception ex = tributario_Class.Insert_Certidao_Inscricao(cert);
             if (ex != null) {
@@ -251,37 +271,41 @@ namespace GTI_Web.Pages {
         }
         
         private Certidao_inscricao Valida_Dados(int Numero, int Ano, int Codigo) {
-            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
-            Certidao_inscricao dados = tributario_Class.Retorna_Certidao_Inscricao(Ano, Numero, Codigo);
+            Empresa_bll empresa_Class = new Empresa_bll("GTIconnection");
+            Certidao_inscricao dados = empresa_Class.Certidao_inscricao_gravada(Ano, Numero);
+            //            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
+            //Certidao_inscricao dados = tributario_Class.Retorna_Certidao_Inscricao(Ano, Numero, Codigo);
             return dados;
         }
 
         private void Exibe_Certidao_Inscricao(Certidao_inscricao dados) {
             lblMsg.Text = "";
-            string sEndereco = dados.Endereco ;
-            string sTipo = "";
-            if (dados.Data_encerramento == null)
-                sTipo = "ABERTA";
-            else {
-                sTipo = "ENCERRADA";
-            }
-
-            Imovel_bll imovel_Class = new Imovel_bll("GTIconnection");
 
             ReportDocument crystalReport = new ReportDocument();
-            crystalReport.Load(Server.MapPath("~/Report/CertidaoInscricaoValida.rpt"));
+            crystalReport.Load(Server.MapPath("~/Report/ComprovanteInscricaoValida.rpt"));
             crystalReport.SetParameterValue("NUMCERTIDAO", dados.Numero.ToString("00000") + "/" + dados.Ano.ToString("0000"));
             crystalReport.SetParameterValue("DATAEMISSAO", Convert.ToDateTime(dados.Data_emissao).ToString("dd/MM/yyyy") + " às " + Convert.ToDateTime(dados.Data_emissao).ToString("HH:mm:ss"));
-            crystalReport.SetParameterValue("ENDERECO", sEndereco);
-            crystalReport.SetParameterValue("CADASTRO", Convert.ToInt32(dados.Cadastro).ToString("000000"));
+            crystalReport.SetParameterValue("CONTROLE", dados.Numero.ToString("00000") + dados.Ano.ToString("0000") + "/" + dados.Cadastro.ToString() + "-" + "IE");
+            crystalReport.SetParameterValue("ENDERECO", dados.Endereco);
+            crystalReport.SetParameterValue("CADASTRO", dados.Cadastro.ToString("000000"));
             crystalReport.SetParameterValue("NOME", dados.Nome);
             crystalReport.SetParameterValue("BAIRRO", dados.Bairro);
-            crystalReport.SetParameterValue("SITUACAO", sTipo);
-            crystalReport.SetParameterValue("ATIVIDADE", string.IsNullOrWhiteSpace(dados.Atividade) ? "N/A" : dados.Atividade);
-            crystalReport.SetParameterValue("PROCESSOABERTURA", dados.Processo_abertura);
+            crystalReport.SetParameterValue("DOCUMENTO", dados.Documento);
+            crystalReport.SetParameterValue("CIDADE", dados.Cidade );
+            crystalReport.SetParameterValue("ATIVIDADE", dados.Atividade);
+            crystalReport.SetParameterValue("IESTADUAL", dados.Inscricao_estadual);
             crystalReport.SetParameterValue("DATAABERTURA", Convert.ToDateTime(dados.Data_abertura).ToString("dd/MM/yyyy"));
-            crystalReport.SetParameterValue("PROCESSOENCERRAMENTO",dados.Processo_encerramento??"N/A");
-            crystalReport.SetParameterValue("DATAENCERRAMENTO", dados.Data_encerramento==null?"N/A": Convert.ToDateTime(dados.Data_encerramento).ToString("dd/MM/yyyy"));
+            crystalReport.SetParameterValue("FANTASIA", dados.Nome_fantasia);
+            crystalReport.SetParameterValue("ATIVIDADE2", dados.Atividade_secundaria);
+            crystalReport.SetParameterValue("COMPLEMENTO", dados.Complemento);
+            crystalReport.SetParameterValue("CEP", dados.Cep);
+            crystalReport.SetParameterValue("SITUACAO", dados.Situacao);
+            crystalReport.SetParameterValue("TELEFONE", dados.Telefone);
+            crystalReport.SetParameterValue("EMAIL", dados.Email);
+            crystalReport.SetParameterValue("TAXALICENCA", dados.Taxa_licenca);
+            crystalReport.SetParameterValue("VIGILANCIA", dados.Vigilancia_sanitaria);
+            crystalReport.SetParameterValue("MEI", dados.Mei);
+            crystalReport.SetParameterValue("AREA", Convert.ToDouble(dados.Area).ToString("#0.00"));
 
             HttpContext.Current.Response.Buffer = false;
             HttpContext.Current.Response.ClearContent();
