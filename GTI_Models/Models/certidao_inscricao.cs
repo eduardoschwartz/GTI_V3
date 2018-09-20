@@ -23,5 +23,17 @@ namespace GTI_Models.Models {
         public string Processo_abertura { get; set; }
         public DateTime? Data_encerramento { get; set; }
         public string Processo_encerramento { get; set; }
+        public string Inscricao_estadual { get; set; }
+        public string Nome_fantasia { get; set; }
+        public string Atividade_secundaria { get; set; }
+        public string Complemento { get; set; }
+        public string Cep { get; set; }
+        public string Situacao { get; set; }
+        public string Telefone { get; set; }
+        public string Email { get; set; }
+        public string Taxa_licenca { get; set; }
+        public string Vigilancia_sanitaria { get; set; }
+        public string Mei { get; set; }
+        public decimal? Area { get; set; }
     }
 }

@@ -63,7 +63,9 @@ namespace GTI_Web.Pages {
             ReportDocument crystalReport = new ReportDocument();
             string sComplemento = "", sQuadras = "", sLotes = "", sEndereco = "", sBairro = "",  sNome = "", sCidade = "", sUF = "";
             string sData = "18/04/2012",  sCPF = "", sCNPJ = "", sAtividade = "", sRG = "", sProcAbertura = "", sSufixo = "", sProcEncerramento="", sDoc = "";
+            string sCep = "",sInscEstadual="",sFantasia="",sFone="",sEmail="",sTaxaLicenca="",sVigilancia="",sMei="",sSituacao="",sAtividade2="";
             short nNumeroImovel = 0;
+            string sArea = "0";
             DateTime dDataProc = Convert.ToDateTime(sData);
             DateTime?  dDataAbertura = null,dDataEncerramento = null;
 
@@ -76,10 +78,16 @@ namespace GTI_Web.Pages {
             sBairro = Reg.Bairro_nome;
             sCidade = Reg.Cidade_nome;
             sUF = Reg.UF;
+            sCep = Reg.Cep;
             sNome = Reg.Razao_social;
+            sFantasia = string.IsNullOrWhiteSpace(Reg.Nome_fantasia)?"NÃO INFORMADO":Reg.Nome_fantasia;
             sCPF = string.IsNullOrWhiteSpace( Reg.Cpf)  ? "" : Reg.Cpf;
             sCNPJ = string.IsNullOrWhiteSpace( Reg.Cnpj)  ? "" : Reg.Cnpj;
             sRG = Reg.Rg ?? "";
+            sInscEstadual = string.IsNullOrWhiteSpace(Reg.Inscricao_estadual)?"ISENTO":Reg.Inscricao_estadual;
+            sFone = Reg.Fone_contato;
+            sEmail = Reg.Email_contato;
+            sArea = Convert.ToSingle(Reg.Area).ToString("#0.00");
             sDoc = gtiCore.FormatarCpfCnpj( Reg.Cpf_cnpj);
             sProcAbertura = Reg.Numprocesso.ToString();
             dDataAbertura = Reg.Data_abertura;
@@ -87,7 +95,23 @@ namespace GTI_Web.Pages {
                 dDataEncerramento = Reg.Data_Encerramento;
                 sProcEncerramento = Reg.Numprocessoencerramento.ToString();
             }
-            sAtividade = Reg.Atividade_extenso;
+            sVigilancia = empresa_Class.Empresa_tem_VS(Codigo) ? "SIM" : "NÃO";
+            sTaxaLicenca = empresa_Class.Empresa_tem_TL(Codigo) ? "SIM" : "NÃO";
+            sMei = empresa_Class.Empresa_Mei(Codigo) ? "SIM" : "NÃO";
+            sSituacao = Reg.Situacao;
+
+            List<CnaeStruct> Lista_Cnae = empresa_Class.Lista_Cnae_Empresa(Codigo);
+            foreach (CnaeStruct item in Lista_Cnae) {
+                if (item.Principal)
+                    sAtividade += item.CNAE + "-" + item.Descricao;
+                else
+                    sAtividade2+=item.CNAE + "-" + item.Descricao + "; "  ;
+            }
+            List<CnaeStruct> Lista_Cnae2 = empresa_Class.Lista_Cnae_Empresa_VS(Codigo);
+            foreach (CnaeStruct item in Lista_Cnae) {
+                sAtividade2 += item.CNAE + "-" + item.Descricao + "; ";
+            }
+
 
             Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
             int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Debito);
@@ -123,13 +147,8 @@ namespace GTI_Web.Pages {
                 }
 
             } else {
-                if (dDataEncerramento != null) {
-                    crystalReport.Load(Server.MapPath("~/Report/CertidaoInscricaoEncerrada.rpt"));
+                    crystalReport.Load(Server.MapPath("~/Report/ComprovanteInscricao.rpt"));
                     sSufixo = "IE";
-                } else {
-                    crystalReport.Load(Server.MapPath("~/Report/CertidaoInscricaoAtiva.rpt"));
-                    sSufixo = "IA";
-                }
             }
 
             Certidao_inscricao cert = new Certidao_inscricao();
@@ -165,13 +184,19 @@ namespace GTI_Web.Pages {
                 crystalReport.SetParameterValue("DOCUMENTO", sDoc);
                 crystalReport.SetParameterValue("CIDADE", sCidade + "/" + sUF);
                 crystalReport.SetParameterValue("ATIVIDADE", sAtividade);
-                crystalReport.SetParameterValue("RG", sRG);
+                crystalReport.SetParameterValue("IESTADUAL", sInscEstadual);
                 crystalReport.SetParameterValue("DATAABERTURA", dDataAbertura);
-                crystalReport.SetParameterValue("PROCESSOABERTURA", sProcAbertura);
-                if (dDataEncerramento != null) {
-                    crystalReport.SetParameterValue("DATAENCERRAMENTO", dDataEncerramento);
-                    crystalReport.SetParameterValue("PROCESSOENCERRAMENTO", sProcEncerramento);
-                }
+                crystalReport.SetParameterValue("FANTASIA", sFantasia);
+                crystalReport.SetParameterValue("ATIVIDADE2", sAtividade2);
+                crystalReport.SetParameterValue("COMPLEMENTO", sComplemento);
+                crystalReport.SetParameterValue("CEP", sCep);
+                crystalReport.SetParameterValue("SITUACAO", sSituacao);
+                crystalReport.SetParameterValue("TELEFONE", sFone);
+                crystalReport.SetParameterValue("EMAIL",sEmail);
+                crystalReport.SetParameterValue("TAXALICENCA", sTaxaLicenca);
+                crystalReport.SetParameterValue("VIGILANCIA", sVigilancia);
+                crystalReport.SetParameterValue("MEI", sMei);
+                crystalReport.SetParameterValue("AREA", sArea);
 
                 HttpContext.Current.Response.Buffer = false;
                 HttpContext.Current.Response.ClearContent();

@@ -41,7 +41,7 @@
     
          <br />
              <br />
-             Certidão de inscrição cadastral<br />
+             Comprovante de inscrição e situação cadastral<br />
              <br />
              <table style="width: 624px; height: 62px;">
                  <tr><td class="panel" style="height: 51px">&nbsp;

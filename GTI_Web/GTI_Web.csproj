@@ -366,6 +366,18 @@
       <DependentUpon>wait.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\ComprovanteInscricaoValida.cs">
+      <DependentUpon>ComprovanteInscricaoValida.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Report\ComprovanteInscricao.cs">
+      <DependentUpon>ComprovanteInscricao.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Report\SituacaoPagamento.cs">
       <DependentUpon>SituacaoPagamento.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -555,6 +567,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Report\ComprovanteInscricaoValida.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComprovanteInscricaoValida.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\ComprovanteInscricao.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComprovanteInscricao.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\SituacaoPagamento.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SituacaoPagamento.cs</LastGenOutput>
