@@ -50,6 +50,13 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Paramparcela Retorna_Parametro_Parcela(int _ano,int _tipo) {
+            using (var db = new GTI_Context(_connection)) {
+                var Sql = from p in db.Paramparcela where p.Ano==_ano && p.Codtipo==_tipo select p;
+                return Sql.FirstOrDefault();
+            }
+        }
+
         public Exception Incluir_Lancamento(Lancamento reg) {
             using (var db = new GTI_Context(_connection)) {
                 int cntCod = (from c in db.Lancamento select c).Count();

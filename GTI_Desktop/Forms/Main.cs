@@ -112,8 +112,6 @@ namespace GTI_Desktop.Forms {
                 login.ShowDialog();
             }
         }
-        
-        
 
         private void MnuConfig_Click(object sender, EventArgs e) {
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Config);
@@ -163,8 +161,6 @@ namespace GTI_Desktop.Forms {
             } else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-
-      
 
         private void DocumentaçãoParaProcessosToolStripMenuItem_Click(object sender, EventArgs e) {
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Processo_Documento);
@@ -461,7 +457,6 @@ namespace GTI_Desktop.Forms {
             mnuAtribuicaoAcesso_Click(null, null);
         }
 
-       
         private void mnuEscritorioContabil_Click(object sender, EventArgs e) {
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Escritorio_Contabil);
             if (formToShow != null) {
@@ -628,6 +623,22 @@ namespace GTI_Desktop.Forms {
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        private void CalculoImpostoMenu_Click(object sender, EventArgs e) {
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.Calculo_Imposto);
+            if (bAllow) {
+                var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Calculo_Imposto);
+                if (formToShow != null) {
+                    formToShow.Show();
+                } else {
+                    Calculo_Imposto f1 = new Calculo_Imposto() {
+                        Tag = "Menu",
+                        MdiParent = this
+                    };
+                    f1.Show();
+                }
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
 
 

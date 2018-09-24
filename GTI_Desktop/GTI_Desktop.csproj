@@ -165,6 +165,12 @@
     <Compile Include="Forms\Bairro.designer.cs">
       <DependentUpon>Bairro.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Calculo_Imposto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Calculo_Imposto.Designer.cs">
+      <DependentUpon>Calculo_Imposto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Carta_Cobranca.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -535,6 +541,9 @@
     </Compile>
     <EmbeddedResource Include="Forms\Bairro.resx">
       <DependentUpon>Bairro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Calculo_Imposto.resx">
+      <DependentUpon>Calculo_Imposto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Carta_Cobranca.resx">
       <DependentUpon>Carta_Cobranca.cs</DependentUpon>
@@ -971,6 +980,7 @@
     <None Include="Resources\rosangela.jpg" />
     <None Include="Resources\solange.jpg" />
     <None Include="Resources\zoomer.png" />
+    <None Include="Resources\executar.gif" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

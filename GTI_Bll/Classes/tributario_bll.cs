@@ -869,5 +869,17 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        /// <summary>
+        /// Retorna os vencimentos das parcelas
+        /// </summary>
+        /// <param name="_ano"></param>
+        /// <param name="_tipo"></param>
+        /// <returns></returns>
+        public Paramparcela Retorna_Parametro_Parcela(int _ano, int _tipo) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Retorna_Parametro_Parcela(_ano,_tipo);
+        }
+
+
     }//end class
 }

@@ -536,6 +536,24 @@ namespace GTI_Bll.Classes {
             return obj.Certidao_inscricao_gravada(Ano,Numero);
         }
 
+        /// <summary>
+        /// Lista das empresas que não estão encerradas e nem suspensas
+        /// </summary>
+        /// <returns></returns>
+        public List<int> Lista_Empresas_Ativas() {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Lista_Empresas_Ativas();
+        }
+
+        /// <summary>
+        /// Lista das empresas que possuem vigilancia sanitaria
+        /// </summary>
+        /// <returns></returns>
+        public List<Mobiliarioatividadevs2> Lista_Empresas_Vigilancia_Sanitaria() {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Lista_Empresas_Vigilancia_Sanitaria();
+        }
+
 
     }
 }

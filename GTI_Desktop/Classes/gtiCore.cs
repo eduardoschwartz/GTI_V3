@@ -560,10 +560,24 @@ namespace GTI_Desktop.Classes {
         }
 
         public static String RetornaNumero(String Numero) {
-            if (String.IsNullOrEmpty(Numero))
+            if (String.IsNullOrWhiteSpace(Numero))
                 return "0";
             else
                 return Regex.Replace(Numero, @"[^\d]", "");
+        }
+
+        public static String Virg2Ponto(String Numero) {
+            if (String.IsNullOrWhiteSpace(Numero))
+                return "0";
+            else
+                return Numero.Replace( ",",".");
+        }
+
+        public static String RemovePonto(String Numero) {
+            if (String.IsNullOrWhiteSpace(Numero))
+                return Numero;
+            else
+                return Numero.Replace( ".", "");
         }
 
 

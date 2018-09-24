@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 
@@ -36,6 +37,68 @@ namespace GTI_Dal.Classes {
                 }
             }
             return bRet;
+        }
+
+
+        public List<int> Lista_Empresas_Ativas() {
+            using (var db = new GTI_Context(_connection)) {
+                List<int> ListaFinal = new List<int>();
+                List<int> ListaAtivos = (from m in db.Mobiliario where m.Dataencerramento==null orderby m.Codigomob select m.Codigomob).ToList();
+                List<int> ListaSuspenso = Lista_Empresas_Suspensas();
+                for (int i = 0; i < ListaAtivos.Count; i++) {
+                    bool _find = false;
+                    for (int w = 0; w < ListaSuspenso.Count; w++) {
+                        if (ListaAtivos[i] == ListaSuspenso[w]) {
+                            _find = true;
+                            break;
+                        }
+                    }
+                    if (!_find)
+                        ListaFinal.Add(ListaAtivos[i]);
+                }
+
+                return ListaFinal;
+            }
+        }
+
+        public List<int> Lista_Empresas_Suspensas() {
+            List<int> Lista = new List<int>();
+
+            string Sql = "SELECT X.codmobiliario FROM(SELECT codmobiliario, MAX(dataevento) AS DataEv FROM mobiliarioevento GROUP BY codmobiliario) AS X INNER JOIN ";
+            Sql+="mobiliarioevento AS f ON f.codmobiliario = X.codmobiliario AND f.dataevento = X.DataEv where f.codtipoevento = 2 ORDER BY X.codmobiliario";
+            SqlConnection cn = new SqlConnection(_connection);
+            cn.Open();
+            SqlCommand cmd = new SqlCommand(Sql, cn);
+            DbDataReader dr = cmd.ExecuteReader();
+            while (dr.Read()) {
+                Lista.Add((int)dr.GetValue(0));
+            }
+            dr.Close();
+            cn.Close();
+            return Lista;
+        }
+
+        public List<Mobiliarioatividadevs2> Lista_Empresas_Vigilancia_Sanitaria() {
+            using (var db = new GTI_Context(_connection)) {
+                List<Mobiliarioatividadevs2> ListaFinal = new List<Mobiliarioatividadevs2>();
+                List<Mobiliarioatividadevs2> ListaGeral = (from m in db.Mobiliarioatividadevs2 select m).ToList();
+                List<int> ListaAtivos = Lista_Empresas_Ativas();
+                for (int i = 0; i < ListaGeral.Count; i++) {
+                    bool _find = false;
+                    for (int w = 0; w < ListaAtivos.Count; w++) {
+                        if (ListaGeral[i].Codmobiliario == ListaAtivos[w]) {
+                            _find = true;
+                            Mobiliarioatividadevs2 reg = new Mobiliarioatividadevs2();
+                            reg.Codmobiliario = ListaGeral[i].Codmobiliario;
+                            reg.Qtde = ListaGeral[i].Qtde;
+                            reg.Valor = ListaGeral[i].Valor;
+                            ListaFinal.Add(reg);
+                        }
+                    }
+                }
+
+                return ListaFinal;
+            }
         }
 
         public int Existe_EmpresaCnpj(string sCNPJ) {

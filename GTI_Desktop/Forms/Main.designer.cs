@@ -66,6 +66,8 @@
             this.mnuMobiliarioCadastro = new System.Windows.Forms.ToolStripMenuItem();
             this.CadastroEmpresaMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.EscritorioContabilMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabelasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AtividadeEmpresaMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAtendimento = new System.Windows.Forms.ToolStripMenuItem();
             this.CadastroCidadaoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ExtratoMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -126,8 +128,8 @@
             this.optDv2 = new System.Windows.Forms.RadioButton();
             this.optDv1 = new System.Windows.Forms.RadioButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tabelasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AtividadeEmpresaMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.administrativoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CalculoImpostoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.sBar.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.topBar.SuspendLayout();
@@ -431,22 +433,37 @@
             this.CadastroEmpresaMenu,
             this.EscritorioContabilMenu});
             this.mnuMobiliarioCadastro.Name = "mnuMobiliarioCadastro";
-            this.mnuMobiliarioCadastro.Size = new System.Drawing.Size(180, 22);
+            this.mnuMobiliarioCadastro.Size = new System.Drawing.Size(121, 22);
             this.mnuMobiliarioCadastro.Text = "Cadastro";
             // 
             // CadastroEmpresaMenu
             // 
             this.CadastroEmpresaMenu.Name = "CadastroEmpresaMenu";
-            this.CadastroEmpresaMenu.Size = new System.Drawing.Size(180, 22);
+            this.CadastroEmpresaMenu.Size = new System.Drawing.Size(169, 22);
             this.CadastroEmpresaMenu.Text = "Empresa";
             this.CadastroEmpresaMenu.Click += new System.EventHandler(this.MnuEmpresa_Click);
             // 
             // EscritorioContabilMenu
             // 
             this.EscritorioContabilMenu.Name = "EscritorioContabilMenu";
-            this.EscritorioContabilMenu.Size = new System.Drawing.Size(180, 22);
+            this.EscritorioContabilMenu.Size = new System.Drawing.Size(169, 22);
             this.EscritorioContabilMenu.Text = "Escritório contábil";
             this.EscritorioContabilMenu.Click += new System.EventHandler(this.mnuEscritorioContabil_Click);
+            // 
+            // tabelasToolStripMenuItem
+            // 
+            this.tabelasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AtividadeEmpresaMenu});
+            this.tabelasToolStripMenuItem.Name = "tabelasToolStripMenuItem";
+            this.tabelasToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.tabelasToolStripMenuItem.Text = "Tabelas";
+            // 
+            // AtividadeEmpresaMenu
+            // 
+            this.AtividadeEmpresaMenu.Name = "AtividadeEmpresaMenu";
+            this.AtividadeEmpresaMenu.Size = new System.Drawing.Size(203, 22);
+            this.AtividadeEmpresaMenu.Text = "Atividades das empresas";
+            this.AtividadeEmpresaMenu.Click += new System.EventHandler(this.AtividadeEmpresaMenu_Click);
             // 
             // mnuAtendimento
             // 
@@ -487,7 +504,7 @@
             this.CadastroLancamentoMenu,
             this.CadastroTributosMenu});
             this.mnuTributarioTabelas.Name = "mnuTributarioTabelas";
-            this.mnuTributarioTabelas.Size = new System.Drawing.Size(137, 22);
+            this.mnuTributarioTabelas.Size = new System.Drawing.Size(180, 22);
             this.mnuTributarioTabelas.Text = "Tabelas";
             // 
             // CadastroLancamentoMenu
@@ -509,7 +526,7 @@
             this.dividaAtivaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CartaCobrancaMenu});
             this.dividaAtivaToolStripMenuItem.Name = "dividaAtivaToolStripMenuItem";
-            this.dividaAtivaToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.dividaAtivaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.dividaAtivaToolStripMenuItem.Text = "Divida Ativa";
             // 
             // CartaCobrancaMenu
@@ -524,7 +541,7 @@
             this.bancosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.RegistroBancarioMenu});
             this.bancosToolStripMenuItem.Name = "bancosToolStripMenuItem";
-            this.bancosToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.bancosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.bancosToolStripMenuItem.Text = "Bancos";
             // 
             // RegistroBancarioMenu
@@ -609,7 +626,8 @@
             // 
             this.mnuOutros.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ConfigMenu,
-            this.mnuSecurity});
+            this.mnuSecurity,
+            this.administrativoToolStripMenuItem});
             this.mnuOutros.Name = "mnuOutros";
             this.mnuOutros.Size = new System.Drawing.Size(55, 20);
             this.mnuOutros.Text = "Outros";
@@ -617,7 +635,7 @@
             // ConfigMenu
             // 
             this.ConfigMenu.Name = "ConfigMenu";
-            this.ConfigMenu.Size = new System.Drawing.Size(146, 22);
+            this.ConfigMenu.Size = new System.Drawing.Size(180, 22);
             this.ConfigMenu.Text = "Configuração";
             this.ConfigMenu.Click += new System.EventHandler(this.MnuConfig_Click);
             // 
@@ -628,7 +646,7 @@
             this.CadastroEventoMenu,
             this.AtribuicaoAcessoMenu});
             this.mnuSecurity.Name = "mnuSecurity";
-            this.mnuSecurity.Size = new System.Drawing.Size(146, 22);
+            this.mnuSecurity.Size = new System.Drawing.Size(180, 22);
             this.mnuSecurity.Text = "Segurança";
             // 
             // CadastroUsuariosMenu
@@ -992,20 +1010,20 @@
             this.optDv1.UseVisualStyleBackColor = false;
             this.optDv1.CheckedChanged += new System.EventHandler(this.OptDv1_CheckedChanged);
             // 
-            // tabelasToolStripMenuItem
+            // administrativoToolStripMenuItem
             // 
-            this.tabelasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AtividadeEmpresaMenu});
-            this.tabelasToolStripMenuItem.Name = "tabelasToolStripMenuItem";
-            this.tabelasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.tabelasToolStripMenuItem.Text = "Tabelas";
+            this.administrativoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CalculoImpostoMenu});
+            this.administrativoToolStripMenuItem.Name = "administrativoToolStripMenuItem";
+            this.administrativoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.administrativoToolStripMenuItem.Text = "Administrativo";
             // 
-            // AtividadeEmpresaMenu
+            // CalculoImpostoMenu
             // 
-            this.AtividadeEmpresaMenu.Name = "AtividadeEmpresaMenu";
-            this.AtividadeEmpresaMenu.Size = new System.Drawing.Size(203, 22);
-            this.AtividadeEmpresaMenu.Text = "Atividades das empresas";
-            this.AtividadeEmpresaMenu.Click += new System.EventHandler(this.AtividadeEmpresaMenu_Click);
+            this.CalculoImpostoMenu.Name = "CalculoImpostoMenu";
+            this.CalculoImpostoMenu.Size = new System.Drawing.Size(180, 22);
+            this.CalculoImpostoMenu.Text = "Calculo de Imposto";
+            this.CalculoImpostoMenu.Click += new System.EventHandler(this.CalculoImpostoMenu_Click);
             // 
             // Main
             // 
@@ -1139,6 +1157,8 @@
         private System.Windows.Forms.ToolStripMenuItem ProcessoAtrasoMenu;
         private System.Windows.Forms.ToolStripMenuItem tabelasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AtividadeEmpresaMenu;
+        private System.Windows.Forms.ToolStripMenuItem administrativoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CalculoImpostoMenu;
     }
 }
 

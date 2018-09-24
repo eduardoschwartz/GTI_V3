@@ -122,5 +122,6 @@ namespace GTI_Dal {
         public DbSet<Atividade> Atividade { get; set; }
         public DbSet<Cnaecriterio> Cnaecriterio { get; set; }
         public DbSet<Cnaecriteriodesc> Cnaecriteriodesc { get; set; }
+        public DbSet<Paramparcela> Paramparcela { get; set; }
     }
 }
