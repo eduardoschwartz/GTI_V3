@@ -29,6 +29,7 @@
             this.ExecutarButton = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.MsgToolStrip = new System.Windows.Forms.ToolStripStatusLabel();
+            this.ExportarButton = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +58,7 @@
             // PBar
             // 
             this.PBar.ForeColor = System.Drawing.Color.GreenYellow;
-            this.PBar.Location = new System.Drawing.Point(108, 71);
+            this.PBar.Location = new System.Drawing.Point(15, 71);
             this.PBar.Name = "PBar";
             this.PBar.Size = new System.Drawing.Size(157, 9);
             this.PBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
@@ -67,11 +68,11 @@
             // 
             this.ExecutarButton.Image = global::GTI_Desktop.Properties.Resources.executar;
             this.ExecutarButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ExecutarButton.Location = new System.Drawing.Point(276, 57);
+            this.ExecutarButton.Location = new System.Drawing.Point(195, 57);
             this.ExecutarButton.Name = "ExecutarButton";
             this.ExecutarButton.Size = new System.Drawing.Size(75, 23);
             this.ExecutarButton.TabIndex = 2;
-            this.ExecutarButton.Text = "Executar";
+            this.ExecutarButton.Text = "Calcular";
             this.ExecutarButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.ExecutarButton.UseVisualStyleBackColor = true;
             this.ExecutarButton.Click += new System.EventHandler(this.ExecutarButton_Click);
@@ -80,7 +81,7 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MsgToolStrip});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 93);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 112);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(371, 22);
             this.statusStrip1.TabIndex = 4;
@@ -92,11 +93,25 @@
             this.MsgToolStrip.Size = new System.Drawing.Size(177, 17);
             this.MsgToolStrip.Text = "Selecione uma opção de cálculo";
             // 
+            // ExportarButton
+            // 
+            this.ExportarButton.Image = global::GTI_Desktop.Properties.Resources.enviar;
+            this.ExportarButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ExportarButton.Location = new System.Drawing.Point(276, 57);
+            this.ExportarButton.Name = "ExportarButton";
+            this.ExportarButton.Size = new System.Drawing.Size(75, 23);
+            this.ExportarButton.TabIndex = 5;
+            this.ExportarButton.Text = "Exportar";
+            this.ExportarButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ExportarButton.UseVisualStyleBackColor = true;
+            this.ExportarButton.Click += new System.EventHandler(this.ExportarButton_Click);
+            // 
             // Calculo_Imposto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(371, 115);
+            this.ClientSize = new System.Drawing.Size(371, 134);
+            this.Controls.Add(this.ExportarButton);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.PBar);
             this.Controls.Add(this.ExecutarButton);
@@ -123,5 +138,6 @@
         private System.Windows.Forms.ProgressBar PBar;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel MsgToolStrip;
+        private System.Windows.Forms.Button ExportarButton;
     }
 }

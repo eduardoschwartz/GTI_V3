@@ -880,6 +880,20 @@ namespace GTI_Bll.Classes {
             return obj.Retorna_Parametro_Parcela(_ano,_tipo);
         }
 
+        /// <summary>
+        /// Grava registro na tabela calculo_iss_vs
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Calculo_Iss_VS(Calculo_iss_vs Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Calculo_Iss_VS(Reg);
+            return ex;
+        }
+
 
     }//end class
 }
+
+
+

@@ -1721,6 +1721,39 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Exception Insert_Calculo_Iss_VS(Calculo_iss_vs Reg) {
+            using (var db = new GTI_Context(_connection)) {
+                object[] Parametros = new object[16];
+                Parametros[0] = new SqlParameter { ParameterName = "@ano", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Ano };
+                Parametros[1] = new SqlParameter { ParameterName = "@codigo", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codigo };
+                Parametros[2] = new SqlParameter { ParameterName = "@lancamento", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Lancamento };
+                Parametros[3] = new SqlParameter { ParameterName = "@qtde_parcela", SqlDbType = SqlDbType.TinyInt, SqlValue = Reg.Qtde_parcela };
+                Parametros[4] = new SqlParameter { ParameterName = "@valor0", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Valor0 };
+                Parametros[5] = new SqlParameter { ParameterName = "@valor1", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Valor1 };
+                Parametros[6] = new SqlParameter { ParameterName = "@documento0", SqlDbType = SqlDbType.Int, SqlValue = Reg.Documento0 };
+                Parametros[7] = new SqlParameter { ParameterName = "@vencimento0", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Vencimento0 };
+                Parametros[8] = new SqlParameter { ParameterName = "@documento1", SqlDbType = SqlDbType.Int, SqlValue = Reg.Documento1 };
+                Parametros[9] = new SqlParameter { ParameterName = "@vencimento1", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Vencimento1 };
+                Parametros[10] = new SqlParameter { ParameterName = "@documento2", SqlDbType = SqlDbType.Int, SqlValue = Reg.Documento2 };
+                Parametros[11] = new SqlParameter { ParameterName = "@vencimento2", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Vencimento2 };
+                Parametros[12] = new SqlParameter { ParameterName = "@documento3", SqlDbType = SqlDbType.Int, SqlValue = (object)Reg.Documento3??DBNull.Value};
+                Parametros[13] = new SqlParameter { ParameterName = "@vencimento3", SqlDbType = SqlDbType.SmallDateTime, SqlValue = (object)Reg.Vencimento3 ?? DBNull.Value };
+                Parametros[14] = new SqlParameter { ParameterName = "@documento4", SqlDbType = SqlDbType.Int, SqlValue = (object)Reg.Documento4 ?? DBNull.Value };
+                Parametros[15] = new SqlParameter { ParameterName = "@vencimento4", SqlDbType = SqlDbType.SmallDateTime, SqlValue = (object)Reg.Vencimento4 ?? DBNull.Value };
+
+                db.Database.ExecuteSqlCommand("INSERT INTO calculo_iss_vs(ano,codigo,lancamento,qtde_parcela,valor0,valor1,documento0,vencimento0,documento1," +
+                    "vencimento1,documento2,vencimento2,documento3,vencimento3,documento4,vencimento4) " +
+                    "VALUES(@ano,@codigo,@lancamento,@qtde_parcela,@valor0,@valor1,@documento0,@vencimento0,@documento1,@vencimento1,@documento2," +
+                    "@vencimento2,@documento3,@vencimento3,@documento4,@vencimento4)", Parametros);
+
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
 
     }//end class
 }
