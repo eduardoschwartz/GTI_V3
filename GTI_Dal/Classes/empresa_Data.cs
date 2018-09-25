@@ -84,15 +84,44 @@ namespace GTI_Dal.Classes {
                 List<Mobiliarioatividadevs2> ListaGeral = (from m in db.Mobiliarioatividadevs2 select m).ToList();
                 List<int> ListaAtivos = Lista_Empresas_Ativas();
                 for (int i = 0; i < ListaGeral.Count; i++) {
-                    bool _find = false;
                     for (int w = 0; w < ListaAtivos.Count; w++) {
                         if (ListaGeral[i].Codmobiliario == ListaAtivos[w]) {
-                            _find = true;
                             Mobiliarioatividadevs2 reg = new Mobiliarioatividadevs2();
                             reg.Codmobiliario = ListaGeral[i].Codmobiliario;
                             reg.Qtde = ListaGeral[i].Qtde;
                             reg.Valor = ListaGeral[i].Valor;
                             ListaFinal.Add(reg);
+                        }
+                    }
+                }
+
+                return ListaFinal;
+            }
+        }
+
+        public List<EmpresaStruct> Lista_Empresas_ISS_Fixo_TLL() {
+            using (var db = new GTI_Context(_connection)) {
+                List<EmpresaStruct> ListaFinal = new List<EmpresaStruct>();
+                var ListaGeral = (from m in db.Mobiliario join a in db.Atividade on m.Codatividade equals a.Codatividade into ma from a in ma.DefaultIfEmpty()
+                                  select new EmpresaStruct { Codigo=m.Codigomob,Area=m.Areatl,Codigo_aliquota=m.Codigoaliq,Valor_aliquota1=(float)a.Valoraliq1,
+                                  Valor_aliquota2= (float)a.Valoraliq2,Valor_aliquota3= (float)a.Valoraliq3,Isento_taxa=m.Isentotaxa,Vistoria=m.Vistoria});
+
+                List<int> ListaAtivos = Lista_Empresas_Ativas();
+
+                foreach (EmpresaStruct item in ListaGeral) {
+                    if (item.Isento_taxa == null || item.Isento_taxa == 0) {
+                        for (int w = 0; w < ListaAtivos.Count; w++) {
+                            if (item.Codigo == ListaAtivos[w]) {
+                                EmpresaStruct reg = new EmpresaStruct();
+                                reg.Codigo = item.Codigo;
+                                reg.Area = item.Area;
+                                reg.Codigo_aliquota = item.Codigo_aliquota;
+                                reg.Valor_aliquota1 = item.Valor_aliquota1;
+                                reg.Valor_aliquota2 = item.Valor_aliquota2;
+                                reg.Valor_aliquota3 = item.Valor_aliquota3;
+                                reg.Vistoria = item.Vistoria;
+                                ListaFinal.Add(reg);
+                            }
                         }
                     }
                 }

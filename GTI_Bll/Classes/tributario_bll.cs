@@ -891,6 +891,18 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        /// <summary>
+        /// retorna o valor do tributo selecionado
+        /// </summary>
+        /// <param name="Ano"></param>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public decimal Retorna_Valor_Tributo(int Ano, int Codigo) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Retorna_Valor_Tributo(Ano, Codigo);
+        }
+
+
 
     }//end class
 }

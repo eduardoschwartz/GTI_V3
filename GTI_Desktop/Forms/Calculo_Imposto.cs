@@ -14,9 +14,11 @@ namespace GTI_Desktop.Forms {
         string _path = @"c:\cadastro\bin\";
         int _ano = 2019;
         int _documento = 19555444;
+        decimal _ipca = (decimal)2.5377;
 
         private enum Tipo_imposto {
             Iptu = 1,
+            ISS_Fixo_TLL=2,
             Vigilancia=5
         }
 
@@ -36,7 +38,7 @@ namespace GTI_Desktop.Forms {
                     Calculo_Iptu();
                     break;
                 case 1:
-                    Calculo_IssTll();
+                    Calculo_IssTLL();
                     break;
                 case 2:
                     Calculo_Vigilancia();
@@ -52,7 +54,165 @@ namespace GTI_Desktop.Forms {
 
         }
 
-        private void Calculo_IssTll() {
+        private void Calculo_IssTLL() {
+            FileStream fsDP = new FileStream(_path + "DEBITOPARCELA.TXT", FileMode.Create, FileAccess.Write);
+            StreamWriter fs1 = new StreamWriter(fsDP, System.Text.Encoding.Default);
+            FileStream fsDT = new FileStream(_path + "DEBITOTRIBUTO.TXT", FileMode.Create, FileAccess.Write);
+            StreamWriter fs2 = new StreamWriter(fsDT, System.Text.Encoding.Default);
+            FileStream fsPD = new FileStream(_path + "PARCELADOCUMENTO.TXT", FileMode.Create, FileAccess.Write);
+            StreamWriter fs3 = new StreamWriter(fsPD, System.Text.Encoding.Default);
+            FileStream fsND = new FileStream(_path + "NUMDOCUMENTO.TXT", FileMode.Create, FileAccess.Write);
+            StreamWriter fs4 = new StreamWriter(fsND, System.Text.Encoding.Default);
+            FileStream fsCC = new FileStream(_path + "CALCULO_ISS_VS.TXT", FileMode.Create, FileAccess.Write);
+            StreamWriter fs5 = new StreamWriter(fsCC, System.Text.Encoding.Default);
+
+            MsgToolStrip.Text = "Calculando ISS Fixo/Taxa de Licença";
+            List<DateTime> aVencimento = new List<DateTime>();
+            List<decimal> aDesconto = new List<decimal>();
+            Tributario_bll tributario_Class = new Tributario_bll(_connection);
+            Paramparcela _Prm = tributario_Class.Retorna_Parametro_Parcela(_ano, (int)Tipo_imposto.ISS_Fixo_TLL);
+            if (_Prm.Venc01 != null) {
+                aVencimento.Add((DateTime)_Prm.Venc01);
+                if (_Prm.Descontounica != null)
+                    aDesconto.Add((decimal)_Prm.Descontounica);
+                if (_Prm.Venc02 != null) {
+                    aVencimento.Add((DateTime)_Prm.Venc02);
+                    if (_Prm.Descontounica2 != null)
+                        aDesconto.Add((decimal)_Prm.Descontounica2);
+                    if (_Prm.Venc03 != null) {
+                        aVencimento.Add((DateTime)_Prm.Venc03);
+                        if (_Prm.Descontounica3 != null)
+                            aDesconto.Add((decimal)_Prm.Descontounica3);
+                        if (_Prm.Venc04 != null) {
+                            aVencimento.Add((DateTime)_Prm.Venc04);
+                        }
+                    }
+                }
+            }
+
+            int _qtde_parcelas = aVencimento.Count;
+            bool _unica = _Prm.Parcelaunica == "S" ? true : false;
+            bool _possui_taxa = false;
+            decimal _valor_vistoria = tributario_Class.Retorna_Valor_Tributo(_ano, 24);
+
+
+            Empresa_bll empresa_Class = new Empresa_bll(_connection);
+            List<EmpresaStruct> ListaEmpresas = empresa_Class.Lista_Empresas_ISS_Fixo_TLL();
+            int _total = ListaEmpresas.Count, _pos = 1;
+            string _documento0 = "", _documento1 = "", _documento2 = "", _documento3 = "", _documento4 = "", _valor0 = "", _valor1 = "";
+            string _vencimento0 = "", _vencimento1 = "", _vencimento2 = "", _vencimento3 = "", _vencimento4 = "";
+            decimal _valor_aliquota = 0;
+
+            foreach (EmpresaStruct item in ListaEmpresas) {
+                bool _vistoria = item.Vistoria == 1 ? true : false;
+                decimal _area = item.Area == null ? 0 : (decimal)item.Area;
+                int _codigo_aliquota = item.Codigo_aliquota == null ? 0 : (int)item.Codigo_aliquota;
+                switch (_codigo_aliquota) {
+                    case 0:;
+                        break;
+                    case 1:
+                        _valor_aliquota = item.Valor_aliquota1==null?0:(decimal)item.Valor_aliquota1;
+                        break;
+                    case 2:
+                        _valor_aliquota = item.Valor_aliquota2 == null ? 0 : (decimal)item.Valor_aliquota2;
+                        break;
+                    case 3:
+                        _valor_aliquota = item.Valor_aliquota3 == null ? 0 : (decimal)item.Valor_aliquota3;
+                        break;
+                    default:
+                        break;
+                }
+
+                //Limitante de área
+                if (_area > 27000 && _valor_aliquota == (decimal)0.29)
+                    _area = 27000;
+                else {
+                    if (_area > 9000 && (_valor_aliquota == (decimal)0.58 || _valor_aliquota == (decimal)0.36))
+                        _area = 9000;
+                    else {
+                        if (_area > 6000 && (_valor_aliquota == (decimal)0.72 || _valor_aliquota == (decimal)0.86))
+                            _area = 6000;
+                    }
+                }
+
+                _valor_aliquota *= _ipca;
+                if (_valor_aliquota < 14)
+                    _valor_aliquota *= _area;
+
+                if (_valor_aliquota == 0 && !_vistoria)
+                    goto LABEL_ISS_FIXO;
+                else
+                    _possui_taxa = true;
+
+                for (int _parcela = 0; _parcela <= _qtde_parcelas; _parcela++) {
+                    string _vencto = _parcela == 0 ? aVencimento[0].ToString("dd/MM/yyyy") : aVencimento[_parcela - 1].ToString("dd/MM/yyyy");
+                    string _linha = item.Codigo + "#" + _ano + "#6#0#" + _parcela + "#0#18#" + _vencto + "#01/01/" + _ano;
+                    fs1.WriteLine(_linha);
+
+                    decimal _valor = _valor_aliquota/3, _valor_unica = (_valor_aliquota / 3) - ((_valor_aliquota / 3) * (decimal)0.05);
+                    decimal _valor_parcela = _parcela > 0 ? _valor : _valor_unica;
+                    _linha = item.Codigo + "#" + _ano + "#6#0#" + _parcela + "#0#14#" + _valor_parcela.ToString("#0.00");
+                    fs2.WriteLine(_linha);
+                    if (_vistoria) {
+                        _linha = item.Codigo + "#" + _ano + "#6#0#" + _parcela + "#0#24#" + _valor_vistoria.ToString("#0.00");
+                        fs2.WriteLine(_linha);
+                    }
+
+                    _linha = item.Codigo + "#" + _ano + "#6#0#" + _parcela + "#0#" + _documento;
+                    fs3.WriteLine(_linha);
+
+                    _linha = _documento + "#" + DateTime.Now.ToString("dd/MM/yyyy");
+                    fs4.WriteLine(_linha);
+
+                    switch (_parcela) {
+                        case 0:
+                            _documento0 = _documento.ToString();
+                            _vencimento0 = _vencto.ToString();
+                            _valor0 = _valor_parcela.ToString("#0.00");
+                            break;
+                        case 1:
+                            _documento1 = _documento.ToString();
+                            _vencimento1 = _vencto.ToString();
+                            _valor1 = _valor_parcela.ToString("#0.00");
+                            break;
+                        case 2:
+                            _documento2 = _documento.ToString();
+                            _vencimento2 = _vencto.ToString();
+                            break;
+                        case 3:
+                            _documento3 = _documento.ToString();
+                            _vencimento3 = _vencto.ToString();
+                            break;
+                        case 4:
+                            _documento4 = _documento.ToString();
+                            _vencimento4 = _vencto.ToString();
+                            break;
+                        default:
+                            break;
+                    }
+
+                    _documento++;
+                }
+
+                string _linha_calc = _ano.ToString() + "#" + item.Codigo + "#6#" + _valor0 + "#" + _valor1 + "#" +
+                _documento0 + "#" + _vencimento0 + "#" + _documento1 + "#" + _vencimento1 + "#" + _documento2 + '#' + _vencimento2 + "#" + _documento3 + "#" +
+                _vencimento3 + "#" + _documento4 + "#" + _vencimento4 + "#" + _qtde_parcelas.ToString();
+                fs5.WriteLine(_linha_calc);
+
+                _pos++;
+
+
+LABEL_ISS_FIXO:;
+
+            }
+
+
+            fs1.Close(); fs2.Close(); fs3.Close(); fs4.Close(); fs5.Close(); fsDP.Close(); fsDT.Close(); fsND.Close(); fsPD.Close(); fsCC.Close();
+            PBar.Value = 100;
+            PBar.Update();
+            MsgToolStrip.Text = "Selecione uma opção de cálculo";
+            Refresh();
+            MessageBox.Show("Cálculo finalizado.", "Infiormação", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
 
@@ -133,28 +293,29 @@ namespace GTI_Desktop.Forms {
                 }
 
                 for (int _parcela = 0; _parcela <= _qtde_parcelas; _parcela++) {
-                    string _vencto =  _parcela==0 ? aVencimento[0].ToString("MM/dd/yyyy"):   aVencimento[_parcela-1].ToString("MM/dd/yyyy");
-                    string _linha = item.Codmobiliario + "," + _ano + ",13,0," + _parcela + ",0,18," + _vencto + ",01/01/" + _ano ;
+                    string _vencto =  _parcela==0 ? aVencimento[0].ToString("dd/MM/yyyy"):   aVencimento[_parcela-1].ToString("dd/MM/yyyy");
+                    string _linha = item.Codmobiliario + "#" + _ano + "#13#0#" + _parcela + "#0#18#" + _vencto + "#01/01/" + _ano ;
                     fs1.WriteLine(_linha);
                     decimal _valor = item.Valor, _valor_unica = item.Valor - (item.Valor * (decimal)0.05);
                     decimal _valor_parcela = _parcela > 0 ? _valor : _valor_unica;
-                    _linha = item.Codmobiliario + "," + _ano + ",13,0," + _parcela + ",0,25," + gtiCore.Virg2Ponto(gtiCore.RemovePonto(string.Format("{0:0.00}", _valor_parcela))) ;
+                    _valor_parcela = _valor_parcela * item.Qtde;
+                    _linha = item.Codmobiliario + "#" + _ano + "#13#0#" + _parcela + "#0#25#" +  _valor_parcela.ToString("#0.00") ;
                     fs2.WriteLine(_linha);
-                    _linha = item.Codmobiliario + "," + _ano + ",13,0," + _parcela + ",0," + _documento;
+                    _linha = item.Codmobiliario + "#" + _ano + "#13#0#" + _parcela + "#0#" + _documento;
                     fs3.WriteLine(_linha);
-                    _linha = _documento + "," + DateTime.Now.ToString("MM/dd/yyyy");
+                    _linha = _documento + "#" + DateTime.Now.ToString("dd/MM/yyyy");
                     fs4.WriteLine(_linha);
 
                     switch (_parcela) {
                         case 0:
                             _documento0 = _documento.ToString();
                             _vencimento0 = _vencto.ToString();
-                            _valor0 = gtiCore.Virg2Ponto(gtiCore.RemovePonto(string.Format("{0:0.00}", _valor_parcela)));
+                            _valor0 = _valor_parcela.ToString("#0.00");
                             break;
                         case 1:
                             _documento1 = _documento.ToString();
                             _vencimento1 = _vencto.ToString();
-                            _valor1 = gtiCore.Virg2Ponto(gtiCore.RemovePonto(string.Format("{0:0.00}", _valor_parcela)));
+                            _valor1 = _valor_parcela.ToString("#0.00");
                             break;
                         case 2:
                             _documento2 = _documento.ToString();
@@ -175,21 +336,19 @@ namespace GTI_Desktop.Forms {
                     _documento++;
                 }
 
-                string _linha_calc = _ano.ToString() + "," + item.Codmobiliario + ",13," + _valor0 + "," + _valor1 + "," +
-                    _documento0 + "," + _vencimento0 + "," + _documento1 + "," + _vencimento1 + "," + _documento2 + ',' + _vencimento2 + "," + _documento3 + "," +
-                    _vencimento3 + "," + _documento4 + "," + _vencimento4 + "," + _qtde_parcelas.ToString();
+                string _linha_calc = _ano.ToString() + "#" + item.Codmobiliario + "#13#" + _valor0 + "#" + _valor1 + "#" +
+                    _documento0 + "#" + _vencimento0 + "#" + _documento1 + "#" + _vencimento1 + "#" + _documento2 + '#' + _vencimento2 + "#" + _documento3 + "#" +
+                    _vencimento3 + "#" + _documento4 + "#" + _vencimento4 + "#" + _qtde_parcelas.ToString();
                 fs5.WriteLine(_linha_calc);
 
                 _pos++;
             }
 
             fs1.Close(); fs2.Close(); fs3.Close(); fs4.Close();fs5.Close() ; fsDP.Close(); fsDT.Close(); fsND.Close(); fsPD.Close();fsCC.Close();
-
             PBar.Value = 100;
             PBar.Update();
             MsgToolStrip.Text = "Selecione uma opção de cálculo";
             Refresh();
-
             MessageBox.Show("Cálculo finalizado.","Infiormação",MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
 
@@ -197,23 +356,27 @@ namespace GTI_Desktop.Forms {
             if (MessageBox.Show("Exportar para o banco de dados?", "Confimação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
             Tributario_bll tributario_Class = new Tributario_bll(_connection);
 
-            DataTable dtDP = new DataTable();
-            dtDP.Columns.Add("codreduzido", typeof(int));
-            dtDP.Columns.Add("anoexercicio", typeof(short));
-            dtDP.Columns.Add("codlancamento", typeof(short));
-            dtDP.Columns.Add("seqlancamento", typeof(short));
-            dtDP.Columns.Add("numparcela", typeof(byte));
-            dtDP.Columns.Add("codcomplemento", typeof(byte));
-            dtDP.Columns.Add("statuslanc", typeof(byte));
-            dtDP.Columns.Add("datavencimento", typeof(DateTime));
-            dtDP.Columns.Add("datadebase", typeof(DateTime));
+            #region DEBITOPARCELA
+            MsgToolStrip.Text = "Inserindo parcelas";
+            Refresh();
 
-            FileStream fsDP = new FileStream(_path + "DEBITOPARCELA.TXT", FileMode.Open, FileAccess.Read);
-            StreamReader fs1 = new StreamReader(fsDP, System.Text.Encoding.Default);
-            while (!fs1.EndOfStream) {
-                string _line = fs1.ReadLine();
-                string[] _fields = _line.Split(',');
-                DataRow _row = dtDP.NewRow();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("codreduzido", typeof(int));
+            dt.Columns.Add("anoexercicio", typeof(short));
+            dt.Columns.Add("codlancamento", typeof(short));
+            dt.Columns.Add("seqlancamento", typeof(short));
+            dt.Columns.Add("numparcela", typeof(byte));
+            dt.Columns.Add("codcomplemento", typeof(byte));
+            dt.Columns.Add("statuslanc", typeof(byte));
+            dt.Columns.Add("datavencimento", typeof(DateTime));
+            dt.Columns.Add("datadebase", typeof(DateTime));
+
+            FileStream fs = new FileStream(_path + "DEBITOPARCELA.TXT", FileMode.Open, FileAccess.Read);
+            StreamReader sr = new StreamReader(fs, System.Text.Encoding.Default);
+            while (!sr.EndOfStream) {
+                string _line = sr.ReadLine();
+                string[] _fields = _line.Split('#');
+                DataRow _row = dt.NewRow();
                 _row["codreduzido"] = Convert.ToInt32(_fields[0]);
                 _row["anoexercicio"] = Convert.ToInt16(_fields[1]);
                 _row["codlancamento"] = Convert.ToInt16(_fields[2]);
@@ -223,106 +386,188 @@ namespace GTI_Desktop.Forms {
                 _row["statuslanc"] = Convert.ToByte(_fields[6]);
                 _row["datavencimento"] =Convert.ToDateTime( _fields[7]);
                 _row["datadebase"] = Convert.ToDateTime(_fields[8]);
-                dtDP.Rows.Add(_row);
+                dt.Rows.Add(_row);
             }
 
-            MsgToolStrip.Text = "Inserindo parcelas";
-            Refresh();
             SqlBulkCopy sbc = new SqlBulkCopy(_connection);
             sbc.BulkCopyTimeout = 0;
             sbc.DestinationTableName = "DEBITOPARCELA";
-            sbc.WriteToServer(dtDP);
+            sbc.WriteToServer(dt);
             sbc.Close();
-            dtDP.Dispose(); fsDP.Close(); fs1.Close();
+            dt.Dispose(); fs.Close(); sr.Close();
 
             MsgToolStrip.Text = "Inserindo tributos";
             Refresh();
+            #endregion
 
+            #region DEBITOTRIBUTO
+            MsgToolStrip.Text = "Inserindo tributos";
+            Refresh();
 
-            DataTable dtDT = new DataTable();
-            dtDT.Columns.Add("codreduzido", typeof(int));
-            dtDT.Columns.Add("anoexercicio", typeof(short));
-            dtDT.Columns.Add("codlancamento", typeof(short));
-            dtDT.Columns.Add("seqlancamento", typeof(short));
-            dtDT.Columns.Add("numparcela", typeof(byte));
-            dtDT.Columns.Add("codcomplemento", typeof(byte));
-            dtDT.Columns.Add("codtributo", typeof(short));
-            dtDT.Columns.Add("valortributo", typeof(decimal));
+            dt = new DataTable();
+            dt.Columns.Add("codreduzido", typeof(int));
+            dt.Columns.Add("anoexercicio", typeof(short));
+            dt.Columns.Add("codlancamento", typeof(short));
+            dt.Columns.Add("seqlancamento", typeof(short));
+            dt.Columns.Add("numparcela", typeof(byte));
+            dt.Columns.Add("codcomplemento", typeof(byte));
+            dt.Columns.Add("codtributo", typeof(short));
+            dt.Columns.Add("valortributo", typeof(decimal));
 
-            DataTable dtPD = new DataTable();
-            dtPD.Columns.Add("codreduzido", typeof(int));
-            dtPD.Columns.Add("anoexercicio", typeof(short));
-            dtPD.Columns.Add("codlancamento", typeof(short));
-            dtPD.Columns.Add("seqlancamento", typeof(short));
-            dtPD.Columns.Add("numparcela", typeof(byte));
-            dtPD.Columns.Add("codcomplemento", typeof(byte));
-            dtPD.Columns.Add("numdocumento", typeof(int));
+            fs = new FileStream(_path + "DEBITOTRIBUTO.TXT", FileMode.Open, FileAccess.Read);
+            sr = new StreamReader(fs, System.Text.Encoding.Default);
+            while (!sr.EndOfStream) {
+                string _line = sr.ReadLine();
+                string[] _fields = _line.Split('#');
+                DataRow _row = dt.NewRow();
+                _row["codreduzido"] = Convert.ToInt32(_fields[0]);
+                _row["anoexercicio"] = Convert.ToInt16(_fields[1]);
+                _row["codlancamento"] = Convert.ToInt16(_fields[2]);
+                _row["seqlancamento"] = Convert.ToInt16(_fields[3]);
+                _row["numparcela"] = Convert.ToByte(_fields[4]);
+                _row["codcomplemento"] = Convert.ToByte(_fields[5]);
+                _row["codtributo"] = Convert.ToInt16(_fields[6]);
+                _row["valortributo"] = Convert.ToDecimal(_fields[7]);
+                dt.Rows.Add(_row);
+            }
 
+            sbc = new SqlBulkCopy(_connection);
+            sbc.BulkCopyTimeout = 0;
+            sbc.DestinationTableName = "DEBITOTRIBUTO";
+            sbc.WriteToServer(dt);
+            sbc.Close();
+            dt.Dispose(); fs.Close(); sr.Close();
 
+            #endregion
 
-            //Calculo_iss_vs reg_iss = new Calculo_iss_vs {
-            //    Ano = (short)_ano,
-            //    Lancamento = 13,
-            //    Qtde_parcela = (byte)_qtde_parcelas
-            //};
+            #region PARCELADOCUMENTO
+            MsgToolStrip.Text = "Inserindo parcelas por documento";
+            Refresh();
 
-            //reg_iss.Codigo = item.Codmobiliario;
-            //switch (_parcela) {
-            //    case 0:
-            //        reg_iss.Documento0 = _documento;
-            //        reg_iss.Vencimento0 = Convert.ToDateTime(_vencto);
-            //        reg_iss.Valor0 = _valor_parcela;
-            //        break;
-            //    case 1:
-            //        reg_iss.Documento1 = _documento;
-            //        reg_iss.Vencimento1 = Convert.ToDateTime(_vencto);
-            //        reg_iss.Valor1 = _valor_parcela;
-            //        break;
-            //    case 2:
-            //        reg_iss.Documento2 = _documento;
-            //        reg_iss.Vencimento2 = Convert.ToDateTime(_vencto);
-            //        break;
-            //    case 3:
-            //        reg_iss.Documento3 = _documento;
-            //        reg_iss.Vencimento3 = Convert.ToDateTime(_vencto);
-            //        break;
-            //    case 4:
-            //        reg_iss.Documento4 = _documento;
-            //        reg_iss.Vencimento4 = Convert.ToDateTime(_vencto);
-            //        break;
-            //    default:
-            //        break;
-            //}
+            dt = new DataTable();
+            dt.Columns.Add("codreduzido", typeof(int));
+            dt.Columns.Add("anoexercicio", typeof(short));
+            dt.Columns.Add("codlancamento", typeof(short));
+            dt.Columns.Add("seqlancamento", typeof(short));
+            dt.Columns.Add("numparcela", typeof(byte));
+            dt.Columns.Add("codcomplemento", typeof(byte));
+            dt.Columns.Add("numdocumento", typeof(int));
 
-            //Exception ex = tributario_Class.Insert_Calculo_Iss_VS(reg_iss);
-            //if (ex != null) {
-            //    ErrorBox eBox = new ErrorBox("Erro", ex.Message, ex);
-            //    eBox.ShowDialog();
-            //}
+            fs = new FileStream(_path + "PARCELADOCUMENTO.TXT", FileMode.Open, FileAccess.Read);
+            sr = new StreamReader(fs, System.Text.Encoding.Default);
+            while (!sr.EndOfStream) {
+                string _line = sr.ReadLine();
+                string[] _fields = _line.Split('#');
+                DataRow _row = dt.NewRow();
+                _row["codreduzido"] = Convert.ToInt32(_fields[0]);
+                _row["anoexercicio"] = Convert.ToInt16(_fields[1]);
+                _row["codlancamento"] = Convert.ToInt16(_fields[2]);
+                _row["seqlancamento"] = Convert.ToInt16(_fields[3]);
+                _row["numparcela"] = Convert.ToByte(_fields[4]);
+                _row["codcomplemento"] = Convert.ToByte(_fields[5]);
+                _row["numdocumento"] = Convert.ToInt32(_fields[6]);
+                dt.Rows.Add(_row);
+            }
 
+            sbc = new SqlBulkCopy(_connection);
+            sbc.BulkCopyTimeout = 0;
+            sbc.DestinationTableName = "PARCELADOCUMENTO";
+            sbc.WriteToServer(dt);
+            sbc.Close();
+            dt.Dispose(); sr.Close(); fs.Close();
 
+            #endregion
 
+            #region NUMDOCUMENTO
+            MsgToolStrip.Text = "Inserindo números de documento";
+            Refresh();
 
+            dt = new DataTable();
+            dt.Columns.Add("numdocumento", typeof(int));
+            dt.Columns.Add("datadocumento", typeof(DateTime));
 
-            //MsgToolStrip.Text = "Inserindo tributos";
-            //Refresh();
-            //sbc = new SqlBulkCopy(_connection);
-            //sbc.BulkCopyTimeout = 0;
-            //sbc.DestinationTableName = "DEBITOTRIBUTO";
-            //sbc.WriteToServer(dtDT);
-            //sbc.Close();
+            fs = new FileStream(_path + "NUMDOCUMENTO.TXT", FileMode.Open, FileAccess.Read);
+            sr = new StreamReader(fs, System.Text.Encoding.Default);
+            while (!sr.EndOfStream) {
+                string _line = sr.ReadLine();
+                string[] _fields = _line.Split('#');
+                DataRow _row = dt.NewRow();
+                _row["numdocumento"] = Convert.ToInt32(_fields[0]);
+                _row["datadocumento"] = Convert.ToDateTime(_fields[1]);
+                dt.Rows.Add(_row);
+            }
 
-            //MsgToolStrip.Text = "Inserindo parcelas por documento";
-            //Refresh();
-            //sbc = new SqlBulkCopy(_connection);
-            //sbc.BulkCopyTimeout = 0;
-            //sbc.DestinationTableName = "PARCELADOCUMENTO";
-            //sbc.WriteToServer(dtPD);
-            //sbc.Close();
+            sbc = new SqlBulkCopy(_connection);
+            sbc.BulkCopyTimeout = 0;
+            sbc.DestinationTableName = "NUMDOCUMENTO";
+            sbc.WriteToServer(dt);
+            sbc.Close();
+            dt.Dispose(); sr.Close(); fs.Close();
 
+            #endregion
 
+            #region CALCULO_ISS_VS
+            MsgToolStrip.Text = "Gravando cálculo";
+            Refresh();
+
+            dt = new DataTable();
+            dt.Columns.Add("ano", typeof(short));
+            dt.Columns.Add("codigo", typeof(int));
+            dt.Columns.Add("lancamento", typeof(short));
+            dt.Columns.Add("valor0", typeof(decimal));
+            dt.Columns.Add("valor1", typeof(decimal));
+            dt.Columns.Add("documento0", typeof(int));
+            dt.Columns.Add("vencimento0", typeof(DateTime));
+            dt.Columns.Add("documento1", typeof(int));
+            dt.Columns.Add("vencimento1", typeof(DateTime));
+            dt.Columns.Add("documento2", typeof(int));
+            dt.Columns.Add("vencimento2", typeof(DateTime));
+            dt.Columns.Add("documento3", typeof(int));
+            dt.Columns.Add("vencimento3", typeof(DateTime));
+            dt.Columns.Add("documento4", typeof(int));
+            dt.Columns.Add("vencimento4", typeof(DateTime));
+            dt.Columns.Add("qtde_parcela", typeof(byte));
+
+            fs = new FileStream(_path + "CALCULO_ISS_VS.TXT", FileMode.Open, FileAccess.Read);
+            sr = new StreamReader(fs, System.Text.Encoding.Default);
+            while (!sr.EndOfStream) {
+                string _line = sr.ReadLine();
+                string[] _fields = _line.Split('#');
+                DataRow _row = dt.NewRow();
+                _row["ano"] = Convert.ToInt16( _fields[0]);
+                _row["codigo"] = Convert.ToInt32(_fields[1]);
+                _row["lancamento"] = Convert.ToInt16(_fields[2]);
+                _row["valor0"] = Convert.ToDecimal(_fields[3]);
+                _row["valor1"] = Convert.ToDecimal(_fields[4]);
+                _row["documento0"] = Convert.ToInt32(_fields[5]);
+                _row["vencimento0"] = Convert.ToDateTime(_fields[6]);
+                _row["documento1"] = Convert.ToInt32(_fields[7]);
+                _row["vencimento1"] = Convert.ToDateTime(_fields[8]);
+                _row["documento2"] = Convert.ToInt32(_fields[9]);
+                _row["vencimento2"] = Convert.ToDateTime(_fields[10]);
+                if (_fields[11] != "") {
+                    _row["documento3"] = Convert.ToInt32(_fields[11]);
+                    _row["vencimento3"] = Convert.ToDateTime(_fields[12]);
+                    _row["documento4"] = Convert.ToInt32(_fields[13]);
+                    _row["vencimento4"] = Convert.ToDateTime(_fields[14]);
+                }
+                _row["qtde_parcela"] = Convert.ToByte(_fields[15]);
+                dt.Rows.Add(_row);
+            }
+
+            sbc = new SqlBulkCopy(_connection);
+            sbc.BulkCopyTimeout = 0;
+            sbc.DestinationTableName = "CALCULO_ISS_VS";
+            sbc.WriteToServer(dt);
+            sbc.Close();
+            dt.Dispose(); sr.Close(); fs.Close();
+
+            #endregion
+
+            MsgToolStrip.Text = "Selecione uma opção de cálculo";
+            Refresh();
+            MessageBox.Show("Exportação finalizada.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
 
 
     }

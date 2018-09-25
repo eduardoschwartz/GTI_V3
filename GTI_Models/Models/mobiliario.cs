@@ -113,6 +113,9 @@ namespace GTI_Models.Models {
         public string Atividade_extenso { get; set; }
         public float? Area { get; set; }
         public byte? Codigo_aliquota { get; set; }
+        public float? Valor_aliquota1 { get; set; }
+        public float? Valor_aliquota2 { get; set; }
+        public float? Valor_aliquota3 { get; set; }
         public DateTime? Data_inicial_desconto { get; set; }
         public DateTime? Data_final_desconto { get; set; }
         public float? Percentual_desconto { get; set; }

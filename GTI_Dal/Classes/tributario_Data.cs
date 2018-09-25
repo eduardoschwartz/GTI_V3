@@ -1755,5 +1755,11 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public decimal Retorna_Valor_Tributo(int Ano,int Codigo) {
+            using (var db = new GTI_Context(_connection)) {
+                decimal Sql = (from t in db.Tributoaliquota where t.Ano==Ano && t.Codtributo==Codigo select t.Valoraliq).FirstOrDefault();
+                return Sql;
+            }
+        }
     }//end class
 }

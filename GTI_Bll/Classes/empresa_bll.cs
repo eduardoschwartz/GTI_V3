@@ -554,6 +554,14 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Empresas_Vigilancia_Sanitaria();
         }
 
+        /// <summary>
+        /// Lista das empresas que possuem Iss Fixo/TLL
+        /// </summary>
+        /// <returns></returns>
+        public List<EmpresaStruct> Lista_Empresas_ISS_Fixo_TLL() {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Lista_Empresas_ISS_Fixo_TLL();
+        }
 
     }
 }
