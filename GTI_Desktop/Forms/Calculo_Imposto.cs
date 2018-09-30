@@ -12,9 +12,9 @@ namespace GTI_Desktop.Forms {
     public partial class Calculo_Imposto : Form {
         string _connection = gtiCore.Connection_Name();
         string _path = @"c:\cadastro\bin\";
-        int _ano = 2019;
+        int _ano = 2018;
         int _documento = 19555444;
-        decimal _ipca = (decimal)2.5377;
+        decimal _ipca = (decimal)3.2649;
 
         private enum Tipo_imposto {
             Iptu = 1,
@@ -50,7 +50,117 @@ namespace GTI_Desktop.Forms {
             ExecutarButton.Enabled = true;
         }
 
+        private int _qtde_normal { get; set; }
         private void Calculo_Iptu() {
+
+            FileStream fsDP = new FileStream(_path + "DEBITOPARCELA.TXT", FileMode.Create, FileAccess.Write);
+            StreamWriter fs1 = new StreamWriter(fsDP, System.Text.Encoding.Default);
+            FileStream fsDT = new FileStream(_path + "DEBITOTRIBUTO.TXT", FileMode.Create, FileAccess.Write);
+            StreamWriter fs2 = new StreamWriter(fsDT, System.Text.Encoding.Default);
+            FileStream fsPD = new FileStream(_path + "PARCELADOCUMENTO.TXT", FileMode.Create, FileAccess.Write);
+            StreamWriter fs3 = new StreamWriter(fsPD, System.Text.Encoding.Default);
+            FileStream fsND = new FileStream(_path + "NUMDOCUMENTO.TXT", FileMode.Create, FileAccess.Write);
+            StreamWriter fs4 = new StreamWriter(fsND, System.Text.Encoding.Default);
+            FileStream fsCC = new FileStream(_path + "CALCULO_ISS_VS.TXT", FileMode.Create, FileAccess.Write);
+            StreamWriter fs5 = new StreamWriter(fsCC, System.Text.Encoding.Default);
+
+            MsgToolStrip.Text = "Calculando IPTU";
+
+            List<DateTime> aVencimento = new List<DateTime>();
+            List<decimal> aDesconto = new List<decimal>();
+
+            Tributario_bll tributario_Class = new Tributario_bll(_connection);
+            Paramparcela _Prm = tributario_Class.Retorna_Parametro_Parcela(_ano, (int)Tipo_imposto.Iptu);
+
+            aDesconto.Add((decimal)_Prm.Descontounica);
+            if (_Prm.Descontounica2 != null)
+                aDesconto.Add((decimal)_Prm.Descontounica2);
+            if (_Prm.Descontounica3 != null)
+                aDesconto.Add((decimal)_Prm.Descontounica3);
+
+            aVencimento.Add((DateTime)_Prm.Venc01);
+            aVencimento.Add((DateTime)_Prm.Venc02);
+            aVencimento.Add((DateTime)_Prm.Venc03);
+            aVencimento.Add((DateTime)_Prm.Venc04);
+            aVencimento.Add((DateTime)_Prm.Venc05);
+            aVencimento.Add((DateTime)_Prm.Venc06);
+            aVencimento.Add((DateTime)_Prm.Venc07);
+            aVencimento.Add((DateTime)_Prm.Venc08);
+            aVencimento.Add((DateTime)_Prm.Venc09);
+            aVencimento.Add((DateTime)_Prm.Venc10);
+            aVencimento.Add((DateTime)_Prm.Venc12);
+            aVencimento.Add((DateTime)_Prm.Venc12);
+
+            Imovel_bll imovel_Class = new Imovel_bll(_connection);
+            List<int> ListaAtivos = imovel_Class.Lista_Imovel_Ativo();
+
+            int _total = ListaAtivos.Count, _pos = 1;
+            int _qtde_normal = 0,_qtde_imune=0,_qtde_isento_area=0,_qtde_isento_processo=0,_qtde_total=0;
+            decimal _valor_si_normal = 0, _valor_si_imune = 0, _valor_si_isento_area = 0, _valor_si_isento_processo = 0, _valor_si_total = 0;
+            decimal _valor_ci_normal = 0, _valor_ci_imune = 0, _valor_ci_isento_area = 0, _valor_ci_isento_processo = 0, _valor_ci_total = 0;
+
+            string _documento0 = "", _documento1 = "", _documento2 = "", _documento3 = "", _documento4 = "", _documento5 = "", _documento6 = "", _documento7 = "";
+            string _documento8 = "", _documento9 = "", _documento10 = "", _documento11 = "", _documento12 = "", _documento91 = "", _documento92 = "";
+            string _vencimento0 = "", _vencimento1 = "", _vencimento2 = "", _vencimento3 = "", _vencimento4 = "", _vencimento5 = "", _vencimento6 = "", _vencimento7 = "";
+            string _vencimento8 = "", _vencimento9 = "", _vencimento10 = "", _vencimento11 = "", _vencimento12 = "", _vencimento91 = "", _vencimento92 = "";
+
+            foreach (int Codigo in ListaAtivos) {
+
+                if (Codigo > 50) break;
+                if (_pos % 50 == 0) {
+                    PBar.Value = _pos * 100 / _total;
+                    PBar.Update();
+                    Refresh();
+                    QtdeNormal.Text = _qtde_normal.ToString("00000");
+                    QtdeImune.Text = _qtde_imune.ToString("00000");
+                    QtdeIsentoArea.Text = _qtde_isento_area.ToString("00000");
+                    QtdeIsentoProcesso.Text = _qtde_isento_processo.ToString("00000");
+                    QtdeTotal.Text = _qtde_total.ToString("00000");
+
+                    Application.DoEvents();
+                }
+
+                SpCalculo _calc = tributario_Class.Calculo_IPTU(Codigo, _ano);
+                int _tipo_isencao = _calc.Tipoisencao;
+                switch (_tipo_isencao) {
+                    case 0:
+                        _qtde_normal += 1;
+                        _valor_ci_normal += _calc.Valorfinal;
+                        _valor_si_normal += _calc.Valorfinal;
+                        break;
+                    case 1:
+                        _qtde_imune += 1;
+                        _valor_ci_imune += _calc.Valorfinal;
+                        _valor_si_imune += _calc.Valorfinal;
+                        break;
+                    case 2:
+                        _qtde_isento_area += 1;
+                        _valor_ci_isento_area += _calc.Valorfinal;
+                        _valor_si_isento_area += _calc.Valorfinal;
+                        break;
+                    case 3:
+                        _qtde_isento_processo += 1;
+                        _valor_ci_isento_processo += _calc.Valorfinal;
+                        _valor_si_isento_processo += _calc.Valorfinal;
+                        break;
+                    default:
+                        break;
+                }
+
+
+                _pos++;
+            }
+
+            fs1.Close(); fs2.Close(); fs3.Close(); fs4.Close(); fs5.Close(); fsDP.Close(); fsDT.Close(); fsND.Close(); fsPD.Close(); fsCC.Close();
+            PBar.Value = 100;
+            PBar.Update();
+            MsgToolStrip.Text = "Selecione uma opção de cálculo";
+            Refresh();
+            MessageBox.Show("Cálculo finalizado.", "Infiormação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+ 
+
+
+
 
         }
 
@@ -92,20 +202,23 @@ namespace GTI_Desktop.Forms {
 
             int _qtde_parcelas = aVencimento.Count;
             bool _unica = _Prm.Parcelaunica == "S" ? true : false;
-            bool _possui_taxa = false;
+            
             decimal _valor_vistoria = tributario_Class.Retorna_Valor_Tributo(_ano, 24);
-
+            decimal _valor_vistoria_parcelado = _valor_vistoria / _qtde_parcelas;
 
             Empresa_bll empresa_Class = new Empresa_bll(_connection);
-            List<EmpresaStruct> ListaEmpresas = empresa_Class.Lista_Empresas_ISS_Fixo_TLL();
+            List<EmpresaStruct> ListaEmpresas = empresa_Class.Lista_Empresas_Taxa_Licenca();
+            List<Mobiliarioatividadeiss> ListaEmpresas_ISS_Fixo = empresa_Class.Lista_Empresas_ISS_Fixo();
             int _total = ListaEmpresas.Count, _pos = 1;
             string _documento0 = "", _documento1 = "", _documento2 = "", _documento3 = "", _documento4 = "", _valor0 = "", _valor1 = "";
             string _vencimento0 = "", _vencimento1 = "", _vencimento2 = "", _vencimento3 = "", _vencimento4 = "";
             decimal _valor_aliquota = 0;
 
             foreach (EmpresaStruct item in ListaEmpresas) {
+                bool _possui_taxa = false;
                 bool _vistoria = item.Vistoria == 1 ? true : false;
                 decimal _area = item.Area == null ? 0 : (decimal)item.Area;
+                int Codigo = item.Codigo;
                 int _codigo_aliquota = item.Codigo_aliquota == null ? 0 : (int)item.Codigo_aliquota;
                 switch (_codigo_aliquota) {
                     case 0:;
@@ -121,6 +234,15 @@ namespace GTI_Desktop.Forms {
                         break;
                     default:
                         break;
+                }
+
+                int _qtdeISS = 0;
+                decimal _valor_aliquota_ISS = 0;
+                foreach (Mobiliarioatividadeiss itemISS in ListaEmpresas_ISS_Fixo) {
+                    if (itemISS.Codmobiliario == Codigo) {
+                        _qtdeISS = itemISS.Qtdeiss == 0 ? 1 : itemISS.Qtdeiss;
+                        _valor_aliquota_ISS += (itemISS.Valoriss * _qtdeISS * _ipca);
+                    }
                 }
 
                 //Limitante de área
@@ -139,41 +261,70 @@ namespace GTI_Desktop.Forms {
                 if (_valor_aliquota < 14)
                     _valor_aliquota *= _area;
 
-                if (_valor_aliquota == 0 && !_vistoria)
-                    goto LABEL_ISS_FIXO;
-                else
+                if (_valor_aliquota == 0 && !_vistoria) {
+                    _possui_taxa = false;
+                } else
                     _possui_taxa = true;
+
 
                 for (int _parcela = 0; _parcela <= _qtde_parcelas; _parcela++) {
                     string _vencto = _parcela == 0 ? aVencimento[0].ToString("dd/MM/yyyy") : aVencimento[_parcela - 1].ToString("dd/MM/yyyy");
-                    string _linha = item.Codigo + "#" + _ano + "#6#0#" + _parcela + "#0#18#" + _vencto + "#01/01/" + _ano;
+                    string _linha = Codigo + "#" + _ano + "#6#0#" + _parcela + "#0#18#" + _vencto + "#01/01/" + _ano;
                     fs1.WriteLine(_linha);
-
+                    
                     decimal _valor = _valor_aliquota/3, _valor_unica = (_valor_aliquota / 3) - ((_valor_aliquota / 3) * (decimal)0.05);
                     decimal _valor_parcela = _parcela > 0 ? _valor : _valor_unica;
-                    _linha = item.Codigo + "#" + _ano + "#6#0#" + _parcela + "#0#14#" + _valor_parcela.ToString("#0.00");
-                    fs2.WriteLine(_linha);
-                    if (_vistoria) {
-                        _linha = item.Codigo + "#" + _ano + "#6#0#" + _parcela + "#0#24#" + _valor_vistoria.ToString("#0.00");
+                    decimal _valor_boleto_parcela = _valor_parcela, _valor_boleto_unica = _valor_unica;
+                    if (_valor_parcela > 0) {
+                        _linha = Codigo + "#" + _ano + "#6#0#" + _parcela + "#0#14#" + _valor_parcela.ToString("#0.00");
                         fs2.WriteLine(_linha);
                     }
+                    if (_vistoria) {
+                        decimal _valor_vistoria_tmp = _parcela == 0 ? _valor_vistoria : _valor_vistoria_parcelado;
+                        _linha = item.Codigo + "#" + _ano + "#6#0#" + _parcela + "#0#24#" + _valor_vistoria_tmp.ToString("#0.00");
+                        fs2.WriteLine(_linha);
+                        _valor_boleto_parcela += _valor_vistoria_parcelado; _valor_boleto_unica += _valor_vistoria;
+                    }
 
-                    _linha = item.Codigo + "#" + _ano + "#6#0#" + _parcela + "#0#" + _documento;
-                    fs3.WriteLine(_linha);
+                    if (_possui_taxa) {
+                        _linha = Codigo + "#" + _ano + "#6#0#" + _parcela + "#0#" + _documento;
+                        fs3.WriteLine(_linha);
+                        _linha = _documento + "#" + DateTime.Now.ToString("dd/MM/yyyy");
+                        fs4.WriteLine(_linha);
+                    } 
 
-                    _linha = _documento + "#" + DateTime.Now.ToString("dd/MM/yyyy");
-                    fs4.WriteLine(_linha);
+                    if (_valor_aliquota_ISS > 0) {
+                        _linha = Codigo + "#" + _ano + "#14#0#" + _parcela + "#0#18#" + _vencto + "#01/01/" + _ano;
+                        fs1.WriteLine(_linha);
+
+                        _valor = _valor_aliquota_ISS / 3;
+                        _valor_unica = (_valor_aliquota_ISS / 3) - ((_valor_aliquota_ISS / 3) * (decimal)0.05);
+                        _valor_parcela = _parcela > 0 ? _valor : _valor_unica;
+                        _valor_boleto_parcela += _valor_parcela; _valor_boleto_unica += _valor_unica;
+                        _linha = Codigo + "#" + _ano + "#14#0#" + _parcela + "#0#11#" + _valor_parcela.ToString("#0.00");
+                        fs2.WriteLine(_linha);
+                        if (!_possui_taxa) {
+                            _linha = Codigo + "#" + _ano + "#14#0#" + _parcela + "#0#" + _documento;
+                            fs3.WriteLine(_linha);
+
+                            _linha = _documento + "#" + DateTime.Now.ToString("dd/MM/yyyy");
+                            fs4.WriteLine(_linha);
+                        } else {
+                            _linha = Codigo + "#" + _ano + "#14#0#" + _parcela + "#0#" + _documento;
+                            fs3.WriteLine(_linha);
+                        }
+                    }
 
                     switch (_parcela) {
                         case 0:
                             _documento0 = _documento.ToString();
                             _vencimento0 = _vencto.ToString();
-                            _valor0 = _valor_parcela.ToString("#0.00");
+                            _valor0 = _valor_boleto_unica.ToString("#0.00");
                             break;
                         case 1:
                             _documento1 = _documento.ToString();
                             _vencimento1 = _vencto.ToString();
-                            _valor1 = _valor_parcela.ToString("#0.00");
+                            _valor1 = _valor_boleto_parcela.ToString("#0.00");
                             break;
                         case 2:
                             _documento2 = _documento.ToString();
@@ -194,18 +345,13 @@ namespace GTI_Desktop.Forms {
                     _documento++;
                 }
 
-                string _linha_calc = _ano.ToString() + "#" + item.Codigo + "#6#" + _valor0 + "#" + _valor1 + "#" +
+                string _linha_calc = _ano.ToString() + "#" + Codigo + "#6#" + _valor0 + "#" + _valor1 + "#" +
                 _documento0 + "#" + _vencimento0 + "#" + _documento1 + "#" + _vencimento1 + "#" + _documento2 + '#' + _vencimento2 + "#" + _documento3 + "#" +
                 _vencimento3 + "#" + _documento4 + "#" + _vencimento4 + "#" + _qtde_parcelas.ToString();
                 fs5.WriteLine(_linha_calc);
 
                 _pos++;
-
-
-LABEL_ISS_FIXO:;
-
             }
-
 
             fs1.Close(); fs2.Close(); fs3.Close(); fs4.Close(); fs5.Close(); fsDP.Close(); fsDT.Close(); fsND.Close(); fsPD.Close(); fsCC.Close();
             PBar.Value = 100;
@@ -228,7 +374,6 @@ LABEL_ISS_FIXO:;
             StreamWriter fs4 = new StreamWriter(fsND, System.Text.Encoding.Default);
             FileStream fsCC = new FileStream(_path + "CALCULO_ISS_VS.TXT", FileMode.Create, FileAccess.Write);
             StreamWriter fs5 = new StreamWriter(fsCC, System.Text.Encoding.Default);
-
 
             MsgToolStrip.Text = "Calculando vigilância sanitária";
             List<DateTime> aVencimento = new List<DateTime>();
@@ -548,6 +693,8 @@ LABEL_ISS_FIXO:;
                 if (_fields[11] != "") {
                     _row["documento3"] = Convert.ToInt32(_fields[11]);
                     _row["vencimento3"] = Convert.ToDateTime(_fields[12]);
+                }
+                if (_fields[13] != "") {
                     _row["documento4"] = Convert.ToInt32(_fields[13]);
                     _row["vencimento4"] = Convert.ToDateTime(_fields[14]);
                 }

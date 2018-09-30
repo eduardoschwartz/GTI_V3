@@ -81,7 +81,7 @@ namespace GTI_Dal.Classes {
         public List<Mobiliarioatividadevs2> Lista_Empresas_Vigilancia_Sanitaria() {
             using (var db = new GTI_Context(_connection)) {
                 List<Mobiliarioatividadevs2> ListaFinal = new List<Mobiliarioatividadevs2>();
-                List<Mobiliarioatividadevs2> ListaGeral = (from m in db.Mobiliarioatividadevs2 select m).ToList();
+                List<Mobiliarioatividadevs2> ListaGeral = (from m in db.Mobiliarioatividadevs2 orderby m.Codmobiliario select m).ToList();
                 List<int> ListaAtivos = Lista_Empresas_Ativas();
                 for (int i = 0; i < ListaGeral.Count; i++) {
                     for (int w = 0; w < ListaAtivos.Count; w++) {
@@ -99,10 +99,11 @@ namespace GTI_Dal.Classes {
             }
         }
 
-        public List<EmpresaStruct> Lista_Empresas_ISS_Fixo_TLL() {
+        public List<EmpresaStruct> Lista_Empresas_Taxa_Licenca() {
             using (var db = new GTI_Context(_connection)) {
                 List<EmpresaStruct> ListaFinal = new List<EmpresaStruct>();
                 var ListaGeral = (from m in db.Mobiliario join a in db.Atividade on m.Codatividade equals a.Codatividade into ma from a in ma.DefaultIfEmpty()
+                                  orderby m.Codigomob
                                   select new EmpresaStruct { Codigo=m.Codigomob,Area=m.Areatl,Codigo_aliquota=m.Codigoaliq,Valor_aliquota1=(float)a.Valoraliq1,
                                   Valor_aliquota2= (float)a.Valoraliq2,Valor_aliquota3= (float)a.Valoraliq3,Isento_taxa=m.Isentotaxa,Vistoria=m.Vistoria});
 
@@ -129,6 +130,28 @@ namespace GTI_Dal.Classes {
                 return ListaFinal;
             }
         }
+
+        public List<Mobiliarioatividadeiss> Lista_Empresas_ISS_Fixo() {
+            using (var db = new GTI_Context(_connection)) {
+                List<Mobiliarioatividadeiss> ListaFinal = new List<Mobiliarioatividadeiss>();
+                List<Mobiliarioatividadeiss> ListaGeral = (from m in db.Mobiliarioatividadeiss where m.Codtributo==11 orderby m.Codmobiliario select m).ToList();
+                List<int> ListaAtivos = Lista_Empresas_Ativas();
+                for (int i = 0; i < ListaGeral.Count; i++) {
+                    for (int w = 0; w < ListaAtivos.Count; w++) {
+                        if (ListaGeral[i].Codmobiliario == ListaAtivos[w]) {
+                            Mobiliarioatividadeiss reg = new Mobiliarioatividadeiss();
+                            reg.Codmobiliario = ListaGeral[i].Codmobiliario;
+                            reg.Qtdeiss = ListaGeral[i].Qtdeiss;
+                            reg.Valoriss = ListaGeral[i].Valoriss;
+                            ListaFinal.Add(reg);
+                        }
+                    }
+                }
+
+                return ListaFinal;
+            }
+        }
+
 
         public int Existe_EmpresaCnpj(string sCNPJ) {
             int nCodigo = 0;

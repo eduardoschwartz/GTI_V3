@@ -446,6 +446,14 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        /// <summary>
+        /// Lista os códigos dos imóveis ativos
+        /// </summary>
+        /// <returns></returns>
+        public List<int> Lista_Imovel_Ativo() {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Lista_Imovel_Ativo();
+        }
 
     }//end class
 }

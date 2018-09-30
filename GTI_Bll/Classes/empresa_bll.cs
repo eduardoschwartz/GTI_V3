@@ -555,13 +555,23 @@ namespace GTI_Bll.Classes {
         }
 
         /// <summary>
-        /// Lista das empresas que possuem Iss Fixo/TLL
+        /// Lista das empresas que possuem Taxa de Licença
         /// </summary>
         /// <returns></returns>
-        public List<EmpresaStruct> Lista_Empresas_ISS_Fixo_TLL() {
+        public List<EmpresaStruct> Lista_Empresas_Taxa_Licenca() {
             Empresa_Data obj = new Empresa_Data(_connection);
-            return obj.Lista_Empresas_ISS_Fixo_TLL();
+            return obj.Lista_Empresas_Taxa_Licenca();
         }
+
+        /// <summary>
+        /// Lista das empresas que possuem ISS Fixo
+        /// </summary>
+        /// <returns></returns>
+        public List<Mobiliarioatividadeiss> Lista_Empresas_ISS_Fixo() {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Lista_Empresas_ISS_Fixo();
+        }
+
 
     }
 }

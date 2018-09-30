@@ -502,6 +502,13 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public List<int> Lista_Imovel_Ativo() {
+            using (var db = new GTI_Context(_connection)) {
+                var Sql = (from e in db.Cadimob where e.Inativo ==false orderby e.Codreduzido select e.Codreduzido).ToList();
+                return Sql;
+            }
+        }
+
         public List<Condominio> Lista_Condominio() {
             using (var db = new GTI_Context(_connection)) {
                 var Sql = (from e in db.Condominio where e.Cd_codigo > 0 orderby e.Cd_nomecond select e).ToList();
