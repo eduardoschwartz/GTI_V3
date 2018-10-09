@@ -51,6 +51,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private int _qtde_normal { get; set; }
+
         private void Calculo_Iptu() {
 
             FileStream fsDP = new FileStream(_path + "DEBITOPARCELA.TXT", FileMode.Create, FileAccess.Write);
@@ -103,10 +104,11 @@ namespace GTI_Desktop.Forms {
             string _documento8 = "", _documento9 = "", _documento10 = "", _documento11 = "", _documento12 = "", _documento91 = "", _documento92 = "";
             string _vencimento0 = "", _vencimento1 = "", _vencimento2 = "", _vencimento3 = "", _vencimento4 = "", _vencimento5 = "", _vencimento6 = "", _vencimento7 = "";
             string _vencimento8 = "", _vencimento9 = "", _vencimento10 = "", _vencimento11 = "", _vencimento12 = "", _vencimento91 = "", _vencimento92 = "";
+            string  _valor0 = "",_valor91="",_valor92="";
 
             foreach (int Codigo in ListaAtivos) {
 
-                if (Codigo > 50) break;
+                if (Codigo > 200) break;
                 if (_pos % 50 == 0) {
                     PBar.Value = _pos * 100 / _total;
                     PBar.Update();
@@ -116,38 +118,127 @@ namespace GTI_Desktop.Forms {
                     QtdeIsentoArea.Text = _qtde_isento_area.ToString("00000");
                     QtdeIsentoProcesso.Text = _qtde_isento_processo.ToString("00000");
                     QtdeTotal.Text = _qtde_total.ToString("00000");
-
+                    Valor_ci_Normal.Text = _valor_ci_normal.ToString("#0.00");
+                    Valor_si_Normal.Text = _valor_si_normal.ToString("#0.00");
+                    Valor_si_IsentoArea.Text = _valor_si_isento_area.ToString("#0.00");
+                    Valor_si_IsentoProcesso.Text = _valor_si_isento_processo.ToString("#0.00");
+                    Valor_si_Imune.Text = _valor_si_imune.ToString("#0.00");
+                    Valor_si_Total.Text = _valor_si_total.ToString("#0.00");
+                    Valor_ci_Total.Text = _valor_ci_total.ToString("#0.00");
                     Application.DoEvents();
                 }
 
                 SpCalculo _calc = tributario_Class.Calculo_IPTU(Codigo, _ano);
                 int _tipo_isencao = _calc.Tipoisencao;
+                int _qtde_parcela = _calc.Qtdeparc;
+                decimal _perc_Isencao = _calc.Percisencao;
+                decimal _vvp = _calc.Vvp,_vvt=_calc.Vvt,_vvi=_calc.Vvi;
+                string _natureza = _calc.Natureza;
+                decimal _valor_parcela =_calc.Valorparcela;
+                decimal _valor_unica = _calc.Valorunica;
+                decimal _valor_unica2 = _calc.Valorunica2;
+                decimal _valor_unica3 = _calc.Valorunica3;
+                decimal _valor_IPTU = _calc.Valoriptu;
+                decimal _valor_ITU = _calc.Valoritu;
+                decimal _area_predial = _calc.Areapredial;
+                decimal _area_terreno = _calc.Areaterreno;
+                decimal _testada = _calc.Testadaprinc;
+                decimal _fcat = _calc.Fcat, _fped = _calc.Fped, _fsit = _calc.Fsit, _fpro = _calc.Fpro, _ftop = _calc.Ftop, _fdis = _calc.Fdis, _fgle = _calc.Fgle;
+                decimal _agrupamento = _calc.Agrupamento, _fracao = _calc.Fracao, _aliquota = _calc.Aliquota;
+
+
+                //grava cálculo
+                string _linha_calc = _ano.ToString() + "#" + Codigo + "#" + _vvt.ToString("#0.00") + "#" + _vvp.ToString("#0.00") + "#" + _vvi.ToString("#0.00") + "#";
+                _linha_calc += _valor_IPTU.ToString("#0.00") + "#" + _valor_ITU.ToString("#0.00") + "#" + _natureza;
+                fs5.WriteLine(_linha_calc);
+
+
+
+                int _tributo = _vvp == 0 ? 2 : 1;
                 switch (_tipo_isencao) {
                     case 0:
                         _qtde_normal += 1;
                         _valor_ci_normal += _calc.Valorfinal;
-                        _valor_si_normal += _calc.Valorfinal;
+                        _valor_si_normal += _calc.Valorfinalfull;
                         break;
                     case 1:
                         _qtde_imune += 1;
-                        _valor_ci_imune += _calc.Valorfinal;
-                        _valor_si_imune += _calc.Valorfinal;
+                        _valor_si_imune += _calc.Valorfinalfull;
                         break;
                     case 2:
                         _qtde_isento_area += 1;
-                        _valor_ci_isento_area += _calc.Valorfinal;
-                        _valor_si_isento_area += _calc.Valorfinal;
+                        _valor_si_isento_area += _calc.Valorfinalfull;
                         break;
                     case 3:
                         _qtde_isento_processo += 1;
-                        _valor_ci_isento_processo += _calc.Valorfinal;
-                        _valor_si_isento_processo += _calc.Valorfinal;
+                        _valor_si_isento_processo += _calc.Valorfinalfull;
                         break;
                     default:
                         break;
                 }
+                _qtde_total = _qtde_normal + _qtde_imune + _qtde_isento_area + _qtde_isento_processo;
+                _valor_ci_total = _valor_ci_normal + _valor_ci_imune + _valor_ci_isento_area + _valor_ci_isento_processo;
+                _valor_si_total = _valor_si_normal + _valor_si_imune + _valor_si_isento_area + _valor_si_isento_processo;
+
+                if (_tipo_isencao == 0 || (_tipo_isencao == 3 && _perc_Isencao < 100)) {
+
+                    //parcelas únicas
+                    string _linha = Codigo + "#" + _ano + "#1#0#0#0#18#" + aVencimento[0].ToString("dd/MM/yyyy") + "#01/01/" + _ano;
+                    fs1.WriteLine(_linha);
+                    _linha = Codigo + "#" + _ano + "#1#0#0#0#" + _tributo.ToString() + "#" + _valor_unica.ToString("#0.00");
+                    fs2.WriteLine(_linha);
+                    _linha = Codigo + "#" + _ano + "#1#0#0#0#" + _documento;
+                    fs3.WriteLine(_linha);
+                    _linha = _documento + "#" + DateTime.Now.ToString("dd/MM/yyyy");
+                    fs4.WriteLine(_linha);
+                    _documento0 = _documento.ToString();
+                    _vencimento0 = aVencimento[0].ToString("dd/MM/yyyy");
+                    _valor0 = _valor_unica.ToString("#0.00");
+                    _documento++;
+
+                    if (_Prm.Descontounica2 != null) {
+                        _linha = Codigo + "#" + _ano + "#1#0#0#91#18#" + aVencimento[1].ToString("dd/MM/yyyy") + "#01/01/" + _ano;
+                        fs1.WriteLine(_linha);
+                        _linha = Codigo + "#" + _ano + "#1#0#0#91#" + _tributo.ToString() + "#" + _valor_unica2.ToString("#0.00");
+                        fs2.WriteLine(_linha);
+                        _linha = Codigo + "#" + _ano + "#1#0#0#91#" + _documento;
+                        fs3.WriteLine(_linha);
+                        _linha = _documento + "#" + DateTime.Now.ToString("dd/MM/yyyy");
+                        fs4.WriteLine(_linha);
+                        _valor91 = _valor_unica2.ToString("#0.00");
+                        _documento++;
+                    }
+
+                    if (_Prm.Descontounica3 != null) {
+                        _linha = Codigo + "#" + _ano + "#1#0#0#92#18#" + aVencimento[2].ToString("dd/MM/yyyy") + "#01/01/" + _ano;
+                        fs1.WriteLine(_linha);
+                        _linha = Codigo + "#" + _ano + "#1#0#0#92#" + _tributo.ToString() + "#" + _valor_unica3.ToString("#0.00");
+                        fs2.WriteLine(_linha);
+                        _linha = Codigo + "#" + _ano + "#1#0#0#92#" + _documento;
+                        fs3.WriteLine(_linha);
+                        _linha = _documento + "#" + DateTime.Now.ToString("dd/MM/yyyy");
+                        fs4.WriteLine(_linha);
+                        _valor92 = _valor_unica3.ToString("#0.00");
+                        _documento++;
+                    }
+
+                    //parcelas normais
+                    for (int _parcela = 1; _parcela <= _qtde_parcela; _parcela++) {
+                        _linha = Codigo + "#" + _ano + "#1#0#" + _parcela + "#0#18#" + aVencimento[_parcela - 1].ToString("dd/MM/yyyy") + "#01/01/" + _ano;
+                        fs1.WriteLine(_linha);
+                        _linha = Codigo + "#" + _ano + "#1#0#" + _parcela + "#0#" + _tributo.ToString() + "#" + _valor_parcela.ToString("#0.00");
+                        fs2.WriteLine(_linha);
+                        _linha = Codigo + "#" + _ano + "#1#0#" + _parcela + "#0#" + _documento;
+                        fs3.WriteLine(_linha);
+                        _linha = _documento + "#" + DateTime.Now.ToString("dd/MM/yyyy");
+                        fs4.WriteLine(_linha);
+                        _documento++;
+                    }
 
 
+
+
+                }
                 _pos++;
             }
 
@@ -157,10 +248,6 @@ namespace GTI_Desktop.Forms {
             MsgToolStrip.Text = "Selecione uma opção de cálculo";
             Refresh();
             MessageBox.Show("Cálculo finalizado.", "Infiormação", MessageBoxButtons.OK, MessageBoxIcon.Information);
- 
-
-
-
 
         }
 

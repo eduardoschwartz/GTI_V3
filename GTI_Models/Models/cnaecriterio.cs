@@ -14,9 +14,19 @@ namespace GTI_Models.Models {
         [Key]
         [Column(Order = 2)]
         public int Criterio { get; set; }
-        public double? Valor { get; set; }
+        public decimal Valor { get; set; }
         [Key]
         [Column(Order = 3)]
         public string Cnae { get; set; }
     }
+
+    public class CnaecriterioStruct {
+        public int Seq { get; set; }
+        public string Cnae { get; set; }
+        public int Criterio { get; set; }
+        public decimal Valor { get; set; }
+        public string Descricao { get; set; }
+    }
+
+
 }

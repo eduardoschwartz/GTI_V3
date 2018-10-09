@@ -572,6 +572,14 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Empresas_ISS_Fixo();
         }
 
+        /// <summary>
+        /// Lista dos critérios de um CNAE
+        /// </summary>
+        /// <returns></returns>
+        public List<CnaecriterioStruct> Lista_Cnae_Criterio(string Cnae) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Lista_Cnae_Criterio(Cnae);
+        }
 
     }
 }

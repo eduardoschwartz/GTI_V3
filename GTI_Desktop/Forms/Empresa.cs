@@ -121,6 +121,8 @@ namespace GTI_Desktop.Forms {
             QtdeFuncionario.Text = "";
             CapitalSocial.Text = "";
             ProcessosListView.Items.Clear();
+            AtividadeISSListView.Items.Clear();
+            AtividadeVSListView.Items.Clear();
             Placa.Text = "";
             InscTemp_chk.Checked = false;
             SustitutoTrib_chk.Checked = false;

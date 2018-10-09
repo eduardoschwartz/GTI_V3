@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace GTI_Desktop.Classes {
     public static class GtiTypes {
         public static string UserBinary { get; set; }
+
         internal class CustomListBoxItem {
             public int _value { get; set; }
             public string _name { get; set; }
@@ -53,6 +54,23 @@ namespace GTI_Desktop.Classes {
             }
         }
 
+        internal class CustomListBoxItem4 {
+            public int _value { get; set; }
+            public string _name { get; set; }
+            public decimal _value2 { get; set; }
+
+            public CustomListBoxItem4(string name, int value, decimal value2) {
+                _name = name;
+                _value = value;
+                _value2 = value2;
+            }
+
+            public override string ToString() {
+                return _name;
+            }
+        }
+
+
     }
-    
+
 }

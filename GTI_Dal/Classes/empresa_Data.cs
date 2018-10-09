@@ -332,6 +332,7 @@ namespace GTI_Dal.Classes {
                 
 
                 row.Atividade_extenso = reg.Atividade_extenso ?? "";
+                row.Cep = reg.Cep==null?"00000-000":reg.Cep;
                 if (reg.Cidade_codigo == 413) {
                     Endereco_Data Cep_Class = new Endereco_Data(_connection);
                     int nCep = Cep_Class.RetornaCep((int)reg.Endereco_codigo, (short)reg.Numero);
@@ -707,6 +708,24 @@ namespace GTI_Dal.Classes {
                 }
                 return Lista;
             }
+        }
+
+        public List<CnaecriterioStruct> Lista_Cnae_Criterio(string Cnae) {
+            List<CnaecriterioStruct> Lista = new List<CnaecriterioStruct>();
+            using(var db = new GTI_Context(_connection)) {
+                var rows = (from c in db.Cnaecriterio join d in db.Cnaecriteriodesc on c.Criterio equals d.Criterio where c.Cnae==Cnae
+                            select new CnaecriterioStruct { Seq=c.Seq,Cnae=c.Cnae,Criterio=c.Criterio,Valor=c.Valor,Descricao=d.Descricao});
+                foreach (var reg in rows) {
+                    CnaecriterioStruct Linha = new CnaecriterioStruct();
+                    Linha.Seq = reg.Seq;
+                    Linha.Cnae = reg.Cnae;
+                    Linha.Valor = reg.Valor;
+                    Linha.Criterio = reg.Criterio;
+                    Linha.Descricao = reg.Descricao;
+                    Lista.Add(Linha);
+                }
+            }
+            return Lista;
         }
 
         public SilStructure CarregaSil(int Codigo) {

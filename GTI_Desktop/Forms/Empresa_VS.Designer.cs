@@ -28,6 +28,10 @@
             this.CancelButton = new System.Windows.Forms.ToolStripButton();
             this.label1 = new System.Windows.Forms.Label();
             this.CnaeList = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.CriterioList = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.Valor = new System.Windows.Forms.Label();
             this.CnaeToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,7 +44,7 @@
             this.CnaeToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OkButton,
             this.CancelButton});
-            this.CnaeToolStrip.Location = new System.Drawing.Point(0, 228);
+            this.CnaeToolStrip.Location = new System.Drawing.Point(0, 84);
             this.CnaeToolStrip.Name = "CnaeToolStrip";
             this.CnaeToolStrip.Padding = new System.Windows.Forms.Padding(6, 0, 1, 0);
             this.CnaeToolStrip.Size = new System.Drawing.Size(498, 25);
@@ -74,25 +78,67 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 29;
-            this.label1.Text = "Cnae..:";
+            this.label1.Text = "Cnae...:";
             // 
             // CnaeList
             // 
-            this.CnaeList.DropDownWidth = 550;
+            this.CnaeList.DropDownWidth = 430;
             this.CnaeList.FormattingEnabled = true;
             this.CnaeList.Location = new System.Drawing.Point(59, 16);
             this.CnaeList.Name = "CnaeList";
             this.CnaeList.Size = new System.Drawing.Size(427, 21);
             this.CnaeList.TabIndex = 30;
+            this.CnaeList.SelectedIndexChanged += new System.EventHandler(this.CnaeList_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 49);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(45, 13);
+            this.label2.TabIndex = 31;
+            this.label2.Text = "Critério.:";
+            // 
+            // CriterioList
+            // 
+            this.CriterioList.DropDownWidth = 430;
+            this.CriterioList.FormattingEnabled = true;
+            this.CriterioList.Location = new System.Drawing.Point(59, 44);
+            this.CriterioList.Name = "CriterioList";
+            this.CriterioList.Size = new System.Drawing.Size(272, 21);
+            this.CriterioList.TabIndex = 32;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(346, 49);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.TabIndex = 33;
+            this.label3.Text = "Valor..:";
+            // 
+            // Valor
+            // 
+            this.Valor.AutoSize = true;
+            this.Valor.ForeColor = System.Drawing.Color.Maroon;
+            this.Valor.Location = new System.Drawing.Point(392, 49);
+            this.Valor.Name = "Valor";
+            this.Valor.Size = new System.Drawing.Size(28, 13);
+            this.Valor.TabIndex = 34;
+            this.Valor.Text = "0,00";
             // 
             // Empresa_VS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(498, 253);
+            this.ClientSize = new System.Drawing.Size(498, 109);
             this.ControlBox = false;
+            this.Controls.Add(this.Valor);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.CriterioList);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.CnaeList);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.CnaeToolStrip);
@@ -115,5 +161,9 @@
         private System.Windows.Forms.ToolStripButton CancelButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox CnaeList;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox CriterioList;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label Valor;
     }
 }
