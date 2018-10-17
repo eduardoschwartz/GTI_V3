@@ -10,9 +10,25 @@ namespace GTI_Desktop.Forms {
         string _connection = gtiCore.Connection_Name();
         public List<CnaeStruct> Lista_Cnae { get; set; }
 
-        public Empresa_Cnae(List<CnaeStruct>Lista_Cnae_Old, List<CnaeStruct> Lista_Cnae_VS) {
+        public Empresa_Cnae(List<CnaeStruct>Lista_Cnae_Old, List<CnaeStruct> Lista_Cnae_VS,bool Read_Only) {
             InitializeComponent();
+            AddButton.Enabled = !Read_Only;
+            DelButton.Enabled = !Read_Only;
             CnaeToolStrip.Renderer = new MySR();
+            MainListView.Items.Clear();
+
+            //Remove Cnae Duplicado
+Inicio:;
+            foreach (CnaeStruct itemCnaeVS in Lista_Cnae_VS) {
+                foreach (CnaeStruct itemCnae in Lista_Cnae_Old) {
+                    if (itemCnaeVS.CNAE == itemCnae.CNAE) {
+                        Lista_Cnae_VS.Remove(itemCnaeVS);
+                        goto Inicio;
+                    }
+                }
+            }
+
+
             foreach (CnaeStruct item in Lista_Cnae_Old) {
                 ListViewItem lvItem = new ListViewItem(item.CNAE);
                 lvItem.SubItems.Add(item.Descricao);

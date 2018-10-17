@@ -110,6 +110,7 @@
     <Content Include="Pages\alvara_vre.aspx" />
     <Content Include="Pages\boletoBB.aspx" />
     <Content Include="Pages\certidaodebito.aspx" />
+    <Content Include="Pages\certidaodebito_doc.aspx" />
     <Content Include="Pages\certidaoendereco.aspx" />
     <Content Include="Pages\certidaoinscricao.aspx" />
     <Content Include="Pages\certidaoisencao.aspx" />
@@ -196,6 +197,13 @@
     </Compile>
     <Compile Include="Pages\certidaodebito.aspx.designer.cs">
       <DependentUpon>certidaodebito.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\certidaodebito_doc.aspx.cs">
+      <DependentUpon>certidaodebito_doc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\certidaodebito_doc.aspx.designer.cs">
+      <DependentUpon>certidaodebito_doc.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\certidaoendereco.aspx.cs">
       <DependentUpon>certidaoendereco.aspx</DependentUpon>

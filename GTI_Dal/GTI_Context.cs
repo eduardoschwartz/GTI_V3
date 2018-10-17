@@ -123,6 +123,6 @@ namespace GTI_Dal {
         public DbSet<Cnaecriterio> Cnaecriterio { get; set; }
         public DbSet<Cnaecriteriodesc> Cnaecriteriodesc { get; set; }
         public DbSet<Paramparcela> Paramparcela { get; set; }
-        public DbSet<Calculo_iss_vs> Calculo_iss_vs { get; set; }
+        public DbSet<Calculo_resumo> Calculo_iss_vs { get; set; }
     }
 }

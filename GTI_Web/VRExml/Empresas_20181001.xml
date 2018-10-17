@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Empresas>
   <Empresa id="126510">
     <!--Dados gerais da empresa (recebidos da RFB)-->
@@ -2673,6 +2673,7 @@
     <!--Endereço do estabelecimento-->
     <Endereco>
       <SetorQuadraLote>6120570052079</SetorQuadraLote>
+      <TipoLogradouro>FZDA</TipoLogradouro>
       <Logradouro>FZDA SANTO ANTONIO</Logradouro>
       <NumeroLogradouro>S/N</NumeroLogradouro>
       <Bairro>RURAL</Bairro>

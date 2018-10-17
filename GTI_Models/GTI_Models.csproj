@@ -70,7 +70,7 @@
     <Compile Include="Models\boleto.cs" />
     <Compile Include="Models\boletoguia.cs" />
     <Compile Include="Models\cadimob.cs" />
-    <Compile Include="Models\calculo_iss_vs.cs" />
+    <Compile Include="Models\calculo_resumo.cs" />
     <Compile Include="Models\carta_cobranca.cs" />
     <Compile Include="Models\carta_cobranca_detalhe.cs" />
     <Compile Include="Models\carta_cobranca_exclusao.cs" />

@@ -885,9 +885,9 @@ namespace GTI_Bll.Classes {
         /// </summary>
         /// <param name="Reg"></param>
         /// <returns></returns>
-        public Exception Insert_Calculo_Iss_VS(Calculo_iss_vs Reg) {
+        public Exception Insert_Calculo_Iss_VS(Calculo_resumo Reg) {
             Tributario_Data obj = new Tributario_Data(_connection);
-            Exception ex = obj.Insert_Calculo_Iss_VS(Reg);
+            Exception ex = obj.Insert_Calculo_Resumo(Reg);
             return ex;
         }
 

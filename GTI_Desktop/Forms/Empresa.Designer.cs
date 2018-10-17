@@ -27,6 +27,7 @@
             this.a1Panel1 = new Owf.Controls.A1Panel();
             this.InscEstadual = new System.Windows.Forms.TextBox();
             this.CodigoToolStrip = new System.Windows.Forms.ToolStrip();
+            this.CodigoButton = new System.Windows.Forms.ToolStripButton();
             this.label5 = new System.Windows.Forms.Label();
             this.RG = new System.Windows.Forms.TextBox();
             this.RazaoSocial = new System.Windows.Forms.TextBox();
@@ -41,21 +42,40 @@
             this.PessoaText = new System.Windows.Forms.TextBox();
             this.PessoaList = new System.Windows.Forms.ComboBox();
             this.tBar = new System.Windows.Forms.ToolStrip();
+            this.AddButton = new System.Windows.Forms.ToolStripButton();
+            this.EditButton = new System.Windows.Forms.ToolStripButton();
+            this.DelButton = new System.Windows.Forms.ToolStripButton();
+            this.FindButton = new System.Windows.Forms.ToolStripButton();
+            this.PrintButton = new System.Windows.Forms.ToolStripButton();
+            this.SairButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.GravarButton = new System.Windows.Forms.ToolStripButton();
+            this.CancelarButton = new System.Windows.Forms.ToolStripButton();
             this.StatusEmpresa = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.Ttp = new System.Windows.Forms.ToolTip(this.components);
+            this.RemoveContadorButon = new System.Windows.Forms.Button();
+            this.ContadorEmailButton = new System.Windows.Forms.Button();
+            this.CnaeVSButton = new System.Windows.Forms.Button();
+            this.CnaeButton = new System.Windows.Forms.Button();
+            this.AtividadePrincipalButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.DGtab = new System.Windows.Forms.TabPage();
             this.SilToolStrip = new System.Windows.Forms.ToolStrip();
+            this.SilAddButton = new System.Windows.Forms.ToolStripButton();
+            this.SilEditButton = new System.Windows.Forms.ToolStripButton();
+            this.SilDelButton = new System.Windows.Forms.ToolStripButton();
             this.label9 = new System.Windows.Forms.Label();
             this.SILList = new System.Windows.Forms.ListBox();
             this.NomeFantasia = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.SimplesToolStrip = new System.Windows.Forms.ToolStrip();
+            this.SimplesButton = new System.Windows.Forms.ToolStripButton();
             this.a1Panel12 = new Owf.Controls.A1Panel();
             this.Placa = new System.Windows.Forms.MaskedTextBox();
             this.VeiculosToolStrip = new System.Windows.Forms.ToolStrip();
+            this.PlacaOKButton = new System.Windows.Forms.ToolStripButton();
+            this.PlacaCancelButton = new System.Windows.Forms.ToolStripButton();
             this.label77 = new System.Windows.Forms.Label();
             this.PlacaLista = new System.Windows.Forms.ListBox();
             this.PontoAgencia = new System.Windows.Forms.TextBox();
@@ -115,6 +135,7 @@
             this.label41 = new System.Windows.Forms.Label();
             this.a1Panel4 = new Owf.Controls.A1Panel();
             this.EnderecoentregaToolStrip = new System.Windows.Forms.ToolStrip();
+            this.EnderecoentregaButton = new System.Windows.Forms.ToolStripButton();
             this.MesmoEndereco = new System.Windows.Forms.CheckBox();
             this.Bairro_EE = new System.Windows.Forms.TextBox();
             this.Cidade_EE = new System.Windows.Forms.TextBox();
@@ -132,6 +153,8 @@
             this.label34 = new System.Windows.Forms.Label();
             this.a1Panel3 = new Owf.Controls.A1Panel();
             this.EnderecoToolStrip = new System.Windows.Forms.ToolStrip();
+            this.FotoButton = new System.Windows.Forms.ToolStripButton();
+            this.EnderecoButton = new System.Windows.Forms.ToolStripButton();
             this.CodigoImovel = new System.Windows.Forms.Label();
             this.label50 = new System.Windows.Forms.Label();
             this.Bairro = new System.Windows.Forms.TextBox();
@@ -151,6 +174,8 @@
             this.RStab = new System.Windows.Forms.TabPage();
             this.a1Panel8 = new Owf.Controls.A1Panel();
             this.ProprietarioToolStrip = new System.Windows.Forms.ToolStrip();
+            this.ProprietarioAddButton = new System.Windows.Forms.ToolStripButton();
+            this.ProprietarioDelButton = new System.Windows.Forms.ToolStripButton();
             this.ProprietarioList = new System.Windows.Forms.ListBox();
             this.label52 = new System.Windows.Forms.Label();
             this.a1Panel7 = new Owf.Controls.A1Panel();
@@ -174,6 +199,8 @@
             this.label54 = new System.Windows.Forms.Label();
             this.a1Panel5 = new Owf.Controls.A1Panel();
             this.ProfissionalToolStrip = new System.Windows.Forms.ToolStrip();
+            this.ProfissionalAddButton = new System.Windows.Forms.ToolStripButton();
+            this.ProfissionalDelButton = new System.Windows.Forms.ToolStripButton();
             this.label62 = new System.Windows.Forms.Label();
             this.ProfissionalRegistro = new System.Windows.Forms.TextBox();
             this.label58 = new System.Windows.Forms.Label();
@@ -184,10 +211,16 @@
             this.ATtab = new System.Windows.Forms.TabPage();
             this.a1Panel11 = new Owf.Controls.A1Panel();
             this.AtividadeVSListView = new System.Windows.Forms.ListView();
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label74 = new System.Windows.Forms.Label();
             this.a1Panel10 = new Owf.Controls.A1Panel();
             this.AtividadeISSListView = new System.Windows.Forms.ListView();
             this.label80 = new System.Windows.Forms.Label();
+            this.button9 = new System.Windows.Forms.Button();
             this.a1Panel9 = new Owf.Controls.A1Panel();
             this.Cnae = new System.Windows.Forms.TextBox();
             this.label73 = new System.Windows.Forms.Label();
@@ -211,49 +244,17 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.mnuHistorico = new System.Windows.Forms.ToolStripDropDownButton();
+            this.mnuAddHistorico = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRemoverHistorico = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuViewHistorico = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox34 = new System.Windows.Forms.TextBox();
             this.listView4 = new System.Windows.Forms.ListView();
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.SilAddButton = new System.Windows.Forms.ToolStripButton();
-            this.SilEditButton = new System.Windows.Forms.ToolStripButton();
-            this.SilDelButton = new System.Windows.Forms.ToolStripButton();
-            this.SimplesButton = new System.Windows.Forms.ToolStripButton();
-            this.PlacaOKButton = new System.Windows.Forms.ToolStripButton();
-            this.PlacaCancelButton = new System.Windows.Forms.ToolStripButton();
-            this.EnderecoentregaButton = new System.Windows.Forms.ToolStripButton();
-            this.FotoButton = new System.Windows.Forms.ToolStripButton();
-            this.EnderecoButton = new System.Windows.Forms.ToolStripButton();
-            this.ProprietarioAddButton = new System.Windows.Forms.ToolStripButton();
-            this.ProprietarioDelButton = new System.Windows.Forms.ToolStripButton();
-            this.RemoveContadorButon = new System.Windows.Forms.Button();
-            this.ContadorEmailButton = new System.Windows.Forms.Button();
-            this.ProfissionalAddButton = new System.Windows.Forms.ToolStripButton();
-            this.ProfissionalDelButton = new System.Windows.Forms.ToolStripButton();
-            this.CnaeVSButton = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.CnaeButton = new System.Windows.Forms.Button();
-            this.AtividadePrincipalButton = new System.Windows.Forms.Button();
-            this.mnuHistorico = new System.Windows.Forms.ToolStripDropDownButton();
-            this.mnuAddHistorico = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuRemoverHistorico = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuViewHistorico = new System.Windows.Forms.ToolStripMenuItem();
-            this.AddButton = new System.Windows.Forms.ToolStripButton();
-            this.EditButton = new System.Windows.Forms.ToolStripButton();
-            this.DelButton = new System.Windows.Forms.ToolStripButton();
-            this.FindButton = new System.Windows.Forms.ToolStripButton();
-            this.PrintButton = new System.Windows.Forms.ToolStripButton();
-            this.SairButton = new System.Windows.Forms.ToolStripButton();
-            this.GravarButton = new System.Windows.Forms.ToolStripButton();
-            this.CancelarButton = new System.Windows.Forms.ToolStripButton();
-            this.CodigoButton = new System.Windows.Forms.ToolStripButton();
-            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.CnaeVSDelButton = new System.Windows.Forms.Button();
             this.a1Panel1.SuspendLayout();
             this.CodigoToolStrip.SuspendLayout();
             this.tBar.SuspendLayout();
@@ -333,6 +334,16 @@
             this.CodigoToolStrip.TabIndex = 0;
             this.CodigoToolStrip.TabStop = true;
             this.CodigoToolStrip.Text = "toolStrip3";
+            // 
+            // CodigoButton
+            // 
+            this.CodigoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.CodigoButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.CodigoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.CodigoButton.Name = "CodigoButton";
+            this.CodigoButton.Size = new System.Drawing.Size(23, 22);
+            this.CodigoButton.Text = "toolStripButton4";
+            this.CodigoButton.Click += new System.EventHandler(this.CodigoButton_Click);
             // 
             // label5
             // 
@@ -486,10 +497,91 @@
             this.tBar.TabIndex = 156;
             this.tBar.Text = "toolStrip1";
             // 
+            // AddButton
+            // 
+            this.AddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.AddButton.Image = global::GTI_Desktop.Properties.Resources.add_file;
+            this.AddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AddButton.Name = "AddButton";
+            this.AddButton.Size = new System.Drawing.Size(23, 22);
+            this.AddButton.ToolTipText = "Novo";
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
+            // 
+            // EditButton
+            // 
+            this.EditButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.EditButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
+            this.EditButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.EditButton.Name = "EditButton";
+            this.EditButton.Size = new System.Drawing.Size(23, 22);
+            this.EditButton.ToolTipText = "Alterar";
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
+            // 
+            // DelButton
+            // 
+            this.DelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.DelButton.Image = global::GTI_Desktop.Properties.Resources.delete;
+            this.DelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DelButton.Name = "DelButton";
+            this.DelButton.Size = new System.Drawing.Size(23, 22);
+            this.DelButton.ToolTipText = "Excluir";
+            // 
+            // FindButton
+            // 
+            this.FindButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.FindButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.FindButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.FindButton.Name = "FindButton";
+            this.FindButton.Size = new System.Drawing.Size(23, 22);
+            this.FindButton.ToolTipText = "Consultar";
+            // 
+            // PrintButton
+            // 
+            this.PrintButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.PrintButton.Image = global::GTI_Desktop.Properties.Resources.print;
+            this.PrintButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.PrintButton.Name = "PrintButton";
+            this.PrintButton.Size = new System.Drawing.Size(23, 22);
+            this.PrintButton.ToolTipText = "Imprimir";
+            // 
+            // SairButton
+            // 
+            this.SairButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SairButton.Image = global::GTI_Desktop.Properties.Resources.Exit;
+            this.SairButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SairButton.Name = "SairButton";
+            this.SairButton.Size = new System.Drawing.Size(23, 22);
+            this.SairButton.Text = "toolStripButton5";
+            this.SairButton.ToolTipText = "Sair";
+            this.SairButton.Click += new System.EventHandler(this.SairButton_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // GravarButton
+            // 
+            this.GravarButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.GravarButton.Image = global::GTI_Desktop.Properties.Resources.gravar;
+            this.GravarButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.GravarButton.Name = "GravarButton";
+            this.GravarButton.Size = new System.Drawing.Size(23, 22);
+            this.GravarButton.Text = "btGravar";
+            this.GravarButton.ToolTipText = "Gravar os dados";
+            this.GravarButton.Click += new System.EventHandler(this.GravarButton_Click);
+            // 
+            // CancelarButton
+            // 
+            this.CancelarButton.AccessibleDescription = "Cancelar operação";
+            this.CancelarButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.CancelarButton.Image = global::GTI_Desktop.Properties.Resources.cancel2;
+            this.CancelarButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.CancelarButton.Name = "CancelarButton";
+            this.CancelarButton.Size = new System.Drawing.Size(23, 22);
+            this.CancelarButton.Text = "btCancelar";
+            this.CancelarButton.ToolTipText = "Cancelar";
+            this.CancelarButton.Click += new System.EventHandler(this.CancelarButton_Click);
             // 
             // StatusEmpresa
             // 
@@ -506,6 +598,67 @@
             this.toolStripLabel1.Name = "toolStripLabel1";
             this.toolStripLabel1.Size = new System.Drawing.Size(61, 22);
             this.toolStripLabel1.Text = "Situação..:";
+            // 
+            // RemoveContadorButon
+            // 
+            this.RemoveContadorButon.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.RemoveContadorButon.Location = new System.Drawing.Point(314, 28);
+            this.RemoveContadorButon.Name = "RemoveContadorButon";
+            this.RemoveContadorButon.Size = new System.Drawing.Size(25, 21);
+            this.RemoveContadorButon.TabIndex = 232;
+            this.Ttp.SetToolTip(this.RemoveContadorButon, "Remover contador do cadastro da empresa");
+            this.RemoveContadorButon.UseVisualStyleBackColor = true;
+            // 
+            // ContadorEmailButton
+            // 
+            this.ContadorEmailButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ContadorEmailButton.Image = global::GTI_Desktop.Properties.Resources.email1;
+            this.ContadorEmailButton.Location = new System.Drawing.Point(314, 80);
+            this.ContadorEmailButton.Name = "ContadorEmailButton";
+            this.ContadorEmailButton.Size = new System.Drawing.Size(25, 21);
+            this.ContadorEmailButton.TabIndex = 230;
+            this.ContadorEmailButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.ContadorEmailButton, "Enviar email para o contador");
+            this.ContadorEmailButton.UseVisualStyleBackColor = true;
+            // 
+            // CnaeVSButton
+            // 
+            this.CnaeVSButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CnaeVSButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.CnaeVSButton.Location = new System.Drawing.Point(698, 51);
+            this.CnaeVSButton.Name = "CnaeVSButton";
+            this.CnaeVSButton.Size = new System.Drawing.Size(23, 22);
+            this.CnaeVSButton.TabIndex = 195;
+            this.CnaeVSButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.CnaeVSButton, "Cadastra os Cnaes para vigilância sanitária");
+            this.CnaeVSButton.UseVisualStyleBackColor = true;
+            this.CnaeVSButton.Click += new System.EventHandler(this.CnaeVSButton_Click);
+            // 
+            // CnaeButton
+            // 
+            this.CnaeButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CnaeButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.CnaeButton.Location = new System.Drawing.Point(698, 73);
+            this.CnaeButton.Name = "CnaeButton";
+            this.CnaeButton.Size = new System.Drawing.Size(23, 22);
+            this.CnaeButton.TabIndex = 241;
+            this.CnaeButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.CnaeButton, "Selecione a atividade principal");
+            this.CnaeButton.UseVisualStyleBackColor = true;
+            this.CnaeButton.Click += new System.EventHandler(this.CnaeButton_Click);
+            // 
+            // AtividadePrincipalButton
+            // 
+            this.AtividadePrincipalButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AtividadePrincipalButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.AtividadePrincipalButton.Location = new System.Drawing.Point(698, 25);
+            this.AtividadePrincipalButton.Name = "AtividadePrincipalButton";
+            this.AtividadePrincipalButton.Size = new System.Drawing.Size(23, 22);
+            this.AtividadePrincipalButton.TabIndex = 240;
+            this.AtividadePrincipalButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.AtividadePrincipalButton, "Selecione a atividade principal");
+            this.AtividadePrincipalButton.UseVisualStyleBackColor = true;
+            this.AtividadePrincipalButton.Click += new System.EventHandler(this.AtividadePrincipalButton_Click);
             // 
             // tabControl1
             // 
@@ -583,6 +736,39 @@
             this.SilToolStrip.TabIndex = 206;
             this.SilToolStrip.Text = "toolStrip2";
             // 
+            // SilAddButton
+            // 
+            this.SilAddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SilAddButton.Image = global::GTI_Desktop.Properties.Resources.add;
+            this.SilAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SilAddButton.Name = "SilAddButton";
+            this.SilAddButton.Size = new System.Drawing.Size(23, 22);
+            this.SilAddButton.Text = "toolStripButton1";
+            this.SilAddButton.ToolTipText = "Adicionar novo SIL";
+            this.SilAddButton.Click += new System.EventHandler(this.SilAddButton_Click);
+            // 
+            // SilEditButton
+            // 
+            this.SilEditButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SilEditButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
+            this.SilEditButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SilEditButton.Name = "SilEditButton";
+            this.SilEditButton.Size = new System.Drawing.Size(23, 22);
+            this.SilEditButton.Text = "toolStripButton2";
+            this.SilEditButton.ToolTipText = "Alterar o SIL selecionado";
+            this.SilEditButton.Click += new System.EventHandler(this.SilEditButton_Click);
+            // 
+            // SilDelButton
+            // 
+            this.SilDelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SilDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.SilDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SilDelButton.Name = "SilDelButton";
+            this.SilDelButton.Size = new System.Drawing.Size(23, 22);
+            this.SilDelButton.Text = "toolStripButton3";
+            this.SilDelButton.ToolTipText = "Excluir o SIL Selecionado";
+            this.SilDelButton.Click += new System.EventHandler(this.SilDelButton_Click);
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -632,6 +818,17 @@
             this.SimplesToolStrip.TabIndex = 202;
             this.SimplesToolStrip.Text = "toolStrip3";
             // 
+            // SimplesButton
+            // 
+            this.SimplesButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SimplesButton.Enabled = false;
+            this.SimplesButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.SimplesButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SimplesButton.Name = "SimplesButton";
+            this.SimplesButton.Size = new System.Drawing.Size(23, 22);
+            this.SimplesButton.Text = "toolStripButton4";
+            this.SimplesButton.ToolTipText = "Exibe os períodos de entrada e saída no Simples";
+            // 
             // a1Panel12
             // 
             this.a1Panel12.BorderColor = System.Drawing.Color.Gray;
@@ -670,6 +867,28 @@
             this.VeiculosToolStrip.Size = new System.Drawing.Size(49, 25);
             this.VeiculosToolStrip.TabIndex = 201;
             this.VeiculosToolStrip.Text = "toolStrip3";
+            // 
+            // PlacaOKButton
+            // 
+            this.PlacaOKButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.PlacaOKButton.Image = global::GTI_Desktop.Properties.Resources.OK;
+            this.PlacaOKButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.PlacaOKButton.Name = "PlacaOKButton";
+            this.PlacaOKButton.Size = new System.Drawing.Size(23, 22);
+            this.PlacaOKButton.Text = "toolStripButton4";
+            this.PlacaOKButton.ToolTipText = "Adicionar placa";
+            this.PlacaOKButton.Click += new System.EventHandler(this.PlacaOKButton_Click);
+            // 
+            // PlacaCancelButton
+            // 
+            this.PlacaCancelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.PlacaCancelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.PlacaCancelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.PlacaCancelButton.Name = "PlacaCancelButton";
+            this.PlacaCancelButton.Size = new System.Drawing.Size(23, 22);
+            this.PlacaCancelButton.Text = "toolStripButton5";
+            this.PlacaCancelButton.ToolTipText = "Remover a placa selecionada";
+            this.PlacaCancelButton.Click += new System.EventHandler(this.PlacaCancelButton_Click);
             // 
             // label77
             // 
@@ -1308,6 +1527,18 @@
             this.EnderecoentregaToolStrip.TabStop = true;
             this.EnderecoentregaToolStrip.Text = "toolStrip3";
             // 
+            // EnderecoentregaButton
+            // 
+            this.EnderecoentregaButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.EnderecoentregaButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.EnderecoentregaButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
+            this.EnderecoentregaButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.EnderecoentregaButton.Name = "EnderecoentregaButton";
+            this.EnderecoentregaButton.Size = new System.Drawing.Size(23, 22);
+            this.EnderecoentregaButton.Text = "toolStripButton2";
+            this.EnderecoentregaButton.ToolTipText = "Alterar o endereço de entrega";
+            this.EnderecoentregaButton.Click += new System.EventHandler(this.EnderecoentregaButton_Click);
+            // 
             // MesmoEndereco
             // 
             this.MesmoEndereco.AutoSize = true;
@@ -1534,6 +1765,28 @@
             this.EnderecoToolStrip.TabIndex = 173;
             this.EnderecoToolStrip.TabStop = true;
             this.EnderecoToolStrip.Text = "toolStrip3";
+            // 
+            // FotoButton
+            // 
+            this.FotoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.FotoButton.Image = global::GTI_Desktop.Properties.Resources.photo_16x16;
+            this.FotoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.FotoButton.Name = "FotoButton";
+            this.FotoButton.Size = new System.Drawing.Size(23, 22);
+            this.FotoButton.Text = "toolStripButton4";
+            this.FotoButton.ToolTipText = "Imagem da Empresa";
+            // 
+            // EnderecoButton
+            // 
+            this.EnderecoButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.EnderecoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.EnderecoButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
+            this.EnderecoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.EnderecoButton.Name = "EnderecoButton";
+            this.EnderecoButton.Size = new System.Drawing.Size(23, 22);
+            this.EnderecoButton.Text = "toolStripButton2";
+            this.EnderecoButton.ToolTipText = "Alterar o endereço de localização";
+            this.EnderecoButton.Click += new System.EventHandler(this.EnderecoButton_Click);
             // 
             // CodigoImovel
             // 
@@ -1767,6 +2020,28 @@
             this.ProprietarioToolStrip.Size = new System.Drawing.Size(24, 48);
             this.ProprietarioToolStrip.TabIndex = 226;
             this.ProprietarioToolStrip.Text = "toolStrip2";
+            // 
+            // ProprietarioAddButton
+            // 
+            this.ProprietarioAddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ProprietarioAddButton.Image = global::GTI_Desktop.Properties.Resources.add;
+            this.ProprietarioAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ProprietarioAddButton.Name = "ProprietarioAddButton";
+            this.ProprietarioAddButton.Size = new System.Drawing.Size(22, 20);
+            this.ProprietarioAddButton.Text = "Adicionar proprietário";
+            this.ProprietarioAddButton.ToolTipText = "Adicionar novo proprietário";
+            this.ProprietarioAddButton.Click += new System.EventHandler(this.ProprietarioAddButton_Click);
+            // 
+            // ProprietarioDelButton
+            // 
+            this.ProprietarioDelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ProprietarioDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.ProprietarioDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ProprietarioDelButton.Name = "ProprietarioDelButton";
+            this.ProprietarioDelButton.Size = new System.Drawing.Size(22, 20);
+            this.ProprietarioDelButton.Text = "Excluir proprietário";
+            this.ProprietarioDelButton.ToolTipText = "Excluir o proprietário Selecionado";
+            this.ProprietarioDelButton.Click += new System.EventHandler(this.ProprietarioDelButton_Click);
             // 
             // ProprietarioList
             // 
@@ -2070,6 +2345,26 @@
             this.ProfissionalToolStrip.TabIndex = 233;
             this.ProfissionalToolStrip.Text = "toolStrip2";
             // 
+            // ProfissionalAddButton
+            // 
+            this.ProfissionalAddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ProfissionalAddButton.Image = global::GTI_Desktop.Properties.Resources.add;
+            this.ProfissionalAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ProfissionalAddButton.Name = "ProfissionalAddButton";
+            this.ProfissionalAddButton.Size = new System.Drawing.Size(23, 22);
+            this.ProfissionalAddButton.Text = "Adicionar proprietário";
+            this.ProfissionalAddButton.ToolTipText = "Selecionar um cidaddão como profissional responsável";
+            // 
+            // ProfissionalDelButton
+            // 
+            this.ProfissionalDelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ProfissionalDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.ProfissionalDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ProfissionalDelButton.Name = "ProfissionalDelButton";
+            this.ProfissionalDelButton.Size = new System.Drawing.Size(23, 22);
+            this.ProfissionalDelButton.Text = "Excluir proprietário";
+            this.ProfissionalDelButton.ToolTipText = "Remover o nome do profissional";
+            // 
             // label62
             // 
             this.label62.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -2171,6 +2466,7 @@
             // a1Panel11
             // 
             this.a1Panel11.BorderColor = System.Drawing.Color.Gray;
+            this.a1Panel11.Controls.Add(this.CnaeVSDelButton);
             this.a1Panel11.Controls.Add(this.AtividadeVSListView);
             this.a1Panel11.Controls.Add(this.label74);
             this.a1Panel11.Controls.Add(this.CnaeVSButton);
@@ -2198,6 +2494,34 @@
             this.AtividadeVSListView.TabIndex = 225;
             this.AtividadeVSListView.UseCompatibleStateImageBehavior = false;
             this.AtividadeVSListView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "CNAE";
+            this.columnHeader9.Width = 80;
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "Descrição";
+            this.columnHeader10.Width = 400;
+            // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "CR";
+            this.columnHeader11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader11.Width = 50;
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "Qtde";
+            this.columnHeader12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader12.Width = 45;
+            // 
+            // columnHeader13
+            // 
+            this.columnHeader13.Text = "Valor";
+            this.columnHeader13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader13.Width = 85;
             // 
             // label74
             // 
@@ -2245,6 +2569,17 @@
             this.label80.TabIndex = 224;
             this.label80.Text = "Atividade para pagamento de ISS";
             this.label80.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button9
+            // 
+            this.button9.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button9.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.button9.Location = new System.Drawing.Point(698, 51);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(23, 22);
+            this.button9.TabIndex = 195;
+            this.button9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button9.UseVisualStyleBackColor = true;
             // 
             // a1Panel9
             // 
@@ -2518,6 +2853,36 @@
             this.toolStrip1.TabIndex = 189;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // mnuHistorico
+            // 
+            this.mnuHistorico.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuAddHistorico,
+            this.mnuRemoverHistorico,
+            this.mnuViewHistorico});
+            this.mnuHistorico.Image = global::GTI_Desktop.Properties.Resources.option;
+            this.mnuHistorico.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mnuHistorico.Name = "mnuHistorico";
+            this.mnuHistorico.Size = new System.Drawing.Size(76, 22);
+            this.mnuHistorico.Text = "Opções";
+            // 
+            // mnuAddHistorico
+            // 
+            this.mnuAddHistorico.Name = "mnuAddHistorico";
+            this.mnuAddHistorico.Size = new System.Drawing.Size(125, 22);
+            this.mnuAddHistorico.Text = "Adicionar";
+            // 
+            // mnuRemoverHistorico
+            // 
+            this.mnuRemoverHistorico.Name = "mnuRemoverHistorico";
+            this.mnuRemoverHistorico.Size = new System.Drawing.Size(125, 22);
+            this.mnuRemoverHistorico.Text = "Remover";
+            // 
+            // mnuViewHistorico
+            // 
+            this.mnuViewHistorico.Name = "mnuViewHistorico";
+            this.mnuViewHistorico.Size = new System.Drawing.Size(125, 22);
+            this.mnuViewHistorico.Text = "Visualizar";
+            // 
             // textBox34
             // 
             this.textBox34.Location = new System.Drawing.Point(8, 134);
@@ -2561,368 +2926,18 @@
             this.columnHeader8.Text = "Usuário";
             this.columnHeader8.Width = 150;
             // 
-            // SilAddButton
-            // 
-            this.SilAddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SilAddButton.Image = global::GTI_Desktop.Properties.Resources.add;
-            this.SilAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SilAddButton.Name = "SilAddButton";
-            this.SilAddButton.Size = new System.Drawing.Size(23, 22);
-            this.SilAddButton.Text = "toolStripButton1";
-            this.SilAddButton.ToolTipText = "Adicionar novo SIL";
-            this.SilAddButton.Click += new System.EventHandler(this.SilAddButton_Click);
-            // 
-            // SilEditButton
-            // 
-            this.SilEditButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SilEditButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
-            this.SilEditButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SilEditButton.Name = "SilEditButton";
-            this.SilEditButton.Size = new System.Drawing.Size(23, 22);
-            this.SilEditButton.Text = "toolStripButton2";
-            this.SilEditButton.ToolTipText = "Alterar o SIL selecionado";
-            this.SilEditButton.Click += new System.EventHandler(this.SilEditButton_Click);
-            // 
-            // SilDelButton
-            // 
-            this.SilDelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SilDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.SilDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SilDelButton.Name = "SilDelButton";
-            this.SilDelButton.Size = new System.Drawing.Size(23, 22);
-            this.SilDelButton.Text = "toolStripButton3";
-            this.SilDelButton.ToolTipText = "Excluir o SIL Selecionado";
-            this.SilDelButton.Click += new System.EventHandler(this.SilDelButton_Click);
-            // 
-            // SimplesButton
-            // 
-            this.SimplesButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SimplesButton.Enabled = false;
-            this.SimplesButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.SimplesButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SimplesButton.Name = "SimplesButton";
-            this.SimplesButton.Size = new System.Drawing.Size(23, 22);
-            this.SimplesButton.Text = "toolStripButton4";
-            this.SimplesButton.ToolTipText = "Exibe os períodos de entrada e saída no Simples";
-            // 
-            // PlacaOKButton
-            // 
-            this.PlacaOKButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.PlacaOKButton.Image = global::GTI_Desktop.Properties.Resources.OK;
-            this.PlacaOKButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.PlacaOKButton.Name = "PlacaOKButton";
-            this.PlacaOKButton.Size = new System.Drawing.Size(23, 22);
-            this.PlacaOKButton.Text = "toolStripButton4";
-            this.PlacaOKButton.ToolTipText = "Adicionar placa";
-            this.PlacaOKButton.Click += new System.EventHandler(this.PlacaOKButton_Click);
-            // 
-            // PlacaCancelButton
-            // 
-            this.PlacaCancelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.PlacaCancelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.PlacaCancelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.PlacaCancelButton.Name = "PlacaCancelButton";
-            this.PlacaCancelButton.Size = new System.Drawing.Size(23, 22);
-            this.PlacaCancelButton.Text = "toolStripButton5";
-            this.PlacaCancelButton.ToolTipText = "Remover a placa selecionada";
-            this.PlacaCancelButton.Click += new System.EventHandler(this.PlacaCancelButton_Click);
-            // 
-            // EnderecoentregaButton
-            // 
-            this.EnderecoentregaButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.EnderecoentregaButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.EnderecoentregaButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
-            this.EnderecoentregaButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.EnderecoentregaButton.Name = "EnderecoentregaButton";
-            this.EnderecoentregaButton.Size = new System.Drawing.Size(23, 22);
-            this.EnderecoentregaButton.Text = "toolStripButton2";
-            this.EnderecoentregaButton.ToolTipText = "Alterar o endereço de entrega";
-            this.EnderecoentregaButton.Click += new System.EventHandler(this.EnderecoentregaButton_Click);
-            // 
-            // FotoButton
-            // 
-            this.FotoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.FotoButton.Image = global::GTI_Desktop.Properties.Resources.photo_16x16;
-            this.FotoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.FotoButton.Name = "FotoButton";
-            this.FotoButton.Size = new System.Drawing.Size(23, 22);
-            this.FotoButton.Text = "toolStripButton4";
-            this.FotoButton.ToolTipText = "Imagem da Empresa";
-            // 
-            // EnderecoButton
-            // 
-            this.EnderecoButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.EnderecoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.EnderecoButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
-            this.EnderecoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.EnderecoButton.Name = "EnderecoButton";
-            this.EnderecoButton.Size = new System.Drawing.Size(23, 22);
-            this.EnderecoButton.Text = "toolStripButton2";
-            this.EnderecoButton.ToolTipText = "Alterar o endereço de localização";
-            this.EnderecoButton.Click += new System.EventHandler(this.EnderecoButton_Click);
-            // 
-            // ProprietarioAddButton
-            // 
-            this.ProprietarioAddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ProprietarioAddButton.Image = global::GTI_Desktop.Properties.Resources.add;
-            this.ProprietarioAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ProprietarioAddButton.Name = "ProprietarioAddButton";
-            this.ProprietarioAddButton.Size = new System.Drawing.Size(22, 20);
-            this.ProprietarioAddButton.Text = "Adicionar proprietário";
-            this.ProprietarioAddButton.ToolTipText = "Adicionar novo proprietário";
-            this.ProprietarioAddButton.Click += new System.EventHandler(this.ProprietarioAddButton_Click);
-            // 
-            // ProprietarioDelButton
-            // 
-            this.ProprietarioDelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ProprietarioDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.ProprietarioDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ProprietarioDelButton.Name = "ProprietarioDelButton";
-            this.ProprietarioDelButton.Size = new System.Drawing.Size(22, 20);
-            this.ProprietarioDelButton.Text = "Excluir proprietário";
-            this.ProprietarioDelButton.ToolTipText = "Excluir o proprietário Selecionado";
-            this.ProprietarioDelButton.Click += new System.EventHandler(this.ProprietarioDelButton_Click);
-            // 
-            // RemoveContadorButon
-            // 
-            this.RemoveContadorButon.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.RemoveContadorButon.Location = new System.Drawing.Point(314, 28);
-            this.RemoveContadorButon.Name = "RemoveContadorButon";
-            this.RemoveContadorButon.Size = new System.Drawing.Size(25, 21);
-            this.RemoveContadorButon.TabIndex = 232;
-            this.Ttp.SetToolTip(this.RemoveContadorButon, "Remover contador do cadastro da empresa");
-            this.RemoveContadorButon.UseVisualStyleBackColor = true;
-            // 
-            // ContadorEmailButton
-            // 
-            this.ContadorEmailButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ContadorEmailButton.Image = global::GTI_Desktop.Properties.Resources.email1;
-            this.ContadorEmailButton.Location = new System.Drawing.Point(314, 80);
-            this.ContadorEmailButton.Name = "ContadorEmailButton";
-            this.ContadorEmailButton.Size = new System.Drawing.Size(25, 21);
-            this.ContadorEmailButton.TabIndex = 230;
-            this.ContadorEmailButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Ttp.SetToolTip(this.ContadorEmailButton, "Enviar email para o contador");
-            this.ContadorEmailButton.UseVisualStyleBackColor = true;
-            // 
-            // ProfissionalAddButton
-            // 
-            this.ProfissionalAddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ProfissionalAddButton.Image = global::GTI_Desktop.Properties.Resources.add;
-            this.ProfissionalAddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ProfissionalAddButton.Name = "ProfissionalAddButton";
-            this.ProfissionalAddButton.Size = new System.Drawing.Size(23, 22);
-            this.ProfissionalAddButton.Text = "Adicionar proprietário";
-            this.ProfissionalAddButton.ToolTipText = "Selecionar um cidaddão como profissional responsável";
-            // 
-            // ProfissionalDelButton
-            // 
-            this.ProfissionalDelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ProfissionalDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.ProfissionalDelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ProfissionalDelButton.Name = "ProfissionalDelButton";
-            this.ProfissionalDelButton.Size = new System.Drawing.Size(23, 22);
-            this.ProfissionalDelButton.Text = "Excluir proprietário";
-            this.ProfissionalDelButton.ToolTipText = "Remover o nome do profissional";
-            // 
-            // CnaeVSButton
-            // 
-            this.CnaeVSButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CnaeVSButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.CnaeVSButton.Location = new System.Drawing.Point(698, 51);
-            this.CnaeVSButton.Name = "CnaeVSButton";
-            this.CnaeVSButton.Size = new System.Drawing.Size(23, 22);
-            this.CnaeVSButton.TabIndex = 195;
-            this.CnaeVSButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Ttp.SetToolTip(this.CnaeVSButton, "Cadastra os Cnaes para vigilância sanitária");
-            this.CnaeVSButton.UseVisualStyleBackColor = true;
-            this.CnaeVSButton.Click += new System.EventHandler(this.CnaeVSButton_Click);
-            // 
-            // button9
-            // 
-            this.button9.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button9.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.button9.Location = new System.Drawing.Point(698, 51);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(23, 22);
-            this.button9.TabIndex = 195;
-            this.button9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button9.UseVisualStyleBackColor = true;
-            // 
-            // CnaeButton
-            // 
-            this.CnaeButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CnaeButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.CnaeButton.Location = new System.Drawing.Point(698, 73);
-            this.CnaeButton.Name = "CnaeButton";
-            this.CnaeButton.Size = new System.Drawing.Size(23, 22);
-            this.CnaeButton.TabIndex = 241;
-            this.CnaeButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Ttp.SetToolTip(this.CnaeButton, "Selecione a atividade principal");
-            this.CnaeButton.UseVisualStyleBackColor = true;
-            this.CnaeButton.Click += new System.EventHandler(this.CnaeButton_Click);
-            // 
-            // AtividadePrincipalButton
-            // 
-            this.AtividadePrincipalButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.AtividadePrincipalButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.AtividadePrincipalButton.Location = new System.Drawing.Point(698, 25);
-            this.AtividadePrincipalButton.Name = "AtividadePrincipalButton";
-            this.AtividadePrincipalButton.Size = new System.Drawing.Size(23, 22);
-            this.AtividadePrincipalButton.TabIndex = 240;
-            this.AtividadePrincipalButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Ttp.SetToolTip(this.AtividadePrincipalButton, "Selecione a atividade principal");
-            this.AtividadePrincipalButton.UseVisualStyleBackColor = true;
-            this.AtividadePrincipalButton.Click += new System.EventHandler(this.AtividadePrincipalButton_Click);
-            // 
-            // mnuHistorico
-            // 
-            this.mnuHistorico.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuAddHistorico,
-            this.mnuRemoverHistorico,
-            this.mnuViewHistorico});
-            this.mnuHistorico.Image = global::GTI_Desktop.Properties.Resources.option;
-            this.mnuHistorico.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuHistorico.Name = "mnuHistorico";
-            this.mnuHistorico.Size = new System.Drawing.Size(76, 22);
-            this.mnuHistorico.Text = "Opções";
-            // 
-            // mnuAddHistorico
-            // 
-            this.mnuAddHistorico.Name = "mnuAddHistorico";
-            this.mnuAddHistorico.Size = new System.Drawing.Size(125, 22);
-            this.mnuAddHistorico.Text = "Adicionar";
-            // 
-            // mnuRemoverHistorico
-            // 
-            this.mnuRemoverHistorico.Name = "mnuRemoverHistorico";
-            this.mnuRemoverHistorico.Size = new System.Drawing.Size(125, 22);
-            this.mnuRemoverHistorico.Text = "Remover";
-            // 
-            // mnuViewHistorico
-            // 
-            this.mnuViewHistorico.Name = "mnuViewHistorico";
-            this.mnuViewHistorico.Size = new System.Drawing.Size(125, 22);
-            this.mnuViewHistorico.Text = "Visualizar";
-            // 
-            // AddButton
-            // 
-            this.AddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.AddButton.Image = global::GTI_Desktop.Properties.Resources.add_file;
-            this.AddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(23, 22);
-            this.AddButton.ToolTipText = "Novo";
-            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
-            // 
-            // EditButton
-            // 
-            this.EditButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.EditButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
-            this.EditButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.EditButton.Name = "EditButton";
-            this.EditButton.Size = new System.Drawing.Size(23, 22);
-            this.EditButton.ToolTipText = "Alterar";
-            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
-            // 
-            // DelButton
-            // 
-            this.DelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.DelButton.Image = global::GTI_Desktop.Properties.Resources.delete;
-            this.DelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.DelButton.Name = "DelButton";
-            this.DelButton.Size = new System.Drawing.Size(23, 22);
-            this.DelButton.ToolTipText = "Excluir";
-            // 
-            // FindButton
-            // 
-            this.FindButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.FindButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.FindButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.FindButton.Name = "FindButton";
-            this.FindButton.Size = new System.Drawing.Size(23, 22);
-            this.FindButton.ToolTipText = "Consultar";
-            // 
-            // PrintButton
-            // 
-            this.PrintButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.PrintButton.Image = global::GTI_Desktop.Properties.Resources.print;
-            this.PrintButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.PrintButton.Name = "PrintButton";
-            this.PrintButton.Size = new System.Drawing.Size(23, 22);
-            this.PrintButton.ToolTipText = "Imprimir";
-            // 
-            // SairButton
-            // 
-            this.SairButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SairButton.Image = global::GTI_Desktop.Properties.Resources.Exit;
-            this.SairButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SairButton.Name = "SairButton";
-            this.SairButton.Size = new System.Drawing.Size(23, 22);
-            this.SairButton.Text = "toolStripButton5";
-            this.SairButton.ToolTipText = "Sair";
-            this.SairButton.Click += new System.EventHandler(this.SairButton_Click);
-            // 
-            // GravarButton
-            // 
-            this.GravarButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.GravarButton.Image = global::GTI_Desktop.Properties.Resources.gravar;
-            this.GravarButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.GravarButton.Name = "GravarButton";
-            this.GravarButton.Size = new System.Drawing.Size(23, 22);
-            this.GravarButton.Text = "btGravar";
-            this.GravarButton.ToolTipText = "Gravar os dados";
-            this.GravarButton.Click += new System.EventHandler(this.GravarButton_Click);
-            // 
-            // CancelarButton
-            // 
-            this.CancelarButton.AccessibleDescription = "Cancelar operação";
-            this.CancelarButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.CancelarButton.Image = global::GTI_Desktop.Properties.Resources.cancel2;
-            this.CancelarButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.CancelarButton.Name = "CancelarButton";
-            this.CancelarButton.Size = new System.Drawing.Size(23, 22);
-            this.CancelarButton.Text = "btCancelar";
-            this.CancelarButton.ToolTipText = "Cancelar";
-            this.CancelarButton.Click += new System.EventHandler(this.CancelarButton_Click);
-            // 
-            // CodigoButton
-            // 
-            this.CodigoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.CodigoButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.CodigoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.CodigoButton.Name = "CodigoButton";
-            this.CodigoButton.Size = new System.Drawing.Size(23, 22);
-            this.CodigoButton.Text = "toolStripButton4";
-            this.CodigoButton.Click += new System.EventHandler(this.CodigoButton_Click);
-            // 
-            // columnHeader9
-            // 
-            this.columnHeader9.Text = "CNAE";
-            this.columnHeader9.Width = 80;
-            // 
-            // columnHeader10
-            // 
-            this.columnHeader10.Text = "Descrição";
-            this.columnHeader10.Width = 400;
-            // 
-            // columnHeader11
-            // 
-            this.columnHeader11.Text = "CR";
-            this.columnHeader11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.columnHeader11.Width = 50;
-            // 
-            // columnHeader12
-            // 
-            this.columnHeader12.Text = "Qtde";
-            this.columnHeader12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.columnHeader12.Width = 45;
-            // 
-            // columnHeader13
-            // 
-            this.columnHeader13.Text = "Valor";
-            this.columnHeader13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.columnHeader13.Width = 85;
+            // CnaeVSDelButton
+            // 
+            this.CnaeVSDelButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CnaeVSDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.CnaeVSDelButton.Location = new System.Drawing.Point(698, 23);
+            this.CnaeVSDelButton.Name = "CnaeVSDelButton";
+            this.CnaeVSDelButton.Size = new System.Drawing.Size(23, 22);
+            this.CnaeVSDelButton.TabIndex = 226;
+            this.CnaeVSDelButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.CnaeVSDelButton, "Remover um CNAE");
+            this.CnaeVSDelButton.UseVisualStyleBackColor = true;
+            this.CnaeVSDelButton.Click += new System.EventHandler(this.CnaeVSDelButton_Click);
             // 
             // Empresa
             // 
@@ -3227,5 +3242,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.ColumnHeader columnHeader12;
         private System.Windows.Forms.ColumnHeader columnHeader13;
+        private System.Windows.Forms.Button CnaeVSDelButton;
     }
 }

@@ -211,7 +211,16 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
-
+        /// <summary>
+        /// Retorna os códigos imobiliários, mobiliários e de cidadão de um Cpf/Cnpj
+        /// </summary>
+        /// <param name="Documento"></param>
+        /// <param name="_tipo"></param>
+        /// <returns></returns>
+        public List<int> Lista_Codigos_Documento(string Documento, TipoDocumento _tipo) {
+            Sistema_Data obj = new Sistema_Data(_connection);
+            return obj.Lista_Codigos_Documento(Documento,_tipo);
+        }
 
     }
 }

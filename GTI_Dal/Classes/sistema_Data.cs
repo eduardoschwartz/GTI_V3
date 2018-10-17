@@ -14,6 +14,37 @@ namespace GTI_Dal.Classes {
             _connection = sConnection;
         }
 
+        public List<int> Lista_Codigos_Documento(string Documento,TipoDocumento _tipo) {
+            List<int> _lista = new List<int>();
+            using (var db = new GTI_Context(_connection)) {
+                string _doc = dalCore.RetornaNumero(Documento);
+
+                List<int> _codigos;
+                //procura imóvel
+                if (_tipo == TipoDocumento.Cpf) {
+                    _codigos = (from i in db.Cadimob join p in db.Proprietario on i.Codreduzido equals p.Codreduzido join c in db.Cidadao on p.Codcidadao equals c.Codcidadao
+                               where p.Tipoprop == "P" && p.Principal == true && c.Cpf.Contains(_doc) select i.Codreduzido).ToList();
+                } else {
+                    _codigos = (from i in db.Cadimob join p in db.Proprietario on i.Codreduzido equals p.Codreduzido join c in db.Cidadao on p.Codcidadao equals c.Codcidadao
+                               where p.Tipoprop == "P" && p.Principal == true && c.Cnpj.Contains(_doc) select i.Codreduzido).ToList();
+                }
+                foreach (int item in _codigos) {
+                    _lista.Add(item);
+                }
+
+                _codigos.Clear();
+                //procura empresa
+
+
+
+
+            }
+
+            return _lista;
+        }
+
+
+
         public Contribuinte_Header_Struct Contribuinte_Header(int Codigo, TipoCadastro Tipo) {
             Contribuinte_Header_Struct reg = new Contribuinte_Header_Struct {
                 Codigo = Codigo,

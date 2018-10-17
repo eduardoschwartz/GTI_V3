@@ -12,10 +12,10 @@ namespace GTI_Desktop.Forms {
     public partial class Calculo_Imposto : Form {
         string _connection = gtiCore.Connection_Name();
         string _path = @"c:\cadastro\bin\";
-        int _ano = 2018;
-        int _documento = 19555444;
+        int _ano = 2019;
+        int _documento = 16496531;
         decimal _ipca = (decimal)3.2649;
-
+ 
         private enum Tipo_imposto {
             Iptu = 1,
             ISS_Fixo_TLL=2,
@@ -62,7 +62,7 @@ namespace GTI_Desktop.Forms {
             StreamWriter fs3 = new StreamWriter(fsPD, System.Text.Encoding.Default);
             FileStream fsND = new FileStream(_path + "NUMDOCUMENTO.TXT", FileMode.Create, FileAccess.Write);
             StreamWriter fs4 = new StreamWriter(fsND, System.Text.Encoding.Default);
-            FileStream fsCC = new FileStream(_path + "CALCULO_ISS_VS.TXT", FileMode.Create, FileAccess.Write);
+            FileStream fsCC = new FileStream(_path + "CALCULO_RESUMO.TXT", FileMode.Create, FileAccess.Write);
             StreamWriter fs5 = new StreamWriter(fsCC, System.Text.Encoding.Default);
 
             MsgToolStrip.Text = "Calculando IPTU";
@@ -89,26 +89,23 @@ namespace GTI_Desktop.Forms {
             aVencimento.Add((DateTime)_Prm.Venc08);
             aVencimento.Add((DateTime)_Prm.Venc09);
             aVencimento.Add((DateTime)_Prm.Venc10);
-            aVencimento.Add((DateTime)_Prm.Venc12);
+            aVencimento.Add((DateTime)_Prm.Venc11);
             aVencimento.Add((DateTime)_Prm.Venc12);
 
             Imovel_bll imovel_Class = new Imovel_bll(_connection);
             List<int> ListaAtivos = imovel_Class.Lista_Imovel_Ativo();
 
             int _total = ListaAtivos.Count, _pos = 1;
-            int _qtde_normal = 0,_qtde_imune=0,_qtde_isento_area=0,_qtde_isento_processo=0,_qtde_total=0;
+            int _qtde_normal = 0,_qtde_imune=0,_qtde_isento_area=0,_qtde_isento_processo=0,_qtde_total=0,_qtde_laminas=0;
             decimal _valor_si_normal = 0, _valor_si_imune = 0, _valor_si_isento_area = 0, _valor_si_isento_processo = 0, _valor_si_total = 0;
             decimal _valor_ci_normal = 0, _valor_ci_imune = 0, _valor_ci_isento_area = 0, _valor_ci_isento_processo = 0, _valor_ci_total = 0;
 
-            string _documento0 = "", _documento1 = "", _documento2 = "", _documento3 = "", _documento4 = "", _documento5 = "", _documento6 = "", _documento7 = "";
-            string _documento8 = "", _documento9 = "", _documento10 = "", _documento11 = "", _documento12 = "", _documento91 = "", _documento92 = "";
-            string _vencimento0 = "", _vencimento1 = "", _vencimento2 = "", _vencimento3 = "", _vencimento4 = "", _vencimento5 = "", _vencimento6 = "", _vencimento7 = "";
-            string _vencimento8 = "", _vencimento9 = "", _vencimento10 = "", _vencimento11 = "", _vencimento12 = "", _vencimento91 = "", _vencimento92 = "";
-            string  _valor0 = "",_valor91="",_valor92="";
+            string[] aDocumento = new string[15];
+            string  _valor0 = "",_valor91="",_valor92="", _valor1 = "";
 
             foreach (int Codigo in ListaAtivos) {
 
-                if (Codigo > 200) break;
+//                if (Codigo > 50) break;
                 if (_pos % 50 == 0) {
                     PBar.Value = _pos * 100 / _total;
                     PBar.Update();
@@ -117,6 +114,7 @@ namespace GTI_Desktop.Forms {
                     QtdeImune.Text = _qtde_imune.ToString("00000");
                     QtdeIsentoArea.Text = _qtde_isento_area.ToString("00000");
                     QtdeIsentoProcesso.Text = _qtde_isento_processo.ToString("00000");
+                    QtdeLamina.Text = _qtde_laminas.ToString("000000");
                     QtdeTotal.Text = _qtde_total.ToString("00000");
                     Valor_ci_Normal.Text = _valor_ci_normal.ToString("#0.00");
                     Valor_si_Normal.Text = _valor_si_normal.ToString("#0.00");
@@ -125,6 +123,7 @@ namespace GTI_Desktop.Forms {
                     Valor_si_Imune.Text = _valor_si_imune.ToString("#0.00");
                     Valor_si_Total.Text = _valor_si_total.ToString("#0.00");
                     Valor_ci_Total.Text = _valor_ci_total.ToString("#0.00");
+
                     Application.DoEvents();
                 }
 
@@ -146,13 +145,7 @@ namespace GTI_Desktop.Forms {
                 decimal _fcat = _calc.Fcat, _fped = _calc.Fped, _fsit = _calc.Fsit, _fpro = _calc.Fpro, _ftop = _calc.Ftop, _fdis = _calc.Fdis, _fgle = _calc.Fgle;
                 decimal _agrupamento = _calc.Agrupamento, _fracao = _calc.Fracao, _aliquota = _calc.Aliquota;
 
-
-                //grava cálculo
-                string _linha_calc = _ano.ToString() + "#" + Codigo + "#" + _vvt.ToString("#0.00") + "#" + _vvp.ToString("#0.00") + "#" + _vvi.ToString("#0.00") + "#";
-                _linha_calc += _valor_IPTU.ToString("#0.00") + "#" + _valor_ITU.ToString("#0.00") + "#" + _natureza;
-                fs5.WriteLine(_linha_calc);
-
-
+                _qtde_laminas += _qtde_parcela + 3;
 
                 int _tributo = _vvp == 0 ? 2 : 1;
                 switch (_tipo_isencao) {
@@ -191,8 +184,7 @@ namespace GTI_Desktop.Forms {
                     fs3.WriteLine(_linha);
                     _linha = _documento + "#" + DateTime.Now.ToString("dd/MM/yyyy");
                     fs4.WriteLine(_linha);
-                    _documento0 = _documento.ToString();
-                    _vencimento0 = aVencimento[0].ToString("dd/MM/yyyy");
+                    aDocumento[0]=_documento.ToString();
                     _valor0 = _valor_unica.ToString("#0.00");
                     _documento++;
 
@@ -206,6 +198,7 @@ namespace GTI_Desktop.Forms {
                         _linha = _documento + "#" + DateTime.Now.ToString("dd/MM/yyyy");
                         fs4.WriteLine(_linha);
                         _valor91 = _valor_unica2.ToString("#0.00");
+                        aDocumento[13] = _documento.ToString();
                         _documento++;
                     }
 
@@ -219,12 +212,14 @@ namespace GTI_Desktop.Forms {
                         _linha = _documento + "#" + DateTime.Now.ToString("dd/MM/yyyy");
                         fs4.WriteLine(_linha);
                         _valor92 = _valor_unica3.ToString("#0.00");
+                        aDocumento[14] = _documento.ToString();
                         _documento++;
                     }
 
                     //parcelas normais
                     for (int _parcela = 1; _parcela <= _qtde_parcela; _parcela++) {
-                        _linha = Codigo + "#" + _ano + "#1#0#" + _parcela + "#0#18#" + aVencimento[_parcela - 1].ToString("dd/MM/yyyy") + "#01/01/" + _ano;
+                        string _vencto = aVencimento[_parcela - 1].ToString("dd/MM/yyyy");
+                        _linha = Codigo + "#" + _ano + "#1#0#" + _parcela + "#0#18#" + _vencto + "#01/01/" + _ano;
                         fs1.WriteLine(_linha);
                         _linha = Codigo + "#" + _ano + "#1#0#" + _parcela + "#0#" + _tributo.ToString() + "#" + _valor_parcela.ToString("#0.00");
                         fs2.WriteLine(_linha);
@@ -232,11 +227,21 @@ namespace GTI_Desktop.Forms {
                         fs3.WriteLine(_linha);
                         _linha = _documento + "#" + DateTime.Now.ToString("dd/MM/yyyy");
                         fs4.WriteLine(_linha);
+
+                        _valor1 = _valor_parcela.ToString("#0.00");
+                        aDocumento[_parcela] = _documento.ToString();
+
                         _documento++;
                     }
 
-
-
+                    //grava cálculo
+                    string _linha_calc = _ano.ToString() + "#" + Codigo + "#1#" + _qtde_parcela.ToString() + "#" +  _valor0 + "#" + _valor1 + "#" + _valor91 + "#" + _valor92 + "#";
+                    _linha_calc += aDocumento[0] + "#" + aDocumento[13] + "#" + aDocumento[14] + "#" ;
+                    for (int i = 1; i <= _qtde_parcela; i++) {
+                        _linha_calc += aDocumento[i] + "#" + aVencimento[i - 1].ToString("dd/MM/yyyy") + "#";
+                    }
+                    _linha_calc = _linha_calc.Substring(0, _linha_calc.Length - 1);
+                    fs5.WriteLine(_linha_calc);
 
                 }
                 _pos++;
@@ -245,7 +250,22 @@ namespace GTI_Desktop.Forms {
             fs1.Close(); fs2.Close(); fs3.Close(); fs4.Close(); fs5.Close(); fsDP.Close(); fsDT.Close(); fsND.Close(); fsPD.Close(); fsCC.Close();
             PBar.Value = 100;
             PBar.Update();
+
             MsgToolStrip.Text = "Selecione uma opção de cálculo";
+            QtdeNormal.Text = _qtde_normal.ToString("00000");
+            QtdeImune.Text = _qtde_imune.ToString("00000");
+            QtdeIsentoArea.Text = _qtde_isento_area.ToString("00000");
+            QtdeIsentoProcesso.Text = _qtde_isento_processo.ToString("00000");
+            QtdeLamina.Text = _qtde_laminas.ToString("000000");
+            QtdeTotal.Text = _qtde_total.ToString("00000");
+            Valor_ci_Normal.Text = _valor_ci_normal.ToString("#0.00");
+            Valor_si_Normal.Text = _valor_si_normal.ToString("#0.00");
+            Valor_si_IsentoArea.Text = _valor_si_isento_area.ToString("#0.00");
+            Valor_si_IsentoProcesso.Text = _valor_si_isento_processo.ToString("#0.00");
+            Valor_si_Imune.Text = _valor_si_imune.ToString("#0.00");
+            Valor_si_Total.Text = _valor_si_total.ToString("#0.00");
+            Valor_ci_Total.Text = _valor_ci_total.ToString("#0.00");
+
             Refresh();
             MessageBox.Show("Cálculo finalizado.", "Infiormação", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -260,7 +280,7 @@ namespace GTI_Desktop.Forms {
             StreamWriter fs3 = new StreamWriter(fsPD, System.Text.Encoding.Default);
             FileStream fsND = new FileStream(_path + "NUMDOCUMENTO.TXT", FileMode.Create, FileAccess.Write);
             StreamWriter fs4 = new StreamWriter(fsND, System.Text.Encoding.Default);
-            FileStream fsCC = new FileStream(_path + "CALCULO_ISS_VS.TXT", FileMode.Create, FileAccess.Write);
+            FileStream fsCC = new FileStream(_path + "CALCULO_RESUMO.TXT", FileMode.Create, FileAccess.Write);
             StreamWriter fs5 = new StreamWriter(fsCC, System.Text.Encoding.Default);
 
             MsgToolStrip.Text = "Calculando ISS Fixo/Taxa de Licença";
@@ -459,7 +479,7 @@ namespace GTI_Desktop.Forms {
             StreamWriter fs3 = new StreamWriter(fsPD, System.Text.Encoding.Default);
             FileStream fsND = new FileStream(_path + "NUMDOCUMENTO.TXT", FileMode.Create, FileAccess.Write);
             StreamWriter fs4 = new StreamWriter(fsND, System.Text.Encoding.Default);
-            FileStream fsCC = new FileStream(_path + "CALCULO_ISS_VS.TXT", FileMode.Create, FileAccess.Write);
+            FileStream fsCC = new FileStream(_path + "CALCULO_RESUMO.TXT", FileMode.Create, FileAccess.Write);
             StreamWriter fs5 = new StreamWriter(fsCC, System.Text.Encoding.Default);
 
             MsgToolStrip.Text = "Calculando vigilância sanitária";
@@ -738,7 +758,7 @@ namespace GTI_Desktop.Forms {
 
             #endregion
 
-            #region CALCULO_ISS_VS
+            #region CALCULO_RESUMO
             MsgToolStrip.Text = "Gravando cálculo";
             Refresh();
 
@@ -746,10 +766,14 @@ namespace GTI_Desktop.Forms {
             dt.Columns.Add("ano", typeof(short));
             dt.Columns.Add("codigo", typeof(int));
             dt.Columns.Add("lancamento", typeof(short));
+            dt.Columns.Add("qtde_parcela", typeof(byte));
             dt.Columns.Add("valor0", typeof(decimal));
             dt.Columns.Add("valor1", typeof(decimal));
+            dt.Columns.Add("valor91", typeof(decimal));
+            dt.Columns.Add("valor92", typeof(decimal));
             dt.Columns.Add("documento0", typeof(int));
-            dt.Columns.Add("vencimento0", typeof(DateTime));
+            dt.Columns.Add("documento91", typeof(int));
+            dt.Columns.Add("documento92", typeof(int));
             dt.Columns.Add("documento1", typeof(int));
             dt.Columns.Add("vencimento1", typeof(DateTime));
             dt.Columns.Add("documento2", typeof(int));
@@ -758,9 +782,25 @@ namespace GTI_Desktop.Forms {
             dt.Columns.Add("vencimento3", typeof(DateTime));
             dt.Columns.Add("documento4", typeof(int));
             dt.Columns.Add("vencimento4", typeof(DateTime));
-            dt.Columns.Add("qtde_parcela", typeof(byte));
+            dt.Columns.Add("documento5", typeof(int));
+            dt.Columns.Add("vencimento5", typeof(DateTime));
+            dt.Columns.Add("documento6", typeof(int));
+            dt.Columns.Add("vencimento6", typeof(DateTime));
+            dt.Columns.Add("documento7", typeof(int));
+            dt.Columns.Add("vencimento7", typeof(DateTime));
+            dt.Columns.Add("documento8", typeof(int));
+            dt.Columns.Add("vencimento8", typeof(DateTime));
+            dt.Columns.Add("documento9", typeof(int));
+            dt.Columns.Add("vencimento9", typeof(DateTime));
+            dt.Columns.Add("documento10", typeof(int));
+            dt.Columns.Add("vencimento10", typeof(DateTime));
+            dt.Columns.Add("documento11", typeof(int));
+            dt.Columns.Add("vencimento11", typeof(DateTime));
+            dt.Columns.Add("documento12", typeof(int));
+            dt.Columns.Add("vencimento12", typeof(DateTime));
 
-            fs = new FileStream(_path + "CALCULO_ISS_VS.TXT", FileMode.Open, FileAccess.Read);
+
+            fs = new FileStream(_path + "CALCULO_RESUMO.TXT", FileMode.Open, FileAccess.Read);
             sr = new StreamReader(fs, System.Text.Encoding.Default);
             while (!sr.EndOfStream) {
                 string _line = sr.ReadLine();
@@ -769,29 +809,67 @@ namespace GTI_Desktop.Forms {
                 _row["ano"] = Convert.ToInt16( _fields[0]);
                 _row["codigo"] = Convert.ToInt32(_fields[1]);
                 _row["lancamento"] = Convert.ToInt16(_fields[2]);
-                _row["valor0"] = Convert.ToDecimal(_fields[3]);
-                _row["valor1"] = Convert.ToDecimal(_fields[4]);
-                _row["documento0"] = Convert.ToInt32(_fields[5]);
-                _row["vencimento0"] = Convert.ToDateTime(_fields[6]);
-                _row["documento1"] = Convert.ToInt32(_fields[7]);
-                _row["vencimento1"] = Convert.ToDateTime(_fields[8]);
-                _row["documento2"] = Convert.ToInt32(_fields[9]);
-                _row["vencimento2"] = Convert.ToDateTime(_fields[10]);
-                if (_fields[11] != "") {
-                    _row["documento3"] = Convert.ToInt32(_fields[11]);
-                    _row["vencimento3"] = Convert.ToDateTime(_fields[12]);
+                _row["qtde_parcela"] = Convert.ToByte(_fields[3]);
+                _row["valor0"] = Convert.ToDecimal(_fields[4]);
+                _row["valor1"] = Convert.ToDecimal(_fields[5]);
+                _row["valor91"] = Convert.ToDecimal(_fields[6]);
+                _row["valor92"] = Convert.ToDecimal(_fields[7]);
+                _row["documento0"] = Convert.ToInt32(_fields[8]);
+                _row["documento91"] = Convert.ToInt32(_fields[9]);
+                _row["documento92"] = Convert.ToInt32(_fields[10]);
+                _row["documento1"] = Convert.ToInt32(_fields[11]);
+                _row["vencimento1"] = Convert.ToDateTime(_fields[12]);
+                if (_fields.Length > 13) {
+                    _row["documento2"] = Convert.ToInt32(_fields[13]);
+                    _row["vencimento2"] = Convert.ToDateTime(_fields[14]);
                 }
-                if (_fields[13] != "") {
-                    _row["documento4"] = Convert.ToInt32(_fields[13]);
-                    _row["vencimento4"] = Convert.ToDateTime(_fields[14]);
+                if (_fields.Length>15) {
+                    _row["documento3"] = Convert.ToInt32(_fields[15]);
+                    _row["vencimento3"] = Convert.ToDateTime(_fields[16]);
                 }
-                _row["qtde_parcela"] = Convert.ToByte(_fields[15]);
+                if (_fields.Length>17) {
+                    _row["documento4"] = Convert.ToInt32(_fields[17]);
+                    _row["vencimento4"] = Convert.ToDateTime(_fields[18]);
+                }
+                if (_fields.Length>19) {
+                    _row["documento5"] = Convert.ToInt32(_fields[19]);
+                    _row["vencimento5"] = Convert.ToDateTime(_fields[20]);
+                }
+                if (_fields.Length>21) {
+                    _row["documento6"] = Convert.ToInt32(_fields[21]);
+                    _row["vencimento6"] = Convert.ToDateTime(_fields[22]);
+                }
+                if (_fields.Length>23) {
+                    _row["documento7"] = Convert.ToInt32(_fields[23]);
+                    _row["vencimento7"] = Convert.ToDateTime(_fields[24]);
+                }
+                if (_fields.Length>25) {
+                    _row["documento8"] = Convert.ToInt32(_fields[25]);
+                    _row["vencimento8"] = Convert.ToDateTime(_fields[26]);
+                }
+                if (_fields.Length>27) {
+                    _row["documento9"] = Convert.ToInt32(_fields[27]);
+                    _row["vencimento9"] = Convert.ToDateTime(_fields[28]);
+                }
+                if (_fields.Length>29) {
+                    _row["documento10"] = Convert.ToInt32(_fields[29]);
+                    _row["vencimento10"] = Convert.ToDateTime(_fields[30]);
+                }
+                if (_fields.Length>31) {
+                    _row["documento11"] = Convert.ToInt32(_fields[31]);
+                    _row["vencimento11"] = Convert.ToDateTime(_fields[32]);
+                }
+                if (_fields.Length>33) {
+                    _row["documento12"] = Convert.ToInt32(_fields[33]);
+                    _row["vencimento12"] = Convert.ToDateTime(_fields[34]);
+                }
+
                 dt.Rows.Add(_row);
             }
 
             sbc = new SqlBulkCopy(_connection);
             sbc.BulkCopyTimeout = 0;
-            sbc.DestinationTableName = "CALCULO_ISS_VS";
+            sbc.DestinationTableName = "CALCULO_RESUMO";
             sbc.WriteToServer(dt);
             sbc.Close();
             dt.Dispose(); sr.Close(); fs.Close();

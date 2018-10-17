@@ -117,10 +117,10 @@ namespace UIWeb.Pages {
                                 EmailContato = (cust.Elements("Email").Any() ? cust.Element("Email").Value : ""),
                                 Endereco = (from end in cust.Descendants("Endereco")
                                             select new EnderecoStruct {
-                                                Logradouro = end.Element("Logradouro").Value,
-                                                Numero = end.Element("NumeroLogradouro").Value,
+                                                Logradouro = end.Element("Logradouro").Value!=null? end.Element("Logradouro").Value:"",
+                                                Numero = end.Element("NumeroLogradouro").Value!=null? end.Element("NumeroLogradouro").Value:"",
                                                 SetorQuadraLote = end.Element("SetorQuadraLote").Value,
-                                                TipoLogradouro = end.Element("TipoLogradouro").Value,
+                                                TipoLogradouro = end.Element("TipoLogradouro").Value!=null? end.Element("TipoLogradouro").Value:"",
                                                 Complemento = end.Elements("Complemento").Any() ? end.Element("Complemento").Value : "",
                                                 Bairro = end.Element("Bairro").Value,
                                                 Cidade = end.Element("Municipio") == null ? "" : end.Element("Municipio").Value,

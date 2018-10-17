@@ -96,7 +96,8 @@ namespace GTI_Desktop.Forms {
             ProfissionalRegistro.ReadOnly = bStart;
             ContadorList.Visible = !bStart;
             ContadorList.Enabled = !bStart;
-
+            CnaeVSButton.Enabled = !bStart;
+            CnaeVSDelButton.Enabled = !bStart;
         }
 
         private void ClearFields() {
@@ -171,6 +172,9 @@ namespace GTI_Desktop.Forms {
             ProfissionalNome.Text = "";
             ProfissionalRegistro.Text = "";
             ProfissionalConselho.Text = "";
+            Cnae.Text = "";
+            if(Lista_Cnae!=null) Lista_Cnae.Clear();
+            if (Lista_Cnae_VS != null) Lista_Cnae_VS.Clear();
             Cnae.Text = "";
         }
 
@@ -459,6 +463,18 @@ namespace GTI_Desktop.Forms {
             Lista_Cnae = empresa_Class.Lista_Cnae_Empresa(Codigo);
             Lista_Cnae_VS = empresa_Class.Lista_Cnae_Empresa_VS(Codigo);
 
+            //Remove Cnae Duplicado
+Inicio:;
+            foreach (CnaeStruct itemCnaeVS in Lista_Cnae_VS) {
+                foreach (CnaeStruct itemCnae in Lista_Cnae) {
+                    if (itemCnaeVS.CNAE == itemCnae.CNAE) {
+                        Lista_Cnae_VS.Remove(itemCnaeVS);
+                        goto Inicio;
+                    }
+                }
+            }
+
+            //Preenche lista da Vigilânica Sanitária
             foreach (CnaeStruct item in Lista_Cnae_VS) {
                 ListViewItem lvItem = new ListViewItem(item.CNAE);
                 lvItem.SubItems.Add(item.Descricao);
@@ -466,6 +482,22 @@ namespace GTI_Desktop.Forms {
                 lvItem.SubItems.Add(item.Qtde.ToString("00"));
                 lvItem.SubItems.Add(string.Format("{0:0.00}", item.Valor));
                 AtividadeVSListView.Items.Add(lvItem);
+            }
+
+            //Exibe Cnae Principal
+            foreach (CnaeStruct item in Lista_Cnae) {
+                if (item.Principal) {
+                    Cnae.Text = item.CNAE;
+                    break;
+                }
+            }
+            if (Cnae.Text == "") {
+                foreach (CnaeStruct item in Lista_Cnae_VS) {
+                    if (item.Principal) {
+                        Cnae.Text = item.CNAE;
+                        break;
+                    }
+                }
             }
 
         }
@@ -696,7 +728,7 @@ namespace GTI_Desktop.Forms {
             else {
                 if (Lista_Cnae == null) Lista_Cnae = new List<CnaeStruct>();
                 if (Lista_Cnae_VS == null) Lista_Cnae_VS = new List<CnaeStruct>();
-                Empresa_Cnae frm = new Empresa_Cnae(Lista_Cnae,Lista_Cnae_VS);
+                Empresa_Cnae frm = new Empresa_Cnae(Lista_Cnae,Lista_Cnae_VS,AddButton.Enabled);
                 frm.ShowDialog(this);
                 Lista_Cnae = frm.Lista_Cnae;
                 Cnae.Text = "";
@@ -710,16 +742,23 @@ namespace GTI_Desktop.Forms {
         }
 
         private void CnaeVSButton_Click(object sender, EventArgs e) {
+
             if (Convert.ToInt32(Codigo.Text) == 0 && !bAddNew)
                 MessageBox.Show("Selecione uma empresa.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
                 if (Lista_Cnae_VS == null) Lista_Cnae_VS = new List<CnaeStruct>();
-                Empresa_VS frm = new Empresa_VS(Lista_Cnae, Lista_Cnae_VS); 
+                Empresa_VS frm = new Empresa_VS(Lista_Cnae, Lista_Cnae_VS,AddButton.Enabled); 
                 frm.ShowDialog(this);
                 CnaeStruct itemVS = frm.Item_VS;
-                if (itemVS != null)
+                if (itemVS != null) {
+                    foreach (CnaeStruct item in Lista_Cnae_VS) {
+                        if (itemVS.CNAE == item.CNAE) {
+                            MessageBox.Show("CNAE já inserido na lista de atividades.","Atenção",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                            return;
+                        }
+                    }
                     Lista_Cnae_VS.Add(itemVS);
-                
+                }
 
                 AtividadeVSListView.Items.Clear();
                 foreach (CnaeStruct item in Lista_Cnae_VS) {
@@ -733,9 +772,17 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-
-
-
-
+        private void CnaeVSDelButton_Click(object sender, EventArgs e) {
+            if (AtividadeVSListView.SelectedItems.Count > 0) {
+                string _cnae = AtividadeVSListView.SelectedItems[0].Text;
+                foreach (CnaeStruct item in Lista_Cnae_VS) {
+                    if (item.CNAE == _cnae) {
+                        Lista_Cnae_VS.Remove(item);
+                        break;
+                    }
+                }
+                AtividadeVSListView.SelectedItems[0].Remove();
+            }
+        }
     }
 }

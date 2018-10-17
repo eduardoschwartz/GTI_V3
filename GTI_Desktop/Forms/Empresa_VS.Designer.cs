@@ -32,6 +32,8 @@
             this.CriterioList = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.Valor = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.Qtde = new System.Windows.Forms.TextBox();
             this.CnaeToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,10 +46,10 @@
             this.CnaeToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OkButton,
             this.CancelButton});
-            this.CnaeToolStrip.Location = new System.Drawing.Point(0, 84);
+            this.CnaeToolStrip.Location = new System.Drawing.Point(0, 116);
             this.CnaeToolStrip.Name = "CnaeToolStrip";
             this.CnaeToolStrip.Padding = new System.Windows.Forms.Padding(6, 0, 1, 0);
-            this.CnaeToolStrip.Size = new System.Drawing.Size(498, 25);
+            this.CnaeToolStrip.Size = new System.Drawing.Size(500, 25);
             this.CnaeToolStrip.TabIndex = 28;
             this.CnaeToolStrip.Text = "toolStrip1";
             // 
@@ -84,12 +86,13 @@
             // 
             // CnaeList
             // 
+            this.CnaeList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CnaeList.DropDownWidth = 430;
             this.CnaeList.FormattingEnabled = true;
             this.CnaeList.Location = new System.Drawing.Point(59, 16);
             this.CnaeList.Name = "CnaeList";
-            this.CnaeList.Size = new System.Drawing.Size(427, 21);
-            this.CnaeList.TabIndex = 30;
+            this.CnaeList.Size = new System.Drawing.Size(430, 21);
+            this.CnaeList.TabIndex = 0;
             this.CnaeList.SelectedIndexChanged += new System.EventHandler(this.CnaeList_SelectedIndexChanged);
             // 
             // label2
@@ -103,12 +106,14 @@
             // 
             // CriterioList
             // 
+            this.CriterioList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CriterioList.DropDownWidth = 430;
             this.CriterioList.FormattingEnabled = true;
             this.CriterioList.Location = new System.Drawing.Point(59, 44);
             this.CriterioList.Name = "CriterioList";
             this.CriterioList.Size = new System.Drawing.Size(272, 21);
-            this.CriterioList.TabIndex = 32;
+            this.CriterioList.TabIndex = 1;
+            this.CriterioList.SelectedIndexChanged += new System.EventHandler(this.CriterioList_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -129,12 +134,32 @@
             this.Valor.TabIndex = 34;
             this.Valor.Text = "0,00";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 77);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(45, 13);
+            this.label4.TabIndex = 35;
+            this.label4.Text = "Qtde....:";
+            // 
+            // Qtde
+            // 
+            this.Qtde.Location = new System.Drawing.Point(59, 74);
+            this.Qtde.MaxLength = 2;
+            this.Qtde.Name = "Qtde";
+            this.Qtde.Size = new System.Drawing.Size(56, 20);
+            this.Qtde.TabIndex = 2;
+            this.Qtde.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Qtde_KeyPress);
+            // 
             // Empresa_VS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(498, 109);
+            this.ClientSize = new System.Drawing.Size(500, 141);
             this.ControlBox = false;
+            this.Controls.Add(this.Qtde);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.Valor);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.CriterioList);
@@ -165,5 +190,7 @@
         private System.Windows.Forms.ComboBox CriterioList;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label Valor;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox Qtde;
     }
 }

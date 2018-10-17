@@ -9,6 +9,7 @@ namespace GTI_Models {
         public enum TipoCadastro { Imovel, Empresa, Cidadao }
         public enum RetornoCertidaoDebito { Negativa, Positiva, NegativaPositiva}
         public enum TipoEndereco { Local, Proprietario, Entrega }
+        public enum TipoDocumento { Cpf,Cnpj}
     }
 
     public class CompetenciaISS {
