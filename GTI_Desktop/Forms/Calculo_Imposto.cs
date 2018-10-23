@@ -13,8 +13,8 @@ namespace GTI_Desktop.Forms {
         string _connection = gtiCore.Connection_Name();
         string _path = @"c:\cadastro\bin\";
         int _ano = 2019;
-        int _documento = 16496531;
-        decimal _ipca = (decimal)3.2649;
+        int _documento = 16961120;
+        decimal _ipca = (decimal)3.4128;
  
         private enum Tipo_imposto {
             Iptu = 1,
@@ -64,6 +64,8 @@ namespace GTI_Desktop.Forms {
             StreamWriter fs4 = new StreamWriter(fsND, System.Text.Encoding.Default);
             FileStream fsCC = new FileStream(_path + "CALCULO_RESUMO.TXT", FileMode.Create, FileAccess.Write);
             StreamWriter fs5 = new StreamWriter(fsCC, System.Text.Encoding.Default);
+            FileStream fsLS = new FileStream(_path + "LASERIPTU.TXT", FileMode.Create, FileAccess.Write);
+            StreamWriter fs6 = new StreamWriter(fsLS, System.Text.Encoding.Default);
 
             MsgToolStrip.Text = "Calculando IPTU";
 
@@ -243,6 +245,13 @@ namespace GTI_Desktop.Forms {
                     _linha_calc = _linha_calc.Substring(0, _linha_calc.Length - 1);
                     fs5.WriteLine(_linha_calc);
 
+                    //grava laseriptu
+                    _linha_calc = _ano.ToString() + "#" + Codigo + "#" + _vvt.ToString("#0.00") + "#" + _vvp.ToString("#0.00") + "#" + _vvi.ToString("#0.00") + "#" + _valor_IPTU.ToString("#0.00") + "#" + _valor_ITU.ToString("#0.00") + "#";
+                    _linha_calc += _natureza + "#" + _area_predial + "#" + _testada + "#" +  _valor1 + "#" +_valor0 + "#" + _valor91 + "#" + _valor92 + "#" + _qtde_parcela + "#0#0#" + _area_terreno.ToString("#0.00") + "#";
+                    _linha_calc += _fcat.ToString("#0.00") + "#" + _fped.ToString("#0.00") + "#" + _fsit.ToString("#0.00") + "#" + _fpro.ToString("#0.00") + "#" + _ftop.ToString("#0.00") + "#" + _fdis.ToString("#0.00") + "#";
+                    _linha_calc += _fgle.ToString("#0.00") + "#" + _agrupamento.ToString("#0.00") + "#" + _fracao.ToString("#0.00") + "#" + _aliquota.ToString("#0.00") ;
+
+                    fs6.WriteLine(_linha_calc);
                 }
                 _pos++;
             }
@@ -379,7 +388,7 @@ namespace GTI_Desktop.Forms {
                     string _linha = Codigo + "#" + _ano + "#6#0#" + _parcela + "#0#18#" + _vencto + "#01/01/" + _ano;
                     fs1.WriteLine(_linha);
                     
-                    decimal _valor = _valor_aliquota/3, _valor_unica = (_valor_aliquota / 3) - ((_valor_aliquota / 3) * (decimal)0.05);
+                    decimal _valor = _valor_aliquota/3, _valor_unica = (_valor_aliquota) - ((_valor_aliquota) * (decimal)0.05);
                     decimal _valor_parcela = _parcela > 0 ? _valor : _valor_unica;
                     decimal _valor_boleto_parcela = _valor_parcela, _valor_boleto_unica = _valor_unica;
                     if (_valor_parcela > 0) {
@@ -387,10 +396,10 @@ namespace GTI_Desktop.Forms {
                         fs2.WriteLine(_linha);
                     }
                     if (_vistoria) {
-                        decimal _valor_vistoria_tmp = _parcela == 0 ? _valor_vistoria : _valor_vistoria_parcelado;
+                        decimal _valor_vistoria_tmp = _parcela == 0 ? _valor_vistoria-(_valor_vistoria * (decimal)0.05) : _valor_vistoria_parcelado;
                         _linha = item.Codigo + "#" + _ano + "#6#0#" + _parcela + "#0#24#" + _valor_vistoria_tmp.ToString("#0.00");
                         fs2.WriteLine(_linha);
-                        _valor_boleto_parcela += _valor_vistoria_parcelado; _valor_boleto_unica += _valor_vistoria;
+                        _valor_boleto_parcela += _valor_vistoria_parcelado; _valor_boleto_unica += _valor_vistoria_tmp;
                     }
 
                     if (_possui_taxa) {
@@ -405,7 +414,7 @@ namespace GTI_Desktop.Forms {
                         fs1.WriteLine(_linha);
 
                         _valor = _valor_aliquota_ISS / 3;
-                        _valor_unica = (_valor_aliquota_ISS / 3) - ((_valor_aliquota_ISS / 3) * (decimal)0.05);
+                        _valor_unica = (_valor_aliquota_ISS ) - ((_valor_aliquota_ISS ) * (decimal)0.05);
                         _valor_parcela = _parcela > 0 ? _valor : _valor_unica;
                         _valor_boleto_parcela += _valor_parcela; _valor_boleto_unica += _valor_unica;
                         _linha = Codigo + "#" + _ano + "#14#0#" + _parcela + "#0#11#" + _valor_parcela.ToString("#0.00");
@@ -441,10 +450,6 @@ namespace GTI_Desktop.Forms {
                             _documento3 = _documento.ToString();
                             _vencimento3 = _vencto.ToString();
                             break;
-                        case 4:
-                            _documento4 = _documento.ToString();
-                            _vencimento4 = _vencto.ToString();
-                            break;
                         default:
                             break;
                     }
@@ -452,9 +457,9 @@ namespace GTI_Desktop.Forms {
                     _documento++;
                 }
 
-                string _linha_calc = _ano.ToString() + "#" + Codigo + "#6#" + _valor0 + "#" + _valor1 + "#" +
-                _documento0 + "#" + _vencimento0 + "#" + _documento1 + "#" + _vencimento1 + "#" + _documento2 + '#' + _vencimento2 + "#" + _documento3 + "#" +
-                _vencimento3 + "#" + _documento4 + "#" + _vencimento4 + "#" + _qtde_parcelas.ToString();
+                string _linha_calc = _ano.ToString() + "#" + Codigo + "#6#" + _qtde_parcelas.ToString() + "#" + _valor0 + "#" + _valor1 + "#0#0#" +
+                _documento0 + "#0#0#" + _documento1 + "#" + _vencimento1 + "#" + _documento2 + '#' + _vencimento2 + "#" + _documento3 + "#" +
+                _vencimento3  ;
                 fs5.WriteLine(_linha_calc);
 
                 _pos++;
@@ -873,6 +878,91 @@ namespace GTI_Desktop.Forms {
             sbc.WriteToServer(dt);
             sbc.Close();
             dt.Dispose(); sr.Close(); fs.Close();
+
+            #endregion
+
+
+
+            #region LASERIPTU
+            if (ImpostoList.SelectedIndex == 0) {
+                MsgToolStrip.Text = "Inserindo LaserIPTU";
+                Refresh();
+
+                dt = new DataTable();
+                dt.Columns.Add("ano", typeof(short));
+                dt.Columns.Add("codreduzido", typeof(int));
+                dt.Columns.Add("vvt", typeof(decimal));
+                dt.Columns.Add("vvc", typeof(decimal));
+                dt.Columns.Add("vvi", typeof(decimal));
+                dt.Columns.Add("impostopredial", typeof(decimal));
+                dt.Columns.Add("impostoterritorial", typeof(decimal));
+                dt.Columns.Add("natureza", typeof(string));
+                dt.Columns.Add("areaconstrucao", typeof(decimal));
+                dt.Columns.Add("testadaprinc", typeof(decimal));
+                dt.Columns.Add("valortotalparc", typeof(decimal));
+                dt.Columns.Add("valortotalunica", typeof(decimal));
+                dt.Columns.Add("valortotalunica2", typeof(decimal));
+                dt.Columns.Add("valortotalunica3", typeof(decimal));
+                dt.Columns.Add("qtdeparc", typeof(short));
+                dt.Columns.Add("txexpparc", typeof(decimal));
+                dt.Columns.Add("txexpunica", typeof(decimal));
+                dt.Columns.Add("areaterreno", typeof(decimal));
+                dt.Columns.Add("fatorcat", typeof(decimal));
+                dt.Columns.Add("fatorped", typeof(decimal));
+                dt.Columns.Add("fatorsit", typeof(decimal));
+                dt.Columns.Add("fatorpro", typeof(decimal));
+                dt.Columns.Add("fatortop", typeof(decimal));
+                dt.Columns.Add("fatordis", typeof(decimal));
+                dt.Columns.Add("fatorgle", typeof(decimal));
+                dt.Columns.Add("agrupamento", typeof(decimal));
+                dt.Columns.Add("fracaoideal", typeof(decimal));
+                dt.Columns.Add("aliquota", typeof(decimal));
+
+                fs = new FileStream(_path + "LASERIPTU.TXT", FileMode.Open, FileAccess.Read);
+                sr = new StreamReader(fs, System.Text.Encoding.Default);
+                while (!sr.EndOfStream) {
+                    string _line = sr.ReadLine();
+                    string[] _fields = _line.Split('#');
+                    DataRow _row = dt.NewRow();
+                    _row["ano"] = Convert.ToInt16(_fields[0]);
+                    _row["codreduzido"] = Convert.ToInt32(_fields[1]);
+                    _row["vvt"] = Convert.ToDecimal(_fields[2]);
+                    _row["vvc"] = Convert.ToDecimal(_fields[3]);
+                    _row["vvi"] = Convert.ToDecimal(_fields[4]);
+                    _row["impostopredial"] = Convert.ToDecimal(_fields[5]);
+                    _row["impostoterritorial"] = Convert.ToDecimal(_fields[6]);
+                    _row["natureza"] = _fields[7];
+                    _row["areaconstrucao"] = Convert.ToDecimal(_fields[8]);
+                    _row["testadaprinc"] = Convert.ToDecimal(_fields[9]);
+                    _row["valortotalparc"] = Convert.ToDecimal(_fields[10]);
+                    _row["valortotalunica"] = Convert.ToDecimal(_fields[11]);
+                    _row["valortotalunica2"] = Convert.ToDecimal(_fields[12]);
+                    _row["valortotalunica3"] = Convert.ToDecimal(_fields[13]);
+                    _row["qtdeparc"] = Convert.ToInt16(_fields[14]);
+                    _row["txexpparc"] = Convert.ToDecimal(_fields[15]);
+                    _row["txexpunica"] = Convert.ToDecimal(_fields[16]);
+                    _row["areaterreno"] = Convert.ToDecimal(_fields[17]);
+                    _row["fatorcat"] = Convert.ToDecimal(_fields[18]);
+                    _row["fatorped"] = Convert.ToDecimal(_fields[19]);
+                    _row["fatorsit"] = Convert.ToDecimal(_fields[20]);
+                    _row["fatorpro"] = Convert.ToDecimal(_fields[21]);
+                    _row["fatortop"] = Convert.ToDecimal(_fields[22]);
+                    _row["fatordis"] = Convert.ToDecimal(_fields[23]);
+                    _row["fatorgle"] = Convert.ToDecimal(_fields[24]);
+                    _row["agrupamento"] = Convert.ToDecimal(_fields[25]);
+                    _row["fracaoideal"] = Convert.ToDecimal(_fields[26]);
+                    _row["aliquota"] = Convert.ToDecimal(_fields[27]);
+
+                    dt.Rows.Add(_row);
+                }
+
+                sbc = new SqlBulkCopy(_connection);
+                sbc.BulkCopyTimeout = 0;
+                sbc.DestinationTableName = "LASERIPTU";
+                sbc.WriteToServer(dt);
+                sbc.Close();
+                dt.Dispose(); fs.Close(); sr.Close();
+            }
 
             #endregion
 

@@ -385,22 +385,20 @@ namespace UIWeb.Pages {
             int nIndex = 0;
             if (bRefis) {
                 foreach (var item in ListaParcela) {
-                    if (Convert.ToDateTime(item.Datavencimento) <= Convert.ToDateTime("31/12/2016")) {
+                    if (Convert.ToDateTime(item.Datavencimento) <= Convert.ToDateTime("30/06/2018")) {
                         Int16 CodLanc = item.Codlancamento;
                         if (CodLanc != 48 || CodLanc != 69 || CodLanc != 78) {
 
-                            if (DateTime.Now <= Convert.ToDateTime("29/09/2017")) {
+                            //if (DateTime.Now <= Convert.ToDateTime("19/11/2018")) {
+                            if (Convert.ToDateTime(sDataDAM) <= Convert.ToDateTime("30/11/2018")) {
                                 nPerc = 1M;
-                                nPlano = 16;
-                            } else if (DateTime.Now > Convert.ToDateTime("29/09/2017") && DateTime.Now <= Convert.ToDateTime("31/10/2017")) {
+                                nPlano = 26;
+                            } else if (Convert.ToDateTime(sDataDAM) > Convert.ToDateTime("30/11/2018") && Convert.ToDateTime(sDataDAM) <= Convert.ToDateTime("14/12/2018")) {
+                                nPerc = 0.9M;
+                                nPlano = 27;
+                            } else if (Convert.ToDateTime(sDataDAM) > Convert.ToDateTime("14/12/2018") && Convert.ToDateTime(sDataDAM) <= Convert.ToDateTime("28/12/2018")) {
                                 nPerc = 0.8M;
-                                nPlano = 17;
-                            } else if (DateTime.Now > Convert.ToDateTime("31/10/2017") && DateTime.Now <= Convert.ToDateTime("30/11/2017")) {
-                                nPerc = 0.6M;
-                                nPlano = 18;
-                            } else if (DateTime.Now > Convert.ToDateTime("30/11/2017") && DateTime.Now <= Convert.ToDateTime("22/12/2017")) {
-                                nPerc = 0.5M;
-                                nPlano = 19;
+                                nPlano = 28;
                             }
                             item.Valorjuros = Convert.ToDecimal(item.Valorjuros) - (Convert.ToDecimal(item.Valorjuros) * nPerc);
                             item.Valormulta = Convert.ToDecimal(item.Valormulta) - (Convert.ToDecimal(item.Valormulta) * nPerc);
@@ -484,7 +482,8 @@ namespace UIWeb.Pages {
             bool bParcNormal = false;
             bool bAnoAtual = false;
             bool bAnoAnterior = false;
-            
+            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
+            bRefis = tributario_Class.IsRefis();
 
             lblmsg.Text = "";
             lblMsg2.Text = "";
@@ -506,13 +505,14 @@ namespace UIWeb.Pages {
                             if (Convert.ToInt16(row.Cells[4].Text) != 0)
                                 bParcNormal = true;
 
-                            if (Convert.ToDateTime(row.Cells[6].Text).Year < 2017)
-                                bAnoAnterior = true;
-                            if (Convert.ToDateTime(row.Cells[6].Text).Year >= 2017)
+//                            if (Convert.ToDateTime(row.Cells[6].Text).Year < 2017)
+                            if (Convert.ToDateTime(row.Cells[6].Text).Year <= 2018  && Convert.ToDateTime(row.Cells[6].Text).Month <= 6)
+                                    bAnoAnterior = true;
+                            if (Convert.ToDateTime(row.Cells[6].Text).Year >= 2018 && Convert.ToDateTime(row.Cells[6].Text).Month > 6 && Convert.ToInt16(row.Cells[2].Text.Substring(0, 3)) != 41)
                                 bAnoAtual = true;
 
                             if (Convert.ToInt16(row.Cells[2].Text.Substring(0, 3)) == 5) {
-                                if (Convert.ToDateTime(row.Cells[6].Text) > Convert.ToDateTime("05/01/2015")) {
+                                if (Convert.ToDateTime(row.Cells[6].Text) > Convert.ToDateTime("05/01/2015")  && !bRefis ) {
                                     bGerado = false;
                                     lblMsg2.Text = "ISS Variável com vencimento após 01/05/2015 não pode ser pago por DAM.";
                                     return;
@@ -536,7 +536,8 @@ namespace UIWeb.Pages {
                 if (bAnoAnterior && bAnoAtual) {
                     bGerado = false;
                     nPlano = 0;
-                    lblMsg2.Text = "Não é possível pagar débitos débitos de 2017 com outros anos pelo Refis.";
+                    //lblMsg2.Text = "Não é possível pagar débitos de 2017 com outros anos pelo Refis.";
+                    lblMsg2.Text = "Não é possível pagar débitos anteriores a 30/06/2018 com débitos posteriores durante Refis.";
                     return;
                 }
                 if (!bAnoAnterior && bAnoAtual) {
