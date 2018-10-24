@@ -43,7 +43,7 @@ namespace GTI_Dal.Classes {
         public List<int> Lista_Empresas_Ativas() {
             using (var db = new GTI_Context(_connection)) {
                 List<int> ListaFinal = new List<int>();
-                List<int> ListaAtivos = (from m in db.Mobiliario where m.Dataencerramento==null orderby m.Codigomob select m.Codigomob).ToList();
+                List<int> ListaAtivos = (from m in db.Mobiliario where m.Dataencerramento==null && m.Insctemp!=1 orderby m.Codigomob select m.Codigomob).ToList();
                 List<int> ListaSuspenso = Lista_Empresas_Suspensas();
                 for (int i = 0; i < ListaAtivos.Count; i++) {
                     bool _find = false;

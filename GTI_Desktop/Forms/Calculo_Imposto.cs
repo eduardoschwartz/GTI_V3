@@ -13,7 +13,7 @@ namespace GTI_Desktop.Forms {
         string _connection = gtiCore.Connection_Name();
         string _path = @"c:\cadastro\bin\";
         int _ano = 2019;
-        int _documento = 16961120;
+        int _documento = 17020168;
         decimal _ipca = (decimal)3.4128;
  
         private enum Tipo_imposto {
@@ -541,7 +541,6 @@ namespace GTI_Desktop.Forms {
             string _vencimento0="", _vencimento1="", _vencimento2="", _vencimento3="", _vencimento4="";
 
             foreach (Mobiliarioatividadevs2 item in ListaVS) {
-
                 if (_pos % 10 == 0) {
                     PBar.Value = _pos * 100 / _total;
                     PBar.Update();
@@ -553,7 +552,7 @@ namespace GTI_Desktop.Forms {
                     string _vencto =  _parcela==0 ? aVencimento[0].ToString("dd/MM/yyyy"):   aVencimento[_parcela-1].ToString("dd/MM/yyyy");
                     string _linha = item.Codmobiliario + "#" + _ano + "#13#0#" + _parcela + "#0#18#" + _vencto + "#01/01/" + _ano ;
                     fs1.WriteLine(_linha);
-                    decimal _valor = item.Valor, _valor_unica = item.Valor - (item.Valor * (decimal)0.05);
+                    decimal _valor = item.Valor/_qtde_parcelas, _valor_unica = (item.Valor - (item.Valor * (decimal)0.05)) ;
                     decimal _valor_parcela = _parcela > 0 ? _valor : _valor_unica;
                     _valor_parcela = _valor_parcela * item.Qtde;
                     _linha = item.Codmobiliario + "#" + _ano + "#13#0#" + _parcela + "#0#25#" +  _valor_parcela.ToString("#0.00") ;
@@ -593,10 +592,10 @@ namespace GTI_Desktop.Forms {
                     _documento++;
                 }
 
-                string _linha_calc = _ano.ToString() + "#" + item.Codmobiliario + "#13#" + _valor0 + "#" + _valor1 + "#" +
-                    _documento0 + "#" + _vencimento0 + "#" + _documento1 + "#" + _vencimento1 + "#" + _documento2 + '#' + _vencimento2 + "#" + _documento3 + "#" +
-                    _vencimento3 + "#" + _documento4 + "#" + _vencimento4 + "#" + _qtde_parcelas.ToString();
+                string _linha_calc = _ano.ToString() + "#" + item.Codmobiliario + "#13#" + _qtde_parcelas.ToString() + "#" + _valor0 + "#" + _valor1 + "#0#0#" +
+                _documento0 + "#0#0#" + _documento1 + "#" + _vencimento1 + "#" + _documento2 + '#' + _vencimento2 ;
                 fs5.WriteLine(_linha_calc);
+
 
                 _pos++;
             }
@@ -880,8 +879,6 @@ namespace GTI_Desktop.Forms {
             dt.Dispose(); sr.Close(); fs.Close();
 
             #endregion
-
-
 
             #region LASERIPTU
             if (ImpostoList.SelectedIndex == 0) {

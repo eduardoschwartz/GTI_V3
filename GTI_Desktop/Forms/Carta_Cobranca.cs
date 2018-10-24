@@ -14,7 +14,7 @@ namespace GTI_Desktop.Forms {
     public partial class Carta_Cobranca : Form {
         private string _connection = gtiCore.Connection_Name();
         private bool _stop = false;
-        short _remessa = 1;
+        short _remessa = 2;
 
         public Carta_Cobranca() {
             InitializeComponent();
@@ -65,8 +65,8 @@ namespace GTI_Desktop.Forms {
         }
 
         private void Gera_Matriz(int _codigo_ini, int _codigo_fim, DateTime _data_vencto) {
-            int _total = _codigo_fim - _codigo_ini + 1, _pos = 1, _numero_documento = 5108165; //5.100.001 até 5.400.000
-            DateTime _data_vencimento = Convert.ToDateTime("15/10/2018");
+            int _total = _codigo_fim - _codigo_ini + 1, _pos = 1, _numero_documento = 5114800; //5.100.001 até 5.400.000
+            DateTime _data_vencimento = Convert.ToDateTime("30/11/2018");
 
             Exception ex = null;
             List<SpExtrato_carta> Lista_Resumo = new List<SpExtrato_carta>();
@@ -80,9 +80,9 @@ namespace GTI_Desktop.Forms {
             Cidadao_bll cidadao_Class = new Cidadao_bll(_connection);
 
             List<int> _lista_codigos = tributario_Class.Lista_Codigo_Carta(_codigo_ini, _codigo_fim, _data_vencto);
-            
 
-            //PBar.Value = 0;
+
+            PBar.Value = 0;
             //ex = tributario_Class.Excluir_Carta_Cobranca(_remessa);
             //if (ex != null) {
             //    ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
@@ -114,7 +114,7 @@ namespace GTI_Desktop.Forms {
                         goto Proximo;
                 }
 
-                List<SpExtrato_carta> Lista_Extrato_Tributo = tributario_Class.Lista_Extrato_Tributo_Carta(Codigo: _codigo_atual,Data_Atualizacao:Convert.ToDateTime("15/10/2018"));
+                List<SpExtrato_carta> Lista_Extrato_Tributo = tributario_Class.Lista_Extrato_Tributo_Carta(Codigo: _codigo_atual,Data_Atualizacao:Convert.ToDateTime("30/11/2018"));
                 if (Lista_Extrato_Tributo.Count == 0)
                     goto Proximo;
 
@@ -130,6 +130,9 @@ namespace GTI_Desktop.Forms {
                     goto Proximo;
 
                 Lista_Final.Clear();
+
+                int nPercDesconto = 0;
+
                 foreach (SpExtrato_carta item in Lista_Resumo) {
                     bool _find = false;
                     int _index = 0;
@@ -140,21 +143,26 @@ namespace GTI_Desktop.Forms {
                         }
                         _index++;
                     }
+
+                    decimal _valor_juros = item.Valorjuros * nPercDesconto;
+                    decimal _valor_multa = item.Valormulta * nPercDesconto;
                     if (_find) {
                         Lista_Final[_index].Valortributo += item.Valortributo;
-                        Lista_Final[_index].Valorjuros += item.Valorjuros;
-                        Lista_Final[_index].Valormulta += item.Valormulta;
+                        Lista_Final[_index].Valorjuros += _valor_juros;
+                        Lista_Final[_index].Valormulta += _valor_multa;
                         Lista_Final[_index].Valorcorrecao += item.Valorcorrecao;
-                        Lista_Final[_index].Valortotal += item.Valortotal;
+                        //Lista_Final[_index].Valortotal += item.Valortotal;
+                        Lista_Final[_index].Valortotal += item.Valortributo+_valor_juros+_valor_multa+item.Valorcorrecao;
                     } else {
                         SpExtrato_carta reg = new SpExtrato_carta();
                         reg.Codreduzido = item.Codreduzido;
                         reg.Anoexercicio = item.Anoexercicio;
                         reg.Valortributo = item.Valortributo;
-                        reg.Valorjuros = item.Valorjuros;
-                        reg.Valormulta = item.Valormulta;
+                        reg.Valorjuros = _valor_juros;
+                        reg.Valormulta = _valor_multa;
                         reg.Valorcorrecao = item.Valorcorrecao;
-                        reg.Valortotal = item.Valortotal;
+                        //reg.Valortotal = item.Valortotal;
+                        reg.Valortotal = item.Valortributo + _valor_juros + _valor_multa + item.Valorcorrecao;
                         Lista_Final.Add(reg);
                     }
                 }
@@ -164,14 +172,13 @@ namespace GTI_Desktop.Forms {
                 //Soma o boleto
                 decimal _valor_boleto = 0;
                 foreach (SpExtrato_carta item in Lista_Final) {
-                    _valor_boleto +=  Convert.ToDecimal( string.Format("{0:0.00}",item.Valortotal));
+                    //_valor_boleto +=  Convert.ToDecimal( string.Format("{0:0.00}",item.Valortotal));
+                    _valor_boleto += Convert.ToDecimal(string.Format("{0:0.00}", item.Valortributo + item.Valormulta + item.Valorjuros + item.Valorcorrecao));
                 }
 
                 //Dados contribuinte
                 string _nome = "", _cpfcnpj = "", _endereco = "", _bairro = "", _cidade = "", _cep = "", _inscricao = "", _lote = "", _quadra = "", _atividade = "";
                 string _convenio = "2873532", _complemento = "", _complemento_entrega = "", _endereco_entrega = "", _bairro_entrega = "", _cidade_entrega = "", _cep_entrega = "";
-                
-                
 
                 Contribuinte_Header_Struct dados = sistema_Class.Contribuinte_Header(_codigo_atual);
                 if (dados == null)
@@ -362,6 +369,7 @@ namespace GTI_Desktop.Forms {
                     RegParc.Numparcela = Convert.ToByte(item.Numparcela);
                     RegParc.Codcomplemento = item.Codcomplemento;
                     RegParc.Numdocumento = _numero_documento;
+                    RegParc.Plano = 32;
 
                     ex = tributario_Class.Insert_Parcela_Documento(RegParc);
                     if (ex != null) {

@@ -163,7 +163,8 @@ namespace GTI_Dal.Classes {
         }
 
         public List<int> Lista_Codigo_Carta(int _codigo_inicial, int _codigo_final, DateTime _data_vencimento) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                db.Database.CommandTimeout = 3 * 60;
                 List<int> Lista =  (from d in db.Debitoparcela where d.Codreduzido >= _codigo_inicial && d.Codreduzido <= _codigo_final && d.Datavencimento <= _data_vencimento && 
                                     (d.Statuslanc == 3 || d.Statuslanc == 38 || d.Statuslanc == 39) && d.Codlancamento!=20 orderby d.Codreduzido select d.Codreduzido  ).Distinct().ToList();
                 return Lista;

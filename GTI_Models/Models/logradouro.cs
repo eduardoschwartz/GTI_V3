@@ -8,5 +8,6 @@ namespace GTI_Models.Models {
         [Required]
         [StringLength(150)]
         public string Endereco { get; set; }
+        public string Endereco_resumido { get; set; }
     }
 }
