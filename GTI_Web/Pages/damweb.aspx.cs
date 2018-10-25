@@ -400,9 +400,11 @@ namespace UIWeb.Pages {
                                 nPerc = 0.8M;
                                 nPlano = 28;
                             }
-                            item.Valorjuros = Convert.ToDecimal(item.Valorjuros) - (Convert.ToDecimal(item.Valorjuros) * nPerc);
-                            item.Valormulta = Convert.ToDecimal(item.Valormulta) - (Convert.ToDecimal(item.Valormulta) * nPerc);
-                            item.Valortotal = item.Valortributo + item.Valorjuros + item.Valormulta + item.Valorcorrecao;
+                            if (nPlano > 0) {
+                                item.Valorjuros = Convert.ToDecimal(item.Valorjuros) - (Convert.ToDecimal(item.Valorjuros) * nPerc);
+                                item.Valormulta = Convert.ToDecimal(item.Valormulta) - (Convert.ToDecimal(item.Valormulta) * nPerc);
+                                item.Valortotal = item.Valortributo + item.Valorjuros + item.Valormulta + item.Valorcorrecao;
+                            }
                             ListaParcela[nIndex].Valorjuros = item.Valorjuros;
                             ListaParcela[nIndex].Valormulta = item.Valormulta;
                             ListaParcela[nIndex].Valortotal = item.Valortotal;

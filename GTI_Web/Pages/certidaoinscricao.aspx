@@ -72,7 +72,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td><asp:CheckBox ID="ExtratoCheckBox" runat="server" ForeColor="#006600" Text="  Exibir o resumo dos pagamentos  na certidão" ToolTip="Marque esta opção para exibir o resumo dos pagamentos na certidão" Enabled="False" /><br />
+                        <td><asp:CheckBox ID="ExtratoCheckBox" runat="server" ForeColor="#006600" Text="  Exibir o resumo dos pagamentos  na certidão" ToolTip="Marque esta opção para exibir o resumo dos pagamentos na certidão" /><br />
                             <br />
                         </td>
                     </tr>

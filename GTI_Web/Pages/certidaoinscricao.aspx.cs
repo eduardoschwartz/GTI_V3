@@ -51,8 +51,12 @@ namespace GTI_Web.Pages {
                 if (Codigo > 0) {
                     if (txtimgcode.Text != Session["randomStr"].ToString())
                         lblMsg.Text = "Código da imagem inválido";
-                    else
-                        PrintReport(Codigo, TipoCadastro.Empresa);
+                    else {
+                        if (ExtratoCheckBox.Checked && optCNPJ.Checked)
+                            lblMsg.Text = "Resumo de pagamento apenas para pessoas físicas.";
+                        else
+                            PrintReport(Codigo, TipoCadastro.Empresa);
+                    }
                 } else {
                     lblMsg.Text = "Selecione uma inscrição municipal da lista.";
                 }
@@ -201,11 +205,15 @@ namespace GTI_Web.Pages {
                 crystalReport.SetParameterValue("CADASTRO", Codigo.ToString("000000"));
                 crystalReport.SetParameterValue("NOME", sNome);
                 crystalReport.SetParameterValue("BAIRRO", sBairro);
+                crystalReport.SetParameterValue("RG", "");
                 crystalReport.SetParameterValue("DOCUMENTO", sDoc);
                 crystalReport.SetParameterValue("CIDADE", sCidade + "/" + sUF);
                 crystalReport.SetParameterValue("ATIVIDADE", sAtividade);
-                crystalReport.SetParameterValue("IESTADUAL", sInscEstadual);
                 crystalReport.SetParameterValue("DATAABERTURA", dDataAbertura);
+                crystalReport.SetParameterValue("PROCESSOABERTURA", sProcAbertura);
+                crystalReport.SetParameterValue("DATAENCERRAMENTO", dDataEncerramento==null?DateTime.Now:dDataEncerramento);
+                crystalReport.SetParameterValue("PROCESSOENCERRAMENTO", sProcEncerramento);
+                crystalReport.SetParameterValue("IESTADUAL", sInscEstadual);
                 crystalReport.SetParameterValue("FANTASIA", sFantasia);
                 crystalReport.SetParameterValue("ATIVIDADE2", sAtividade2);
                 crystalReport.SetParameterValue("COMPLEMENTO", sComplemento);
@@ -217,6 +225,7 @@ namespace GTI_Web.Pages {
                 crystalReport.SetParameterValue("VIGILANCIA", sVigilancia);
                 crystalReport.SetParameterValue("MEI", sMei);
                 crystalReport.SetParameterValue("AREA", sArea);
+                
 
                 HttpContext.Current.Response.Buffer = false;
                 HttpContext.Current.Response.ClearContent();
@@ -224,7 +233,7 @@ namespace GTI_Web.Pages {
 
                 try {
                     crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true, "certidao" + _numero_certidao.ToString() + _ano_certidao.ToString());
-                } catch {
+                } catch (Exception ex2) {
                 } finally {
                     crystalReport.Close();
                     crystalReport.Dispose();
