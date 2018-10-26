@@ -157,7 +157,7 @@ namespace GTI_Web.Pages {
                 crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoDocumentoN.rpt"));
                 crystalReport.SetParameterValue("NUMCERTIDAO", _numero_certidao.ToString("00000") + "/" + _ano_certidao.ToString("0000"));
                 crystalReport.SetParameterValue("DATAEMISSAO", DateTime.Now.ToString("dd/MM/yyyy") + " às " + DateTime.Now.ToString("HH:mm:ss"));
-                crystalReport.SetParameterValue("CONTROLE", _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + Codigo.ToString() + "-" + sSufixo);
+                crystalReport.SetParameterValue("CONTROLE", _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _lista_certidao[0]._Codigo.ToString() + "-IN");
                 crystalReport.SetParameterValue("NOME", _lista_certidao[0]._Nome);
                 crystalReport.SetParameterValue("DOC", optCPF.Checked?txtCPF.Text:txtCNPJ.Text);
 
@@ -172,7 +172,6 @@ namespace GTI_Web.Pages {
                     crystalReport.Close();
                     crystalReport.Dispose();
                 }
-
 
             }
 
