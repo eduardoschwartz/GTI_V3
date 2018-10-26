@@ -209,13 +209,14 @@ namespace GTI_Desktop.Forms {
                     _cep_entrega = endImovel.Cep;
                 } else {
                     if (_tipo == TipoCadastro.Empresa) {
-                        mobiliarioendentrega endEmpresa = empresa_Class.Empresa_Endereco_entrega(_codigo_atual);
+                        EmpresaStruct endEmpresa = empresa_Class.Retorna_Empresa(_codigo_atual);
+                        //mobiliarioendentrega endEmpresa = empresa_Class.Empresa_Endereco_entrega(_codigo_atual);
                         _complemento_entrega = endEmpresa.Complemento == "" ? "" : " " + endEmpresa.Complemento;
-                        _endereco_entrega = endEmpresa.Nomelogradouro + ", " + endEmpresa.Numimovel.ToString() + _complemento;
-                        _bairro_entrega = endEmpresa.Descbairro;
-                        _cidade_entrega = endEmpresa.Desccidade + "/" + endEmpresa.Uf;
+                        _endereco_entrega = endEmpresa.Nome_logradouro + ", " + endEmpresa.Numero.ToString() + _complemento;
+                        _bairro_entrega = endEmpresa.Bairro_nome;
+                        _cidade_entrega = endEmpresa.Cidade_nome + "/" + endEmpresa.UF;
                         _cep_entrega = endEmpresa.Cep;
-                        if(String.IsNullOrWhiteSpace( endEmpresa.Nomelogradouro)) {
+                        if(String.IsNullOrWhiteSpace( endEmpresa.Nome_logradouro)) {
                             _endereco_entrega = _endereco;
                             _bairro_entrega = _bairro;
                             _cidade_entrega = _cidade;

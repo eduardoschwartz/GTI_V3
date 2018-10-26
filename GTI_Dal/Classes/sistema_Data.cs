@@ -34,7 +34,25 @@ namespace GTI_Dal.Classes {
 
                 _codigos.Clear();
                 //procura empresa
+                if (_tipo == TipoDocumento.Cpf) {
+                    _codigos = (from m in db.Mobiliario where m.Cpf.Contains(_doc) select m.Codigomob).ToList();
+                } else {
+                    _codigos = (from m in db.Mobiliario where m.Cnpj.Contains(_doc) select m.Codigomob).ToList();
+                }
+                foreach (int item in _codigos) {
+                    _lista.Add(item);
+                }
 
+                _codigos.Clear();
+                //procura cidadão
+                if (_tipo == TipoDocumento.Cpf) {
+                    _codigos = (from c in db.Cidadao where c.Cpf.Contains(_doc) select c.Codcidadao).ToList();
+                } else {
+                    _codigos = (from c in db.Cidadao where c.Cnpj.Contains(_doc) select c.Codcidadao).ToList();
+                }
+                foreach (int item in _codigos) {
+                    _lista.Add(item);
+                }
 
 
 

@@ -308,6 +308,7 @@ namespace GTI_Web.Pages {
             crystalReport.SetParameterValue("ATIVIDADE2", dados.Atividade_secundaria);
             crystalReport.SetParameterValue("COMPLEMENTO", dados.Complemento);
             crystalReport.SetParameterValue("CEP", dados.Cep);
+            crystalReport.SetParameterValue("RG", "");
             crystalReport.SetParameterValue("SITUACAO", dados.Situacao);
             crystalReport.SetParameterValue("TELEFONE", dados.Telefone);
             crystalReport.SetParameterValue("EMAIL", dados.Email);
@@ -315,6 +316,9 @@ namespace GTI_Web.Pages {
             crystalReport.SetParameterValue("VIGILANCIA", dados.Vigilancia_sanitaria);
             crystalReport.SetParameterValue("MEI", dados.Mei);
             crystalReport.SetParameterValue("AREA", Convert.ToDouble(dados.Area).ToString("#0.00"));
+            crystalReport.SetParameterValue("DATAENCERRAMENTO", Convert.ToDateTime(dados.Data_encerramento).ToString("dd/MM/yyyy"));
+            crystalReport.SetParameterValue("PROCESSOABERTURA", dados.Processo_abertura);
+            crystalReport.SetParameterValue("PROCESSOENCERRAMENTO", dados.Processo_encerramento==null?"":dados.Processo_encerramento);
 
             HttpContext.Current.Response.Buffer = false;
             HttpContext.Current.Response.ClearContent();
