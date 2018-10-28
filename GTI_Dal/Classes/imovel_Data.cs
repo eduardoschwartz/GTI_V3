@@ -251,7 +251,7 @@ namespace GTI_Dal.Classes {
                         regEnd.UF = "SP";
                         regEnd.CodLogradouro = reg.Ee_codlog;
                         regEnd.Endereco = reg.Ee_nomelog.ToString();
-                        if (String.IsNullOrEmpty(regEnd.Endereco))
+                        if (!String.IsNullOrEmpty(reg.Endereco))
                             regEnd.Endereco = reg.Endereco.ToString();
                         regEnd.Numero = reg.Ee_numimovel;
                         regEnd.Complemento = reg.Ee_complemento ?? "";

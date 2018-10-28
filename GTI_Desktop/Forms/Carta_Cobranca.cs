@@ -47,7 +47,7 @@ namespace GTI_Desktop.Forms {
                             gtiCore.Ocupado(this);
                             Gera_Matriz(_codigo_ini, _codigo_fim, Convert.ToDateTime(DataVencto.Text));
                             gtiCore.Liberado(this);
-                            PrintReport();
+                           // PrintReport()
                         }
                     }
                 }
@@ -203,7 +203,7 @@ namespace GTI_Desktop.Forms {
                 if (_tipo == TipoCadastro.Imovel) {
                     EnderecoStruct endImovel = imovel_Class.Dados_Endereco(_codigo_atual, dados.TipoEndereco);
                     _complemento_entrega = endImovel.Complemento == "" ? "" : " " + endImovel.Complemento;
-                    _endereco_entrega = endImovel.Endereco + ", " + endImovel.Numero.ToString() + _complemento;
+                    _endereco_entrega = endImovel.Endereco + ", " + endImovel.Numero.ToString() + _complemento_entrega;
                     _bairro_entrega = endImovel.NomeBairro;
                     _cidade_entrega = endImovel.NomeCidade + "/" + endImovel.UF;
                     _cep_entrega = endImovel.Cep;
@@ -212,7 +212,7 @@ namespace GTI_Desktop.Forms {
                         EmpresaStruct endEmpresa = empresa_Class.Retorna_Empresa(_codigo_atual);
                         //mobiliarioendentrega endEmpresa = empresa_Class.Empresa_Endereco_entrega(_codigo_atual);
                         _complemento_entrega = endEmpresa.Complemento == "" ? "" : " " + endEmpresa.Complemento;
-                        _endereco_entrega = endEmpresa.Nome_logradouro + ", " + endEmpresa.Numero.ToString() + _complemento;
+                        _endereco_entrega = endEmpresa.Nome_logradouro + ", " + endEmpresa.Numero.ToString() + _complemento_entrega;
                         _bairro_entrega = endEmpresa.Bairro_nome;
                         _cidade_entrega = endEmpresa.Cidade_nome + "/" + endEmpresa.UF;
                         _cep_entrega = endEmpresa.Cep;
@@ -227,13 +227,13 @@ namespace GTI_Desktop.Forms {
                             CidadaoStruct endCidadao = cidadao_Class.LoadReg(_codigo_atual);
                             if (endCidadao.EtiquetaR == "S" || endCidadao.EtiquetaR==null) {
                                 _complemento_entrega = endCidadao.ComplementoR == "" ? "" : " " + endCidadao.ComplementoR;
-                                _endereco_entrega = endCidadao.EnderecoR + ", " + endCidadao.NumeroR.ToString() + _complemento;
+                                _endereco_entrega = endCidadao.EnderecoR + ", " + endCidadao.NumeroR.ToString() + _complemento_entrega;
                                 _bairro_entrega = endCidadao.NomeBairroR;
                                 _cidade_entrega = endCidadao.NomeCidadeR + "/" + endCidadao.UfR;
                                 _cep_entrega = endCidadao.CepR.ToString();
                             } else {
                                 _complemento_entrega = endCidadao.ComplementoC == "" ? "" : " " + endCidadao.ComplementoC;
-                                _endereco_entrega = endCidadao.EnderecoC + ", " + endCidadao.NumeroC.ToString() + _complemento;
+                                _endereco_entrega = endCidadao.EnderecoC + ", " + endCidadao.NumeroC.ToString() + _complemento_entrega;
                                 _bairro_entrega = endCidadao.NomeBairroC;
                                 _cidade_entrega = endCidadao.NomeCidadeC + "/" + endCidadao.UfC;
                                 _cep_entrega = endCidadao.CepR.ToString();
