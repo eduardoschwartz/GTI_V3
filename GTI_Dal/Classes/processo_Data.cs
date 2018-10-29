@@ -14,21 +14,21 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Documento> Lista_Documento() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = from c in db.Documento orderby c.Nome select c;
                 return Sql.ToList();
             }
         }
 
         public string Retorna_Documento(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 string Sql = (from c in db.Documento where c.Codigo == Codigo select c.Nome).FirstOrDefault();
                 return Sql;
             }
         }
 
         public Exception Incluir_Documento(Documento reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int cntCod = (from c in db.Documento select c).Count();
                 short maxCod = 1;
                 if (cntCod > 0)
@@ -45,7 +45,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Alterar_Documento(Documento reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int nCoddoc = reg.Codigo;
                 Documento b = db.Documento.First(i => i.Codigo == nCoddoc);
                 b.Nome = reg.Nome;
@@ -59,7 +59,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Excluir_Documento(Documento reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int nCoddoc = reg.Codigo;
                 Documento b = db.Documento.First(i => i.Codigo == nCoddoc);
                 try {
@@ -73,21 +73,21 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Despacho> Lista_Despacho() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Despacho select c);
                 return Sql.ToList();
             }
         }
 
         public string Retorna_Despacho(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 string Sql = (from c in db.Despacho where c.Codigo == Codigo select c.Descricao).FirstOrDefault();
                 return Sql;
             }
         }
 
         public Exception Incluir_Despacho(Despacho reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int cntCod = (from c in db.Despacho select c).Count();
                 int maxCod = 1;
                 if (cntCod > 0)
@@ -104,7 +104,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Alterar_Despacho(Despacho reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int nCoddoc = reg.Codigo;
                 Despacho b = db.Despacho.First(i => i.Codigo == nCoddoc);
                 b.Descricao = reg.Descricao;
@@ -119,7 +119,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Excluir_Despacho(Despacho reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int nCoddoc = reg.Codigo;
                 Despacho b = db.Despacho.First(i => i.Codigo == nCoddoc);
                 try {
@@ -133,7 +133,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Assunto> Lista_Assunto(bool Somente_Ativo, bool Somente_Inativo, string Filter = "") {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Assunto select c);
                 Sql = Sql.Where(c => c.Nome.Contains(Filter));
                 if (Somente_Ativo)
@@ -146,14 +146,14 @@ namespace GTI_Dal.Classes {
         }
 
         public string Retorna_Assunto(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 string Sql = (from c in db.Assunto where c.Codigo == Codigo select c.Nome).FirstOrDefault();
                 return Sql;
             }
         }
 
         public Exception Incluir_Assunto(Assunto reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int cntCod = (from c in db.Assunto select c).Count();
                 int maxCod = 1;
                 if (cntCod > 0)
@@ -173,7 +173,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Incluir_Assunto_Local(List<Assuntocc> Lista) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Database.ExecuteSqlCommand("DELETE FROM Assuntocc WHERE CodAssunto=@CodAssunto",
                         new SqlParameter("@CodAssunto", Lista[0].Codassunto));
@@ -200,7 +200,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Incluir_Assunto_Documento(List<Assuntodoc> Lista) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Database.ExecuteSqlCommand("DELETE FROM Assuntodoc WHERE CodAssunto=@CodAssunto",
                         new SqlParameter("@CodAssunto", Lista[0].Codassunto));
@@ -226,7 +226,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Alterar_Assunto(Assunto reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int nCoddoc = reg.Codigo;
                 Assunto b = db.Assunto.First(i => i.Codigo == nCoddoc);
                 b.Nome = reg.Nome;
@@ -241,7 +241,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Excluir_Assunto(Assunto reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Database.ExecuteSqlCommand("DELETE FROM Assuntodoc WHERE CodAssunto=@CodAssunto", new SqlParameter("@CodAssunto", reg.Codigo));
                     db.Database.ExecuteSqlCommand("DELETE FROM Assuntocc WHERE CodAssunto=@CodAssunto", new SqlParameter("@CodAssunto", reg.Codigo));
@@ -254,7 +254,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Centrocusto> Lista_Local(bool Somente_Ativo,bool Local) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Centrocusto select c);
                 if (Somente_Ativo)
                     Sql = Sql.Where(c => c.Ativo == true);
@@ -266,7 +266,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<AssuntoLocal> Lista_Assunto_Local(short Assunto) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from a in db.Assuntocc join c in db.Centrocusto on a.Codcc equals c.Codigo where a.Codassunto == Assunto
                            select new AssuntoLocal { Seq = (short)a.Seq, Codigo = (short)a.Codcc, Nome = c.Descricao }).OrderBy(u => u.Seq);
                 return Sql.ToList();
@@ -274,7 +274,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<AssuntoDocStruct> Lista_Assunto_Documento(short Assunto) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from a in db.Assuntodoc join d in db.Documento on a.Coddoc equals d.Codigo where a.Codassunto == Assunto
                            select new AssuntoDocStruct { Codigo = (short)a.Coddoc, Nome = d.Nome }).OrderBy(u => u.Nome);
                 return Sql.ToList();
@@ -282,7 +282,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Incluir_Local(Centrocusto reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int cntCod = (from c in db.Centrocusto select c).Count();
                 int maxCod = 1;
                 if (cntCod > 0)
@@ -299,7 +299,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Excluir_Local(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Centrocusto b = db.Centrocusto.First(i => i.Codigo == Codigo);
                 try {
                     db.Centrocusto.Remove(b);
@@ -312,7 +312,7 @@ namespace GTI_Dal.Classes {
         }
 
         public short Retorna_Ultimo_Codigo_Local() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Centrocusto orderby c.Codigo descending select c.Codigo).FirstOrDefault();
                 return Sql;
             }
@@ -320,7 +320,7 @@ namespace GTI_Dal.Classes {
 
         public bool Existe_Processo(int Ano, int Numero) {
             bool bValido = false;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var existingReg = db.Processogti.Count(a => a.Ano == Ano && a.Numero == Numero);
                 if (existingReg > 0)
                     bValido = true;
@@ -349,7 +349,7 @@ namespace GTI_Dal.Classes {
         }
 
         public ProcessoCidadaoStruct Processo_cidadao_old(int ano, int numero) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from pc in db.Processocidadao
                            join l in db.Logradouro on pc.Codlogradouro equals l.Codlogradouro into pcl from l in pcl.DefaultIfEmpty()
                            join c in db.Cidade on new { p1 = pc.Siglauf, p2 = pc.Codcidade } equals new { p1 = c.Siglauf, p2 = c.Codcidade, } into pcc from c in pcc.DefaultIfEmpty()
@@ -365,7 +365,7 @@ namespace GTI_Dal.Classes {
         }
 
         public ProcessoStruct Dados_Processo(int nAno, int nNumero) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from c in db.Processogti
                            join u in db.Usuario on c.Userid equals u.Id into uc from u in uc.DefaultIfEmpty()
                            where c.Ano == nAno && c.Numero == nNumero select new ProcessoStruct { Ano= c.Ano,CodigoAssunto=c.Codassunto,AtendenteNome=u.Nomelogin,CentroCusto=(int)c.Centrocusto,
@@ -420,7 +420,7 @@ namespace GTI_Dal.Classes {
         }
 
         private List<ProcessoDocStruct> ListProcessoDoc(int nAno, int nNumero) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from pd in db.Processodoc join d in db.Documento on pd.Coddoc equals d.Codigo where pd.Ano == nAno && pd.Numero == nNumero
                            select new ProcessoDocStruct { CodigoDocumento = pd.Coddoc, NomeDocumento = d.Nome, DataEntrega = pd.Data });
                 return Sql.ToList();
@@ -428,7 +428,7 @@ namespace GTI_Dal.Classes {
         }
 
         private List<ProcessoEndStruct> ListProcessoEnd(int nAno, int nNumero) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from pe in db.Processoend join l in db.Logradouro on pe.Codlogr equals l.Codlogradouro where pe.Ano == nAno && pe.Numprocesso == nNumero
                            select new ProcessoEndStruct { CodigoLogradouro = pe.Codlogr, NomeLogradouro = l.Endereco, Numero = pe.Numero });
                 return Sql.ToList();
@@ -436,7 +436,7 @@ namespace GTI_Dal.Classes {
         }
 
         private List<ProcessoAnexoStruct> ListProcessoAnexo(int nAno, int nNumero) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from a in db.Anexo join p in db.Processogti on new { p1 = a.Anoanexo, p2 = a.Numeroanexo } equals new { p1 = p.Ano, p2 = p.Numero }
                            join c in db.Cidadao on p.Codcidadao equals c.Codcidadao into pc from c in pc.DefaultIfEmpty()
                            join u in db.Centrocusto on p.Centrocusto equals u.Codigo into pcu from u in pcu.DefaultIfEmpty()
@@ -447,7 +447,7 @@ namespace GTI_Dal.Classes {
         }
 
         private List<Anexo_logStruct> ListProcessoAnexoLog(int nAno, int nNumero) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from a in db.Anexo_log
                            join u in db.Usuario on a.Userid equals u.Id into ac from u in ac.DefaultIfEmpty()
                            where a.Ano == nAno && a.Numero == nNumero
@@ -458,7 +458,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Cancelar_Processo(int Ano, int Numero, string Observacao) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Processogti p = db.Processogti.First(i => i.Ano == Ano && i.Numero == Numero);
                 p.Datacancel = DateTime.Now;
                 p.Dataarquiva = null;
@@ -475,7 +475,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Reativar_Processo(int Ano, int Numero, string Observacao) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Processogti p = db.Processogti.First(i => i.Ano == Ano && i.Numero == Numero);
                 p.Datareativa = DateTime.Now;
                 p.Dataarquiva = null;
@@ -492,7 +492,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Suspender_Processo(int Ano, int Numero, string Observacao) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Processogti p = db.Processogti.First(i => i.Ano == Ano && i.Numero == Numero);
                 p.Datareativa = null;
                 p.Dataarquiva = null;
@@ -509,7 +509,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Arquivar_Processo(int Ano, int Numero, string Observacao) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Processogti p = db.Processogti.First(i => i.Ano == Ano && i.Numero == Numero);
                 p.Datareativa = DateTime.Now;
                 p.Dataarquiva = null;
@@ -526,7 +526,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Excluir_Anexo(Anexo reg, string usuario) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Database.ExecuteSqlCommand("DELETE FROM anexo WHERE ano=@ano AND numero=@numero AND anoanexo=@anoanexo AND numeroanexo=@numeroanexo",
                         new SqlParameter("@ano", reg.Ano), new SqlParameter("@numero", reg.Numero), new SqlParameter("@anoanexo", reg.Anoanexo), new SqlParameter("@numeroanexo", reg.Numeroanexo));
@@ -556,7 +556,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Incluir_Anexo(Anexo reg, string usuario) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 db.Anexo.Add(reg);
                 try {
                     db.SaveChanges();
@@ -585,7 +585,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Incluir_Historico_Processo(short Ano, int Numero, string Historico, string Usuario) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int cntSeq = (from p in db.Processo_historico where p.Ano == Ano && p.Numero == Numero select p).Count();
                 int maxSeq = 1;
                 if (cntSeq > 0)
@@ -609,14 +609,14 @@ namespace GTI_Dal.Classes {
         }
 
         public bool Assunto_uso_processo(short Codigo_Assunto) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var cntCod1 = (from p in db.Processogti where p.Codassunto == Codigo_Assunto select p).Count();
                 return cntCod1 > 0 ? true : false;
             }
         }
 
         public Exception Incluir_MovimentoCC(short Ano, int Numero, List<TramiteStruct> Lista) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 string sql = "DELETE FROM TRAMITACAOCC WHERE ANO = @P0 AND NUMERO=@P1";
                 List<object> parameterList = new List<object> {
                     Ano,
@@ -648,7 +648,7 @@ namespace GTI_Dal.Classes {
 
         public List<TramiteStruct> DadosTramite(short Ano, int Numero, int CodAssunto) {
             List<TramiteStruct> Lista = new List<TramiteStruct>();
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from v in db.Tramitacaocc where v.Ano == Ano && v.Numero == Numero orderby v.Seq select new { v.Seq, v.Ccusto });
                 if (reg.Count() > 0) {
                     var reg5 = (from tcc in db.Tramitacaocc join cc in db.Centrocusto on tcc.Ccusto equals cc.Codigo where tcc.Ano == Ano && tcc.Numero == Numero select new { tcc.Seq, tcc.Ccusto, cc.Descricao });
@@ -715,7 +715,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<UsuariocentroCusto> ListaCentrocustoUsuario(int idLogin) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from u in db.Usuariocc join c in db.Centrocusto on u.Codigocc equals c.Codigo where u.Userid == idLogin
                            select new UsuariocentroCusto { Codigo = u.Codigocc, Nome = c.Descricao });
                 List<UsuariocentroCusto> Lista = new List<UsuariocentroCusto>();
@@ -731,7 +731,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Alterar_Local(Centrocusto reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int nCodigo = reg.Codigo;
                 Centrocusto b = db.Centrocusto.First(i => i.Codigo == nCodigo);
                 b.Descricao = reg.Descricao;
@@ -747,7 +747,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Alterar_Observacao_Tramite(int Ano, int Numero, int Seq, string Observacao) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     Tramitacao t = db.Tramitacao.First(i => i.Ano == Ano && i.Numero == Numero && i.Seq == Seq);
                     t.Obs = string.IsNullOrWhiteSpace(Observacao) ? null : Observacao;
@@ -760,7 +760,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Alterar_Despacho(int Ano, int Numero, int Seq, short CodigoDespacho) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     Tramitacao t = db.Tramitacao.First(i => i.Ano == Ano && i.Numero == Numero && i.Seq == Seq);
                     t.Despacho = CodigoDespacho;
@@ -773,7 +773,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<UsuarioFuncStruct> ListaFuncionario(int LoginId) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from f in db.Usuariofunc join u in db.Usuario on f.Userid equals u.Id
                            where f.Userid == LoginId orderby u.Nomecompleto select new { f.Funclogin, u.Nomecompleto });
                 List<UsuarioFuncStruct> Lista = new List<UsuarioFuncStruct>();
@@ -790,7 +790,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Excluir_Tramite(int Ano, int Numero, int Seq) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     Tramitacao t = db.Tramitacao.FirstOrDefault(i => i.Ano == Ano && i.Numero == Numero && i.Seq == Seq);
                     if (t != null) {
@@ -805,7 +805,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Incluir_Tramite(Tramitacao Reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Tramitacao.Add(Reg);
                     db.SaveChanges();
@@ -817,7 +817,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Alterar_Tramite(Tramitacao Reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     Tramitacao t = db.Tramitacao.First(i => i.Ano == Reg.Ano && i.Numero == Reg.Numero && i.Seq == Reg.Seq);
                     t.Despacho = Reg.Despacho;
@@ -833,7 +833,7 @@ namespace GTI_Dal.Classes {
 
         public bool Cidadao_Processo(int id_cidadao) {
             int _contador = 0;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
 Inicio:;
                 try {
                     _contador = (from p in db.Processogti where p.Codcidadao == id_cidadao select p.Numero).Count();
@@ -845,7 +845,7 @@ Inicio:;
         }
 
         public List<ProcessoStruct> Lista_Processos(ProcessoFilter Filter) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Processogti
                            join c in db.Cidadao on p.Codcidadao equals c.Codcidadao into cp from c in cp.DefaultIfEmpty()
                            join a in db.Assunto on p.Codassunto equals a.Codigo into ap from a in ap.DefaultIfEmpty()
@@ -873,7 +873,7 @@ Inicio:;
         }
 
         public DateTime? Data_Processo(int Ano,int Numero) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 DateTime? Sql = (from p in db.Processogti where p.Ano == Ano && p.Numero == Numero select p.Dataentrada).FirstOrDefault();
                 if (Sql == null)
                     return null;

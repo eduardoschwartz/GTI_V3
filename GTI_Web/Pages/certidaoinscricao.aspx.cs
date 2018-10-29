@@ -205,7 +205,7 @@ namespace GTI_Web.Pages {
                 crystalReport.SetParameterValue("CADASTRO", Codigo.ToString("000000"));
                 crystalReport.SetParameterValue("NOME", sNome);
                 crystalReport.SetParameterValue("BAIRRO", sBairro);
-                crystalReport.SetParameterValue("RG", "");
+                crystalReport.SetParameterValue("RG", sRG);
                 crystalReport.SetParameterValue("DOCUMENTO", sDoc);
                 crystalReport.SetParameterValue("CIDADE", sCidade + "/" + sUF);
                 crystalReport.SetParameterValue("ATIVIDADE", sAtividade);

@@ -377,7 +377,8 @@ namespace GTI_Desktop.Forms {
                 if (_valor_aliquota < 14)
                     _valor_aliquota *= _area;
 
-                if (_valor_aliquota == 0 && !_vistoria) {
+                if (_valor_aliquota == 0 ) {
+                    //if (_valor_aliquota == 0 && !_vistoria) {
                     _possui_taxa = false;
                 } else
                     _possui_taxa = true;
@@ -395,12 +396,12 @@ namespace GTI_Desktop.Forms {
                         _linha = Codigo + "#" + _ano + "#6#0#" + _parcela + "#0#14#" + _valor_parcela.ToString("#0.00");
                         fs2.WriteLine(_linha);
                     }
-                    if (_vistoria) {
-                        decimal _valor_vistoria_tmp = _parcela == 0 ? _valor_vistoria-(_valor_vistoria * (decimal)0.05) : _valor_vistoria_parcelado;
-                        _linha = item.Codigo + "#" + _ano + "#6#0#" + _parcela + "#0#24#" + _valor_vistoria_tmp.ToString("#0.00");
-                        fs2.WriteLine(_linha);
-                        _valor_boleto_parcela += _valor_vistoria_parcelado; _valor_boleto_unica += _valor_vistoria_tmp;
-                    }
+                    //if (_vistoria) {
+                    //    decimal _valor_vistoria_tmp = _parcela == 0 ? _valor_vistoria-(_valor_vistoria * (decimal)0.05) : _valor_vistoria_parcelado;
+                    //    _linha = item.Codigo + "#" + _ano + "#6#0#" + _parcela + "#0#24#" + _valor_vistoria_tmp.ToString("#0.00");
+                    //    fs2.WriteLine(_linha);
+                    //    _valor_boleto_parcela += _valor_vistoria_parcelado; _valor_boleto_unica += _valor_vistoria_tmp;
+                    //}
 
                     if (_possui_taxa) {
                         _linha = Codigo + "#" + _ano + "#6#0#" + _parcela + "#0#" + _documento;

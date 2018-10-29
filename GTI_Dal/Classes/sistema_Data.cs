@@ -16,7 +16,7 @@ namespace GTI_Dal.Classes {
 
         public List<int> Lista_Codigos_Documento(string Documento,TipoDocumento _tipo) {
             List<int> _lista = new List<int>();
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 string _doc = dalCore.RetornaNumero(Documento);
 
                 List<int> _codigos;
@@ -150,7 +150,7 @@ namespace GTI_Dal.Classes {
         }
 
         public int Retorna_Ultima_Remessa_Cobranca() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Parametros where c.Nomeparam=="COBRANCA" select c.Valparam).FirstOrDefault();
                 return Convert.ToInt32(Sql);
             }
@@ -158,7 +158,7 @@ namespace GTI_Dal.Classes {
 
         public Exception Atualiza_Codigo_Remessa_Cobranca( ) {
             Parametros p = null;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var _sql = (from c in db.Parametros where c.Nomeparam == "COBRANCA" select c.Valparam).FirstOrDefault();
                 int _valor = Convert.ToInt32(_sql) + 1;
 
@@ -179,7 +179,7 @@ namespace GTI_Dal.Classes {
         #region Security
 
         public Exception Alterar_Senha(Usuario reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 string sLogin = reg.Nomelogin;
                 Usuario b = db.Usuario.First(i => i.Nomelogin == sLogin);
                 b.Senha2 = reg.Senha2;
@@ -193,49 +193,49 @@ namespace GTI_Dal.Classes {
         }
 
         public int? Retorna_Ultimo_Codigo_Usuario() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Usuario orderby c.Id descending select c.Id).FirstOrDefault();
                 return Sql;
             }
         }
 
         public string Retorna_User_FullName(string loginName) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 string Sql = (from u in db.Usuario where u.Nomelogin == loginName select u.Nomecompleto).FirstOrDefault();
                 return Sql;
             }
         }
 
         public string Retorna_User_LoginName(string fullName) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 string Sql = (from u in db.Usuario where u.Nomecompleto == fullName select u.Nomelogin).FirstOrDefault();
                 return Sql;
             }
         }
 
         public string Retorna_User_LoginName(int idUser) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 string Sql = (from u in db.Usuario where u.Id == idUser select u.Nomelogin).FirstOrDefault();
                 return Sql;
             }
         }
 
         public int Retorna_User_LoginId(string loginName) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int Sql = (from u in db.Usuario where u.Nomelogin == loginName select (int)u.Id).FirstOrDefault();
                 return Sql;
             }
         }
 
         public string Retorna_User_Password(string login) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 string Sql = (from u in db.Usuario where u.Nomelogin == login select u.Senha2).FirstOrDefault();
                 return Sql;
             }
         }
 
         public List<security_event> Lista_Sec_Eventos() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from t in db.Security_event orderby t.Id select t).ToList();
                 List<security_event> Lista = new List<security_event>();
                 foreach (var item in reg) {
@@ -247,14 +247,14 @@ namespace GTI_Dal.Classes {
         }
 
         public int GetSizeofBinary (){
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int nSize = (from t in db.Security_event orderby t.Id descending select t.Id).FirstOrDefault();
                 return nSize;
             }
         }
 
         public string GetUserBinary(int id) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 string Sql = (from u in db.Usuario where u.Id == id select u.Userbinary).FirstOrDefault();
                 if (Sql == null) {
                     Sql = "0";
@@ -269,7 +269,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<usuarioStruct> Lista_Usuarios() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from t in db.Usuario
                            join cc in db.Centrocusto on t.Setor_atual equals cc.Codigo into tcc from cc in tcc.DefaultIfEmpty()
                            where t.Ativo == 1
@@ -292,7 +292,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Incluir_Usuario(Usuario reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     List<SqlParameter> parameters = new List<SqlParameter>();
                     parameters.Add(new SqlParameter("@id", reg.Id));
@@ -310,7 +310,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Alterar_Usuario(Usuario reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Usuario b = db.Usuario.First(i => i.Id == reg.Id);
                 b.Nomecompleto = reg.Nomecompleto;
                 b.Nomelogin = reg.Nomelogin;
@@ -326,7 +326,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Alterar_Usuario_Local(List<Usuariocc> reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 db.Database.ExecuteSqlCommand("DELETE FROM usuariocc WHERE userid=@id" ,new SqlParameter("@id", reg[0].Userid));
 
                 List<SqlParameter> parameters = new List<SqlParameter>();
@@ -346,7 +346,7 @@ namespace GTI_Dal.Classes {
         }
 
         public usuarioStruct Retorna_Usuario(int Id) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from t in db.Usuario
                            join cc in db.Centrocusto on t.Setor_atual equals cc.Codigo into tcc from cc in tcc.DefaultIfEmpty()
                            where t.Id==Id
@@ -365,14 +365,14 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Usuariocc> Lista_Usuario_Local(int Id) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from cc in db.Usuariocc where cc.Userid == Id orderby cc.Codigocc select cc).ToList();
                 return reg;
             }
         }
 
         public Exception SaveUserBinary(Usuario reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int nId = (int)reg.Id;
                 Usuario b = db.Usuario.First(i => i.Id == nId);
                 b.Userbinary = reg.Userbinary;

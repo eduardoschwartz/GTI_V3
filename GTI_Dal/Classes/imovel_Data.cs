@@ -16,7 +16,7 @@ namespace GTI_Dal.Classes {
         }
 
         public ImovelStruct Dados_Imovel(int nCodigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from i in db.Cadimob
                            join c in db.Condominio on i.Codcondominio equals c.Cd_codigo into ic from c in ic.DefaultIfEmpty()
                            join b in db.Benfeitoria on i.Dt_codbenf equals b.Codbenfeitoria into ib from b in ib.DefaultIfEmpty()
@@ -89,21 +89,21 @@ namespace GTI_Dal.Classes {
         }//End LoadReg
 
         public decimal Soma_Area(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var sum = db.Areas.Where(x=>x.Codreduzido==Codigo).Sum(x => x.Areaconstr);
                 return Convert.ToDecimal(sum);
             }
         }
 
         public int Qtde_Imovel_Cidadao(int CodigoImovel) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int Sql = (from v in db.Vwproprietarioduplicado join p in db.Proprietario on v.Codproprietario equals p.Codcidadao where p.Codreduzido == CodigoImovel && p.Tipoprop == "P" select v.Qtdeimovel).FirstOrDefault();
                     return Sql;
             }
         }
 
         public List<ProprietarioStruct> Lista_Proprietario(int CodigoImovel, bool Principal = false) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from p in db.Proprietario
                            join c in db.Cidadao on p.Codcidadao equals c.Codcidadao
                            where p.Codreduzido == CodigoImovel
@@ -138,7 +138,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<LogradouroStruct> Lista_Logradouro(String Filter = "") {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from l in db.Logradouro
                            select new { l.Codlogradouro, l.Endereco });
                 if (!String.IsNullOrEmpty(Filter))
@@ -157,7 +157,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<FacequadraStruct> Lista_FaceQuadra(int distrito,int setor,int quadra,int face) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from f in db.Facequadra
                            join l in db.Logradouro on f.Codlogr equals l.Codlogradouro into lf from l in lf.DefaultIfEmpty()
                            where f.Coddistrito==distrito && f.Codsetor==setor  && f.Codquadra==quadra && f.Codface==face
@@ -178,7 +178,7 @@ namespace GTI_Dal.Classes {
 
         public bool Existe_Imovel(int nCodigo) {
             bool bRet = false;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var existingReg = db.Cadimob.Count(a => a.Codreduzido == nCodigo);
                 if (existingReg != 0) {
                     bRet = true;
@@ -189,7 +189,7 @@ namespace GTI_Dal.Classes {
 
         public int Existe_Imovel(int distrito, int setor, int quadra, int lote, int unidade, int subunidade) {
             int nRet = 0;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 nRet = (from a in db.Cadimob where a.Distrito == distrito && a.Setor == setor && a.Quadra == quadra && a.Lote == lote && a.Unidade == unidade && a.Subunidade == subunidade select a.Codreduzido).FirstOrDefault();
             }
             return nRet;
@@ -197,7 +197,7 @@ namespace GTI_Dal.Classes {
 
         public int Retorna_Imovel_Inscricao(int distrito,int setor,int quadra,int lote,int face,int unidade,int subunidade) {
             int nRet = 0;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 nRet = (from a in db.Cadimob where a.Distrito == distrito && a.Setor==setor && a.Quadra==quadra && a.Lote==lote && a.Seq==face && a.Unidade==unidade&& a.Subunidade==subunidade select a.Codreduzido).FirstOrDefault();
             }
             return nRet;
@@ -205,7 +205,7 @@ namespace GTI_Dal.Classes {
 
         public EnderecoStruct Dados_Endereco(int Codigo, TipoEndereco Tipo) {
             EnderecoStruct regEnd = new EnderecoStruct();
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 if (Tipo == TipoEndereco.Local) {
                     var reg = (from i in db.Cadimob
                                join b in db.Bairro on i.Li_codbairro equals b.Codbairro into ib from b in ib.DefaultIfEmpty()
@@ -251,7 +251,7 @@ namespace GTI_Dal.Classes {
                         regEnd.UF = "SP";
                         regEnd.CodLogradouro = reg.Ee_codlog;
                         regEnd.Endereco = reg.Ee_nomelog.ToString();
-                        if (String.IsNullOrEmpty(regEnd.Endereco))
+                        if (String.IsNullOrEmpty(reg.Endereco))
                             regEnd.Endereco = reg.Endereco.ToString();
                         regEnd.Numero = reg.Ee_numimovel;
                         regEnd.Complemento = reg.Ee_complemento ?? "";
@@ -293,7 +293,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Categprop> Lista_Categoria_Propriedade() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from c in db.Categprop where c.Codcategprop != 999 orderby c.Desccategprop select new {c.Codcategprop,c.Desccategprop}).ToList();
                 List<Categprop> Lista = new List<Categprop>();
                 foreach (var item in reg) {
@@ -308,7 +308,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Topografia> Lista_Topografia() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from t in db.Topografia where t.Codtopografia != 999 orderby t.Desctopografia select new { t.Codtopografia,t.Desctopografia }).ToList();
                 List<Topografia> Lista = new List<Topografia>();
                 foreach (var item in reg) {
@@ -323,7 +323,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Situacao> Lista_Situacao() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from t in db.Situacao where t.Codsituacao != 999 orderby t.Descsituacao select new { t.Codsituacao, t.Descsituacao }).ToList();
                 List<Situacao> Lista = new List<Situacao>();
                 foreach (var item in reg) {
@@ -338,7 +338,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Benfeitoria> Lista_Benfeitoria() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from t in db.Benfeitoria where t.Codbenfeitoria != 999 orderby t.Descbenfeitoria select new { t.Codbenfeitoria, t.Descbenfeitoria }).ToList();
                 List<Benfeitoria> Lista = new List<Benfeitoria>();
                 foreach (var item in reg) {
@@ -353,7 +353,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Pedologia> Lista_Pedologia() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from t in db.Pedologia where t.Codpedologia != 999 orderby t.Descpedologia select new { t.Codpedologia, t.Descpedologia }).ToList();
                 List<Pedologia> Lista = new List<Pedologia>();
                 foreach (var item in reg) {
@@ -368,7 +368,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Usoterreno> Lista_Uso_Terreno() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from t in db.Usoterreno where t.Codusoterreno != 999 orderby t.Descusoterreno select new { t.Codusoterreno, t.Descusoterreno }).ToList();
                 List<Usoterreno> Lista = new List<Usoterreno>();
                 foreach (var item in reg) {
@@ -383,7 +383,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Usoconstr> Lista_Uso_Construcao() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from t in db.Usoconstr where t.Codusoconstr != 999 orderby t.Descusoconstr select new { t.Codusoconstr, t.Descusoconstr }).ToList();
                 List<Usoconstr> Lista = new List<Usoconstr>();
                 foreach (var item in reg) {
@@ -398,7 +398,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Categconstr> Lista_Categoria_Construcao() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from c in db.Categconstr where c.Codcategconstr != 999 orderby c.Desccategconstr select new { c.Codcategconstr, c.Desccategconstr }).ToList();
                 List<Categconstr> Lista = new List<Categconstr>();
                 foreach (var item in reg) {
@@ -413,7 +413,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Tipoconstr> Lista_Tipo_Construcao() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from c in db.Tipoconstr where c.Codtipoconstr != 999 orderby c.Desctipoconstr select new { c.Codtipoconstr, c.Desctipoconstr }).ToList();
                 List<Tipoconstr> Lista = new List<Tipoconstr>();
                 foreach (var item in reg) {
@@ -428,7 +428,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Testada> Lista_Testada(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from t in db.Testada where t.Codreduzido == Codigo orderby t.Numface select t).ToList();
                 List<Testada> Lista = new List<Testada>();
                 foreach (var item in reg) {
@@ -444,7 +444,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<AreaStruct> Lista_Area(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from a in db.Areas
                            join c in db.Categconstr on a.Catconstr equals c.Codcategconstr into ac from c in ac.DefaultIfEmpty()
                            join t in db.Tipoconstr on a.Tipoconstr equals t.Codtipoconstr into at from t in at.DefaultIfEmpty()
@@ -477,7 +477,7 @@ namespace GTI_Dal.Classes {
         }
 
         public ImovelStruct Inscricao_imovel(int Logradouro, short Numero) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from i in db.Cadimob
                            join f in db.Facequadra on new { p1 = i.Distrito, p2 = i.Setor, p3 = i.Quadra, p4 = i.Seq } equals new { p1 = f.Coddistrito, p2 = f.Codsetor, p3 = f.Codquadra, p4 = f.Codface } into fi from f in fi.DefaultIfEmpty()
                            join l in db.Logradouro on f.Codlogr equals l.Codlogradouro into lf from l in lf.DefaultIfEmpty()
@@ -503,21 +503,21 @@ namespace GTI_Dal.Classes {
         }
 
         public List<int> Lista_Imovel_Ativo() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from e in db.Cadimob where e.Inativo ==false orderby e.Codreduzido select e.Codreduzido).ToList();
                 return Sql;
             }
         }
 
         public List<Condominio> Lista_Condominio() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from e in db.Condominio where e.Cd_codigo > 0 orderby e.Cd_nomecond select e).ToList();
                 return Sql;
             }
         }
 
         public CondominioStruct Dados_Condominio(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from m in db.Condominio
                            join b in db.Bairro on m.Cd_codbairro equals b.Codbairro into mb from b in mb.DefaultIfEmpty()
                            join c in db.Cidade on new { p1 = (short)m.Cd_codcidade, p2 = m.Cd_uf } equals new { p1 = c.Codcidade, p2 = c.Siglauf } into mc from c in mc.DefaultIfEmpty()
@@ -587,7 +587,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<AreaStruct> Lista_Area_Condominio(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from a in db.CondominioArea
                            join c in db.Categconstr on a.Catconstr equals c.Codcategconstr into ac from c in ac.DefaultIfEmpty()
                            join t in db.Tipoconstr on a.Tipoconstr equals t.Codtipoconstr into at from t in at.DefaultIfEmpty()
@@ -622,7 +622,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Testadacondominio> Lista_Testada_Condominio(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from t in db.Testadacondominio where t.Codcond == Codigo orderby t.Numface select t).ToList();
                 List<Testadacondominio> Lista = new List<Testadacondominio>();
                 foreach (var item in reg) {
@@ -638,7 +638,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Condominiounidade> Lista_Unidade_Condominio(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from t in db.CondominioUnidade where t.Cd_codigo == Codigo orderby new { t.Cd_unidade,t.Cd_subunidades } select t).ToList();
                 List<Condominiounidade> Lista = new List<Condominiounidade>();
                 foreach (var item in reg) {
@@ -654,7 +654,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<ImovelStruct> Lista_Imovel(ImovelStruct Reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Cadimob
                            join f in db.Facequadra on new { p1 = c.Distrito, p2 = c.Setor, p3 = c.Quadra, p4 = c.Seq } equals new { p1 = f.Coddistrito, p2 = f.Codsetor, p3 = f.Codquadra, p4 = f.Codface } into fc from f in fc.DefaultIfEmpty()
                            join l in db.Logradouro on f.Codlogr equals l.Codlogradouro into fl from l in fl.DefaultIfEmpty()
@@ -708,21 +708,21 @@ namespace GTI_Dal.Classes {
         }
 
         public Laseriptu Dados_IPTU(int Codigo,int Ano) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from i in db.Laser_iptu where i.Ano == Ano && i.Codreduzido == Codigo select i).FirstOrDefault();
                 return Sql;
             }
         }
 
         public List<Laseriptu> Dados_IPTU(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from i in db.Laser_iptu where i.Codreduzido == Codigo orderby i.Ano select i).ToList();
                 return Sql;
             }
         }
 
         public bool Verifica_Imunidade(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Cadimob Sql = (from c in db.Cadimob where c.Codreduzido == Codigo select c).FirstOrDefault();
                 if (Sql.Imune == null)
                     return false;
@@ -732,7 +732,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<IsencaoStruct> Lista_Imovel_Isencao(int Codigo,int Ano=0) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Processo_Data processo_Class = new Processo_Data(_connection);
                 
                 var reg = (from t in db.Isencao where t.Codreduzido == Codigo orderby t.Anoisencao select t).ToList();
@@ -762,7 +762,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Inativar_imovel(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Cadimob i= db.Cadimob.First(x => x.Codreduzido == Codigo);
                 i.Inativo = true;
                 try {
@@ -775,7 +775,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<HistoricoStruct> Lista_Historico(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from h in db.Historico
                            join u in db.Usuario on h.Userid equals u.Id into hu from u in hu.DefaultIfEmpty()
                            where h.Codreduzido == Codigo orderby h.Seq select new HistoricoStruct {
@@ -798,7 +798,7 @@ namespace GTI_Dal.Classes {
 
         public bool Existe_Face_Quadra(int Distrito,int Setor,int Quadra,int Face) {
             bool bRet = false;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var existingReg = db.Facequadra.Count(a => a.Coddistrito == Distrito && a.Codsetor==Setor && a.Codquadra==Quadra && a.Codface==Face);
                 if (existingReg != 0) {
                     bRet = true;
@@ -809,7 +809,7 @@ namespace GTI_Dal.Classes {
 
         public int Retorna_Codigo_Disponivel() {
             int maxCod = 0;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 maxCod = (from c in db.Cadimob select c.Codreduzido).Max();
                 maxCod = Convert.ToInt32(maxCod + 1);
             }
@@ -818,7 +818,7 @@ namespace GTI_Dal.Classes {
 
         public int Retorna_Codigo_Condominio_Disponivel() {
             int maxCod = 0;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 maxCod = (from c in db.Condominio select c.Cd_codigo).Max();
                 maxCod = Convert.ToInt32(maxCod + 1);
             }
@@ -826,7 +826,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Incluir_Imovel(Cadimob reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 object[] Parametros = new object[35];
                 Parametros[0] = new SqlParameter { ParameterName = "@Cip", SqlDbType = SqlDbType.Bit, SqlValue = reg.Cip };
                 Parametros[1] = new SqlParameter { ParameterName = "@Codcondominio", SqlDbType = SqlDbType.Int, SqlValue = reg.Codcondominio };
@@ -880,7 +880,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Incluir_Condominio(Condominio reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 object[] Parametros = new object[26];
                 Parametros[0] = new SqlParameter { ParameterName = "@cd_codigo", SqlDbType = SqlDbType.Int, SqlValue = reg.Cd_codigo };
                 Parametros[1] = new SqlParameter { ParameterName = "@cd_nomecond", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Cd_nomecond };
@@ -925,7 +925,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Alterar_Condominio(Condominio reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Condominio b = db.Condominio.First(i => i.Cd_codigo == reg.Cd_codigo);
                 b.Cd_areaterreno = reg.Cd_areaterreno;
                 b.Cd_areatotconstr = reg.Cd_areatotconstr;
@@ -962,7 +962,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Alterar_Imovel(Cadimob reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Cadimob b = db.Cadimob.First(i => i.Codreduzido == reg.Codreduzido);
                 b.Cip = reg.Cip;
                 b.Codcondominio = reg.Codcondominio;
@@ -1000,7 +1000,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Incluir_Proprietario(List<Proprietario> Lista) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Database.ExecuteSqlCommand("DELETE FROM proprietario WHERE Codreduzido=@Codreduzido",
                         new SqlParameter("@Codreduzido", Lista[0].Codreduzido));
@@ -1026,7 +1026,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Incluir_Testada(List<Testada> testadas) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Database.ExecuteSqlCommand("DELETE FROM TESTADA WHERE Codreduzido=@Codreduzido",
                         new SqlParameter("@Codreduzido", testadas[0].Codreduzido));
@@ -1051,7 +1051,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Incluir_Testada_Condominio(List<Testadacondominio> testadas) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Database.ExecuteSqlCommand("DELETE FROM TESTADACONDOMINIO WHERE CODCOND=@Codreduzido",
                         new SqlParameter("@Codreduzido", testadas[0].Codcond));
@@ -1076,7 +1076,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Incluir_Historico(List<Historico> historicos) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Database.ExecuteSqlCommand("DELETE FROM HISTORICO WHERE Codreduzido=@Codreduzido",
                         new SqlParameter("@Codreduzido", historicos[0].Codreduzido));
@@ -1103,7 +1103,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Incluir_Area(List<Areas> areas) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Database.ExecuteSqlCommand("DELETE FROM AREAS WHERE Codreduzido=@Codreduzido",
                         new SqlParameter("@Codreduzido", areas[0].Codreduzido));
@@ -1135,7 +1135,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Incluir_Area_Condominio(List<Condominioarea> areas) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Database.ExecuteSqlCommand("DELETE FROM Condominioarea WHERE Codcondominio=@Codreduzido",
                         new SqlParameter("@Codreduzido", areas[0].Codcondominio));
@@ -1167,7 +1167,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Incluir_Unidade_Condominio(List<Condominiounidade> unidades) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Database.ExecuteSqlCommand("DELETE FROM Condominiounidade WHERE Cd_codigo=@Codreduzido",
                         new SqlParameter("@Codreduzido", unidades[0].Cd_codigo));

@@ -17,7 +17,7 @@ namespace GTI_Dal.Classes {
         
         public bool Existe_Empresa(int nCodigo) {
             bool bRet = false;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var existingReg = db.Mobiliario.Count(a => a.Codigomob == nCodigo);
                 if (existingReg != 0) {
                     bRet = true;
@@ -28,7 +28,7 @@ namespace GTI_Dal.Classes {
 
         public bool Empresa_Suspensa(int nCodigo) {
             bool bRet = false;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var existingReg = db.Mobiliarioevento.Count(a => a.Codmobiliario == nCodigo);
                 if (existingReg != 0) {
                     int sit = (from m in db.Mobiliarioevento where m.Codmobiliario == nCodigo orderby m.Dataevento descending select m.Codtipoevento).FirstOrDefault();
@@ -41,7 +41,7 @@ namespace GTI_Dal.Classes {
 
 
         public List<int> Lista_Empresas_Ativas() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 List<int> ListaFinal = new List<int>();
                 List<int> ListaAtivos = (from m in db.Mobiliario where m.Dataencerramento==null && m.Insctemp!=1 orderby m.Codigomob select m.Codigomob).ToList();
                 List<int> ListaSuspenso = Lista_Empresas_Suspensas();
@@ -79,7 +79,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Mobiliarioatividadevs2> Lista_Empresas_Vigilancia_Sanitaria() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 List<Mobiliarioatividadevs2> ListaFinal = new List<Mobiliarioatividadevs2>();
                 List<Mobiliarioatividadevs2> ListaGeral = (from m in db.Mobiliarioatividadevs2 orderby m.Codmobiliario select m).ToList();
                 List<int> ListaAtivos = Lista_Empresas_Ativas();
@@ -100,7 +100,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<EmpresaStruct> Lista_Empresas_Taxa_Licenca() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 List<EmpresaStruct> ListaFinal = new List<EmpresaStruct>();
                 var ListaGeral = (from m in db.Mobiliario join a in db.Atividade on m.Codatividade equals a.Codatividade into ma from a in ma.DefaultIfEmpty()
                                   orderby m.Codigomob
@@ -132,7 +132,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Mobiliarioatividadeiss> Lista_Empresas_ISS_Fixo() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 List<Mobiliarioatividadeiss> ListaFinal = new List<Mobiliarioatividadeiss>();
                 List<Mobiliarioatividadeiss> ListaGeral = (from m in db.Mobiliarioatividadeiss where m.Codtributo==11 orderby m.Codmobiliario select m).ToList();
                 List<int> ListaAtivos = Lista_Empresas_Ativas();
@@ -155,7 +155,7 @@ namespace GTI_Dal.Classes {
 
         public int Existe_EmpresaCnpj(string sCNPJ) {
             int nCodigo = 0;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var existingReg = db.Mobiliario.Count(a => a.Cnpj == sCNPJ);
                 if (existingReg != 0) {
                     int reg = (from m in db.Mobiliario where m.Cnpj == sCNPJ select m.Codigomob).FirstOrDefault();
@@ -167,7 +167,7 @@ namespace GTI_Dal.Classes {
 
         public int Existe_EmpresaCpf(string sCPF) {
             int nCodigo = 0;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var existingReg = db.Mobiliario.Count(a => a.Cpf == sCPF);
                 if (existingReg != 0) {
                     int reg = (from m in db.Mobiliario where m.Cpf == sCPF select m.Codigomob).FirstOrDefault();
@@ -179,7 +179,7 @@ namespace GTI_Dal.Classes {
 
         public bool Empresa_tem_VS(int nCodigo) {
             bool bRet = false;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var existingReg = db.Mobiliarioatividadevs2.Count(a => a.Codmobiliario == nCodigo);
                 if (existingReg != 0) {
                     bRet = true;
@@ -190,7 +190,7 @@ namespace GTI_Dal.Classes {
 
         public bool Empresa_tem_TL(int nCodigo) {
             bool ret = true;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 byte? isento = (from m in db.Mobiliario where m.Codigomob == nCodigo && m.Isentotaxa ==1 select m.Isentotaxa).FirstOrDefault();
                 if (Convert.ToBoolean(isento))
                     return false;
@@ -199,7 +199,7 @@ namespace GTI_Dal.Classes {
         }
 
         public string Regime_Empresa(int nCodigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int tributo = (from m in db.Mobiliarioatividadeiss where m.Codmobiliario == nCodigo select m.Codtributo).FirstOrDefault();
                 if (tributo == 11)
                     return "F";
@@ -218,7 +218,7 @@ namespace GTI_Dal.Classes {
 
         public bool Empresa_Mei(int nCodigo) {
             bool ret = true;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var existingReg = db.Mei.Count(a => a.Codigo == nCodigo);
                 if (existingReg == 0) {
                     ret = false;
@@ -232,14 +232,14 @@ namespace GTI_Dal.Classes {
         }
 
         public bool Empresa_Simples(int Codigo,DateTime Data) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 short nRet = db.Database.SqlQuery<short>("SELECT dbo.RETORNASN2(@Codigo,@Data)", new SqlParameter("@Codigo", Codigo), new SqlParameter("@Data", Data)).Single();
                 return nRet == 1 ? true : false;
             }
         }
 
         public EmpresaStruct Retorna_Empresa(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from m in db.Mobiliario
                            join b in db.Bairro on new { p1 = (short)m.Codbairro, p2 = (short)m.Codcidade, p3 = m.Siglauf } equals new { p1 = b.Codbairro, p2 = b.Codcidade, p3 = b.Siglauf } into mb from b in mb.DefaultIfEmpty()
                            join c in db.Cidade on new { p1 = (short)m.Codcidade, p2 = m.Siglauf } equals new { p1 = c.Codcidade, p2 = c.Siglauf } into mc from c in mc.DefaultIfEmpty()
@@ -374,7 +374,7 @@ namespace GTI_Dal.Classes {
         public List<CidadaoStruct> Lista_Socio(int nCodigo) {
             List<CidadaoStruct> Lista = new List<CidadaoStruct>();
             Cidadao_Data cidadao_classs = new Cidadao_Data(_connection);
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 List<int> Socios = (from m in db.Mobiliarioproprietario where m.Codmobiliario == nCodigo select m.Codcidadao).ToList();
                 foreach (int Cod in Socios) {
                     CidadaoStruct reg = cidadao_classs.LoadReg(Cod);
@@ -385,42 +385,42 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Horariofunc> Lista_Horario() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from h in db.Horariofunc orderby h.Deschorario  select h).ToList();
                 return Sql;
             }
         }
 
         public List<Atividade> Lista_Atividade() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from h in db.Atividade orderby h.Descatividade select h).ToList();
                 return Sql;
             }
         }
 
         public string Retorna_Nome_Atividade(int id_atividade) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from h in db.Atividade where h.Codatividade==id_atividade select h.Descatividade).FirstOrDefault();
                 return Sql;
             }
         }
 
         public List<string> Lista_Placas(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Mobiliarioplaca where p.Codigo==Codigo orderby p.placa select  p.placa).Distinct().ToList();
                 return Sql;
             }
         }
 
         public List<sil> Lista_Sil(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from s in db.Sil where s.Codigo==Codigo orderby s.Data_emissao descending select s).ToList();
                 return Sql;
             }
         }
 
         public mobiliarioendentrega Empresa_Endereco_entrega(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from m in db.Mobiliarioendentrega
                            join b in db.Bairro on new { p1 = m.Codbairro, p2 = m.Codcidade, p3 = m.Uf } equals new { p1 = b.Codbairro, p2 = b.Codcidade, p3 = b.Siglauf } into mb from b in mb.DefaultIfEmpty()
                            join c in db.Cidade on new { p1 = m.Codcidade, p2 = m.Uf } equals new { p1 = c.Codcidade, p2 = c.Siglauf } into mc from c in mc.DefaultIfEmpty()
@@ -451,7 +451,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<MobiliarioproprietarioStruct> Lista_Empresa_Proprietario(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from m in db.Mobiliarioproprietario
                            join c in db.Cidadao on m.Codcidadao equals c.Codcidadao where  m.Codmobiliario==Codigo
                            orderby c.Nomecidadao select new MobiliarioproprietarioStruct {Codcidadao=m.Codcidadao,Nome=c.Nomecidadao }).ToList();
@@ -460,14 +460,14 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Escritoriocontabil> Lista_Escritorio_Contabil() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from e in db.Escritoriocontabil where e.Codigoesc>0 orderby e.Nomeesc  select e).ToList();
                 return Sql;
             }
         }
 
         public EscritoriocontabilStruct Dados_Escritorio_Contabil(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from m in db.Escritoriocontabil
                            join b in db.Bairro on m.Codbairro equals b.Codbairro into mb from b in mb.DefaultIfEmpty()
                            join c in db.Cidade on new { p1 = (short)m.Codcidade, p2 = m.UF } equals new { p1 = c.Codcidade, p2 = c.Siglauf } into mc from c in mc.DefaultIfEmpty()
@@ -512,14 +512,14 @@ namespace GTI_Dal.Classes {
         }
 
         public Certidao_inscricao Certidao_inscricao_gravada(int Ano,int Numero) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Certidao_inscricao where c.Ano == Ano && c.Numero==Numero select c).FirstOrDefault();
                 return Sql;
             }
         }
 
         public Exception Incluir_escritorio(Escritoriocontabil reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 object[] Parametros = new object[17];
                 Parametros[0] = new SqlParameter { ParameterName = "@Codigoesc", SqlDbType = SqlDbType.Int, SqlValue = reg.Codigoesc };
                 Parametros[1] = new SqlParameter { ParameterName = "@Nomeesc", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Nomeesc };
@@ -553,7 +553,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Alterar_escritorio(Escritoriocontabil reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Escritoriocontabil b = db.Escritoriocontabil.First(i => i.Codigoesc == reg.Codigoesc);
                 b.Nomeesc = reg.Nomeesc;
                 b.Cep = reg.Cep;
@@ -581,14 +581,14 @@ namespace GTI_Dal.Classes {
         }
 
         public int Retorna_Ultimo_Codigo_Escritorio() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Escritoriocontabil orderby c.Codigoesc descending select c.Codigoesc).FirstOrDefault();
                 return Sql;
             }
         }
 
         public Exception Excluir_Escritorio(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     Escritoriocontabil b = db.Escritoriocontabil.First(i => i.Codigoesc == Codigo);
                     db.Escritoriocontabil.Remove(b);
@@ -602,7 +602,7 @@ namespace GTI_Dal.Classes {
 
         public bool Empresa_Escritorio(int id_escritorio) {
             int _contador = 0;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Inicio:;
                 try {
                     _contador = (from p in db.Mobiliario where p.Respcontabil == id_escritorio select p.Codigomob).Count();
@@ -614,7 +614,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Incluir_DEmp(List<DEmpresa> Lista) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     foreach (DEmpresa reg in Lista) {
                         db.DEmpresa.Add(reg);
@@ -629,14 +629,14 @@ namespace GTI_Dal.Classes {
 
         public List<DEmpresa> ListaDEmpresa(int nSid) {
             List<DEmpresa> reg;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 reg = (from b in db.DEmpresa where b.sid == nSid select b).ToList();
                 return reg;
             }
         }
 
         public Exception Delete_DEmpresa(int nSid) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.DEmpresa.RemoveRange(db.DEmpresa.Where(i => i.sid == nSid));
                     db.SaveChanges();
@@ -649,7 +649,7 @@ namespace GTI_Dal.Classes {
 
         public List<CnaeStruct> Lista_Cnae_Empresa(int nCodigo) {
             List<CnaeStruct> Lista = new List<CnaeStruct>();
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var rows = (from m in db.Mobiliariocnae join c in db.Cnaesubclasse on
                             new { p1 = m.Divisao, p2 = m.Grupo, p3 = m.Classe, p4 = m.Subclasse } equals
                             new { p1 = c.Divisao, p2 = c.Grupo, p3 = c.Classe, p4 = c.Subclasse }
@@ -668,7 +668,7 @@ namespace GTI_Dal.Classes {
 
         public List<CnaeStruct> Lista_Cnae_Empresa_VS(int nCodigo) {
             List<CnaeStruct> Lista = new List<CnaeStruct>();
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var rows = (from m in db.Mobiliarioatividadevs2 join c in db.Cnaesubclasse on
                             new { p1 = m.Divisao, p2 = m.Grupo, p3 = m.Classe, p4 = m.Subclasse } equals
                             new { p1 = c.Divisao, p2 = c.Grupo, p3 = c.Classe, p4 = c.Subclasse }
@@ -693,7 +693,7 @@ namespace GTI_Dal.Classes {
 
         public List<CnaeStruct> Lista_Cnae() {
             List<CnaeStruct> Lista = new List<CnaeStruct>();
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var rows = (from c in db.Cnaesubclasse 
                             select new { c.Divisao, c.Grupo, c.Classe,c.Subclasse,c.Descricao });
                 foreach (var reg in rows) {
@@ -712,7 +712,7 @@ namespace GTI_Dal.Classes {
 
         public List<CnaecriterioStruct> Lista_Cnae_Criterio(string Cnae) {
             List<CnaecriterioStruct> Lista = new List<CnaecriterioStruct>();
-            using(var db = new GTI_Context(_connection)) {
+            using(GTI_Context db = new GTI_Context(_connection)) {
                 var rows = (from c in db.Cnaecriterio join d in db.Cnaecriteriodesc on c.Criterio equals d.Criterio where c.Cnae==Cnae
                             select new CnaecriterioStruct { Seq=c.Seq,Cnae=c.Cnae,Criterio=c.Criterio,Valor=c.Valor,Descricao=d.Descricao});
                 foreach (var reg in rows) {
@@ -729,7 +729,7 @@ namespace GTI_Dal.Classes {
         }
 
         public SilStructure CarregaSil(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from s in db.Sil where s.Codigo == Codigo
                            select new {
                                s.Codigo, s.Protocolo, s.Data_emissao, s.Data_validade, s.Area_imovel
@@ -749,7 +749,7 @@ namespace GTI_Dal.Classes {
 
         public bool Existe_Empresa_Vre(int nCodigo) {
             bool bRet = false;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var existingReg = db.Vre_empresa.Count(a => a.Id == nCodigo);
                 if (existingReg != 0) {
                     bRet = true;
@@ -769,7 +769,7 @@ namespace GTI_Dal.Classes {
         //            "@outros_usos,@classif_CRC_PJ,@classif_CRC_PF,@numero_CRC_PJ,@cnpj_contador,@tipo_CRC_PF,@tipo_CRC_PJ,@numero_CRC_PF,@uf_CRC_PF,@uf_CRC_PJ,@cpf_contador,@nome_arquivo,@data_importacao," +
         //            "@situacao,@codreduzido,@data_emissao,@data_validade,@protocolo)";
 
-        //    using (var db = new GTI_Context(_connection)) {
+        //    using (GTI_Context db = new GTI_Context(_connection)) {
         //            params object[] aPrm = new object;
         //            cmd.Parameters.Add("@id", SqlDbType.Int).Value = reg.Id;
         //            cmd.Parameters.Add("@Razao_social", SqlDbType.VarChar).Value = reg.Razao_social;
@@ -831,7 +831,7 @@ namespace GTI_Dal.Classes {
         //}
 
         public Exception Insert_Empresa_Vre(Vre_empresa reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Vre_empresa.Add(reg);
                     db.SaveChanges();
@@ -843,7 +843,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Insert_Atividade_Vre(Vre_atividade reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Vre_atividade.Add(reg);
                     db.SaveChanges();
@@ -855,7 +855,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Insert_Socio_Vre(Vre_socio reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Vre_socio.Add(reg);
                     db.SaveChanges();
@@ -867,7 +867,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Insert_Licenciamento_Vre(Vre_licenciamento reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Vre_licencimento.Add(reg);
                     db.SaveChanges();
@@ -879,14 +879,14 @@ namespace GTI_Dal.Classes {
         }
 
         public List<int> Retorna_Codigo_por_CPF(string CPF) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 List<int> Sql = (from c in db.Mobiliario where c.Cpf==CPF orderby c.Codigomob select c.Codigomob).ToList();
                 return Sql;
             }
         }
 
         public List<int> Retorna_Codigo_por_CNPJ(string CNPJ) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 List<int> Sql = (from c in db.Mobiliario where c.Cnpj == CNPJ orderby c.Codigomob descending select c.Codigomob).ToList();
                 return Sql;
             }
@@ -894,7 +894,7 @@ namespace GTI_Dal.Classes {
 
         public bool Existe_Atividade_Empresa(int id_Atividade) {
             int _contador = 0;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     _contador = (from p in db.Mobiliario where p.Codatividade == id_Atividade select p.Codigomob).Count();
                 } catch {
@@ -905,7 +905,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Excluir_Atividade(int id_atividade) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     Atividade b = db.Atividade.First(i => i.Codatividade == id_atividade);
                     db.Atividade.Remove(b);

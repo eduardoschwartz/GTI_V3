@@ -21,21 +21,21 @@ namespace GTI_Dal.Classes {
         }
         
         public List<Lancamento> Lista_Lancamento() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = from l in db.Lancamento orderby l.Descfull select l;
                 return Sql.ToList();
             }
         }
 
         public List<Situacaolancamento> Lista_Status() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = from s in db.Situacaolancamento orderby s.Descsituacao select s;
                 return Sql.ToList();
             }
         }
 
         public List<Tributo> Lista_Tributo(int Codigo=0) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 List<Tributo> Sql = (from l in db.Tributo orderby l.Desctributo select l).ToList();
                 if (Codigo > 0)
                     Sql=Sql.Where(c => c.Codtributo == Codigo).ToList();
@@ -44,21 +44,21 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Tipolivro> Lista_Tipo_Livro() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = from t in db.Tipolivro orderby t.Desctipo select t;
                 return Sql.ToList();
             }
         }
 
         public Paramparcela Retorna_Parametro_Parcela(int _ano,int _tipo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = from p in db.Paramparcela where p.Ano==_ano && p.Codtipo==_tipo select p;
                 return Sql.FirstOrDefault();
             }
         }
 
         public Exception Incluir_Lancamento(Lancamento reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int cntCod = (from c in db.Lancamento select c).Count();
                 int maxCod = 1;
                 if (cntCod > 0)
@@ -78,7 +78,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Incluir_Tributo(Tributo reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int cntCod = (from c in db.Tributo select c).Count();
                 int maxCod = 1;
                 if (cntCod > 0)
@@ -100,7 +100,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Alterar_Lancamento(Lancamento reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int nCodLanc = reg.Codlancamento;
                 Lancamento b = db.Lancamento.First(i => i.Codlancamento == nCodLanc);
                 b.Descfull = reg.Descfull;
@@ -116,7 +116,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Alterar_Tributo(Tributo reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int nCodTrib = reg.Codtributo;
                 Tributo b = db.Tributo.First(i => i.Codtributo == nCodTrib);
                 b.Desctributo = reg.Desctributo;
@@ -132,7 +132,7 @@ namespace GTI_Dal.Classes {
 
         public bool Existe_Lancamento(Lancamento reg,bool novo=true) {
             bool bValido = false;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 if (novo) {
                     var existingReg = db.Lancamento.Count(a => a.Descfull == reg.Descfull);
                     if (existingReg > 0)
@@ -148,7 +148,7 @@ namespace GTI_Dal.Classes {
 
         public bool Existe_Tributo(Tributo reg, bool novo = true) {
             bool bValido = false;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 if (novo) {
                     var existingReg = db.Tributo.Count(a => a.Desctributo == reg.Desctributo);
                     if (existingReg > 0)
@@ -172,7 +172,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Excluir_Lancamento(Lancamento reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int nCodLanc = reg.Codlancamento;
                 Lancamento b = db.Lancamento.First(i => i.Codlancamento == nCodLanc);
                 try {
@@ -186,7 +186,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Excluir_Tributo(Tributo reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int nCodTrib = reg.Codtributo;
                 Tributo b = db.Tributo.First(i => i.Codtributo == nCodTrib);
                 try {
@@ -200,35 +200,35 @@ namespace GTI_Dal.Classes {
         }
 
         public bool Lancamento_uso_debito(int codigo_lancamento) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Debitoparcela reg = (from c in db.Debitoparcela where c.Codlancamento==codigo_lancamento select c).FirstOrDefault();
                 return reg!=null;
             }
         }
 
         public bool Lancamento_uso_tributo(int codigo_lancamento) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Tributolancamento reg = (from c in db.Tributolancamento where c.Codlancamento == codigo_lancamento select c).FirstOrDefault();
                 return reg != null;
             }
         }
 
         public bool Tributo_uso_debito(int codigo_tributo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Debitoparcela reg = (from c in db.Debitoparcela where c.Codlancamento == codigo_tributo select c).FirstOrDefault();
                 return reg != null;
             }
         }
 
         public bool Tributo_uso_lancamento(int codigo_tributo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Tributolancamento reg = (from c in db.Tributolancamento  where c.Codtributo == codigo_tributo select c).FirstOrDefault();
                 return reg != null;
             }
         }
 
         public bool Tributo_uso_aliquota(int codigo_tributo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Tributoaliquota reg = (from c in db.Tributoaliquota where c.Codtributo == codigo_tributo select c).FirstOrDefault();
                 return reg != null;
             }
@@ -236,7 +236,7 @@ namespace GTI_Dal.Classes {
 
         public List<SpExtrato> Lista_Extrato_Tributo(int Codigo, short Ano1 = 1990, short Ano2 = 2050, short Lancamento1 = 1, short Lancamento2 = 99, short Sequencia1 = 0, short Sequencia2 = 9999,
             short Parcela1 = 0, short Parcela2 = 999, short Complemento1 = 0, short Complemento2 = 999, short Status1 = 0, short Status2 = 99, DateTime? Data_Atualizacao = null, string Usuario = "") {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
 
                 var prmCod1 = new SqlParameter { ParameterName = "@CodReduz1", SqlDbType = SqlDbType.Int, SqlValue = Codigo };
                 var prmCod2 = new SqlParameter { ParameterName = "@CodReduz2", SqlDbType = SqlDbType.Int, SqlValue = Codigo };
@@ -304,8 +304,8 @@ namespace GTI_Dal.Classes {
 
         public List<SpExtrato_carta> Lista_Extrato_Tributo_Carta(int Codigo, short Ano1 = 1990, short Ano2 = 2050, short Lancamento1 = 1, short Lancamento2 = 99, short Sequencia1 = 0, short Sequencia2 = 9999,
                                                                  short Parcela1 = 0, short Parcela2 = 999, short Complemento1 = 0, short Complemento2 = 999, short Status1 = 0, short Status2 = 99, DateTime? Data_Atualizacao = null, string Usuario = "") {
-            using (var db = new GTI_Context(_connection)) {
-
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                db.Database.CommandTimeout = 180;
                 var prmCod1 = new SqlParameter { ParameterName = "@CodReduz1", SqlDbType = SqlDbType.Int, SqlValue = Codigo };
                 var prmCod2 = new SqlParameter { ParameterName = "@CodReduz2", SqlDbType = SqlDbType.Int, SqlValue = Codigo };
                 var prmAno1 = new SqlParameter { ParameterName = "@AnoExercicio1", SqlDbType = SqlDbType.SmallInt, SqlValue = Ano1 };
@@ -494,7 +494,7 @@ namespace GTI_Dal.Classes {
 
         public double Retorna_Taxa_Expediente(int codigo,short ano,short lancamento,short sequencia,short parcela,short complemento) {
             double nTaxa=0;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from d in db.Debitotributo where d.Codreduzido == codigo && d.Anoexercicio==ano && d.Codlancamento==lancamento && d.Seqlancamento==sequencia &&
                            d.Numparcela==parcela && d.Codcomplemento==complemento && d.Codtributo==3  select d.Valortributo).FirstOrDefault();
                 if (reg == null)
@@ -506,7 +506,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<ObsparcelaStruct> Lista_Observacao_Parcela(int codigo) {
-                using (var db = new GTI_Context(_connection)) {
+                using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = from d in db.Obsparcela
                           join u in db.Usuario on d.Userid equals u.Id into du from u in du.DefaultIfEmpty()
                           where d.Codreduzido == codigo
@@ -518,7 +518,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Incluir_Observacao_Parcela(Obsparcela reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int maxSeq = Retorna_Ultima_Seq_Observacao_Parcela(reg.Codreduzido,reg.Anoexercicio,reg.Codlancamento,reg.Seqlancamento,reg.Numparcela,reg.Codcomplemento);
 
                 try {
@@ -542,7 +542,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Alterar_Observacao_Parcela(Obsparcela reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Obsparcela b = db.Obsparcela.First(i => i.Codreduzido == reg.Codreduzido && i.Anoexercicio==reg.Anoexercicio && i.Codlancamento==reg.Codlancamento &&
                 i.Seqlancamento==reg.Seqlancamento && i.Numparcela==reg.Numparcela && i.Codcomplemento==reg.Codcomplemento && i.Seq==reg.Seq);
                 b.Data = reg.Data;
@@ -558,7 +558,7 @@ namespace GTI_Dal.Classes {
         }
 
         public short Retorna_Ultima_Seq_Observacao_Parcela(int Codigo,int Ano,short Lanc, short Sequencia,short Parcela,short Complemento) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var cntCod = (from c in db.Obsparcela
                               where c.Codreduzido == Codigo && c.Anoexercicio == Ano && c.Codlancamento == Lanc && c.Seqlancamento == Sequencia && c.Numparcela == Parcela && c.Codcomplemento == Complemento
                               orderby c.Seq descending
@@ -568,7 +568,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Excluir_Observacao_Parcela(Obsparcela reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Obsparcela b = db.Obsparcela.First(i => i.Codreduzido == reg.Codreduzido && i.Anoexercicio == reg.Anoexercicio && i.Codlancamento == reg.Codlancamento && i.Seqlancamento == reg.Seqlancamento && i.Numparcela == reg.Numparcela && i.Codcomplemento == reg.Codcomplemento && i.Seq == reg.Seq);
                 try {
                     db.Obsparcela.Remove(b);
@@ -581,7 +581,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<DebitoobservacaoStruct> Lista_Observacao_Codigo(int codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = from d in db.Debitoobservacao
                           join u in db.Usuario on d.Userid equals u.Id into du from u in du.DefaultIfEmpty()
                           where d.Codreduzido == codigo
@@ -592,7 +592,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Incluir_Observacao_Codigo(Debitoobservacao reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int maxSeq = Retorna_Ultima_Seq_Observacao_Codigo(reg.Codreduzido);
 
                 try {
@@ -611,14 +611,14 @@ namespace GTI_Dal.Classes {
         }
 
         public short Retorna_Ultima_Seq_Observacao_Codigo(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var cntCod = (from c in db.Debitoobservacao where c.Codreduzido == Codigo orderby c.Seq descending select c.Seq).FirstOrDefault();
                 return Convert.ToInt16(cntCod);
             }
         }
 
         public Exception Alterar_Observacao_Codigo(Debitoobservacao reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Debitoobservacao b = db.Debitoobservacao.First(i => i.Codreduzido == reg.Codreduzido && i.Seq==reg.Seq);
                 b.Dataobs = reg.Dataobs;
                 b.Obs = reg.Obs;
@@ -633,7 +633,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Excluir_Observacao_Codigo(int Codigo,short Seq) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Debitoobservacao b = db.Debitoobservacao.First(i => i.Codreduzido == Codigo &&  i.Seq == Seq);
                 try {
                     db.Debitoobservacao.Remove(b);
@@ -646,7 +646,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Numdocumento> Lista_Parcela_Documentos(Parceladocumento reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from d in db.Numdocumento
                            join p in db.Parceladocumento on d.numdocumento equals p.Numdocumento into dp1 from p in dp1.DefaultIfEmpty()
                            where p.Codreduzido==reg.Codreduzido && p.Anoexercicio==reg.Anoexercicio && p.Codlancamento==reg.Codlancamento && 
@@ -666,7 +666,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<DebitoStructure> Lista_Tabela_Parcela_Documento(int nNumdocumento) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                     var reg = (from p in db.Parceladocumento where p.Numdocumento == nNumdocumento
                                select new { p.Codreduzido, p.Anoexercicio, p.Codlancamento, p.Seqlancamento, p.Numparcela, p.Codcomplemento });
                     List<DebitoStructure> Lista = new List<DebitoStructure>();
@@ -685,7 +685,7 @@ namespace GTI_Dal.Classes {
             }
 
         //public List<ParceladocumentoStruct> Lista_Lancamento_Documentos(Parceladocumento reg) {
-        //    using (var db = new GTI_Context(_connection)) {
+        //    using (GTI_Context db = new GTI_Context(_connection)) {
         //        var Sql = (from d in db.Numdocumento
         //                   join p in db.Parceladocumento on d.numdocumento equals p.Numdocumento into dp1 from p in dp1.DefaultIfEmpty()
         //                   where p.Codreduzido == reg.Codreduzido && p.Anoexercicio == reg.Anoexercicio && p.Codlancamento == reg.Codlancamento &&
@@ -705,7 +705,7 @@ namespace GTI_Dal.Classes {
         //}
 
         public Exception Insert_Boleto_Guia(Boletoguia Reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Boletoguia.Add(Reg);
                     db.SaveChanges();
@@ -717,7 +717,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Insert_Numero_Segunda_Via(Segunda_via_web Reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Segunda_via_web.Add(Reg);
                     db.SaveChanges();
@@ -729,7 +729,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Insert_Atividade(Atividade Reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Database.ExecuteSqlCommand("INSERT INTO atividade(codatividade,descatividade,valoraliq1,valoraliq2,valoraliq3) " +
                         "VALUES(@codatividade, @descatividade, @valoraliq1, @valoraliq2, @valoraliq3)",
@@ -746,7 +746,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Alterar_Atividade(Atividade reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Atividade b = db.Atividade.First(i => i.Codatividade == reg.Codatividade);
                 b.Descatividade = reg.Descatividade;
                 b.Valoraliq1 = reg.Valoraliq1;
@@ -763,7 +763,7 @@ namespace GTI_Dal.Classes {
 
         public List<Boletoguia> Lista_Boleto_Guia(int nSid) {
             List<Boletoguia> reg;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 reg = (from b in db.Boletoguia where b.Sid == nSid select b).ToList();
                 return reg;
             }
@@ -771,14 +771,14 @@ namespace GTI_Dal.Classes {
 
         public List<Boleto> Lista_Boleto_DAM(int nSid) {
             List<Boleto> reg;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 reg = (from b in db.Boleto where b.Sid == nSid select b).ToList();
                 return reg;
             }
         }
 
         public List<DebitoStructure> Lista_Parcelas_CIP(int nCodigo, int nAno) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from dp in db.Debitoparcela
                            join dt in db.Debitotributo on new { p1 = dp.Codreduzido, p2 = dp.Anoexercicio, p3 = dp.Codlancamento, p4 = dp.Seqlancamento, p5 = dp.Numparcela, p6 = dp.Codcomplemento }
                                                    equals new { p1 = dt.Codreduzido, p2 = dt.Anoexercicio, p3 = dt.Codlancamento, p4 = dt.Seqlancamento, p5 = dt.Numparcela, p6 = dt.Codcomplemento } into dpdt from dt in dpdt.DefaultIfEmpty()
@@ -812,7 +812,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<DebitoStructure> Lista_Parcelas_IPTU(int nCodigo, int nAno) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from dp in db.Debitoparcela
                            join dt in db.Debitotributo on new { p1 = dp.Codreduzido, p2 = dp.Anoexercicio, p3 = dp.Codlancamento, p4 = dp.Seqlancamento, p5 = dp.Numparcela, p6 = dp.Codcomplemento }
                                                    equals new { p1 = dt.Codreduzido, p2 = dt.Anoexercicio, p3 = dt.Codlancamento, p4 = dt.Seqlancamento, p5 = dt.Numparcela, p6 = dt.Codcomplemento } into dpdt from dt in dpdt.DefaultIfEmpty()
@@ -846,7 +846,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Insert_Carne_Web(int Codigo, int Ano) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     Laseriptu b = db.Laser_iptu.First(i => i.Codreduzido == Codigo && i.Ano == Ano);
                     b.Carne_web = 1;
@@ -859,7 +859,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Excluir_Carne(int nSid) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Boletoguia.RemoveRange(db.Boletoguia.Where(i => i.Sid == nSid));
                     db.SaveChanges();
@@ -871,7 +871,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Laseriptu Carrega_Dados_IPTU(int nCodigo, int nAno) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Laseriptu reg = (from l in db.Laser_iptu where l.Ano == nAno && l.Codreduzido == nCodigo select l).FirstOrDefault();
                 return reg;
             }
@@ -879,7 +879,7 @@ namespace GTI_Dal.Classes {
 
         public bool Existe_Documento_CIP(int nNumDocumento) {
             bool bRet = false;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var existingReg = db.Parceladocumento.Where(a => a.Codlancamento == 79).Count(a => a.Numdocumento == nNumDocumento);
                 if (existingReg != 0) {
                     bRet = true;
@@ -890,7 +890,7 @@ namespace GTI_Dal.Classes {
 
         public bool Existe_Documento(int nNumDocumento) {
             bool bRet = false;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var existingReg = db.Numdocumento.Where(a => a.numdocumento > 1).Count(a => a.numdocumento == nNumDocumento);
                 if (existingReg != 0) {
                     bRet = true;
@@ -901,7 +901,7 @@ namespace GTI_Dal.Classes {
 
         public int Retorna_Codigo_por_Documento(int nNumDocumento) {
             int Sql = 0;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Sql = (from b in db.Parceladocumento where  b.Numdocumento == nNumDocumento select b.Codreduzido).FirstOrDefault();
             }
             return Sql;
@@ -917,7 +917,7 @@ namespace GTI_Dal.Classes {
 
         public int Insert_Documento(Numdocumento Reg) {
             Int32 maxCod = 0;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     maxCod = db.Numdocumento.Max(u => u.numdocumento);
                     maxCod++;
@@ -936,7 +936,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Insert_Documento_Existente(Numdocumento Reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Database.ExecuteSqlCommand("INSERT INTO numdocumento(numdocumento,datadocumento,valorguia,emissor,registrado) VALUES(@numdocumento,@datadocumento,@valorguia,@emissor,@registrado)",
                         new SqlParameter("@numdocumento", Reg.numdocumento),
@@ -952,7 +952,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Insert_Parcela_Documento(Parceladocumento Reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Parceladocumento.Add(Reg);
                     db.SaveChanges();
@@ -1076,7 +1076,7 @@ namespace GTI_Dal.Classes {
         }
 
         public void DeleteSid(int nSid) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Boletoguia.RemoveRange(db.Boletoguia.Where(i => i.Sid == nSid));
                     db.SaveChanges();
@@ -1089,7 +1089,7 @@ namespace GTI_Dal.Classes {
         }
 
         public void GravaDam(Boleto Reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Boleto.Add(Reg);
                     db.SaveChanges();
@@ -1102,7 +1102,7 @@ namespace GTI_Dal.Classes {
 
         public bool Existe_Comercio_Eletronico(int nNumDocumento) {
             bool bRet = false;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var existingReg = db.Comercio_eletronico.Where(a => a.Numdoc > 1).Count(a => a.Numdoc == nNumDocumento);
                 if (existingReg != 0) {
                     bRet = true;
@@ -1112,7 +1112,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Insert_Boleto_Comercio_Eletronico(comercio_eletronico Reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Comercio_eletronico.Add(Reg);
                     db.SaveChanges();
@@ -1125,7 +1125,7 @@ namespace GTI_Dal.Classes {
 
         public Numdocumento Retorna_Dados_Documento(int nNumDocumento) {
             Numdocumento reg;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 reg = (from m in db.Numdocumento where m.numdocumento == nNumDocumento select m).FirstOrDefault();
             }
             return reg;
@@ -1133,7 +1133,7 @@ namespace GTI_Dal.Classes {
 
         public int Retorna_Codigo_Certidao(TipoCertidao tipo_certidao) {
             int nRet = 0;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Parametros select p);
                 if (tipo_certidao == TipoCertidao.Endereco)
                     Sql = Sql.Where(c => c.Nomeparam == "CETEND");
@@ -1172,7 +1172,7 @@ namespace GTI_Dal.Classes {
 
         private Exception Atualiza_Codigo_Certidao(TipoCertidao tipo_certidao,int Valor) {
             Parametros p=null;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 if(tipo_certidao==TipoCertidao.Endereco)
                     p = db.Parametros.First(i => i.Nomeparam == "CETEND");
                 else {
@@ -1202,7 +1202,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Insert_Comprovante_Pagamento(Comprovante_pagamento Reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 object[] Parametros = new object[10];
                 Parametros[0] = new SqlParameter { ParameterName = "@Ano", SqlDbType = SqlDbType.Int, SqlValue = Reg.Ano };
                 Parametros[1] = new SqlParameter { ParameterName = "@Numero", SqlDbType = SqlDbType.Int, SqlValue = Reg.Numero };
@@ -1228,7 +1228,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Insert_Certidao_Endereco(Certidao_endereco Reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Certidao_endereco.Add(Reg);
                     db.SaveChanges();
@@ -1240,7 +1240,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Insert_Certidao_ValorVenal(Certidao_valor_venal Reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Certidao_valor_venal.Add(Reg);
                     db.SaveChanges();
@@ -1252,7 +1252,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Insert_Certidao_Isencao(Certidao_isencao Reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Certidao_isencao.Add(Reg);
                     db.SaveChanges();
@@ -1264,28 +1264,28 @@ namespace GTI_Dal.Classes {
         }
 
         public Certidao_endereco Retorna_Certidao_Endereco(int Ano,int Numero,int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Certidao_endereco where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
                 return Sql;
             }
         }
 
         public Certidao_valor_venal Retorna_Certidao_ValorVenal(int Ano, int Numero, int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Certidao_valor_venal where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
                 return Sql;
             }
         }
 
         public Certidao_isencao Retorna_Certidao_Isencao(int Ano, int Numero, int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Certidao_isencao where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
                 return Sql;
             }
         }
 
         public Exception Insert_Certidao_Debito(Certidao_debito Reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Certidao_debito.Add(Reg);
                     db.SaveChanges();
@@ -1297,7 +1297,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Insert_Certidao_Inscricao(Certidao_inscricao Reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Certidao_inscricao.Add(Reg);
                     db.SaveChanges();
@@ -1309,14 +1309,14 @@ namespace GTI_Dal.Classes {
         }
 
         public Certidao_debito Retorna_Certidao_Debito(int Ano, int Numero, int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Certidao_debito where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
                 return Sql;
             }
         }
 
         public Certidao_inscricao Retorna_Certidao_Inscricao(int Ano, int Numero, int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Certidao_inscricao where p.Ano == Ano && p.Numero == Numero && p.Cadastro == Codigo select p).FirstOrDefault();
                 return Sql;
             }
@@ -1457,7 +1457,7 @@ namespace GTI_Dal.Classes {
         }
 
         public SpCalculo Calculo_IPTU(int Codigo, int Ano) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var prmCodigo = new SqlParameter { ParameterName = "@Codigo", SqlDbType = SqlDbType.Int, SqlValue = Codigo };
                 var prmAno = new SqlParameter { ParameterName = "@Ano", SqlDbType = SqlDbType.Int, SqlValue = Ano };
                 SpCalculo result = db.SpCalculo.SqlQuery("EXEC spCalculo @Codigo, @Ano ", prmCodigo, prmAno).FirstOrDefault();
@@ -1467,7 +1467,7 @@ namespace GTI_Dal.Classes {
 
         public List<CompetenciaISS> Resumo_CompetenciaISS(int Codigo) {
             List<CompetenciaISS> TabelaMes = new List<CompetenciaISS>();
-            using (var db = new Eicon_Context(ConfigurationManager.ConnectionStrings["GTIEicon"].ConnectionString)) {
+            using (Eicon_Context db = new Eicon_Context(ConfigurationManager.ConnectionStrings["GTIEicon"].ConnectionString)) {
                 decimal _mes_inicial = db.Tb_inter_encerramento_giss.OrderBy(c => c.Ano_competencia).ThenBy(c => c.Mes_competencia).Where(c => c.Num_cadastro == Codigo).Select(c => c.Mes_competencia).FirstOrDefault();
                 decimal _ano_inicial = db.Tb_inter_encerramento_giss.OrderBy(c => c.Ano_competencia).ThenBy(c => c.Mes_competencia).Where(c => c.Num_cadastro == Codigo).Select(c => c.Ano_competencia).FirstOrDefault();
                 if (_ano_inicial == 0)
@@ -1550,7 +1550,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Insert_Certidao_Inscricao_Extrato(Certidao_inscricao_extrato Reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Certidao_inscricao_extrato.Add(Reg);
                     db.SaveChanges();
@@ -1563,7 +1563,7 @@ namespace GTI_Dal.Classes {
 
         public DebitoPagoStruct Retorna_DebitoPago_Documento(int nNumDocumento) {
             DebitoPagoStruct ret = null;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from m in db.Debitopago
                            join b in db.Banco on m.Codbanco equals b.Codbanco into bm from b in bm.DefaultIfEmpty()
                            where m.Numdocumento == nNumDocumento select new DebitoPagoStruct { Ano = m.Anoexercicio,Banco_Codigo=m.Codbanco,Banco_Nome=b.Nomebanco,
@@ -1640,7 +1640,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Insert_Carta_Cobranca_Exclusao(Carta_cobranca_exclusao Reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 object[] Parametros = new object[2];
                 Parametros[0] = new SqlParameter { ParameterName = "@remessa", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Remessa };
                 Parametros[1] = new SqlParameter { ParameterName = "@codigo", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codigo };
@@ -1656,7 +1656,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Excluir_Carta_Cobranca(int Remessa) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Carta_cobranca_exclusao.RemoveRange(db.Carta_cobranca_exclusao.Where(i => i.Remessa == Remessa));
                     db.SaveChanges();
@@ -1672,7 +1672,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Insert_Carta_Cobranca_Detalhe(Carta_cobranca_detalhe Reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 object[] Parametros = new object[9];
                 Parametros[0] = new SqlParameter { ParameterName = "@remessa", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Remessa };
                 Parametros[1] = new SqlParameter { ParameterName = "@codigo", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codigo };
@@ -1697,7 +1697,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Carta_cobranca> Lista_Carta_Cobranca(int s) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from t in db.Carta_cobranca  orderby t.Numero_Documento select new { t.Bairro, t.Cep,t.Cidade,t.Codigo,t.Cpf_cnpj,t.Data_Documento,
                     t.Data_Vencimento,t.Endereco,t.Nome,t.Nosso_Numero,t.Numero_Documento,t.Valor_Boleto }).ToList();
                 List<Carta_cobranca> Lista = new List<Carta_cobranca>();
@@ -1723,7 +1723,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Insert_Calculo_Resumo(Calculo_resumo Reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 object[] Parametros = new object[15];
                 Parametros[0] = new SqlParameter { ParameterName = "@ano", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Ano };
                 Parametros[1] = new SqlParameter { ParameterName = "@codigo", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codigo };
@@ -1756,7 +1756,7 @@ namespace GTI_Dal.Classes {
         }
 
         public decimal Retorna_Valor_Tributo(int Ano,int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 decimal Sql = (from t in db.Tributoaliquota where t.Ano==Ano && t.Codtributo==Codigo select t.Valoraliq).FirstOrDefault();
                 return Sql;
             }

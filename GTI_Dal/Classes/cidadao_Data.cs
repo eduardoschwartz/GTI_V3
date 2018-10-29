@@ -12,7 +12,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Cidadao> Lista_Cidadao(string Nome,string Cpf,string CNPJ) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Cidadao select c);
                 if (!String.IsNullOrEmpty(Nome))
                     Sql = Sql.Where(c => c.Nomecidadao.Contains(Nome));
@@ -25,14 +25,14 @@ namespace GTI_Dal.Classes {
         }
 
         public Cidadao Retorna_Cidadao(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Cidadao where c.Codcidadao==Codigo  select c).FirstOrDefault();
                 return Sql;
             }
         }
 
         public string Retorna_Nome_Cidadao(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 string Sql = (from c in db.Cidadao where c.Codcidadao == Codigo select c.Nomecidadao).FirstOrDefault();
                 return Sql;
             }
@@ -40,7 +40,7 @@ namespace GTI_Dal.Classes {
 
         public bool ExisteCidadao(int nCodigo) {
             bool bRet = false;
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var existingReg = db.Cidadao.Count(a => a.Codcidadao == nCodigo);
                 if (existingReg != 0) {
                     bRet = true;
@@ -50,14 +50,14 @@ namespace GTI_Dal.Classes {
         }
 
         public int Retorna_Ultimo_Codigo_Cidadao() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Cidadao orderby c.Codcidadao descending select c.Codcidadao ).FirstOrDefault();
                 return Sql;
             }
         }
         
         public Exception Incluir_cidadao(Cidadao reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var cntCod = (from c in db.Cidadao select c).Count();
                 int nMax;
                 if (cntCod > 0) {
@@ -77,7 +77,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Alterar_cidadao(Cidadao reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 Cidadao b = db.Cidadao.First(i => i.Codcidadao == reg.Codcidadao);
                 b.Nomecidadao = reg.Nomecidadao;
                 b.Rg = reg.Rg;
@@ -98,7 +98,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Excluir_cidadao(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     Cidadao b = db.Cidadao.First(i =>  i.Codcidadao == Codigo);
                     db.Cidadao.Remove(b);
@@ -111,21 +111,21 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Profissao> Lista_Profissao() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Profissao orderby p.Nome select p);
                 return Sql.ToList();
             }
         }
 
         public List<Tipousuario> Lista_TipoCidadao() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Tipousuario orderby p.Nome select p);
                 return Sql.ToList();
             }
         }
 
         public Exception Incluir_profissao(Profissao reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var maxCod = (from p in db.Profissao select p.Codigo).Max();
                 int nMax = Convert.ToInt32(maxCod + 1);
                 reg.Codigo = nMax;
@@ -140,7 +140,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Alterar_Profissao(Profissao reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     int _id_profissao = reg.Codigo;
                     Profissao b = db.Profissao.First(i => i.Codigo == _id_profissao);
@@ -154,7 +154,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Excluir_Profissao(Profissao reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
 
                 int _id_profissao = reg.Codigo;
                 Profissao b = db.Profissao.First(i => i.Codigo == _id_profissao);
@@ -169,7 +169,7 @@ namespace GTI_Dal.Classes {
         }
 
         public bool Profissao_cidadao(int id_profissao) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var cntCod1 = (from c in db.Cidadao where  c.Codprofissao == id_profissao select c.Codcidadao).Count();
                 return cntCod1 > 0  ? true : false;
             }
@@ -177,7 +177,7 @@ namespace GTI_Dal.Classes {
 
 
         public CidadaoStruct LoadReg(Int32 nCodigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from c in db.Cidadao
                            join l in db.Logradouro on c.Codlogradouro equals l.Codlogradouro into cl1 from l in cl1.DefaultIfEmpty()
                            join l2 in db.Logradouro on c.Codlogradouro2 equals l2.Codlogradouro into cl2 from l2 in cl2.DefaultIfEmpty()

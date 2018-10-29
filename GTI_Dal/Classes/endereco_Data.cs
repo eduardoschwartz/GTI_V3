@@ -12,7 +12,7 @@ namespace GTI_Dal.Classes {
         }
 
         public bool Bairro_uso_cidadao(string id_UF, int id_cidade,int id_bairro) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var cntCod1 = (from c in db.Cidadao where c.Siglauf == id_UF && c.Codcidade == id_cidade && c.Codbairro == id_bairro select c.Codcidadao).Count();
                 var cntCod2 = (from c in db.Cidadao where c.Siglauf == id_UF && c.Codcidade == id_cidade && c.Codbairro2 == id_bairro select c.Codcidadao).Count();
                 return cntCod1 > 0||cntCod2>0 ? true : false;
@@ -20,21 +20,21 @@ namespace GTI_Dal.Classes {
         }
 
         public bool Bairro_uso_empresa(string id_UF, int id_cidade, int id_bairro) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var cntCod1 = (from c in db.Mobiliario where c.Siglauf == id_UF && c.Codcidade == id_cidade && c.Codbairro == id_bairro select c.Codigomob).Count();
                 return cntCod1 > 0  ? true : false;
             }
         }
 
         public bool Bairro_uso_processo(string id_UF, int id_cidade, int id_bairro) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var cntCod1 = (from c in db.Processocidadao where c.Siglauf == id_UF && c.Codcidade == id_cidade && c.Codbairro == id_bairro select c.Codcidadao).Count();
                 return cntCod1 > 0 ? true : false;
             }
         }
 
         public bool Pais_uso_cidadao(int id_pais) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var cntCod1 = (from c in db.Cidadao where c.Codpais == id_pais  select c.Codcidadao).Count();
                 var cntCod2 = (from c in db.Cidadao where c.Codpais2 == id_pais select c.Codcidadao).Count();
                 return cntCod1 > 0 || cntCod2 > 0 ? true : false;
@@ -44,14 +44,14 @@ namespace GTI_Dal.Classes {
 
 
         public List<Bairro> Lista_Bairro(string UF, int cidade) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from b in db.Bairro where b.Siglauf == UF && b.Codcidade == cidade orderby b.Descbairro select b);
                 return Sql.ToList();
             }
         }
 
         public Exception Incluir_bairro(Bairro reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var cntCod = (from c in db.Bairro where c.Siglauf == reg.Siglauf && c.Codcidade == reg.Codcidade select c.Codbairro).Count();
                 int maxCod = 1;
                 if (cntCod > 0)
@@ -68,7 +68,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Alterar_Bairro(Bairro reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 string sUF = reg.Siglauf;
                 int nCodCidade = reg.Codcidade;
                 int nCodBairro = reg.Codbairro;
@@ -84,7 +84,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Excluir_Bairro(Bairro reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 
                     string sUF = reg.Siglauf;
                     int nCodCidade = reg.Codcidade;
@@ -101,7 +101,7 @@ namespace GTI_Dal.Classes {
         }
 
         public List <Cidade> Lista_Cidade(string sUF) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Cidade select c);
                 if (!string.IsNullOrEmpty(sUF))
                      Sql = Sql.Where(u => u.Siglauf == sUF).OrderBy(u=>u.Desccidade);
@@ -111,49 +111,49 @@ namespace GTI_Dal.Classes {
         }
 
         public List<Uf> Lista_UF() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Uf orderby c.Descuf select c);
                 return Sql.ToList();
             }
         }
 
         public List<Pais> Lista_Pais() {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Pais select c);
                 return Sql.ToList();
             }
         }
 
         public string Retorna_Logradouro(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Logradouro where c.Codlogradouro == Codigo select c.Endereco).FirstOrDefault();
                 return Sql;
             }
         }
 
         public string Retorna_Pais(int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 string Sql = (from c in db.Pais where c.Id_pais == Codigo select c.Nome_pais).FirstOrDefault();
                 return Sql;
             }
         }
 
         public string Retorna_Cidade(string UF, int Codigo) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Cidade where c.Siglauf == UF && c.Codcidade==Codigo select c.Desccidade).FirstOrDefault();
                 return Sql;
             }
         }
 
         public string Retorna_Bairro(string UF, int Cidade,int Bairro) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Bairro where c.Siglauf == UF && c.Codcidade == Cidade && c.Codbairro==Bairro select c.Descbairro).FirstOrDefault();
                 return Sql;
             }
         }
 
         public Exception Incluir_Pais(Pais reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int cntCod = (from c in db.Pais select c).Count();
                 int maxCod = 1;
                 if(cntCod>0)
@@ -170,7 +170,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Alterar_Pais(Pais reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int nCodPais = reg.Id_pais;
                 Pais b = db.Pais.First(i => i.Id_pais == nCodPais);
                 b.Nome_pais = reg.Nome_pais;
@@ -184,7 +184,7 @@ namespace GTI_Dal.Classes {
         }
 
         public Exception Excluir_Pais(Pais reg) {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 int nCodPais = reg.Id_pais;
                 Pais b = db.Pais.First(i =>  i.Id_pais == nCodPais);
                 try {
@@ -199,7 +199,7 @@ namespace GTI_Dal.Classes {
 
 
         public List<Logradouro> Lista_Logradouro(String Filter = "") {
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from l in db.Logradouro
                            select new { l.Codlogradouro, l.Endereco });
                 if (!String.IsNullOrEmpty(Filter))
@@ -228,7 +228,7 @@ namespace GTI_Dal.Classes {
                 bPar = false; bImpar = true;
             }
 
-            using (var db = new GTI_Context(_connection)) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Cep where c.Codlogr == CodigoLogradouro select c).ToList();
                 if (Sql.Count == 0)
                     nCep = 0;
