@@ -64,17 +64,33 @@ namespace GTI_Web.Pages {
                 }
 
                 lblMsg.Text = "";
+                bool bCompetenciaOK = true;
                 Sistema_bll sistema_Class = new Sistema_bll("GTIconnection");
                 List<int> _codigos = sistema_Class.Lista_Codigos_Documento(sCPF != "" ? sCPF : sCNPJ, sCPF != "" ?TipoDocumento.Cpf:TipoDocumento.Cnpj);
                 if (_codigos.Count > 0) {
                     if (txtimgcode.Text != Session["randomStr"].ToString())
                         lblMsg.Text = "Código da imagem inválido";
-                    else
+                    else {
+                        Empresa_bll empresa_Class = new Empresa_bll("GTIconnection");
+                        foreach (int _codigo in _codigos) {
+                            if (_codigo >= 100000 && _codigo < 500000) {
+                                string Regime = empresa_Class.RegimeEmpresa(_codigo);
+                                if (Regime == "V") {
+                                    //Verifica competência en
+                                    Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
+                                    int _holes = tributario_Class.Competencias_Nao_Encerradas(tributario_Class.Resumo_CompetenciaISS(_codigo));
+                                    if (_holes != 0)
+                                        bCompetenciaOK = false;
+                                }
+                            }
+                        }
+                    }
+
+                    if(bCompetenciaOK)
                         PrintReport(_codigos);
+                } else {
+                    lblMsg.Text = "Não há inscrições cadastradas com este CPF/CNPJ.";
                 }
-                //else {
-                //    lblMsg.Text = "O CPF/CNPJ digitado não retornou nenuma inscrição cadastrada.";
-                //}
             }
         }
 
@@ -173,6 +189,39 @@ namespace GTI_Web.Pages {
                     crystalReport.Dispose();
                 }
 
+            } else {
+                if (_tipo_Certidao == RetornoCertidaoDebito.Positiva) {
+                    int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Debito);
+                    int _ano_certidao = DateTime.Now.Year;
+
+                    string _tributo = "";
+                    foreach (Certidao_debito_documento item in _lista_certidao) {
+                        if(item._Tributo!="")
+                            _tributo +=  item._Tributo +  " (IM:" + item._Codigo + ")" + ",";
+                    }
+                    _tributo = _tributo.Substring(0, _tributo.Length - 1);
+
+                    crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoDocumentoP.rpt"));
+                    crystalReport.SetParameterValue("NUMCERTIDAO", _numero_certidao.ToString("00000") + "/" + _ano_certidao.ToString("0000"));
+                    crystalReport.SetParameterValue("DATAEMISSAO", DateTime.Now.ToString("dd/MM/yyyy") + " às " + DateTime.Now.ToString("HH:mm:ss"));
+                    crystalReport.SetParameterValue("CONTROLE", _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _lista_certidao[0]._Codigo.ToString() + "-IP");
+                    crystalReport.SetParameterValue("NOME", _lista_certidao[0]._Nome);
+                    crystalReport.SetParameterValue("TRIBUTO", _tributo);
+                    crystalReport.SetParameterValue("DOC", optCPF.Checked ? txtCPF.Text : txtCNPJ.Text);
+
+                    HttpContext.Current.Response.Buffer = false;
+                    HttpContext.Current.Response.ClearContent();
+                    HttpContext.Current.Response.ClearHeaders();
+
+                    try {
+                        crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true, "certidao" + _numero_certidao.ToString() + _ano_certidao.ToString());
+                    } catch  {
+                    } finally {
+                        crystalReport.Close();
+                        crystalReport.Dispose();
+                    }
+
+                }
             }
 
 

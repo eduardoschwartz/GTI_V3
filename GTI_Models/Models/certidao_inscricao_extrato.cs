@@ -4,26 +4,30 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GTI_Models.Models {
     public class Certidao_inscricao_extrato {
-        [Key]
-        [Column(Order = 1)]
         public string Id { get; set; }
         [Key]
+        [Column(Order = 1)]
+        public int Numero_certidao { get; set; }
+        [Key]
         [Column(Order = 2)]
-        public int Codigo { get; set; }
+        public short Ano_certidao { get; set; }
         [Key]
         [Column(Order = 3)]
-        public short Ano { get; set; }
+        public int Codigo { get; set; }
         [Key]
         [Column(Order = 4)]
-        public short Lancamento_Codigo { get; set; }
+        public short Ano { get; set; }
         [Key]
         [Column(Order = 5)]
-        public byte Sequencia { get; set; }
+        public short Lancamento_Codigo { get; set; }
         [Key]
         [Column(Order = 6)]
-        public byte Parcela { get; set; }
+        public byte Sequencia { get; set; }
         [Key]
         [Column(Order = 7)]
+        public byte Parcela { get; set; }
+        [Key]
+        [Column(Order = 8)]
         public byte Complemento { get; set; }
         public string Lancamento_Descricao { get; set; }
         public DateTime Data_Vencimento { get; set; }

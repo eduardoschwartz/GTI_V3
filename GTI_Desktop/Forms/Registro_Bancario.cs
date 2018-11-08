@@ -115,7 +115,7 @@ namespace GTI_Desktop.Forms {
             string _valor_IOF = "0".PadLeft(15, '0'),_valor_abatimento= "0".PadLeft(15, '0'),_identifica_titulo,_codigo_protesto="3",_dias_protesto="00",_codigo_baixa="0";
             string _dias_baixa = "000", _codigo_moeda = "09",_numero_contrato= "19663033".PadLeft(10,'0'),_uso_livre=" ",_segmentoP,_segmentoQ;
 
-            List<Carta_cobranca> Lista = tributario_Class.Lista_Carta_Cobranca(1);
+            List<Carta_cobranca> Lista = tributario_Class.Lista_Carta_Cobranca(2);
             _qtde_registros = Lista.Count;
             foreach (Carta_cobranca item in Lista) {
                 //*** Segmento P ***

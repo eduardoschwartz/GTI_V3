@@ -127,7 +127,7 @@ namespace GTI_Web.Pages {
 
             Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
             int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Debito);
-            int _ano_certidao = DateTime.Now.Year;
+            short _ano_certidao = (short)DateTime.Now.Year;
 
 
             if (ExtratoCheckBox.Checked) {
@@ -233,7 +233,7 @@ namespace GTI_Web.Pages {
 
                 try {
                     crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true, "certidao" + _numero_certidao.ToString() + _ano_certidao.ToString());
-                } catch (Exception ex2) {
+                } catch  {
                 } finally {
                     crystalReport.Close();
                     crystalReport.Dispose();
@@ -264,10 +264,10 @@ namespace GTI_Web.Pages {
                             lblMsg.Text = "Código de validação inválido.";
                         else {
                             sTipo = sCod.Substring(sCod.Length - 2, 2);
-                            if (sTipo == "IE" || sTipo == "IA" ) {
+                            if (sTipo == "IE" || sTipo == "IA" || sTipo== "XA" || sTipo == "XE") {
                                 Certidao_inscricao dados = Valida_Dados(nNumero, nAno, nCodigo);
                                 if (dados != null)
-                                    Exibe_Certidao_Inscricao(dados);
+                                    Exibe_Certidao_Inscricao(dados,sTipo);
                                 else
                                     lblMsg.Text = "Certidão não cadastrada.";
                             } else {
@@ -287,11 +287,35 @@ namespace GTI_Web.Pages {
             return dados;
         }
 
-        private void Exibe_Certidao_Inscricao(Certidao_inscricao dados) {
+        private void Exibe_Certidao_Inscricao(Certidao_inscricao dados, string Tipo) {
             lblMsg.Text = "";
 
             ReportDocument crystalReport = new ReportDocument();
-            crystalReport.Load(Server.MapPath("~/Report/ComprovanteInscricaoValida.rpt"));
+
+            TableLogOnInfos crtableLogoninfos = new TableLogOnInfos();
+            TableLogOnInfo crtableLogoninfo = new TableLogOnInfo();
+            ConnectionInfo crConnectionInfo = new ConnectionInfo();
+            Tables CrTables;
+
+            if (Tipo == "IE" || Tipo == "IA")
+                crystalReport.Load(Server.MapPath("~/Report/ComprovanteInscricaoValida.rpt"));
+            else {
+                crystalReport.Load(Server.MapPath("~/Report/CertidaoInscricaoExtratoValida.rpt"));
+                crystalReport.RecordSelectionFormula = "{certidao_inscricao_extrato.ano_certidao}=" + dados.Ano +  " and {certidao_inscricao_extrato.numero_certidao}=" +dados.Numero ;
+            }
+
+            crConnectionInfo.ServerName = "200.232.123.115";
+            crConnectionInfo.DatabaseName = "Tributacao";
+            crConnectionInfo.UserID = "gtisys";
+            crConnectionInfo.Password = "everest";
+
+            CrTables = crystalReport.Database.Tables;
+            foreach (CrystalDecisions.CrystalReports.Engine.Table CrTable in CrTables) {
+                crtableLogoninfo = CrTable.LogOnInfo;
+                crtableLogoninfo.ConnectionInfo = crConnectionInfo;
+                CrTable.ApplyLogOnInfo(crtableLogoninfo);
+            }
+
             crystalReport.SetParameterValue("NUMCERTIDAO", dados.Numero.ToString("00000") + "/" + dados.Ano.ToString("0000"));
             crystalReport.SetParameterValue("DATAEMISSAO", Convert.ToDateTime(dados.Data_emissao).ToString("dd/MM/yyyy") + " às " + Convert.ToDateTime(dados.Data_emissao).ToString("HH:mm:ss"));
             crystalReport.SetParameterValue("CONTROLE", dados.Numero.ToString("00000") + dados.Ano.ToString("0000") + "/" + dados.Cadastro.ToString() + "-" + "IE");
@@ -333,7 +357,7 @@ namespace GTI_Web.Pages {
             }
         }
 
-        private string Grava_Extrato_Pagamento(int Codigo, int NumeroCertidao,int AnoCertidao,string Sufixo) {
+        private string Grava_Extrato_Pagamento(int Codigo, int NumeroCertidao,short AnoCertidao,string Sufixo) {
             string Controle = NumeroCertidao.ToString("00000") + AnoCertidao.ToString("0000") + "/" + Codigo.ToString() + "-" + Sufixo;
             Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
             List<SpExtrato> ListaTributo = tributario_Class.Lista_Extrato_Tributo(Codigo, 1980, 2050, 0, 99, 0, 99, 0, 999, 0, 99, 0, 99, DateTime.Now, "Web");
@@ -342,6 +366,8 @@ namespace GTI_Web.Pages {
             foreach (SpExtrato item in ListaParcela.Where(x=>(x.Codlancamento==2 ||x.Codlancamento==6 || x.Codlancamento==14) && x.Statuslanc<3) ) {
                 Certidao_inscricao_extrato reg = new Certidao_inscricao_extrato();
                 reg.Id = Controle;
+                reg.Numero_certidao = NumeroCertidao;
+                reg.Ano_certidao = AnoCertidao;
                 reg.Ano = item.Anoexercicio;
                 reg.Codigo = item.Codreduzido;
                 reg.Complemento = item.Codcomplemento;

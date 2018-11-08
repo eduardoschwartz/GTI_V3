@@ -107,7 +107,9 @@ namespace UIWeb.Pages {
                     tributario_Class.Insert_Boleto_Comercio_Eletronico(Reg);
             }
         }
-        
 
+        protected void btGerar_Click(object sender, EventArgs e) {
+
+        }
     }
 }
