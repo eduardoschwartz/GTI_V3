@@ -146,6 +146,7 @@
                             <asp:Button ID="btSelectAll" runat="server" OnClick="btSelectAll_Click" Text="Selecionar todos" class="button1" />
                             &nbsp;&nbsp;
                             <asp:Button ID="btSelectNone" runat="server" class="button1" OnClick="btSelectNone_Click" Text="Desmarcar todos" />
+                            <asp:Label ID="PlanoLabel" runat="server" Text="0" Visible="False"></asp:Label>
                         </td>
                     </tr>
                 </table>

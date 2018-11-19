@@ -414,6 +414,7 @@ namespace UIWeb.Pages {
                 }
             }
 
+            PlanoLabel.Text = nPlano.ToString();
             foreach (var item in ListaParcela) {
                 if (item.Statuslanc == 3 || item.Statuslanc == 19 || item.Statuslanc == 38 || item.Statuslanc == 39 ) {
                     DebitoStructure reg = new DebitoStructure();
@@ -486,7 +487,7 @@ namespace UIWeb.Pages {
             bool bAnoAnterior = false;
             Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
             bRefis = tributario_Class.IsRefis();
-
+            nPlano = Convert.ToInt32(PlanoLabel.Text);
             lblmsg.Text = "";
             lblMsg2.Text = "";
             if (bGerado) {
@@ -612,7 +613,6 @@ namespace UIWeb.Pages {
 
                 }
             }
-        
 
             decimal nValorGuia = 0;
             decimal.TryParse(TableTotal.Rows[2].Cells[6].Text, out nValorGuia);
@@ -622,6 +622,19 @@ namespace UIWeb.Pages {
             regDoc.Emissor = "Gti.Web/Dam.Reg";
             regDoc.Datadocumento = DateTime.Now;
             regDoc.Registrado = true;
+            regDoc.Percisencao = 0;
+            if (bRefis) {
+                if(nPlano==26)
+                    regDoc.Percisencao = 100;
+                else {
+                    if(nPlano==27)
+                        regDoc.Percisencao = 90;
+                    else {
+                        if (nPlano == 28)
+                            regDoc.Percisencao = 80;
+                    }
+                }
+            }
             int NumDoc= tributario_Class.Insert_Documento(regDoc);
            
             foreach (DebitoStructure Lanc in lstExtrato) {

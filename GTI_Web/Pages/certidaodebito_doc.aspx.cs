@@ -3,12 +3,10 @@ using GTI_Bll.Classes;
 using GTI_Models;
 using GTI_Models.Models;
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Web;
 using UIWeb;
 using static GTI_Models.modelCore;
-using CrystalDecisions.Shared;
 
 namespace GTI_Web.Pages {
     public partial class certidaodebito_doc : System.Web.UI.Page {
@@ -86,8 +84,10 @@ namespace GTI_Web.Pages {
                         }
                     }
 
-                    if(bCompetenciaOK)
+                    if (bCompetenciaOK)
                         PrintReport(_codigos);
+                    else
+                        lblMsg.Text = "Existem competências não encerradas.";
                 } else {
                     lblMsg.Text = "Não há inscrições cadastradas com este CPF/CNPJ.";
                 }
@@ -165,50 +165,47 @@ namespace GTI_Web.Pages {
                 }
             }
 
-            
-            if (_tipo_Certidao == RetornoCertidaoDebito.Negativa) {
-                int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Debito);
-                int _ano_certidao = DateTime.Now.Year;
+            string _tributo = "";
+            foreach (Certidao_debito_documento item in _lista_certidao) {
+                if (item._Tributo != "")
+                    _tributo += item._Tributo + " (IM:" + item._Codigo + ")" + ",";
+            }
+            if(_tributo.Length>0)
+                _tributo = _tributo.Substring(0, _tributo.Length - 1);
+            int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Debito);
+            int _ano_certidao = DateTime.Now.Year;
+            Certidao_debito cert = new Certidao_debito();
+            cert.Codigo = 0;
+            cert.Ano = (short)_ano_certidao;
+            cert.Ret = nRet;
+            cert.Numero = _numero_certidao;
+            cert.Datagravada = DateTime.Now;
+            cert.Inscricao = "";
+            cert.Nome = _lista_certidao[0]._Nome;
+            cert.Logradouro = "";
+            cert.Numimovel = 0;
+            cert.Bairro = "";
+            cert.Cidade = "";
+            cert.UF = "";
+            cert.Processo = "";
+            cert.Dataprocesso = dDataProc;
+            cert.Atendente = "GTI.Web";
+            cert.Cpf = txtCPF.Text;
+            cert.Cnpj = txtCNPJ.Text;
+            cert.Atividade = "";
+            cert.Lancamento = _tributo;
+            Exception ex = tributario_Class.Insert_Certidao_Debito(cert);
 
-                crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoDocumentoN.rpt"));
-                crystalReport.SetParameterValue("NUMCERTIDAO", _numero_certidao.ToString("00000") + "/" + _ano_certidao.ToString("0000"));
-                crystalReport.SetParameterValue("DATAEMISSAO", DateTime.Now.ToString("dd/MM/yyyy") + " às " + DateTime.Now.ToString("HH:mm:ss"));
-                crystalReport.SetParameterValue("CONTROLE", _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _lista_certidao[0]._Codigo.ToString() + "-IN");
-                crystalReport.SetParameterValue("NOME", _lista_certidao[0]._Nome);
-                crystalReport.SetParameterValue("DOC", optCPF.Checked?txtCPF.Text:txtCNPJ.Text);
-
-                HttpContext.Current.Response.Buffer = false;
-                HttpContext.Current.Response.ClearContent();
-                HttpContext.Current.Response.ClearHeaders();
-
-                try {
-                    crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true, "certidao" + _numero_certidao.ToString() + _ano_certidao.ToString());
-                } catch {
-                } finally {
-                    crystalReport.Close();
-                    crystalReport.Dispose();
-                }
-
+            if (ex != null) {
+                throw ex;
             } else {
-                if (_tipo_Certidao == RetornoCertidaoDebito.Positiva) {
-                    int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Debito);
-                    int _ano_certidao = DateTime.Now.Year;
-
-                    string _tributo = "";
-                    foreach (Certidao_debito_documento item in _lista_certidao) {
-                        if(item._Tributo!="")
-                            _tributo +=  item._Tributo +  " (IM:" + item._Codigo + ")" + ",";
-                    }
-                    _tributo = _tributo.Substring(0, _tributo.Length - 1);
-
-                    crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoDocumentoP.rpt"));
+                if (_tipo_Certidao == RetornoCertidaoDebito.Negativa) {
+                    crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoDocumentoN.rpt"));
                     crystalReport.SetParameterValue("NUMCERTIDAO", _numero_certidao.ToString("00000") + "/" + _ano_certidao.ToString("0000"));
                     crystalReport.SetParameterValue("DATAEMISSAO", DateTime.Now.ToString("dd/MM/yyyy") + " às " + DateTime.Now.ToString("HH:mm:ss"));
-                    crystalReport.SetParameterValue("CONTROLE", _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _lista_certidao[0]._Codigo.ToString() + "-IP");
+                    crystalReport.SetParameterValue("CONTROLE", _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _lista_certidao[0]._Codigo.ToString() + "-IN");
                     crystalReport.SetParameterValue("NOME", _lista_certidao[0]._Nome);
-                    crystalReport.SetParameterValue("TRIBUTO", _tributo);
                     crystalReport.SetParameterValue("DOC", optCPF.Checked ? txtCPF.Text : txtCNPJ.Text);
-
                     HttpContext.Current.Response.Buffer = false;
                     HttpContext.Current.Response.ClearContent();
                     HttpContext.Current.Response.ClearHeaders();
@@ -220,23 +217,58 @@ namespace GTI_Web.Pages {
                         crystalReport.Close();
                         crystalReport.Dispose();
                     }
+                } else {
+                    if (_tipo_Certidao == RetornoCertidaoDebito.Positiva) {
+                        crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoDocumentoP.rpt"));
+                        crystalReport.SetParameterValue("NUMCERTIDAO", _numero_certidao.ToString("00000") + "/" + _ano_certidao.ToString("0000"));
+                        crystalReport.SetParameterValue("DATAEMISSAO", DateTime.Now.ToString("dd/MM/yyyy") + " às " + DateTime.Now.ToString("HH:mm:ss"));
+                        crystalReport.SetParameterValue("CONTROLE", _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _lista_certidao[0]._Codigo.ToString() + "-IP");
+                        crystalReport.SetParameterValue("NOME", _lista_certidao[0]._Nome);
+                        crystalReport.SetParameterValue("TRIBUTO", _tributo);
+                        crystalReport.SetParameterValue("DOC", optCPF.Checked ? txtCPF.Text : txtCNPJ.Text);
+                        HttpContext.Current.Response.Buffer = false;
+                        HttpContext.Current.Response.ClearContent();
+                        HttpContext.Current.Response.ClearHeaders();
 
+                        try {
+                            crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true, "certidao" + _numero_certidao.ToString() + _ano_certidao.ToString());
+                        } catch  {
+                        } finally {
+                            crystalReport.Close();
+                            crystalReport.Dispose();
+                        }
+                    } else {
+                        if (_tipo_Certidao == RetornoCertidaoDebito.NegativaPositiva) {
+                            crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoDocumentoPN.rpt"));
+                            crystalReport.SetParameterValue("NUMCERTIDAO", _numero_certidao.ToString("00000") + "/" + _ano_certidao.ToString("0000"));
+                            crystalReport.SetParameterValue("DATAEMISSAO", DateTime.Now.ToString("dd/MM/yyyy") + " às " + DateTime.Now.ToString("HH:mm:ss"));
+                            crystalReport.SetParameterValue("CONTROLE", _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _lista_certidao[0]._Codigo.ToString() + "-IS");
+                            crystalReport.SetParameterValue("NOME", _lista_certidao[0]._Nome);
+                            crystalReport.SetParameterValue("TRIBUTO", _tributo);
+                            crystalReport.SetParameterValue("DOC", optCPF.Checked ? txtCPF.Text : txtCNPJ.Text);
+                            HttpContext.Current.Response.Buffer = false;
+                            HttpContext.Current.Response.ClearContent();
+                            HttpContext.Current.Response.ClearHeaders();
+
+                            try {
+                                crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true, "certidao" + _numero_certidao.ToString() + _ano_certidao.ToString());
+                            } catch {
+                            } finally {
+                                crystalReport.Close();
+                                crystalReport.Dispose();
+                            }
+                        }
+                    }
                 }
             }
-
-
 
 SEM_INSCRICAO:;
 
         }
 
 
-
-
         protected void ValidarButton_Click(object sender, EventArgs e) {
-
         }
-
 
     }
 

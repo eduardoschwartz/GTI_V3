@@ -82,6 +82,17 @@ namespace GTI_Bll.Classes {
         }
 
         /// <summary>
+        /// Verifica se a empresa pode tirar alvará na Internet
+        /// </summary>
+        /// <param name="nCodigo"></param>
+        /// <returns></returns>
+        public bool Empresa_tem_Alvara(int nCodigo) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Empresa_tem_Alvara(nCodigo);
+
+        }
+
+        /// <summary>
         /// Retorna o regime da empresa
         /// </summary>
         /// <param name="nCodigo"></param>

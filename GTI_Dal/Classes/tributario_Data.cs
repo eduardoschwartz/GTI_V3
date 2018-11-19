@@ -921,12 +921,13 @@ namespace GTI_Dal.Classes {
                 try {
                     maxCod = db.Numdocumento.Max(u => u.numdocumento);
                     maxCod++;
-                    db.Database.ExecuteSqlCommand("INSERT INTO numdocumento(numdocumento,datadocumento,valorguia,emissor,registrado) VALUES(@numdocumento,@datadocumento,@valorguia,@emissor,@registrado)",
+                    db.Database.ExecuteSqlCommand("INSERT INTO numdocumento(numdocumento,datadocumento,valorguia,emissor,registrado,percisencao) VALUES(@numdocumento,@datadocumento,@valorguia,@emissor,@registrado,@percisencao)",
                         new SqlParameter("@numdocumento", maxCod),
                         new SqlParameter("@datadocumento", Reg.Datadocumento),
                         new SqlParameter("@valorguia", Reg.Valorguia),
                         new SqlParameter("@emissor", Reg.Emissor),
-                        new SqlParameter("@registrado", Reg.Registrado));
+                        new SqlParameter("@registrado", Reg.Registrado),
+                        new SqlParameter("@percisencao", Reg.Percisencao));
                 } catch (Exception ex) {
                     throw (ex.InnerException);
                 }
@@ -1539,12 +1540,15 @@ namespace GTI_Dal.Classes {
         }
 
         public int Competencias_Nao_Encerradas(List<CompetenciaISS>Lista) {
-            int nCount = 0;
+            int nCount = 0, nFill = 0;
             if (Lista == null)
                 return 0;
             for (int i = 0; i < Lista.Count; i++) {
                 if (Lista[i].Encerrada == false)
-                    nCount++;
+                    if (Lista[i].Mes_Competencia == DateTime.Now.Month - 1 && DateTime.Now.Day < 16)
+                        nFill++; //just BS
+                    else
+                        nCount++;
             }
             return nCount;
         }

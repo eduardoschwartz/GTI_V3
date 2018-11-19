@@ -13,7 +13,7 @@ namespace GTI_Desktop.Forms {
         string _connection = gtiCore.Connection_Name();
         string _path = @"c:\cadastro\bin\";
         int _ano = 2019;
-        int _documento = 17020168;
+        int _documento = 17032686;
         decimal _ipca = (decimal)3.4128;
  
         private enum Tipo_imposto {
@@ -533,6 +533,10 @@ namespace GTI_Desktop.Forms {
             List<Mobiliarioatividadevs2> ListaEmpresas = empresa_Class.Lista_Empresas_Vigilancia_Sanitaria();
             List<Mobiliarioatividadevs2> ListaVS = new List<Mobiliarioatividadevs2>();
             foreach (Mobiliarioatividadevs2 item in ListaEmpresas) {
+                if (item.Codmobiliario != 303947) {
+                    goto PROXIMO;
+                }
+
                 bool _find = false;
                 for (int i = 0; i < ListaVS.Count; i++) {
                     if (item.Codmobiliario == ListaVS[i].Codmobiliario) {
@@ -546,9 +550,10 @@ namespace GTI_Desktop.Forms {
                     Mobiliarioatividadevs2 reg = new Mobiliarioatividadevs2();
                     reg.Codmobiliario = item.Codmobiliario;
                     reg.Qtde = item.Qtde;
-                    reg.Valor = item.Valor;
+                    reg.Valor = item.Valor * item.Qtde ;
                     ListaVS.Add(reg);
                 }
+PROXIMO:;
             }
 
             int _total = ListaVS.Count, _pos = 1;
@@ -556,6 +561,7 @@ namespace GTI_Desktop.Forms {
             string _vencimento0="", _vencimento1="", _vencimento2="", _vencimento3="", _vencimento4="";
 
             foreach (Mobiliarioatividadevs2 item in ListaVS) {
+               
                 if (_pos % 10 == 0) {
                     PBar.Value = _pos * 100 / _total;
                     PBar.Update();
@@ -569,7 +575,7 @@ namespace GTI_Desktop.Forms {
                     fs1.WriteLine(_linha);
                     decimal _valor = item.Valor/_qtde_parcelas, _valor_unica = (item.Valor - (item.Valor * (decimal)0.05)) ;
                     decimal _valor_parcela = _parcela > 0 ? _valor : _valor_unica;
-                    _valor_parcela = _valor_parcela * item.Qtde;
+                    //_valor_parcela = _valor_parcela ;
                     _linha = item.Codmobiliario + "#" + _ano + "#13#0#" + _parcela + "#0#25#" +  _valor_parcela.ToString("#0.00") ;
                     fs2.WriteLine(_linha);
                     _linha = item.Codmobiliario + "#" + _ano + "#13#0#" + _parcela + "#0#" + _documento;
