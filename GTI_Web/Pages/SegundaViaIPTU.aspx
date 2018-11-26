@@ -10,9 +10,6 @@
         .auto-style3 {
             width: 333px;
         }
-        .auto-style4 {
-            width: 433px;
-        }
         .auto-style5 {
             width: 99px;
         }
@@ -57,7 +54,7 @@
             <br />
             &nbsp;<br />
             
-            Emissão de segunda via do carnê de IPTU - 2018<br />
+            Emissão de segunda via do carnê de IPTU - 2019<br />
             <br />
             <asp:Panel ID="Panel2" runat="server" ForeColor="Black" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" Width="603px">
                 <table style="width: 100%;">

@@ -1,11 +1,13 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using GTI_Bll.Classes;
+using GTI_Models;
 using GTI_Models.Models;
 
 using System;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
+using UIWeb;
 
 namespace GTI_Web.Pages {
     public partial class alvara_funcionamento : System.Web.UI.Page {
@@ -16,31 +18,53 @@ namespace GTI_Web.Pages {
         private void EmiteAlvara(int Codigo) {
 
             lblmsg.Text = "";
-            string sTipo = "";
+            Empresa_bll empresa_Class = new Empresa_bll("GTIconnection");
+            EmpresaStruct reg = empresa_Class.Retorna_Empresa(Codigo);
 
-            Imovel_bll imovel_Class = new Imovel_bll("GTIconnection");
+            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
+            int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Alvara);
+            int _ano_certidao = DateTime.Now.Year;
 
+            Alvara_funcionamento alvara = new Alvara_funcionamento();
+            alvara.Ano = (short)_ano_certidao;
+            alvara.Numero = _numero_certidao;
+            alvara.Controle = _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + Codigo.ToString() + "-AF";
+            alvara.Codigo = Codigo;
+            alvara.Razao_social = reg.Razao_social;
+
+            string sDoc = "";    
+            if (reg.Cpf_cnpj.Length == 11)
+                sDoc = Convert.ToInt64(gtiCore.RetornaNumero(reg.Cpf_cnpj)).ToString(@"000\.000\.000\-00");
+            else
+                sDoc = Convert.ToInt64(gtiCore.RetornaNumero(reg.Cpf_cnpj)).ToString(@"00\.000\.000\/0000\-00");
+
+            alvara.Documento = sDoc;
+            alvara.Endereco = reg.Endereco_nome + ", " + reg.Numero.ToString() + " " + reg.Complemento;
+            alvara.Bairro = reg.Bairro_nome;
+            alvara.Atividade = reg.Atividade_extenso;
+            alvara.Horario = String.IsNullOrWhiteSpace(reg.Horario_extenso) ? reg.Horario_Nome : reg.Horario_extenso;
+            alvara.Validade = Convert.ToDateTime("30/06/2019");
+            alvara.Data_Gravada = DateTime.Now;
+
+            Exception ex = tributario_Class.Insert_Alvara_Funcionamento(alvara);
+            
             ReportDocument crystalReport = new ReportDocument();
-            crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoValida.rpt"));
-            crystalReport.SetParameterValue("NUMCERTIDAO", "");
-            crystalReport.SetParameterValue("DATAEMISSAO", "");
-            crystalReport.SetParameterValue("CONTROLE", "");
-            crystalReport.SetParameterValue("ENDERECO","");
-            crystalReport.SetParameterValue("CADASTRO", "");
-            crystalReport.SetParameterValue("NOME", "");
-            crystalReport.SetParameterValue("INSCRICAO", "");
-            crystalReport.SetParameterValue("BAIRRO", "");
-            crystalReport.SetParameterValue("TIPO", sTipo);
-            crystalReport.SetParameterValue("PROCESSO", "");
-            crystalReport.SetParameterValue("ATIVIDADE", "");
-            crystalReport.SetParameterValue("TRIBUTO", "");
+            crystalReport.Load(Server.MapPath("~/Report/AlvaraFuncionamento.rpt"));
+            crystalReport.SetParameterValue("CADASTRO", Codigo.ToString());
+            crystalReport.SetParameterValue("NOME", alvara.Razao_social);
+            crystalReport.SetParameterValue("AUTENTICIDADE", alvara.Controle);
+            crystalReport.SetParameterValue("DOC", alvara.Documento);
+            crystalReport.SetParameterValue("ENDERECO", alvara.Endereco);
+            crystalReport.SetParameterValue("BAIRRO", alvara.Bairro);
+            crystalReport.SetParameterValue("ATIVIDADE", alvara.Atividade);
+            crystalReport.SetParameterValue("HORARIO", alvara.Horario);
 
             HttpContext.Current.Response.Buffer = false;
             HttpContext.Current.Response.ClearContent();
             HttpContext.Current.Response.ClearHeaders();
 
             try {
-                crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true, "comp"+ "");
+                crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true,"Alvara"+ Codigo.ToString("000000"));
             } catch {
             } finally {
                 crystalReport.Close();
@@ -50,8 +74,47 @@ namespace GTI_Web.Pages {
         }
 
         protected void ValidarButton_Click(object sender, EventArgs e) {
-
+            string sCod = Codigo.Text;
+            string sTipo = "";
+            lblmsg.Text = "";
+            if (sCod.Trim().Length != 19)
+                lblmsg.Text = "Código de validação inválido.";
+            else {
+                Empresa_bll empresa_Class = new Empresa_bll("GTIconnection");
+                Alvara_funcionamento dados = empresa_Class.Alvara_Funcionamento_gravado(sCod);
+                if (dados != null)
+                    Exibe_Validacao(dados);
+                else
+                    lblmsg.Text = "Alvará não cadastrada.";
+            }
         }
+
+        private void Exibe_Validacao(Alvara_funcionamento alvara) {
+            ReportDocument crystalReport = new ReportDocument();
+            crystalReport.Load(Server.MapPath("~/Report/AlvaraFuncionamentoValida.rpt"));
+            crystalReport.SetParameterValue("CADASTRO", alvara.Codigo.ToString());
+            crystalReport.SetParameterValue("NOME", alvara.Razao_social);
+            crystalReport.SetParameterValue("AUTENTICIDADE", alvara.Controle);
+            crystalReport.SetParameterValue("DOC", alvara.Documento);
+            crystalReport.SetParameterValue("ENDERECO", alvara.Endereco);
+            crystalReport.SetParameterValue("BAIRRO", alvara.Bairro);
+            crystalReport.SetParameterValue("ATIVIDADE", alvara.Atividade);
+            crystalReport.SetParameterValue("HORARIO", alvara.Horario);
+
+            HttpContext.Current.Response.Buffer = false;
+            HttpContext.Current.Response.ClearContent();
+            HttpContext.Current.Response.ClearHeaders();
+
+            try {
+                crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true, "Alvara" + alvara.Codigo.ToString("000000"));
+            } catch {
+            } finally {
+                crystalReport.Close();
+                crystalReport.Dispose();
+            }
+        }
+
+
 
         protected void btPrint_Click(object sender, EventArgs e) {
             int Num = 0;
@@ -73,9 +136,32 @@ namespace GTI_Web.Pages {
                             lblmsg.Text = "Esta empresa não pode emitir alvará pela internet.";
                             return;
                         } else {
-                            lblmsg.Text = "OK";
-                            return;
+                            bool bSuspenso = empresa_Class.EmpresaSuspensa(Num);
+                            if (bSuspenso) {
+                                lblmsg.Text = "Esta empresa encontra-se suspensa.";
+                                return;
+                            } else {
+                                EmpresaStruct empresa = empresa_Class.Retorna_Empresa(Num);
+                                if (empresa.Data_Encerramento != null) {
+                                    lblmsg.Text = "Esta empresa encontra-se encerrada.";
+                                    return;
+                                } else {
+                                    bool bIsentoTaxa;
+                                    if (empresa.Isento_taxa == 1)
+                                        bIsentoTaxa = true;
+                                    else
+                                        bIsentoTaxa = false;
 
+                                    if (!bIsentoTaxa) {
+                                        int _qtde = empresa_Class.Qtde_Parcelas_TLL_Vencidas(Num);
+                                        if (_qtde > 0) {
+                                            lblmsg.Text = "A taxa de licença não esta paga, favor dirigir-se ao Sistema Prático da Prefeitura para regularizar.";
+                                            return;
+                                        }
+                                    }
+                                    EmiteAlvara(Num);
+                                }
+                            }
                         }
                     }
                 }

@@ -781,6 +781,18 @@ namespace GTI_Bll.Classes {
         }
 
         /// <summary>
+        /// Insere na tabela alvara_funcionamento
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Alvara_Funcionamento(Alvara_funcionamento Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Alvara_Funcionamento(Reg);
+            return ex;
+        }
+
+
+        /// <summary>
         /// Exclui uma remessa de Cartas de cobrança
         /// </summary>
         /// <param name="Remessa"></param>

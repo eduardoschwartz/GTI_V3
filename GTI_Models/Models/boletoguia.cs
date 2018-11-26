@@ -38,5 +38,7 @@ namespace GTI_Models.Models {
         public string Numbarra2c { get; set; }
         public string Numbarra2d { get; set; }
         public string Desclanc { get; set; }
+        public string Nossonumero { get; set; }
+        public string Parcela { get; set; }
     }
 }

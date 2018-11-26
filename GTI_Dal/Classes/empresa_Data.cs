@@ -61,6 +61,15 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public int Qtde_Parcelas_TLL_Vencidas(int Codigo) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                int _qtde = db.Debitoparcela.Count(d => d.Codreduzido == Codigo && d.Anoexercicio <= DateTime.Now.Year &&
+                             d.Codlancamento == 6 && d.Numparcela > 0 && d.Statuslanc == 3 && d.Datavencimento < DateTime.Now);
+                return _qtde;
+            }
+        }
+
+
         public List<int> Lista_Empresas_Suspensas() {
             List<int> Lista = new List<int>();
 
@@ -529,6 +538,15 @@ namespace GTI_Dal.Classes {
                 return Sql;
             }
         }
+
+        public Alvara_funcionamento Alvara_Funcionamento_gravado(string Controle) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var Sql = (from c in db.Alvara_funcionamento where c.Controle==Controle select c).FirstOrDefault();
+                return Sql;
+            }
+        }
+
+
 
         public Exception Incluir_escritorio(Escritoriocontabil reg) {
             using (GTI_Context db = new GTI_Context(_connection)) {

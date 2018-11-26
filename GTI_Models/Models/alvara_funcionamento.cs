@@ -10,6 +10,7 @@ namespace GTI_Models.Models {
         [Key]
         [Column(Order = 2)]
         public int Numero { get; set; }
+        public string Controle { get; set; }
         public int Codigo { get; set; }
         public string Razao_social { get; set; }
         public string Documento { get; set; }

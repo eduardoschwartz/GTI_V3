@@ -382,6 +382,18 @@
       <DependentUpon>wait.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\AlvaraFuncionamentoValida.cs">
+      <DependentUpon>AlvaraFuncionamentoValida.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Report\Carne_IPTU.cs">
+      <DependentUpon>Carne_IPTU.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Report\CertidaoDebitoDocumentoPN.cs">
       <DependentUpon>CertidaoDebitoDocumentoPN.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -396,6 +408,12 @@
     </Compile>
     <Compile Include="Report\CertidaoDebitoDocumentoN.cs">
       <DependentUpon>CertidaoDebitoDocumentoN.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Report\AlvaraFuncionamento.cs">
+      <DependentUpon>AlvaraFuncionamento.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
@@ -607,6 +625,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Report\AlvaraFuncionamentoValida.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AlvaraFuncionamentoValida.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\Carne_IPTU.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Carne_IPTU.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\CertidaoDebitoDocumentoPN.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CertidaoDebitoDocumentoPN.cs</LastGenOutput>
@@ -618,6 +644,10 @@
     <EmbeddedResource Include="Report\CertidaoDebitoDocumentoN.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CertidaoDebitoDocumentoN.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\AlvaraFuncionamento.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AlvaraFuncionamento.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\CertidaoInscricaoExtratoValida.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -631,6 +661,7 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ComprovanteInscricao.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\BoletoRegistrado.rdlc" />
     <EmbeddedResource Include="Report\SituacaoPagamento.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SituacaoPagamento.cs</LastGenOutput>

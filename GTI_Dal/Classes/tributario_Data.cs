@@ -818,7 +818,8 @@ namespace GTI_Dal.Classes {
                                                    equals new { p1 = dt.Codreduzido, p2 = dt.Anoexercicio, p3 = dt.Codlancamento, p4 = dt.Seqlancamento, p5 = dt.Numparcela, p6 = dt.Codcomplemento } into dpdt from dt in dpdt.DefaultIfEmpty()
                            join pd in db.Parceladocumento on new { p1 = dp.Codreduzido, p2 = dp.Anoexercicio, p3 = dp.Codlancamento, p4 = dp.Seqlancamento, p5 = dp.Numparcela, p6 = dp.Codcomplemento }
                                                       equals new { p1 = pd.Codreduzido, p2 = pd.Anoexercicio, p3 = pd.Codlancamento, p4 = pd.Seqlancamento, p5 = pd.Numparcela, p6 = pd.Codcomplemento } into dppd from pd in dppd.DefaultIfEmpty()
-                           where dp.Codreduzido == nCodigo && dp.Anoexercicio == nAno && dp.Codlancamento == 1 && dp.Seqlancamento == 0 && dp.Statuslanc == 3
+                           join nd in db.Numdocumento on pd.Numdocumento equals nd.numdocumento 
+                           where dp.Codreduzido == nCodigo && dp.Anoexercicio == nAno && dp.Codlancamento == 1 && dp.Seqlancamento == 0 && (dp.Statuslanc == 3 || dp.Statuslanc==18) && nd.Registrado==true
                            orderby new { dp.Numparcela, dp.Codcomplemento }
                            select new { dp.Codreduzido, dp.Anoexercicio, dp.Codlancamento, dp.Seqlancamento, dp.Numparcela, dp.Codcomplemento, dp.Datavencimento, dt.Valortributo, pd.Numdocumento });
 
@@ -1150,6 +1151,10 @@ namespace GTI_Dal.Classes {
                             else {
                                 if (tipo_certidao == TipoCertidao.Comprovante_Pagamento)
                                     Sql = Sql.Where(c => c.Nomeparam == "CPAGTO");
+                                else {
+                                    if (tipo_certidao == TipoCertidao.Alvara)
+                                        Sql = Sql.Where(c => c.Nomeparam == "ALVARA");
+                                }
                             }
                         }
                     }
@@ -1188,6 +1193,10 @@ namespace GTI_Dal.Classes {
                             else {
                                 if (tipo_certidao == TipoCertidao.Comprovante_Pagamento)
                                     p = db.Parametros.First(i => i.Nomeparam == "CPAGTO");
+                                else {
+                                    if (tipo_certidao == TipoCertidao.Alvara)
+                                        p = db.Parametros.First(i => i.Nomeparam == "ALVARA");
+                                }
                             }
                         }
                     }
@@ -1263,6 +1272,34 @@ namespace GTI_Dal.Classes {
                 return null;
             }
         }
+
+        public Exception Insert_Alvara_Funcionamento(Alvara_funcionamento Reg) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                object[] Parametros = new object[12];
+                Parametros[0] = new SqlParameter { ParameterName = "@Ano", SqlDbType = SqlDbType.Int, SqlValue = Reg.Ano };
+                Parametros[1] = new SqlParameter { ParameterName = "@Numero", SqlDbType = SqlDbType.Int, SqlValue = Reg.Numero };
+                Parametros[2] = new SqlParameter { ParameterName = "@Controle", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Controle };
+                Parametros[3] = new SqlParameter { ParameterName = "@Codigo", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codigo };
+                Parametros[4] = new SqlParameter { ParameterName = "@Razao_Social", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Razao_social };
+                Parametros[5] = new SqlParameter { ParameterName = "@Documento", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Documento };
+                Parametros[6] = new SqlParameter { ParameterName = "@Endereco", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Endereco };
+                Parametros[7] = new SqlParameter { ParameterName = "@Bairro", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Bairro };
+                Parametros[8] = new SqlParameter { ParameterName = "@Atividade", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Atividade };
+                Parametros[9] = new SqlParameter { ParameterName = "@Horario", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Horario };
+                Parametros[10] = new SqlParameter { ParameterName = "@Validade", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Validade };
+                Parametros[11] = new SqlParameter { ParameterName = "@Data_gravada", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Data_Gravada };
+                db.Database.ExecuteSqlCommand("INSERT INTO Alvara_Funcionamento(ano,numero,controle,codigo,razao_social,documento,endereco,bairro,atividade,horario,validade,data_gravada) VALUES(@ano,@numero," +
+                                              "@controle,@codigo,@razao_social,@documento,@endereco,@bairro,@atividade,@horario,@validade,@data_gravada)", Parametros);
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+
 
         public Certidao_endereco Retorna_Certidao_Endereco(int Ano,int Numero,int Codigo) {
             using (GTI_Context db = new GTI_Context(_connection)) {

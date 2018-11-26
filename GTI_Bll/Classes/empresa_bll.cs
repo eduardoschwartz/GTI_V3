@@ -18,8 +18,18 @@ namespace GTI_Bll.Classes {
         public bool Existe_Empresa(int nCodigo) {
             Empresa_Data obj = new Empresa_Data(_connection);
             return obj.Existe_Empresa(nCodigo);
-
         }
+
+        /// <summary>
+        /// Retorna a qtde de parcelas de Taxa de licença não pagas no ano.
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public int Qtde_Parcelas_TLL_Vencidas(int Codigo) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Qtde_Parcelas_TLL_Vencidas(Codigo);
+        }
+
 
         /// <summary>
         /// Retorna o cadastro da empresa
@@ -434,6 +444,19 @@ namespace GTI_Bll.Classes {
             Empresa_Data obj = new Empresa_Data(_connection);
             return obj.Retorna_Codigo_por_CPF(CPF);
         }
+
+
+        /// <summary>
+        /// Retrorna os dados do alvara gravado para validação
+        /// </summary>
+        /// <param name="Controle"></param>
+        /// <returns></returns>
+        public Alvara_funcionamento Alvara_Funcionamento_gravado(string Controle) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Alvara_Funcionamento_gravado(Controle);
+        }
+
+
 
         /// <summary>
         /// Retorna as inscrições cadastrais da empresa através do nº de CNPJ

@@ -339,6 +339,10 @@ namespace GTI_Web.DataSets {
             
             private global::System.Data.DataColumn columndesclanc;
             
+            private global::System.Data.DataColumn columnnossonumero;
+            
+            private global::System.Data.DataColumn columnparcela;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public boletoguiaDataTable() {
@@ -614,6 +618,22 @@ namespace GTI_Web.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn nossonumeroColumn {
+                get {
+                    return this.columnnossonumero;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn parcelaColumn {
+                get {
+                    return this.columnparcela;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -679,7 +699,9 @@ namespace GTI_Web.DataSets {
                         string numbarra2b, 
                         string numbarra2c, 
                         string numbarra2d, 
-                        string desclanc) {
+                        string desclanc, 
+                        string nossonumero, 
+                        string parcela) {
                 boletoguiaRow rowboletoguiaRow = ((boletoguiaRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         usuario,
@@ -711,7 +733,9 @@ namespace GTI_Web.DataSets {
                         numbarra2b,
                         numbarra2c,
                         numbarra2d,
-                        desclanc};
+                        desclanc,
+                        nossonumero,
+                        parcela};
                 rowboletoguiaRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowboletoguiaRow);
                 return rowboletoguiaRow;
@@ -772,6 +796,8 @@ namespace GTI_Web.DataSets {
                 this.columnnumbarra2c = base.Columns["numbarra2c"];
                 this.columnnumbarra2d = base.Columns["numbarra2d"];
                 this.columndesclanc = base.Columns["desclanc"];
+                this.columnnossonumero = base.Columns["nossonumero"];
+                this.columnparcela = base.Columns["parcela"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -837,6 +863,10 @@ namespace GTI_Web.DataSets {
                 base.Columns.Add(this.columnnumbarra2d);
                 this.columndesclanc = new global::System.Data.DataColumn("desclanc", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndesclanc);
+                this.columnnossonumero = new global::System.Data.DataColumn("nossonumero", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnossonumero);
+                this.columnparcela = new global::System.Data.DataColumn("parcela", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnparcela);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnsid,
                                 this.columnseq}, true));
@@ -1469,6 +1499,38 @@ namespace GTI_Web.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string nossonumero {
+                get {
+                    try {
+                        return ((string)(this[this.tableboletoguia.nossonumeroColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'nossonumero\' in table \'boletoguia\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableboletoguia.nossonumeroColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string parcela {
+                get {
+                    try {
+                        return ((string)(this[this.tableboletoguia.parcelaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'parcela\' in table \'boletoguia\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableboletoguia.parcelaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IscodreduzidoNull() {
                 return this.IsNull(this.tableboletoguia.codreduzidoColumn);
             }
@@ -1777,6 +1839,30 @@ namespace GTI_Web.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetdesclancNull() {
                 this[this.tableboletoguia.desclancColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsnossonumeroNull() {
+                return this.IsNull(this.tableboletoguia.nossonumeroColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetnossonumeroNull() {
+                this[this.tableboletoguia.nossonumeroColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsparcelaNull() {
+                return this.IsNull(this.tableboletoguia.parcelaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetparcelaNull() {
+                this[this.tableboletoguia.parcelaColumn] = global::System.Convert.DBNull;
             }
         }
         
