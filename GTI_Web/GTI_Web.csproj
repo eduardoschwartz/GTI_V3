@@ -131,7 +131,7 @@
     <Content Include="Pages\SegundaViaCIP.aspx" />
     <Content Include="Pages\SegundaViaCIPFim.aspx" />
     <Content Include="Pages\SegundaViaIPTU.aspx" />
-    <Content Include="Pages\SegundaViaIPTUFim.aspx" />
+    <Content Include="Pages\SegundaViaIPTUend.aspx" />
     <Content Include="Pages\situacao_pagto.aspx" />
     <Content Include="Pages\Turing.aspx" />
     <Content Include="Pages\wait.aspx" />
@@ -353,12 +353,12 @@
     <Compile Include="Pages\SegundaViaIPTU.aspx.designer.cs">
       <DependentUpon>SegundaViaIPTU.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SegundaViaIPTUFim.aspx.cs">
-      <DependentUpon>SegundaViaIPTUFim.aspx</DependentUpon>
+    <Compile Include="Pages\SegundaViaIPTUend.aspx.cs">
+      <DependentUpon>SegundaViaIPTUend.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\SegundaViaIPTUFim.aspx.designer.cs">
-      <DependentUpon>SegundaViaIPTUFim.aspx</DependentUpon>
+    <Compile Include="Pages\SegundaViaIPTUend.aspx.designer.cs">
+      <DependentUpon>SegundaViaIPTUend.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\situacao_pagto.aspx.cs">
       <DependentUpon>situacao_pagto.aspx</DependentUpon>
@@ -661,7 +661,7 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ComprovanteInscricao.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\BoletoRegistrado.rdlc" />
+    <EmbeddedResource Include="Report\Carne_IPTU.rdlc" />
     <EmbeddedResource Include="Report\SituacaoPagamento.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SituacaoPagamento.cs</LastGenOutput>

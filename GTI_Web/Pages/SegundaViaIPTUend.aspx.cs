@@ -35,11 +35,18 @@ namespace UIWeb.Pages {
             if (ListaBoleto.Count > 0) {
                 tributario_Class.Insert_Carne_Web(Convert.ToInt32( ListaBoleto[0].Codreduzido), 2018);
                 DataSet Ds = gtiCore.ToDataSet(ListaBoleto);
-                ReportDataSource rdsAct = new ReportDataSource("DataSet1", Ds.Tables[0]);
+                ReportDataSource rdsAct = new ReportDataSource("dsBoletoGuia", Ds.Tables[0]);
                 ReportViewer viewer = new ReportViewer();
                 viewer.LocalReport.Refresh();
-                viewer.LocalReport.ReportPath = "Report/rptDamParcelado.rdlc";
-                viewer.LocalReport.DataSources.Add(rdsAct); // Add  datasource here         
+                viewer.LocalReport.ReportPath = "Report/Carne_IPTU.rdlc";
+                viewer.LocalReport.DataSources.Add(rdsAct); // Add  datasource here       
+
+                List<ReportParameter> parameters = new List<ReportParameter>();
+                parameters.Add(new ReportParameter("QUADRA", "Quadra: "+ ListaBoleto[0].Quadra + " Lote: " + ListaBoleto[0].Lote));
+                parameters.Add(new ReportParameter("DATADOC", Convert.ToDateTime( ListaBoleto[0].Datadoc).ToString("dd/MM/yyyy") ));
+                viewer.LocalReport.SetParameters(parameters);
+
+
                 byte[] bytes = viewer.LocalReport.Render( "PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
                 tributario_Class.Excluir_Carne(nSid);
                 Response.Buffer = true;

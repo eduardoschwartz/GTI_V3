@@ -50,7 +50,7 @@ namespace UIWeb {
             int nSid=gravaCarne();
             if (nSid > 0) {
                 Session["sid"] = nSid;
-                Response.Redirect("~/Pages/SegundaViaIPTUFim.aspx");
+                Response.Redirect("~/Pages/SegundaViaIPTUend.aspx");
             }
         }
 
@@ -86,8 +86,9 @@ namespace UIWeb {
                 reg.Fulllanc = "IMPOSTO PREDIAL E TERRITORIAL URBANO - 2ª VIA";
                 reg.Numdoc = item.Numero_Documento.ToString();
                 reg.Numparcela = (short)item.Numero_Parcela;
-                
-                
+                reg.Quadra = dados_imovel.QuadraOriginal.Length > 15 ? dados_imovel.QuadraOriginal.Substring(0, 15) : dados_imovel.QuadraOriginal;
+                reg.Lote = dados_imovel.LoteOriginal.Length > 15 ? dados_imovel.LoteOriginal.Substring(0, 15) : dados_imovel.LoteOriginal;
+                reg.Datadoc = item.Data_Base;
                 reg.Datavencto = Convert.ToDateTime( item.Data_Vencimento);
                 reg.Numdoc2 = item.Numero_Documento.ToString();
                 reg.Digitavel = "linha digitavel";

@@ -40,5 +40,8 @@ namespace GTI_Models.Models {
         public string Desclanc { get; set; }
         public string Nossonumero { get; set; }
         public string Parcela { get; set; }
+        public string Quadra { get; set; }
+        public string Lote { get; set; }
+        public DateTime? Datadoc { get; set; }
     }
 }

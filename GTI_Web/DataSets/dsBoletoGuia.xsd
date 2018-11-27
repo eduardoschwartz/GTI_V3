@@ -318,6 +318,9 @@
               </xs:element>
               <xs:element name="nossonumero" msprop:Generator_ColumnVarNameInTable="columnnossonumero" msprop:Generator_ColumnPropNameInRow="nossonumero" msprop:Generator_ColumnPropNameInTable="nossonumeroColumn" msprop:Generator_UserColumnName="nossonumero" type="xs:string" minOccurs="0" />
               <xs:element name="parcela" msprop:Generator_ColumnVarNameInTable="columnparcela" msprop:Generator_ColumnPropNameInRow="parcela" msprop:Generator_ColumnPropNameInTable="parcelaColumn" msprop:Generator_UserColumnName="parcela" type="xs:string" minOccurs="0" />
+              <xs:element name="Quadra" msprop:Generator_ColumnVarNameInTable="columnQuadra" msprop:Generator_ColumnPropNameInRow="Quadra" msprop:Generator_ColumnPropNameInTable="QuadraColumn" msprop:Generator_UserColumnName="Quadra" type="xs:string" minOccurs="0" />
+              <xs:element name="Lote" msprop:Generator_ColumnVarNameInTable="columnLote" msprop:Generator_ColumnPropNameInRow="Lote" msprop:Generator_ColumnPropNameInTable="LoteColumn" msprop:Generator_UserColumnName="Lote" type="xs:string" minOccurs="0" />
+              <xs:element name="Datadoc" msprop:Generator_ColumnVarNameInTable="columnDatadoc" msprop:Generator_ColumnPropNameInRow="Datadoc" msprop:Generator_ColumnPropNameInTable="DatadocColumn" msprop:Generator_UserColumnName="Datadoc" type="xs:dateTime" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

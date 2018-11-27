@@ -821,7 +821,7 @@ namespace GTI_Dal.Classes {
                            join nd in db.Numdocumento on pd.Numdocumento equals nd.numdocumento 
                            where dp.Codreduzido == nCodigo && dp.Anoexercicio == nAno && dp.Codlancamento == 1 && dp.Seqlancamento == 0 && (dp.Statuslanc == 3 || dp.Statuslanc==18) && nd.Registrado==true
                            orderby new { dp.Numparcela, dp.Codcomplemento }
-                           select new { dp.Codreduzido, dp.Anoexercicio, dp.Codlancamento, dp.Seqlancamento, dp.Numparcela, dp.Codcomplemento, dp.Datavencimento, dt.Valortributo, pd.Numdocumento });
+                           select new { dp.Codreduzido, dp.Anoexercicio, dp.Codlancamento, dp.Seqlancamento, dp.Numparcela, dp.Codcomplemento, dp.Datavencimento, dt.Valortributo, pd.Numdocumento,nd.Datadocumento });
 
                 List<DebitoStructure> Lista = new List<DebitoStructure>();
                 foreach (var query in reg) {
@@ -839,6 +839,7 @@ namespace GTI_Dal.Classes {
                     Linha.Soma_Principal = Convert.ToDecimal(query.Valortributo);
                     Linha.Data_Vencimento = query.Datavencimento;
                     Linha.Numero_Documento = query.Numdocumento;
+                    Linha.Data_Base = Convert.ToDateTime(query.Datadocumento);
                     Lista.Add(Linha);
                     Proximo:;
                 }

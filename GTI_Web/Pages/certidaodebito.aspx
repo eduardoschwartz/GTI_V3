@@ -44,7 +44,7 @@
              <br />
              <table style="width: 624px; height: 62px;">
                  <tr>
-                     <td class="auto-style1" style="width: 134px">Digite o código/IM..:</td>
+                     <td class="auto-style1" style="width: 134px">Código imóvel ou IM..:</td>
                      <td>
                          <asp:TextBox ID="txtIM" runat="server" Width="83px" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" onKeyPress="return formata(this, '§§§§§§', event)"></asp:TextBox>
                      </td>

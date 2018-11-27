@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SegundaViaIPTUFim.aspx.cs" Inherits="UIWeb.Pages.SegundaViaIPTUFim" MasterPageFile="~/Pages/default.Master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SegundaViaIPTUend.aspx.cs" Inherits="UIWeb.Pages.SegundaViaIPTUFim" MasterPageFile="~/Pages/default.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MenuContentPlaceHolder" runat="server">
     <link href="../css/gti.css" rel="stylesheet" />
