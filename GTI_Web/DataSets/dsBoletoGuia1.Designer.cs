@@ -349,6 +349,8 @@ namespace GTI_Web.DataSets {
             
             private global::System.Data.DataColumn columnDatadoc;
             
+            private global::System.Data.DataColumn columninscricao_cadastral;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public boletoguiaDataTable() {
@@ -664,6 +666,14 @@ namespace GTI_Web.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn inscricao_cadastralColumn {
+                get {
+                    return this.columninscricao_cadastral;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -734,7 +744,8 @@ namespace GTI_Web.DataSets {
                         string parcela, 
                         string Quadra, 
                         string Lote, 
-                        System.DateTime Datadoc) {
+                        System.DateTime Datadoc, 
+                        string inscricao_cadastral) {
                 boletoguiaRow rowboletoguiaRow = ((boletoguiaRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         usuario,
@@ -771,7 +782,8 @@ namespace GTI_Web.DataSets {
                         parcela,
                         Quadra,
                         Lote,
-                        Datadoc};
+                        Datadoc,
+                        inscricao_cadastral};
                 rowboletoguiaRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowboletoguiaRow);
                 return rowboletoguiaRow;
@@ -837,6 +849,7 @@ namespace GTI_Web.DataSets {
                 this.columnQuadra = base.Columns["Quadra"];
                 this.columnLote = base.Columns["Lote"];
                 this.columnDatadoc = base.Columns["Datadoc"];
+                this.columninscricao_cadastral = base.Columns["inscricao_cadastral"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -912,6 +925,8 @@ namespace GTI_Web.DataSets {
                 base.Columns.Add(this.columnLote);
                 this.columnDatadoc = new global::System.Data.DataColumn("Datadoc", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDatadoc);
+                this.columninscricao_cadastral = new global::System.Data.DataColumn("inscricao_cadastral", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columninscricao_cadastral);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnsid,
                                 this.columnseq}, true));
@@ -1624,6 +1639,22 @@ namespace GTI_Web.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string inscricao_cadastral {
+                get {
+                    try {
+                        return ((string)(this[this.tableboletoguia.inscricao_cadastralColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'inscricao_cadastral\' in table \'boletoguia\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableboletoguia.inscricao_cadastralColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IscodreduzidoNull() {
                 return this.IsNull(this.tableboletoguia.codreduzidoColumn);
             }
@@ -1992,6 +2023,18 @@ namespace GTI_Web.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetDatadocNull() {
                 this[this.tableboletoguia.DatadocColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isinscricao_cadastralNull() {
+                return this.IsNull(this.tableboletoguia.inscricao_cadastralColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setinscricao_cadastralNull() {
+                this[this.tableboletoguia.inscricao_cadastralColumn] = global::System.Convert.DBNull;
             }
         }
         

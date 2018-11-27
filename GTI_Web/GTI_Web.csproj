@@ -388,12 +388,6 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Report\Carne_IPTU.cs">
-      <DependentUpon>Carne_IPTU.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Report\CertidaoDebitoDocumentoPN.cs">
       <DependentUpon>CertidaoDebitoDocumentoPN.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -628,10 +622,6 @@
     <EmbeddedResource Include="Report\AlvaraFuncionamentoValida.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AlvaraFuncionamentoValida.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Report\Carne_IPTU.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>Carne_IPTU.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\CertidaoDebitoDocumentoPN.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

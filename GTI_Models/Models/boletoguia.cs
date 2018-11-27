@@ -43,5 +43,6 @@ namespace GTI_Models.Models {
         public string Quadra { get; set; }
         public string Lote { get; set; }
         public DateTime? Datadoc { get; set; }
+        public string Inscricao_cadastral { get; set; }
     }
 }

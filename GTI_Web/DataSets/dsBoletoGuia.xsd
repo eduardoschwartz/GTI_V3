@@ -145,7 +145,7 @@
   <xs:element name="dsBoletoGuia" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsBoletoGuia" msprop:Generator_UserDSName="dsBoletoGuia">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="boletoguia" msprop:Generator_TableClassName="boletoguiaDataTable" msprop:Generator_TableVarName="tableboletoguia" msprop:Generator_RowChangedName="boletoguiaRowChanged" msprop:Generator_TablePropName="boletoguia" msprop:Generator_RowDeletingName="boletoguiaRowDeleting" msprop:Generator_RowChangingName="boletoguiaRowChanging" msprop:Generator_RowEvHandlerName="boletoguiaRowChangeEventHandler" msprop:Generator_RowDeletedName="boletoguiaRowDeleted" msprop:Generator_RowClassName="boletoguiaRow" msprop:Generator_UserTableName="boletoguia" msprop:Generator_RowEvArgName="boletoguiaRowChangeEvent">
+        <xs:element name="boletoguia" msprop:Generator_TableClassName="boletoguiaDataTable" msprop:Generator_TableVarName="tableboletoguia" msprop:Generator_TablePropName="boletoguia" msprop:Generator_RowDeletingName="boletoguiaRowDeleting" msprop:Generator_RowChangingName="boletoguiaRowChanging" msprop:Generator_RowEvHandlerName="boletoguiaRowChangeEventHandler" msprop:Generator_RowDeletedName="boletoguiaRowDeleted" msprop:Generator_UserTableName="boletoguia" msprop:Generator_RowChangedName="boletoguiaRowChanged" msprop:Generator_RowEvArgName="boletoguiaRowChangeEvent" msprop:Generator_RowClassName="boletoguiaRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="usuario" msprop:Generator_ColumnVarNameInTable="columnusuario" msprop:Generator_ColumnPropNameInRow="usuario" msprop:Generator_ColumnPropNameInTable="usuarioColumn" msprop:Generator_UserColumnName="usuario">
@@ -321,6 +321,7 @@
               <xs:element name="Quadra" msprop:Generator_ColumnVarNameInTable="columnQuadra" msprop:Generator_ColumnPropNameInRow="Quadra" msprop:Generator_ColumnPropNameInTable="QuadraColumn" msprop:Generator_UserColumnName="Quadra" type="xs:string" minOccurs="0" />
               <xs:element name="Lote" msprop:Generator_ColumnVarNameInTable="columnLote" msprop:Generator_ColumnPropNameInRow="Lote" msprop:Generator_ColumnPropNameInTable="LoteColumn" msprop:Generator_UserColumnName="Lote" type="xs:string" minOccurs="0" />
               <xs:element name="Datadoc" msprop:Generator_ColumnVarNameInTable="columnDatadoc" msprop:Generator_ColumnPropNameInRow="Datadoc" msprop:Generator_ColumnPropNameInTable="DatadocColumn" msprop:Generator_UserColumnName="Datadoc" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="inscricao_cadastral" msprop:Generator_ColumnVarNameInTable="columninscricao_cadastral" msprop:Generator_ColumnPropNameInRow="inscricao_cadastral" msprop:Generator_ColumnPropNameInTable="inscricao_cadastralColumn" msprop:Generator_UserColumnName="inscricao_cadastral" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

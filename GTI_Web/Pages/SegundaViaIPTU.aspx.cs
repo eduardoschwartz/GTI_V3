@@ -93,6 +93,8 @@ namespace UIWeb {
                 reg.Numdoc2 = item.Numero_Documento.ToString();
                 reg.Digitavel = "linha digitavel";
                 reg.Valorguia = Convert.ToDecimal(item.Soma_Principal);
+                reg.Inscricao_cadastral = dados_imovel.Distrito.ToString() + "." + dados_imovel.Setor.ToString("00") + "." + dados_imovel.Quadra.ToString("0000") + 
+                    "." + dados_imovel.Lote.ToString("00000") + "." + dados_imovel.Seq.ToString("00") + "." + dados_imovel.Unidade.ToString("00") + "." + dados_imovel.SubUnidade.ToString("000");
                 Laseriptu RegIPTU = tributario_Class.Carrega_Dados_IPTU(item.Codigo_Reduzido, 2019);
                 reg.Totparcela = (short)RegIPTU.Qtdeparc;
                 if (item.Numero_Parcela == 0) {
