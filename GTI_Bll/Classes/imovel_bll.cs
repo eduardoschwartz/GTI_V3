@@ -455,10 +455,26 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Imovel_Ativo();
         }
 
+        /// <summary>
+        /// Retorna os códigos dos imóveis que receberam o comunicado de isenção
+        /// </summary>
+        /// <returns></returns>
         public List<int> Lista_Comunicado_Isencao() {
             Imovel_Data obj = new Imovel_Data(_connection);
             return obj.Lista_Comunicado_Isencao();
         }
+
+        /// <summary>
+        /// Grava na tabela Comunicado_Isencao
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Comunicado_Isencao(Comunicado_isencao Reg) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            Exception ex = obj.Insert_Comunicado_Isencao(Reg);
+            return ex;
+        }
+
 
     }//end class
 }

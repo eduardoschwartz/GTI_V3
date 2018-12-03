@@ -251,7 +251,7 @@ namespace GTI_Dal.Classes {
                         regEnd.UF = "SP";
                         regEnd.CodLogradouro = reg.Ee_codlog;
                         regEnd.Endereco = reg.Ee_nomelog.ToString();
-                        if (String.IsNullOrEmpty(reg.Endereco))
+                        if (!String.IsNullOrEmpty(reg.Endereco))
                             regEnd.Endereco = reg.Endereco.ToString();
                         regEnd.Numero = reg.Ee_numimovel;
                         regEnd.Complemento = reg.Ee_complemento ?? "";
@@ -1199,6 +1199,39 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Exception Insert_Comunicado_Isencao(Comunicado_isencao Reg) {
+            using (var db = new GTI_Context(_connection)) {
+                object[] Parametros = new object[17];
+                Parametros[0] = new SqlParameter { ParameterName = "@remessa", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Remessa };
+                Parametros[1] = new SqlParameter { ParameterName = "@codigo", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codigo };
+                Parametros[2] = new SqlParameter { ParameterName = "@nome", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Nome };
+                Parametros[3] = new SqlParameter { ParameterName = "@cpf_cnpj", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Cpf_cnpj };
+                Parametros[4] = new SqlParameter { ParameterName = "@endereco", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Endereco };
+                Parametros[5] = new SqlParameter { ParameterName = "@bairro", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Bairro };
+                Parametros[6] = new SqlParameter { ParameterName = "@cidade", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Cidade };
+                Parametros[7] = new SqlParameter { ParameterName = "@cep", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Cep };
+                Parametros[8] = new SqlParameter { ParameterName = "@endereco_entrega", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Endereco_entrega };
+                Parametros[9] = new SqlParameter { ParameterName = "@bairro_entrega", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Bairro_entrega };
+                Parametros[10] = new SqlParameter { ParameterName = "@cidade_entrega", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Cidade_entrega };
+                Parametros[11] = new SqlParameter { ParameterName = "@cep_entrega", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Cep_entrega };
+                Parametros[12] = new SqlParameter { ParameterName = "@data_documento", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Data_documento };
+                Parametros[13] = new SqlParameter { ParameterName = "@inscricao", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Inscricao };
+                Parametros[14] = new SqlParameter { ParameterName = "@lote", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Lote };
+                Parametros[15] = new SqlParameter { ParameterName = "@quadra", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Quadra };
+                Parametros[16] = new SqlParameter { ParameterName = "@Cep_entrega_cod", SqlDbType = SqlDbType.Int, SqlValue = Reg.Cep_entrega_cod };
+
+                db.Database.ExecuteSqlCommand("INSERT INTO comunicado_isencao(remessa,codigo,nome,cpf_cnpj,endereco,bairro,cidade,cep,endereco_entrega,bairro_entrega,cidade_entrega,cep_entrega," +
+                    "data_documento,inscricao,lote,quadra,Cep_entrega_cod) VALUES(@remessa,@codigo,@nome,@cpf_cnpj,@endereco,@bairro,@cidade,@cep,@endereco_entrega,@bairro_entrega,@cidade_entrega," +
+                    "@cep_entrega,@data_documento,@inscricao,@lote,@quadra,@Cep_entrega_cod)", Parametros);
+
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
 
 
     }//end class

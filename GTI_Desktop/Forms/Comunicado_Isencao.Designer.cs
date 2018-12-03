@@ -24,6 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.PrintButton = new System.Windows.Forms.Button();
+            this.PBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // PrintButton
@@ -41,11 +42,21 @@
             this.PrintButton.UseVisualStyleBackColor = true;
             this.PrintButton.Click += new System.EventHandler(this.PrintButton_Click);
             // 
+            // PBar
+            // 
+            this.PBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.PBar.Location = new System.Drawing.Point(12, 40);
+            this.PBar.Name = "PBar";
+            this.PBar.Size = new System.Drawing.Size(197, 8);
+            this.PBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.PBar.TabIndex = 45;
+            // 
             // Comunicado_Isencao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(319, 60);
+            this.Controls.Add(this.PBar);
             this.Controls.Add(this.PrintButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -60,5 +71,6 @@
         #endregion
 
         private System.Windows.Forms.Button PrintButton;
+        private System.Windows.Forms.ProgressBar PBar;
     }
 }
