@@ -375,10 +375,14 @@ namespace GTI_Desktop.Classes {
         /// <returns></returns>
         public static bool GetBinaryAccess(int index) {
             string _acesso = GtiTypes.UserBinary;
-            if (_acesso.Substring(index - 1, 1) == "1")
-                return true;
-            else
+            if (_acesso.Length < index)
                 return false;
+            else {
+                if (_acesso.Substring(index - 1, 1) == "1")
+                    return true;
+                else
+                    return false;
+            }
         }
 
         #region Dat Acesso

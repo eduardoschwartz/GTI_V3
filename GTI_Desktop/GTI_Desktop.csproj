@@ -201,6 +201,12 @@
     <Compile Include="Forms\Cnae.Designer.cs">
       <DependentUpon>Cnae.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Comunicado_Isencao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Comunicado_Isencao.Designer.cs">
+      <DependentUpon>Comunicado_Isencao.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Condominio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -466,6 +472,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Report\ComunicadoIsencao.cs">
+      <DependentUpon>ComunicadoIsencao.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\Carta_Cobranca_Envelope.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -559,6 +571,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Cnae.resx">
       <DependentUpon>Cnae.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Comunicado_Isencao.resx">
+      <DependentUpon>Comunicado_Isencao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Condominio.resx">
       <DependentUpon>Condominio.cs</DependentUpon>
@@ -693,6 +708,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\ComunicadoIsencao.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComunicadoIsencao.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Carta_Cobranca_Envelope.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

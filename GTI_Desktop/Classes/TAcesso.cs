@@ -28,6 +28,7 @@
         Carta_Cobranca=26,
         Registro_Bancario=27,
         Atividade_Empresa=28,
-        Calculo_Imposto=29
+        Calculo_Imposto=29,
+        Comunicado_Isencao=30
     }
 }

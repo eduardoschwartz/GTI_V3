@@ -246,6 +246,18 @@ namespace GTI_Desktop.Forms {
                     crViewer.ReportSource = rpt_carta_cobranca_envelope;
                     break;
 
+                case "Comunicado_Isencao":
+                    ComunicadoIsencao rpt_comunicado_Isencao = new GTI_Desktop.Report.ComunicadoIsencao();
+                    CrTables = rpt_comunicado_Isencao.Database.Tables;
+                    foreach (CrystalDecisions.CrystalReports.Engine.Table CrTable in CrTables) {
+                        crtableLogoninfo = CrTable.LogOnInfo;
+                        crtableLogoninfo.ConnectionInfo = crConnectionInfo;
+                        CrTable.ApplyLogOnInfo(crtableLogoninfo);
+                    }
+                    rpt_comunicado_Isencao.RecordSelectionFormula = "{Comunicado_isencao.Remessa}=" + Valor1;
+                    crViewer.ReportSource = rpt_comunicado_Isencao;
+                    break;
+
                 default:
                     break;
             }

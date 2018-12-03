@@ -455,5 +455,10 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Imovel_Ativo();
         }
 
+        public List<int> Lista_Comunicado_Isencao() {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Lista_Comunicado_Isencao();
+        }
+
     }//end class
 }

@@ -1191,6 +1191,15 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public List<int> Lista_Comunicado_Isencao() {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                DateTime _data_alteracao = Convert.ToDateTime("21/10/2018");
+                List<int>Codigos = (from t in db.Isencao where t.dataaltera > _data_alteracao orderby t.Codreduzido select t.Codreduzido).Distinct().ToList();
+                return Codigos;
+            }
+        }
+
+
 
     }//end class
 }
