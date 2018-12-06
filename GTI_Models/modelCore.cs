@@ -10,6 +10,7 @@ namespace GTI_Models {
         public enum RetornoCertidaoDebito { Negativa, Positiva, NegativaPositiva}
         public enum TipoEndereco { Local, Proprietario, Entrega }
         public enum TipoDocumento { Cpf,Cnpj}
+        public enum TipoCarne { Iptu=1,Iss_Taxa=2,Iss_Estimado_Variavel=3,Taxa=4,Vigilancia=5,Cip=6}
     }
 
     public class CompetenciaISS {

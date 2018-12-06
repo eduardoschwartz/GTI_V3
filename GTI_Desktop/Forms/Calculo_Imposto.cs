@@ -340,6 +340,9 @@ namespace GTI_Desktop.Forms {
                 bool _vistoria = item.Vistoria == 1 ? true : false;
                 decimal _area = item.Area == null ? 0 : (decimal)item.Area;
                 int Codigo = item.Codigo;
+                if (Codigo == 100256)
+                    _possui_taxa = false;
+
                 int _codigo_aliquota = item.Codigo_aliquota == null ? 0 : (int)item.Codigo_aliquota;
                 switch (_codigo_aliquota) {
                     case 0:;
