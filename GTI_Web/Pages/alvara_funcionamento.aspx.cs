@@ -85,7 +85,7 @@ namespace GTI_Web.Pages {
                 if (dados != null)
                     Exibe_Validacao(dados);
                 else
-                    lblmsg.Text = "Alvará não cadastrada.";
+                    lblmsg.Text = "Alvará não cadastrado.";
             }
         }
 

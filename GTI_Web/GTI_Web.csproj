@@ -132,6 +132,7 @@
     <Content Include="Pages\SegundaViaCIPFim.aspx" />
     <Content Include="Pages\SegundaViaIPTU.aspx" />
     <Content Include="Pages\SegundaViaIPTUend.aspx" />
+    <Content Include="Pages\SegundaViaISS.aspx" />
     <Content Include="Pages\situacao_pagto.aspx" />
     <Content Include="Pages\Turing.aspx" />
     <Content Include="Pages\wait.aspx" />
@@ -359,6 +360,13 @@
     </Compile>
     <Compile Include="Pages\SegundaViaIPTUend.aspx.designer.cs">
       <DependentUpon>SegundaViaIPTUend.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SegundaViaISS.aspx.cs">
+      <DependentUpon>SegundaViaISS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\SegundaViaISS.aspx.designer.cs">
+      <DependentUpon>SegundaViaISS.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\situacao_pagto.aspx.cs">
       <DependentUpon>situacao_pagto.aspx</DependentUpon>
