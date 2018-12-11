@@ -134,6 +134,8 @@
     <Content Include="Pages\SegundaViaIPTUend.aspx" />
     <Content Include="Pages\SegundaViaISS.aspx" />
     <Content Include="Pages\SegundaViaISSend.aspx" />
+    <Content Include="Pages\SegundaViaVS.aspx" />
+    <Content Include="Pages\SegundaViaVSend.aspx" />
     <Content Include="Pages\situacao_pagto.aspx" />
     <Content Include="Pages\Turing.aspx" />
     <Content Include="Pages\wait.aspx" />
@@ -173,6 +175,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsDAM.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\dsMobiliarioAtividadeVS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsMobiliarioAtividadeVS.xsd</DependentUpon>
     </Compile>
     <Compile Include="DataSets\dsSituacaoPagto.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -375,6 +382,20 @@
     </Compile>
     <Compile Include="Pages\SegundaViaISSend.aspx.designer.cs">
       <DependentUpon>SegundaViaISSend.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SegundaViaVS.aspx.cs">
+      <DependentUpon>SegundaViaVS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\SegundaViaVS.aspx.designer.cs">
+      <DependentUpon>SegundaViaVS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SegundaViaVSend.aspx.cs">
+      <DependentUpon>SegundaViaVSend.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\SegundaViaVSend.aspx.designer.cs">
+      <DependentUpon>SegundaViaVSend.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\situacao_pagto.aspx.cs">
       <DependentUpon>situacao_pagto.aspx</DependentUpon>
@@ -616,6 +637,17 @@
     <Content Include="DataSets\dsSituacaoPagto.xsc">
       <DependentUpon>dsSituacaoPagto.xsd</DependentUpon>
     </Content>
+    <Content Include="DataSets\dsMobiliarioAtividadeVS.xsc">
+      <DependentUpon>dsMobiliarioAtividadeVS.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\dsMobiliarioAtividadeVS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsMobiliarioAtividadeVS.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\dsMobiliarioAtividadeVS.xss">
+      <DependentUpon>dsMobiliarioAtividadeVS.xsd</DependentUpon>
+    </Content>
     <None Include="DataSets\dsSituacaoPagto.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -639,6 +671,7 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AlvaraFuncionamentoValida.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\Carne_VS.rdlc" />
     <EmbeddedResource Include="Report\Carne_ISS_TLL.rdlc" />
     <EmbeddedResource Include="Report\CertidaoDebitoDocumentoPN.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -914,17 +914,38 @@ namespace GTI_Bll.Classes {
             return obj.Retorna_Valor_Tributo(Ano, Codigo);
         }
 
+        /// <summary>
+        /// Lista as parcelas de taxa de licença de uma empresa no ano selecionado
+        /// </summary>
+        /// <param name="nCodigo"></param>
+        /// <param name="nAno"></param>
+        /// <returns></returns>
         public List<DebitoStructure> Lista_Parcelas_Taxa(int nCodigo, int nAno) {
             Tributario_Data obj = new Tributario_Data(_connection);
             return obj.Lista_Parcelas_Taxa(nCodigo,nAno);
         }
 
+        /// <summary>
+        /// Lista as parcelas de Iss Fixo de uma empresa no ano selecionado
+        /// </summary>
+        /// <param name="nCodigo"></param>
+        /// <param name="nAno"></param>
+        /// <returns></returns>
         public List<DebitoStructure> Lista_Parcelas_Iss_Fixo(int nCodigo, int nAno) {
             Tributario_Data obj = new Tributario_Data(_connection);
             return obj.Lista_Parcelas_Iss_Fixo(nCodigo,nAno);
         }
 
-
+        /// <summary>
+        /// Lista as parcelas de vigilância sanitária de uma empresa no ano selecionado
+        /// </summary>
+        /// <param name="nCodigo"></param>
+        /// <param name="nAno"></param>
+        /// <returns></returns>
+        public List<DebitoStructure> Lista_Parcelas_Vigilancia(int nCodigo, int nAno) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Lista_Parcelas_Vigilancia(nCodigo, nAno);
+        }
 
     }//end class
 }
