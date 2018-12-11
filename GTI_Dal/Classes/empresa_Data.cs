@@ -161,6 +161,26 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public decimal Aliquota_Taxa_Licenca(int _codigo) {
+            decimal _aliquota = 0;
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var Sql = (from m in db.Mobiliario join a in db.Atividade on m.Codatividade equals a.Codatividade into ma from a in ma.DefaultIfEmpty()
+                           where m.Codigomob==_codigo select new  {a.Valoraliq1,a.Valoraliq2,a.Valoraliq3 }).FirstOrDefault();
+                if (Sql != null) {
+                    if (Sql.Valoraliq1 > 0)
+                        _aliquota = Sql.Valoraliq1;
+                    else {
+                        if (Sql.Valoraliq2 > 0)
+                            _aliquota = Sql.Valoraliq2;
+                        else {
+                            if (Sql.Valoraliq3 > 0)
+                                _aliquota = Sql.Valoraliq3;
+                        }
+                    }
+                }
+            }
+            return _aliquota;
+        }
 
         public int Existe_EmpresaCnpj(string sCNPJ) {
             int nCodigo = 0;

@@ -97,6 +97,7 @@ namespace GTI_Web.Pages {
 
                             Paramparcela _parametro_parcela = tributario_Class.Retorna_Parametro_Parcela(_ano, (int)modelCore.TipoCarne.Iss_Taxa);
                             int _qtde_parcela = (int)_parametro_parcela.Qtdeparcela;
+                            decimal _SomaISS = 0, _SomaTaxa = 0;
 
                             List<DebitoStructure> Lista_Taxa = tributario_Class.Lista_Parcelas_Taxa(_codigo, 2019);
                             List<DebitoStructure> Lista_Iss = tributario_Class.Lista_Parcelas_Iss_Fixo(_codigo, 2019);
@@ -114,6 +115,8 @@ namespace GTI_Web.Pages {
                                 reg.Soma_Principal = item.Soma_Principal;
                                 reg.Data_Base = item.Data_Base;
                                 Lista_Unificada.Add(reg);
+                                if (item.Numero_Parcela > 0)
+                                    _SomaTaxa += item.Soma_Principal;
                             }
 
                             if (_temiss) {
@@ -126,6 +129,8 @@ namespace GTI_Web.Pages {
                                             if (item.Numero_Documento == item2.Numero_Documento) {
                                                 _valor_principal = item2.Soma_Principal;
                                                 Lista_Unificada[_index].Soma_Principal+=_valor_principal;
+                                                if (item.Numero_Parcela > 0)
+                                                    _SomaISS += item2.Soma_Principal;
                                                 _index++;
                                                 break;
                                             }
@@ -142,6 +147,8 @@ namespace GTI_Web.Pages {
                                         reg.Soma_Principal = item.Soma_Principal;
                                         reg.Data_Base = item.Data_Base;
                                         Lista_Unificada.Add(reg);
+                                        if (item.Numero_Parcela > 0)
+                                            _SomaISS += item.Soma_Principal;
                                     }
                                 }
                             }
@@ -204,6 +211,9 @@ namespace GTI_Web.Pages {
                                     reg.Datavencto = item.Data_Vencimento;
                                     reg.Numdoc2 = item.Numero_Documento.ToString();
                                     reg.Valorguia = item.Soma_Principal;
+                                    reg.Valor_ISS = _SomaISS;
+                                    reg.Valor_Taxa = _SomaTaxa;
+
                                     //***** GERA CÓDIGO DE BARRAS BOLETO REGISTRADO*****
                                     DateTime _data_base = Convert.ToDateTime("07/10/1997");
                                     TimeSpan ts = Convert.ToDateTime(item.Data_Vencimento) - _data_base;
@@ -228,6 +238,12 @@ namespace GTI_Web.Pages {
                                     _linha_digitavel += _digitavel.Substring(21, 5) + "." + _digitavel.Substring(26, 6) + " " + _digitavel.Substring(32, 1) + " " + gtiCore.StringRight(_digitavel, 14);
                                     string _codigo_barra = gtiCore.Gera2of5Str(_barra);
                                     //**************************************************
+                                    reg.Totparcela = (short)_qtde_parcela;
+                                    if (item.Numero_Parcela == 0) {
+                                            reg.Parcela = "Única";
+                                    } else
+                                        reg.Parcela = reg.Numparcela.ToString("00") + "/" + reg.Totparcela.ToString("00");
+
 
                                     reg.Digitavel = _linha_digitavel;
                                     reg.Codbarra = _codigo_barra;

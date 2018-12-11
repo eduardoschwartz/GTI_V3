@@ -39,7 +39,7 @@
             
             &nbsp;<br />
             <br />
-            Situação dos débitos referentes a ISS Fixo, Taxa de Licença e Taxa de Vigilância Sanitária.<br />
+            Emissão de segunda via do carnê de ISS/Taxa de Licença - 2019.<br />
             <br />
             <asp:Panel ID="Panel2" runat="server" ForeColor="Black" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" Width="685px">
                 <table style="width: 100%;">

@@ -615,5 +615,17 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Cnae_Criterio(Cnae);
         }
 
+        /// <summary>
+        /// Retorna o valor da aliquota de taxa de licença de uma empresa
+        /// </summary>
+        /// <param name="_codigo"></param>
+        /// <returns></returns>
+        public decimal Aliquota_Taxa_Licenca(int _codigo) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Aliquota_Taxa_Licenca(_codigo);
+        }
+
+
+
     }
 }

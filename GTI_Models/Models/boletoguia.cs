@@ -44,5 +44,7 @@ namespace GTI_Models.Models {
         public string Lote { get; set; }
         public DateTime? Datadoc { get; set; }
         public string Inscricao_cadastral { get; set; }
+        public decimal? Valor_ISS { get; set; }
+        public decimal? Valor_Taxa { get; set; }
     }
 }
