@@ -29,8 +29,9 @@ namespace GTI_Web.Pages {
                     lblMsg.Text = "Nº de processo inválido.";
                 else {
                     string NumeroProcesso = Numero.Text + "/" + Ano.Text;
-
                     Processo_bll processo_Class = new Processo_bll("GTIconnection");
+                    _numero = processo_Class.ExtractNumeroProcessoNoDV(NumeroProcesso);
+                    
                     bool _existe = processo_Class.Existe_Processo(_ano, _numero);
                     Exception ex = processo_Class.ValidaProcesso(NumeroProcesso);
                     if (ex != null)
@@ -38,7 +39,7 @@ namespace GTI_Web.Pages {
                     else {
                         if (_existe )
                             if (Page.IsValid && (txtimgcode.Text == Session["randomStr"].ToString())) {
-                                Response.Redirect("~/Pages/ConsultaProcessoend.aspx?d=gti&x=" + gtiCore.Encrypt(NumeroProcesso));
+                                Response.Redirect("~/Pages/ConsultaProcessoend.aspx?d=gti&x=" + HttpUtility.UrlEncode(gtiCore.Encrypt(NumeroProcesso)));
                             } else {
                                 lblMsg.Text = "Código da imagem inválido.";
                             }

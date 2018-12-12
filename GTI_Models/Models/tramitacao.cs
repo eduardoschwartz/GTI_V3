@@ -40,5 +40,6 @@ namespace GTI_Models.Models {
         public string Usuario2 { get; set; }
         public string Nome_usuario { get; set; }
         public string Obs { get; set; }
+        public string Telefone { get; set; }
     }
 }

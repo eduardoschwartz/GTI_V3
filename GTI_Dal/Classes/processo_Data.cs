@@ -653,12 +653,13 @@ namespace GTI_Dal.Classes {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from v in db.Tramitacaocc where v.Ano == Ano && v.Numero == Numero orderby v.Seq select new { v.Seq, v.Ccusto });
                 if (reg.Count() > 0) {
-                    var reg5 = (from tcc in db.Tramitacaocc join cc in db.Centrocusto on tcc.Ccusto equals cc.Codigo where tcc.Ano == Ano && tcc.Numero == Numero select new { tcc.Seq, tcc.Ccusto, cc.Descricao });
+                    var reg5 = (from tcc in db.Tramitacaocc join cc in db.Centrocusto on tcc.Ccusto equals cc.Codigo where tcc.Ano == Ano && tcc.Numero == Numero select new { tcc.Seq, tcc.Ccusto, cc.Descricao,cc.Telefone });
                     foreach (var query in reg5) {
                         TramiteStruct Linha = new TramiteStruct {
                             Seq = query.Seq,
                             CentroCustoCodigo = Convert.ToInt16(query.Ccusto),
-                            CentroCustoNome = query.Descricao
+                            CentroCustoNome = query.Descricao,
+                            Telefone=query.Telefone
                         };
                         Lista.Add(Linha);
                     }
