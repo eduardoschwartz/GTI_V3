@@ -24,10 +24,7 @@
             <asp:Label ID="lblMsg" runat="server" ForeColor="Red"></asp:Label>
             <br />
             <br />
-            <asp:HyperLink ID="HyperLink1" runat="server" Font-Size="Small" NavigateUrl="~/Pages/SegundaViaVS.aspx">Emitir carnê de outra empresa</asp:HyperLink>
-            <br />
-            <br />
-            <asp:HyperLink ID="HyperLink2" runat="server" Font-Size="Small" NavigateUrl="~/Pages/gtiMenu.aspx">Voltar ao menu principal</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink1" runat="server" Font-Size="Small" NavigateUrl="~/Pages/SegundaViaVS.aspx?d=gti">Emitir carnê de outra empresa</asp:HyperLink>
             <br />
         </div>
         <br />

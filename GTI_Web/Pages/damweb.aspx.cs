@@ -13,8 +13,6 @@ namespace UIWeb.Pages {
         static bool bGerado;
         private bool bRefis;
         int nPlano = 0;
-        private static byte[] key = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
-        private static byte[] iv = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
 
 
         protected void Page_Load(object sender, EventArgs e) {
@@ -23,7 +21,14 @@ namespace UIWeb.Pages {
                 bGerado = false;
                 ShowResult(false);
                 String s = Request.QueryString["d"];
-                lblVenctoDam.Text =this.Decrypt(s);
+                try {
+                    lblVenctoDam.Text = gtiCore.Decrypt(s);
+                } catch (Exception) {
+
+                    Response.Redirect("~/Pages/gtiMenu.aspx");
+                }
+
+                
 
                 if (!DateTime.TryParse(lblVenctoDam.Text, out DataDAM)) {
                     Response.Redirect("~/Pages/gtiMenu.aspx");
@@ -690,16 +695,6 @@ namespace UIWeb.Pages {
             }
         }
 
-        private string Decrypt(string cipherText) {
-            SymmetricAlgorithm algorithm = DES.Create();
-            ICryptoTransform transform = algorithm.CreateDecryptor(key, iv);
-            byte[] inputbuffer = Convert.FromBase64String(cipherText);
-            byte[] outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
-            return Encoding.Unicode.GetString(outputBuffer);
-           
-        }
-
-
-
+ 
     }//end class
 }

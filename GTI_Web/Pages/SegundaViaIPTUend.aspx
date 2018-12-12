@@ -25,10 +25,8 @@
             <asp:Label ID="lblMsg" runat="server" ForeColor="Red"></asp:Label>
             <br />
             <br />
-            <asp:HyperLink ID="HyperLink1" runat="server" Font-Size="Small" NavigateUrl="~/Pages/SegundaViaIPTU.aspx">Emitir carnê de outro imóvel</asp:HyperLink>
-            <br />
-            <br />
-            <asp:HyperLink ID="HyperLink2" runat="server" Font-Size="Small" NavigateUrl="~/Pages/gtiMenu.aspx">Voltar ao menu principal</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink1" runat="server" Font-Size="Small" NavigateUrl="~/Pages/SegundaViaIPTU.aspx?d=gti">Emitir carnê de outro imóvel</asp:HyperLink>
+
             <br />
         </div>
         <br />

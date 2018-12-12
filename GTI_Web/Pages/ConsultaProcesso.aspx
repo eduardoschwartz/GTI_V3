@@ -57,7 +57,7 @@
                             </td>
                         <td style="width: 391px">
                             
-                            <asp:TextBox ID="TextBox1" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="6" Width="70px"  onKeyPress="return formata(this, '§§§§', event)"></asp:TextBox>
+                            <asp:TextBox ID="Ano" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="6" Width="70px"  onKeyPress="return formata(this, '§§§§', event)"></asp:TextBox>
                             &nbsp;
 
                     </tr>

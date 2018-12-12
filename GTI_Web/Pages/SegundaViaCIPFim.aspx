@@ -32,9 +32,6 @@
             <br />
             <asp:HyperLink ID="HyperLink1" runat="server" Font-Size="Small" NavigateUrl="~/Pages/SegundaViaIPTU.aspx">Emitir segunda via de outro imóvel</asp:HyperLink>
             <br />
-            <br />
-            <asp:HyperLink ID="HyperLink2" runat="server" Font-Size="Small" NavigateUrl="~/Pages/gtiMenu.aspx">Voltar ao menu principal</asp:HyperLink>
-            <br />
         </div>
         <br />
     

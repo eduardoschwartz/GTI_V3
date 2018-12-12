@@ -371,7 +371,9 @@ namespace GTI_Dal.Classes {
                            where c.Ano == nAno && c.Numero == nNumero select new ProcessoStruct { Ano= c.Ano,CodigoAssunto=c.Codassunto,AtendenteNome=u.Nomelogin,CentroCusto=(int)c.Centrocusto,
                            CodigoCidadao=(int)c.Codcidadao,Complemento=c.Complemento,DataArquivado=c.Dataarquiva,DataCancelado=c.Datacancel,DataEntrada=c.Dataentrada,DataReativacao=c.Datareativa,
                            DataSuspensao=c.Datasuspenso,Fisico=c.Fisico,Hora=c.Hora,Inscricao=(int)c.Insc,Interno=c.Interno,Numero=c.Numero,ObsArquiva=c.Obsa,
-                           ObsCancela=c.Obsc,ObsReativa=c.Obsr,ObsSuspensao=c.Obss,Observacao=c.Observacao,Origem=c.Origem,TipoEnd=c.Tipoend,AtendenteId=(int)u.Id}).First();
+                           ObsCancela=c.Obsc,ObsReativa=c.Obsr,ObsSuspensao=c.Obss,Observacao=c.Observacao,Origem=c.Origem,TipoEnd=c.Tipoend,AtendenteId=(int)u.Id}).FirstOrDefault();
+                if (reg == null)
+                    return null;
                 ProcessoStruct row = new ProcessoStruct {
                     AtendenteNome = reg.AtendenteNome,
                     AtendenteId=reg.AtendenteId,

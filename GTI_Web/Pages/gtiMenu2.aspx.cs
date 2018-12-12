@@ -8,10 +8,6 @@ namespace UIWeb.Pages {
     public partial class gtiMenu2 : System.Web.UI.Page {
         DateTime DataDAM;
 
-        private static byte[] key = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
-        private static byte[] iv = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
-
-
         protected void Page_Load(object sender, EventArgs e) {
             //txtVencto.Text = DateTime.Now.ToString("dd/MM/yyyy");
             String s = Request.QueryString["d"];
@@ -35,20 +31,10 @@ namespace UIWeb.Pages {
                         lblMsg.Text = "Vencimento máximo de 30 dias.";
                         return;
                     } else
-                        Response.Redirect("~/Pages/damweb.aspx?d=" + HttpUtility.UrlEncode(this.Encrypt(DataDAM.ToString("dd/MM/yyyy"))));
+                        Response.Redirect("~/Pages/damweb.aspx?d=" + HttpUtility.UrlEncode(gtiCore.Encrypt(DataDAM.ToString("dd/MM/yyyy"))));
                 }
             }
         }
 
-
-
-        private string Encrypt(string clearText) {
-            SymmetricAlgorithm algorithm = DES.Create();
-            ICryptoTransform transform = algorithm.CreateEncryptor(key, iv);
-            byte[] inputbuffer = Encoding.Unicode.GetBytes(clearText);
-            byte[] outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
-            return Convert.ToBase64String(outputBuffer);
-           
-        }
     }
 }
