@@ -15,6 +15,10 @@ namespace UIWeb.Pages {
             if (!IsPostBack) {
                 lblMsg.Text = "";
                 txtCod.Text = "";
+                String s = Request.QueryString["d"];
+                if (s != "gti")
+                    Response.Redirect("~/Pages/gtiMenu.aspx");
+
             }
         }
 

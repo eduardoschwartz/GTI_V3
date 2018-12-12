@@ -5,8 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace UIWeb.Pages {
-    public partial class envioDeca : System.Web.UI.Page {
+namespace GTI_Web.Pages {
+    public partial class ConsultaProcesso : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
             String s = Request.QueryString["d"];
             if (s != "gti")
@@ -14,9 +14,8 @@ namespace UIWeb.Pages {
 
         }
 
-        protected void btAcesso_Click(object sender, EventArgs e) {
-            if(txtAcesso.Text.ToUpper()=="VREGTI")
-                Response.Redirect("~/Pages/readVRExml.aspx");
+        protected void VerificarButton_Click(object sender, EventArgs e) {
+
         }
     }
 }

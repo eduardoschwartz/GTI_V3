@@ -12,9 +12,11 @@ using UIWeb;
 namespace GTI_Web.Pages {
     public partial class alvara_funcionamento : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
-
+            String s = Request.QueryString["d"];
+            if (s != "gti")
+                Response.Redirect("~/Pages/gtiMenu.aspx");
         }
-      
+
         private void EmiteAlvara(int Codigo) {
 
             lblmsg.Text = "";

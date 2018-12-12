@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Pages/default.Master" AutoEventWireup="true" CodeBehind="SegundaViaVS.aspx.cs" Inherits="GTI_Web.Pages.SegundaViaVS" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Pages/default.Master" AutoEventWireup="true" CodeBehind="ConsultaProcesso.aspx.cs" Inherits="GTI_Web.Pages.ConsultaProcesso" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MenuContentPlaceHolder" runat="server">
-            <link href="../css/gti.css" rel="stylesheet" />
+        <link href="../css/gti.css" rel="stylesheet" />
     <script>
 
         function formata(campo, mask, evt) {
@@ -39,37 +39,28 @@
             
             &nbsp;<br />
             <br />
-            Impressão do carnê de Vigilância Sanitária - 2019.<br />
+            Consulta de Processos.<br />
             <br />
             <asp:Panel ID="Panel2" runat="server" ForeColor="Black" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" Width="685px">
                 <table style="width: 100%;">
                    
                     
                     <tr>
-                        <td class="panel" style="width: 115px; text-align: right;"><asp:Label ID="lblCod" runat="server" Text="Inscrição Municipal.:"></asp:Label>
+                        <td class="panel" style="width: 170px; text-align: right;"><asp:Label ID="lblCod" runat="server" Text="Nº do processo.:"></asp:Label>
+                            </td>
+                        <td style="width: 107px">
+                            
+                            <asp:TextBox ID="Numero" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="7" Width="70px"  onKeyPress="return formata(this, '§§§§§-§', event)"></asp:TextBox>
+                            &nbsp;
+
+                        <td class="panel" style="width: 153px; text-align: right;"><asp:Label ID="Label1" runat="server" Text="Ano do processo.:"></asp:Label>
                             </td>
                         <td style="width: 391px">
                             
-                            <asp:TextBox ID="Codigo" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="6" Width="70px"  onKeyPress="return formata(this, '§§§§§§', event)"></asp:TextBox>
+                            <asp:TextBox ID="TextBox1" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="6" Width="70px"  onKeyPress="return formata(this, '§§§§', event)"></asp:TextBox>
                             &nbsp;
 
-                        
                     </tr>
-                    <tr>
-                        <td class="panel" style="height: 51px; width: 115px;">&nbsp;
-                        <asp:RadioButton ID="optCPF" runat="server" AutoPostBack="True" Checked="True" GroupName="optDoc" OnCheckedChanged="optCPF_CheckedChanged" Text="CPF" />
-                        &nbsp;&nbsp;
-                        <asp:RadioButton ID="optCNPJ" runat="server" AutoPostBack="True" GroupName="optDoc" OnCheckedChanged="optCNPJ_CheckedChanged" Text="CNPJ" />
-                        </td> <td class="panel" style="height: 51px">&nbsp;&nbsp;
-                         <asp:Label ID="Label3" runat="server" Text="CPF/CNPJ:"></asp:Label>
-                            &nbsp;
-                        &nbsp;
-                            <asp:TextBox ID="txtCPF" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="14" Width="158px" TabIndex="1"  onKeyPress="return formata(this, '§§§.§§§.§§§-§§', event)" OnTextChanged="txtCPF_TextChanged"></asp:TextBox>
-                            
-                            <asp:TextBox ID="txtCNPJ" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="18" onKeyPress="return formata(this, '§§.§§§.§§§/§§§§-§§', event)" TabIndex="1" Visible="False" Width="166px" OnTextChanged="txtCNPJ_TextChanged"></asp:TextBox>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                         
-                        </td></tr>
 
                   
                 </table>

@@ -118,6 +118,7 @@
     <Content Include="Pages\certidaovalorvenal.aspx" />
     <Content Include="Pages\cip.aspx" />
     <Content Include="Pages\cipendereco.aspx" />
+    <Content Include="Pages\ConsultaProcesso.aspx" />
     <Content Include="Pages\cpv_pagto.aspx" />
     <Content Include="Pages\dadosEmpresa.aspx" />
     <Content Include="Pages\damweb.aspx" />
@@ -263,6 +264,13 @@
     </Compile>
     <Compile Include="Pages\cipendereco.aspx.designer.cs">
       <DependentUpon>cipendereco.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ConsultaProcesso.aspx.cs">
+      <DependentUpon>ConsultaProcesso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ConsultaProcesso.aspx.designer.cs">
+      <DependentUpon>ConsultaProcesso.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\cpv_pagto.aspx.cs">
       <DependentUpon>cpv_pagto.aspx</DependentUpon>

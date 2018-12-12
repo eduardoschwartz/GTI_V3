@@ -11,6 +11,10 @@ namespace UIWeb.Pages {
         protected void Page_Load(object sender, EventArgs e) {
             lblMsg.Text = "";
             if (!IsPostBack) {
+                String s = Request.QueryString["d"];
+                if (s != "gti")
+                    Response.Redirect("~/Pages/gtiMenu.aspx");
+
                 if (Session["sid"] != null && Session["sid"].ToString() != "") {
                     Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
                     List<Boletoguia> ListaBoleto = tributario_Class.Lista_Boleto_Guia(Convert.ToInt32(Session["sid"]));

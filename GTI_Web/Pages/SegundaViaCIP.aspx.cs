@@ -7,6 +7,9 @@ using System.Collections.Generic;
 namespace UIWeb.Pages {
     public partial class SegundaViaCIP : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
+            String s = Request.QueryString["d"];
+            if (s != "gti")
+                Response.Redirect("~/Pages/gtiMenu.aspx");
 
         }
 

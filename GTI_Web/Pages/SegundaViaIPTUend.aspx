@@ -8,7 +8,7 @@
             <br />
             &nbsp;<br />
             
-            Emissão de segunda via do carnê de IPTU - 2019<br />
+            Impressão do carnê de IPTU - 2019<br />
             <br />
             <br />
             <asp:Label ID="Label6" runat="server" Font-Size="Small" Text="Código do imóvel:"></asp:Label>
@@ -25,7 +25,7 @@
             <asp:Label ID="lblMsg" runat="server" ForeColor="Red"></asp:Label>
             <br />
             <br />
-            <asp:HyperLink ID="HyperLink1" runat="server" Font-Size="Small" NavigateUrl="~/Pages/SegundaViaIPTU.aspx">Emitir segunda via de outro imóvel</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink1" runat="server" Font-Size="Small" NavigateUrl="~/Pages/SegundaViaIPTU.aspx">Emitir carnê de outro imóvel</asp:HyperLink>
             <br />
             <br />
             <asp:HyperLink ID="HyperLink2" runat="server" Font-Size="Small" NavigateUrl="~/Pages/gtiMenu.aspx">Voltar ao menu principal</asp:HyperLink>

@@ -11,6 +11,10 @@ namespace GTI_Web.Pages {
         protected void Page_Load(object sender, EventArgs e) {
             lblMsg.Text = "";
             if (!IsPostBack) {
+                String s = Request.QueryString["d"];
+                if (s != "gti")
+                    Response.Redirect("~/Pages/gtiMenu.aspx");
+
                 if (Session["sid"] != null && Session["sid"].ToString() != "") {
                     Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
                     List<Boletoguia> ListaBoleto = tributario_Class.Lista_Boleto_Guia(Convert.ToInt32(Session["sid"]));
@@ -44,11 +48,14 @@ namespace GTI_Web.Pages {
                 tributario_Class.Insert_Carne_Web(_codigo, 2019);
                 DataSet Ds = gtiCore.ToDataSet(ListaBoleto);
                 ReportDataSource rdsAct = new ReportDataSource("dsBoletoGuia", Ds.Tables[0]);
-                ReportDataSource rdsCnae = new ReportDataSource("dsMobiliarioAtividadeVS", Ds.Tables[0]);
+                DataTable DataTable1 = GetData(_codigo);
+                ReportDataSource rdsCnae = new ReportDataSource("dsMobiliarioAtividadeVS", DataTable1);
                 ReportViewer viewer = new ReportViewer();
                 viewer.LocalReport.Refresh();
                 viewer.LocalReport.ReportPath = "Report/Carne_VS.rdlc";
                 viewer.LocalReport.DataSources.Add(rdsAct); // Add  datasource here       
+
+                
                 viewer.LocalReport.DataSources.Add(rdsCnae); // Add  datasource here       
 
                 Empresa_bll empresa_Class = new Empresa_bll("GTIconnection");

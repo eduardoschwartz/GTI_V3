@@ -10,7 +10,12 @@ using static GTI_Models.modelCore;
 namespace GTI_Web.Pages {
     public partial class certidaodebito : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
+
             lblMsg.Text = "";
+            String s = Request.QueryString["d"];
+            if (s != "gti")
+                Response.Redirect("~/Pages/gtiMenu.aspx");
+
         }
 
         protected void btPrint_Click(object sender, EventArgs e) {

@@ -11,9 +11,12 @@ namespace UIWeb.Pages {
     public partial class readVRExml : System.Web.UI.Page {
         DataTable dt = new DataTable();
         protected void Page_Load(object sender, EventArgs e) {
+            String s = Request.QueryString["d"];
+            if (s != "gti")
+                Response.Redirect("~/Pages/gtiMenu.aspx");
 
         }
-        
+
         protected void btEnviar_Click(object sender, EventArgs e) {
             if (!FileUpload1.HasFile) {
                 Statuslbl.Text = "Selecione um arquivo para enviar";

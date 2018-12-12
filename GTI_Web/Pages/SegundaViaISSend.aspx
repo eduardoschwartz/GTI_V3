@@ -7,7 +7,7 @@
             <br />
             &nbsp;<br />
             
-            Emissão de segunda via do carnê de ISS/Taxa de Licença - 2019<br />
+            Impressão do carnê de ISS/Taxa de Licença - 2019<br />
             <br />
             <br />
             <asp:Label ID="Label6" runat="server" Font-Size="Small" Text="Inscrição Municipal: "></asp:Label>
@@ -24,7 +24,7 @@
             <asp:Label ID="lblMsg" runat="server" ForeColor="Red"></asp:Label>
             <br />
             <br />
-            <asp:HyperLink ID="HyperLink1" runat="server" Font-Size="Small" NavigateUrl="~/Pages/SegundaViaISS.aspx">Emitir segunda via de outra empresa</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink1" runat="server" Font-Size="Small" NavigateUrl="~/Pages/SegundaViaISS.aspx">Emitir carnê de outra empresa</asp:HyperLink>
             <br />
             <br />
             <asp:HyperLink ID="HyperLink2" runat="server" Font-Size="Small" NavigateUrl="~/Pages/gtiMenu.aspx">Voltar ao menu principal</asp:HyperLink>

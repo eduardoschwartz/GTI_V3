@@ -8,7 +8,10 @@ using GTI_Models.Models;
 namespace GTI_Web.Pages {
     public partial class cpv_pagto : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
-        
+            String s = Request.QueryString["d"];
+            if (s != "gti")
+                Response.Redirect("~/Pages/gtiMenu.aspx");
+
         }
 
         protected void Submit_Click(object sender, EventArgs e) {

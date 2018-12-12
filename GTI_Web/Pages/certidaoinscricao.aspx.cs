@@ -14,6 +14,10 @@ namespace GTI_Web.Pages {
     public partial class certidaoinscricao : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
             lblMsg.Text = "";
+            String s = Request.QueryString["d"];
+            if (s != "gti")
+                Response.Redirect("~/Pages/gtiMenu.aspx");
+
         }
 
         protected void optCPF_CheckedChanged(object sender, EventArgs e) {

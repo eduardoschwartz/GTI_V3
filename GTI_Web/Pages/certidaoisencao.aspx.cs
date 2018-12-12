@@ -10,6 +10,9 @@ using System.Web;
 namespace GTI_Web.Pages {
     public partial class certidaoisencao : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
+            String s = Request.QueryString["d"];
+            if (s != "gti")
+                Response.Redirect("~/Pages/gtiMenu.aspx");
 
         }
 

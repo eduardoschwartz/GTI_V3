@@ -11,6 +11,10 @@ namespace GTI_Web.Pages {
 
         protected void Page_Load(object sender, EventArgs e) {
             lblMsg.Text = "";
+            String s = Request.QueryString["d"];
+            if (s != "gti")
+                Response.Redirect("~/Pages/gtiMenu.aspx");
+
         }
 
 
@@ -253,7 +257,7 @@ namespace GTI_Web.Pages {
                                     _index++;
                                 }
                                 Session["sid"] = nSid;
-                                Response.Redirect("~/Pages/SegundaViaISSend.aspx");
+                                Response.Redirect("~/Pages/SegundaViaISSend.aspx?d=gti");
 
                             }
 

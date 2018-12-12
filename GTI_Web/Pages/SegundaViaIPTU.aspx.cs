@@ -6,6 +6,10 @@ using System.Collections.Generic;
 namespace UIWeb {
     public partial class SegundaViaIPTU : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
+            String s = Request.QueryString["d"];
+            if (s != "gti")
+                Response.Redirect("~/Pages/gtiMenu.aspx");
+
         }
 
         protected void btPrint_Click(object sender, EventArgs e) {
@@ -50,7 +54,7 @@ namespace UIWeb {
             int nSid=gravaCarne();
             if (nSid > 0) {
                 Session["sid"] = nSid;
-                Response.Redirect("~/Pages/SegundaViaIPTUend.aspx");
+                Response.Redirect("~/Pages/SegundaViaIPTUend.aspx?d=gti");
             }
         }
 
