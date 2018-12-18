@@ -114,6 +114,7 @@
     <Compile Include="Models\categprop.cs" />
     <Compile Include="Models\mobiliariocnae.cs" />
     <Compile Include="Models\mobiliarioendentrega.cs" />
+    <Compile Include="Models\mobiliariohist.cs" />
     <Compile Include="Models\mobiliarioplaca.cs" />
     <Compile Include="Models\numdocumento.cs" />
     <Compile Include="Models\obsparcela.cs" />

@@ -385,18 +385,22 @@ namespace GTI_Desktop.Forms {
         }
 
         private void MnuEmpresa_Click(object sender, EventArgs e) {
-            gtiCore.Ocupado(this);
-            var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Empresa);
-            if (formToShow != null) {
-                formToShow.Show();
-            } else {
-                Empresa f1 = new Empresa {
-                    Tag = "Menu",
-                    MdiParent = this
-                };
-                f1.Show();
-            }
-            gtiCore.Liberado(this);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroEmpresa);
+            if (bAllow) {
+                gtiCore.Ocupado(this);
+                var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Empresa);
+                if (formToShow != null) {
+                    formToShow.Show();
+                } else {
+                    Empresa f1 = new Empresa {
+                        Tag = "Menu",
+                        MdiParent = this
+                    };
+                    f1.Show();
+                }
+                gtiCore.Liberado(this);
+            }else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void BtMobiliario_Click(object sender, EventArgs e) {

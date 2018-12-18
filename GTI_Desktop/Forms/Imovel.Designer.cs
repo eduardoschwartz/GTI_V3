@@ -1412,7 +1412,7 @@
             this.ZoomHistoricoButton});
             this.HistoricoBar.Location = new System.Drawing.Point(381, 185);
             this.HistoricoBar.Name = "HistoricoBar";
-            this.HistoricoBar.Size = new System.Drawing.Size(95, 25);
+            this.HistoricoBar.Size = new System.Drawing.Size(126, 25);
             this.HistoricoBar.TabIndex = 178;
             this.HistoricoBar.Text = "toolStrip1";
             // 
@@ -2414,10 +2414,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(762, 377);
-            this.Controls.Add(this.AreaPnl);
             this.Controls.Add(this.TopPanel);
             this.Controls.Add(this.ImovelTab);
             this.Controls.Add(this.BarToolStrip);
+            this.Controls.Add(this.AreaPnl);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;

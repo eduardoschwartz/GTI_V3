@@ -635,5 +635,15 @@ namespace GTI_Bll.Classes {
             return obj.Lista_AtividadeISS_Empresa(nCodigo);
         }
 
+        /// <summary>
+        /// Lista do histórico da empresa
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public List<MobiliarioHistoricoStruct> Lista_Empresa_Historico(int Codigo) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Lista_Empresa_Historico(Codigo);
+        }
+
     }
 }

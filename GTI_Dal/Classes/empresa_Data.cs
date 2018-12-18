@@ -274,7 +274,7 @@ namespace GTI_Dal.Classes {
 
         public bool Empresa_Simples(int Codigo,DateTime Data) {
             using (GTI_Context db = new GTI_Context(_connection)) {
-                short nRet = db.Database.SqlQuery<short>("SELECT dbo.RETORNASN2(@Codigo,@Data)", new SqlParameter("@Codigo", Codigo), new SqlParameter("@Data", Data)).Single();
+                short nRet = db.Database.SqlQuery<short>("SELECT dbo.RETORNASN(@Codigo,@Data)", new SqlParameter("@Codigo", Codigo), new SqlParameter("@Data", Data)).Single();
                 return nRet == 1 ? true : false;
             }
         }
@@ -493,6 +493,27 @@ namespace GTI_Dal.Classes {
                 }
 
                 return row;
+            }
+        }
+
+        public List<MobiliarioHistoricoStruct> Lista_Empresa_Historico(int Codigo) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var Sql = (from m in db.Mobiliariohist
+                           join u in db.Usuario on m.Userid equals u.Id where m.Codmobiliario == Codigo
+                           orderby m.Datahist select new MobiliarioHistoricoStruct { Codigo=Codigo,Seq=m.Seq,Data=m.Datahist,Observacao=m.Obs,Usuario_id=m.Userid,Usuario_Nome=u.Nomelogin }).ToList();
+                List<MobiliarioHistoricoStruct> Lista = new List<MobiliarioHistoricoStruct>();
+                foreach (MobiliarioHistoricoStruct item in Sql) {
+                    MobiliarioHistoricoStruct reg = new MobiliarioHistoricoStruct();
+                    reg.Codigo = Codigo;
+                    reg.Seq = item.Seq;
+                    reg.Data = item.Data;
+                    reg.Observacao = item.Observacao;
+                    reg.Usuario_id = item.Usuario_id == null ? 0 : item.Usuario_id;
+                    reg.Usuario_Nome = item.Usuario_Nome.ToString();
+                    Lista.Add(reg);
+                }
+
+                return Lista;
             }
         }
 

@@ -106,6 +106,9 @@ namespace GTI_Desktop.Forms {
             AtividadePrincipalButton.Enabled = !bStart;
             CnaeButton.Enabled = !bStart;
             AtividadeISSButton.Enabled = !bStart;
+            AddHistoricoButton.Enabled = !bStart;
+            EditHistoricoButton.Enabled = !bStart;
+            DelHistoricoButton.Enabled = !bStart;
         }
 
         private void ClearFields() {
@@ -184,6 +187,7 @@ namespace GTI_Desktop.Forms {
             if(Lista_Cnae!=null) Lista_Cnae.Clear();
             if (Lista_Cnae_VS != null) Lista_Cnae_VS.Clear();
             Cnae.Text = "";
+            HistoricoListView.Items.Clear();
         }
 
         private void CarregaLista() {
@@ -526,6 +530,18 @@ Inicio:;
                     }
                 }
             }
+            
+            //Preenche lista de Histórico
+            List<MobiliarioHistoricoStruct> Lista_Hist = empresa_Class.Lista_Empresa_Historico(Codigo);
+            foreach (MobiliarioHistoricoStruct item in Lista_Hist) {
+                ListViewItem lvItem = new ListViewItem(item.Data.ToString("dd/MM/yyyy"));
+                lvItem.SubItems.Add(item.Seq.ToString("000"));
+                lvItem.SubItems.Add(item.Observacao);
+                lvItem.SubItems.Add(item.Usuario_Nome);
+                lvItem.SubItems.Add( item.Usuario_id.ToString());
+                HistoricoListView.Items.Add(lvItem);
+            }
+
 
         }
 
@@ -812,8 +828,68 @@ Inicio:;
             }
         }
 
+        private void ZoomHistoricoButton_Click(object sender, EventArgs e) {
+            if (HistoricoListView.SelectedItems.Count > 0) {
+                string sData = HistoricoListView.SelectedItems[0].SubItems[1].Text;
+                string sTexto = HistoricoListView.SelectedItems[0].SubItems[2].Text;
+                ZoomBox f1 = new ZoomBox("Histórico da empresa de " + sData, this, sTexto, true);
+                f1.ShowDialog();
+            } else
+                MessageBox.Show("Selecione um histórico.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
-                
-       
+        private void EditHistoricoButton_Click(object sender, EventArgs e) {
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroEmpresa_Alterar_Historico);
+            if (bAllow) {
+                if (HistoricoListView.SelectedItems.Count > 0) {
+                    string sData = HistoricoListView.SelectedItems[0].SubItems[1].Text;
+                    string sTexto = HistoricoListView.SelectedItems[0].SubItems[2].Text;
+                    ZoomBox f1 = new ZoomBox("Histórico da empresa de " + sData, this, sTexto, false);
+                    f1.ShowDialog();
+                    Sistema_bll sistema_Class = new Sistema_bll(_connection);
+                    string sLogin = Properties.Settings.Default.LastUser;
+                    HistoricoListView.SelectedItems[0].SubItems[1].Text = DateTime.Now.ToString("dd/MM/yyyy");
+                    HistoricoListView.SelectedItems[0].SubItems[2].Text = f1.ReturnText;
+                    HistoricoListView.SelectedItems[0].SubItems[3].Text = sistema_Class.Retorna_User_FullName(sLogin);
+                    HistoricoListView.SelectedItems[0].Tag = sistema_Class.Retorna_User_LoginId(sLogin).ToString();
+                } else
+                    MessageBox.Show("Selecione um histórico.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void AddHistoricoButton_Click(object sender, EventArgs e) {
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroEmpresa_Alterar_Historico);
+            if (bAllow) {
+                if (HistoricoListView.SelectedItems.Count > 0) {
+                    string sData = DateTime.Now.ToString("dd/MM/yyyy");
+                    ZoomBox f1 = new ZoomBox("Histórico da empresa de " + sData, this, "", false);
+                    f1.ShowDialog();
+                    if (f1.ReturnText != "") {
+                        Sistema_bll sistema_Class = new Sistema_bll(_connection);
+                        ListViewItem lvItem = new ListViewItem((HistoricoListView.Items.Count + 1).ToString("000"));
+                        lvItem.SubItems.Add(sData);
+                        lvItem.SubItems.Add(f1.ReturnText);
+                        string sLogin = Properties.Settings.Default.LastUser;
+                        lvItem.SubItems.Add(sistema_Class.Retorna_User_FullName(sLogin));
+                        lvItem.Tag = sistema_Class.Retorna_User_LoginId(sLogin).ToString();
+                        HistoricoListView.Items.Add(lvItem);
+                    }
+                } else
+                    MessageBox.Show("Selecione um histórico.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void DelHistoricoButton_Click(object sender, EventArgs e) {
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroEmpresa_Alterar_Historico);
+            if (bAllow) {
+                if (HistoricoListView.SelectedItems.Count > 0) {
+                    HistoricoListView.Items.Remove(HistoricoListView.SelectedItems[0]);
+                } else
+                    MessageBox.Show("Selecione um histórico.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 }

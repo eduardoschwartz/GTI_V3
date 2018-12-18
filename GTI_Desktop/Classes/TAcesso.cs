@@ -29,6 +29,10 @@
         Registro_Bancario=27,
         Atividade_Empresa=28,
         Calculo_Imposto=29,
-        Comunicado_Isencao=30
+        Comunicado_Isencao=30,
+        CadastroEmpresa=31,
+        CadastroEmpresa_Alterar_Total=32,
+        CadastroEmpresa_Alterar_Historico=33,
+        CadastroEmpresa_Exclusao
     }
 }
