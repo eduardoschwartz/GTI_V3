@@ -286,6 +286,7 @@ namespace GTI_Dal.Classes {
                            join c in db.Cidade on new { p1 = (short)m.Codcidade, p2 = m.Siglauf } equals new { p1 = c.Codcidade, p2 = c.Siglauf } into mc from c in mc.DefaultIfEmpty()
                            join l in db.Logradouro on m.Codlogradouro equals l.Codlogradouro into lm from l in lm.DefaultIfEmpty()
                            join h in db.Horariofunc on m.Horario equals h.Codhorario into hm from h in hm.DefaultIfEmpty()
+                           join a in db.Atividade on m.Codatividade equals a.Codatividade into am from a in am.DefaultIfEmpty()
                            join p in db.Cidadao on m.Codprofresp equals p.Codcidadao into mp from p in mp.DefaultIfEmpty()
                            where m.Codigomob == Codigo
                            select new EmpresaStruct{Codigo= m.Codigomob, Razao_social= m.Razaosocial,Nome_fantasia=m.Nomefantasia,Endereco_codigo=m.Codlogradouro,Endereco_nome= l.Endereco,Numero=  m.Numero,Complemento= m.Complemento,
@@ -300,7 +301,7 @@ namespace GTI_Dal.Classes {
                                                     Dispensa_ie_processo=m.Dispensaieproc,Data_alvara_provisorio=m.Dtalvaraprovisorio,Senha_iss=m.Senhaiss,Inscricao_temporaria=m.Insctemp,Horas_24=m.Horas24,Isento_iss=m.Isentoiss,
                                                     Bombonieri=m.Bombonieri,Emite_nf=m.Emitenf,Danfe=m.Danfe,Imovel=m.Imovel,Sil=m.Sil,Substituto_tributario_issqn=m.Substituto_tributario_issqn,Individual=m.Individual,
                                                     Ponto_agencia=m.Ponto_agencia,Cadastro_vre=m.Cadastro_vre,Liberado_vre=m.Liberado_vre,Cpf=m.Cpf,Cnpj=m.Cnpj,Prof_responsavel_registro=m.Numregistroresp,
-                                                    Prof_responsavel_conselho=m.Nomeorgao,prof_responsavel_nome=p.Nomecidadao,Horario_Nome=h.Deschorario
+                                                    Prof_responsavel_conselho=m.Nomeorgao,prof_responsavel_nome=p.Nomecidadao,Horario_Nome=h.Deschorario,Atividade_nome=a.Descatividade
                            }).FirstOrDefault();
 
 
@@ -370,9 +371,13 @@ namespace GTI_Dal.Classes {
                 row.Email_contato = reg.Email_contato ?? "";
                 row.Fone_contato = reg.Fone_contato ?? "";
                 row.Area = reg.Area == 0 ? 0 : Convert.ToSingle(reg.Area);
-                
 
+                row.Qtde_profissionais = reg.Qtde_profissionais;
+                row.Codigo_aliquota = reg.Codigo_aliquota;
+                row.Atividade_codigo = reg.Atividade_codigo;
+                row.Atividade_nome = reg.Atividade_nome ?? "";
                 row.Atividade_extenso = reg.Atividade_extenso ?? "";
+
                 row.Cep = reg.Cep==null?"00000-000":reg.Cep;
                 if (reg.Cidade_codigo == 413) {
                     Endereco_Data Cep_Class = new Endereco_Data(_connection);
@@ -694,6 +699,28 @@ namespace GTI_Dal.Classes {
                     return ex;
                 }
                 return null;
+            }
+        }
+
+        public List<MobiliarioAtividadeISSStruct> Lista_AtividadeISS_Empresa(int nCodigo) {
+            List<MobiliarioAtividadeISSStruct> Lista = new List<MobiliarioAtividadeISSStruct>();
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var rows = (from m in db.Mobiliarioatividadeiss join a in db.Atividadeiss on m.Codatividade equals a.Codatividade 
+                            where m.Codmobiliario == nCodigo
+                            select new  MobiliarioAtividadeISSStruct{Codigo_empresa=  m.Codmobiliario,Codigo_atividade=m.Codatividade,Codigo_tributo =m.Codtributo,
+                                                                     Descricao =a.Descatividade,Item=a.Item,Quantidade=m.Qtdeiss,Valor=m.Valoriss });
+                foreach (var reg in rows) {
+                    MobiliarioAtividadeISSStruct Linha = new MobiliarioAtividadeISSStruct();
+                    Linha.Codigo_empresa = reg.Codigo_empresa;
+                    Linha.Codigo_atividade = reg.Codigo_atividade;
+                    Linha.Codigo_tributo = reg.Codigo_tributo;
+                    Linha.Descricao = reg.Descricao;
+                    Linha.Quantidade = reg.Quantidade;
+                    Linha.Valor = reg.Valor;
+                    Linha.Item = reg.Item;
+                    Lista.Add(Linha);
+                }
+                return Lista;
             }
         }
 

@@ -126,5 +126,6 @@ namespace GTI_Dal {
         public DbSet<Calculo_resumo> Calculo_iss_vs { get; set; }
         public DbSet<Alvara_funcionamento> Alvara_funcionamento { get; set; }
         public DbSet<Comunicado_isencao> Comunicado_Isencao { get; set; }
+        public DbSet<Atividadeiss> Atividadeiss { get; set; }
     }
 }

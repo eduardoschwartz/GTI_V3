@@ -5,7 +5,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
-using Microsoft.Office.Interop.Excel;
 using System.Windows.Forms;
 
 namespace GTI_Desktop.Forms {
@@ -141,37 +140,37 @@ namespace GTI_Desktop.Forms {
             }) {
                 if (sfd.ShowDialog() == DialogResult.OK) {
                     gtiCore.Ocupado(this);
-                    Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
-                    Workbook wb = app.Workbooks.Add(XlSheetType.xlWorksheet);
-                    Worksheet ws = (Worksheet)app.ActiveSheet;
-                    app.Visible = false;
-                    ws.Cells[1, 1] = "Ano";
-                    ws.Cells[1, 2] = "Número";
-                    ws.Cells[1, 3] = "Assunto";
-                    ws.Cells[1, 4] = "Requerente";
-                    ws.Cells[1, 5] = "Dt.Entrada";
-                    ws.Cells[1, 6] = "Último Trâmite";
-                    ws.Cells[1, 7] = "Último Despacho";
-                    ws.Cells[1, 8] = "Dias";
-                    ws.Cells[1, 9] = "Próximo Trâmite";
+                    //Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
+                    //Workbook wb = app.Workbooks.Add(XlSheetType.xlWorksheet);
+                    //Worksheet ws = (Worksheet)app.ActiveSheet;
+                    //app.Visible = false;
+                    //ws.Cells[1, 1] = "Ano";
+                    //ws.Cells[1, 2] = "Número";
+                    //ws.Cells[1, 3] = "Assunto";
+                    //ws.Cells[1, 4] = "Requerente";
+                    //ws.Cells[1, 5] = "Dt.Entrada";
+                    //ws.Cells[1, 6] = "Último Trâmite";
+                    //ws.Cells[1, 7] = "Último Despacho";
+                    //ws.Cells[1, 8] = "Dias";
+                    //ws.Cells[1, 9] = "Próximo Trâmite";
 
-                    int r = 2;
-                    for (int i = 0; i < MainListView.VirtualListSize; i++) {
-                        ws.Cells[i + r, 1] = MainListView.Items[i].Text;
-                        ws.Cells[i + r, 2] = MainListView.Items[i].SubItems[1].Text;
-                        ws.Cells[i + r, 3] = MainListView.Items[i].SubItems[2].Text;
-                        ws.Cells[i + r, 4] = MainListView.Items[i].SubItems[3].Text;
-                        ws.Cells[i + r, 5] = MainListView.Items[i].SubItems[4].Text;
-                        ws.Cells[i + r, 6] = MainListView.Items[i].SubItems[5].Text;
-                        ws.Cells[i + r, 7] = MainListView.Items[i].SubItems[6].Text;
-                        ws.Cells[i + r, 8] = MainListView.Items[i].SubItems[7].Text;
-                        ws.Cells[i + r, 9] = MainListView.Items[i].SubItems[8].Text;
-                    }
+                    //int r = 2;
+                    //for (int i = 0; i < MainListView.VirtualListSize; i++) {
+                    //    ws.Cells[i + r, 1] = MainListView.Items[i].Text;
+                    //    ws.Cells[i + r, 2] = MainListView.Items[i].SubItems[1].Text;
+                    //    ws.Cells[i + r, 3] = MainListView.Items[i].SubItems[2].Text;
+                    //    ws.Cells[i + r, 4] = MainListView.Items[i].SubItems[3].Text;
+                    //    ws.Cells[i + r, 5] = MainListView.Items[i].SubItems[4].Text;
+                    //    ws.Cells[i + r, 6] = MainListView.Items[i].SubItems[5].Text;
+                    //    ws.Cells[i + r, 7] = MainListView.Items[i].SubItems[6].Text;
+                    //    ws.Cells[i + r, 8] = MainListView.Items[i].SubItems[7].Text;
+                    //    ws.Cells[i + r, 9] = MainListView.Items[i].SubItems[8].Text;
+                    //}
 
-                    ws.Columns.AutoFit();
-                    wb.SaveAs(sfd.FileName, XlFileFormat.xlWorkbookNormal, Type.Missing, Type.Missing, false, false, XlSaveAsAccessMode.xlNoChange,
-                                XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
-                    app.Quit();
+                    //ws.Columns.AutoFit();
+                    //wb.SaveAs(sfd.FileName, XlFileFormat.xlWorkbookNormal, Type.Missing, Type.Missing, false, false, XlSaveAsAccessMode.xlNoChange,
+                    //            XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
+                    //app.Quit();
                     gtiCore.Liberado(this);
                     MessageBox.Show("Seus dados foram exportados para o Excel com sucesso.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

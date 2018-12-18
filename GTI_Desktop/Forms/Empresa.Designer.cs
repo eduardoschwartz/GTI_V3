@@ -59,6 +59,7 @@
             this.CnaeVSButton = new System.Windows.Forms.Button();
             this.CnaeButton = new System.Windows.Forms.Button();
             this.AtividadePrincipalButton = new System.Windows.Forms.Button();
+            this.CnaeVSDelButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.DGtab = new System.Windows.Forms.TabPage();
             this.SilToolStrip = new System.Windows.Forms.ToolStrip();
@@ -220,17 +221,17 @@
             this.a1Panel10 = new Owf.Controls.A1Panel();
             this.AtividadeISSListView = new System.Windows.Forms.ListView();
             this.label80 = new System.Windows.Forms.Label();
-            this.button9 = new System.Windows.Forms.Button();
+            this.AtividadeISSButton = new System.Windows.Forms.Button();
             this.a1Panel9 = new Owf.Controls.A1Panel();
             this.Cnae = new System.Windows.Forms.TextBox();
             this.label73 = new System.Windows.Forms.Label();
-            this.textBox29 = new System.Windows.Forms.TextBox();
+            this.QtdeProfissional = new System.Windows.Forms.TextBox();
             this.label72 = new System.Windows.Forms.Label();
-            this.textBox28 = new System.Windows.Forms.TextBox();
+            this.Area = new System.Windows.Forms.TextBox();
             this.label71 = new System.Windows.Forms.Label();
-            this.label70 = new System.Windows.Forms.Label();
+            this.Nivel = new System.Windows.Forms.Label();
             this.label69 = new System.Windows.Forms.Label();
-            this.textBox27 = new System.Windows.Forms.TextBox();
+            this.Atividade_Extenso = new System.Windows.Forms.TextBox();
             this.label68 = new System.Windows.Forms.Label();
             this.Aliquota = new System.Windows.Forms.TextBox();
             this.label67 = new System.Windows.Forms.Label();
@@ -254,7 +255,11 @@
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.CnaeVSDelButton = new System.Windows.Forms.Button();
+            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Desc = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.a1Panel1.SuspendLayout();
             this.CodigoToolStrip.SuspendLayout();
             this.tBar.SuspendLayout();
@@ -659,6 +664,19 @@
             this.Ttp.SetToolTip(this.AtividadePrincipalButton, "Selecione a atividade principal");
             this.AtividadePrincipalButton.UseVisualStyleBackColor = true;
             this.AtividadePrincipalButton.Click += new System.EventHandler(this.AtividadePrincipalButton_Click);
+            // 
+            // CnaeVSDelButton
+            // 
+            this.CnaeVSDelButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CnaeVSDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.CnaeVSDelButton.Location = new System.Drawing.Point(698, 23);
+            this.CnaeVSDelButton.Name = "CnaeVSDelButton";
+            this.CnaeVSDelButton.Size = new System.Drawing.Size(23, 22);
+            this.CnaeVSDelButton.TabIndex = 226;
+            this.CnaeVSDelButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.CnaeVSDelButton, "Remover um CNAE");
+            this.CnaeVSDelButton.UseVisualStyleBackColor = true;
+            this.CnaeVSDelButton.Click += new System.EventHandler(this.CnaeVSDelButton_Click);
             // 
             // tabControl1
             // 
@@ -2490,6 +2508,7 @@
             this.AtividadeVSListView.FullRowSelect = true;
             this.AtividadeVSListView.Location = new System.Drawing.Point(6, 20);
             this.AtividadeVSListView.Name = "AtividadeVSListView";
+            this.AtividadeVSListView.ShowItemToolTips = true;
             this.AtividadeVSListView.Size = new System.Drawing.Size(686, 62);
             this.AtividadeVSListView.TabIndex = 225;
             this.AtividadeVSListView.UseCompatibleStateImageBehavior = false;
@@ -2540,7 +2559,7 @@
             this.a1Panel10.BorderColor = System.Drawing.Color.Gray;
             this.a1Panel10.Controls.Add(this.AtividadeISSListView);
             this.a1Panel10.Controls.Add(this.label80);
-            this.a1Panel10.Controls.Add(this.button9);
+            this.a1Panel10.Controls.Add(this.AtividadeISSButton);
             this.a1Panel10.GradientEndColor = System.Drawing.SystemColors.Control;
             this.a1Panel10.GradientStartColor = System.Drawing.SystemColors.Control;
             this.a1Panel10.Image = null;
@@ -2552,11 +2571,20 @@
             // 
             // AtividadeISSListView
             // 
+            this.AtividadeISSListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader14,
+            this.columnHeader18,
+            this.Desc,
+            this.columnHeader16,
+            this.columnHeader17});
+            this.AtividadeISSListView.FullRowSelect = true;
             this.AtividadeISSListView.Location = new System.Drawing.Point(6, 23);
             this.AtividadeISSListView.Name = "AtividadeISSListView";
+            this.AtividadeISSListView.ShowGroups = false;
             this.AtividadeISSListView.Size = new System.Drawing.Size(686, 56);
             this.AtividadeISSListView.TabIndex = 225;
             this.AtividadeISSListView.UseCompatibleStateImageBehavior = false;
+            this.AtividadeISSListView.View = System.Windows.Forms.View.Details;
             // 
             // label80
             // 
@@ -2570,16 +2598,16 @@
             this.label80.Text = "Atividade para pagamento de ISS";
             this.label80.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button9
+            // AtividadeISSButton
             // 
-            this.button9.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button9.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.button9.Location = new System.Drawing.Point(698, 51);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(23, 22);
-            this.button9.TabIndex = 195;
-            this.button9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button9.UseVisualStyleBackColor = true;
+            this.AtividadeISSButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AtividadeISSButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.AtividadeISSButton.Location = new System.Drawing.Point(698, 51);
+            this.AtividadeISSButton.Name = "AtividadeISSButton";
+            this.AtividadeISSButton.Size = new System.Drawing.Size(23, 22);
+            this.AtividadeISSButton.TabIndex = 195;
+            this.AtividadeISSButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.AtividadeISSButton.UseVisualStyleBackColor = true;
             // 
             // a1Panel9
             // 
@@ -2588,13 +2616,13 @@
             this.a1Panel9.Controls.Add(this.CnaeButton);
             this.a1Panel9.Controls.Add(this.AtividadePrincipalButton);
             this.a1Panel9.Controls.Add(this.label73);
-            this.a1Panel9.Controls.Add(this.textBox29);
+            this.a1Panel9.Controls.Add(this.QtdeProfissional);
             this.a1Panel9.Controls.Add(this.label72);
-            this.a1Panel9.Controls.Add(this.textBox28);
+            this.a1Panel9.Controls.Add(this.Area);
             this.a1Panel9.Controls.Add(this.label71);
-            this.a1Panel9.Controls.Add(this.label70);
+            this.a1Panel9.Controls.Add(this.Nivel);
             this.a1Panel9.Controls.Add(this.label69);
-            this.a1Panel9.Controls.Add(this.textBox27);
+            this.a1Panel9.Controls.Add(this.Atividade_Extenso);
             this.a1Panel9.Controls.Add(this.label68);
             this.a1Panel9.Controls.Add(this.Aliquota);
             this.a1Panel9.Controls.Add(this.label67);
@@ -2635,17 +2663,17 @@
             this.label73.TabIndex = 237;
             this.label73.Text = "CNAE(s)..:";
             // 
-            // textBox29
+            // QtdeProfissional
             // 
-            this.textBox29.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox29.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox29.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox29.Location = new System.Drawing.Point(473, 73);
-            this.textBox29.MaxLength = 50;
-            this.textBox29.Name = "textBox29";
-            this.textBox29.Size = new System.Drawing.Size(45, 20);
-            this.textBox29.TabIndex = 236;
-            this.textBox29.TabStop = false;
+            this.QtdeProfissional.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.QtdeProfissional.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.QtdeProfissional.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.QtdeProfissional.Location = new System.Drawing.Point(473, 73);
+            this.QtdeProfissional.MaxLength = 50;
+            this.QtdeProfissional.Name = "QtdeProfissional";
+            this.QtdeProfissional.Size = new System.Drawing.Size(45, 20);
+            this.QtdeProfissional.TabIndex = 236;
+            this.QtdeProfissional.TabStop = false;
             // 
             // label72
             // 
@@ -2659,17 +2687,17 @@
             this.label72.TabIndex = 235;
             this.label72.Text = "Qtde..:";
             // 
-            // textBox28
+            // Area
             // 
-            this.textBox28.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox28.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox28.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox28.Location = new System.Drawing.Point(323, 73);
-            this.textBox28.MaxLength = 50;
-            this.textBox28.Name = "textBox28";
-            this.textBox28.Size = new System.Drawing.Size(72, 20);
-            this.textBox28.TabIndex = 234;
-            this.textBox28.TabStop = false;
+            this.Area.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.Area.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.Area.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.Area.Location = new System.Drawing.Point(323, 73);
+            this.Area.MaxLength = 50;
+            this.Area.Name = "Area";
+            this.Area.Size = new System.Drawing.Size(72, 20);
+            this.Area.TabIndex = 234;
+            this.Area.TabStop = false;
             // 
             // label71
             // 
@@ -2683,17 +2711,17 @@
             this.label71.TabIndex = 233;
             this.label71.Text = "Área m²..:";
             // 
-            // label70
+            // Nivel
             // 
-            this.label70.AutoSize = true;
-            this.label70.BackColor = System.Drawing.Color.Transparent;
-            this.label70.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label70.ForeColor = System.Drawing.Color.Navy;
-            this.label70.Location = new System.Drawing.Point(235, 76);
-            this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(13, 13);
-            this.label70.TabIndex = 232;
-            this.label70.Text = "1";
+            this.Nivel.AutoSize = true;
+            this.Nivel.BackColor = System.Drawing.Color.Transparent;
+            this.Nivel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Nivel.ForeColor = System.Drawing.Color.Navy;
+            this.Nivel.Location = new System.Drawing.Point(235, 76);
+            this.Nivel.Name = "Nivel";
+            this.Nivel.Size = new System.Drawing.Size(13, 13);
+            this.Nivel.TabIndex = 232;
+            this.Nivel.Text = "1";
             // 
             // label69
             // 
@@ -2707,17 +2735,17 @@
             this.label69.TabIndex = 231;
             this.label69.Text = "Nível..:";
             // 
-            // textBox27
+            // Atividade_Extenso
             // 
-            this.textBox27.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox27.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox27.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox27.Location = new System.Drawing.Point(122, 50);
-            this.textBox27.MaxLength = 50;
-            this.textBox27.Name = "textBox27";
-            this.textBox27.Size = new System.Drawing.Size(575, 20);
-            this.textBox27.TabIndex = 229;
-            this.textBox27.TabStop = false;
+            this.Atividade_Extenso.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.Atividade_Extenso.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.Atividade_Extenso.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.Atividade_Extenso.Location = new System.Drawing.Point(122, 50);
+            this.Atividade_Extenso.MaxLength = 50;
+            this.Atividade_Extenso.Name = "Atividade_Extenso";
+            this.Atividade_Extenso.Size = new System.Drawing.Size(575, 20);
+            this.Atividade_Extenso.TabIndex = 229;
+            this.Atividade_Extenso.TabStop = false;
             // 
             // label68
             // 
@@ -2926,18 +2954,34 @@
             this.columnHeader8.Text = "Usuário";
             this.columnHeader8.Width = 150;
             // 
-            // CnaeVSDelButton
+            // columnHeader14
             // 
-            this.CnaeVSDelButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CnaeVSDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.CnaeVSDelButton.Location = new System.Drawing.Point(698, 23);
-            this.CnaeVSDelButton.Name = "CnaeVSDelButton";
-            this.CnaeVSDelButton.Size = new System.Drawing.Size(23, 22);
-            this.CnaeVSDelButton.TabIndex = 226;
-            this.CnaeVSDelButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Ttp.SetToolTip(this.CnaeVSDelButton, "Remover um CNAE");
-            this.CnaeVSDelButton.UseVisualStyleBackColor = true;
-            this.CnaeVSDelButton.Click += new System.EventHandler(this.CnaeVSDelButton_Click);
+            this.columnHeader14.Text = "Tipo";
+            this.columnHeader14.Width = 35;
+            // 
+            // Desc
+            // 
+            this.Desc.Tag = "";
+            this.Desc.Text = "Descrição";
+            this.Desc.Width = 454;
+            // 
+            // columnHeader16
+            // 
+            this.columnHeader16.Text = "Qtde";
+            this.columnHeader16.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader16.Width = 40;
+            // 
+            // columnHeader17
+            // 
+            this.columnHeader17.Text = "Valor";
+            this.columnHeader17.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader17.Width = 86;
+            // 
+            // columnHeader18
+            // 
+            this.columnHeader18.Text = "Código";
+            this.columnHeader18.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader18.Width = 45;
             // 
             // Empresa
             // 
@@ -3140,13 +3184,13 @@
         private System.Windows.Forms.Label label60;
         private System.Windows.Forms.TabPage ATtab;
         private Owf.Controls.A1Panel a1Panel9;
-        internal System.Windows.Forms.TextBox textBox29;
+        internal System.Windows.Forms.TextBox QtdeProfissional;
         private System.Windows.Forms.Label label72;
-        internal System.Windows.Forms.TextBox textBox28;
+        internal System.Windows.Forms.TextBox Area;
         private System.Windows.Forms.Label label71;
-        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.Label Nivel;
         private System.Windows.Forms.Label label69;
-        internal System.Windows.Forms.TextBox textBox27;
+        internal System.Windows.Forms.TextBox Atividade_Extenso;
         private System.Windows.Forms.Label label68;
         internal System.Windows.Forms.TextBox Aliquota;
         private System.Windows.Forms.Label label67;
@@ -3161,7 +3205,7 @@
         private Owf.Controls.A1Panel a1Panel10;
         private System.Windows.Forms.ListView AtividadeISSListView;
         private System.Windows.Forms.Label label80;
-        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button AtividadeISSButton;
         private System.Windows.Forms.Button AtividadePrincipalButton;
         private System.Windows.Forms.Label label73;
         internal System.Windows.Forms.Label DataProcessoEncerramento;
@@ -3243,5 +3287,10 @@
         private System.Windows.Forms.ColumnHeader columnHeader12;
         private System.Windows.Forms.ColumnHeader columnHeader13;
         private System.Windows.Forms.Button CnaeVSDelButton;
+        private System.Windows.Forms.ColumnHeader columnHeader14;
+        private System.Windows.Forms.ColumnHeader columnHeader18;
+        private System.Windows.Forms.ColumnHeader Desc;
+        private System.Windows.Forms.ColumnHeader columnHeader16;
+        private System.Windows.Forms.ColumnHeader columnHeader17;
     }
 }

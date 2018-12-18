@@ -34,6 +34,7 @@ namespace GTI_Desktop.Forms {
             gtiCore.Liberado(this);
         }
 
+
         private void ControlBehaviour(bool bStart) {
             AddButton.Enabled = bStart;
             EditButton.Enabled = bStart;
@@ -98,6 +99,13 @@ namespace GTI_Desktop.Forms {
             ContadorList.Enabled = !bStart;
             CnaeVSButton.Enabled = !bStart;
             CnaeVSDelButton.Enabled = !bStart;
+            Atividade_Principal.ReadOnly = bStart;
+            Atividade_Extenso.ReadOnly = bStart;
+            QtdeProfissional.ReadOnly = bStart;
+            Area.ReadOnly = bStart;
+            AtividadePrincipalButton.Enabled = !bStart;
+            CnaeButton.Enabled = !bStart;
+            AtividadeISSButton.Enabled = !bStart;
         }
 
         private void ClearFields() {
@@ -435,6 +443,13 @@ namespace GTI_Desktop.Forms {
             Subunidade.Text = Reg.Subunidade.ToString("000");
             CodigoImovel.Text =Convert.ToInt32(Reg.Imovel).ToString("000000");
 
+            Area.Text = Convert.ToDecimal(Reg.Area).ToString("#0.00");
+            QtdeProfissional.Text = Reg.Qtde_profissionais.ToString();
+            Atividade_Principal.Text = Reg.Atividade_codigo + " - " + Reg.Atividade_nome;
+            Atividade_Extenso.Text = Reg.Atividade_extenso;
+            Nivel.Text = Reg.Codigo_aliquota.ToString();
+            Aliquota.Text = empresa_Class.Aliquota_Taxa_Licenca(Codigo).ToString("#0.00");
+
             List<MobiliarioproprietarioStruct>Lista_Prop = empresa_Class.Lista_Empresa_Proprietario(Codigo);
             foreach (MobiliarioproprietarioStruct _prop in Lista_Prop) {
                 CustomListBoxItem listBoxItem = new CustomListBoxItem(_prop.Nome, _prop.Codcidadao);
@@ -473,6 +488,18 @@ Inicio:;
                     }
                 }
             }
+
+            //Preenche lista de Atividade ISS
+            List<MobiliarioAtividadeISSStruct> Lista_ISS = empresa_Class.Lista_AtividadeISS_Empresa(Codigo);
+            foreach (MobiliarioAtividadeISSStruct item in Lista_ISS) {
+                ListViewItem lvItem = new ListViewItem(item.Codigo_tributo == 11 ? "F" : item.Codigo_tributo == 12 ? "E" : "V");
+                lvItem.SubItems.Add(item.Codigo_atividade.ToString("000"));
+                lvItem.SubItems.Add(item.Descricao);
+                lvItem.SubItems.Add(item.Quantidade.ToString("00"));
+                lvItem.SubItems.Add(string.Format("{0:0.00}", item.Valor));
+                AtividadeISSListView.Items.Add(lvItem);
+            }
+
 
             //Preenche lista da Vigilânica Sanitária
             foreach (CnaeStruct item in Lista_Cnae_VS) {
@@ -784,5 +811,9 @@ Inicio:;
                 AtividadeVSListView.SelectedItems[0].Remove();
             }
         }
+
+
+                
+       
     }
 }

@@ -11,8 +11,8 @@
            
             <ul>
                 <li><a href="gtiMenu2.aspx?d=gti" style="width: 600px">Consulta e atualização de boletos vencidos para pagamento</a></li>
-<%--                <li><a href="SegundaViaIPTU.aspx?d=gti" style="width: 600px; color: #CC0000;">Impressão do carnê de IPTU (2019)</a> </li>
-                <li><a href="SegundaViaISS.aspx?d=gti" style="width: 600px; ">Impressão do carnê de ISS Fixo/Taxa de Licença (2019)</a> </li>
+                <li><a href="SegundaViaIPTU.aspx?d=gti" style="width: 600px; color: #CC0000;">Impressão do carnê de IPTU (2019)</a> </li>
+<%--                <li><a href="SegundaViaISS.aspx?d=gti" style="width: 600px; ">Impressão do carnê de ISS Fixo/Taxa de Licença (2019)</a> </li>
                 <li><a href="SegundaViaVS.aspx?d=gti" style="width: 600px; ">Impressão do carnê de Vigilância Sanitária (2019)</a> </li>--%>
                 <li><a href="ConsultaProcesso.aspx?d=gti" style="width: 600px; ">Consulta de Processos</a> </li>
                 <li><a href="SegundaViaCIP.aspx?d=gti" style="width: 600px">Emissão de 2ª via da contribuição de iluminação pública (CIP) (2018)</a></li>
@@ -26,6 +26,7 @@
                 <li><a href="gticertidao.aspx?d=gti" style="width: 600px">Emissão de certidões / Verificar autenticidade</a></li>
                 <li><a href="cpv_pagto.aspx?d=gti" style="width: 600px">Impressão de comprovante de pagamento</a></li>
                 <li><a href="situacao_pagto.aspx?d=gti" style="width: 600px">Situação dos débitos ref. a ISS Fixo, Taxa de Licença e Vig.Sanitária.</a></li>
+                <li><a href="LoginFunc.aspx?d=gti" style="width: 600px">Área restrita do usuário.</a></li>
             </ul>
         </div>
 

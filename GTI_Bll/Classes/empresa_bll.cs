@@ -625,7 +625,15 @@ namespace GTI_Bll.Classes {
             return obj.Aliquota_Taxa_Licenca(_codigo);
         }
 
-
+        /// <summary>
+        /// Lista atividade de ISS de uma empresa
+        /// </summary>
+        /// <param name="nCodigo"></param>
+        /// <returns></returns>
+        public List<MobiliarioAtividadeISSStruct> Lista_AtividadeISS_Empresa(int nCodigo) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Lista_AtividadeISS_Empresa(nCodigo);
+        }
 
     }
 }

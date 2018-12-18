@@ -110,6 +110,7 @@ namespace GTI_Models.Models {
         public string Cpf_cnpj { get; set; }
         public short? Isencao { get; set; }
         public int? Atividade_codigo { get; set; }
+        public string Atividade_nome { get; set; }
         public string Atividade_extenso { get; set; }
         public float? Area { get; set; }
         public byte? Codigo_aliquota { get; set; }

@@ -19,4 +19,16 @@ namespace GTI_Models.Models {
         public short Qtdeiss { get; set; }
         public decimal Valoriss { get; set; }
     }
+
+    public class MobiliarioAtividadeISSStruct {
+        public int Codigo_empresa { get; set; }
+        public short Codigo_tributo { get; set; }
+        public int Codigo_atividade { get; set; }
+        public string Descricao { get; set; }
+        public string Item { get; set; }
+        public short Quantidade { get; set; }
+        public decimal Valor { get; set; }
+    }
+
+
 }
