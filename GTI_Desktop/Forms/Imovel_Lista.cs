@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using OfficeOpenXml;
 
 namespace GTI_Desktop.Forms {
     public partial class Imovel_Lista : Form {
@@ -273,43 +274,42 @@ namespace GTI_Desktop.Forms {
 
         private void ExcelButton_Click(object sender, EventArgs e) {
             using (SaveFileDialog sfd = new SaveFileDialog() {
-                Filter = "Excel |* .xls",
-                InitialDirectory = @"c:\dados\xls",
-                FileName = "Consulta_Imovel.xls",
+                Filter = "Excel |* .xlsx",
+                InitialDirectory = @"c:\dados\xlsx",
+                FileName = "Consulta_Imovel.xlsx",
                 ValidateNames = true
             }) {
                 if (sfd.ShowDialog() == DialogResult.OK) {
                     gtiCore.Ocupado(this);
                     string file = sfd.FileName;
-                    //Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
-                    //Workbook wb = app.Workbooks.Add(XlSheetType.xlWorksheet);
-                    //Worksheet ws = (Worksheet)app.ActiveSheet;
-                    //app.Visible = false;
-                    //ws.Cells[1, 1] = "Código";
-                    //ws.Cells[1, 2] = "Inscrição";
-                    //ws.Cells[1, 3] = "Proprietário";
-                    //ws.Cells[1, 4] = "Endereço";
-                    //ws.Cells[1, 5] = "Nº";
-                    //ws.Cells[1, 6] = "Compl.";
-                    //ws.Cells[1, 7] = "Bairro";
-                    //ws.Cells[1, 8] = "Condomínio";
 
-                    //int r = 2;
-                    //for (int i = 0; i < MainListView.VirtualListSize; i++) {
-                    //    ws.Cells[i + r, 1] = MainListView.Items[i].Text;
-                    //    ws.Cells[i + r, 2] = MainListView.Items[i].SubItems[1].Text;
-                    //    ws.Cells[i + r, 3] = MainListView.Items[i].SubItems[2].Text;
-                    //    ws.Cells[i + r, 4] = MainListView.Items[i].SubItems[3].Text;
-                    //    ws.Cells[i + r, 5] = MainListView.Items[i].SubItems[4].Text;
-                    //    ws.Cells[i + r, 6] = MainListView.Items[i].SubItems[5].Text;
-                    //    ws.Cells[i + r, 7] = MainListView.Items[i].SubItems[6].Text;
-                    //    ws.Cells[i + r, 8] = MainListView.Items[i].SubItems[7].Text;
-                    //}
+                    ExcelPackage package = new ExcelPackage();
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Lista");
+                    worksheet.Cells[1, 1].Value = "Código";
+                    worksheet.Cells[1, 2].Value = "Inscrição";
+                    worksheet.Cells[1, 3].Value = "Proprietário";
+                    worksheet.Cells[1, 4].Value = "Endereço";
+                    worksheet.Cells[1, 5].Value = "Nº";
+                    worksheet.Cells[1, 6].Value = "Compl.";
+                    worksheet.Cells[1, 7].Value = "Bairro";
+                    worksheet.Cells[1, 8].Value = "Condomínio";
 
-                    //ws.Columns.AutoFit();
-                    //wb.SaveAs(sfd.FileName, XlFileFormat.xlWorkbookNormal, Type.Missing, Type.Missing, false, false, XlSaveAsAccessMode.xlNoChange,
-                    //            XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
-                    //app.Quit();
+                    int r = 2;
+                    for (int i = 0; i < MainListView.VirtualListSize; i++) {
+                        worksheet.Cells[i + r, 1].Value = MainListView.Items[i].Text;
+                        worksheet.Cells[i + r, 2].Value = MainListView.Items[i].SubItems[1].Text;
+                        worksheet.Cells[i + r, 3].Value = MainListView.Items[i].SubItems[2].Text;
+                        worksheet.Cells[i + r, 4].Value = MainListView.Items[i].SubItems[3].Text;
+                        worksheet.Cells[i + r, 5].Value = MainListView.Items[i].SubItems[4].Text;
+                        worksheet.Cells[i + r, 6].Value = MainListView.Items[i].SubItems[5].Text;
+                        worksheet.Cells[i + r, 7].Value = MainListView.Items[i].SubItems[6].Text;
+                        worksheet.Cells[i + r, 8].Value = MainListView.Items[i].SubItems[7].Text;
+                    }
+
+                    worksheet.Cells.AutoFitColumns(0);  //Autofit columns for all cells
+                    var xlFile = gtiCore.GetFileInfo(sfd.FileName);
+                    package.SaveAs(xlFile);
+                 
                     gtiCore.Liberado(this);
                     MessageBox.Show("Seus dados foram exportados para o Excel com sucesso.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

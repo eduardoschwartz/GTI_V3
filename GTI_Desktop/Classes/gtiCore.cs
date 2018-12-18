@@ -584,7 +584,13 @@ namespace GTI_Desktop.Classes {
                 return Numero.Replace( ".", "");
         }
 
-
+        public static FileInfo GetFileInfo(string file, bool deleteIfExists = true) {
+            var fi = new FileInfo(file);
+            if (deleteIfExists && fi.Exists) {
+                fi.Delete();  // ensures we create a new workbook
+            }
+            return fi;
+        }
     }
 
     public class MySR : ToolStripSystemRenderer {

@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using OfficeOpenXml;
 
 namespace GTI_Desktop.Forms {
     public partial class Processo_Atraso : Form {
@@ -39,6 +40,7 @@ namespace GTI_Desktop.Forms {
                     PBar.Value = _pos * 100 / _total;
                     PBar.Update();
                     System.Windows.Forms.Application.DoEvents();
+                    break;
                 }
 
                 _ano = _processo.Ano;
@@ -133,44 +135,43 @@ namespace GTI_Desktop.Forms {
 
         private void Gerar_Excel() {
             using (SaveFileDialog sfd = new SaveFileDialog() {
-                Filter = "Excel |* .xls",
-                InitialDirectory = @"c:\dados\xls",
-                FileName = "processo_atraso.xls",
+                Filter = "Excel |* .xlsx",
+                InitialDirectory = @"c:\dados\xlsx",
+                FileName = "processo_atraso.xlsx",
                 ValidateNames = true
             }) {
                 if (sfd.ShowDialog() == DialogResult.OK) {
                     gtiCore.Ocupado(this);
-                    //Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
-                    //Workbook wb = app.Workbooks.Add(XlSheetType.xlWorksheet);
-                    //Worksheet ws = (Worksheet)app.ActiveSheet;
-                    //app.Visible = false;
-                    //ws.Cells[1, 1] = "Ano";
-                    //ws.Cells[1, 2] = "Número";
-                    //ws.Cells[1, 3] = "Assunto";
-                    //ws.Cells[1, 4] = "Requerente";
-                    //ws.Cells[1, 5] = "Dt.Entrada";
-                    //ws.Cells[1, 6] = "Último Trâmite";
-                    //ws.Cells[1, 7] = "Último Despacho";
-                    //ws.Cells[1, 8] = "Dias";
-                    //ws.Cells[1, 9] = "Próximo Trâmite";
 
-                    //int r = 2;
-                    //for (int i = 0; i < MainListView.VirtualListSize; i++) {
-                    //    ws.Cells[i + r, 1] = MainListView.Items[i].Text;
-                    //    ws.Cells[i + r, 2] = MainListView.Items[i].SubItems[1].Text;
-                    //    ws.Cells[i + r, 3] = MainListView.Items[i].SubItems[2].Text;
-                    //    ws.Cells[i + r, 4] = MainListView.Items[i].SubItems[3].Text;
-                    //    ws.Cells[i + r, 5] = MainListView.Items[i].SubItems[4].Text;
-                    //    ws.Cells[i + r, 6] = MainListView.Items[i].SubItems[5].Text;
-                    //    ws.Cells[i + r, 7] = MainListView.Items[i].SubItems[6].Text;
-                    //    ws.Cells[i + r, 8] = MainListView.Items[i].SubItems[7].Text;
-                    //    ws.Cells[i + r, 9] = MainListView.Items[i].SubItems[8].Text;
-                    //}
+                    ExcelPackage package = new ExcelPackage();
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Lista");
+                    worksheet.Cells[1, 1].Value = "Ano";
+                    worksheet.Cells[1, 2].Value = "Número";
+                    worksheet.Cells[1, 3].Value = "Assunto";
+                    worksheet.Cells[1, 4].Value = "Requerente";
+                    worksheet.Cells[1, 5].Value = "Dt.Entrada";
+                    worksheet.Cells[1, 6].Value = "Último Trâmite";
+                    worksheet.Cells[1, 7].Value = "Último Descpacho";
+                    worksheet.Cells[1, 8].Value = "Dias";
+                    worksheet.Cells[1, 9].Value = "Próximo trâmite";
 
-                    //ws.Columns.AutoFit();
-                    //wb.SaveAs(sfd.FileName, XlFileFormat.xlWorkbookNormal, Type.Missing, Type.Missing, false, false, XlSaveAsAccessMode.xlNoChange,
-                    //            XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
-                    //app.Quit();
+                    int r = 2;
+                    for (int i = 0; i < MainListView.VirtualListSize; i++) {
+                        worksheet.Cells[i + r, 1].Value = MainListView.Items[i].Text;
+                        worksheet.Cells[i + r, 2].Value = MainListView.Items[i].SubItems[1].Text;
+                        worksheet.Cells[i + r, 3].Value = MainListView.Items[i].SubItems[2].Text;
+                        worksheet.Cells[i + r, 4].Value = MainListView.Items[i].SubItems[3].Text;
+                        worksheet.Cells[i + r, 5].Value = MainListView.Items[i].SubItems[4].Text;
+                        worksheet.Cells[i + r, 6].Value = MainListView.Items[i].SubItems[5].Text;
+                        worksheet.Cells[i + r, 7].Value = MainListView.Items[i].SubItems[6].Text;
+                        worksheet.Cells[i + r, 8].Value = MainListView.Items[i].SubItems[7].Text;
+                        worksheet.Cells[i + r, 8].Value = MainListView.Items[i].SubItems[8].Text;
+                    }
+
+                    worksheet.Cells.AutoFitColumns(0);  
+                    var xlFile = gtiCore.GetFileInfo(sfd.FileName);
+                    package.SaveAs(xlFile);
+
                     gtiCore.Liberado(this);
                     MessageBox.Show("Seus dados foram exportados para o Excel com sucesso.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
