@@ -99,7 +99,7 @@ namespace GTI_Desktop.Forms {
             ContadorList.Enabled = !bStart;
             CnaeVSButton.Enabled = !bStart;
             CnaeVSDelButton.Enabled = !bStart;
-            Atividade_Principal.ReadOnly = bStart;
+            Atividade_Principal.ReadOnly = true;
             Atividade_Extenso.ReadOnly = bStart;
             QtdeProfissional.ReadOnly = bStart;
             Area.ReadOnly = bStart;
@@ -188,6 +188,14 @@ namespace GTI_Desktop.Forms {
             if (Lista_Cnae_VS != null) Lista_Cnae_VS.Clear();
             Cnae.Text = "";
             HistoricoListView.Items.Clear();
+            ProcessosListView.Items.Clear();
+            Atividade_Principal.Text = "";
+            Atividade_Principal.Tag = "";
+            Atividade_Extenso.Text = "";
+            Aliquota.Text = "";
+            Area.Text = "";
+            QtdeProfissional.Text = "";
+            ProprietarioList.Items.Clear();
         }
 
         private void CarregaLista() {
@@ -199,14 +207,14 @@ namespace GTI_Desktop.Forms {
             ContadorList.DataSource = empresa_Class.Lista_Escritorio_Contabil();
             ContadorList.DisplayMember = "Nomeesc";
             ContadorList.ValueMember = "Codigoesc";
-            
         }
 
         private void GravarButton_Click(object sender, EventArgs e) {
-            if (bAddNew) {
-                ControlBehaviour(true);
+            if (Valida_Dados()) {
+                if (bAddNew) {
+                    ControlBehaviour(true);
+                }
             }
-            
         }
 
         private void CancelarButton_Click(object sender, EventArgs e) {
@@ -450,6 +458,7 @@ namespace GTI_Desktop.Forms {
             Area.Text = Convert.ToDecimal(Reg.Area).ToString("#0.00");
             QtdeProfissional.Text = Reg.Qtde_profissionais.ToString();
             Atividade_Principal.Text = Reg.Atividade_codigo + " - " + Reg.Atividade_nome;
+            Atividade_Principal.Tag = Convert.ToInt32( Reg.Atividade_codigo).ToString("00000");
             Atividade_Extenso.Text = Reg.Atividade_extenso;
             Nivel.Text = Reg.Codigo_aliquota.ToString();
             Aliquota.Text = empresa_Class.Aliquota_Taxa_Licenca(Codigo).ToString("#0.00");
@@ -542,6 +551,20 @@ Inicio:;
                 HistoricoListView.Items.Add(lvItem);
             }
 
+            //Preenche lista de Processos
+            Processo_bll processo_Class = new Processo_bll(_connection);
+            ProcessoFilter Reg2 = new ProcessoFilter();
+            Reg2.Inscricao = Codigo;
+
+            List<ProcessoStruct> Lista_Proc = processo_Class.Lista_Processos(Reg2);
+            foreach (ProcessoStruct item in Lista_Proc) {
+                string _numero_processo = item.Numero.ToString("00000") + "-" + processo_Class.DvProcesso(item.Numero).ToString() + "/" + item.Ano.ToString();
+                ListViewItem lvItem = new ListViewItem(_numero_processo);
+                lvItem.SubItems.Add(item.Assunto);
+                lvItem.SubItems.Add(Convert.ToDateTime(item.DataEntrada).ToString("dd/MM/yyyy"));
+                lvItem.SubItems.Add(string.IsNullOrWhiteSpace(item.DataArquivado.ToString()) ? "" : Convert.ToDateTime(item.DataArquivado).ToString("dd/MM/yyyy"));
+                ProcessosListView.Items.Add(lvItem);
+            }
 
         }
 
@@ -891,5 +914,84 @@ Inicio:;
             } else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+        private bool Valida_Dados() {
+            if (RazaoSocial.Text.Trim() == "") {
+                MessageBox.Show("Digite a razão social da empresa.","Erro",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return false;
+            }
+            if (PessoaList.SelectedIndex==0 &&  !gtiCore.Valida_CPF( CPF.Text)) {
+                MessageBox.Show("Digite um nº de CPF válido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (PessoaList.SelectedIndex == 1 && !gtiCore.Valida_CNPJ(CNPJ.Text)) {
+                MessageBox.Show("Digite um nº de CNPJ válido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (!gtiCore.IsDate(DataAbertura.Text)) {
+                MessageBox.Show("Data de abertura inválida.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            Processo_bll processo_Class = new Processo_bll(_connection);
+            if (!gtiCore.IsDate(NumProcessoAbertura.Text)) {
+                MessageBox.Show("Processo de abertura inválido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            } else {
+                Exception ex = processo_Class.ValidaProcesso(NumProcessoAbertura.Text);
+                if (ex!=null) {
+                    MessageBox.Show("Processo de abertura inválido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+
+            if(!gtiCore.IsEmptyDate(DataEncerramento.Text)) {
+                if (!gtiCore.IsDate(DataEncerramento.Text)) {
+                    MessageBox.Show("Data de encerramento inválida.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                } else {
+                    Exception ex = processo_Class.ValidaProcesso(NumProcessoEncerramento.Text);
+                    if (ex != null) {
+                        MessageBox.Show("Processo de encerramento inválido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                }
+            } else {
+                if (NumProcessoEncerramento.Text.Trim() != "") {
+                    MessageBox.Show("Digite a data de encerramento.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+
+            if (Logradouro.Text.Trim()=="") {
+                MessageBox.Show("Endereço incompleto.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (Logradouro_EE.Text.Trim() == "") {
+                MessageBox.Show("Endereço de entrega incompleto.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (Atividade_Principal.Text.Trim() == "") {
+                MessageBox.Show("Selecione a atividade da empresa.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (AlvaraAuto_chk.Checked) {
+                Empresa_bll empresa_Class = new Empresa_bll(_connection);
+                int _atividade = Convert.ToInt32(Atividade_Principal.Tag.ToString());
+                bool _permite = empresa_Class.Empresa_Alvara_Automatico(_atividade);
+                if (!_permite) {
+                    MessageBox.Show("A atividade desta empresa não permite alvará automático.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+
     }
 }

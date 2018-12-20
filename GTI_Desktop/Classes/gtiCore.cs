@@ -231,11 +231,12 @@ namespace GTI_Desktop.Classes {
 
             int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-            string tempCpf;
-            string digito;
+            string tempCpf, digito;
+            int soma, resto;
 
-            int soma;
-            int resto;
+            if (cpf == "00000000000" || cpf == "11111111111" || cpf == "22222222222" || cpf == "33333333333" || cpf == "44444444444" || cpf == "55555555555" ||
+                cpf == "66666666666" || cpf == "77777777777" || cpf == "88888888888" || cpf == "99999999999")
+                return false;
 
             cpf = cpf.Trim();
             cpf = cpf.Replace(".", "").Replace("-", "");

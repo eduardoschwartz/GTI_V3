@@ -6,6 +6,9 @@ using GTI_Desktop.Properties;
 using System.Collections.Generic;
 using System.Linq;
 using GTI_Desktop.Classes;
+using System.Net;
+using System.IO;
+using System.Text;
 
 namespace GTI_Desktop.Forms {
     public partial class Processo_Local : Form {

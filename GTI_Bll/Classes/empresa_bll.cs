@@ -645,5 +645,26 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Empresa_Historico(Codigo);
         }
 
+        /// <summary>
+        /// Retorna true se a atividade da empresa permite alvará automático ou false ne não permitir.
+        /// </summary>
+        /// <param name="Codigo_Atividade"></param>
+        /// <returns></returns>
+        public bool Empresa_Alvara_Automatico(int Codigo_Atividade) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Empresa_Alvara_Automatico(Codigo_Atividade);
+        }
+
+        /// <summary>
+        /// Incluir uma nova empresa
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Incluir_Empresa(Mobiliario reg) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            Exception ex = obj.Incluir_Empresa(reg);
+            return ex;
+        }
+
     }
 }

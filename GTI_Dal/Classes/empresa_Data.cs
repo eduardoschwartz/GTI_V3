@@ -856,6 +856,100 @@ namespace GTI_Dal.Classes {
             return bRet;
         }
 
+        public Exception Incluir_Empresa(Mobiliario reg) {
+            string query = "INSERT INTO mobiliario (codigomob,razaosocial,nomefantasia,codlogradouro,numero,complemento,codbairro,codcidade,siglauf,cep,homepage,horario,dataabertura,";
+            query += "numprocesso,dataprocesso,dataencerramento,numprocencerramento,dataprocencerramento,inscestadual,cnpj,cpf,isencao,codatividade,ativextenso,areatl,codigoaliq,datainicialdesc,";
+            query += "datafinaldesc,percdesconto,capitalsocial,nomeorgao,codprofresp,numregistroresp,qtdesocio,qtdeempregado,respcontabil,rgresp,orgaoemisresp,nomecontato,cargocontato,";
+            query += "fonecontato,faxcontato,emailcontato,vistoria,qtdeprof,rg,orgao,nomelogradouro,simples,regespecial,alvara,datasimples,isentotaxa,mei,horarioext,";
+            query += "dtalvaraprovisorio,insctemp,horas24,isentoiss,bombonieri,emitenf,danfe,imovel,sil,substituto_tributario_issqn,individual,ponto_agencia ";
+            query += "VALUES(@codigomob,@razaosocial,@nomefantasia,@codlogradouro,@numero,@complemento,@codbairro,@codcidade,@siglauf,@cep,@homepage,@horario,@dataabertura,";
+            query += "@numprocesso,@dataprocesso,@dataencerramento,@numprocencerramento,@dataprocencerramento,@inscestadual,@cnpj,@cpf,@isencao,@codatividade,@ativextenso,@areatl,@codigoaliq,@datainicialdesc,";
+            query += "@datafinaldesc,@percdesconto,@capitalsocial,@nomeorgao,@codprofresp,@numregistroresp,@qtdesocio,@qtdeempregado,@respcontabil,@rgresp,@orgaoemisresp,@nomecontato,@cargocontato,";
+            query += "@fonecontato,@faxcontato,@emailcontato,@vistoria,@qtdeprof,@rg,@orgao,@nomelogradouro,@simples,@regespecial,@alvara,@datasimples,@isentotaxa,@mei,@horarioext,";
+            query += "@dtalvaraprovisorio,@insctemp,@horas24,@isentoiss,@bombonieri,@emitenf,@danfe,@imovel,@sil,@substituto_tributario_issqn,@individual,@ponto_agencia )";
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                object[] Parametros = new object[66];
+                Parametros[0] = new SqlParameter { ParameterName = "@Codigomob", SqlDbType = SqlDbType.Int, SqlValue = reg.Codigomob };
+                Parametros[1] = new SqlParameter { ParameterName = "@razaosocial", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Razaosocial };
+                Parametros[2] = new SqlParameter { ParameterName = "@nomefantasia", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Nomefantasia };
+                Parametros[3] = new SqlParameter { ParameterName = "@numero", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Numero };
+                Parametros[4] = new SqlParameter { ParameterName = "@complemento", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Complemento };
+                Parametros[5] = new SqlParameter { ParameterName = "@codbairro", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Codbairro };
+                Parametros[6] = new SqlParameter { ParameterName = "@codcidade", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Codcidade };
+                Parametros[7] = new SqlParameter { ParameterName = "@siglauf", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Siglauf };
+                Parametros[8] = new SqlParameter { ParameterName = "@cep", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Cep };
+                Parametros[9] = new SqlParameter { ParameterName = "@homepage", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Homepage };
+                Parametros[10] = new SqlParameter { ParameterName = "@horario", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Horario };
+                Parametros[11] = new SqlParameter { ParameterName = "@dataabertura", SqlDbType = SqlDbType.SmallDateTime, SqlValue = reg.Dataabertura };
+                Parametros[12] = new SqlParameter { ParameterName = "@numprocesso", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Numprocesso };
+                Parametros[13] = new SqlParameter { ParameterName = "@dataprocesso", SqlDbType = SqlDbType.SmallDateTime, SqlValue = reg.Dataprocesso };
+                Parametros[14] = new SqlParameter { ParameterName = "@dataencerramento", SqlDbType = SqlDbType.SmallDateTime, SqlValue = reg.Dataencerramento };
+                Parametros[15] = new SqlParameter { ParameterName = "@numprocencerramento", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Numprocencerramento };
+                Parametros[16] = new SqlParameter { ParameterName = "@dataprocencerramento", SqlDbType = SqlDbType.SmallDateTime, SqlValue = reg.Dataprocencerramento };
+                Parametros[17] = new SqlParameter { ParameterName = "@inscestadual", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Inscestadual };
+                Parametros[18] = new SqlParameter { ParameterName = "@cnpj", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Cnpj };
+                Parametros[19] = new SqlParameter { ParameterName = "@cpf", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Cpf };
+                Parametros[20] = new SqlParameter { ParameterName = "@isencao", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Isencao };
+                Parametros[21] = new SqlParameter { ParameterName = "@codatividade", SqlDbType = SqlDbType.Int, SqlValue = reg.Codatividade };
+                Parametros[22] = new SqlParameter { ParameterName = "@ativextenso", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Ativextenso };
+                Parametros[23] = new SqlParameter { ParameterName = "@areatl", SqlDbType = SqlDbType.Real, SqlValue = reg.Areatl };
+                Parametros[24] = new SqlParameter { ParameterName = "@codigoaliq", SqlDbType = SqlDbType.TinyInt, SqlValue = reg.Codigoaliq };
+                Parametros[25] = new SqlParameter { ParameterName = "@datainicialdesc", SqlDbType = SqlDbType.SmallDateTime, SqlValue = reg.Datainicialdesc };
+                Parametros[26] = new SqlParameter { ParameterName = "@datafinaldesc", SqlDbType = SqlDbType.SmallDateTime, SqlValue = reg.Datafinaldesc };
+                Parametros[27] = new SqlParameter { ParameterName = "@percdesconto", SqlDbType = SqlDbType.Real, SqlValue = reg.Percdesconto };
+                Parametros[28] = new SqlParameter { ParameterName = "@capitalsocial", SqlDbType = SqlDbType.Real, SqlValue = reg.Capitalsocial };
+                Parametros[29] = new SqlParameter { ParameterName = "@nomeorgao", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Nomeorgao };
+                Parametros[30] = new SqlParameter { ParameterName = "@codprofresp", SqlDbType = SqlDbType.Int, SqlValue = reg.Codprofresp };
+                Parametros[31] = new SqlParameter { ParameterName = "@numregistroresp", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Numregistroresp };
+                Parametros[32] = new SqlParameter { ParameterName = "@qtdesocio", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Qtdesocio };
+                Parametros[33] = new SqlParameter { ParameterName = "@qtdeempregado", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Qtdeempregado };
+                Parametros[34] = new SqlParameter { ParameterName = "@respcontabil", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Respcontabil };
+                Parametros[35] = new SqlParameter { ParameterName = "@rgresp", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Rgresp };
+                Parametros[36] = new SqlParameter { ParameterName = "@orgaoemisresp", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Orgaoemisresp };
+                Parametros[37] = new SqlParameter { ParameterName = "@nomecontato", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Nomecontato };
+                Parametros[38] = new SqlParameter { ParameterName = "@cargocontato", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Cargocontato };
+                Parametros[39] = new SqlParameter { ParameterName = "@fonecontato", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Fonecontato };
+                Parametros[40] = new SqlParameter { ParameterName = "@faxcontato", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Faxcontato };
+                Parametros[41] = new SqlParameter { ParameterName = "@emailcontato", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Emailcontato };
+                Parametros[42] = new SqlParameter { ParameterName = "@vistoria", SqlDbType = SqlDbType.TinyInt, SqlValue = reg.Vistoria };
+                Parametros[43] = new SqlParameter { ParameterName = "@qtdeprof", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Qtdeprof };
+                Parametros[44] = new SqlParameter { ParameterName = "@rg", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Rg };
+                Parametros[45] = new SqlParameter { ParameterName = "@orgao", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Orgao };
+                Parametros[46] = new SqlParameter { ParameterName = "@nomelogradouro", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Nomelogradouro };
+                Parametros[47] = new SqlParameter { ParameterName = "@simples", SqlDbType = SqlDbType.TinyInt, SqlValue = reg.Simples };
+                Parametros[48] = new SqlParameter { ParameterName = "@regespecial", SqlDbType = SqlDbType.TinyInt, SqlValue = reg.Regespecial };
+                Parametros[49] = new SqlParameter { ParameterName = "@alvara", SqlDbType = SqlDbType.TinyInt, SqlValue = reg.Alvara };
+                Parametros[50] = new SqlParameter { ParameterName = "@datasimples", SqlDbType = SqlDbType.SmallDateTime, SqlValue = reg.Datasimples };
+                Parametros[51] = new SqlParameter { ParameterName = "@isentotaxa", SqlDbType = SqlDbType.TinyInt, SqlValue = reg.Isentotaxa };
+                Parametros[52] = new SqlParameter { ParameterName = "@mei", SqlDbType = SqlDbType.TinyInt, SqlValue = reg.Mei };
+                Parametros[53] = new SqlParameter { ParameterName = "@horarioext", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Horarioext };
+                Parametros[54] = new SqlParameter { ParameterName = "@dtalvaraprovisorio", SqlDbType = SqlDbType.SmallDateTime, SqlValue = reg.Dtalvaraprovisorio };
+                Parametros[55] = new SqlParameter { ParameterName = "@insctemp", SqlDbType = SqlDbType.TinyInt, SqlValue = reg.Insctemp };
+                Parametros[56] = new SqlParameter { ParameterName = "@horas24", SqlDbType = SqlDbType.TinyInt, SqlValue = reg.Horas24 };
+                Parametros[57] = new SqlParameter { ParameterName = "@isentoiss", SqlDbType = SqlDbType.TinyInt, SqlValue = reg.Isentoiss };
+                Parametros[58] = new SqlParameter { ParameterName = "@bombonieri", SqlDbType = SqlDbType.TinyInt, SqlValue = reg.Bombonieri };
+                Parametros[59] = new SqlParameter { ParameterName = "@emitenf", SqlDbType = SqlDbType.TinyInt, SqlValue = reg.Emitenf };
+                Parametros[60] = new SqlParameter { ParameterName = "@danfe", SqlDbType = SqlDbType.TinyInt, SqlValue = reg.Danfe };
+                Parametros[61] = new SqlParameter { ParameterName = "@imovel", SqlDbType = SqlDbType.Int, SqlValue = reg.Imovel };
+                Parametros[62] = new SqlParameter { ParameterName = "@sil", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Sil };
+                Parametros[63] = new SqlParameter { ParameterName = "@substituto_tributario_issqn", SqlDbType = SqlDbType.Bit, SqlValue = reg.Substituto_tributario_issqn };
+                Parametros[64] = new SqlParameter { ParameterName = "@individual", SqlDbType = SqlDbType.Bit, SqlValue = reg.Individual };
+                Parametros[65] = new SqlParameter { ParameterName = "@ponto_agencia", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Ponto_agencia };
+
+                db.Database.ExecuteSqlCommand(query, Parametros);
+
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+
+            }
+        }
+
+
+
         //public Exception Insert_Empresa_Vre(Vre_empresa reg) {
 
         //    string query = "INSERT INTO vre_empresa(id,razao_social,cnpj,data_abertura,porte,numero_registro,tipo_registro,tipo_mei,cpf_responsavel,nome_responsavel,fone_contato1," +
@@ -1015,6 +1109,21 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public bool Empresa_Alvara_Automatico(int Codigo_Atividade) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var reg = (from a in db.Atividade where a.Codatividade == Codigo_Atividade select new { a.Descatividade, a.Alvara }).FirstOrDefault();
+                Atividade row = new Atividade();
+                if (reg == null)
+                    return false;
+                else {
+                    row.Descatividade = reg.Descatividade;
+                    if (reg.Alvara == null)
+                        return false;
+                    else 
+                        return reg.Alvara==0?false:true;
+                }
+            }
+        }
 
     }
 }

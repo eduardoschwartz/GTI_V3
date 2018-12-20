@@ -244,28 +244,22 @@
             this.label66 = new System.Windows.Forms.Label();
             this.label65 = new System.Windows.Forms.Label();
             this.HStab = new System.Windows.Forms.TabPage();
+            this.HistoricoBar = new System.Windows.Forms.ToolStrip();
+            this.AddHistoricoButton = new System.Windows.Forms.ToolStripButton();
+            this.EditHistoricoButton = new System.Windows.Forms.ToolStripButton();
+            this.DelHistoricoButton = new System.Windows.Forms.ToolStripButton();
+            this.ZoomHistoricoButton = new System.Windows.Forms.ToolStripButton();
             this.ProcessosListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.mnuHistorico = new System.Windows.Forms.ToolStripDropDownButton();
-            this.mnuAddHistorico = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuRemoverHistorico = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuViewHistorico = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox34 = new System.Windows.Forms.TextBox();
             this.HistoricoListView = new System.Windows.Forms.ListView();
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.HistoricoBar = new System.Windows.Forms.ToolStrip();
-            this.AddHistoricoButton = new System.Windows.Forms.ToolStripButton();
-            this.EditHistoricoButton = new System.Windows.Forms.ToolStripButton();
-            this.DelHistoricoButton = new System.Windows.Forms.ToolStripButton();
-            this.ZoomHistoricoButton = new System.Windows.Forms.ToolStripButton();
             this.a1Panel1.SuspendLayout();
             this.CodigoToolStrip.SuspendLayout();
             this.tBar.SuspendLayout();
@@ -293,7 +287,6 @@
             this.a1Panel10.SuspendLayout();
             this.a1Panel9.SuspendLayout();
             this.HStab.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             this.HistoricoBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -2872,14 +2865,72 @@
             this.HStab.BackColor = System.Drawing.SystemColors.Control;
             this.HStab.Controls.Add(this.HistoricoBar);
             this.HStab.Controls.Add(this.ProcessosListView);
-            this.HStab.Controls.Add(this.toolStrip1);
-            this.HStab.Controls.Add(this.textBox34);
             this.HStab.Controls.Add(this.HistoricoListView);
             this.HStab.Location = new System.Drawing.Point(4, 22);
             this.HStab.Name = "HStab";
             this.HStab.Size = new System.Drawing.Size(755, 298);
             this.HStab.TabIndex = 4;
             this.HStab.Text = "Histórico/Processos";
+            // 
+            // HistoricoBar
+            // 
+            this.HistoricoBar.Dock = System.Windows.Forms.DockStyle.None;
+            this.HistoricoBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.HistoricoBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AddHistoricoButton,
+            this.EditHistoricoButton,
+            this.DelHistoricoButton,
+            this.ZoomHistoricoButton});
+            this.HistoricoBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.HistoricoBar.Location = new System.Drawing.Point(709, 12);
+            this.HistoricoBar.Name = "HistoricoBar";
+            this.HistoricoBar.Size = new System.Drawing.Size(24, 94);
+            this.HistoricoBar.TabIndex = 191;
+            this.HistoricoBar.Text = "toolStrip1";
+            // 
+            // AddHistoricoButton
+            // 
+            this.AddHistoricoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.AddHistoricoButton.Image = global::GTI_Desktop.Properties.Resources.add;
+            this.AddHistoricoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AddHistoricoButton.Name = "AddHistoricoButton";
+            this.AddHistoricoButton.Size = new System.Drawing.Size(22, 20);
+            this.AddHistoricoButton.Text = "toolStripButton1";
+            this.AddHistoricoButton.ToolTipText = "Adicionar histórico";
+            this.AddHistoricoButton.Click += new System.EventHandler(this.AddHistoricoButton_Click);
+            // 
+            // EditHistoricoButton
+            // 
+            this.EditHistoricoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.EditHistoricoButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
+            this.EditHistoricoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.EditHistoricoButton.Name = "EditHistoricoButton";
+            this.EditHistoricoButton.Size = new System.Drawing.Size(22, 20);
+            this.EditHistoricoButton.Text = "toolStripButton1";
+            this.EditHistoricoButton.ToolTipText = "Alterar o histórico selecionado";
+            this.EditHistoricoButton.Click += new System.EventHandler(this.EditHistoricoButton_Click);
+            // 
+            // DelHistoricoButton
+            // 
+            this.DelHistoricoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.DelHistoricoButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.DelHistoricoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DelHistoricoButton.Name = "DelHistoricoButton";
+            this.DelHistoricoButton.Size = new System.Drawing.Size(22, 20);
+            this.DelHistoricoButton.Text = "toolStripButton2";
+            this.DelHistoricoButton.ToolTipText = "Excluir histórico selecionado";
+            this.DelHistoricoButton.Click += new System.EventHandler(this.DelHistoricoButton_Click);
+            // 
+            // ZoomHistoricoButton
+            // 
+            this.ZoomHistoricoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ZoomHistoricoButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.ZoomHistoricoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ZoomHistoricoButton.Name = "ZoomHistoricoButton";
+            this.ZoomHistoricoButton.Size = new System.Drawing.Size(22, 20);
+            this.ZoomHistoricoButton.Text = "toolStripButton3";
+            this.ZoomHistoricoButton.ToolTipText = "Visualizar histórico selecionado";
+            this.ZoomHistoricoButton.Click += new System.EventHandler(this.ZoomHistoricoButton_Click);
             // 
             // ProcessosListView
             // 
@@ -2888,9 +2939,10 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
-            this.ProcessosListView.Location = new System.Drawing.Point(8, 193);
+            this.ProcessosListView.FullRowSelect = true;
+            this.ProcessosListView.Location = new System.Drawing.Point(8, 162);
             this.ProcessosListView.Name = "ProcessosListView";
-            this.ProcessosListView.Size = new System.Drawing.Size(632, 91);
+            this.ProcessosListView.Size = new System.Drawing.Size(690, 123);
             this.ProcessosListView.TabIndex = 190;
             this.ProcessosListView.UseCompatibleStateImageBehavior = false;
             this.ProcessosListView.View = System.Windows.Forms.View.Details;
@@ -2898,12 +2950,12 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Nº Processo";
-            this.columnHeader1.Width = 75;
+            this.columnHeader1.Width = 90;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Assunto";
-            this.columnHeader2.Width = 380;
+            this.columnHeader2.Width = 420;
             // 
             // columnHeader3
             // 
@@ -2917,56 +2969,6 @@
             this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader4.Width = 75;
             // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuHistorico});
-            this.toolStrip1.Location = new System.Drawing.Point(661, 234);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(79, 25);
-            this.toolStrip1.TabIndex = 189;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // mnuHistorico
-            // 
-            this.mnuHistorico.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuAddHistorico,
-            this.mnuRemoverHistorico,
-            this.mnuViewHistorico});
-            this.mnuHistorico.Image = global::GTI_Desktop.Properties.Resources.option;
-            this.mnuHistorico.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuHistorico.Name = "mnuHistorico";
-            this.mnuHistorico.Size = new System.Drawing.Size(76, 22);
-            this.mnuHistorico.Text = "Opções";
-            // 
-            // mnuAddHistorico
-            // 
-            this.mnuAddHistorico.Name = "mnuAddHistorico";
-            this.mnuAddHistorico.Size = new System.Drawing.Size(125, 22);
-            this.mnuAddHistorico.Text = "Adicionar";
-            // 
-            // mnuRemoverHistorico
-            // 
-            this.mnuRemoverHistorico.Name = "mnuRemoverHistorico";
-            this.mnuRemoverHistorico.Size = new System.Drawing.Size(125, 22);
-            this.mnuRemoverHistorico.Text = "Remover";
-            // 
-            // mnuViewHistorico
-            // 
-            this.mnuViewHistorico.Name = "mnuViewHistorico";
-            this.mnuViewHistorico.Size = new System.Drawing.Size(125, 22);
-            this.mnuViewHistorico.Text = "Visualizar";
-            // 
-            // textBox34
-            // 
-            this.textBox34.Location = new System.Drawing.Point(8, 134);
-            this.textBox34.Multiline = true;
-            this.textBox34.Name = "textBox34";
-            this.textBox34.Size = new System.Drawing.Size(690, 49);
-            this.textBox34.TabIndex = 188;
-            // 
             // HistoricoListView
             // 
             this.HistoricoListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -2978,7 +2980,7 @@
             this.HistoricoListView.FullRowSelect = true;
             this.HistoricoListView.Location = new System.Drawing.Point(8, 12);
             this.HistoricoListView.Name = "HistoricoListView";
-            this.HistoricoListView.Size = new System.Drawing.Size(690, 120);
+            this.HistoricoListView.Size = new System.Drawing.Size(690, 144);
             this.HistoricoListView.TabIndex = 187;
             this.HistoricoListView.UseCompatibleStateImageBehavior = false;
             this.HistoricoListView.View = System.Windows.Forms.View.Details;
@@ -3008,66 +3010,6 @@
             // 
             this.columnHeader15.Text = "UsuarioId";
             this.columnHeader15.Width = 0;
-            // 
-            // HistoricoBar
-            // 
-            this.HistoricoBar.Dock = System.Windows.Forms.DockStyle.None;
-            this.HistoricoBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.HistoricoBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AddHistoricoButton,
-            this.EditHistoricoButton,
-            this.DelHistoricoButton,
-            this.ZoomHistoricoButton});
-            this.HistoricoBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.HistoricoBar.Location = new System.Drawing.Point(709, 12);
-            this.HistoricoBar.Name = "HistoricoBar";
-            this.HistoricoBar.Size = new System.Drawing.Size(32, 113);
-            this.HistoricoBar.TabIndex = 191;
-            this.HistoricoBar.Text = "toolStrip1";
-            // 
-            // AddHistoricoButton
-            // 
-            this.AddHistoricoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.AddHistoricoButton.Image = global::GTI_Desktop.Properties.Resources.add;
-            this.AddHistoricoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.AddHistoricoButton.Name = "AddHistoricoButton";
-            this.AddHistoricoButton.Size = new System.Drawing.Size(30, 20);
-            this.AddHistoricoButton.Text = "toolStripButton1";
-            this.AddHistoricoButton.ToolTipText = "Adicionar histórico";
-            this.AddHistoricoButton.Click += new System.EventHandler(this.AddHistoricoButton_Click);
-            // 
-            // EditHistoricoButton
-            // 
-            this.EditHistoricoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.EditHistoricoButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
-            this.EditHistoricoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.EditHistoricoButton.Name = "EditHistoricoButton";
-            this.EditHistoricoButton.Size = new System.Drawing.Size(30, 20);
-            this.EditHistoricoButton.Text = "toolStripButton1";
-            this.EditHistoricoButton.ToolTipText = "Alterar o histórico selecionado";
-            this.EditHistoricoButton.Click += new System.EventHandler(this.EditHistoricoButton_Click);
-            // 
-            // DelHistoricoButton
-            // 
-            this.DelHistoricoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.DelHistoricoButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.DelHistoricoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.DelHistoricoButton.Name = "DelHistoricoButton";
-            this.DelHistoricoButton.Size = new System.Drawing.Size(30, 20);
-            this.DelHistoricoButton.Text = "toolStripButton2";
-            this.DelHistoricoButton.ToolTipText = "Excluir histórico selecionado";
-            this.DelHistoricoButton.Click += new System.EventHandler(this.DelHistoricoButton_Click);
-            // 
-            // ZoomHistoricoButton
-            // 
-            this.ZoomHistoricoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ZoomHistoricoButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.ZoomHistoricoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ZoomHistoricoButton.Name = "ZoomHistoricoButton";
-            this.ZoomHistoricoButton.Size = new System.Drawing.Size(30, 20);
-            this.ZoomHistoricoButton.Text = "toolStripButton3";
-            this.ZoomHistoricoButton.ToolTipText = "Visualizar histórico selecionado";
-            this.ZoomHistoricoButton.Click += new System.EventHandler(this.ZoomHistoricoButton_Click);
             // 
             // Empresa
             // 
@@ -3134,8 +3076,6 @@
             this.a1Panel9.PerformLayout();
             this.HStab.ResumeLayout(false);
             this.HStab.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.HistoricoBar.ResumeLayout(false);
             this.HistoricoBar.PerformLayout();
             this.ResumeLayout(false);
@@ -3305,13 +3245,7 @@
         private System.Windows.Forms.ListBox PlacaLista;
         private System.Windows.Forms.TextBox PontoAgencia;
         internal System.Windows.Forms.Label label76;
-        private System.Windows.Forms.TextBox textBox34;
         private System.Windows.Forms.ListView HistoricoListView;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripDropDownButton mnuHistorico;
-        private System.Windows.Forms.ToolStripMenuItem mnuAddHistorico;
-        private System.Windows.Forms.ToolStripMenuItem mnuRemoverHistorico;
-        private System.Windows.Forms.ToolStripMenuItem mnuViewHistorico;
         private System.Windows.Forms.TextBox NumProcessoEncerramento;
         private System.Windows.Forms.ToolStrip VeiculosToolStrip;
         private System.Windows.Forms.ToolStripButton PlacaOKButton;
