@@ -103,7 +103,7 @@
             this.IsentoTaxa_chk = new System.Windows.Forms.CheckBox();
             this.IsentoIss_chk = new System.Windows.Forms.CheckBox();
             this.AlvaraAuto_chk = new System.Windows.Forms.CheckBox();
-            this.SustitutoTrib_chk = new System.Windows.Forms.CheckBox();
+            this.SubstitutoTrib_chk = new System.Windows.Forms.CheckBox();
             this.InscTemp_chk = new System.Windows.Forms.CheckBox();
             this.DataProcessoEncerramento = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -1084,7 +1084,7 @@
             this.a1Panel2.Controls.Add(this.IsentoTaxa_chk);
             this.a1Panel2.Controls.Add(this.IsentoIss_chk);
             this.a1Panel2.Controls.Add(this.AlvaraAuto_chk);
-            this.a1Panel2.Controls.Add(this.SustitutoTrib_chk);
+            this.a1Panel2.Controls.Add(this.SubstitutoTrib_chk);
             this.a1Panel2.Controls.Add(this.InscTemp_chk);
             this.a1Panel2.GradientEndColor = System.Drawing.SystemColors.Control;
             this.a1Panel2.GradientStartColor = System.Drawing.SystemColors.Control;
@@ -1183,16 +1183,16 @@
             this.AlvaraAuto_chk.Text = "Alvará Automático";
             this.AlvaraAuto_chk.UseVisualStyleBackColor = true;
             // 
-            // SustitutoTrib_chk
+            // SubstitutoTrib_chk
             // 
-            this.SustitutoTrib_chk.AutoSize = true;
-            this.SustitutoTrib_chk.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SustitutoTrib_chk.Location = new System.Drawing.Point(12, 36);
-            this.SustitutoTrib_chk.Name = "SustitutoTrib_chk";
-            this.SustitutoTrib_chk.Size = new System.Drawing.Size(171, 17);
-            this.SustitutoTrib_chk.TabIndex = 1;
-            this.SustitutoTrib_chk.Text = "Substituto Tributário do ISSQN";
-            this.SustitutoTrib_chk.UseVisualStyleBackColor = true;
+            this.SubstitutoTrib_chk.AutoSize = true;
+            this.SubstitutoTrib_chk.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.SubstitutoTrib_chk.Location = new System.Drawing.Point(12, 36);
+            this.SubstitutoTrib_chk.Name = "SubstitutoTrib_chk";
+            this.SubstitutoTrib_chk.Size = new System.Drawing.Size(171, 17);
+            this.SubstitutoTrib_chk.TabIndex = 1;
+            this.SubstitutoTrib_chk.Text = "Substituto Tributário do ISSQN";
+            this.SubstitutoTrib_chk.UseVisualStyleBackColor = true;
             // 
             // InscTemp_chk
             // 
@@ -3127,7 +3127,7 @@
         private System.Windows.Forms.CheckBox IsentoTaxa_chk;
         private System.Windows.Forms.CheckBox IsentoIss_chk;
         private System.Windows.Forms.CheckBox AlvaraAuto_chk;
-        private System.Windows.Forms.CheckBox SustitutoTrib_chk;
+        private System.Windows.Forms.CheckBox SubstitutoTrib_chk;
         private System.Windows.Forms.CheckBox InscTemp_chk;
         private System.Windows.Forms.ToolStripLabel StatusEmpresa;
         internal System.Windows.Forms.Label SimplesNacional;

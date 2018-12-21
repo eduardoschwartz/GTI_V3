@@ -398,7 +398,7 @@ namespace GTI_Bll.Classes {
         /// <returns></returns>
         public Exception Insert_Empresa_Vre(Vre_empresa reg) {
             Empresa_Data obj = new Empresa_Data(_connection);
-            Exception ex = obj.Insert_Empresa_Vre(reg);
+            Exception ex = obj.Incluir_Empresa_Vre(reg);
             return ex;
         }
 
@@ -409,7 +409,7 @@ namespace GTI_Bll.Classes {
         /// <returns></returns>
         public Exception Insert_Atividade_Vre(Vre_atividade reg) {
             Empresa_Data obj = new Empresa_Data(_connection);
-            Exception ex = obj.Insert_Atividade_Vre(reg);
+            Exception ex = obj.Incluir_Atividade_Vre(reg);
             return ex;
         }
 
@@ -420,7 +420,7 @@ namespace GTI_Bll.Classes {
         /// <returns></returns>
         public Exception Insert_Socio_Vre(Vre_socio reg) {
             Empresa_Data obj = new Empresa_Data(_connection);
-            Exception ex = obj.Insert_Socio_Vre(reg);
+            Exception ex = obj.Incluir_Socio_Vre(reg);
             return ex;
         }
 
@@ -431,7 +431,7 @@ namespace GTI_Bll.Classes {
         /// <returns></returns>
         public Exception Insert_Licenciamento_Vre(Vre_licenciamento reg) {
             Empresa_Data obj = new Empresa_Data(_connection);
-            Exception ex = obj.Insert_Licenciamento_Vre(reg);
+            Exception ex = obj.Incluir_Licenciamento_Vre(reg);
             return ex;
         }
 
@@ -663,6 +663,26 @@ namespace GTI_Bll.Classes {
         public Exception Incluir_Empresa(Mobiliario reg) {
             Empresa_Data obj = new Empresa_Data(_connection);
             Exception ex = obj.Incluir_Empresa(reg);
+            return ex;
+        }
+
+        /// <summary>
+        /// Retorna o próximo código disponível
+        /// </summary>
+        /// <returns></returns>
+        public int Retorna_Codigo_Disponivel() {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Retorna_Codigo_Disponivel();
+        }
+
+        /// <summary>
+        /// Gravar a lista de placas de uma empresa
+        /// </summary>
+        /// <param name="Lista"></param>
+        /// <returns></returns>
+        public Exception Incluir_Empresa_Placa(List<mobiliarioplaca> Lista) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            Exception ex = obj.Incluir_Empresa_Placa(Lista);
             return ex;
         }
 

@@ -79,7 +79,7 @@ namespace GTI_Desktop.Forms {
             SilDelButton.Enabled = !bStart;
             SilEditButton.Enabled = !bStart;
             InscTemp_chk.AutoCheck = !bStart;
-            SustitutoTrib_chk.AutoCheck = !bStart;
+            SubstitutoTrib_chk.AutoCheck = !bStart;
             AlvaraAuto_chk.AutoCheck = !bStart;
             IsentoIss_chk.AutoCheck = !bStart;
             IsentoTaxa_chk.AutoCheck = !bStart;
@@ -137,7 +137,7 @@ namespace GTI_Desktop.Forms {
             AtividadeVSListView.Items.Clear();
             Placa.Text = "";
             InscTemp_chk.Checked = false;
-            SustitutoTrib_chk.Checked = false;
+            SubstitutoTrib_chk.Checked = false;
             AlvaraAuto_chk.Checked = false;
             IsentoIss_chk.Checked = false;
             IsentoTaxa_chk.Checked = false;
@@ -178,6 +178,7 @@ namespace GTI_Desktop.Forms {
             ContatoEmail.Text = "";
             ContatoFone.Text = "";
             ContadorNome.Text = "";
+            ContadorNome.Tag = "";
             ContadorFone.Text = "";
             ContadorEmail.Text = "";
             ProfissionalNome.Text = "";
@@ -211,10 +212,152 @@ namespace GTI_Desktop.Forms {
 
         private void GravarButton_Click(object sender, EventArgs e) {
             if (Valida_Dados()) {
-                if (bAddNew) {
-                    ControlBehaviour(true);
+                Exception ex = Gravar_Empresa();
+                if (ex == null) {
+                    int _codigo = Convert.ToInt32(Codigo.Text);
+                    ex = Gravar_Placa(_codigo);
+                    if (ex == null) {
+                        ControlBehaviour(true);
+
+                    }
                 }
             }
+        }
+
+        private Exception Gravar_Empresa() {
+            //******************************
+            //Dados para a tabela Mobiliario
+            //******************************
+            Single? _area = Area.Text == "" ? (Single?)null : Convert.ToSingle(Area.Text);
+            Single? _capital_social = CapitalSocial.Text == "" ? (Single?)null : Convert.ToSingle(CapitalSocial.Text);
+            int? _codigo_atividade = Atividade_Principal.Tag.ToString() == "" ? (int?)null : Convert.ToInt32(Atividade_Principal.Tag.ToString());
+            short? _codigo_bairro = Bairro.Tag.ToString() == "" ? (short?)null : Convert.ToInt16(Bairro.Tag.ToString());
+            short? _codigo_cidade = Cidade.Tag.ToString() == "" ? (short?)null : Convert.ToInt16(Cidade.Tag.ToString());
+            int? _codigo_logradouro = Logradouro.Tag.ToString() == "" ? (int?)null : Convert.ToInt32(Logradouro.Tag.ToString());
+            byte? _codigo_aliquota = Nivel.Text == "" ? (byte?)null : Convert.ToByte(Nivel.Text);
+            short? _codigo_contador = ContadorNome.Tag.ToString() == "" ? (short?)null : Convert.ToInt16(ContadorNome.Tag.ToString());
+            string _cnpj = PessoaList.SelectedIndex == 0 ? null : gtiCore.RetornaNumero(CNPJ.Text);
+            string _cpf = PessoaList.SelectedIndex == 1 ? null : gtiCore.RetornaNumero(CPF.Text);
+            DateTime? _data_encerramento = !gtiCore.IsDate(DataEncerramento.Text) ? (DateTime?)null : Convert.ToDateTime(DataEncerramento.Text);
+            DateTime? _data_proc_encerramento = !gtiCore.IsDate(DataProcessoEncerramento.Text) ? (DateTime?)null : Convert.ToDateTime(DataProcessoEncerramento.Text);
+            DateTime? _data_processo_abertura = !gtiCore.IsDate(DataProcessoAbertura.Text) ? (DateTime?)null : Convert.ToDateTime(DataProcessoAbertura.Text);
+            string _contato_cargo = ContatoCargo.Text.Trim() == "" ? null : ContatoCargo.Text.Trim();
+            string _contato_email = ContatoEmail.Text.Trim() == "" ? null : ContatoEmail.Text.Trim();
+            string _contato_fone = ContatoFone.Text.Trim() == "" ? null : ContatoFone.Text.Trim();
+            string _homepage = HomePage.Text.Trim() == "" ? null : HomePage.Text.Trim();
+            string _complemento = Complemento.Text.Trim() == "" ? null : Complemento.Text.Trim();
+            string _fantasia = NomeFantasia.Text.Trim() == "" ? null : NomeFantasia.Text.Trim();
+            byte _alvara = AlvaraAuto_chk.Checked ? (byte)1 : (byte)0;
+            byte _bombonieri = Bombonieri_chk.Checked ? (byte)1 : (byte)0;
+            byte _horas24 = Horas24_chk.Checked ? (byte)1 : (byte)0;
+            bool _individual = EmpresaInd_chk.Checked ? true : false;
+            byte _insc_temp = InscTemp_chk.Checked ? (byte)1 : (byte)0;
+            byte _isento_taxa = IsentoTaxa_chk.Checked ? (byte)1 : (byte)0;
+            byte _isento_iss = IsentoIss_chk.Checked ? (byte)1 : (byte)0;
+            bool _liberado_vre = LiberadoVRE_chk.Checked ? true : false;
+            bool _sub_tributario = SubstitutoTrib_chk.Checked ? true : false;
+            byte _vistoria = Vistoria_chk.Checked ? (byte)1 : (byte)0;
+            short? _horario = HorarioFuncionamento.Tag.ToString() == "" ? (short?)null : Convert.ToInt16(HorarioFuncionamento.Tag.ToString());
+            string _horarioext = HorarioExtenso.Text.Trim() == "" ? null : HorarioExtenso.Text.Trim();
+            string _insc_estadual = InscEstadual.Text.Trim() == "" ? null : InscEstadual.Text.Trim();
+            int? _codigo_imovel = Convert.ToInt32(CodigoImovel.Text) == 0 ? (int?)null : Convert.ToInt32(CodigoImovel.Text.ToString());
+            string _nome_contato = ContatoNome.Text.Trim() == "" ? null : ContatoNome.Text.Trim();
+            string _nome_logradouro = Logradouro_EE.Text.Trim() == "" ? null : Logradouro_EE.Text.Trim();
+            short? _numero = Numero.Text == "" ? (short?)null : Convert.ToInt16(Numero.Text);
+            string _numero_processo_abertura = NumProcessoAbertura.Text.Trim() == "" ? null : NumProcessoAbertura.Text.Trim();
+            string _numero_processo_encerramento = NumProcessoEncerramento.Text.Trim() == "" ? null : NumProcessoEncerramento.Text.Trim();
+            string _profissional_registro = ProfissionalRegistro.Text.Trim() == "" ? null : ProfissionalRegistro.Text.Trim();
+            string _profissional_orgao = ProfissionalConselho.Text.Trim() == "" ? null : ProfissionalConselho.Text.Trim();
+            string _ponto_agencia = PontoAgencia.Text.Trim() == "" ? null : PontoAgencia.Text.Trim();
+            short? _qtde_empregado = QtdeFuncionario.Text == "" ? (short?)null : Convert.ToInt16(QtdeFuncionario.Text);
+            short? _qtde_prof = QtdeProfissional.Text == "" ? (short?)null : Convert.ToInt16(QtdeProfissional.Text);
+            short? _profissional_codigo = ProfissionalNome.Tag.ToString() == "" ? (short?)null : Convert.ToInt16(ProfissionalNome.Tag.ToString());
+            string _rg = RG.Text.Trim() == "" ? null : RG.Text.Trim();
+            string _uf = UF.Text.Trim() == "" ? null : UF.Text.Trim();
+            string _cep = Cep.Text.Trim() == "" ? null : gtiCore.RetornaNumero(Cep.Text).Trim();
+
+            Mobiliario reg = new Mobiliario {
+                Alvara = _alvara,
+                Areatl = _area,
+                Ativextenso = Atividade_Extenso.Text.Trim(),
+                Bombonieri = _bombonieri,
+                Capitalsocial = _capital_social,
+                Cargocontato = _contato_cargo,
+                Cep = _cep,
+                Cnpj = _cnpj,
+                Codatividade = _codigo_atividade,
+                Codbairro = _codigo_bairro,
+                Codcidade = _codigo_cidade,
+                Codigoaliq = _codigo_aliquota,
+                Codlogradouro = _codigo_logradouro,
+                Codprofresp = _profissional_codigo,
+                Complemento = _complemento,
+                Cpf = _cpf,
+                Dataabertura = Convert.ToDateTime(DataAbertura.Text),
+                Dataencerramento = _data_encerramento,
+                Dataprocencerramento = _data_proc_encerramento,
+                Dataprocesso = _data_processo_abertura,
+                Emailcontato = _contato_email,
+                Fonecontato = _contato_fone,
+                Homepage = _homepage,
+                Horario = _horario,
+                Horarioext = _horarioext,
+                Horas24 = _horas24,
+                Imovel = _codigo_imovel,
+                Individual = _individual,
+                Inscestadual = _insc_estadual,
+                Insctemp = _insc_temp,
+                Isentotaxa = _isento_taxa,
+                Isentoiss = _isento_iss,
+                Liberado_vre = _liberado_vre,
+                Nomecontato = _nome_contato,
+                Nomefantasia = _fantasia,
+                Nomelogradouro = _nome_logradouro,
+                Numero = _numero,
+                Numprocesso = _numero_processo_abertura,
+                Numprocencerramento = _numero_processo_encerramento,
+                Numregistroresp = _profissional_registro,
+                Orgaoemisresp = _profissional_orgao,
+                Ponto_agencia = _ponto_agencia,
+                Qtdeempregado = _qtde_empregado,
+                Qtdeprof = _qtde_prof,
+                Razaosocial = RazaoSocial.Text.Trim(),
+                Respcontabil = _codigo_contador,
+                Rg = _rg,
+                Siglauf = _uf,
+                Substituto_tributario_issqn = _sub_tributario,
+                Vistoria = _vistoria
+            };
+
+            Empresa_bll empresa_Class = new Empresa_bll(_connection);
+            Exception ex;
+
+            if (bAddNew) {
+                reg.Codigomob = empresa_Class.Retorna_Codigo_Disponivel();
+                ex = empresa_Class.Incluir_Empresa(reg);
+                if (ex != null) {
+                    ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                    eBox.ShowDialog();
+                    return ex;
+                } else {
+                    Codigo.Text = reg.Codigomob.ToString("000000");
+                }
+            }
+            return null;
+        }
+
+        private Exception Gravar_Placa(int Codigo) {
+            List<mobiliarioplaca> Lista = new List<mobiliarioplaca>();
+            foreach (string item in PlacaLista.Items) {
+                mobiliarioplaca reg = new mobiliarioplaca {
+                    Codigo = Codigo,
+                    placa=item
+                };
+                Lista.Add(reg);
+            }
+            Empresa_bll empresa_Class = new Empresa_bll(_connection);
+            Exception ex = empresa_Class.Incluir_Empresa_Placa(Lista);
+            return ex;
         }
 
         private void CancelarButton_Click(object sender, EventArgs e) {
@@ -223,7 +366,7 @@ namespace GTI_Desktop.Forms {
 
         private void AddButton_Click(object sender, EventArgs e) {
             bAddNew = true;
-            ClearFields();
+//            ClearFields();
             ControlBehaviour(false);
         }
 
@@ -380,7 +523,7 @@ namespace GTI_Desktop.Forms {
             QtdeFuncionario.Text = Reg.Qtde_empregado.ToString();
             CapitalSocial.Text = Reg.Capital_social.ToString();
             InscTemp_chk.Checked = Reg.Inscricao_temporaria == 1 ? true : false;
-            SustitutoTrib_chk.Checked = (bool)Reg.Substituto_tributario_issqn ;
+            SubstitutoTrib_chk.Checked = (bool)Reg.Substituto_tributario_issqn ;
             IsentoIss_chk.Checked = Reg.Isento_iss == 1 ? true : false;
             IsentoTaxa_chk.Checked = Reg.Isento_taxa == 1 ? true : false;
             EmpresaInd_chk.Checked =  (bool)Reg.Individual;
