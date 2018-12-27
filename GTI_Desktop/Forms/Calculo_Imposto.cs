@@ -331,8 +331,8 @@ namespace GTI_Desktop.Forms {
             List<EmpresaStruct> ListaEmpresas = empresa_Class.Lista_Empresas_Taxa_Licenca();
             List<Mobiliarioatividadeiss> ListaEmpresas_ISS_Fixo = empresa_Class.Lista_Empresas_ISS_Fixo();
             int _total = ListaEmpresas.Count, _pos = 1;
-            string _documento0 = "", _documento1 = "", _documento2 = "", _documento3 = "", _documento4 = "", _valor0 = "", _valor1 = "";
-            string _vencimento0 = "", _vencimento1 = "", _vencimento2 = "", _vencimento3 = "", _vencimento4 = "";
+            string _documento0 = "", _documento1 = "", _documento2 = "", _documento3 = "", _valor0 = "", _valor1 = "";
+            string _vencimento0 = "", _vencimento1 = "", _vencimento2 = "", _vencimento3 = "";
             decimal _valor_aliquota = 0;
 
             foreach (EmpresaStruct item in ListaEmpresas) {
@@ -425,7 +425,6 @@ namespace GTI_Desktop.Forms {
                             break;
                         }
                     }
-
 
                     if (_valor_aliquota_ISS > 0 && !IsMedico ) {
                         _linha = Codigo + "#" + _ano + "#14#0#" + _parcela + "#0#18#" + _vencto + "#01/01/" + _ano;
@@ -533,16 +532,16 @@ namespace GTI_Desktop.Forms {
             bool _unica = _Prm.Parcelaunica == "S" ? true : false;
 
             Empresa_bll empresa_Class = new Empresa_bll(_connection);
-            List<Mobiliarioatividadevs2> ListaEmpresas = empresa_Class.Lista_Empresas_Vigilancia_Sanitaria();
-            List<Mobiliarioatividadevs2> ListaVS = new List<Mobiliarioatividadevs2>();
-            foreach (Mobiliarioatividadevs2 item in ListaEmpresas) {
-                if (item.Codmobiliario != 303947) {
-                    goto PROXIMO;
-                }
+            List<MobiliariovsStruct> ListaEmpresas = empresa_Class.Lista_Empresas_Vigilancia_Sanitaria();
+            List<MobiliariovsStruct> ListaVS = new List<MobiliariovsStruct>();
+            foreach (MobiliariovsStruct item in ListaEmpresas) {
+                //if (item.Codigo != 303947) {
+                //    goto PROXIMO;
+                //}
 
                 bool _find = false;
                 for (int i = 0; i < ListaVS.Count; i++) {
-                    if (item.Codmobiliario == ListaVS[i].Codmobiliario) {
+                    if (item.Codigo == ListaVS[i].Codigo) {
                         _find = true;
                         ListaVS[i].Valor += item.Valor * item.Qtde;
                         break;
@@ -550,20 +549,20 @@ namespace GTI_Desktop.Forms {
                 }
                 
                 if (!_find) {
-                    Mobiliarioatividadevs2 reg = new Mobiliarioatividadevs2();
-                    reg.Codmobiliario = item.Codmobiliario;
+                    MobiliariovsStruct reg = new MobiliariovsStruct();
+                    reg.Codigo = item.Codigo;
                     reg.Qtde = item.Qtde;
                     reg.Valor = item.Valor * item.Qtde ;
                     ListaVS.Add(reg);
                 }
-PROXIMO:;
+//PROXIMO:;
             }
 
             int _total = ListaVS.Count, _pos = 1;
             string _documento0="", _documento1="", _documento2="", _documento3="", _documento4="", _valor0="", _valor1="";
             string _vencimento0="", _vencimento1="", _vencimento2="", _vencimento3="", _vencimento4="";
 
-            foreach (Mobiliarioatividadevs2 item in ListaVS) {
+            foreach (MobiliariovsStruct item in ListaVS) {
                
                 if (_pos % 10 == 0) {
                     PBar.Value = _pos * 100 / _total;
@@ -574,14 +573,14 @@ PROXIMO:;
 
                 for (int _parcela = 0; _parcela <= _qtde_parcelas; _parcela++) {
                     string _vencto =  _parcela==0 ? aVencimento[0].ToString("dd/MM/yyyy"):   aVencimento[_parcela-1].ToString("dd/MM/yyyy");
-                    string _linha = item.Codmobiliario + "#" + _ano + "#13#0#" + _parcela + "#0#18#" + _vencto + "#01/01/" + _ano ;
+                    string _linha = item.Codigo + "#" + _ano + "#13#0#" + _parcela + "#0#18#" + _vencto + "#01/01/" + _ano ;
                     fs1.WriteLine(_linha);
-                    decimal _valor = item.Valor/_qtde_parcelas, _valor_unica = (item.Valor - (item.Valor * (decimal)0.05)) ;
+                    decimal _valor = Convert.ToDecimal(item.Valor)/_qtde_parcelas, _valor_unica = (Convert.ToDecimal(item.Valor) - (Convert.ToDecimal(item.Valor) * (decimal)0.05)) ;
                     decimal _valor_parcela = _parcela > 0 ? _valor : _valor_unica;
                     //_valor_parcela = _valor_parcela ;
-                    _linha = item.Codmobiliario + "#" + _ano + "#13#0#" + _parcela + "#0#25#" +  _valor_parcela.ToString("#0.00") ;
+                    _linha = item.Codigo + "#" + _ano + "#13#0#" + _parcela + "#0#25#" +  _valor_parcela.ToString("#0.00") ;
                     fs2.WriteLine(_linha);
-                    _linha = item.Codmobiliario + "#" + _ano + "#13#0#" + _parcela + "#0#" + _documento;
+                    _linha = item.Codigo + "#" + _ano + "#13#0#" + _parcela + "#0#" + _documento;
                     fs3.WriteLine(_linha);
                     _linha = _documento + "#" + DateTime.Now.ToString("dd/MM/yyyy");
                     fs4.WriteLine(_linha);
@@ -616,7 +615,7 @@ PROXIMO:;
                     _documento++;
                 }
 
-                string _linha_calc = _ano.ToString() + "#" + item.Codmobiliario + "#13#" + _qtde_parcelas.ToString() + "#" + _valor0 + "#" + _valor1 + "#0#0#" +
+                string _linha_calc = _ano.ToString() + "#" + item.Codigo + "#13#" + _qtde_parcelas.ToString() + "#" + _valor0 + "#" + _valor1 + "#0#0#" +
                 _documento0 + "#0#0#" + _documento1 + "#" + _vencimento1 + "#" + _documento2 + '#' + _vencimento2 ;
                 fs5.WriteLine(_linha_calc);
 

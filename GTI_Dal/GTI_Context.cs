@@ -128,5 +128,7 @@ namespace GTI_Dal {
         public DbSet<Comunicado_isencao> Comunicado_Isencao { get; set; }
         public DbSet<Atividadeiss> Atividadeiss { get; set; }
         public DbSet<Mobiliariohist> Mobiliariohist { get; set; }
+        public DbSet<Mobiliariovs> Mobiliariovs { get; set; }
+        public DbSet<Cnae> Cnae { get; set; }
     }
 }

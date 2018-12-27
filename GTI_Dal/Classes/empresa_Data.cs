@@ -87,16 +87,17 @@ namespace GTI_Dal.Classes {
             return Lista;
         }
 
-        public List<Mobiliarioatividadevs2> Lista_Empresas_Vigilancia_Sanitaria() {
+        public List<MobiliariovsStruct> Lista_Empresas_Vigilancia_Sanitaria() {
             using (GTI_Context db = new GTI_Context(_connection)) {
-                List<Mobiliarioatividadevs2> ListaFinal = new List<Mobiliarioatividadevs2>();
-                List<Mobiliarioatividadevs2> ListaGeral = (from m in db.Mobiliarioatividadevs2 orderby m.Codmobiliario select m).ToList();
+                List<MobiliariovsStruct> ListaFinal = new List<MobiliariovsStruct>();
+                List<MobiliariovsStruct> ListaGeral = (from m in db.Mobiliariovs join c in db.Cnaecriteriodesc on m.Criterio equals c.Criterio
+                                                       orderby m.Codigo select new MobiliariovsStruct {Codigo=m.Codigo,Cnae=m.Cnae,Criterio=m.Criterio,Qtde=m.Qtde,Valor=c.Valor }).ToList();
                 List<int> ListaAtivos = Lista_Empresas_Ativas();
                 for (int i = 0; i < ListaGeral.Count; i++) {
                     for (int w = 0; w < ListaAtivos.Count; w++) {
-                        if (ListaGeral[i].Codmobiliario == ListaAtivos[w]) {
-                            Mobiliarioatividadevs2 reg = new Mobiliarioatividadevs2();
-                            reg.Codmobiliario = ListaGeral[i].Codmobiliario;
+                        if (ListaGeral[i].Codigo == ListaAtivos[w]) {
+                            MobiliariovsStruct reg = new MobiliariovsStruct();
+                            reg.Codigo = ListaGeral[i].Codigo;
                             reg.Qtde = ListaGeral[i].Qtde;
                             reg.Valor = ListaGeral[i].Valor;
                             ListaFinal.Add(reg);
@@ -209,7 +210,7 @@ namespace GTI_Dal.Classes {
         public bool Empresa_tem_VS(int nCodigo) {
             bool bRet = false;
             using (GTI_Context db = new GTI_Context(_connection)) {
-                var existingReg = db.Mobiliarioatividadevs2.Count(a => a.Codmobiliario == nCodigo);
+                var existingReg = db.Mobiliariovs.Count(a => a.Codigo == nCodigo);
                 if (existingReg != 0) {
                     bRet = true;
                 }
@@ -767,22 +768,16 @@ namespace GTI_Dal.Classes {
         public List<CnaeStruct> Lista_Cnae_Empresa_VS(int nCodigo) {
             List<CnaeStruct> Lista = new List<CnaeStruct>();
             using (GTI_Context db = new GTI_Context(_connection)) {
-                var rows = (from m in db.Mobiliarioatividadevs2 join c in db.Cnaesubclasse on
-                            new { p1 = m.Divisao, p2 = m.Grupo, p3 = m.Classe, p4 = m.Subclasse } equals
-                            new { p1 = c.Divisao, p2 = c.Grupo, p3 = c.Classe, p4 = c.Subclasse }
-                            where m.Codmobiliario == nCodigo
-                            select new { m.Divisao,m.Grupo,m.Classe,m.Subclasse, c.Descricao,m.Criterio,m.Qtde,m.Valor });
+                var rows = (from m in db.Mobiliariovs join c in db.Cnae on m.Cnae equals c.cnae join a in db.Cnaecriteriodesc on m.Criterio equals a.Criterio
+                            where m.Codigo == nCodigo
+                            select new { m.Cnae, c.Descricao,m.Criterio,m.Qtde,a.Valor });
                 foreach (var reg in rows) {
                     CnaeStruct Linha = new CnaeStruct();
-                    Linha.Divisao = reg.Divisao;
-                    Linha.Grupo = reg.Grupo;
-                    Linha.Classe = reg.Classe;
-                    Linha.Subclasse = reg.Subclasse;
-                    Linha.Descricao = reg.Descricao;
+                    Linha.Descricao = reg.Descricao.ToUpper();
                     Linha.Criterio = reg.Criterio;
-                    Linha.Qtde = reg.Qtde;
-                    Linha.Valor = reg.Valor;
-                    Linha.CNAE = dalCore.Unifica_Cnae(reg.Divisao, reg.Grupo, reg.Classe, reg.Subclasse);
+                    Linha.Qtde = (int)reg.Qtde;
+                    Linha.Valor =(decimal) reg.Valor;
+                    Linha.CNAE = reg.Cnae;
                     Lista.Add(Linha);
                 }
                 return Lista;

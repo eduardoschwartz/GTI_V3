@@ -583,7 +583,7 @@ namespace GTI_Bll.Classes {
         /// Lista das empresas que possuem vigilancia sanitaria
         /// </summary>
         /// <returns></returns>
-        public List<Mobiliarioatividadevs2> Lista_Empresas_Vigilancia_Sanitaria() {
+        public List<MobiliariovsStruct> Lista_Empresas_Vigilancia_Sanitaria() {
             Empresa_Data obj = new Empresa_Data(_connection);
             return obj.Lista_Empresas_Vigilancia_Sanitaria();
         }
