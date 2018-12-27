@@ -77,7 +77,6 @@ namespace GTI_Web.Pages {
 
         protected void ValidarButton_Click(object sender, EventArgs e) {
             string sCod = Codigo.Text;
-            string sTipo = "";
             lblmsg.Text = "";
             if (sCod.Trim().Length != 19)
                 lblmsg.Text = "Código de validação inválido.";

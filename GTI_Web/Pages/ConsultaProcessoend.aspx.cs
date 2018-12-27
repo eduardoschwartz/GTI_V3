@@ -14,7 +14,7 @@ namespace GTI_Web.Pages {
                     Response.Redirect("~/Pages/gtiMenu.aspx");
                 try {
                     s = gtiCore.Decrypt(Request.QueryString["x"]);
-                } catch (Exception ex2) {
+                } catch  {
 
                     Response.Redirect("~/Pages/gtiMenu.aspx");
                 }

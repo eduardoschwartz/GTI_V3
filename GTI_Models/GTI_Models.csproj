@@ -85,6 +85,7 @@
     <Compile Include="Models\certidao_valor_venal.cs" />
     <Compile Include="Models\cidadao.cs" />
     <Compile Include="Models\cidade.cs" />
+    <Compile Include="Models\cnae.cs" />
     <Compile Include="Models\cnaecriterio.cs" />
     <Compile Include="Models\cnaecriteriodesc.cs" />
     <Compile Include="Models\cnaesubclasse.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Models\mobiliarioendentrega.cs" />
     <Compile Include="Models\mobiliariohist.cs" />
     <Compile Include="Models\mobiliarioplaca.cs" />
+    <Compile Include="Models\mobiliariovs.cs" />
     <Compile Include="Models\numdocumento.cs" />
     <Compile Include="Models\obsparcela.cs" />
     <Compile Include="Models\parametros.cs" />
@@ -152,7 +154,6 @@
     <Compile Include="Models\usoconstr.cs" />
     <Compile Include="Models\usoterreno.cs" />
     <Compile Include="Models\mobiliarioatividadeiss.cs" />
-    <Compile Include="Models\mobiliarioatividadevs2.cs" />
     <Compile Include="Models\mobiliarioevento.cs" />
     <Compile Include="Models\mobiliarioproprietario.cs" />
     <Compile Include="Models\processoGTI.cs" />

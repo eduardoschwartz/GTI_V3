@@ -100,7 +100,7 @@ namespace GTI_Web.Pages {
 
         private void PrintReport(List<int>_codigos) {
             ReportDocument crystalReport = new ReportDocument();
-            string sData = "18/04/2012", sTributo = "", sSufixo = "", sNao = "",sNome="",sTipoCertidao="";
+            string sData = "18/04/2012", sTributo = "";
             short  nRet = 0;
             List<Certidao_debito_documento> _lista_certidao = new List<Certidao_debito_documento>();
             RetornoCertidaoDebito _tipo_Certidao; 
@@ -118,7 +118,7 @@ namespace GTI_Web.Pages {
                 TipoCadastro _tipo_cadastro = _codigo < 100000 ? TipoCadastro.Imovel : _codigo >= 100000 && _codigo < 500000 ? TipoCadastro.Empresa : TipoCadastro.Cidadao;
                 Sistema_bll sistema_Class = new Sistema_bll("GTIconnection");
                 Contribuinte_Header_Struct _header = sistema_Class.Contribuinte_Header(_codigo);
-                sNome =  _header==null?"":   _header.Nome;
+                string sNome =  _header==null?"":   _header.Nome;
 
                 //***Verifica débito
                 Certidao_debito_detalhe dadosCertidao = tributario_Class.Certidao_Debito(_codigo);

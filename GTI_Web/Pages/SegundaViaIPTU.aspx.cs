@@ -100,6 +100,10 @@ namespace UIWeb {
                 reg.Inscricao_cadastral = dados_imovel.Distrito.ToString() + "." + dados_imovel.Setor.ToString("00") + "." + dados_imovel.Quadra.ToString("0000") + 
                     "." + dados_imovel.Lote.ToString("00000") + "." + dados_imovel.Seq.ToString("00") + "." + dados_imovel.Unidade.ToString("00") + "." + dados_imovel.SubUnidade.ToString("000");
                 Laseriptu RegIPTU = tributario_Class.Carrega_Dados_IPTU(item.Codigo_Reduzido, 2019);
+                if (RegIPTU == null) {
+                    lblmsg.Text = "Solicitação inválida, entre em contato com o Sistema Prático na Prefeitura.";
+                    return 0; 
+                }
                 reg.Totparcela = (short)RegIPTU.Qtdeparc;
                 if (item.Numero_Parcela == 0) {
                     if(item.Complemento==0)

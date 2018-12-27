@@ -153,12 +153,12 @@ namespace UIWeb.Pages {
                 sSocio2 = sSocio2.Substring(0, sSocio2.Length - 2);
             PROPRIETARIO.Text = "<pre>" + sSocio + "</pre>";
 
-            List<CnaeStruct> ListaCnae = empresa_class.ListaCnae(Codigo);
+            List<Cnae> ListaCnae = empresa_class.ListaCnae(Codigo);
             string sCnae = "";
             sCnae2 = "";
-            foreach (CnaeStruct cnae in ListaCnae) {
-                sCnae += cnae.CNAE + "-" + cnae.Descricao + System.Environment.NewLine;
-                sCnae2 += cnae.CNAE + "-" + cnae.Descricao + System.Environment.NewLine;
+            foreach (Cnae cnae in ListaCnae) {
+                sCnae += cnae.cnae + "-" + cnae.Descricao + System.Environment.NewLine;
+                sCnae2 += cnae.cnae + "-" + cnae.Descricao + System.Environment.NewLine;
             }
             if (!string.IsNullOrWhiteSpace(sCnae2))
                 sCnae2 = sCnae2.Substring(0, sCnae2.Length - 1);

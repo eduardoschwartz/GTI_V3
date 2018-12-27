@@ -65,7 +65,7 @@
                             <asp:Label ID="lblCod" runat="server" Text="Código do imóvel..:"></asp:Label>
                             &nbsp;
                             <asp:TextBox ID="txtCod" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="6" Width="70px"  onKeyPress="return formata(this, '§§§§§§', event)"></asp:TextBox>
-                            &nbsp; (Sem dígito)</td>
+                            &nbsp; </td>
 
                     </tr>
                     <tr>
@@ -79,6 +79,7 @@
 
 
                 </table>
+                <br />
                 <asp:Label ID="lblmsg" runat="server" Font-Bold="True" ForeColor="Red" Text=""></asp:Label>
                 <br />
                 <table border="0">
