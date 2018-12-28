@@ -26,6 +26,7 @@ namespace GTI_Desktop.Forms {
             SilToolStrip.Renderer = new MySR();
             EnderecoToolStrip.Renderer =new MySR();
             EnderecoentregaToolStrip.Renderer = new MySR();
+            HistoricoBar.Renderer = new MySR();
             
             CarregaLista();
             ClearFields();
@@ -33,7 +34,6 @@ namespace GTI_Desktop.Forms {
             ControlBehaviour(true);
             gtiCore.Liberado(this);
         }
-
 
         private void ControlBehaviour(bool bStart) {
             AddButton.Enabled = bStart;
@@ -197,6 +197,7 @@ namespace GTI_Desktop.Forms {
             Area.Text = "";
             QtdeProfissional.Text = "";
             ProprietarioList.Items.Clear();
+            PlacaLista.Items.Clear();
         }
 
         private void CarregaLista() {
@@ -217,8 +218,11 @@ namespace GTI_Desktop.Forms {
                     int _codigo = Convert.ToInt32(Codigo.Text);
                     ex = Gravar_Placa(_codigo);
                     if (ex == null) {
-                        ControlBehaviour(true);
+                        ex = Gravar_Proprietario(_codigo);
+                        if (ex == null) {
 
+                            ControlBehaviour(true);
+                        }
                     }
                 }
             }
@@ -356,9 +360,24 @@ namespace GTI_Desktop.Forms {
                 Lista.Add(reg);
             }
             Empresa_bll empresa_Class = new Empresa_bll(_connection);
-            Exception ex = empresa_Class.Incluir_Empresa_Placa(Lista);
+            Exception ex = empresa_Class.Incluir_Empresa_Placa(Lista,Codigo);
             return ex;
         }
+
+        private Exception Gravar_Proprietario(int Codigo) {
+            List<Mobiliarioproprietario> Lista = new List<Mobiliarioproprietario>();
+            foreach (CustomListBoxItem item in ProprietarioList.Items) {
+                Mobiliarioproprietario reg = new Mobiliarioproprietario (){
+                    Codmobiliario = Codigo,
+                    Codcidadao = item._value
+                };
+                Lista.Add(reg);
+            }
+            Empresa_bll empresa_Class = new Empresa_bll(_connection);
+            Exception ex = empresa_Class.Incluir_Empresa_Proprietario(Lista, Codigo);
+            return ex;
+        }
+
 
         private void CancelarButton_Click(object sender, EventArgs e) {
             ControlBehaviour(true);

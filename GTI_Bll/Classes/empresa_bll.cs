@@ -680,11 +680,25 @@ namespace GTI_Bll.Classes {
         /// </summary>
         /// <param name="Lista"></param>
         /// <returns></returns>
-        public Exception Incluir_Empresa_Placa(List<mobiliarioplaca> Lista) {
+        public Exception Incluir_Empresa_Placa(List<mobiliarioplaca> Lista,int Codigo) {
             Empresa_Data obj = new Empresa_Data(_connection);
-            Exception ex = obj.Incluir_Empresa_Placa(Lista);
+            Exception ex = obj.Incluir_Empresa_Placa(Lista,Codigo);
             return ex;
         }
+
+        /// <summary>
+        /// Gravar a lista de proprietários de uma empresa
+        /// </summary>
+        /// <param name="Lista"></param>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public Exception Incluir_Empresa_Proprietario(List<Mobiliarioproprietario> Lista, int Codigo) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            Exception ex = obj.Incluir_Empresa_Proprietario(Lista, Codigo);
+            return ex;
+        }
+
+
 
     }
 }

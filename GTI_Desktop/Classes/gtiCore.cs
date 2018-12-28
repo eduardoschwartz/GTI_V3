@@ -9,12 +9,14 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Collections;
 using System.IO;
+using GTI_Bll.Classes;
 
 namespace GTI_Desktop.Classes {
     /// <summary>
     /// Classe que contêm as funções genéricas do sistema
     /// </summary>
     public static class gtiCore {
+        
         public enum eTweakMode { Normal, AllLetters, AllLettersAllCaps, AllLettersAllSmall, AlphaNumeric, AlphaNumericAllCaps, AlphaNumericAllSmall, IntegerPositive, DecimalPositive };
         public enum LocalEndereco { Imovel, Empresa, Cidadao }
         public enum TipoEndereco { Local, Proprietario, Entrega }
@@ -592,6 +594,22 @@ namespace GTI_Desktop.Classes {
             }
             return fi;
         }
+
+        public static void UpdateUserBinary() {
+            string _connection = gtiCore.Connection_Name();
+            Sistema_bll sistema_Class = new Sistema_bll(_connection);
+            string sTmp = sistema_Class.GetUserBinary(Properties.Settings.Default.UserId);
+            int nSize = sistema_Class.GetSizeofBinary();
+            GtiTypes.UserBinary = gtiCore.Decrypt(sTmp);
+            if (nSize > GtiTypes.UserBinary.Length) {
+                int nDif = nSize - GtiTypes.UserBinary.Length;
+                sTmp = new string('0', nDif);
+                GtiTypes.UserBinary += sTmp;
+            }
+
+        }
+
+
     }
 
     public class MySR : ToolStripSystemRenderer {

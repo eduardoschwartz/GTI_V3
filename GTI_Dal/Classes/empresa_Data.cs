@@ -770,13 +770,13 @@ namespace GTI_Dal.Classes {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 var rows = (from m in db.Mobiliariovs join c in db.Cnae on m.Cnae equals c.cnae join a in db.Cnaecriteriodesc on m.Criterio equals a.Criterio
                             where m.Codigo == nCodigo
-                            select new { m.Cnae, c.Descricao,m.Criterio,m.Qtde,a.Valor });
+                            select new { m.Cnae, c.Descricao, m.Criterio, m.Qtde, a.Valor });
                 foreach (var reg in rows) {
                     CnaeStruct Linha = new CnaeStruct();
                     Linha.Descricao = reg.Descricao.ToUpper();
                     Linha.Criterio = reg.Criterio;
                     Linha.Qtde = (int)reg.Qtde;
-                    Linha.Valor =(decimal) reg.Valor;
+                    Linha.Valor = (decimal)reg.Valor;
                     Linha.CNAE = reg.Cnae;
                     Lista.Add(Linha);
                 }
@@ -1105,11 +1105,11 @@ namespace GTI_Dal.Classes {
             }
         }
 
-        public Exception Incluir_Empresa_Placa(List<mobiliarioplaca> Lista) {
+        public Exception Incluir_Empresa_Placa(List<mobiliarioplaca> Lista,int Codigo) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Database.ExecuteSqlCommand("DELETE FROM MOBILIARIOPLACA WHERE Codigo=@Codigo",
-                        new SqlParameter("@Codigo", Lista[0].Codigo));
+                        new SqlParameter("@Codigo", Codigo));
                 } catch (Exception ex) {
                     return ex;
                 }
@@ -1118,6 +1118,28 @@ namespace GTI_Dal.Classes {
                         db.Database.ExecuteSqlCommand("INSERT INTO mobiliarioplaca(Codigo,placa) VALUES(@Codigo,@placa)",
                         new SqlParameter("@Codigo", item.Codigo),
                         new SqlParameter("@placa", item.placa));
+                    } catch (Exception ex) {
+                        return ex;
+                    }
+                }
+                return null;
+
+            }
+        }
+
+        public Exception Incluir_Empresa_Proprietario(List<Mobiliarioproprietario> Lista,int Codigo) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                try {
+                    db.Database.ExecuteSqlCommand("DELETE FROM MOBILIARIOPROPRIETARIO WHERE Codmobiliario=@Codigo",
+                        new SqlParameter("@Codigo", Codigo));
+                } catch (Exception ex) {
+                    return ex;
+                }
+                foreach (Mobiliarioproprietario item in Lista) {
+                    try {
+                        db.Database.ExecuteSqlCommand("INSERT INTO mobiliarioproprietario(Codmobiliario,codcidadao) VALUES(@Codmobiliario,@codcidadao)",
+                        new SqlParameter("@Codmobiliario", item.Codmobiliario),
+                        new SqlParameter("@codcidadao", item.Codcidadao));
                     } catch (Exception ex) {
                         return ex;
                     }

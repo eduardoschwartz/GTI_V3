@@ -133,12 +133,15 @@ namespace GTI_Desktop.Forms {
 
         private void BaseRealToolStripMenuItem_Click(object sender, EventArgs e) {
             sbDataBase.Text = Properties.Settings.Default.DataBaseReal;
+            gtiCore.UpdateUserBinary();
             this.Refresh();
         }
 
         private void BaseDeTestesToolStripMenuItem_Click(object sender, EventArgs e) {
             sbDataBase.Text = Properties.Settings.Default.DataBaseTeste;
+            gtiCore.UpdateUserBinary();
             this.Refresh();
+
         }
 
         private void BtCidadao_Click(object sender, EventArgs e) {

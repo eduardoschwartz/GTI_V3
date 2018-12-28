@@ -193,8 +193,8 @@ namespace GTI_Desktop.Forms {
                 return;
             }
             gtiCore.Ocupado(this);
-            GTI_Desktop.Properties.Settings.Default.ServerName = txtServer.Text;
-            GTI_Desktop.Properties.Settings.Default.Save();
+            Properties.Settings.Default.ServerName = txtServer.Text;
+            Properties.Settings.Default.Save();
 
             string _connection = gtiCore.Connection_Name();
             Sistema_bll sistema_Class = new Sistema_bll(_connection);
@@ -239,16 +239,17 @@ namespace GTI_Desktop.Forms {
                 if (result != DialogResult.OK)
                     return;
             }
+            gtiCore.UpdateUserBinary();
             //Update user Binary
-            string sTmp = sistema_Class.GetUserBinary(nId);
-            int nSize = sistema_Class.GetSizeofBinary();
-            GtiTypes.UserBinary = gtiCore.Decrypt(sTmp);
-            if (nSize > GtiTypes.UserBinary.Length) {
-                int nDif = nSize - GtiTypes.UserBinary.Length;
-                sTmp = new string('0', nDif);
-                GtiTypes.UserBinary += sTmp;
-            }
-
+            //string sTmp = sistema_Class.GetUserBinary(nId);
+            //int nSize = sistema_Class.GetSizeofBinary();
+            //GtiTypes.UserBinary = gtiCore.Decrypt(sTmp);
+            //if (nSize > GtiTypes.UserBinary.Length) {
+            //    int nDif = nSize - GtiTypes.UserBinary.Length;
+            //    sTmp = new string('0', nDif);
+            //    GtiTypes.UserBinary += sTmp;
+            //}
+       //     string h = GtiTypes.UserBinary;
             Close();
             Main f1 = (Main)Application.OpenForms["Main"];
             f1.sbUser.Text = gtiCore.Retorna_Last_User();
