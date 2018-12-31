@@ -325,7 +325,9 @@ namespace GTI_Dal.Classes {
                     }
                 }
                 if(reg.Rg!=null)
-                    row.Rg = (reg.Rg.Trim() + ' ' + reg.Orgao.Trim()).Trim();
+                    row.Rg = reg.Rg.Trim() ;
+                if (reg.Orgao != null)
+                    row.Rg +=  ' ' + reg.Orgao.Trim();
                 row.Bairro_nome = reg.Bairro_nome;
                 row.Cidade_nome = reg.Cidade_nome;
                 row.UF = reg.UF;
@@ -680,12 +682,8 @@ namespace GTI_Dal.Classes {
         public bool Empresa_Escritorio(int id_escritorio) {
             int _contador = 0;
             using (GTI_Context db = new GTI_Context(_connection)) {
-                Inicio:;
-                try {
-                    _contador = (from p in db.Mobiliario where p.Respcontabil == id_escritorio select p.Codigomob).Count();
-                } catch {
-                    goto Inicio; //este erro só acontece no timeout, então tenta até conseguir.                   
-                }
+                db.Database.CommandTimeout = 180;
+                _contador = (from p in db.Mobiliario where p.Respcontabil == id_escritorio select p.Codigomob).Count();
                 return _contador > 0 ? true : false;
             }
         }
@@ -777,7 +775,7 @@ namespace GTI_Dal.Classes {
                     Linha.Criterio = reg.Criterio;
                     Linha.Qtde = (int)reg.Qtde;
                     Linha.Valor = (decimal)reg.Valor;
-                    Linha.CNAE = reg.Cnae;
+                    Linha.CNAE = Convert.ToInt32( reg.Cnae).ToString("0000-0/00");
                     Lista.Add(Linha);
                 }
                 return Lista;
@@ -1149,8 +1147,55 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Exception Incluir_Empresa_AtividadeISS(List<Mobiliarioatividadeiss> Lista, int Codigo) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                try {
+                    db.Database.ExecuteSqlCommand("DELETE FROM MOBILIARIOATIVIDADEISS WHERE Codmobiliario=@Codigo",
+                        new SqlParameter("@Codigo", Codigo));
+                } catch (Exception ex) {
+                    return ex;
+                }
+                foreach (Mobiliarioatividadeiss item in Lista) {
+                    try {
+                        db.Database.ExecuteSqlCommand("INSERT INTO mobiliarioatividadeiss(Codmobiliario,codtributo,codatividade,seq,qtdeiss,valoriss) " +
+                            "VALUES(@Codmobiliario,@codtributo,@codatividade,@seq,@qtdeiss,@valoriss)",
+                        new SqlParameter("@Codmobiliario", item.Codmobiliario),
+                        new SqlParameter("@codtributo", item.Codtributo), 
+                        new SqlParameter("@codatividade", item.Codatividade),
+                        new SqlParameter("@seq", item.Seq), 
+                        new SqlParameter("@qtdeiss", item.Qtdeiss),
+                        new SqlParameter("@valoriss", item.Valoriss));
+                    } catch (Exception ex) {
+                        return ex;
+                    }
+                }
+                return null;
+            }
+        }
 
-
+        public Exception Incluir_Empresa_AtividadeVS(List<Mobiliariovs> Lista, int Codigo) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                try {
+                    db.Database.ExecuteSqlCommand("DELETE FROM MOBILIARIOVS WHERE codigo=@Codigo",
+                        new SqlParameter("@Codigo", Codigo));
+                } catch (Exception ex) {
+                    return ex;
+                }
+                foreach (Mobiliariovs item in Lista) {
+                    try {
+                        db.Database.ExecuteSqlCommand("INSERT INTO mobiliariovs(Codigo,cnae,criterio,qtde) " +
+                            "VALUES(@Codigo,@cnae,@criterio,@qtde)",
+                        new SqlParameter("@Codigo", item.Codigo),
+                        new SqlParameter("@cnae", item.Cnae),
+                        new SqlParameter("@criterio", item.Criterio),
+                        new SqlParameter("@qtde", item.Qtde));
+                    } catch (Exception ex) {
+                        return ex;
+                    }
+                }
+                return null;
+            }
+        }
 
         //public Exception Insert_Empresa_Vre(Vre_empresa reg) {
 

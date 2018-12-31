@@ -910,7 +910,7 @@ namespace GTI_Dal.Classes {
         }
 
         public bool IsRefis() {
-            return true;
+            return false;
         }
 
         public bool IsRefisDI() {

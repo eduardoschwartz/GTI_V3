@@ -698,7 +698,29 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        /// <summary>
+        /// Gravar a lista de atividades de ISS de uma empresa
+        /// </summary>
+        /// <param name="Lista"></param>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public Exception Incluir_Empresa_AtividadeISS(List<Mobiliarioatividadeiss> Lista, int Codigo) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            Exception ex = obj.Incluir_Empresa_AtividadeISS(Lista, Codigo);
+            return ex;
+        }
 
+        /// <summary>
+        /// Gravar a lista de atividades VS de uma empresa
+        /// </summary>
+        /// <param name="Lista"></param>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public Exception Incluir_Empresa_AtividadeVS(List<Mobiliariovs> Lista, int Codigo) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            Exception ex = obj.Incluir_Empresa_AtividadeVS(Lista, Codigo);
+            return ex;
+        }
 
     }
 }

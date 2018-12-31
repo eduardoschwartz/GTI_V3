@@ -220,8 +220,13 @@ namespace GTI_Desktop.Forms {
                     if (ex == null) {
                         ex = Gravar_Proprietario(_codigo);
                         if (ex == null) {
-
-                            ControlBehaviour(true);
+                            ex = Gravar_AtividadeISS(_codigo);
+                            if (ex == null) {
+                                ex = Gravar_AtividadeVS(_codigo);
+                                if (ex == null) {
+                                    ControlBehaviour(true);
+                                }
+                            }
                         }
                     }
                 }
@@ -361,6 +366,10 @@ namespace GTI_Desktop.Forms {
             }
             Empresa_bll empresa_Class = new Empresa_bll(_connection);
             Exception ex = empresa_Class.Incluir_Empresa_Placa(Lista,Codigo);
+            if (ex != null) {
+                ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                eBox.ShowDialog();
+            }
             return ex;
         }
 
@@ -375,9 +384,58 @@ namespace GTI_Desktop.Forms {
             }
             Empresa_bll empresa_Class = new Empresa_bll(_connection);
             Exception ex = empresa_Class.Incluir_Empresa_Proprietario(Lista, Codigo);
+            if (ex != null) {
+                ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                eBox.ShowDialog();
+            }
             return ex;
         }
 
+        private Exception Gravar_AtividadeISS(int Codigo) {
+            List<Mobiliarioatividadeiss> Lista = new List<Mobiliarioatividadeiss>();
+            byte x = 0;
+            foreach (ListViewItem item in AtividadeISSListView.Items) {
+                Mobiliarioatividadeiss reg = new Mobiliarioatividadeiss() {
+                    Codmobiliario = Codigo,
+                    Codtributo = item.Text == "F" ? (short)11 : item.Text == "E" ? (short)12 : (short)13,
+                    Codatividade = Convert.ToInt16(item.SubItems[1].Text),
+                    Qtdeiss = Convert.ToInt16(item.SubItems[3].Text),
+                    Valoriss = Convert.ToDecimal(item.SubItems[4].Text),
+                    Seq = x
+                };
+                Lista.Add(reg);
+                x++;
+            }
+            Empresa_bll empresa_Class = new Empresa_bll(_connection);
+            Exception ex = empresa_Class.Incluir_Empresa_AtividadeISS(Lista, Codigo);
+            if (ex != null) {
+                ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                eBox.ShowDialog();
+            }
+            return ex;
+        }
+
+        private Exception Gravar_AtividadeVS(int Codigo) {
+            List<Mobiliariovs> Lista = new List<Mobiliariovs>();
+            byte x = 0;
+            foreach (ListViewItem item in AtividadeVSListView.Items) {
+                Mobiliariovs reg = new Mobiliariovs() {
+                    Codigo = Codigo,
+                    Cnae = gtiCore.RetornaNumero( item.Text),
+                    Criterio = Convert.ToInt16(item.SubItems[2].Text),
+                    Qtde = Convert.ToInt16(item.SubItems[3].Text)
+                };
+                Lista.Add(reg);
+                x++;
+            }
+            Empresa_bll empresa_Class = new Empresa_bll(_connection);
+            Exception ex = empresa_Class.Incluir_Empresa_AtividadeVS(Lista, Codigo);
+            if (ex != null) {
+                ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                eBox.ShowDialog();
+            }
+            return ex;
+        }
 
         private void CancelarButton_Click(object sender, EventArgs e) {
             ControlBehaviour(true);
@@ -655,14 +713,14 @@ namespace GTI_Desktop.Forms {
 
             //Remove Cnae Duplicado
 Inicio:;
-            foreach (CnaeStruct itemCnaeVS in Lista_Cnae_VS) {
-                foreach (CnaeStruct itemCnae in Lista_Cnae) {
-                    if (itemCnaeVS.CNAE == itemCnae.CNAE) {
-                        Lista_Cnae_VS.Remove(itemCnaeVS);
-                        goto Inicio;
-                    }
-                }
-            }
+            //foreach (CnaeStruct itemCnaeVS in Lista_Cnae_VS) {
+            //    foreach (CnaeStruct itemCnae in Lista_Cnae) {
+            //        if (itemCnaeVS.CNAE == itemCnae.CNAE) {
+            //            Lista_Cnae_VS.Remove(itemCnaeVS);
+            //            goto Inicio;
+            //        }
+            //    }
+            //}
 
             //Preenche lista de Atividade ISS
             List<MobiliarioAtividadeISSStruct> Lista_ISS = empresa_Class.Lista_AtividadeISS_Empresa(Codigo);
@@ -1097,7 +1155,7 @@ Inicio:;
             }
 
             Processo_bll processo_Class = new Processo_bll(_connection);
-            if (!gtiCore.IsDate(NumProcessoAbertura.Text)) {
+            if (!gtiCore.IsDate(DataAbertura.Text)) {
                 MessageBox.Show("Processo de abertura inválido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             } else {
