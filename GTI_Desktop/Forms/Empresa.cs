@@ -733,7 +733,6 @@ Inicio:;
                 AtividadeISSListView.Items.Add(lvItem);
             }
 
-
             //Preenche lista da Vigilânica Sanitária
             foreach (CnaeStruct item in Lista_Cnae_VS) {
                 ListViewItem lvItem = new ListViewItem(item.CNAE);
@@ -785,7 +784,6 @@ Inicio:;
                 lvItem.SubItems.Add(string.IsNullOrWhiteSpace(item.DataArquivado.ToString()) ? "" : Convert.ToDateTime(item.DataArquivado).ToString("dd/MM/yyyy"));
                 ProcessosListView.Items.Add(lvItem);
             }
-
         }
 
         private void EnderecoentregaButton_Click(object sender, EventArgs e) {
