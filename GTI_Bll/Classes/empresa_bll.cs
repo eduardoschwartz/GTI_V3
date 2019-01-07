@@ -731,6 +731,30 @@ namespace GTI_Bll.Classes {
             return obj.Lista_AtividadeISS();
         }
 
+        /// <summary>
+        /// Alterar os dados de uma empresa
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Alterar_Empresa(Mobiliario reg) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            Exception ex = obj.Alterar_Empresa(reg);
+            return ex;
+        }
+
+        /// <summary>
+        /// Incluir os Cnaes de uma empresa
+        /// </summary>
+        /// <param name="Lista"></param>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public Exception Incluir_Empresa_CNAE(List<CnaeStruct> Lista, int Codigo) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            Exception ex = obj.Incluir_Empresa_CNAE(Lista,Codigo);
+            return ex;
+        }
+
+
 
     }
 }

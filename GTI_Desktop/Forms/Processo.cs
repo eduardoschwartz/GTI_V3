@@ -1,6 +1,7 @@
 ﻿using GTI_Bll.Classes;
 using GTI_Desktop.Classes;
 using GTI_Desktop.Datasets;
+using GTI_Desktop.Properties;
 using GTI_Models;
 using GTI_Models.Models;
 using Microsoft.Reporting.WinForms;
@@ -27,6 +28,23 @@ namespace GTI_Desktop.Forms {
         public string ObsCancela { get; set; }
         public string ObsReativa { get; set; }
         public string ObsSuspende { get; set; }
+
+        //State Control
+        public bool _addEnderecoButton { get; set; }
+        public bool _delEnderecoButton { get; set; }
+        public bool _tbar { get; set; }
+        public bool _zoombutton { get; set; }
+        public bool _cidadaoeditbutton { get; set; }
+        public bool _cidadaooldbutton { get; set; }
+        public bool _guiabutton { get; set; }
+        public bool _documentoeditbutton { get; set; }
+        public bool _arquivalabel { get; set; }
+        public bool _cancelalabel { get; set; }
+        public bool _reativalabel { get; set; }
+        public bool _suspensaolabel { get; set; }
+        public bool _anexolabel { get; set; }
+        public bool _numproc { get; set; }
+
         #endregion
 
         public Processo()
@@ -245,30 +263,60 @@ namespace GTI_Desktop.Forms {
             RGLabel.Text = "";
         }
 
-        private void LockForm(bool bLock)
-        {
-            tBar.Enabled = !bLock;
-            AddEnderecoButton.Enabled = !bLock;
-            DelEnderecoButton.Enabled = !bLock;
-            ZoomButton.Enabled = !bLock;
-            CidadaoEditButton.Enabled = !bLock;
-            CidadaoOldButton.Enabled = !bLock;
-            GuiaButton.Enabled = !bLock;
-            DocumentoEditButton.Enabled = !bLock;
-            ArquivaLabel.Enabled = !bLock;
-            CancelaLabel.Enabled = !bLock;
-            ReativaLabel.Enabled = !bLock;
-            SuspensaoLabel.Enabled = !bLock;
-            AnexoLabel.Enabled = !bLock;
-            NumProcText.ReadOnly = bLock;
-            if (bLock) {
-                Doc1Check.Checked = true;
-                Doc2Check.Checked = false;
-                Doc3Check.Checked = false;
-                Doc4Check.Checked = false;
-                Doc5Check.Checked = false;
-                Doc1Check.Focus();
-            }
+        private void UnlockForm() {
+            AddEnderecoButton.Enabled = _addEnderecoButton;
+            DelEnderecoButton.Enabled = _delEnderecoButton;
+            tBar.Enabled = _tbar;
+            ZoomButton.Enabled = _zoombutton;
+            CidadaoEditButton.Enabled = _cidadaoeditbutton;
+            CidadaoOldButton.Enabled = _cidadaooldbutton;
+            GuiaButton.Enabled = _guiabutton;
+            DocumentoEditButton.Enabled = _documentoeditbutton;
+            ArquivaLabel.Enabled = _arquivalabel;
+            CancelaLabel.Enabled = _cancelalabel;
+            ReativaLabel.Enabled = _reativalabel;
+            SuspensaoLabel.Enabled = _suspensaolabel;
+            AnexoLabel.Enabled = _anexolabel;
+            NumProcText.ReadOnly = _numproc;
+        }
+
+        private void LockForm() {
+            _addEnderecoButton = AddEnderecoButton.Enabled;
+            _delEnderecoButton = DelEnderecoButton.Enabled;
+            _tbar = tBar.Enabled;
+            _zoombutton = ZoomButton.Enabled;
+            _cidadaoeditbutton = CidadaoEditButton.Enabled;
+            _cidadaooldbutton = CidadaoOldButton.Enabled;
+            _guiabutton = GuiaButton.Enabled;
+            _documentoeditbutton = DocumentoEditButton.Enabled;
+            _arquivalabel = ArquivaLabel.Enabled;
+            _cancelalabel = CancelaLabel.Enabled;
+            _reativalabel = ReativaLabel.Enabled;
+            _suspensaolabel = SuspensaoLabel.Enabled;
+            _anexolabel = AnexoLabel.Enabled;
+            _numproc = NumProcText.ReadOnly;
+
+            AddEnderecoButton.Enabled = false;
+            DelEnderecoButton.Enabled = false;
+            tBar.Enabled = false;
+            ZoomButton.Enabled = false;
+            CidadaoEditButton.Enabled = false;
+            CidadaoOldButton.Enabled = false;
+            GuiaButton.Enabled = false;
+            DocumentoEditButton.Enabled = false;
+            ArquivaLabel.Enabled = false;
+            CancelaLabel.Enabled = false;
+            ReativaLabel.Enabled = false;
+            SuspensaoLabel.Enabled = false;
+            AnexoLabel.Enabled = false;
+            NumProcText.ReadOnly = false;
+
+            Doc1Check.Checked = true;
+            Doc2Check.Checked = false;
+            Doc3Check.Checked = false;
+            Doc4Check.Checked = false;
+            Doc5Check.Checked = false;
+            Doc1Check.Focus();
         }
 
         #endregion
@@ -361,7 +409,7 @@ namespace GTI_Desktop.Forms {
 
         private void BtAnexoSair_Click(object sender, EventArgs e)
         {
-            LockForm(false);
+            UnlockForm();
             AnexoPanel.Visible = false;
         }
 
@@ -372,7 +420,7 @@ namespace GTI_Desktop.Forms {
                 return;
             }
             GetButtonState();
-            LockForm(true);
+            LockForm();
             AnexoPanel.Show();
             AnexoPanel.BringToFront();
         }
@@ -495,7 +543,7 @@ namespace GTI_Desktop.Forms {
                 RGLabel.Text = row.RG + " " + row.Orgao;
                 CidadeLabel.Text = row.Cidade_Nome + "/" + row.UF;
                 GetButtonState();
-                LockForm(true);
+                LockForm();
                 CidadaoPanel.Show();
                 CidadaoPanel.BringToFront();
                 GravarButton.Enabled = false;
@@ -506,7 +554,7 @@ namespace GTI_Desktop.Forms {
 
         private void BtCancelCidadao_Click(object sender, EventArgs e)
         {
-            LockForm(false);
+            UnlockForm();
             SetButtonState();
             CidadaoPanel.Hide();
         }
@@ -682,7 +730,7 @@ namespace GTI_Desktop.Forms {
         private void BtPrint_Click(object sender, EventArgs e)
         {
             if (AssuntoCombo.SelectedIndex > -1) {
-                LockForm(true);
+                LockForm();
                 PrintPanel.Visible = true;
                 PrintPanel.BringToFront();
                 DocumentoEditButton.Enabled = false;
@@ -1359,7 +1407,7 @@ namespace GTI_Desktop.Forms {
                 if (AssuntoCombo.SelectedIndex > -1) {
                     bExec = false;
                     GetButtonState();
-                    LockForm(true);
+                    LockForm();
                     DocPanel.Show();
                     DocPanel.BringToFront();
                     GravarButton.Enabled = false;
@@ -1372,14 +1420,14 @@ namespace GTI_Desktop.Forms {
 
         private void BtCancelDoc_Click(object sender, EventArgs e)
         {
-            LockForm(false);
+            UnlockForm();
             PrintPanel.Visible = false;
             DocumentoEditButton.Enabled = true;
         }
 
         private void BtCancelPnlDoc_Click(object sender, EventArgs e)
         {
-            LockForm(false);
+            UnlockForm();
             SetButtonState();
             UpdateDocNumber();
             DocPanel.Hide();
@@ -1412,8 +1460,6 @@ namespace GTI_Desktop.Forms {
         }
 
         #endregion
-
-
-
     }
+
 }

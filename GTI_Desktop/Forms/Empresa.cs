@@ -225,8 +225,10 @@ namespace GTI_Desktop.Forms {
                             if (ex == null) {
                                 ex = Gravar_AtividadeVS(_codigo);
                                 if (ex == null) {
-                                    ControlBehaviour(true);
-                                }
+                                    ex = Gravar_CNAE(_codigo);
+                                    if (ex == null) {
+                                        ControlBehaviour(true);
+                                    }                                }
                             }
                         }
                     }
@@ -352,6 +354,15 @@ namespace GTI_Desktop.Forms {
                 } else {
                     Codigo.Text = reg.Codigomob.ToString("000000");
                 }
+            } else {
+                reg.Codigomob = Convert.ToInt32(Codigo.Text);
+                ex = empresa_Class.Alterar_Empresa(reg);
+                if (ex != null) {
+                    ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                    eBox.ShowDialog();
+                } else {
+                    ControlBehaviour(true);
+                }
             }
             return null;
         }
@@ -431,6 +442,16 @@ namespace GTI_Desktop.Forms {
             }
             Empresa_bll empresa_Class = new Empresa_bll(_connection);
             Exception ex = empresa_Class.Incluir_Empresa_AtividadeVS(Lista, Codigo);
+            if (ex != null) {
+                ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                eBox.ShowDialog();
+            }
+            return ex;
+        }
+
+        private Exception Gravar_CNAE(int Codigo) {
+            Empresa_bll empresa_Class = new Empresa_bll(_connection);
+            Exception ex = empresa_Class.Incluir_Empresa_CNAE(Lista_Cnae, Codigo);
             if (ex != null) {
                 ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
                 eBox.ShowDialog();
@@ -1231,8 +1252,8 @@ namespace GTI_Desktop.Forms {
                         }
                     }
                     if (!_find) {
-                        ListViewItem lvItem = new ListViewItem(_ret.Codigo_atividade.ToString("000"));
-                        lvItem.SubItems.Add(_ret.Tipo_str);
+                        ListViewItem lvItem = new ListViewItem(_ret.Tipo_str);
+                        lvItem.SubItems.Add(_ret.Codigo_atividade.ToString("000"));
                         lvItem.SubItems.Add(_ret.Descricao);
                         lvItem.SubItems.Add(_ret.Quantidade.ToString());
                         lvItem.SubItems.Add(_ret.Aliquota.ToString("#0.00"));

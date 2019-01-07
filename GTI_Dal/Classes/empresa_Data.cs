@@ -39,7 +39,6 @@ namespace GTI_Dal.Classes {
             return bRet;
         }
 
-
         public List<int> Lista_Empresas_Ativas() {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 List<int> ListaFinal = new List<int>();
@@ -68,7 +67,6 @@ namespace GTI_Dal.Classes {
                 return _qtde;
             }
         }
-
 
         public List<int> Lista_Empresas_Suspensas() {
             List<int> Lista = new List<int>();
@@ -595,8 +593,6 @@ namespace GTI_Dal.Classes {
             }
         }
 
-
-
         public Exception Incluir_escritorio(Escritoriocontabil reg) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 object[] Parametros = new object[17];
@@ -764,8 +760,6 @@ namespace GTI_Dal.Classes {
                 return Lista;
             }
         }
-
-
 
         public List<CnaeStruct> Lista_Cnae_Empresa(int nCodigo) {
             List<CnaeStruct> Lista = new List<CnaeStruct>();
@@ -1195,6 +1189,34 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Exception Incluir_Empresa_CNAE(List<CnaeStruct> Lista, int Codigo) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                try {
+                    db.Database.ExecuteSqlCommand("DELETE FROM MOBILIARIOCNAE WHERE Codmobiliario=@Codigo",
+                        new SqlParameter("@Codigo", Codigo));
+                } catch (Exception ex) {
+                    return ex;
+                }
+                foreach (CnaeStruct item in Lista) {
+                    try {
+                        db.Database.ExecuteSqlCommand("INSERT INTO mobiliariocnae (Codmobiliario,secao,divisao,grupo,classe,subclasse,principal,cnae) " +
+                            "VALUES(@Codmobiliario,@secao,@divisao,@grupo,@classe,@subclasse,@principal,@cnae)",
+                        new SqlParameter("@Codmobiliario", Codigo),
+                        new SqlParameter("@secao", " "),
+                        new SqlParameter("@divisao", item.Divisao),
+                        new SqlParameter("@grupo", item.Grupo),
+                        new SqlParameter("@classe", item.Classe),
+                        new SqlParameter("@subclasse", item.Subclasse),
+                        new SqlParameter("@principal", item.Principal),
+                        new SqlParameter("@cnae", item.CNAE));
+                    } catch (Exception ex) {
+                        return ex;
+                    }
+                }
+                return null;
+            }
+        }
+
         public Exception Incluir_Empresa_AtividadeVS(List<Mobiliariovs> Lista, int Codigo) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
@@ -1414,7 +1436,76 @@ namespace GTI_Dal.Classes {
             return maxCod;
         }
 
-   
+        public Exception Alterar_Empresa(Mobiliario reg) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                Mobiliario m = db.Mobiliario.First(i => i.Codigomob == reg.Codigomob);
+                m.Alvara = reg.Alvara;
+                m.Areatl = reg.Areatl;
+                m.Ativextenso = reg.Ativextenso;
+                m.Bombonieri = reg.Bombonieri;
+                m.Cadastro_vre = reg.Cadastro_vre;
+                m.Capitalsocial = reg.Capitalsocial;
+                m.Cargocontato = reg.Cargocontato;
+                m.Cep = reg.Cep;
+                m.Cnpj = reg.Cnpj;
+                m.Codatividade = reg.Codatividade;
+                m.Codbairro = reg.Codbairro;
+                m.Codcidade = reg.Codcidade;
+                m.Codigoaliq = reg.Codigoaliq;
+                m.Codlogradouro = reg.Codlogradouro;
+                m.Codprofresp = reg.Codprofresp;
+                m.Complemento = reg.Complemento;
+                m.Cpf = reg.Cpf;
+                m.Dataabertura = reg.Dataabertura;
+                m.Dataencerramento = reg.Dataencerramento;
+                m.Datafinaldesc = reg.Datafinaldesc;
+                m.Datainicialdesc = reg.Datainicialdesc;
+                m.Dataprocencerramento = reg.Dataprocencerramento;
+                m.Dataprocesso = reg.Dataprocesso;
+                m.Emailcontato = reg.Emailcontato;
+                m.Emitenf = reg.Emitenf;
+                m.Fonecontato = reg.Fonecontato;
+                m.Homepage = reg.Homepage;
+                m.Horario = reg.Horario;
+                m.Horarioext = reg.Horarioext;
+                m.Horas24 = reg.Horas24;
+                m.Imovel = reg.Imovel;
+                m.Individual = reg.Individual;
+                m.Inscestadual = reg.Inscestadual;
+                m.Insctemp = reg.Insctemp;
+                m.Isencao = reg.Isencao;
+                m.Isentoiss = reg.Isentoiss;
+                m.Isentotaxa = reg.Isentotaxa;
+                m.Liberado_vre = reg.Liberado_vre;
+                m.Nomecontato = reg.Nomecontato;
+                m.Nomefantasia = reg.Nomefantasia;
+                m.Nomelogradouro = reg.Nomelogradouro;
+                m.Nomeorgao = reg.Nomeorgao;
+                m.Numero = reg.Numero;
+                m.Numprocencerramento = reg.Numprocencerramento;
+                m.Numprocesso = reg.Numprocesso;
+                m.Numregistroresp = reg.Numregistroresp;
+                m.Orgao = reg.Orgao;
+                m.Orgaoemisresp = reg.Orgaoemisresp;
+                m.Ponto_agencia = reg.Ponto_agencia;
+                m.Qtdeempregado = reg.Qtdeempregado;
+                m.Qtdeprof = reg.Qtdeprof;
+                m.Razaosocial = reg.Razaosocial;
+                m.Regespecial = reg.Regespecial;
+                m.Respcontabil = reg.Respcontabil;
+                m.Rg = reg.Rg;
+                m.Siglauf = reg.Siglauf;
+                m.Substituto_tributario_issqn = reg.Substituto_tributario_issqn;
+                m.Vistoria = reg.Vistoria;
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
 
 
     }
