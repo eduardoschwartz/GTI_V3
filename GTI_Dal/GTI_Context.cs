@@ -130,5 +130,7 @@ namespace GTI_Dal {
         public DbSet<Mobiliariohist> Mobiliariohist { get; set; }
         public DbSet<Mobiliariovs> Mobiliariovs { get; set; }
         public DbSet<Cnae> Cnae { get; set; }
+        public DbSet<Cnae_criterio> Cnae_criterio { get; set; }
+        public DbSet<Tabelaiss> Tabelaiss { get; set; }
     }
 }

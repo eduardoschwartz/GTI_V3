@@ -27,10 +27,10 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.a1Panel1 = new Owf.Controls.A1Panel();
+            this.CancelarButton = new System.Windows.Forms.Button();
             this.SelectButton = new System.Windows.Forms.Button();
             this.Busca = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.CancelButton = new System.Windows.Forms.Button();
             this.a1Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,7 +64,7 @@
             // a1Panel1
             // 
             this.a1Panel1.BorderColor = System.Drawing.Color.Gray;
-            this.a1Panel1.Controls.Add(this.CancelButton);
+            this.a1Panel1.Controls.Add(this.CancelarButton);
             this.a1Panel1.Controls.Add(this.SelectButton);
             this.a1Panel1.Controls.Add(this.Busca);
             this.a1Panel1.Controls.Add(this.label1);
@@ -78,6 +78,21 @@
             this.a1Panel1.ShadowOffSet = 3;
             this.a1Panel1.Size = new System.Drawing.Size(605, 45);
             this.a1Panel1.TabIndex = 0;
+            // 
+            // CancelarButton
+            // 
+            this.CancelarButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CancelarButton.Image = global::GTI_Desktop.Properties.Resources.cancel2;
+            this.CancelarButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.CancelarButton.Location = new System.Drawing.Point(475, 8);
+            this.CancelarButton.Name = "CancelarButton";
+            this.CancelarButton.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
+            this.CancelarButton.Size = new System.Drawing.Size(86, 24);
+            this.CancelarButton.TabIndex = 2;
+            this.CancelarButton.Text = "Cancelar";
+            this.CancelarButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.CancelarButton.UseVisualStyleBackColor = true;
+            this.CancelarButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // SelectButton
             // 
@@ -112,21 +127,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Pesquisa..:";
             // 
-            // CancelButton
-            // 
-            this.CancelButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CancelButton.Image = global::GTI_Desktop.Properties.Resources.cancel2;
-            this.CancelButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.CancelButton.Location = new System.Drawing.Point(475, 8);
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.CancelButton.Size = new System.Drawing.Size(86, 24);
-            this.CancelButton.TabIndex = 2;
-            this.CancelButton.Text = "Cancelar";
-            this.CancelButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.CancelButton.UseVisualStyleBackColor = true;
-            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
-            // 
             // Cnae
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -156,6 +156,6 @@
         private System.Windows.Forms.TextBox Busca;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button SelectButton;
-        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button CancelarButton;
     }
 }

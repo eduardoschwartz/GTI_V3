@@ -27,7 +27,7 @@ namespace GTI_Models.Models {
         public string Descricao { get; set; }
         public string Item { get; set; }
         public short Quantidade { get; set; }
-        public decimal Valor { get; set; }
+        public float Valor { get; set; }
     }
 
 

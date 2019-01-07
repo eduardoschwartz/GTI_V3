@@ -155,6 +155,12 @@
     </Compile>
     <Compile Include="Editores\Data_Editor.cs" />
     <Compile Include="Editores\Tributo_Editor.cs" />
+    <Compile Include="Forms\Atividade_ISS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Atividade_ISS.Designer.cs">
+      <DependentUpon>Atividade_ISS.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Bairro.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -547,6 +553,9 @@
     <Compile Include="User_Controls\ctlTributoEditor.Designer.cs">
       <DependentUpon>ctlTributoEditor.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\Atividade_ISS.resx">
+      <DependentUpon>Atividade_ISS.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Bairro.resx">
       <DependentUpon>Bairro.cs</DependentUpon>
     </EmbeddedResource>

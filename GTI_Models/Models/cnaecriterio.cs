@@ -21,7 +21,6 @@ namespace GTI_Models.Models {
     }
 
     public class CnaecriterioStruct {
-        public int Seq { get; set; }
         public string Cnae { get; set; }
         public int Criterio { get; set; }
         public decimal Valor { get; set; }

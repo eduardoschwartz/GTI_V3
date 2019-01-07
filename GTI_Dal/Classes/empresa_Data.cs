@@ -725,10 +725,10 @@ namespace GTI_Dal.Classes {
         public List<MobiliarioAtividadeISSStruct> Lista_AtividadeISS_Empresa(int nCodigo) {
             List<MobiliarioAtividadeISSStruct> Lista = new List<MobiliarioAtividadeISSStruct>();
             using (GTI_Context db = new GTI_Context(_connection)) {
-                var rows = (from m in db.Mobiliarioatividadeiss join a in db.Atividadeiss on m.Codatividade equals a.Codatividade 
-                            where m.Codmobiliario == nCodigo
+                var rows = (from m in db.Mobiliarioatividadeiss join a in db.Atividadeiss on m.Codatividade equals a.Codatividade join t in db.Tabelaiss on m.Codatividade equals t.Codigoativ
+                            where m.Codmobiliario==nCodigo
                             select new  MobiliarioAtividadeISSStruct{Codigo_empresa=  m.Codmobiliario,Codigo_atividade=m.Codatividade,Codigo_tributo =m.Codtributo,
-                                                                     Descricao =a.Descatividade,Item=a.Item,Quantidade=m.Qtdeiss,Valor=m.Valoriss });
+                                                                     Descricao =a.Descatividade,Item=a.Item,Quantidade=m.Qtdeiss,Valor=t.Aliquota });
                 foreach (var reg in rows) {
                     MobiliarioAtividadeISSStruct Linha = new MobiliarioAtividadeISSStruct();
                     Linha.Codigo_empresa = reg.Codigo_empresa;
@@ -743,6 +743,29 @@ namespace GTI_Dal.Classes {
                 return Lista;
             }
         }
+
+        public List<AtividadeIssStruct> Lista_AtividadeISS() {
+            List<AtividadeIssStruct> Lista = new List<AtividadeIssStruct>();
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var rows = (from a in db.Atividadeiss join t in db.Tabelaiss on a.Codatividade equals t.Codigoativ
+                            orderby a.Codatividade
+                            select new AtividadeIssStruct {
+                                Codigo_atividade = a.Codatividade, Tipo=t.Tipoiss,
+                                Descricao = a.Descatividade, Aliquota   = t.Aliquota
+                            });
+                foreach (var reg in rows) {
+                    AtividadeIssStruct Linha = new AtividadeIssStruct();
+                    Linha.Codigo_atividade = reg.Codigo_atividade;
+                    Linha.Tipo = reg.Tipo;
+                    Linha.Descricao = reg.Descricao;
+                    Linha.Aliquota = reg.Aliquota;
+                    Lista.Add(Linha);
+                }
+                return Lista;
+            }
+        }
+
+
 
         public List<CnaeStruct> Lista_Cnae_Empresa(int nCodigo) {
             List<CnaeStruct> Lista = new List<CnaeStruct>();
@@ -804,11 +827,10 @@ namespace GTI_Dal.Classes {
         public List<CnaecriterioStruct> Lista_Cnae_Criterio(string Cnae) {
             List<CnaecriterioStruct> Lista = new List<CnaecriterioStruct>();
             using(GTI_Context db = new GTI_Context(_connection)) {
-                var rows = (from c in db.Cnaecriterio join d in db.Cnaecriteriodesc on c.Criterio equals d.Criterio where c.Cnae==Cnae
-                            select new CnaecriterioStruct { Seq=c.Seq,Cnae=c.Cnae,Criterio=c.Criterio,Valor=c.Valor,Descricao=d.Descricao});
+                var rows = (from c in db.Cnae_criterio join d in db.Cnaecriteriodesc on c.Criterio equals d.Criterio where c.Cnae==Cnae
+                            select new CnaecriterioStruct { Cnae=c.Cnae,Criterio=c.Criterio,Valor=(decimal)d.Valor,Descricao=d.Descricao});
                 foreach (var reg in rows) {
                     CnaecriterioStruct Linha = new CnaecriterioStruct();
-                    Linha.Seq = reg.Seq;
                     Linha.Cnae = reg.Cnae;
                     Linha.Valor = reg.Valor;
                     Linha.Criterio = reg.Criterio;

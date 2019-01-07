@@ -629,7 +629,7 @@
             // CnaeVSButton
             // 
             this.CnaeVSButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CnaeVSButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.CnaeVSButton.Image = global::GTI_Desktop.Properties.Resources.add;
             this.CnaeVSButton.Location = new System.Drawing.Point(698, 51);
             this.CnaeVSButton.Name = "CnaeVSButton";
             this.CnaeVSButton.Size = new System.Drawing.Size(23, 22);
@@ -2589,10 +2589,10 @@
             this.columnHeader16,
             this.columnHeader17});
             this.AtividadeISSListView.FullRowSelect = true;
-            this.AtividadeISSListView.Location = new System.Drawing.Point(6, 23);
+            this.AtividadeISSListView.Location = new System.Drawing.Point(6, 21);
             this.AtividadeISSListView.Name = "AtividadeISSListView";
             this.AtividadeISSListView.ShowGroups = false;
-            this.AtividadeISSListView.Size = new System.Drawing.Size(686, 56);
+            this.AtividadeISSListView.Size = new System.Drawing.Size(686, 60);
             this.AtividadeISSListView.TabIndex = 225;
             this.AtividadeISSListView.UseCompatibleStateImageBehavior = false;
             this.AtividadeISSListView.View = System.Windows.Forms.View.Details;
@@ -2648,6 +2648,7 @@
             this.AtividadeISSButton.TabIndex = 195;
             this.AtividadeISSButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.AtividadeISSButton.UseVisualStyleBackColor = true;
+            this.AtividadeISSButton.Click += new System.EventHandler(this.AtividadeISSButton_Click);
             // 
             // a1Panel9
             // 

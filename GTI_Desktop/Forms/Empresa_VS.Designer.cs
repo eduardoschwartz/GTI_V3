@@ -25,7 +25,7 @@
         private void InitializeComponent() {
             this.CnaeToolStrip = new System.Windows.Forms.ToolStrip();
             this.OkButton = new System.Windows.Forms.ToolStripButton();
-            this.CancelButton = new System.Windows.Forms.ToolStripButton();
+            this.CancelarButton = new System.Windows.Forms.ToolStripButton();
             this.label1 = new System.Windows.Forms.Label();
             this.CnaeList = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -45,7 +45,7 @@
             this.CnaeToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.CnaeToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OkButton,
-            this.CancelButton});
+            this.CancelarButton});
             this.CnaeToolStrip.Location = new System.Drawing.Point(0, 116);
             this.CnaeToolStrip.Name = "CnaeToolStrip";
             this.CnaeToolStrip.Padding = new System.Windows.Forms.Padding(6, 0, 1, 0);
@@ -64,16 +64,16 @@
             this.OkButton.ToolTipText = "Adicionar Cnae";
             this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
-            // CancelButton
+            // CancelarButton
             // 
-            this.CancelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.CancelButton.Image = global::GTI_Desktop.Properties.Resources.cancel2;
-            this.CancelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(23, 22);
-            this.CancelButton.Text = "toolStripButton3";
-            this.CancelButton.ToolTipText = "Remover Cnae";
-            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            this.CancelarButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.CancelarButton.Image = global::GTI_Desktop.Properties.Resources.cancel2;
+            this.CancelarButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.CancelarButton.Name = "CancelarButton";
+            this.CancelarButton.Size = new System.Drawing.Size(23, 22);
+            this.CancelarButton.Text = "toolStripButton3";
+            this.CancelarButton.ToolTipText = "Remover Cnae";
+            this.CancelarButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // label1
             // 
@@ -183,7 +183,7 @@
 
         private System.Windows.Forms.ToolStrip CnaeToolStrip;
         private System.Windows.Forms.ToolStripButton OkButton;
-        private System.Windows.Forms.ToolStripButton CancelButton;
+        private System.Windows.Forms.ToolStripButton CancelarButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox CnaeList;
         private System.Windows.Forms.Label label2;

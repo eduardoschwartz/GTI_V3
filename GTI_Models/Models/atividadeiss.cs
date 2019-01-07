@@ -11,4 +11,14 @@ namespace GTI_Models.Models {
         public string Retido { get; set; }
         public byte? Imprimir { get; set; }
     }
+
+    public class AtividadeIssStruct {
+        public int Codigo_atividade { get; set; }
+        public int Tipo { get; set; }
+        public string Tipo_str { get; set; }
+        public string Descricao { get; set; }
+        public int? Quantidade { get; set; }
+        public float Aliquota { get; set; }
+    }
+
 }

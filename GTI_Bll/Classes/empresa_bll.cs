@@ -722,5 +722,15 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        /// <summary>
+        /// Lista das atividades de ISS cadastradas
+        /// </summary>
+        /// <returns></returns>
+        public List<AtividadeIssStruct> Lista_AtividadeISS() {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Lista_AtividadeISS();
+        }
+
+
     }
 }

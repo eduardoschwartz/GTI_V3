@@ -60,12 +60,13 @@ namespace GTI_Desktop.Forms {
                         MessageBox.Show("Digite a Quantidade.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     else {
                         CustomListBoxItem4 item = (CustomListBoxItem4)CriterioList.SelectedItem;
-                        Item_VS = new CnaeStruct();
-                        Item_VS.CNAE = CnaeList.Text.Substring(0, 9);
-                        Item_VS.Descricao = CnaeList.Text.Substring(10, CnaeList.Text.Length - 10);
-                        Item_VS.Criterio = item._value;
-                        Item_VS.Qtde = _qtde;
-                        Item_VS.Valor = _valor;
+                        Item_VS = new CnaeStruct {
+                            CNAE = CnaeList.Text.Substring(0, 9),
+                            Descricao = CnaeList.Text.Substring(10, CnaeList.Text.Length - 10),
+                            Criterio = item._value,
+                            Qtde = _qtde,
+                            Valor = _valor
+                        };
                         Close();
                     }
                 }
@@ -75,7 +76,7 @@ namespace GTI_Desktop.Forms {
         private void CnaeList_SelectedIndexChanged(object sender, EventArgs e) {
             if (CnaeList.SelectedIndex > -1) {
                 Empresa_bll empresa_Class = new Empresa_bll(_connection);
-                string _cnae = gtiCore.ExtractNumber(CnaeList.Text.Substring(0,9));
+                string _cnae =  gtiCore.ExtractNumber(CnaeList.Text.Substring(0,9));
                 List<CnaecriterioStruct>  ListaCriterio = empresa_Class.Lista_Cnae_Criterio(_cnae);
                 List<CustomListBoxItem4> myItems = new List<CustomListBoxItem4>();
                 foreach (var item in ListaCriterio) {

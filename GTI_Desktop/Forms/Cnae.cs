@@ -61,9 +61,10 @@ namespace GTI_Desktop.Forms {
                 MessageBox.Show("Selecione ao menos 1 Cnae.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
                 ListViewItem item = MainListView.SelectedItems[0];
-                Return_Cnae = new CnaeStruct();
-                Return_Cnae.CNAE = item.Text;
-                Return_Cnae.Descricao = item.SubItems[1].Text;
+                Return_Cnae = new CnaeStruct {
+                    CNAE = item.Text,
+                    Descricao = item.SubItems[1].Text
+                };
                 DialogResult = DialogResult.OK;
                 Close();
             }

@@ -89,6 +89,7 @@
     <Compile Include="Models\cnaecriterio.cs" />
     <Compile Include="Models\cnaecriteriodesc.cs" />
     <Compile Include="Models\cnaesubclasse.cs" />
+    <Compile Include="Models\cnae_criterio.cs" />
     <Compile Include="Models\comercio_eletronico.cs" />
     <Compile Include="Models\comprovante_pagamento.cs" />
     <Compile Include="Models\comunicado_isencao.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Models\spCalculo.cs" />
     <Compile Include="Models\spExtrato.cs" />
     <Compile Include="Models\spExtrato_carta.cs" />
+    <Compile Include="Models\tabelaiss.cs" />
     <Compile Include="Models\tb_inter_encerramento_giss.cs" />
     <Compile Include="Models\testada.cs" />
     <Compile Include="Models\Testadacondominio.cs" />

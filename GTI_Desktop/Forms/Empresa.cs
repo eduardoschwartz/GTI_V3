@@ -198,6 +198,7 @@ namespace GTI_Desktop.Forms {
             QtdeProfissional.Text = "";
             ProprietarioList.Items.Clear();
             PlacaLista.Items.Clear();
+            AtividadeISSListView.Items.Clear();
         }
 
         private void CarregaLista() {
@@ -712,7 +713,7 @@ namespace GTI_Desktop.Forms {
             Lista_Cnae_VS = empresa_Class.Lista_Cnae_Empresa_VS(Codigo);
 
             //Remove Cnae Duplicado
-Inicio:;
+//Inicio:;
             //foreach (CnaeStruct itemCnaeVS in Lista_Cnae_VS) {
             //    foreach (CnaeStruct itemCnae in Lista_Cnae) {
             //        if (itemCnaeVS.CNAE == itemCnae.CNAE) {
@@ -729,7 +730,7 @@ Inicio:;
                 lvItem.SubItems.Add(item.Codigo_atividade.ToString("000"));
                 lvItem.SubItems.Add(item.Descricao);
                 lvItem.SubItems.Add(item.Quantidade.ToString("00"));
-                lvItem.SubItems.Add(string.Format("{0:0.00}", item.Valor));
+                lvItem.SubItems.Add(string.Format("{0:0.000}", item.Valor));
                 AtividadeISSListView.Items.Add(lvItem);
             }
 
@@ -772,8 +773,9 @@ Inicio:;
 
             //Preenche lista de Processos
             Processo_bll processo_Class = new Processo_bll(_connection);
-            ProcessoFilter Reg2 = new ProcessoFilter();
-            Reg2.Inscricao = Codigo;
+            ProcessoFilter Reg2 = new ProcessoFilter {
+                Inscricao = Codigo
+            };
 
             List<ProcessoStruct> Lista_Proc = processo_Class.Lista_Processos(Reg2);
             foreach (ProcessoStruct item in Lista_Proc) {
@@ -992,8 +994,9 @@ Inicio:;
             else {
                 if (Atividade_Principal.Tag == null || Atividade_Principal.Tag.ToString() == "")
                     Atividade_Principal.Tag = "0";
-                Empresa_Atividade f1 = new Empresa_Atividade(Convert.ToInt32(Atividade_Principal.Tag.ToString()));
-                f1.Tag = Name;
+                Empresa_Atividade f1 = new Empresa_Atividade(Convert.ToInt32(Atividade_Principal.Tag.ToString())) {
+                    Tag = Name
+                };
                 var result = f1.ShowDialog(this);
                 if (result == DialogResult.OK) {
                     int _id_atividade = f1.ReturnValue;
@@ -1026,7 +1029,6 @@ Inicio:;
         }
 
         private void CnaeVSButton_Click(object sender, EventArgs e) {
-
             if (Convert.ToInt32(Codigo.Text) == 0 && !bAddNew)
                 MessageBox.Show("Selecione uma empresa.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
@@ -1044,7 +1046,6 @@ Inicio:;
                     Lista_Cnae_VS.Add(itemVS);
                 }
 
-                AtividadeVSListView.Items.Clear();
                 foreach (CnaeStruct item in Lista_Cnae_VS) {
                     ListViewItem lvItem = new ListViewItem(item.CNAE);
                     lvItem.SubItems.Add(item.Descricao);
@@ -1209,6 +1210,41 @@ Inicio:;
 
             return true;
         }
+
+        private void AtividadeISSButton_Click(object sender, EventArgs e) {
+            if (Convert.ToInt32(Codigo.Text) == 0 && !bAddNew)
+                MessageBox.Show("Selecione uma empresa.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else {
+                Atividade_ISS f1 = new Atividade_ISS {
+                    Tag = Name
+                };
+                var result = f1.ShowDialog(this);
+                if (result == DialogResult.OK) {
+                    AtividadeIssStruct _ret = f1.ReturnValue;
+                    int _codigo_atividade = _ret.Codigo_atividade;
+                    string _tipo = _ret.Tipo_str;
+                    bool _find = false;
+                    foreach (ListViewItem item in AtividadeISSListView.Items) {
+                        if(Convert.ToInt32(item.Text)==_codigo_atividade && item.SubItems[1].Text == _tipo) {
+                            _find = true;
+                            break;
+                        }
+                    }
+                    if (!_find) {
+                        ListViewItem lvItem = new ListViewItem(_ret.Codigo_atividade.ToString("000"));
+                        lvItem.SubItems.Add(_ret.Tipo_str);
+                        lvItem.SubItems.Add(_ret.Descricao);
+                        lvItem.SubItems.Add(_ret.Quantidade.ToString());
+                        lvItem.SubItems.Add(_ret.Aliquota.ToString("#0.00"));
+                        AtividadeISSListView.Items.Add(lvItem);
+                    }
+                    else
+                        MessageBox.Show("Atividade já cadastrada.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+            }
+        }
+
 
 
     }
