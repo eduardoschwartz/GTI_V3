@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace GTI_Dal.Classes {
     public class Processo_Data {
@@ -400,8 +401,11 @@ namespace GTI_Dal.Classes {
                 if (!row.Interno) {
                     row.CentroCusto = 0;
                     row.CodigoCidadao = Convert.ToInt32(reg.CodigoCidadao);
-                    Cidadao_Data clsCidadao = new Cidadao_Data(_connection);
-                    row.NomeCidadao = clsCidadao.Retorna_Cidadao((int)row.CodigoCidadao).Nomecidadao;
+                    if (row.CodigoCidadao > 0) {
+                        Cidadao_Data clsCidadao = new Cidadao_Data(_connection);
+                        row.NomeCidadao = clsCidadao.Retorna_Cidadao((int)row.CodigoCidadao).Nomecidadao;
+                    } else
+                        row.NomeCidadao = "";
                 } else {
                     row.CentroCusto = Convert.ToInt16(reg.CentroCusto);
                     row.CodigoCidadao = 0;
@@ -513,8 +517,8 @@ namespace GTI_Dal.Classes {
         public Exception Arquivar_Processo(int Ano, int Numero, string Observacao) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 Processogti p = db.Processogti.First(i => i.Ano == Ano && i.Numero == Numero);
-                p.Datareativa = DateTime.Now;
-                p.Dataarquiva = null;
+                p.Datareativa = null;
+                p.Dataarquiva = DateTime.Now;
                 p.Datacancel = null;
                 p.Datasuspenso = null;
                 p.Obsa = Observacao;
@@ -889,8 +893,139 @@ Inicio:;
             }
         }
 
+        public Exception Incluir_Processo(Processogti reg) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                object[] Parametros = new object[25];
+                Parametros[0] = new SqlParameter { ParameterName = "@Ano", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Ano };
+                Parametros[1] = new SqlParameter { ParameterName = "@Numero", SqlDbType = SqlDbType.Int, SqlValue = reg.Numero };
+                Parametros[2] = new SqlParameter { ParameterName = "@Fisico", SqlDbType = SqlDbType.Bit, SqlValue = reg.Fisico };
+                Parametros[3] = new SqlParameter { ParameterName = "@Origem", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Origem };
+                Parametros[4] = new SqlParameter { ParameterName = "@Interno", SqlDbType = SqlDbType.Bit, SqlValue = reg.Interno };
+                Parametros[5] = new SqlParameter { ParameterName = "@Codassunto", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Codassunto };
+                if(reg.Complemento!=null)
+                    Parametros[6] = new SqlParameter { ParameterName = "@Complemento", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Complemento };
+                else
+                    Parametros[6] = new SqlParameter { ParameterName = "@Complemento",  SqlValue = DBNull.Value };
+                if (reg.Observacao != null)
+                    Parametros[7] = new SqlParameter { ParameterName = "@Observacao", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Observacao };
+                else
+                    Parametros[7] = new SqlParameter { ParameterName = "@Observacao",  SqlValue = DBNull.Value };
+                if (reg.Dataentrada != null)
+                    Parametros[8] = new SqlParameter { ParameterName = "@Dataentrada", SqlDbType = SqlDbType.SmallDateTime, SqlValue = reg.Dataentrada };
+                else
+                    Parametros[8] = new SqlParameter { ParameterName = "@Dataentrada", SqlValue = DBNull.Value };
+                if (reg.Datareativa != null)
+                    Parametros[9] = new SqlParameter { ParameterName = "@Datareativa", SqlDbType = SqlDbType.SmallDateTime, SqlValue = reg.Datareativa };
+                else
+                    Parametros[9] = new SqlParameter { ParameterName = "@Datareativa",  SqlValue = DBNull.Value };
+                if (reg.Datacancel != null)
+                    Parametros[10] = new SqlParameter { ParameterName = "@Datacancel", SqlDbType = SqlDbType.SmallDateTime, SqlValue = reg.Datacancel };
+                else
+                    Parametros[10] = new SqlParameter { ParameterName = "@Datacancel",  SqlValue = DBNull.Value };
+                if (reg.Dataarquiva != null)
+                    Parametros[11] = new SqlParameter { ParameterName = "@Dataarquiva", SqlDbType = SqlDbType.SmallDateTime, SqlValue = reg.Dataarquiva };
+                else
+                    Parametros[11] = new SqlParameter { ParameterName = "@Dataarquiva",  SqlValue = DBNull.Value };
+                if (reg.Datasuspenso != null)
+                    Parametros[12] = new SqlParameter { ParameterName = "@Datasuspenso", SqlDbType = SqlDbType.SmallDateTime, SqlValue = reg.Datasuspenso };
+                else
+                    Parametros[12] = new SqlParameter { ParameterName = "@Datasuspenso", SqlValue = DBNull.Value };
+                if (reg.Etiqueta != null)
+                    Parametros[13] = new SqlParameter { ParameterName = "@Etiqueta", SqlDbType = SqlDbType.Bit, SqlValue = reg.Etiqueta };
+                else
+                    Parametros[13] = new SqlParameter { ParameterName = "@Etiqueta",  SqlValue = DBNull.Value };
+                if (reg.Codcidadao != null)
+                    Parametros[14] = new SqlParameter { ParameterName = "@Codcidadao", SqlDbType = SqlDbType.Int, SqlValue = reg.Codcidadao };
+                else
+                    Parametros[14] = new SqlParameter { ParameterName = "@Codcidadao",  SqlValue = DBNull.Value };
+                if (reg.Motivocancel != null)
+                    Parametros[15] = new SqlParameter { ParameterName = "@Motivocancel", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Motivocancel };
+                else
+                    Parametros[15] = new SqlParameter { ParameterName = "@Motivocancel",  SqlValue = DBNull.Value };
+                if (reg.Centrocusto != null)
+                    Parametros[16] = new SqlParameter { ParameterName = "@Centrocusto", SqlDbType = SqlDbType.Int, SqlValue = reg.Centrocusto };
+                else
+                    Parametros[16] = new SqlParameter { ParameterName = "@Centrocusto",  SqlValue = DBNull.Value };
+                if (reg.Obsa != null)
+                    Parametros[17] = new SqlParameter { ParameterName = "@Obsa", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Obsa };
+                else
+                    Parametros[17] = new SqlParameter { ParameterName = "@Obsa",  SqlValue = DBNull.Value };
+                if (reg.Obsc != null)
+                    Parametros[18] = new SqlParameter { ParameterName = "@Obsc", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Obsc };
+                else
+                    Parametros[18] = new SqlParameter { ParameterName = "@Obsc",  SqlValue = DBNull.Value };
+                if (reg.Obss != null)
+                    Parametros[19] = new SqlParameter { ParameterName = "@Obss", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Obss };
+                else
+                    Parametros[19] = new SqlParameter { ParameterName = "@Obss",  SqlValue = DBNull.Value };
+                if (reg.Obsr != null)
+                    Parametros[20] = new SqlParameter { ParameterName = "@Obsr", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Obsr };
+                else
+                    Parametros[20] = new SqlParameter { ParameterName = "@Obsr", SqlValue = DBNull.Value };
+                if (reg.Hora != null)
+                    Parametros[21] = new SqlParameter { ParameterName = "@Hora", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Hora };
+                else
+                    Parametros[21] = new SqlParameter { ParameterName = "@Hora",  SqlValue = DBNull.Value };
+                if (reg.Insc != null)
+                    Parametros[22] = new SqlParameter { ParameterName = "@Insc", SqlDbType = SqlDbType.Int, SqlValue = reg.Insc };
+                else
+                    Parametros[22] = new SqlParameter { ParameterName = "@Insc",  SqlValue = DBNull.Value };
+                if (reg.Tipoend != null)
+                    Parametros[23] = new SqlParameter { ParameterName = "@Tipoend", SqlDbType = SqlDbType.Char, SqlValue = reg.Tipoend };
+                else
+                    Parametros[23] = new SqlParameter { ParameterName = "@Tipoend",  SqlValue = DBNull.Value };
+                if (reg.Userid != null)
+                    Parametros[24] = new SqlParameter { ParameterName = "@Userid", SqlDbType = SqlDbType.Int, SqlValue = reg.Userid };
+                else
+                    Parametros[24] = new SqlParameter { ParameterName = "@Userid",  SqlValue = DBNull.Value };
 
+                db.Database.ExecuteSqlCommand("INSERT INTO processogti(ano,numero,fisico,origem,interno,codassunto,complemento,observacao,dataentrada,datareativa," +
+                                              "datacancel,dataarquiva,datasuspenso,etiqueta,codcidadao,motivocancel,centrocusto,obsa,obsc,obss,obsr,hora,insc,tipoend," +
+                                              "userid) VALUES(@ano,@numero,@fisico,@origem,@interno,@codassunto,@complemento,@observacao,@dataentrada,@datareativa," +
+                                              "@datacancel,@dataarquiva,@datasuspenso,@etiqueta,@codcidadao,@motivocancel,@centrocusto,@obsa,@obsc,@obss,@obsr,@hora," +
+                                              "@insc,@tipoend,@userid)", Parametros);
 
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public int Retorna_Numero_Disponivel(int Ano) {
+            int maxCod = 0;
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var Sql = (from p in db.Processogti where p.Ano ==Ano select p.Numero).Max();
+                maxCod = Convert.ToInt32(Sql) + 1;
+            }
+            return maxCod;
+        }
+
+        public Exception Incluir_Processo_Endereco(List<Processoend> Lista,int Ano,int Numero) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+
+                try {
+                    db.Database.ExecuteSqlCommand("delete from processoend where ano=@ano and numprocesso=@numprocesso",
+                        new SqlParameter("@ano", Ano), new SqlParameter("@numprocesso", Numero));
+                } catch (Exception ex) {
+                    return ex;
+                }
+                foreach (Processoend item in Lista) {
+                    try {
+                        db.Database.ExecuteSqlCommand("insert into processoend(ano,numprocesso,codlogr,numero) VALUES(@ano,@numprocesso,@codlogr,@numero)",
+                        new SqlParameter("@ano", item.Ano),
+                        new SqlParameter("@numprocesso", item.Numprocesso),
+                        new SqlParameter("@codlogr", item.Codlogr),
+                        new SqlParameter("@numero", item.Numero));
+                    } catch (Exception ex) {
+                        return ex;
+                    }
+                }
+                return null;
+            }
+        }
 
     }
 }

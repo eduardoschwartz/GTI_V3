@@ -473,6 +473,7 @@
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
+            this.EnderecoListView.FullRowSelect = true;
             this.EnderecoListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.EnderecoListView.Location = new System.Drawing.Point(6, 23);
             this.EnderecoListView.Name = "EnderecoListView";
@@ -1661,6 +1662,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(640, 365);
+            this.Controls.Add(this.RequerentePanel);
             this.Controls.Add(this.ComplementoText);
             this.Controls.Add(this.NumProcText);
             this.Controls.Add(this.panel1);
@@ -1687,12 +1689,11 @@
             this.Controls.Add(this.Label2);
             this.Controls.Add(this.AssuntoCombo);
             this.Controls.Add(this.AssuntoText);
-            this.Controls.Add(this.RequerentePanel);
-            this.Controls.Add(this.pnlCCusto);
             this.Controls.Add(this.DocPanel);
             this.Controls.Add(this.PrintPanel);
             this.Controls.Add(this.CidadaoPanel);
             this.Controls.Add(this.AnexoPanel);
+            this.Controls.Add(this.pnlCCusto);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;

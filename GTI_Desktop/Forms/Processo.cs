@@ -24,6 +24,8 @@ namespace GTI_Desktop.Forms {
         List<CustomListBoxItem> lstButtonState;
         string _connection = gtiCore.Connection_Name();
 
+        public int _numero_processo { get; set; }
+        public short _ano_processo { get; set; }
         public string ObsArquiva { get; set; }
         public string ObsCancela { get; set; }
         public string ObsReativa { get; set; }
@@ -52,7 +54,7 @@ namespace GTI_Desktop.Forms {
             gtiCore.Ocupado(this);
             InitializeComponent();
             OrigemCombo.Items.Add(new CustomListBoxItem("CENTRO DE CUSTOS", 1));
-            OrigemCombo.Items.Add(new CustomListBoxItem("CONTRIBUINTE", 2));
+            OrigemCombo.Items.Add(new CustomListBoxItem("SISTEMA PRÁTICO", 2));
             lstButtonState = new List<CustomListBoxItem>();
             DocPanel.Hide();
 
@@ -60,7 +62,7 @@ namespace GTI_Desktop.Forms {
 
             List<CustomListBoxItem2> myItems = new List<CustomListBoxItem2>();
             Processo_bll clsProcesso = new Processo_bll(_connection);
-            List<GTI_Models.Models.Assunto> lista = clsProcesso.Lista_Assunto(false, false);
+            List<GTI_Models.Models.Assunto> lista = clsProcesso.Lista_Assunto(true, false);
             foreach (GTI_Models.Models.Assunto item in lista) {
                 myItems.Add(new CustomListBoxItem2(item.Nome, item.Codigo, item.Ativo));
             }
@@ -235,7 +237,7 @@ namespace GTI_Desktop.Forms {
             AtendenteLabel.Text = "";
             HoraLabel.Text = "00:00";
             AssuntoText.Text = "";
-            Fisicocheckbox.Checked = false;
+            Fisicocheckbox.Checked = true;
             Internocheckbox.Checked = false;
             AssuntoCombo.SelectedIndex = -1;
             OrigemCombo.SelectedIndex = 1;
@@ -327,8 +329,13 @@ namespace GTI_Desktop.Forms {
         {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroProcesso_Novo);
             if (bAllow) {
+                _ano_processo = 0;
+                _numero_processo = 0;
                 bAddNew = true;
                 ClearFields();
+                AtendenteLabel.Text = gtiCore.Retorna_Last_User();
+                Sistema_bll sistema_Class = new Sistema_bll(_connection);
+                AtendenteLabel.Tag = sistema_Class.Retorna_User_LoginId(AtendenteLabel.Text);
                 NumProcText.Text = "";
                 ControlBehaviour(false);
             } else
@@ -351,13 +358,18 @@ namespace GTI_Desktop.Forms {
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void BtGravar_Click(object sender, EventArgs e)
-        {
-            //TODO: Gravar o processo
-            //            if (ValidateReg()) {
-            //              SaveReg();
-            ControlBehaviour(true);
-            //          }
+        private void BtGravar_Click(object sender, EventArgs e) {
+            if (ValidateReg()) {
+                Exception ex = Grava_Processo();
+                if (ex == null) {
+                    ex = Grava_Endereco();
+                    if (ex == null) {
+                        ex = Grava_Documento();
+                        CarregaProcesso();
+                        ControlBehaviour(true);
+                    }
+                }
+            }
         }
 
         private void BtTramitar_Click(object sender, EventArgs e)
@@ -703,9 +715,9 @@ namespace GTI_Desktop.Forms {
                             Processo_bll clsProcesso = new Processo_bll(_connection);
                             short Ano_Processo = clsProcesso.ExtractAnoProcesso(NumProcText.Text);
                             int Num_Processo = clsProcesso.ExtractNumeroProcessoNoDV(NumProcText.Text);
-                            string sHist = "Arquivação do processo --> " + ObsSuspende;
+                            string sHist = "Arquivação do processo --> " + ObsArquiva;
                             clsProcesso.Incluir_Historico_Processo(Ano_Processo, Num_Processo, sHist, gtiCore.Retorna_Last_User());
-                            clsProcesso.Arquivar_Processo(Ano_Processo, Num_Processo, ObsReativa);
+                            clsProcesso.Arquivar_Processo(Ano_Processo, Num_Processo, ObsArquiva);
                             SituacaoLabel.Text = "ARQUIVADO";
                         }
                     }
@@ -762,7 +774,8 @@ namespace GTI_Desktop.Forms {
 
         private void TxtNumProc_TextChanged(object sender, EventArgs e)
         {
-            ClearFields();
+            if(bExec)
+                ClearFields();
         }
 
         private void CmbAssunto_SelectedIndexChanged(object sender, EventArgs e)
@@ -770,13 +783,15 @@ namespace GTI_Desktop.Forms {
             if (!bAssunto) return;
 
             CustomListBoxItem2 item = (CustomListBoxItem2)AssuntoCombo.SelectedItem;
-            if (item != null)
-                InscricaoText.Text = item._ativo.ToString();
+//            if (item != null)
+//                InscricaoText.Text = item._ativo.ToString();
             DocListView.Items.Clear();
-            if (AssuntoCombo.SelectedIndex == -1)
+            if (AssuntoCombo.SelectedIndex == -1) {
                 AssuntoText.Text = "";
-            else {
+                AssuntoText.Tag = "";
+            } else {
                 AssuntoText.Text = AssuntoCombo.Text;
+                AssuntoText.Tag = item._value.ToString();
                 ComplementoText.Text = AssuntoCombo.Text;
             }
         }
@@ -841,13 +856,24 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void BtCidadaoEdit_Click(object sender, EventArgs e)
-        {
-            Cidadao f1 = new Cidadao {
-                CodCidadao = Convert.ToInt32(CodCidadaoLabel.Text),
-                Tag = "Processo"
-            };
-            f1.Show();
+        private void BtCidadaoEdit_Click(object sender, EventArgs e){
+            inputBox z = new inputBox();
+            String sCod = z.Show("", "Adicionar o requerente do processo.", "Digite o código do cidadão.", 6, gtiCore.eTweakMode.IntegerPositive);
+            if (!string.IsNullOrEmpty(sCod)) {
+                int nCod = Convert.ToInt32(sCod);
+                if (nCod < 500000 || nCod > 700000)
+                    MessageBox.Show("Código de cidadão inválido!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else {
+                    Cidadao_bll cidadao_Class = new Cidadao_bll(_connection);
+                    if (!cidadao_Class.ExisteCidadao(nCod))
+                        MessageBox.Show("Código não cadastrado!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else {
+                        CidadaoStruct reg = cidadao_Class.LoadReg(nCod);
+                        CodCidadaoLabel.Text = reg.Codigo.ToString("000000");
+                        NomeCidadaoLabel.Text = reg.Nome;
+                    }
+                }
+            }
         }
 
         #endregion
@@ -858,7 +884,9 @@ namespace GTI_Desktop.Forms {
         {
             gtiCore.Ocupado(this);
             Processo_bll clsProcesso = new Processo_bll(_connection);
-            ProcessoStruct Reg = clsProcesso.Dados_Processo(clsProcesso.ExtractAnoProcesso(NumProcText.Text), clsProcesso.ExtractNumeroProcessoNoDV(NumProcText.Text));
+            _numero_processo = clsProcesso.ExtractNumeroProcessoNoDV(NumProcText.Text);
+            _ano_processo = clsProcesso.ExtractAnoProcesso(NumProcText.Text);
+            ProcessoStruct Reg = clsProcesso.Dados_Processo(_ano_processo,_numero_processo);
             AssuntoCombo.SelectedValue = Convert.ToInt32(Reg.CodigoAssunto);
             AssuntoText.Text = AssuntoCombo.Text;
             ComplementoText.Text = Reg.Complemento;
@@ -956,7 +984,7 @@ namespace GTI_Desktop.Forms {
             DocPanel.Hide();
             UpdateDocNumber();
 
-        }//end LoadReg
+        }
 
         private void TxtNumProc_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
@@ -1002,9 +1030,7 @@ namespace GTI_Desktop.Forms {
             DocPendenteLabel.Text = DocPendente.ToString();
         }
 
-        private bool ValidateReg()
-            //TODO: Validação do processo
-        {
+        private bool ValidateReg() {
             if (AssuntoCombo.SelectedIndex == -1) {
                 MessageBox.Show("Selecione o assunto.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -1018,93 +1044,107 @@ namespace GTI_Desktop.Forms {
                 return false;
             }
             if (OrigemCombo.SelectedIndex == 1 && NomeCidadaoLabel.Text == "") {
-                MessageBox.Show("Selecione o Cidadão.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Selecione o requerente do processo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            if (string.IsNullOrEmpty(InscricaoText.Text.Trim()))
+            if (string.IsNullOrWhiteSpace(InscricaoText.Text.Trim()))
                 InscricaoText.Text = "0";
 
             return true;
         }
 
-        private void SaveReg()
-        {
+        private Exception Grava_Processo() {
+            Processogti Reg = new Processogti();
+            Reg.Numero = _numero_processo;
+            Reg.Ano = _ano_processo;
+            Reg.Complemento = ComplementoText.Text.Trim();
+            Reg.Observacao = ObsText.Text.Trim();
+            Reg.Insc = Convert.ToInt32(InscricaoText.Text);
+            Reg.Dataentrada = Convert.ToDateTime(EntradaLabel.Text);
+            Reg.Hora = HoraLabel.Text;
+            if (gtiCore.IsEmptyDate(SuspensaoLabel.Text))
+                Reg.Datasuspenso = null;
+            else
+                Reg.Datasuspenso = Convert.ToDateTime(SuspensaoLabel.Text);
+            if (gtiCore.IsEmptyDate(ReativaLabel.Text))
+                Reg.Datareativa = null;
+            else
+                Reg.Datareativa = Convert.ToDateTime(ReativaLabel.Text);
+            if (gtiCore.IsEmptyDate(ArquivaLabel.Text))
+                Reg.Dataarquiva = null;
+            else
+                Reg.Dataarquiva = Convert.ToDateTime(ArquivaLabel.Text);
+            if (gtiCore.IsEmptyDate(CancelaLabel.Text))
+                Reg.Datacancel = null;
+            else
+                Reg.Datacancel = Convert.ToDateTime(CancelaLabel.Text);
+            Reg.Interno = Internocheckbox.Checked ? true : false;
+            Reg.Fisico = Fisicocheckbox.Checked ? true : false;
+            Reg.Codassunto = Convert.ToInt16(AssuntoText.Tag.ToString());
+            Reg.Userid = Convert.ToInt32( AtendenteLabel.Tag.ToString());
+            CustomListBoxItem selectedData = (CustomListBoxItem)OrigemCombo.SelectedItem;
+            Reg.Origem = Convert.ToInt16(selectedData._value);
+            if (OrigemCombo.SelectedIndex == 0) {
+                Reg.Centrocusto = Convert.ToInt32(CCustoCombo.SelectedValue);
+                Reg.Codcidadao = 0;
+            } else {
+                Reg.Centrocusto = 0;
+                Reg.Codcidadao = Convert.ToInt32(CodCidadaoLabel.Text);
+            }
 
-            /*            processogti Reg = new processogti();
-                        if (bAddNew) {
-                            Reg.NUMERO = 0;
-                            Reg.ANO = 0;
-                        } else {
-                            Reg.NUMERO = Num_Processo;
-                            Reg.ANO = Convert.ToInt16(Ano_Processo);
-                        }
-                        Reg.COMPLEMENTO = txtComplemento.Text.Trim();
-                        Reg.RESPONSAVEL = lblAtendente.Text;
-                        Reg.CODASSUNTO = Convert.ToInt16(cmbAssunto.SelectedValue);
-                        Reg.OBSERVACAO = txtObs.Text;
-                        Reg.INSC = Convert.ToInt32(txtInscricao.Text);
-                        Reg.DATAENTRADA = Convert.ToDateTime(lblEntrada.Text);
-                        Reg.HORA = lblHora.Text;
-                        if (gtiCore.IsEmptyDate(lblSuspensao.Text))
-                            Reg.DATASUSPENSO = null;
-                        else
-                            Reg.DATASUSPENSO = Convert.ToDateTime(lblSuspensao.Text);
-                        if (gtiCore.IsEmptyDate(lblReativa.Text))
-                            Reg.DATAREATIVA = null;
-                        else
-                            Reg.DATAREATIVA = Convert.ToDateTime(lblReativa.Text);
-                        if (gtiCore.IsEmptyDate(lblArquiva.Text))
-                            Reg.DATAARQUIVA = null;
-                        else
-                            Reg.DATAARQUIVA = Convert.ToDateTime(lblArquiva.Text);
-                        if (gtiCore.IsEmptyDate(lblCancela.Text))
-                            Reg.DATACANCEL = null;
-                        else
-                            Reg.DATACANCEL = Convert.ToDateTime(lblCancela.Text);
-                        Reg.INTERNO = chkInterno.Checked ? true : false;
-                        Reg.FISICO = chkFisico.Checked ? true : false;
+            Exception ex;
+            if (bAddNew) {
+                Processo_bll processo_Class = new Processo_bll(_connection);
+                Reg.Ano = (short)DateTime.Now.Year;
+                Reg.Numero = processo_Class.Retorna_Numero_Disponivel(DateTime.Now.Year);
+                _ano_processo = Reg.Ano;
+                _numero_processo = Reg.Numero;
+                ex = processo_Class.Incluir_Processo(Reg);
+                if (ex != null) {
+                    ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                    eBox.ShowDialog();
+                    return ex;
+                } else {
+                    bExec = false;
+                    NumProcText.Text = $"{ _numero_processo}-{processo_Class.DvProcesso(_numero_processo)}/{_ano_processo}";
+                    bExec = true;
+                }
+                Reg.Tipoend = ComOption.Checked ? "C" : "R";
+            }
 
-                        UserData selectedData = (UserData)cmbOrigem.SelectedItem;
-                        Reg.ORIGEM = Convert.ToInt16(selectedData.Value);
-                        if (cmbOrigem.SelectedIndex == 0) {
-                            Reg.CENTROCUSTO = Convert.ToInt32(cmbCCusto.SelectedValue);
-                            Reg.CODCIDADAO = 0;
-                        } else {
-                            Reg.CENTROCUSTO = 0;
-                            Reg.CODCIDADAO = Convert.ToInt32(lblCodCidadao.Text);
-                        }
-                        Reg.TIPOEND = optCom.Checked ? "C" : "R";
-                        List<processoend> ListaEndereco = new List<processoend>();
-                        foreach (ListViewItem item in lvEndereco.Items) {
-                            processoend regEnd = new processoend();
-                            regEnd.CODLOGR = Convert.ToInt32(item.SubItems[1].Text);
-                            regEnd.NUMERO = item.SubItems[2].Text;
-                            ListaEndereco.Add(regEnd);
-                        }
-                        Reg.processoend = ListaEndereco;
+            return null;
+        }
 
-                        List<processodoc> ListaDoc = new List<processodoc>();
-                        foreach (ListViewItem item in lvDoc.Items) {
-                            processodoc regDoc = new processodoc();
-                            regDoc.CODDOC = Convert.ToInt16(item.SubItems[1].Text);
-                            if (!string.IsNullOrEmpty(item.SubItems[2].Text))
-                                regDoc.DATA = Convert.ToDateTime(item.SubItems[2].Text);
-                            else
-                                regDoc.DATA = null;
-                            ListaDoc.Add(regDoc);
-                        }
-                        Reg.processodoc = ListaDoc;
+        private Exception Grava_Endereco() {
+            List<Processoend> ListaEndereco = new List<Processoend>();
+            foreach (ListViewItem item in EnderecoListView.Items) {
+                Processoend regEnd = new Processoend {
+                    Ano=_ano_processo,
+                    Numprocesso=_numero_processo,
+                    Codlogr = Convert.ToInt16(item.SubItems[1].Text),
+                    Numero = item.SubItems[2].Text
+                };
+                ListaEndereco.Add(regEnd);
+            }
 
-                        Classes.Processo clsProc = new Classes.Processo();
-                        if (bAddNew) {
-                            Reg.HORA = DateTime.Now.Hour.ToString("00") + ":" + DateTime.Now.Minute.ToString("00");
-                            Reg.RESPONSAVEL = gtiPropertys.LastUser;
-                            Num_Processo = clsProc.InsertRecord(Reg);
-                            Ano_Processo = DateTime.Now.Year;
-                            txtNumProc.Text = string.Format("{0}-{1}/{2}", Num_Processo, clsProc.DvProcesso(Num_Processo), Ano_Processo);
-                            CarregaProcesso();
-                        } else
-                            clsProc.UpdateRecord(Reg);*/
+            Processo_bll processo_Class = new Processo_bll(_connection);
+            Exception ex = processo_Class.Incluir_Processo_Endereco(ListaEndereco,_ano_processo,_numero_processo);
+            if (ex != null) {
+                ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                eBox.ShowDialog();
+            }
+            return ex;
+        }
+
+        private Exception Grava_Documento() {
+            //Classes.Processo clsProc = new Classes.Processo();
+            //if (bAddNew) {
+            //    Reg.Hora = DateTime.Now.Hour.ToString("00") + ":" + DateTime.Now.Minute.ToString("00");
+            //Reg.RESPONSAVEL = gtiPropertys.LastUser;
+            //Num_Processo = clsProc.InsertRecord(Reg);
+            //Ano_Processo = DateTime.Now.Year;
+
+            return null;
         }
 
         #endregion
@@ -1356,33 +1396,32 @@ namespace GTI_Desktop.Forms {
 
         #region Endereco
 
-        private void BtAddEndereco_Click(object sender, EventArgs e)
-        {
-            //endereco reg = new endereco();
-            //reg.id_pais = 1;
-            //reg.sigla_uf =  "SP" ;
-            //reg.id_cidade =  413 ;
-            //Forms.Endereco f1 = new Forms.Endereco(reg, true,false );
-            //f1.ShowDialog();
+        private void BtAddEndereco_Click(object sender, EventArgs e)     {
+            GTI_Models.Models.Endereco reg = new GTI_Models.Models.Endereco();
+            reg.Id_pais = 1;
+            reg.Sigla_uf = "SP";
+            reg.Id_cidade = 413;
+            Forms.Endereco f1 = new Forms.Endereco(reg, true, false);
+            f1.ShowDialog();
 
-            //if (!String.IsNullOrEmpty(f1.endRetorno.nome_logradouro.Trim())) {
-            //    bool bFind = false;
-            //    foreach (ListViewItem item in lvEndereco.Items) {
-            //        if (item.SubItems[1].Text == f1.endRetorno.id_logradouro.ToString() && item.SubItems[2].Text == f1.endRetorno.numero_imovel.ToString()) {
-            //            bFind = true;
-            //            break;
-            //        }
-            //    }
-            //    if (bFind)
-            //        MessageBox.Show("Endereço já incluso na lista.", "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    else {
-            //        ListViewItem lvi = new ListViewItem(f1.endRetorno.nome_logradouro );
-            //        lvi.SubItems.Add(f1.endRetorno.id_logradouro.ToString());
-            //        lvi.SubItems.Add(f1.endRetorno.numero_imovel.ToString());
-            //        lvEndereco.Items.Add(lvi);
-            //        int s = lvEndereco.Items.Count;
-            //    }
-            //}
+            if (!String.IsNullOrEmpty(f1.EndRetorno.Nome_logradouro.Trim())) {
+                bool bFind = false;
+                foreach (ListViewItem item in EnderecoListView.Items) {
+                    if (item.SubItems[1].Text == f1.EndRetorno.Id_logradouro.ToString() && item.SubItems[2].Text == f1.EndRetorno.Numero_imovel.ToString()) {
+                        bFind = true;
+                        break;
+                    }
+                }
+                if (bFind)
+                    MessageBox.Show("Endereço já incluso na lista.", "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else {
+                    ListViewItem lvi = new ListViewItem(f1.EndRetorno.Nome_logradouro);
+                    lvi.SubItems.Add(f1.EndRetorno.Id_logradouro.ToString());
+                    lvi.SubItems.Add(f1.EndRetorno.Numero_imovel.ToString());
+                    EnderecoListView.Items.Add(lvi);
+                    int s = EnderecoListView.Items.Count;
+                }
+            }
         }
 
         private void BtDelEndereco_Click(object sender, EventArgs e)

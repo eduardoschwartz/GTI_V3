@@ -430,5 +430,38 @@ namespace GTI_Bll.Classes {
             return obj.Data_Processo(Ano,Numero);
         }
 
+        /// <summary>
+        /// Incluir um novo processo
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Incluir_Processo(Processogti reg) {
+            Processo_Data obj = new Processo_Data(_connection);
+            Exception ex = obj.Incluir_Processo(reg);
+            return ex;
+        }
+
+        /// <summary>
+        /// Retorna o próximo número de processo
+        /// </summary>
+        /// <param name="Ano"></param>
+        /// <returns></returns>
+        public int Retorna_Numero_Disponivel(int Ano) {
+            Processo_Data obj = new Processo_Data(_connection);
+            return obj.Retorna_Numero_Disponivel(Ano);
+        }
+
+        /// <summary>
+        /// Incluir os endereços de um processo
+        /// </summary>
+        /// <param name="Lista"></param>
+        /// <returns></returns>
+        public Exception Incluir_Processo_Endereco(List<Processoend> Lista,int Ano,int Numero) {
+            Processo_Data obj = new Processo_Data(_connection);
+            Exception ex = obj.Incluir_Processo_Endereco(Lista,Ano,Numero);
+            return ex;
+        }
+
+
     }
 }

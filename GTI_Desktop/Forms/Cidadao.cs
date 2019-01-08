@@ -19,7 +19,8 @@ namespace GTI_Desktop.Forms {
             set {
                 _CodCidadao = value;
                 bAddNew = false;
-                LoadReg(_CodCidadao);
+                if(_CodCidadao>0)
+                    LoadReg(_CodCidadao);
             }
         }
 
