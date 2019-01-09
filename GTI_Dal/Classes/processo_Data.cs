@@ -1027,5 +1027,34 @@ Inicio:;
             }
         }
 
+        public Exception Incluir_Processo_Documento(List<Processodoc> Lista, int Ano, int Numero) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+
+                try {
+                    db.Database.ExecuteSqlCommand("delete from processodoc where ano=@ano and numero=@numero",
+                        new SqlParameter("@ano", Ano), new SqlParameter("@numero", Numero));
+                } catch (Exception ex) {
+                    return ex;
+                }
+                foreach (Processodoc item in Lista) {
+                    try {
+                        object[] Parametros = new object[4];
+                        Parametros[0] = new SqlParameter { ParameterName = "@ano", SqlDbType = SqlDbType.SmallInt, SqlValue = item.Ano };
+                        Parametros[1] = new SqlParameter { ParameterName = "@numero", SqlDbType = SqlDbType.Int, SqlValue = item.Numero };
+                        Parametros[2] = new SqlParameter { ParameterName = "@coddoc", SqlDbType = SqlDbType.SmallInt, SqlValue = item.Coddoc };
+                        if (item.Data != null)
+                            Parametros[3] = new SqlParameter { ParameterName = "@data", SqlDbType = SqlDbType.SmallDateTime, SqlValue = item.Data };
+                        else
+                            Parametros[3] = new SqlParameter { ParameterName = "@data", SqlValue = DBNull.Value };
+
+                        db.Database.ExecuteSqlCommand("INSERT INTO processodoc(ano,numero,coddoc,data) VALUES(@ano,@numero,@coddoc,@data)", Parametros);
+                    } catch (Exception ex) {
+                        return ex;
+                    }
+                }
+                return null;
+            }
+        }
+
     }
 }

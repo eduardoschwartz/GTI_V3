@@ -255,6 +255,7 @@ namespace GTI_Desktop.Forms {
             NomeCidadaoLabel.Text = "";
             CCustoCombo.SelectedIndex = -1;
             EnderecoListView.Items.Clear();
+            DocListView.Items.Clear();
             SituacaoLabel.Text = "NORMAL";
             NomeLabel.Text = "";
             DocLabel.Text = "";
@@ -263,6 +264,8 @@ namespace GTI_Desktop.Forms {
             BairroLabel.Text = "";
             CidadeLabel.Text = "";
             RGLabel.Text = "";
+            DocEntregueLabel.Text = "0";
+            DocPendenteLabel.Text = "0";
         }
 
         private void UnlockForm() {
@@ -534,6 +537,7 @@ namespace GTI_Desktop.Forms {
 
         private void BtCancelar_Click(object sender, EventArgs e)
         {
+            ClearFields();
             ControlBehaviour(true);
         }
 
@@ -969,6 +973,20 @@ namespace GTI_Desktop.Forms {
             ObsArquiva = Reg.ObsArquiva;
             //pnlDoc.Show();
             DocListView.Items.Clear();
+            if (Reg.ListaProcessoDoc.Count == 0) {
+                //se não houver documentos gravados no processo carrega lista padrão de documentos do assunto selecionado.
+                Processo_bll processo_Class = new Processo_bll(_connection);
+                List<AssuntoDocStruct> ListaDoc = new List<AssuntoDocStruct>();
+                ListaDoc = processo_Class.Lista_Assunto_Documento((short)Reg.CodigoAssunto);
+                foreach (AssuntoDocStruct item in ListaDoc) {
+                    ProcessoDocStruct reg = new ProcessoDocStruct();
+                    reg.CodigoDocumento = item.Codigo;
+                    reg.NomeDocumento = item.Nome;
+                    Reg.ListaProcessoDoc.Add(reg);
+                }
+            }
+
+
             foreach (var item in Reg.ListaProcessoDoc) {
                 ListViewItem lvi = new ListViewItem(item.NomeDocumento);
                 lvi.SubItems.Add(item.CodigoDocumento.ToString());
@@ -1094,6 +1112,7 @@ namespace GTI_Desktop.Forms {
 
             Exception ex;
             if (bAddNew) {
+                Reg.Hora = DateTime.Now.Hour.ToString("00") + ":" + DateTime.Now.Minute.ToString("00");
                 Processo_bll processo_Class = new Processo_bll(_connection);
                 Reg.Ano = (short)DateTime.Now.Year;
                 Reg.Numero = processo_Class.Retorna_Numero_Disponivel(DateTime.Now.Year);
@@ -1137,14 +1156,26 @@ namespace GTI_Desktop.Forms {
         }
 
         private Exception Grava_Documento() {
-            //Classes.Processo clsProc = new Classes.Processo();
-            //if (bAddNew) {
-            //    Reg.Hora = DateTime.Now.Hour.ToString("00") + ":" + DateTime.Now.Minute.ToString("00");
-            //Reg.RESPONSAVEL = gtiPropertys.LastUser;
-            //Num_Processo = clsProc.InsertRecord(Reg);
-            //Ano_Processo = DateTime.Now.Year;
+            List<Processodoc> ListaDoc = new List<Processodoc>();
+            foreach (ListViewItem item in DocListView.Items) {
+                Processodoc reg = new Processodoc {
+                    Ano = _ano_processo,
+                    Numero = _numero_processo,
+                    Coddoc = Convert.ToInt16(item.SubItems[1].Text)
+                };
+                if (!string.IsNullOrWhiteSpace(item.SubItems[2].Text))
+                    reg.Data = Convert.ToDateTime(item.SubItems[2].Text);
+                
+                ListaDoc.Add(reg);
+            }
 
-            return null;
+            Processo_bll processo_Class = new Processo_bll(_connection);
+            Exception ex = processo_Class.Incluir_Processo_Documento(ListaDoc, _ano_processo, _numero_processo);
+            if (ex != null) {
+                ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                eBox.ShowDialog();
+            }
+            return ex;
         }
 
         #endregion
@@ -1440,10 +1471,31 @@ namespace GTI_Desktop.Forms {
 
         private void BtDocumentoEdit_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(NumProcText.Text))
-                MessageBox.Show("Processo não carregado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else {
-                if (AssuntoCombo.SelectedIndex > -1) {
+            if (bAddNew) {
+                
+                if (AssuntoCombo.SelectedIndex==-1)
+                    MessageBox.Show("Selecione o assunto.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else {
+                    if (DocListView.Items.Count > 0) goto Jump;
+                    List<ProcessoDocStruct> ListaProcessoDoc = new List<ProcessoDocStruct>();
+                    Processo_bll processo_Class = new Processo_bll(_connection);
+                    List<AssuntoDocStruct> ListaDoc = new List<AssuntoDocStruct>();
+                    
+                    ListaDoc = processo_Class.Lista_Assunto_Documento(Convert.ToInt16( AssuntoCombo.SelectedValue));
+                    foreach (AssuntoDocStruct item in ListaDoc) {
+                        ProcessoDocStruct reg = new ProcessoDocStruct();
+                        reg.CodigoDocumento = item.Codigo;
+                        reg.NomeDocumento = item.Nome;
+                        ListaProcessoDoc.Add(reg);
+                    }
+
+                    foreach (var item in ListaProcessoDoc) {
+                        ListViewItem lvi = new ListViewItem(item.NomeDocumento);
+                        lvi.SubItems.Add(item.CodigoDocumento.ToString());
+                        lvi.SubItems.Add("");
+                        DocListView.Items.Add(lvi);
+                    }
+Jump:;
                     bExec = false;
                     GetButtonState();
                     LockForm();
@@ -1452,9 +1504,18 @@ namespace GTI_Desktop.Forms {
                     GravarButton.Enabled = false;
                     CancelarButton.Enabled = false;
                     bExec = true;
-                } else
-                    MessageBox.Show("Selecione o assunto.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            } else {
+                bExec = false;
+                GetButtonState();
+                LockForm();
+                DocPanel.Show();
+                DocPanel.BringToFront();
+                GravarButton.Enabled = false;
+                CancelarButton.Enabled = false;
+                bExec = true;
             }
+            UpdateDocNumber();
         }
 
         private void BtCancelDoc_Click(object sender, EventArgs e)

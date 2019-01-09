@@ -462,6 +462,18 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        /// <summary>
+        /// Incluir os documentos de um processo
+        /// </summary>
+        /// <param name="Lista"></param>
+        /// <param name="Ano"></param>
+        /// <param name="Numero"></param>
+        /// <returns></returns>
+        public Exception Incluir_Processo_Documento(List<Processodoc> Lista, int Ano, int Numero) {
+            Processo_Data obj = new Processo_Data(_connection);
+            Exception ex = obj.Incluir_Processo_Documento(Lista, Ano, Numero);
+            return ex;
+        }
 
     }
 }

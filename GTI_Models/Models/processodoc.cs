@@ -13,6 +13,6 @@ namespace GTI_Models.Models {
         [Key]
         [Column(Order = 3)]
         public short Coddoc { get; set; }
-        public DateTime Data { get; set; }
+        public DateTime? Data { get; set; }
     }
 }
