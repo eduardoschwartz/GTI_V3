@@ -7,12 +7,12 @@ namespace GTI_Models.Models {
         [Key]
         [Column(Order = 1)]
         [Index("AssuntoLocal_Index", IsUnique = true, Order = 1)]
-        public int Codassunto { get; set; }
+        public short Codassunto { get; set; }
         [Key]
         [Column(Order = 2)]
         [Index("AssuntoLocal_Index", IsUnique = true, Order = 2)]
-        public int Seq { get; set; }
-        public int Codcc { get; set; }
+        public short Seq { get; set; }
+        public short Codcc { get; set; }
 
        // public List<processo_assunto> assuntos { get; set; }
 

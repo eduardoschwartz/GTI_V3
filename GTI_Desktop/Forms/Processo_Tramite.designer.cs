@@ -220,12 +220,12 @@
             // 
             this.txtObs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtObs.Location = new System.Drawing.Point(12, 247);
+            this.txtObs.Location = new System.Drawing.Point(12, 297);
             this.txtObs.Multiline = true;
             this.txtObs.Name = "txtObs";
             this.txtObs.ReadOnly = true;
             this.txtObs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtObs.Size = new System.Drawing.Size(651, 44);
+            this.txtObs.Size = new System.Drawing.Size(771, 44);
             this.txtObs.TabIndex = 162;
             // 
             // lblHora
@@ -500,10 +500,10 @@
             this.btEnviar,
             this.toolStripSeparator2,
             this.btSair});
-            this.tBar.Location = new System.Drawing.Point(0, 304);
+            this.tBar.Location = new System.Drawing.Point(0, 354);
             this.tBar.Name = "tBar";
             this.tBar.Padding = new System.Windows.Forms.Padding(6, 0, 1, 0);
-            this.tBar.Size = new System.Drawing.Size(674, 25);
+            this.tBar.Size = new System.Drawing.Size(794, 25);
             this.tBar.TabIndex = 157;
             this.tBar.Text = "toolStrip1";
             // 
@@ -674,7 +674,7 @@
             this.lvMain.Location = new System.Drawing.Point(12, 48);
             this.lvMain.MinimumSize = new System.Drawing.Size(565, 176);
             this.lvMain.Name = "lvMain";
-            this.lvMain.Size = new System.Drawing.Size(650, 193);
+            this.lvMain.Size = new System.Drawing.Size(770, 243);
             this.lvMain.SmallImageList = this.imageList1;
             this.lvMain.TabIndex = 159;
             this.lvMain.UseCompatibleStateImageBehavior = false;
@@ -700,7 +700,7 @@
             // columnHeader7
             // 
             this.columnHeader7.Text = "Local";
-            this.columnHeader7.Width = 160;
+            this.columnHeader7.Width = 230;
             // 
             // columnHeader2
             // 
@@ -745,10 +745,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(674, 329);
+            this.ClientSize = new System.Drawing.Size(794, 379);
+            this.Controls.Add(this.pnlEnvRec);
             this.Controls.Add(this.pnlDespacho);
             this.Controls.Add(this.pnlLocal);
-            this.Controls.Add(this.pnlEnvRec);
             this.Controls.Add(this.lblComplemento);
             this.Controls.Add(this.lblRequerente);
             this.Controls.Add(this.lblNumProc);

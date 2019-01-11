@@ -156,7 +156,7 @@ namespace GTI_Models.Models {
         public string AssuntoNome { get; set; }
         public int Interno { get; set; }
         public int Fisico { get; set; }
-        public string DataEntrada { get; set; }
+        public DateTime? DataEntrada { get; set; }
         public int CodLogradouro { get; set; }
         public int NumEnd { get; set; }
         public string Complemento { get; set; }

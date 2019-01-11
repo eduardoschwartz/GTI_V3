@@ -27,13 +27,13 @@ namespace GTI_Models.Models {
         public int Ano { get; set; }
         public int Numero { get; set; }
         public int Seq { get; set; }
-        public int CentroCustoCodigo { get; set; }
+        public short CentroCustoCodigo { get; set; }
         public string CentroCustoNome { get; set; }
         public string DataEntrada { get; set; }
         public string HoraEntrada { get; set; }
         public int? Userid1 { get; set; }
         public string Usuario1 { get; set; }
-        public int DespachoCodigo { get; set; }
+        public short DespachoCodigo { get; set; }
         public string DespachoNome { get; set; }
         public string DataEnvio { get; set; }
         public int? Userid2 { get; set; }

@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using static GTI_Desktop.Classes.GtiTypes;
 
 namespace GTI_Desktop.Forms {
     public partial class Processo_Lista : Form
@@ -17,13 +18,31 @@ namespace GTI_Desktop.Forms {
         public Processo_Lista()
         {
             InitializeComponent();
+            tBar.Renderer = new MySR();
             ProprietarioToolStrip.Renderer = new MySR();
-            SetorToolStrip.Renderer = new MySR();
-            AssuntoToolStrip.Renderer = new MySR();
             InternoList.SelectedIndex = 0;
             FisicoList.SelectedIndex = 0;
+            Carrega_Lista();
             ReadDatFile();
         }
+
+        private void Carrega_Lista() {
+            Processo_bll processo_Class = new Processo_bll(_connection);
+            List<CustomListBoxItem2> myItems = new List<CustomListBoxItem2> {
+                new CustomListBoxItem2("(Não selecionado)", 0, false)
+            };
+            List<GTI_Models.Models.Assunto> lista = processo_Class.Lista_Assunto(false, false);
+            foreach (GTI_Models.Models.Assunto item in lista) {
+                string Complemento = item.Ativo ? "" : " (Inativo)" ; 
+                myItems.Add(new CustomListBoxItem2(item.Nome+ Complemento , item.Codigo, item.Ativo));
+            }
+            AssuntoList.DisplayMember = "_name";
+            AssuntoList.ValueMember = "_value";
+            AssuntoList.DataSource = myItems;
+            AssuntoList.SelectedIndex = 0;
+        }
+
+
 
         private void ReadDatFile() {
 
@@ -75,6 +94,8 @@ namespace GTI_Desktop.Forms {
             }
             Reg.AnoIni = AnoInicial.Text.Trim() == "" ? 0 : Convert.ToInt32(AnoInicial.Text);
             Reg.AnoFim = AnoFinal.Text.Trim() == "" ? 0 : Convert.ToInt32(AnoFinal.Text);
+            if (gtiCore.IsDate(DataEntrada.Text))
+                Reg.DataEntrada = Convert.ToDateTime(DataEntrada.Text);
 
             //********************************
 
@@ -100,14 +121,17 @@ namespace GTI_Desktop.Forms {
                     aCount.Add(new ProcessoNumero { Ano = item.Ano, Numero = item.Numero });
                     _total++;
                 }
+
+                string _nome = item.Interno ? item.CentroCustoNome : item.NomeCidadao;
                 //******************************************
 
-                ArrayList itemlv = new ArrayList();
-                itemlv.Add(item.Ano.ToString());
-                itemlv.Add(item.Numero.ToString("00000") + "-" +  processo_Class.DvProcesso( item.Numero));
-                itemlv.Add(item.NomeCidadao);
-                itemlv.Add(item.Assunto);
-                itemlv.Add(Convert.ToDateTime(item.DataEntrada).ToString("dd/MM/yyyy"));
+                ArrayList itemlv = new ArrayList {
+                    item.Ano.ToString(),
+                    item.Numero.ToString("00000") + "-" + processo_Class.DvProcesso(item.Numero),
+                    _nome ?? "",
+                    item.Assunto ?? "",
+                    Convert.ToDateTime(item.DataEntrada).ToString("dd/MM/yyyy")
+                };
                 if (item.DataCancelado != null)
                     itemlv.Add(Convert.ToDateTime(item.DataCancelado).ToString("dd/MM/yyyy"));
                 else
@@ -162,7 +186,11 @@ namespace GTI_Desktop.Forms {
         private void FindButton_Click(object sender, EventArgs e) {
             MainListView.Items.Clear();
             if (ValidaProcesso())
-                Fill_List();
+                if (NumeroProcesso.Text == "" && AnoInicial.Text == "" && AnoFinal.Text == "" && gtiCore.IsEmptyDate(DataEntrada.Text) && 
+                    Requerente.Text == "" && SetorList.SelectedIndex == 0 && AssuntoList.SelectedIndex==0  && Complemento.Text=="")
+                    MessageBox.Show("Nenhum filtro selecionado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    Fill_List();
             else
                 MessageBox.Show("Nenhum processo coincide com o filtro selecionado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -194,6 +222,10 @@ namespace GTI_Desktop.Forms {
             return bRet;
         }
 
-
+      
+        private void Requerente_KeyPress(object sender, KeyPressEventArgs e) {
+            const char Delete = (char)8;
+            e.Handled = !Char.IsDigit(e.KeyChar) && e.KeyChar != Delete;
+        }
     }
 }

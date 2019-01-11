@@ -225,7 +225,8 @@ namespace GTI_Desktop.Classes {
         /// </summary>
         /// <returns>Date DataBase</returns>
         public static DateTime Retorna_Data_Base_Sistema() {
-            Main f1 = (Main)Application.OpenForms["MainForm"];
+    //        Main f1 = (Main)Application.OpenForms["MainForm"];
+            Main f1 = (Main)Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Main);
             return f1.ReturnDataBaseValue();
         }
 

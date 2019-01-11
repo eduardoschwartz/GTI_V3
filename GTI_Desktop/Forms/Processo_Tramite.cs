@@ -4,6 +4,7 @@ using GTI_Desktop.Properties;
 using GTI_Models.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace GTI_Desktop.Forms {
@@ -19,6 +20,7 @@ namespace GTI_Desktop.Forms {
             InitializeComponent();
             this.Size = new System.Drawing.Size(Properties.Settings.Default.Form_Processo_Tramite_width, Properties.Settings.Default.Form_Processo_Tramite_height);
 
+            tBar.Renderer = new MySR();
             Ano_Processo = AnoProcesso;
             Num_Processo = NumProcesso;
             lstButtonState = new List<GtiTypes.CustomListBoxItem>();
@@ -60,16 +62,16 @@ namespace GTI_Desktop.Forms {
                 ListViewItem lvi = new ListViewItem();
                 lvi.SubItems.Add(Reg.Seq.ToString("00"));
                 lvi.SubItems.Add(Reg.CentroCustoCodigo.ToString());
-                lvi.SubItems.Add(Reg.CentroCustoNome);
-                lvi.SubItems.Add(Reg.DataEntrada);
-                lvi.SubItems.Add(Reg.HoraEntrada);
-                lvi.SubItems.Add(Reg.Usuario1);
-                lvi.SubItems.Add(Reg.DespachoNome);
+                lvi.SubItems.Add(Reg.CentroCustoNome??"");
+                lvi.SubItems.Add(Reg.DataEntrada??"");
+                lvi.SubItems.Add(Reg.HoraEntrada??"");
+                lvi.SubItems.Add(Reg.Usuario1??"");
+                lvi.SubItems.Add(Reg.DespachoNome??"");
                 lvi.SubItems.Add("0");
-                lvi.SubItems.Add(Reg.DataEnvio);
-                lvi.SubItems.Add(Reg.Usuario2);
-                lvi.SubItems.Add(Reg.Obs);
-                lvi.Tag = Reg.Obs;
+                lvi.SubItems.Add(Reg.DataEnvio??"");
+                lvi.SubItems.Add(Reg.Usuario2??"");
+                lvi.SubItems.Add(Reg.Obs??"");
+                lvi.Tag = Reg.Obs??"";
                 if (!string.IsNullOrEmpty(Reg.Obs)) lvi.ImageIndex = 0;
                 lvMain.Items.Add(lvi);
                 nPos++;
@@ -182,7 +184,7 @@ namespace GTI_Desktop.Forms {
                     Ano = Ano_Processo,
                     Numero = Num_Processo,
                     Seq = Convert.ToInt32(lvItem.SubItems[1].Text),
-                    CentroCustoCodigo = Convert.ToInt32(lvItem.SubItems[2].Text)
+                    CentroCustoCodigo = Convert.ToInt16(lvItem.SubItems[2].Text)
                 };
                 Lista.Add(Reg);
             }
@@ -456,6 +458,9 @@ Alterar:;
                 MessageBox.Show("Selecione o trâmite que deseja receber.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            Sistema_bll Sistema_Class = new Sistema_bll(_connection);
+            int nUserId = Sistema_Class.Retorna_User_LoginId(Properties.Settings.Default.LastUser);
+
             if (bFechado) {
                 MessageBox.Show("O processo não está aberto.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -463,7 +468,6 @@ Alterar:;
                 bool bFind = false;
                 int CodCC = Convert.ToInt16(lvMain.SelectedItems[0].SubItems[2].Text);
                 Processo_bll processo_Class = new Processo_bll(_connection);
-                Sistema_bll Sistema_Class = new Sistema_bll(_connection);
                 List<UsuariocentroCusto> Lista = processo_Class.ListaCentrocustoUsuario(Sistema_Class.Retorna_User_LoginId( gtiCore.Retorna_Last_User()));
                 foreach (UsuariocentroCusto item in Lista) {
                     if (item.Codigo == CodCC) {
@@ -472,12 +476,12 @@ Alterar:;
                     }
                 }
 
-                if (!bFind) {
+                if (!bFind && nUserId != 433) {
                     MessageBox.Show("Você não pode trâmitar deste local.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                if (!String.IsNullOrEmpty(lvMain.SelectedItems[0].SubItems[4].Text)) {
+                if (!String.IsNullOrWhiteSpace(lvMain.SelectedItems[0].SubItems[4].Text)) {
                     MessageBox.Show("Já houve recebimento neste local.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
@@ -488,12 +492,13 @@ Alterar:;
                 if (lvMain.Items.Count - 1 == lvMain.SelectedItems[0].Index)
                     goto Receber;
 
-                if (!String.IsNullOrEmpty(lvMain.Items[lvMain.SelectedItems[0].Index - 1].SubItems[4].Text))
-                    goto Receber;
             }
 
-            MessageBox.Show("O local anterior ainda não foi tramitado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return;
+            if (lvMain.SelectedItems[0].Index>0 &&  String.IsNullOrEmpty(lvMain.Items[lvMain.SelectedItems[0].Index - 1].SubItems[9].Text)) {
+                MessageBox.Show("O local anterior ainda não foi tramitado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
 Receber:;
 
             GetButtonState();
@@ -502,6 +507,7 @@ Receber:;
             pnlEnvRec.Visible = true;
             pnlEnvRec.BringToFront();
             lblEnvRec.Text = "Recebimento de Processo";
+            toolTip1.SetToolTip(btOKEnvRec, "Receber processo");
             cmbDespacho2.SelectedIndex = -1;
 
             lblLocal.Text = lvMain.SelectedItems[0].SubItems[3].Text;
@@ -518,7 +524,7 @@ Receber:;
                 sNomeCompleto = sistema_Class.Retorna_User_FullName(gtiCore.Retorna_Last_User());
             cmbFuncionario.Items.Add(new GtiTypes.CustomListBoxItem(sNomeCompleto, 999));
             Processo_bll clsProc = new Processo_bll(_connection);
-            List<UsuarioFuncStruct> ListaFunc = clsProc.ListaFuncionario(sistema_Class.Retorna_User_LoginId(gtiCore.Retorna_Last_User()));
+            List<UsuarioFuncStruct> ListaFunc = clsProc.ListaFuncionario(nUserId);
             foreach (UsuarioFuncStruct item in ListaFunc) {
                 cmbFuncionario.Items.Add(new GtiTypes.CustomListBoxItem(item.NomeCompleto, item.FuncLogin));
             }
@@ -544,8 +550,7 @@ Receber:;
             DateTime Hora = Convert.ToDateTime(lblHora.Text);
             DateTime DataHora = new DateTime(Data.Year, Data.Month, Data.Day, Hora.Hour, Hora.Second, Hora.Second);
             short? CodDespacho = cmbDespacho2.SelectedIndex == -1 ? Convert.ToInt16(0) : Convert.ToInt16(cmbDespacho2.SelectedValue);
-            Sistema_bll clsSistema = new Sistema_bll(_connection);
-//            string Usuario = cmbFuncionario.SelectedIndex == -1 ? clsSistema.Retorna_User_LoginName(lvMain.SelectedItems[0].SubItems[6].Text) : clsSistema.Retorna_User_LoginName(cmbFuncionario.Text);
+            Sistema_bll Sistema_Class = new Sistema_bll(_connection);
 
             Tramitacao reg = new Tramitacao {
                 Ano = Convert.ToInt16(Ano),
@@ -553,8 +558,7 @@ Receber:;
                 Seq = Convert.ToByte(Seq),
                 Ccusto = CCusto,
                 Datahora = DataHora,
-                Despacho = CodDespacho == 0 ? null : CodDespacho,
-             //   Userid = Userid
+                Despacho = CodDespacho == 0 ? null : CodDespacho
             };
 
             if (bReceber) {
@@ -562,6 +566,13 @@ Receber:;
                     MessageBox.Show("Selecione um funcionário", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 } else {
+                    GtiTypes.CustomListBoxItem selectedItem = (GtiTypes.CustomListBoxItem)cmbFuncionario.SelectedItem;
+                    reg.Userid = selectedItem._value;
+                    if (reg.Userid < 999) 
+                        reg.Userid = Sistema_Class.Retorna_User_LoginId("F" + Convert.ToInt32( reg.Userid).ToString("000"));
+                    else
+                        reg.Userid= Sistema_Class.Retorna_User_LoginId(gtiCore.Retorna_Last_User());
+
                     ex = clsProcesso.Excluir_Tramite(Ano, Numero, Seq);
                     if (ex != null) {
                         ErrorBox eBox = new ErrorBox("Erro!", ex.Message, ex);
@@ -574,15 +585,26 @@ Receber:;
                     }
                 }
             } else {
+                if (CodDespacho==0) {
+                    MessageBox.Show("Selecione um despacho para o trâmite.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 reg.Dataenvio = DataHora;
-                reg.Userid2 = clsSistema.Retorna_User_LoginId(  gtiCore.Retorna_Last_User());
+                GtiTypes.CustomListBoxItem selectedItem = (GtiTypes.CustomListBoxItem)cmbFuncionario.SelectedItem;
+                reg.Userid2 = selectedItem._value;
+
+                if (reg.Userid2 < 999)
+                    reg.Userid2 = Sistema_Class.Retorna_User_LoginId("F" + Convert.ToInt32(reg.Userid2).ToString("000"));
+                else
+                    reg.Userid2 = Sistema_Class.Retorna_User_LoginId(gtiCore.Retorna_Last_User());
+
                 ex = clsProcesso.Alterar_Tramite(reg);
                 if (ex != null) {
                     ErrorBox eBox = new ErrorBox("Erro!", ex.Message, ex);
                     eBox.ShowDialog();
                 }
-
             }
+
             CarregaTramite();
             LockForm(true);
             SetButtonState();
@@ -591,6 +613,8 @@ Receber:;
         }
 
         private void BtEnviar_Click(object sender, EventArgs e) {
+            
+            
             if (lvMain.SelectedItems.Count == 0) {
                 MessageBox.Show("Selecione o trâmite que deseja enviar.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -603,6 +627,7 @@ Receber:;
                 int CodCC = Convert.ToInt16(lvMain.SelectedItems[0].SubItems[2].Text);
                 Processo_bll processo_Class = new Processo_bll(_connection);
                 Sistema_bll Sistema_Class = new Sistema_bll(_connection);
+                int nUserId = Sistema_Class.Retorna_User_LoginId( Properties.Settings.Default.LastUser);
                 List<UsuariocentroCusto> Lista = processo_Class.ListaCentrocustoUsuario( Sistema_Class.Retorna_User_LoginId( gtiCore.Retorna_Last_User()));
                 foreach (UsuariocentroCusto item in Lista) {
                     if (item.Codigo == CodCC) {
@@ -611,13 +636,8 @@ Receber:;
                     }
                 }
 
-                if (!bFind) {
+                if (!bFind && nUserId!=433) {
                     MessageBox.Show("Você não pode trâmitar deste local.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                if (!String.IsNullOrEmpty(lvMain.SelectedItems[0].SubItems[9].Text)) {
-                    MessageBox.Show("Já houve envio deste local.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -632,12 +652,12 @@ Receber:;
                 if (lvMain.Items.Count - 1 == lvMain.SelectedItems[0].Index)
                     goto Enviar;
 
-                if (!String.IsNullOrEmpty(lvMain.Items[lvMain.SelectedItems[0].Index - 1].SubItems[4].Text))
-                    goto Enviar;
+                if (lvMain.SelectedItems[0].Index > 0 && String.IsNullOrEmpty(lvMain.Items[lvMain.SelectedItems[0].Index - 1].SubItems[9].Text)) {
+                    MessageBox.Show("O local anterior ainda não foi tramitado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
 
-            MessageBox.Show("O local anterior ainda não foi tramitado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return;
 Enviar:;
 
             GetButtonState();
@@ -645,13 +665,13 @@ Enviar:;
             lvMain.Enabled = false;
             pnlEnvRec.Visible = true;
             pnlEnvRec.BringToFront();
-            cmbFuncionario.Enabled = false;
             lblEnvRec.Text = "Envio de Processo";
             if (lvMain.SelectedItems[0].SubItems[7].Text != "")
                 cmbDespacho2.Text = lvMain.SelectedItems[0].SubItems[7].Text;
             else
                 cmbDespacho2.SelectedIndex = -1;
 
+            toolTip1.SetToolTip(btOKEnvRec, "Enviar processo");
             Sistema_bll sistema_Class = new Sistema_bll(_connection);
             lblLocal.Text = lvMain.SelectedItems[0].SubItems[3].Text;
             lblData.Text = gtiCore.Retorna_Data_Base_Sistema().ToString("dd/MM/yyyy");

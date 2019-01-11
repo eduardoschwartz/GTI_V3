@@ -475,5 +475,16 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        /// <summary>
+        /// Alterar os dados de um processo.
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Alterar_Processo(Processogti reg) {
+            Processo_Data obj = new Processo_Data(_connection);
+            Exception ex = obj.Alterar_Processo(reg);
+            return ex;
+        }
+
     }
 }

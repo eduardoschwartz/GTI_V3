@@ -700,9 +700,8 @@ namespace GTI_Dal.Classes {
                     var reg4 = (from t in db.Tramitacao
                                 join d in db.Despacho on t.Despacho equals d.Codigo into td from d in td.DefaultIfEmpty()
                                 join u in db.Usuario on t.Userid equals u.Id into tu from u in tu.DefaultIfEmpty()
-                                join u2 in db.Usuario on t.Userid equals u2.Id into tu2 from u2 in tu2.DefaultIfEmpty()
                                 where t.Ano == Ano && t.Numero == Numero && t.Seq == Seq
-                                select new { t.Seq, t.Ccusto, t.Datahora, t.Dataenvio, d.Descricao, t.Userid,t.Userid2, Usuario1=u.Nomelogin, t.Obs, Usuario2= u2.Nomelogin });
+                                select new { t.Seq, t.Ccusto, t.Datahora, t.Dataenvio, d.Descricao, t.Userid,t.Userid2, Usuario1=u.Nomelogin, t.Obs });
 
                     foreach (var query in reg4) {
                         Lista[i].DataEntrada = query.Datahora.ToString() == "" ? "" : DateTime.Parse(query.Datahora.ToString()).ToString("dd/MM/yyyy");
@@ -713,7 +712,12 @@ namespace GTI_Dal.Classes {
                         Lista[i].DespachoNome = String.IsNullOrEmpty(query.Descricao) ? "" : query.Descricao;
                         Lista[i].DataEnvio = query.Dataenvio == null ? "" : DateTime.Parse(query.Dataenvio.ToString()).ToString("dd/MM/yyyy");
                         Lista[1].Userid2 = query.Userid2;
-                        Lista[i].Usuario2 = String.IsNullOrEmpty(query.Usuario2) ? "" : query.Usuario2;
+
+                        if (query.Userid2 != null) {
+                            string NomeLogin = clsSistema.Retorna_User_LoginName((int)query.Userid2);
+                            Lista[i].Usuario2 = clsSistema.Retorna_User_FullName(NomeLogin);
+                        } else
+                            Lista[i].Usuario2 = "";
                         Lista[i].Obs = String.IsNullOrEmpty(query.Obs) ? "" : query.Obs;
                     }
                 }
@@ -781,7 +785,7 @@ namespace GTI_Dal.Classes {
 
         public List<UsuarioFuncStruct> ListaFuncionario(int LoginId) {
             using (GTI_Context db = new GTI_Context(_connection)) {
-                var reg = (from f in db.Usuariofunc join u in db.Usuario on f.Userid equals u.Id
+                var reg = (from f in db.Usuariofunc join u in db.Usuario on f.Funclogin equals u.Nomelogin
                            where f.Userid == LoginId orderby u.Nomecompleto select new { f.Funclogin, u.Nomecompleto });
                 List<UsuarioFuncStruct> Lista = new List<UsuarioFuncStruct>();
 
@@ -878,6 +882,8 @@ Inicio:;
                     Sql = Sql.Where(c => c.DataArquivado != null);
                 if(Filter.Inscricao!=null && Filter.Inscricao>0)
                     Sql = Sql.Where(c => c.Inscricao == Filter.Inscricao);
+                if (Filter.DataEntrada != null )
+                    Sql = Sql.Where(c => c.DataEntrada == Filter.DataEntrada);
 
                 return Sql.ToList();
             }
@@ -1055,6 +1061,46 @@ Inicio:;
                 return null;
             }
         }
+
+        public Exception Alterar_Processo(Processogti reg) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                short _ano = reg.Ano;
+                int _numero = reg.Numero;
+                Processogti p = db.Processogti.First(i => i.Ano == _ano && i.Numero==_numero);
+                p.Centrocusto = reg.Centrocusto;
+                p.Codassunto = reg.Codassunto;
+                p.Codcidadao = reg.Codcidadao;
+                p.Complemento = reg.Complemento;
+                p.Dataarquiva = reg.Dataarquiva;
+                p.Datacancel = reg.Datacancel;
+                p.Dataentrada = reg.Dataentrada;
+                p.Datareativa = reg.Datareativa;
+                p.Datasuspenso = reg.Datasuspenso;
+                p.Etiqueta = reg.Etiqueta;
+                p.Fisico = reg.Fisico;
+                p.Hora = reg.Hora;
+                p.Insc = reg.Insc;
+                p.Interno = reg.Interno;
+                p.Motivocancel = reg.Motivocancel;
+                p.Numero = reg.Numero;
+                p.Obsa = reg.Obsa;
+                p.Obsc = reg.Obsc;
+                p.Observacao = reg.Observacao;
+                p.Obsr = reg.Obsr;
+                p.Obss = reg.Obss;
+                p.Origem = reg.Origem;
+                p.Tipoend = reg.Tipoend;
+                p.Userid = reg.Userid;
+
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
 
     }
 }

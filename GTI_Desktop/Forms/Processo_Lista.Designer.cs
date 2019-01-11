@@ -59,32 +59,20 @@
             this.FisicoList = new System.Windows.Forms.ComboBox();
             this.Label9 = new System.Windows.Forms.Label();
             this.InternoList = new System.Windows.Forms.ComboBox();
-            this.DataEntrada = new System.Windows.Forms.DateTimePicker();
             this.AnoInicial = new System.Windows.Forms.TextBox();
             this.AnoFinal = new System.Windows.Forms.TextBox();
             this.Requerente = new System.Windows.Forms.TextBox();
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
             this.ProprietarioAddButton = new System.Windows.Forms.ToolStripButton();
             this.ProprietarioDelButton = new System.Windows.Forms.ToolStripButton();
-            this.Setor = new System.Windows.Forms.TextBox();
-            this.SetorToolStrip = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.Assunto = new System.Windows.Forms.TextBox();
-            this.AssuntoToolStrip = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.NumeroProcesso = new System.Windows.Forms.TextBox();
-            this.RequerenteToolStrip = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.ProprietarioToolStrip = new System.Windows.Forms.ToolStrip();
+            this.DataEntrada = new System.Windows.Forms.MaskedTextBox();
+            this.SetorList = new System.Windows.Forms.ComboBox();
+            this.AssuntoList = new System.Windows.Forms.ComboBox();
             this.tBar.SuspendLayout();
-            this.SetorToolStrip.SuspendLayout();
-            this.AssuntoToolStrip.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.RequerenteToolStrip.SuspendLayout();
             this.ProprietarioToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -101,10 +89,10 @@
             this.Total,
             this.toolStripLabel2,
             this.ExcelButton});
-            this.tBar.Location = new System.Drawing.Point(0, 432);
+            this.tBar.Location = new System.Drawing.Point(0, 430);
             this.tBar.Name = "tBar";
             this.tBar.Padding = new System.Windows.Forms.Padding(6, 0, 1, 0);
-            this.tBar.Size = new System.Drawing.Size(643, 25);
+            this.tBar.Size = new System.Drawing.Size(797, 25);
             this.tBar.TabIndex = 80;
             this.tBar.Text = "toolStrip1";
             // 
@@ -197,9 +185,9 @@
             this.columnHeader10,
             this.columnHeader11});
             this.MainListView.FullRowSelect = true;
-            this.MainListView.Location = new System.Drawing.Point(0, 152);
+            this.MainListView.Location = new System.Drawing.Point(0, 144);
             this.MainListView.Name = "MainListView";
-            this.MainListView.Size = new System.Drawing.Size(643, 278);
+            this.MainListView.Size = new System.Drawing.Size(797, 283);
             this.MainListView.TabIndex = 78;
             this.MainListView.UseCompatibleStateImageBehavior = false;
             this.MainListView.View = System.Windows.Forms.View.Details;
@@ -297,7 +285,7 @@
             this.Complemento.Location = new System.Drawing.Point(96, 109);
             this.Complemento.MaxLength = 40;
             this.Complemento.Name = "Complemento";
-            this.Complemento.Size = new System.Drawing.Size(375, 20);
+            this.Complemento.Size = new System.Drawing.Size(479, 20);
             this.Complemento.TabIndex = 6;
             // 
             // Label6
@@ -312,7 +300,7 @@
             // Label7
             // 
             this.Label7.AutoSize = true;
-            this.Label7.Location = new System.Drawing.Point(307, 10);
+            this.Label7.Location = new System.Drawing.Point(292, 10);
             this.Label7.Name = "Label7";
             this.Label7.Size = new System.Drawing.Size(57, 13);
             this.Label7.TabIndex = 42;
@@ -321,7 +309,7 @@
             // Label13
             // 
             this.Label13.AutoSize = true;
-            this.Label13.Location = new System.Drawing.Point(445, 10);
+            this.Label13.Location = new System.Drawing.Point(402, 10);
             this.Label13.Name = "Label13";
             this.Label13.Size = new System.Drawing.Size(91, 13);
             this.Label13.TabIndex = 43;
@@ -332,7 +320,7 @@
             this.Label8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Label8.AutoSize = true;
-            this.Label8.Location = new System.Drawing.Point(487, 35);
+            this.Label8.Location = new System.Drawing.Point(211, 36);
             this.Label8.Name = "Label8";
             this.Label8.Size = new System.Drawing.Size(48, 13);
             this.Label8.TabIndex = 44;
@@ -346,7 +334,7 @@
             "(Todos)",
             "Sim",
             "Não"});
-            this.FisicoList.Location = new System.Drawing.Point(541, 31);
+            this.FisicoList.Location = new System.Drawing.Point(265, 32);
             this.FisicoList.Name = "FisicoList";
             this.FisicoList.Size = new System.Drawing.Size(84, 21);
             this.FisicoList.TabIndex = 4;
@@ -356,7 +344,7 @@
             this.Label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Label9.AutoSize = true;
-            this.Label9.Location = new System.Drawing.Point(487, 60);
+            this.Label9.Location = new System.Drawing.Point(377, 35);
             this.Label9.Name = "Label9";
             this.Label9.Size = new System.Drawing.Size(49, 13);
             this.Label9.TabIndex = 45;
@@ -370,50 +358,38 @@
             "(Todos)",
             "Sim",
             "Não"});
-            this.InternoList.Location = new System.Drawing.Point(541, 57);
+            this.InternoList.Location = new System.Drawing.Point(431, 32);
             this.InternoList.Name = "InternoList";
             this.InternoList.Size = new System.Drawing.Size(84, 21);
             this.InternoList.TabIndex = 5;
-            // 
-            // DataEntrada
-            // 
-            this.DataEntrada.Checked = false;
-            this.DataEntrada.CustomFormat = "dd/MM/yyyy";
-            this.DataEntrada.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DataEntrada.Location = new System.Drawing.Point(541, 7);
-            this.DataEntrada.MaxDate = new System.DateTime(2019, 12, 31, 0, 0, 0, 0);
-            this.DataEntrada.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
-            this.DataEntrada.Name = "DataEntrada";
-            this.DataEntrada.Size = new System.Drawing.Size(84, 20);
-            this.DataEntrada.TabIndex = 3;
             // 
             // AnoInicial
             // 
             this.AnoInicial.Location = new System.Drawing.Point(242, 7);
             this.AnoInicial.MaxLength = 4;
             this.AnoInicial.Name = "AnoInicial";
-            this.AnoInicial.Size = new System.Drawing.Size(59, 20);
+            this.AnoInicial.Size = new System.Drawing.Size(45, 20);
             this.AnoInicial.TabIndex = 1;
             this.AnoInicial.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AnoInicial_KeyPress);
             // 
             // AnoFinal
             // 
-            this.AnoFinal.Location = new System.Drawing.Point(368, 7);
+            this.AnoFinal.Location = new System.Drawing.Point(350, 7);
             this.AnoFinal.MaxLength = 4;
             this.AnoFinal.Name = "AnoFinal";
-            this.AnoFinal.Size = new System.Drawing.Size(59, 20);
+            this.AnoFinal.Size = new System.Drawing.Size(45, 20);
             this.AnoFinal.TabIndex = 2;
             this.AnoFinal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AnoFinal_KeyPress);
             // 
             // Requerente
             // 
             this.Requerente.Location = new System.Drawing.Point(96, 33);
-            this.Requerente.MaxLength = 0;
+            this.Requerente.MaxLength = 6;
             this.Requerente.Name = "Requerente";
-            this.Requerente.ReadOnly = true;
-            this.Requerente.Size = new System.Drawing.Size(323, 20);
+            this.Requerente.Size = new System.Drawing.Size(75, 20);
             this.Requerente.TabIndex = 208;
             this.Requerente.TabStop = false;
+            this.Requerente.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Requerente_KeyPress);
             // 
             // miniToolStrip
             // 
@@ -450,109 +426,16 @@
             this.ProprietarioDelButton.Text = "toolStripButton3";
             this.ProprietarioDelButton.ToolTipText = "Remover o proprietário";
             // 
-            // Setor
-            // 
-            this.Setor.Location = new System.Drawing.Point(96, 57);
-            this.Setor.MaxLength = 0;
-            this.Setor.Name = "Setor";
-            this.Setor.ReadOnly = true;
-            this.Setor.Size = new System.Drawing.Size(323, 20);
-            this.Setor.TabIndex = 210;
-            this.Setor.TabStop = false;
-            // 
-            // SetorToolStrip
-            // 
-            this.SetorToolStrip.BackColor = System.Drawing.Color.Transparent;
-            this.SetorToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.SetorToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.SetorToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2});
-            this.SetorToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.SetorToolStrip.Location = new System.Drawing.Point(422, 55);
-            this.SetorToolStrip.Name = "SetorToolStrip";
-            this.SetorToolStrip.Size = new System.Drawing.Size(49, 25);
-            this.SetorToolStrip.TabIndex = 211;
-            this.SetorToolStrip.Text = "toolStrip2";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
-            this.toolStripButton1.ToolTipText = "Adicionar um proprietário";
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton2.Text = "toolStripButton3";
-            this.toolStripButton2.ToolTipText = "Remover o proprietário";
-            // 
-            // Assunto
-            // 
-            this.Assunto.Location = new System.Drawing.Point(96, 83);
-            this.Assunto.MaxLength = 0;
-            this.Assunto.Name = "Assunto";
-            this.Assunto.ReadOnly = true;
-            this.Assunto.Size = new System.Drawing.Size(323, 20);
-            this.Assunto.TabIndex = 212;
-            this.Assunto.TabStop = false;
-            // 
-            // AssuntoToolStrip
-            // 
-            this.AssuntoToolStrip.BackColor = System.Drawing.Color.Transparent;
-            this.AssuntoToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.AssuntoToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.AssuntoToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton3,
-            this.toolStripButton4});
-            this.AssuntoToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.AssuntoToolStrip.Location = new System.Drawing.Point(422, 81);
-            this.AssuntoToolStrip.Name = "AssuntoToolStrip";
-            this.AssuntoToolStrip.Size = new System.Drawing.Size(49, 25);
-            this.AssuntoToolStrip.TabIndex = 213;
-            this.AssuntoToolStrip.Text = "toolStrip2";
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton3.Text = "toolStripButton1";
-            this.toolStripButton3.ToolTipText = "Adicionar um proprietário";
-            // 
-            // toolStripButton4
-            // 
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton4.Text = "toolStripButton3";
-            this.toolStripButton4.ToolTipText = "Remover o proprietário";
-            // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.AssuntoList);
+            this.panel1.Controls.Add(this.SetorList);
+            this.panel1.Controls.Add(this.DataEntrada);
             this.panel1.Controls.Add(this.NumeroProcesso);
-            this.panel1.Controls.Add(this.RequerenteToolStrip);
-            this.panel1.Controls.Add(this.AssuntoToolStrip);
-            this.panel1.Controls.Add(this.Assunto);
-            this.panel1.Controls.Add(this.SetorToolStrip);
-            this.panel1.Controls.Add(this.Setor);
             this.panel1.Controls.Add(this.Requerente);
             this.panel1.Controls.Add(this.AnoFinal);
             this.panel1.Controls.Add(this.AnoInicial);
-            this.panel1.Controls.Add(this.DataEntrada);
             this.panel1.Controls.Add(this.InternoList);
             this.panel1.Controls.Add(this.Label9);
             this.panel1.Controls.Add(this.FisicoList);
@@ -569,7 +452,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(643, 147);
+            this.panel1.Size = new System.Drawing.Size(797, 140);
             this.panel1.TabIndex = 77;
             // 
             // NumeroProcesso
@@ -580,41 +463,6 @@
             this.NumeroProcesso.Size = new System.Drawing.Size(75, 20);
             this.NumeroProcesso.TabIndex = 0;
             this.NumeroProcesso.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumeroProcesso_KeyPress);
-            // 
-            // RequerenteToolStrip
-            // 
-            this.RequerenteToolStrip.BackColor = System.Drawing.Color.Transparent;
-            this.RequerenteToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.RequerenteToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.RequerenteToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton5,
-            this.toolStripButton6});
-            this.RequerenteToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.RequerenteToolStrip.Location = new System.Drawing.Point(422, 31);
-            this.RequerenteToolStrip.Name = "RequerenteToolStrip";
-            this.RequerenteToolStrip.Size = new System.Drawing.Size(49, 25);
-            this.RequerenteToolStrip.TabIndex = 214;
-            this.RequerenteToolStrip.Text = "toolStrip3";
-            // 
-            // toolStripButton5
-            // 
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton5.Text = "toolStripButton1";
-            this.toolStripButton5.ToolTipText = "Adicionar um proprietário";
-            // 
-            // toolStripButton6
-            // 
-            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton6.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton6.Text = "toolStripButton3";
-            this.toolStripButton6.ToolTipText = "Remover o proprietário";
             // 
             // ProprietarioToolStrip
             // 
@@ -631,11 +479,38 @@
             this.ProprietarioToolStrip.TabIndex = 209;
             this.ProprietarioToolStrip.Text = "toolStrip2";
             // 
+            // DataEntrada
+            // 
+            this.DataEntrada.Location = new System.Drawing.Point(499, 7);
+            this.DataEntrada.Mask = "00/00/0000";
+            this.DataEntrada.Name = "DataEntrada";
+            this.DataEntrada.Size = new System.Drawing.Size(76, 20);
+            this.DataEntrada.TabIndex = 3;
+            this.DataEntrada.ValidatingType = typeof(System.DateTime);
+            // 
+            // SetorList
+            // 
+            this.SetorList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SetorList.FormattingEnabled = true;
+            this.SetorList.Location = new System.Drawing.Point(96, 58);
+            this.SetorList.Name = "SetorList";
+            this.SetorList.Size = new System.Drawing.Size(479, 21);
+            this.SetorList.TabIndex = 209;
+            // 
+            // AssuntoList
+            // 
+            this.AssuntoList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.AssuntoList.FormattingEnabled = true;
+            this.AssuntoList.Location = new System.Drawing.Point(96, 84);
+            this.AssuntoList.Name = "AssuntoList";
+            this.AssuntoList.Size = new System.Drawing.Size(479, 21);
+            this.AssuntoList.TabIndex = 210;
+            // 
             // Processo_Lista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(643, 457);
+            this.ClientSize = new System.Drawing.Size(797, 455);
             this.Controls.Add(this.MainListView);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tBar);
@@ -647,14 +522,8 @@
             this.Text = "Lista dos processos cadastrados";
             this.tBar.ResumeLayout(false);
             this.tBar.PerformLayout();
-            this.SetorToolStrip.ResumeLayout(false);
-            this.SetorToolStrip.PerformLayout();
-            this.AssuntoToolStrip.ResumeLayout(false);
-            this.AssuntoToolStrip.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.RequerenteToolStrip.ResumeLayout(false);
-            this.RequerenteToolStrip.PerformLayout();
             this.ProprietarioToolStrip.ResumeLayout(false);
             this.ProprietarioToolStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -689,26 +558,14 @@
         internal System.Windows.Forms.ComboBox FisicoList;
         internal System.Windows.Forms.Label Label9;
         internal System.Windows.Forms.ComboBox InternoList;
-        internal System.Windows.Forms.DateTimePicker DataEntrada;
         internal System.Windows.Forms.TextBox AnoInicial;
         internal System.Windows.Forms.TextBox AnoFinal;
         private System.Windows.Forms.TextBox Requerente;
         private System.Windows.Forms.ToolStrip miniToolStrip;
         private System.Windows.Forms.ToolStripButton ProprietarioAddButton;
         private System.Windows.Forms.ToolStripButton ProprietarioDelButton;
-        private System.Windows.Forms.TextBox Setor;
-        private System.Windows.Forms.ToolStrip SetorToolStrip;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.TextBox Assunto;
-        private System.Windows.Forms.ToolStrip AssuntoToolStrip;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStrip ProprietarioToolStrip;
-        private System.Windows.Forms.ToolStrip RequerenteToolStrip;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.ToolStripButton toolStripButton6;
         public System.Windows.Forms.TextBox NumeroProcesso;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
@@ -717,5 +574,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader11;
+        private System.Windows.Forms.MaskedTextBox DataEntrada;
+        private System.Windows.Forms.ComboBox AssuntoList;
+        private System.Windows.Forms.ComboBox SetorList;
     }
 }

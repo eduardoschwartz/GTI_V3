@@ -1111,9 +1111,9 @@ namespace GTI_Desktop.Forms {
             }
 
             Exception ex;
+            Processo_bll processo_Class = new Processo_bll(_connection);
             if (bAddNew) {
                 Reg.Hora = DateTime.Now.Hour.ToString("00") + ":" + DateTime.Now.Minute.ToString("00");
-                Processo_bll processo_Class = new Processo_bll(_connection);
                 Reg.Ano = (short)DateTime.Now.Year;
                 Reg.Numero = processo_Class.Retorna_Numero_Disponivel(DateTime.Now.Year);
                 _ano_processo = Reg.Ano;
@@ -1129,8 +1129,15 @@ namespace GTI_Desktop.Forms {
                     bExec = true;
                 }
                 Reg.Tipoend = ComOption.Checked ? "C" : "R";
+            } else {
+                ex = processo_Class.Alterar_Processo(Reg);
+                if (ex != null) {
+                    ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                    eBox.ShowDialog();
+                } else {
+                    ControlBehaviour(true);
+                }
             }
-
             return null;
         }
 

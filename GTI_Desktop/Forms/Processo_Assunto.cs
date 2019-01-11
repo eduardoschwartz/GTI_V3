@@ -361,9 +361,9 @@ namespace GTI_Desktop.Forms {
             int x = 1;
             foreach (GtiTypes.CustomListBoxItem item in lstCC2.Items) {
                 Assuntocc reg = new Assuntocc {
-                    Codassunto = CodAssunto,
-                    Codcc = item._value,
-                    Seq = x
+                    Codassunto = Convert.ToInt16(CodAssunto),
+                    Codcc = Convert.ToInt16(item._value),
+                    Seq = Convert.ToInt16(x)
                 };
                 Lista.Add(reg);
                 x++;
