@@ -27,11 +27,17 @@ namespace GTI_Web.Pages {
                 if (!ExisteImovel)
                     lblMsg.Text = "Imóvel não cadastrado.";
                 else {
-                    if (txtimgcode.Text != Session["randomStr"].ToString())
-                        lblMsg.Text = "Código da imagem inválido";
-                    else
-                        PrintReport(Codigo);
-                }
+                    ImovelStruct _dadosImovel = imovel_Class.Dados_Imovel(Codigo);
+                    if (_dadosImovel.ResideImovel == false)
+                        lblMsg.Text = "Isenção válida apenas proprietários residentes no imóvel.";
+                    else {
+
+
+                        if (txtimgcode.Text != Session["randomStr"].ToString())
+                            lblMsg.Text = "Código da imagem inválido";
+                        else
+                            PrintReport(Codigo);
+                    }                }
             }
         }
 
@@ -59,11 +65,15 @@ namespace GTI_Web.Pages {
                         else {
                             sTipo = sCod.Substring(sCod.Length - 2, 2);
                             if (sTipo == "CI") {
-                                Certidao_isencao dados = Valida_Dados(nNumero, nAno, nCodigo);
-                                if (dados != null)
-                                    Exibe_Certidao_Isencao(dados);
-                                else
-                                    lblMsg.Text = "Certidão não cadastrada.";
+                                Imovel_bll imovel_Class = new Imovel_bll("GTIconnection");
+                                ImovelStruct _dadosImovel = imovel_Class.Dados_Imovel(Convert.ToInt32(sCod));
+                                
+                                    Certidao_isencao dados = Valida_Dados(nNumero, nAno, nCodigo);
+                                    if (dados != null)
+                                        Exibe_Certidao_Isencao(dados);
+                                    else
+                                        lblMsg.Text = "Certidão não cadastrada.";
+                               
                             } else {
                                 lblMsg.Text = "Código de validação inválido.";
                             }

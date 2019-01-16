@@ -868,7 +868,8 @@ Inicio:;
                            select new ProcessoStruct {
                                Ano = p.Ano, Numero = p.Numero, NomeCidadao = c.Nomecidadao, Assunto = a.Nome, DataEntrada = p.Dataentrada, DataCancelado = p.Datacancel,
                                DataReativacao = p.Datareativa, DataArquivado = p.Dataarquiva, DataSuspensao = p.Datasuspenso, Interno = p.Interno, Fisico = p.Fisico, LogradouroNome = l.Endereco,
-                               LogradouroNumero = e.Numero,Complemento=p.Complemento,CentroCustoNome= u.Descricao,Inscricao=p.Insc 
+                               LogradouroNumero = e.Numero,Complemento=p.Complemento,CentroCustoNome= u.Descricao,Inscricao=p.Insc ,CodigoCidadao=p.Codcidadao,CodigoAssunto=p.Codassunto,
+                               CentroCusto =p.Centrocusto
                            }); 
                 if (!string.IsNullOrWhiteSpace(Filter.SNumProcesso))
                     Sql = Sql.Where(c => c.Ano == Filter.Ano && c.Numero==Filter.Numero);
@@ -880,10 +881,20 @@ Inicio:;
                     Sql = Sql.Where(c => c.DataArquivado == null);
                 if (Filter.Arquivado == true)
                     Sql = Sql.Where(c => c.DataArquivado != null);
-                if(Filter.Inscricao!=null && Filter.Inscricao>0)
-                    Sql = Sql.Where(c => c.Inscricao == Filter.Inscricao);
+                if(Filter.Requerente!=null && Filter.Requerente>0)
+                    Sql = Sql.Where(c => c.CodigoCidadao == Filter.Requerente);
                 if (Filter.DataEntrada != null )
                     Sql = Sql.Where(c => c.DataEntrada == Filter.DataEntrada);
+                if (Filter.Setor > 0)
+                    Sql = Sql.Where(c => c.CentroCusto == Filter.Setor);
+                if (Filter.AssuntoCodigo > 0)
+                    Sql = Sql.Where(c => c.CodigoAssunto <= Filter.AssuntoCodigo);
+                if (Filter.Complemento != "")
+                    Sql = Sql.Where(c => c.Complemento.Contains(Filter.Complemento));
+                if (Filter.Fisico !=null)
+                    Sql = Sql.Where(c => c.Fisico == Filter.Fisico);
+                if (Filter.Interno != null)
+                    Sql = Sql.Where(c => c.Interno == Filter.Interno);
 
                 return Sql.ToList();
             }

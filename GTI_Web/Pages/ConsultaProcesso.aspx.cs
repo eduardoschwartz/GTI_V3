@@ -25,9 +25,9 @@ namespace GTI_Web.Pages {
             if (_numero == 0 || _ano == 0)
                 lblMsg.Text = "Nº de processo inválido.";
             else {
-                if(!Numero.Text.Contains("-"))
-                    lblMsg.Text = "Nº de processo inválido.";
-                else {
+//                if(!Numero.Text.Contains("-"))
+ //                   lblMsg.Text = "Nº de processo inválido.";
+            //    else {
                     string NumeroProcesso = Numero.Text + "/" + Ano.Text;
                     Processo_bll processo_Class = new Processo_bll("GTIconnection");
                     _numero = processo_Class.ExtractNumeroProcessoNoDV(NumeroProcesso);
@@ -46,7 +46,7 @@ namespace GTI_Web.Pages {
                         else
                             lblMsg.Text = "Processo não cadastrado.";
                     }
-                }
+   //             }
             }
         }
     }

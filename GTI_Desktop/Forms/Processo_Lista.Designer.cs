@@ -30,6 +30,7 @@
             this.tBar = new System.Windows.Forms.ToolStrip();
             this.FindButton = new System.Windows.Forms.ToolStripButton();
             this.SelectButton = new System.Windows.Forms.ToolStripButton();
+            this.ClearButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.Total = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
@@ -66,11 +67,11 @@
             this.ProprietarioAddButton = new System.Windows.Forms.ToolStripButton();
             this.ProprietarioDelButton = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.AssuntoList = new System.Windows.Forms.ComboBox();
+            this.SetorList = new System.Windows.Forms.ComboBox();
+            this.DataEntrada = new System.Windows.Forms.MaskedTextBox();
             this.NumeroProcesso = new System.Windows.Forms.TextBox();
             this.ProprietarioToolStrip = new System.Windows.Forms.ToolStrip();
-            this.DataEntrada = new System.Windows.Forms.MaskedTextBox();
-            this.SetorList = new System.Windows.Forms.ComboBox();
-            this.AssuntoList = new System.Windows.Forms.ComboBox();
             this.tBar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.ProprietarioToolStrip.SuspendLayout();
@@ -85,14 +86,15 @@
             this.tBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FindButton,
             this.SelectButton,
+            this.ClearButton,
             this.toolStripSeparator1,
             this.Total,
             this.toolStripLabel2,
             this.ExcelButton});
-            this.tBar.Location = new System.Drawing.Point(0, 430);
+            this.tBar.Location = new System.Drawing.Point(0, 522);
             this.tBar.Name = "tBar";
             this.tBar.Padding = new System.Windows.Forms.Padding(6, 0, 1, 0);
-            this.tBar.Size = new System.Drawing.Size(797, 25);
+            this.tBar.Size = new System.Drawing.Size(789, 25);
             this.tBar.TabIndex = 80;
             this.tBar.Text = "toolStrip1";
             // 
@@ -117,6 +119,17 @@
             this.SelectButton.Text = "toolStripButton2";
             this.SelectButton.ToolTipText = "Retornar";
             this.SelectButton.Click += new System.EventHandler(this.SelectButton_Click);
+            // 
+            // ClearButton
+            // 
+            this.ClearButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ClearButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.ClearButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ClearButton.Name = "ClearButton";
+            this.ClearButton.Size = new System.Drawing.Size(23, 22);
+            this.ClearButton.Text = "toolStripButton1";
+            this.ClearButton.ToolTipText = "Limpar a tela de consulta";
+            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
             // toolStripSeparator1
             // 
@@ -147,6 +160,7 @@
             this.ExcelButton.Size = new System.Drawing.Size(23, 22);
             this.ExcelButton.Text = "toolStripButton1";
             this.ExcelButton.ToolTipText = "Exportar resultado para o Excel";
+            this.ExcelButton.Click += new System.EventHandler(this.ExcelButton_Click);
             // 
             // columnHeader1
             // 
@@ -187,7 +201,7 @@
             this.MainListView.FullRowSelect = true;
             this.MainListView.Location = new System.Drawing.Point(0, 144);
             this.MainListView.Name = "MainListView";
-            this.MainListView.Size = new System.Drawing.Size(797, 283);
+            this.MainListView.Size = new System.Drawing.Size(789, 375);
             this.MainListView.TabIndex = 78;
             this.MainListView.UseCompatibleStateImageBehavior = false;
             this.MainListView.View = System.Windows.Forms.View.Details;
@@ -452,8 +466,35 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(797, 140);
+            this.panel1.Size = new System.Drawing.Size(789, 140);
             this.panel1.TabIndex = 77;
+            // 
+            // AssuntoList
+            // 
+            this.AssuntoList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.AssuntoList.FormattingEnabled = true;
+            this.AssuntoList.Location = new System.Drawing.Point(96, 84);
+            this.AssuntoList.Name = "AssuntoList";
+            this.AssuntoList.Size = new System.Drawing.Size(479, 21);
+            this.AssuntoList.TabIndex = 210;
+            // 
+            // SetorList
+            // 
+            this.SetorList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SetorList.FormattingEnabled = true;
+            this.SetorList.Location = new System.Drawing.Point(96, 58);
+            this.SetorList.Name = "SetorList";
+            this.SetorList.Size = new System.Drawing.Size(479, 21);
+            this.SetorList.TabIndex = 209;
+            // 
+            // DataEntrada
+            // 
+            this.DataEntrada.Location = new System.Drawing.Point(499, 7);
+            this.DataEntrada.Mask = "00/00/0000";
+            this.DataEntrada.Name = "DataEntrada";
+            this.DataEntrada.Size = new System.Drawing.Size(76, 20);
+            this.DataEntrada.TabIndex = 3;
+            this.DataEntrada.ValidatingType = typeof(System.DateTime);
             // 
             // NumeroProcesso
             // 
@@ -479,47 +520,22 @@
             this.ProprietarioToolStrip.TabIndex = 209;
             this.ProprietarioToolStrip.Text = "toolStrip2";
             // 
-            // DataEntrada
-            // 
-            this.DataEntrada.Location = new System.Drawing.Point(499, 7);
-            this.DataEntrada.Mask = "00/00/0000";
-            this.DataEntrada.Name = "DataEntrada";
-            this.DataEntrada.Size = new System.Drawing.Size(76, 20);
-            this.DataEntrada.TabIndex = 3;
-            this.DataEntrada.ValidatingType = typeof(System.DateTime);
-            // 
-            // SetorList
-            // 
-            this.SetorList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.SetorList.FormattingEnabled = true;
-            this.SetorList.Location = new System.Drawing.Point(96, 58);
-            this.SetorList.Name = "SetorList";
-            this.SetorList.Size = new System.Drawing.Size(479, 21);
-            this.SetorList.TabIndex = 209;
-            // 
-            // AssuntoList
-            // 
-            this.AssuntoList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.AssuntoList.FormattingEnabled = true;
-            this.AssuntoList.Location = new System.Drawing.Point(96, 84);
-            this.AssuntoList.Name = "AssuntoList";
-            this.AssuntoList.Size = new System.Drawing.Size(479, 21);
-            this.AssuntoList.TabIndex = 210;
-            // 
             // Processo_Lista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(797, 455);
+            this.ClientSize = new System.Drawing.Size(789, 547);
             this.Controls.Add(this.MainListView);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tBar);
             this.DoubleBuffered = true;
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(616, 425);
             this.Name = "Processo_Lista";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lista dos processos cadastrados";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Processo_Lista_FormClosing);
             this.tBar.ResumeLayout(false);
             this.tBar.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -577,5 +593,6 @@
         private System.Windows.Forms.MaskedTextBox DataEntrada;
         private System.Windows.Forms.ComboBox AssuntoList;
         private System.Windows.Forms.ComboBox SetorList;
+        private System.Windows.Forms.ToolStripButton ClearButton;
     }
 }

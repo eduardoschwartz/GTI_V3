@@ -21,7 +21,7 @@
                 } else {
                     if (mask.charAt(i) == '!') { return true; }
                     for (c = i; c < mask.length; c++) {
-                        if (mask.charAt(c) != '§' && mask.charAt(c) != '!')
+                        if (mask.charAt(c) != '§' && mask.charAt(c) != '!' )
                             campo.value = campo.value + mask.charAt(c);
                         else if (mask.charAt(c) == '!') {
                             return true;
@@ -50,7 +50,7 @@
                             </td>
                         <td style="width: 107px">
                             
-                            <asp:TextBox ID="Numero" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="7" Width="70px"  onKeyPress="return formata(this, '§§§§§-§', event)"></asp:TextBox>
+                            <asp:TextBox ID="Numero" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="7" Width="70px"  onKeyPress="return formata(this, '§§§§§§', event)"></asp:TextBox>
                             &nbsp;
 
                         <td class="panel" style="width: 153px; text-align: right;"><asp:Label ID="Label1" runat="server" Text="Ano do processo.:"></asp:Label>

@@ -60,7 +60,7 @@
             this.MainListView.FullRowSelect = true;
             this.MainListView.Location = new System.Drawing.Point(0, 28);
             this.MainListView.Name = "MainListView";
-            this.MainListView.Size = new System.Drawing.Size(632, 315);
+            this.MainListView.Size = new System.Drawing.Size(648, 330);
             this.MainListView.TabIndex = 74;
             this.MainListView.UseCompatibleStateImageBehavior = false;
             this.MainListView.View = System.Windows.Forms.View.Details;
@@ -95,7 +95,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(632, 28);
+            this.panel1.Size = new System.Drawing.Size(648, 28);
             this.panel1.TabIndex = 73;
             // 
             // Busca
@@ -103,7 +103,7 @@
             this.Busca.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.Busca.Location = new System.Drawing.Point(74, 3);
             this.Busca.Name = "Busca";
-            this.Busca.Size = new System.Drawing.Size(377, 20);
+            this.Busca.Size = new System.Drawing.Size(393, 20);
             this.Busca.TabIndex = 72;
             this.Busca.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtBusca_KeyPress);
             // 
@@ -127,7 +127,7 @@
             this.mnuTitle,
             this.FindButton,
             this.ReturnButton});
-            this.tBar.Location = new System.Drawing.Point(558, 0);
+            this.tBar.Location = new System.Drawing.Point(574, 0);
             this.tBar.Name = "tBar";
             this.tBar.Padding = new System.Windows.Forms.Padding(6, 0, 1, 0);
             this.tBar.Size = new System.Drawing.Size(68, 25);
@@ -199,9 +199,9 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
             this.TotalCidadao});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 346);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 361);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(632, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(648, 25);
             this.toolStrip1.TabIndex = 75;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -222,12 +222,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(632, 371);
+            this.ClientSize = new System.Drawing.Size(648, 386);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.MainListView);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(586, 345);
             this.Name = "Cidadao_Lista";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta de Cidadão";

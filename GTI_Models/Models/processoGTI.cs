@@ -148,14 +148,14 @@ namespace GTI_Models.Models {
         public string SNumProcesso { get; set; }
         public int Ano { get; set; }
         public int Numero { get; set; }
-        public int AnoIni { get; set; }
-        public int AnoFim { get; set; }
-        public string Requerente { get; set; }
-        public int Setor { get; set; }
-        public int AssuntoCodigo { get; set; }
+        public int? AnoIni { get; set; }
+        public int? AnoFim { get; set; }
+        public int? Requerente { get; set; }
+        public int? Setor { get; set; }
+        public int? AssuntoCodigo { get; set; }
         public string AssuntoNome { get; set; }
-        public int Interno { get; set; }
-        public int Fisico { get; set; }
+        public bool? Interno { get; set; }
+        public bool? Fisico { get; set; }
         public DateTime? DataEntrada { get; set; }
         public int CodLogradouro { get; set; }
         public int NumEnd { get; set; }

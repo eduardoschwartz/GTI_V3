@@ -29,5 +29,11 @@
     <Setting Name="Form_Processo_Tramite_height" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">368</Value>
     </Setting>
+    <Setting Name="Form_Processo_Lista_width" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">810</Value>
+    </Setting>
+    <Setting Name="Form_Processo_Lista_height" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">490</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

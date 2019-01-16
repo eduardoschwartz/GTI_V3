@@ -140,7 +140,7 @@ namespace GTI_Desktop.Forms {
             string[] aReg = new string[8];
             string[] aTmp = new string[1];
 
-            aLista.Add(gtiCore.ConvertDatReg("DS", Busca.Text.Split()));
+            aLista.Add(gtiCore.ConvertDatReg("DS", new[] { Busca.Text }));
 
             for (int i = 0; i < MainListView.VirtualListSize; i++) {
                 aReg[0] = MainListView.Items[i].Text;
@@ -167,7 +167,7 @@ namespace GTI_Desktop.Forms {
                 if (aDatResult[0].Count > 0)
                     Busca.Text = aDatResult[0][0].ToString();
 
-                aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "CD");
+                aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "CD",false);
                 MainListView.VirtualListSize = aDatResult.Count;
             } catch  {
             }

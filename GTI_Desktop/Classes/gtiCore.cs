@@ -496,7 +496,7 @@ namespace GTI_Desktop.Classes {
             Encoding ANSI = Encoding.Default;
             using (StreamWriter sw = new StreamWriter(Path, false, ANSI)) {
                 foreach (string item in aArray) {
-                    sw.Write(item);
+                    sw.Write( item);
                 }
                 sw.Write("|XX");
                 sw.Flush();
