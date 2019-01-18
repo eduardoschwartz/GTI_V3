@@ -20,12 +20,12 @@ namespace GTI_Web.Pages {
         private void EmiteAlvara(int Codigo) {
 
             lblmsg.Text = "";
+            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
             Empresa_bll empresa_Class = new Empresa_bll("GTIconnection");
             EmpresaStruct reg = empresa_Class.Retorna_Empresa(Codigo);
-
-            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
-            int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Alvara);
+            
             int _ano_certidao = DateTime.Now.Year;
+            int _numero_certidao = empresa_Class.Retorna_Alvara_Disponivel(_ano_certidao);
 
             Alvara_funcionamento alvara = new Alvara_funcionamento();
             alvara.Ano = (short)_ano_certidao;

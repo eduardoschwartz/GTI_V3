@@ -423,15 +423,6 @@ namespace GTI_Desktop.Forms {
             ExtratoDataGrid.Enabled = !bLock;
             ConsultarCodigoButton.Enabled = !bLock;
             RefreshButton.Enabled = !bLock;
-            FiltroLink.Enabled = !bLock;
-            DetalheLink.Enabled = !bLock;
-            DAMLink.Enabled = !bLock;
-            DocumentoLink.Enabled = !bLock;
-            ParcelamentoLink.Enabled = !bLock;
-            OutrosLink.Enabled = !bLock;
-            ExtratoLink.Enabled = !bLock;
-            ExecFiscalLink.Enabled = !bLock;
-            ObservacaoLink.Enabled = !bLock;
         }
 
         private void ExtratoDataGrid_CellMouseEnter(object sender, DataGridViewCellEventArgs e) {
@@ -884,6 +875,65 @@ InicioObs:
                 DocumentoPanel.BringToFront();
             } else
                 MessageBox.Show("Selecione uma parcela.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void FiltroMenu_Click(object sender, EventArgs e) {
+            if (ExtratoDataGrid.Rows.Count == 0)
+                MessageBox.Show("Filtro indisponível!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else {
+                if (FiltroPanel.Visible)
+                    FiltroPanel.Visible = false;
+                else {
+                    FiltroPanel.Visible = true;
+                    FiltroPanel.BringToFront();
+                }
+            }
+        }
+
+        private void ObsGeralMenu_Click(object sender, EventArgs e) {
+            if (ExtratoDataGrid.SelectedRows.Count > 0) {
+                ExibeObservacao(true);
+            } else
+                MessageBox.Show("Selecione um contribuinte.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void Detalhemenu_Click(object sender, EventArgs e) {
+            Detalhe_Parcela();
+        }
+
+        private void ExtratoMenu_Click(object sender, EventArgs e) {
+
+        }
+
+        private void DocumentoMenu_Click(object sender, EventArgs e) {
+            if (ExtratoDataGrid.SelectedRows.Count > 0) {
+                Tributario_bll TributarioClass = new Tributario_bll(_connection);
+                DocumentoListView.Items.Clear();
+                Parceladocumento reg = new Parceladocumento();
+                DataGridViewRow linha = ExtratoDataGrid.SelectedRows[0];
+                reg.Codreduzido = Convert.ToInt32(CodigoText.Text);
+                reg.Anoexercicio = Convert.ToInt16(linha.Cells["ano"].Value);
+                reg.Codlancamento = Convert.ToInt16(linha.Cells["lancamento"].Value.ToString().Substring(0, 2));
+                reg.Seqlancamento = Convert.ToInt16(linha.Cells["sequencia"].Value);
+                reg.Numparcela = Convert.ToByte(linha.Cells["parcela"].Value);
+                reg.Codcomplemento = Convert.ToByte(linha.Cells["complemento"].Value);
+                List<Numdocumento> Lista = TributarioClass.Lista_Parcela_Documentos(reg);
+                foreach (Numdocumento item in Lista) {
+                    ListViewItem lvItem = new ListViewItem(item.numdocumento.ToString("00000000"));
+                    lvItem.SubItems.Add(Convert.ToDateTime(item.Datadocumento).ToString("dd/MM/yyyy"));
+                    lvItem.SubItems.Add(Convert.ToDecimal(item.Valorguia).ToString("#0.00"));
+                    DocumentoListView.Items.Add(lvItem);
+                }
+
+                LockScreen(true);
+                DocumentoPanel.Visible = true;
+                DocumentoPanel.BringToFront();
+            } else
+                MessageBox.Show("Selecione uma parcela.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void ParcelamentoMenu_Click(object sender, EventArgs e) {
+
         }
 
         private void PesquisarDocumentoButton_Click(object sender, EventArgs e) {

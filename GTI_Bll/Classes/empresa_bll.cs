@@ -754,7 +754,15 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
-
+        /// <summary>
+        /// Busca o próximo nº de alvara de funcionamento
+        /// </summary>
+        /// <param name="Ano"></param>
+        /// <returns></returns>
+        public int Retorna_Alvara_Disponivel(int Ano) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Retorna_Alvara_Disponivel(Ano);
+        }
 
     }
 }
