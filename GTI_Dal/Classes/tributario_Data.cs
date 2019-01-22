@@ -596,7 +596,7 @@ namespace GTI_Dal.Classes {
                 int maxSeq = Retorna_Ultima_Seq_Observacao_Codigo(reg.Codreduzido);
 
                 try {
-                    db.Database.ExecuteSqlCommand("INSERT INTO debitoobservacao(codreduzido,seq,usuario,dataobs,obs) " +
+                    db.Database.ExecuteSqlCommand("INSERT INTO debitoobservacao(codreduzido,seq,userid,dataobs,obs) " +
                         "VALUES(@codreduzido, @seq, @userid, @dataobs, @obs)",
                         new SqlParameter("@codreduzido", reg.Codreduzido),
                         new SqlParameter("@seq", maxSeq + 1),
@@ -1300,8 +1300,6 @@ namespace GTI_Dal.Classes {
             }
         }
 
-
-
         public Certidao_endereco Retorna_Certidao_Endereco(int Ano,int Numero,int Codigo) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Certidao_endereco where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
@@ -1912,6 +1910,37 @@ Proximo:;
             }
         }
 
+        public List<Documento_parcela_valor> Lista_Detalhe_Documento(int Numero) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var sql = from p in db.Parceladocumento join d in db.Debitoparcela on new { p1 = p.Codreduzido, p2 = p.Anoexercicio, p3 = p.Codlancamento, p4 = p.Seqlancamento, p5 = p.Numparcela, p6 = p.Codcomplemento }
+                          equals new { p1 = d.Codreduzido, p2 = d.Anoexercicio, p3 = d.Codlancamento, p4 = d.Seqlancamento, p5 = d.Numparcela, p6 = d.Codcomplemento } into dp from d in dp
+                          join t in db.Debitotributo on new { p1 = d.Codreduzido, p2 = d.Anoexercicio, p3 = d.Codlancamento, p4 = d.Seqlancamento, p5 = d.Numparcela, p6 = d.Codcomplemento }
+                          equals new { p1 = t.Codreduzido, p2 = t.Anoexercicio, p3 = t.Codlancamento, p4 = t.Seqlancamento, p5 = t.Numparcela, p6 = t.Codcomplemento } into pt from t in pt
+                          join l in db.Lancamento on d.Codlancamento equals l.Codlancamento into pl from l in pl
+                          where p.Numdocumento == Numero
+                          orderby d.Codreduzido, d.Anoexercicio, d.Codlancamento, d.Seqlancamento, d.Numparcela, d.Codcomplemento select new Documento_parcela_valor {Codigo=d.Codreduzido,Ano=d.Anoexercicio,
+                          Lancamento_codigo =d.Codlancamento,Sequencia=d.Seqlancamento,Parcela=d.Numparcela,Complemento=(byte)d.Codlancamento,Valor_parcela=(decimal)t.Valortributo,Data_vencimento=d.Datavencimento,Lancamento_nome=l.Descreduz };
+
+                List<Documento_parcela_valor> Lista = new List<Documento_parcela_valor>();
+                int _pos = -1;
+                foreach (var reg in sql) {
+                    bool _find = false;
+                    foreach (Documento_parcela_valor item in Lista) {
+                        if(item.Codigo==reg.Codigo && item.Ano==reg.Ano && item.Lancamento_codigo==reg.Lancamento_codigo && item.Sequencia==reg.Sequencia && item.Parcela==reg.Parcela && item.Complemento == reg.Complemento) {
+                            _find = true;
+                            break;
+                        }
+                    }
+                    if (!_find) {
+                        Lista.Add(reg);
+                        _pos++;
+                    } else
+                        Lista[_pos].Valor_parcela += reg.Valor_parcela;
+                    
+                }
+                return Lista;
+            }
+        }
 
     }//end class
 }

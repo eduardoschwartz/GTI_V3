@@ -33,6 +33,7 @@
         CadastroEmpresa=31,
         CadastroEmpresa_Alterar_Total=32,
         CadastroEmpresa_Alterar_Historico=33,
-        CadastroEmpresa_Exclusao
+        CadastroEmpresa_Exclusao=34,
+        Consulta_documento=35
     }
 }

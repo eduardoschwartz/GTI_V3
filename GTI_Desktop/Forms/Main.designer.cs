@@ -105,6 +105,7 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.emCascataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ladoALadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.topBar = new System.Windows.Forms.ToolStrip();
             this.btImobiliario = new System.Windows.Forms.ToolStripButton();
             this.btMobiliario = new System.Windows.Forms.ToolStripButton();
@@ -132,7 +133,6 @@
             this.optDv2 = new System.Windows.Forms.RadioButton();
             this.optDv1 = new System.Windows.Forms.RadioButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.testeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sBar.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.topBar.SuspendLayout();
@@ -655,7 +655,7 @@
             // ConfigMenu
             // 
             this.ConfigMenu.Name = "ConfigMenu";
-            this.ConfigMenu.Size = new System.Drawing.Size(180, 22);
+            this.ConfigMenu.Size = new System.Drawing.Size(152, 22);
             this.ConfigMenu.Text = "Configuração";
             this.ConfigMenu.Click += new System.EventHandler(this.MnuConfig_Click);
             // 
@@ -666,7 +666,7 @@
             this.CadastroEventoMenu,
             this.AtribuicaoAcessoMenu});
             this.mnuSecurity.Name = "mnuSecurity";
-            this.mnuSecurity.Size = new System.Drawing.Size(180, 22);
+            this.mnuSecurity.Size = new System.Drawing.Size(152, 22);
             this.mnuSecurity.Text = "Segurança";
             // 
             // CadastroUsuariosMenu
@@ -695,7 +695,7 @@
             this.administrativoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CalculoImpostoMenu});
             this.administrativoToolStripMenuItem.Name = "administrativoToolStripMenuItem";
-            this.administrativoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.administrativoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.administrativoToolStripMenuItem.Text = "Administrativo";
             // 
             // CalculoImpostoMenu
@@ -721,42 +721,48 @@
             // minimizarTodasToolStripMenuItem
             // 
             this.minimizarTodasToolStripMenuItem.Name = "minimizarTodasToolStripMenuItem";
-            this.minimizarTodasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.minimizarTodasToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.minimizarTodasToolStripMenuItem.Text = "Minimizar todas";
             this.minimizarTodasToolStripMenuItem.Click += new System.EventHandler(this.MinimizarTodasToolStripMenuItem_Click);
             // 
             // restaurarTodasToolStripMenuItem
             // 
             this.restaurarTodasToolStripMenuItem.Name = "restaurarTodasToolStripMenuItem";
-            this.restaurarTodasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.restaurarTodasToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.restaurarTodasToolStripMenuItem.Text = "Restaurar todas";
             this.restaurarTodasToolStripMenuItem.Click += new System.EventHandler(this.RestaurarTodasToolStripMenuItem_Click);
             // 
             // fecharTodasToolStripMenuItem
             // 
             this.fecharTodasToolStripMenuItem.Name = "fecharTodasToolStripMenuItem";
-            this.fecharTodasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fecharTodasToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.fecharTodasToolStripMenuItem.Text = "Fechar todas";
             this.fecharTodasToolStripMenuItem.Click += new System.EventHandler(this.FecharTodasToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(156, 6);
             // 
             // emCascataToolStripMenuItem
             // 
             this.emCascataToolStripMenuItem.Name = "emCascataToolStripMenuItem";
-            this.emCascataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.emCascataToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.emCascataToolStripMenuItem.Text = "Em cascata";
             this.emCascataToolStripMenuItem.Click += new System.EventHandler(this.EmCascataToolStripMenuItem_Click);
             // 
             // ladoALadoToolStripMenuItem
             // 
             this.ladoALadoToolStripMenuItem.Name = "ladoALadoToolStripMenuItem";
-            this.ladoALadoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ladoALadoToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.ladoALadoToolStripMenuItem.Text = "Lado a lado";
             this.ladoALadoToolStripMenuItem.Click += new System.EventHandler(this.LadoALadoToolStripMenuItem_Click);
+            // 
+            // testeToolStripMenuItem
+            // 
+            this.testeToolStripMenuItem.Name = "testeToolStripMenuItem";
+            this.testeToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.testeToolStripMenuItem.Text = "teste";
             // 
             // topBar
             // 
@@ -807,8 +813,9 @@
             // 
             // btCidadao
             // 
+            this.btCidadao.AutoSize = false;
+            this.btCidadao.BackgroundImage = global::GTI_Desktop.Properties.Resources.usuarios;
             this.btCidadao.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btCidadao.Image = global::GTI_Desktop.Properties.Resources._7837_64x64;
             this.btCidadao.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btCidadao.Name = "btCidadao";
             this.btCidadao.Size = new System.Drawing.Size(52, 52);
@@ -839,12 +846,13 @@
             // ConsultaDocButton
             // 
             this.ConsultaDocButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ConsultaDocButton.Image = global::GTI_Desktop.Properties.Resources.pasta_azul_lupa;
+            this.ConsultaDocButton.Image = ((System.Drawing.Image)(resources.GetObject("ConsultaDocButton.Image")));
             this.ConsultaDocButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ConsultaDocButton.Name = "ConsultaDocButton";
             this.ConsultaDocButton.Size = new System.Drawing.Size(52, 52);
             this.ConsultaDocButton.Text = "toolStripButton3";
             this.ConsultaDocButton.ToolTipText = "Consulta documento";
+            this.ConsultaDocButton.Click += new System.EventHandler(this.ConsultaDocButton_Click);
             // 
             // btExtrato
             // 
@@ -1045,18 +1053,12 @@
             this.optDv1.UseVisualStyleBackColor = false;
             this.optDv1.CheckedChanged += new System.EventHandler(this.OptDv1_CheckedChanged);
             // 
-            // testeToolStripMenuItem
-            // 
-            this.testeToolStripMenuItem.Name = "testeToolStripMenuItem";
-            this.testeToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.testeToolStripMenuItem.Text = "teste";
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(217)))), ((int)(((byte)(235)))));
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.BackColor = System.Drawing.Color.White;
+            this.BackgroundImage = global::GTI_Desktop.Properties.Resources.texture2;
             this.ClientSize = new System.Drawing.Size(1054, 496);
             this.Controls.Add(this.a1Panel1);
             this.Controls.Add(this.topBar);

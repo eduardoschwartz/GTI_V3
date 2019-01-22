@@ -11,7 +11,6 @@ namespace GTI_Web.Pages {
             String s = Request.QueryString["d"];
             if (s != "gti")
                 Response.Redirect("~/Pages/gtiMenu.aspx");
-
         }
 
         protected void Submit_Click(object sender, EventArgs e) {

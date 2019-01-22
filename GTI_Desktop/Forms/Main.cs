@@ -42,7 +42,9 @@ namespace GTI_Desktop.Forms {
         private void Main_Load(object sender, EventArgs e) {
             this.IsMdiContainer = true;
             this.Refresh();
-            CorFundo();
+
+            this.SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
+             //CorFundo();
             sbServidor.Text = Properties.Settings.Default.ServerName;
             sbVersao.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             LockForm(true);
@@ -57,6 +59,8 @@ namespace GTI_Desktop.Forms {
                 try {
                     ctlMDI = (MdiClient)ctl;
                     ctlMDI.BackColor = this.BackColor;
+                    //ctlMDI.BackgroundImage = Properties.Resources.GTI_logo;
+                    
                 } catch  {
                 }
             }
@@ -660,6 +664,15 @@ namespace GTI_Desktop.Forms {
                     };
                     f1.Show();
                 }
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void ConsultaDocButton_Click(object sender, EventArgs e) {
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.Consulta_documento);
+            if (bAllow) {
+                Documento_Detalhe f1 = new Documento_Detalhe();
+                f1.ShowDialog();
             } else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }

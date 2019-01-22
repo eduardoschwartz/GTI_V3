@@ -947,6 +947,17 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Parcelas_Vigilancia(nCodigo, nAno);
         }
 
+        /// <summary>
+        /// Lista as parcelas e valor da parcela de um documento
+        /// </summary>
+        /// <param name="Numero"></param>
+        /// <returns></returns>
+        public List<Documento_parcela_valor> Lista_Detalhe_Documento(int Numero) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Lista_Detalhe_Documento(Numero);
+        }
+
+
     }//end class
 }
 

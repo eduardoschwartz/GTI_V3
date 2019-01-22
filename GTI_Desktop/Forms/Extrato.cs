@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using static GTI_Desktop.Classes.GtiTypes;
+using static GTI_Models.modelCore;
 
 namespace GTI_Desktop.Forms {
     public partial class Extrato : Form {
@@ -117,6 +118,29 @@ namespace GTI_Desktop.Forms {
                     gtiCore.Liberado(this);
                 } else {
                     txtNome.Text = reg.Nome;
+                    if (reg.Tipo == TipoCadastro.Imovel) {
+                        TipoCadastroLabel.Text = "Imóvel";
+                    } else {
+                        if (reg.Tipo == TipoCadastro.Empresa) {
+                            TipoCadastroLabel.Text = "Empresa";
+                        } else {
+                            TipoCadastroLabel.Text = "Cidadão";
+                        }
+                    }
+                    if (reg.Ativo) {
+                        if (reg.Tipo == TipoCadastro.Empresa)
+                            SituacaoCadastroLabel.Text = "Ativa";
+                        else
+                            SituacaoCadastroLabel.Text = "Ativo";
+                        SituacaoCadastroLabel.ForeColor = Color.Green;
+                    } else {
+                        if (reg.Tipo == TipoCadastro.Empresa) 
+                            SituacaoCadastroLabel.Text = "Inativa";
+                        else
+                            SituacaoCadastroLabel.Text = "Inativo";
+                        SituacaoCadastroLabel.ForeColor = Color.Red;
+                    }
+
                     Carrega_Extrato(Convert.ToInt32(CodigoText.Text));
                     Exibe_Extrato();
                     gtiCore.Liberado(this);
@@ -136,6 +160,9 @@ namespace GTI_Desktop.Forms {
             ObservacaoText.Text = "";
             DocumentoPanel.Visible = false;
             DocumentoListView.Items.Clear();
+            TipoCadastroLabel.Text = "Tipo de";
+            SituacaoCadastroLabel.Text = "Cadastro";
+            SituacaoCadastroLabel.ForeColor = Color.Black;
         }
 
         private void Grid_Format() {
@@ -418,6 +445,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void LockScreen(bool bLock) {
+            MainMenu.Enabled = !bLock; ;
             FiltroPanel.Visible = false;
             CodigoText.ReadOnly = bLock;
             ExtratoDataGrid.Enabled = !bLock;
@@ -890,13 +918,6 @@ InicioObs:
             }
         }
 
-        private void ObsGeralMenu_Click(object sender, EventArgs e) {
-            if (ExtratoDataGrid.SelectedRows.Count > 0) {
-                ExibeObservacao(true);
-            } else
-                MessageBox.Show("Selecione um contribuinte.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
-
         private void Detalhemenu_Click(object sender, EventArgs e) {
             Detalhe_Parcela();
         }
@@ -934,6 +955,26 @@ InicioObs:
 
         private void ParcelamentoMenu_Click(object sender, EventArgs e) {
 
+        }
+
+        private void ObservacaoGeralMenu_Click(object sender, EventArgs e) {
+            if (ExtratoDataGrid.SelectedRows.Count > 0) {
+                ExibeObservacao(true);
+            } else
+                MessageBox.Show("Selecione um contribuinte.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void ObservacaoParcelaMenu_Click(object sender, EventArgs e) {
+            if (ExtratoDataGrid.SelectedRows.Count > 0) {
+                DataGridViewRow linha = ExtratoDataGrid.SelectedRows[0];
+                int _ano = Convert.ToInt16(linha.Cells["ano"].Value);
+                short _lancamento= Convert.ToInt16(linha.Cells["lancamento"].Value.ToString().Substring(0, 2));
+                short _seq = Convert.ToInt16(linha.Cells["sequencia"].Value);
+                short _parcela = Convert.ToInt16(linha.Cells["parcela"].Value);
+                byte _complemento = Convert.ToByte(linha.Cells["complemento"].Value);
+                ExibeObservacao(false,_ano,_lancamento,_seq,_parcela,_complemento);
+            } else
+                MessageBox.Show("Selecione uma parcela.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void PesquisarDocumentoButton_Click(object sender, EventArgs e) {

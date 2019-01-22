@@ -24,20 +24,20 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.sBar = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblTotalNPago = new System.Windows.Forms.ToolStripStatusLabel();
@@ -54,6 +54,39 @@
             this.RefreshButton = new System.Windows.Forms.Button();
             this.mnuMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuEditaParcela = new System.Windows.Forms.ToolStripMenuItem();
+            this.CodigoText = new System.Windows.Forms.TextBox();
+            this.ChkAllExercicio = new System.Windows.Forms.CheckBox();
+            this.a1Panel2 = new Owf.Controls.A1Panel();
+            this.Label1 = new System.Windows.Forms.Label();
+            this.txtNome = new System.Windows.Forms.TextBox();
+            this.MainMenu = new System.Windows.Forms.MenuStrip();
+            this.FiltroMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.ObsGeralMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.Detalhemenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExtratoMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.filtradoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.completoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DocumentoMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.ParcelamentoMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.DamMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExecFiscalMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.OutrosMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.dividaAtivaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FiltroPanel = new Owf.Controls.A1Panel();
+            this.OcultarButton = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.CmbDivAtiva = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.CmbAjuizado = new System.Windows.Forms.ComboBox();
+            this.ChkParcelaOculta = new System.Windows.Forms.CheckBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.FiltroButton = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.CmbAnoFinal = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.CmbAnoInicial = new System.Windows.Forms.ComboBox();
             this.ExtratoDataGrid = new System.Windows.Forms.DataGridView();
             this.imgCol = new System.Windows.Forms.DataGridViewImageColumn();
             this.Ano = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -71,27 +104,6 @@
             this.exec_fiscal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.certidao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.data_remessa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Label1 = new System.Windows.Forms.Label();
-            this.CodigoText = new System.Windows.Forms.TextBox();
-            this.ChkAllExercicio = new System.Windows.Forms.CheckBox();
-            this.a1Panel2 = new Owf.Controls.A1Panel();
-            this.txtNome = new System.Windows.Forms.TextBox();
-            this.FiltroPanel = new Owf.Controls.A1Panel();
-            this.OcultarButton = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.CmbDivAtiva = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.CmbAjuizado = new System.Windows.Forms.ComboBox();
-            this.ChkParcelaOculta = new System.Windows.Forms.CheckBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.FiltroButton = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.CmbAnoFinal = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.CmbAnoInicial = new System.Windows.Forms.ComboBox();
-            this.GridPanel = new Owf.Controls.A1Panel();
             this.DocumentoPanel = new Owf.Controls.A1Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.PesquisarDocumentoButton = new System.Windows.Forms.ToolStripButton();
@@ -101,6 +113,7 @@
             this.Doc = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DataDoc = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ValorGuia = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.miniToolStrip = new System.Windows.Forms.ToolStrip();
             this.ObservacaoPanel = new Owf.Controls.A1Panel();
             this.TituloObsLabel = new System.Windows.Forms.Label();
             this.tBar = new System.Windows.Forms.ToolStrip();
@@ -117,89 +130,33 @@
             this.Data = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.User = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Obs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.MainMenu = new System.Windows.Forms.MenuStrip();
-            this.FiltroMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.ObsGeralMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.Detalhemenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.ExtratoMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.DocumentoMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.ParcelamentoMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.DamMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.ExecFiscalMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.OutrosMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.mnuParametros = new System.Windows.Forms.ToolStripMenuItem();
-            this.CadastroBairroMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.CadastroPaisMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.CadastroProfissaoMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuImobiliario = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuCadastro = new System.Windows.Forms.ToolStripMenuItem();
-            this.CadastroImovelMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.CadastroCondominioMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.FaceQuadraMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.relatórioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ComunicadoIsencaoMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuMobiliario = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuMobiliarioCadastro = new System.Windows.Forms.ToolStripMenuItem();
-            this.CadastroEmpresaMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.EscritorioContabilMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabelasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AtividadeEmpresaMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuAtendimento = new System.Windows.Forms.ToolStripMenuItem();
-            this.CadastroCidadaoMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuTributario = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuTributarioTabelas = new System.Windows.Forms.ToolStripMenuItem();
-            this.CadastroLancamentoMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.CadastroTributosMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.dividaAtivaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CartaCobrancaMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.bancosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RegistroBancarioMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuProtocolo = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabelasBásicasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.documentaçãoParaProcessosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.despachosDosTrâmitesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.assuntosDoProcessoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.localDeTramitaçãoDeProcessosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuControleProcesso = new System.Windows.Forms.ToolStripMenuItem();
-            this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ProcessoAtrasoMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuOutros = new System.Windows.Forms.ToolStripMenuItem();
-            this.ConfigMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuSecurity = new System.Windows.Forms.ToolStripMenuItem();
-            this.CadastroUsuariosMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.CadastroEventoMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.AtribuicaoAcessoMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.administrativoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CalculoImpostoMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuJanela = new System.Windows.Forms.ToolStripMenuItem();
-            this.minimizarTodasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.restaurarTodasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fecharTodasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.emCascataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ladoALadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.testeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GridPanel = new Owf.Controls.A1Panel();
+            this.ObservacaoGeralMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.ObservacaoParcelaMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.TipoCadastroLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.SituacaoCadastroLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.SerasaLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.sBar.SuspendLayout();
             this.mnuMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ExtratoDataGrid)).BeginInit();
             this.a1Panel2.SuspendLayout();
+            this.MainMenu.SuspendLayout();
             this.FiltroPanel.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.GridPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ExtratoDataGrid)).BeginInit();
             this.DocumentoPanel.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.ObservacaoPanel.SuspendLayout();
             this.tBar.SuspendLayout();
-            this.MainMenu.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.GridPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // sBar
             // 
+            this.sBar.BackColor = System.Drawing.Color.Linen;
             this.sBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.lblTotalNPago,
@@ -208,9 +165,15 @@
             this.lblTotalVenc,
             this.toolStripStatusLabel8,
             this.toolStripStatusLabel5,
-            this.lblTotalSel});
+            this.lblTotalSel,
+            this.toolStripStatusLabel2,
+            this.TipoCadastroLabel,
+            this.SituacaoCadastroLabel,
+            this.toolStripStatusLabel4,
+            this.SerasaLabel});
             this.sBar.Location = new System.Drawing.Point(0, 571);
             this.sBar.Name = "sBar";
+            this.sBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
             this.sBar.Size = new System.Drawing.Size(964, 22);
             this.sBar.TabIndex = 118;
             this.sBar.Text = "statusStrip1";
@@ -330,218 +293,6 @@
             this.mnuEditaParcela.Text = "Edição da parcela";
             this.mnuEditaParcela.Click += new System.EventHandler(this.MnuEditaDebito_Click);
             // 
-            // ExtratoDataGrid
-            // 
-            this.ExtratoDataGrid.AllowUserToAddRows = false;
-            this.ExtratoDataGrid.AllowUserToDeleteRows = false;
-            this.ExtratoDataGrid.AllowUserToResizeRows = false;
-            this.ExtratoDataGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ExtratoDataGrid.BackgroundColor = System.Drawing.Color.White;
-            this.ExtratoDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ExtratoDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
-            this.ExtratoDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ExtratoDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.imgCol,
-            this.Ano,
-            this.lancamento,
-            this.sequencia,
-            this.parcela,
-            this.complemento,
-            this.status,
-            this.data_vencimento,
-            this.DA,
-            this.AJ,
-            this.valor_lancado,
-            this.valor_atual,
-            this.notificado,
-            this.exec_fiscal,
-            this.certidao,
-            this.data_remessa});
-            this.ExtratoDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.ExtratoDataGrid.EnableHeadersVisualStyles = false;
-            this.ExtratoDataGrid.GridColor = System.Drawing.Color.Gainsboro;
-            this.ExtratoDataGrid.Location = new System.Drawing.Point(3, 54);
-            this.ExtratoDataGrid.MultiSelect = false;
-            this.ExtratoDataGrid.Name = "ExtratoDataGrid";
-            this.ExtratoDataGrid.ReadOnly = true;
-            dataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ExtratoDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle27;
-            this.ExtratoDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle28.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle28.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.Color.White;
-            this.ExtratoDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle28;
-            this.ExtratoDataGrid.RowTemplate.DefaultCellStyle.NullValue = "N/D";
-            this.ExtratoDataGrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.DarkRed;
-            this.ExtratoDataGrid.RowTemplate.Height = 17;
-            this.ExtratoDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ExtratoDataGrid.ShowCellErrors = false;
-            this.ExtratoDataGrid.ShowCellToolTips = false;
-            this.ExtratoDataGrid.ShowEditingIcon = false;
-            this.ExtratoDataGrid.ShowRowErrors = false;
-            this.ExtratoDataGrid.Size = new System.Drawing.Size(948, 396);
-            this.ExtratoDataGrid.StandardTab = true;
-            this.ExtratoDataGrid.TabIndex = 3;
-            this.ExtratoDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ExtratoDataGrid_CellClick);
-            this.ExtratoDataGrid.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.ExtratoDataGrid_CellMouseEnter);
-            this.ExtratoDataGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ExtratoDataGrid_MouseClick);
-            // 
-            // imgCol
-            // 
-            this.imgCol.HeaderText = "Obs";
-            this.imgCol.Name = "imgCol";
-            this.imgCol.ReadOnly = true;
-            this.imgCol.Width = 30;
-            // 
-            // Ano
-            // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Ano.DefaultCellStyle = dataGridViewCellStyle16;
-            this.Ano.HeaderText = "Ano";
-            this.Ano.Name = "Ano";
-            this.Ano.ReadOnly = true;
-            this.Ano.Width = 42;
-            // 
-            // lancamento
-            // 
-            this.lancamento.HeaderText = "Lançamento";
-            this.lancamento.Name = "lancamento";
-            this.lancamento.ReadOnly = true;
-            this.lancamento.Width = 175;
-            // 
-            // sequencia
-            // 
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.sequencia.DefaultCellStyle = dataGridViewCellStyle17;
-            this.sequencia.HeaderText = "Sq";
-            this.sequencia.Name = "sequencia";
-            this.sequencia.ReadOnly = true;
-            this.sequencia.Width = 28;
-            // 
-            // parcela
-            // 
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.parcela.DefaultCellStyle = dataGridViewCellStyle18;
-            this.parcela.HeaderText = "Pc";
-            this.parcela.Name = "parcela";
-            this.parcela.ReadOnly = true;
-            this.parcela.Width = 28;
-            // 
-            // complemento
-            // 
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.complemento.DefaultCellStyle = dataGridViewCellStyle19;
-            this.complemento.HeaderText = "Cp";
-            this.complemento.Name = "complemento";
-            this.complemento.ReadOnly = true;
-            this.complemento.Width = 28;
-            // 
-            // status
-            // 
-            this.status.HeaderText = "Status";
-            this.status.Name = "status";
-            this.status.ReadOnly = true;
-            this.status.Width = 110;
-            // 
-            // data_vencimento
-            // 
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.data_vencimento.DefaultCellStyle = dataGridViewCellStyle20;
-            this.data_vencimento.HeaderText = "Dt.Vencto";
-            this.data_vencimento.Name = "data_vencimento";
-            this.data_vencimento.ReadOnly = true;
-            this.data_vencimento.Width = 70;
-            // 
-            // DA
-            // 
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DA.DefaultCellStyle = dataGridViewCellStyle21;
-            this.DA.HeaderText = "D";
-            this.DA.Name = "DA";
-            this.DA.ReadOnly = true;
-            this.DA.Width = 20;
-            // 
-            // AJ
-            // 
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.AJ.DefaultCellStyle = dataGridViewCellStyle22;
-            this.AJ.HeaderText = "A";
-            this.AJ.Name = "AJ";
-            this.AJ.ReadOnly = true;
-            this.AJ.Width = 20;
-            // 
-            // valor_lancado
-            // 
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.valor_lancado.DefaultCellStyle = dataGridViewCellStyle23;
-            this.valor_lancado.HeaderText = "Vl.Lanc";
-            this.valor_lancado.Name = "valor_lancado";
-            this.valor_lancado.ReadOnly = true;
-            this.valor_lancado.Width = 75;
-            // 
-            // valor_atual
-            // 
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.valor_atual.DefaultCellStyle = dataGridViewCellStyle24;
-            this.valor_atual.HeaderText = "Vl.Atual";
-            this.valor_atual.Name = "valor_atual";
-            this.valor_atual.ReadOnly = true;
-            this.valor_atual.Width = 75;
-            // 
-            // notificado
-            // 
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.notificado.DefaultCellStyle = dataGridViewCellStyle25;
-            this.notificado.HeaderText = "N";
-            this.notificado.Name = "notificado";
-            this.notificado.ReadOnly = true;
-            this.notificado.Width = 35;
-            // 
-            // exec_fiscal
-            // 
-            this.exec_fiscal.HeaderText = "Exec.Fiscal";
-            this.exec_fiscal.Name = "exec_fiscal";
-            this.exec_fiscal.ReadOnly = true;
-            // 
-            // certidao
-            // 
-            this.certidao.HeaderText = "Certidão";
-            this.certidao.Name = "certidao";
-            this.certidao.ReadOnly = true;
-            this.certidao.Width = 70;
-            // 
-            // data_remessa
-            // 
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.data_remessa.DefaultCellStyle = dataGridViewCellStyle26;
-            this.data_remessa.HeaderText = "Dt.Remessa";
-            this.data_remessa.Name = "data_remessa";
-            this.data_remessa.ReadOnly = true;
-            this.data_remessa.Width = 70;
-            // 
-            // Label1
-            // 
-            this.Label1.AutoSize = true;
-            this.Label1.Location = new System.Drawing.Point(8, 10);
-            this.Label1.Name = "Label1";
-            this.Label1.Size = new System.Drawing.Size(55, 13);
-            this.Label1.TabIndex = 35;
-            this.Label1.Text = "Código....:";
-            // 
             // CodigoText
             // 
             this.CodigoText.Location = new System.Drawing.Point(69, 7);
@@ -567,34 +318,171 @@
             // 
             this.a1Panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.a1Panel2.BackColor = System.Drawing.Color.White;
+            this.a1Panel2.BackColor = System.Drawing.Color.Linen;
             this.a1Panel2.BorderColor = System.Drawing.Color.Gray;
-            this.a1Panel2.Controls.Add(this.menuStrip1);
+            this.a1Panel2.Controls.Add(this.Label1);
             this.a1Panel2.Controls.Add(this.txtNome);
             this.a1Panel2.Controls.Add(this.ConsultarCodigoButton);
             this.a1Panel2.Controls.Add(this.RefreshButton);
             this.a1Panel2.Controls.Add(this.CodigoText);
-            this.a1Panel2.Controls.Add(this.Label1);
             this.a1Panel2.Controls.Add(this.MainMenu);
-            this.a1Panel2.GradientEndColor = System.Drawing.Color.White;
-            this.a1Panel2.GradientStartColor = System.Drawing.Color.White;
+            this.a1Panel2.GradientEndColor = System.Drawing.Color.Linen;
+            this.a1Panel2.GradientStartColor = System.Drawing.Color.Linen;
             this.a1Panel2.Image = null;
             this.a1Panel2.ImageLocation = new System.Drawing.Point(4, 4);
-            this.a1Panel2.Location = new System.Drawing.Point(9, 5);
+            this.a1Panel2.Location = new System.Drawing.Point(6, 5);
             this.a1Panel2.Name = "a1Panel2";
             this.a1Panel2.ShadowOffSet = 3;
-            this.a1Panel2.Size = new System.Drawing.Size(952, 88);
+            this.a1Panel2.Size = new System.Drawing.Size(955, 64);
             this.a1Panel2.TabIndex = 0;
+            // 
+            // Label1
+            // 
+            this.Label1.AutoSize = true;
+            this.Label1.BackColor = System.Drawing.Color.Linen;
+            this.Label1.Location = new System.Drawing.Point(8, 10);
+            this.Label1.Name = "Label1";
+            this.Label1.Size = new System.Drawing.Size(55, 13);
+            this.Label1.TabIndex = 46;
+            this.Label1.Text = "Código....:";
             // 
             // txtNome
             // 
             this.txtNome.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNome.BackColor = System.Drawing.Color.Linen;
             this.txtNome.Location = new System.Drawing.Point(186, 8);
             this.txtNome.Name = "txtNome";
             this.txtNome.ReadOnly = true;
-            this.txtNome.Size = new System.Drawing.Size(755, 20);
+            this.txtNome.Size = new System.Drawing.Size(758, 20);
             this.txtNome.TabIndex = 36;
+            // 
+            // MainMenu
+            // 
+            this.MainMenu.BackColor = System.Drawing.Color.Linen;
+            this.MainMenu.Dock = System.Windows.Forms.DockStyle.None;
+            this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FiltroMenu,
+            this.ObsGeralMenu,
+            this.Detalhemenu,
+            this.ExtratoMenu,
+            this.DocumentoMenu,
+            this.ParcelamentoMenu,
+            this.DamMenu,
+            this.ExecFiscalMenu,
+            this.OutrosMenu});
+            this.MainMenu.Location = new System.Drawing.Point(4, 32);
+            this.MainMenu.Name = "MainMenu";
+            this.MainMenu.Size = new System.Drawing.Size(736, 24);
+            this.MainMenu.TabIndex = 45;
+            this.MainMenu.Text = "menuStrip1";
+            // 
+            // FiltroMenu
+            // 
+            this.FiltroMenu.BackColor = System.Drawing.Color.Linen;
+            this.FiltroMenu.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.FiltroMenu.ForeColor = System.Drawing.Color.Black;
+            this.FiltroMenu.Name = "FiltroMenu";
+            this.FiltroMenu.Size = new System.Drawing.Size(84, 20);
+            this.FiltroMenu.Text = "Filtrar dados";
+            this.FiltroMenu.Click += new System.EventHandler(this.FiltroMenu_Click);
+            // 
+            // ObsGeralMenu
+            // 
+            this.ObsGeralMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ObservacaoGeralMenu,
+            this.ObservacaoParcelaMenu});
+            this.ObsGeralMenu.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.ObsGeralMenu.ForeColor = System.Drawing.Color.Black;
+            this.ObsGeralMenu.Name = "ObsGeralMenu";
+            this.ObsGeralMenu.Size = new System.Drawing.Size(81, 20);
+            this.ObsGeralMenu.Text = "Observação";
+            // 
+            // Detalhemenu
+            // 
+            this.Detalhemenu.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.Detalhemenu.ForeColor = System.Drawing.Color.Black;
+            this.Detalhemenu.Name = "Detalhemenu";
+            this.Detalhemenu.Size = new System.Drawing.Size(116, 20);
+            this.Detalhemenu.Text = "Detalhe da parcela";
+            this.Detalhemenu.Click += new System.EventHandler(this.Detalhemenu_Click);
+            // 
+            // ExtratoMenu
+            // 
+            this.ExtratoMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.filtradoToolStripMenuItem,
+            this.completoToolStripMenuItem});
+            this.ExtratoMenu.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.ExtratoMenu.ForeColor = System.Drawing.Color.Black;
+            this.ExtratoMenu.Name = "ExtratoMenu";
+            this.ExtratoMenu.Size = new System.Drawing.Size(55, 20);
+            this.ExtratoMenu.Text = "Extrato";
+            this.ExtratoMenu.Click += new System.EventHandler(this.ExtratoMenu_Click);
+            // 
+            // filtradoToolStripMenuItem
+            // 
+            this.filtradoToolStripMenuItem.BackColor = System.Drawing.Color.Linen;
+            this.filtradoToolStripMenuItem.Name = "filtradoToolStripMenuItem";
+            this.filtradoToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.filtradoToolStripMenuItem.Text = "Filtrado";
+            // 
+            // completoToolStripMenuItem
+            // 
+            this.completoToolStripMenuItem.BackColor = System.Drawing.Color.Linen;
+            this.completoToolStripMenuItem.Name = "completoToolStripMenuItem";
+            this.completoToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.completoToolStripMenuItem.Text = "Completo";
+            // 
+            // DocumentoMenu
+            // 
+            this.DocumentoMenu.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.DocumentoMenu.ForeColor = System.Drawing.Color.Black;
+            this.DocumentoMenu.Name = "DocumentoMenu";
+            this.DocumentoMenu.Size = new System.Drawing.Size(87, 20);
+            this.DocumentoMenu.Text = "Documentos";
+            this.DocumentoMenu.Click += new System.EventHandler(this.DocumentoMenu_Click);
+            // 
+            // ParcelamentoMenu
+            // 
+            this.ParcelamentoMenu.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.ParcelamentoMenu.ForeColor = System.Drawing.Color.Black;
+            this.ParcelamentoMenu.Name = "ParcelamentoMenu";
+            this.ParcelamentoMenu.Size = new System.Drawing.Size(97, 20);
+            this.ParcelamentoMenu.Text = "Parcelamentos";
+            this.ParcelamentoMenu.Click += new System.EventHandler(this.ParcelamentoMenu_Click);
+            // 
+            // DamMenu
+            // 
+            this.DamMenu.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.DamMenu.ForeColor = System.Drawing.Color.Black;
+            this.DamMenu.Name = "DamMenu";
+            this.DamMenu.Size = new System.Drawing.Size(55, 20);
+            this.DamMenu.Text = "D.A.M.";
+            // 
+            // ExecFiscalMenu
+            // 
+            this.ExecFiscalMenu.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.ExecFiscalMenu.ForeColor = System.Drawing.Color.Black;
+            this.ExecFiscalMenu.Name = "ExecFiscalMenu";
+            this.ExecFiscalMenu.Size = new System.Drawing.Size(98, 20);
+            this.ExecFiscalMenu.Text = "Execução fiscal";
+            // 
+            // OutrosMenu
+            // 
+            this.OutrosMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dividaAtivaToolStripMenuItem});
+            this.OutrosMenu.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.OutrosMenu.ForeColor = System.Drawing.Color.Black;
+            this.OutrosMenu.Name = "OutrosMenu";
+            this.OutrosMenu.Size = new System.Drawing.Size(55, 20);
+            this.OutrosMenu.Text = "Outros";
+            // 
+            // dividaAtivaToolStripMenuItem
+            // 
+            this.dividaAtivaToolStripMenuItem.BackColor = System.Drawing.Color.Linen;
+            this.dividaAtivaToolStripMenuItem.Name = "dividaAtivaToolStripMenuItem";
+            this.dividaAtivaToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.dividaAtivaToolStripMenuItem.Text = "Divida Ativa";
             // 
             // FiltroPanel
             // 
@@ -776,25 +664,208 @@
             this.CmbAnoInicial.Size = new System.Drawing.Size(57, 21);
             this.CmbAnoInicial.TabIndex = 6;
             // 
-            // GridPanel
+            // ExtratoDataGrid
             // 
-            this.GridPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.ExtratoDataGrid.AllowUserToAddRows = false;
+            this.ExtratoDataGrid.AllowUserToDeleteRows = false;
+            this.ExtratoDataGrid.AllowUserToResizeRows = false;
+            this.ExtratoDataGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.GridPanel.BackColor = System.Drawing.SystemColors.Control;
-            this.GridPanel.BorderColor = System.Drawing.Color.Gray;
-            this.GridPanel.Controls.Add(this.ObservacaoPanel);
-            this.GridPanel.Controls.Add(this.DocumentoPanel);
-            this.GridPanel.Controls.Add(this.ExtratoDataGrid);
-            this.GridPanel.GradientEndColor = System.Drawing.SystemColors.Control;
-            this.GridPanel.GradientStartColor = System.Drawing.Color.White;
-            this.GridPanel.Image = null;
-            this.GridPanel.ImageLocation = new System.Drawing.Point(4, 4);
-            this.GridPanel.Location = new System.Drawing.Point(6, 113);
-            this.GridPanel.Name = "GridPanel";
-            this.GridPanel.ShadowOffSet = 3;
-            this.GridPanel.Size = new System.Drawing.Size(955, 454);
-            this.GridPanel.TabIndex = 120;
+            this.ExtratoDataGrid.BackgroundColor = System.Drawing.Color.White;
+            this.ExtratoDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ExtratoDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.ExtratoDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ExtratoDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.imgCol,
+            this.Ano,
+            this.lancamento,
+            this.sequencia,
+            this.parcela,
+            this.complemento,
+            this.status,
+            this.data_vencimento,
+            this.DA,
+            this.AJ,
+            this.valor_lancado,
+            this.valor_atual,
+            this.notificado,
+            this.exec_fiscal,
+            this.certidao,
+            this.data_remessa});
+            this.ExtratoDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.ExtratoDataGrid.EnableHeadersVisualStyles = false;
+            this.ExtratoDataGrid.GridColor = System.Drawing.Color.Gainsboro;
+            this.ExtratoDataGrid.Location = new System.Drawing.Point(3, 3);
+            this.ExtratoDataGrid.MultiSelect = false;
+            this.ExtratoDataGrid.Name = "ExtratoDataGrid";
+            this.ExtratoDataGrid.ReadOnly = true;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ExtratoDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            this.ExtratoDataGrid.RowHeadersVisible = false;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.White;
+            this.ExtratoDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle14;
+            this.ExtratoDataGrid.RowTemplate.DefaultCellStyle.NullValue = "N/D";
+            this.ExtratoDataGrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.DarkRed;
+            this.ExtratoDataGrid.RowTemplate.Height = 17;
+            this.ExtratoDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.ExtratoDataGrid.ShowCellErrors = false;
+            this.ExtratoDataGrid.ShowCellToolTips = false;
+            this.ExtratoDataGrid.ShowEditingIcon = false;
+            this.ExtratoDataGrid.ShowRowErrors = false;
+            this.ExtratoDataGrid.Size = new System.Drawing.Size(948, 488);
+            this.ExtratoDataGrid.StandardTab = true;
+            this.ExtratoDataGrid.TabIndex = 3;
+            this.ExtratoDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ExtratoDataGrid_CellClick);
+            this.ExtratoDataGrid.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.ExtratoDataGrid_CellMouseEnter);
+            this.ExtratoDataGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ExtratoDataGrid_MouseClick);
+            // 
+            // imgCol
+            // 
+            this.imgCol.HeaderText = "Obs";
+            this.imgCol.Name = "imgCol";
+            this.imgCol.ReadOnly = true;
+            this.imgCol.Width = 30;
+            // 
+            // Ano
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Ano.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Ano.HeaderText = "Ano";
+            this.Ano.Name = "Ano";
+            this.Ano.ReadOnly = true;
+            this.Ano.Width = 42;
+            // 
+            // lancamento
+            // 
+            this.lancamento.HeaderText = "Lançamento";
+            this.lancamento.Name = "lancamento";
+            this.lancamento.ReadOnly = true;
+            this.lancamento.Width = 175;
+            // 
+            // sequencia
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.sequencia.DefaultCellStyle = dataGridViewCellStyle3;
+            this.sequencia.HeaderText = "Sq";
+            this.sequencia.Name = "sequencia";
+            this.sequencia.ReadOnly = true;
+            this.sequencia.Width = 28;
+            // 
+            // parcela
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.parcela.DefaultCellStyle = dataGridViewCellStyle4;
+            this.parcela.HeaderText = "Pc";
+            this.parcela.Name = "parcela";
+            this.parcela.ReadOnly = true;
+            this.parcela.Width = 28;
+            // 
+            // complemento
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.complemento.DefaultCellStyle = dataGridViewCellStyle5;
+            this.complemento.HeaderText = "Cp";
+            this.complemento.Name = "complemento";
+            this.complemento.ReadOnly = true;
+            this.complemento.Width = 28;
+            // 
+            // status
+            // 
+            this.status.HeaderText = "Status";
+            this.status.Name = "status";
+            this.status.ReadOnly = true;
+            this.status.Width = 110;
+            // 
+            // data_vencimento
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.data_vencimento.DefaultCellStyle = dataGridViewCellStyle6;
+            this.data_vencimento.HeaderText = "Dt.Vencto";
+            this.data_vencimento.Name = "data_vencimento";
+            this.data_vencimento.ReadOnly = true;
+            this.data_vencimento.Width = 70;
+            // 
+            // DA
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DA.DefaultCellStyle = dataGridViewCellStyle7;
+            this.DA.HeaderText = "D";
+            this.DA.Name = "DA";
+            this.DA.ReadOnly = true;
+            this.DA.Width = 20;
+            // 
+            // AJ
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.AJ.DefaultCellStyle = dataGridViewCellStyle8;
+            this.AJ.HeaderText = "A";
+            this.AJ.Name = "AJ";
+            this.AJ.ReadOnly = true;
+            this.AJ.Width = 20;
+            // 
+            // valor_lancado
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.valor_lancado.DefaultCellStyle = dataGridViewCellStyle9;
+            this.valor_lancado.HeaderText = "Vl.Lanc";
+            this.valor_lancado.Name = "valor_lancado";
+            this.valor_lancado.ReadOnly = true;
+            this.valor_lancado.Width = 75;
+            // 
+            // valor_atual
+            // 
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.valor_atual.DefaultCellStyle = dataGridViewCellStyle10;
+            this.valor_atual.HeaderText = "Vl.Atual";
+            this.valor_atual.Name = "valor_atual";
+            this.valor_atual.ReadOnly = true;
+            this.valor_atual.Width = 75;
+            // 
+            // notificado
+            // 
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.notificado.DefaultCellStyle = dataGridViewCellStyle11;
+            this.notificado.HeaderText = "N";
+            this.notificado.Name = "notificado";
+            this.notificado.ReadOnly = true;
+            this.notificado.Width = 35;
+            // 
+            // exec_fiscal
+            // 
+            this.exec_fiscal.HeaderText = "Exec.Fiscal";
+            this.exec_fiscal.Name = "exec_fiscal";
+            this.exec_fiscal.ReadOnly = true;
+            // 
+            // certidao
+            // 
+            this.certidao.HeaderText = "Certidão";
+            this.certidao.Name = "certidao";
+            this.certidao.ReadOnly = true;
+            this.certidao.Width = 70;
+            // 
+            // data_remessa
+            // 
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.data_remessa.DefaultCellStyle = dataGridViewCellStyle12;
+            this.data_remessa.HeaderText = "Dt.Remessa";
+            this.data_remessa.Name = "data_remessa";
+            this.data_remessa.ReadOnly = true;
+            this.data_remessa.Width = 70;
             // 
             // DocumentoPanel
             // 
@@ -842,7 +913,7 @@
             this.SairDocumentoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SairDocumentoButton.Name = "SairDocumentoButton";
             this.SairDocumentoButton.Size = new System.Drawing.Size(23, 22);
-            this.SairDocumentoButton.Text = "toolStripButton2";
+            this.SairDocumentoButton.Text = "Fechar";
             this.SairDocumentoButton.Click += new System.EventHandler(this.SairDocumentoButton_Click);
             // 
             // label6
@@ -885,6 +956,20 @@
             // 
             this.ValorGuia.Text = "Valor";
             this.ValorGuia.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // miniToolStrip
+            // 
+            this.miniToolStrip.AccessibleName = "New item selection";
+            this.miniToolStrip.AccessibleRole = System.Windows.Forms.AccessibleRole.ButtonDropDown;
+            this.miniToolStrip.AutoSize = false;
+            this.miniToolStrip.BackColor = System.Drawing.Color.Transparent;
+            this.miniToolStrip.CanOverflow = false;
+            this.miniToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.miniToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.miniToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.miniToolStrip.Name = "miniToolStrip";
+            this.miniToolStrip.Size = new System.Drawing.Size(49, 25);
+            this.miniToolStrip.TabIndex = 2;
             // 
             // ObservacaoPanel
             // 
@@ -971,7 +1056,7 @@
             // 
             this.GravarObsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.GravarObsButton.Image = global::GTI_Desktop.Properties.Resources.gravar;
-            this.GravarObsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.GravarObsButton.ImageTransparentColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.GravarObsButton.Name = "GravarObsButton";
             this.GravarObsButton.Size = new System.Drawing.Size(23, 22);
             this.GravarObsButton.Text = "toolStripButton1";
@@ -996,7 +1081,7 @@
             this.SairObsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SairObsButton.Name = "SairObsButton";
             this.SairObsButton.Size = new System.Drawing.Size(23, 22);
-            this.SairObsButton.Text = "toolStripButton5";
+            this.SairObsButton.Text = "Fechar";
             this.SairObsButton.ToolTipText = "Fechar tela de observação";
             this.SairObsButton.Click += new System.EventHandler(this.SairObsButton_Click);
             // 
@@ -1057,501 +1142,83 @@
             this.Obs.Text = "Observação";
             this.Obs.Width = 300;
             // 
-            // MainMenu
-            // 
-            this.MainMenu.BackColor = System.Drawing.Color.White;
-            this.MainMenu.Dock = System.Windows.Forms.DockStyle.None;
-            this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.FiltroMenu,
-            this.ObsGeralMenu,
-            this.Detalhemenu,
-            this.ExtratoMenu,
-            this.DocumentoMenu,
-            this.ParcelamentoMenu,
-            this.DamMenu,
-            this.ExecFiscalMenu,
-            this.OutrosMenu});
-            this.MainMenu.Location = new System.Drawing.Point(11, 32);
-            this.MainMenu.Name = "MainMenu";
-            this.MainMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.MainMenu.Size = new System.Drawing.Size(736, 24);
-            this.MainMenu.TabIndex = 45;
-            this.MainMenu.Text = "menuStrip1";
-            // 
-            // FiltroMenu
-            // 
-            this.FiltroMenu.BackColor = System.Drawing.Color.Aqua;
-            this.FiltroMenu.ForeColor = System.Drawing.Color.White;
-            this.FiltroMenu.Name = "FiltroMenu";
-            this.FiltroMenu.Size = new System.Drawing.Size(84, 20);
-            this.FiltroMenu.Text = "Filtrar dados";
-            this.FiltroMenu.Click += new System.EventHandler(this.FiltroMenu_Click);
-            // 
-            // ObsGeralMenu
-            // 
-            this.ObsGeralMenu.ForeColor = System.Drawing.Color.Maroon;
-            this.ObsGeralMenu.Name = "ObsGeralMenu";
-            this.ObsGeralMenu.Size = new System.Drawing.Size(81, 20);
-            this.ObsGeralMenu.Text = "Observação";
-            this.ObsGeralMenu.Click += new System.EventHandler(this.ObsGeralMenu_Click);
-            // 
-            // Detalhemenu
-            // 
-            this.Detalhemenu.ForeColor = System.Drawing.Color.Maroon;
-            this.Detalhemenu.Name = "Detalhemenu";
-            this.Detalhemenu.Size = new System.Drawing.Size(116, 20);
-            this.Detalhemenu.Text = "Detalhe da parcela";
-            this.Detalhemenu.Click += new System.EventHandler(this.Detalhemenu_Click);
-            // 
-            // ExtratoMenu
-            // 
-            this.ExtratoMenu.ForeColor = System.Drawing.Color.Maroon;
-            this.ExtratoMenu.Name = "ExtratoMenu";
-            this.ExtratoMenu.Size = new System.Drawing.Size(55, 20);
-            this.ExtratoMenu.Text = "Extrato";
-            this.ExtratoMenu.Click += new System.EventHandler(this.ExtratoMenu_Click);
-            // 
-            // DocumentoMenu
-            // 
-            this.DocumentoMenu.ForeColor = System.Drawing.Color.Maroon;
-            this.DocumentoMenu.Name = "DocumentoMenu";
-            this.DocumentoMenu.Size = new System.Drawing.Size(87, 20);
-            this.DocumentoMenu.Text = "Documentos";
-            this.DocumentoMenu.Click += new System.EventHandler(this.DocumentoMenu_Click);
-            // 
-            // ParcelamentoMenu
-            // 
-            this.ParcelamentoMenu.ForeColor = System.Drawing.Color.Maroon;
-            this.ParcelamentoMenu.Name = "ParcelamentoMenu";
-            this.ParcelamentoMenu.Size = new System.Drawing.Size(97, 20);
-            this.ParcelamentoMenu.Text = "Parcelamentos";
-            this.ParcelamentoMenu.Click += new System.EventHandler(this.ParcelamentoMenu_Click);
-            // 
-            // DamMenu
-            // 
-            this.DamMenu.ForeColor = System.Drawing.Color.Maroon;
-            this.DamMenu.Name = "DamMenu";
-            this.DamMenu.Size = new System.Drawing.Size(55, 20);
-            this.DamMenu.Text = "D.A.M.";
-            // 
-            // ExecFiscalMenu
-            // 
-            this.ExecFiscalMenu.ForeColor = System.Drawing.Color.Maroon;
-            this.ExecFiscalMenu.Name = "ExecFiscalMenu";
-            this.ExecFiscalMenu.Size = new System.Drawing.Size(98, 20);
-            this.ExecFiscalMenu.Text = "Execução fiscal";
-            // 
-            // OutrosMenu
-            // 
-            this.OutrosMenu.ForeColor = System.Drawing.Color.Maroon;
-            this.OutrosMenu.Name = "OutrosMenu";
-            this.OutrosMenu.Size = new System.Drawing.Size(55, 20);
-            this.OutrosMenu.Text = "Outros";
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.BackColor = System.Drawing.Color.White;
-            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuParametros,
-            this.mnuImobiliario,
-            this.mnuMobiliario,
-            this.mnuAtendimento,
-            this.mnuTributario,
-            this.mnuProtocolo,
-            this.mnuOutros,
-            this.mnuJanela,
-            this.testeToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(21, 56);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(616, 24);
-            this.menuStrip1.TabIndex = 46;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // mnuParametros
-            // 
-            this.mnuParametros.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CadastroBairroMenu,
-            this.CadastroPaisMenu,
-            this.CadastroProfissaoMenu});
-            this.mnuParametros.Name = "mnuParametros";
-            this.mnuParametros.Size = new System.Drawing.Size(79, 20);
-            this.mnuParametros.Text = "Parâmetros";
-            // 
-            // CadastroBairroMenu
-            // 
-            this.CadastroBairroMenu.Name = "CadastroBairroMenu";
-            this.CadastroBairroMenu.Size = new System.Drawing.Size(193, 22);
-            this.CadastroBairroMenu.Text = "Cadastro de Bairros";
-            // 
-            // CadastroPaisMenu
-            // 
-            this.CadastroPaisMenu.Name = "CadastroPaisMenu";
-            this.CadastroPaisMenu.Size = new System.Drawing.Size(193, 22);
-            this.CadastroPaisMenu.Text = "Cadastro de Países";
-            // 
-            // CadastroProfissaoMenu
-            // 
-            this.CadastroProfissaoMenu.Name = "CadastroProfissaoMenu";
-            this.CadastroProfissaoMenu.Size = new System.Drawing.Size(193, 22);
-            this.CadastroProfissaoMenu.Text = "Cadastro de Profissões";
-            // 
-            // mnuImobiliario
-            // 
-            this.mnuImobiliario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuCadastro,
-            this.relatórioToolStripMenuItem});
-            this.mnuImobiliario.Name = "mnuImobiliario";
-            this.mnuImobiliario.Size = new System.Drawing.Size(76, 20);
-            this.mnuImobiliario.Text = "Imobiliário";
-            // 
-            // mnuCadastro
-            // 
-            this.mnuCadastro.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CadastroImovelMenu,
-            this.CadastroCondominioMenu,
-            this.FaceQuadraMenu});
-            this.mnuCadastro.Name = "mnuCadastro";
-            this.mnuCadastro.Size = new System.Drawing.Size(121, 22);
-            this.mnuCadastro.Text = "Cadastro";
-            // 
-            // CadastroImovelMenu
-            // 
-            this.CadastroImovelMenu.Name = "CadastroImovelMenu";
-            this.CadastroImovelMenu.Size = new System.Drawing.Size(156, 22);
-            this.CadastroImovelMenu.Text = "Imóvel";
-            // 
-            // CadastroCondominioMenu
-            // 
-            this.CadastroCondominioMenu.Name = "CadastroCondominioMenu";
-            this.CadastroCondominioMenu.Size = new System.Drawing.Size(156, 22);
-            this.CadastroCondominioMenu.Text = "Condomínios";
-            // 
-            // FaceQuadraMenu
-            // 
-            this.FaceQuadraMenu.Name = "FaceQuadraMenu";
-            this.FaceQuadraMenu.Size = new System.Drawing.Size(156, 22);
-            this.FaceQuadraMenu.Text = "Face de Quadra";
-            // 
-            // relatórioToolStripMenuItem
-            // 
-            this.relatórioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ComunicadoIsencaoMenu});
-            this.relatórioToolStripMenuItem.Name = "relatórioToolStripMenuItem";
-            this.relatórioToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
-            this.relatórioToolStripMenuItem.Text = "Relatório";
-            // 
-            // ComunicadoIsencaoMenu
-            // 
-            this.ComunicadoIsencaoMenu.Name = "ComunicadoIsencaoMenu";
-            this.ComunicadoIsencaoMenu.Size = new System.Drawing.Size(202, 22);
-            this.ComunicadoIsencaoMenu.Text = "Comunicado de Isenção";
-            // 
-            // mnuMobiliario
-            // 
-            this.mnuMobiliario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuMobiliarioCadastro,
-            this.tabelasToolStripMenuItem});
-            this.mnuMobiliario.Name = "mnuMobiliario";
-            this.mnuMobiliario.Size = new System.Drawing.Size(73, 20);
-            this.mnuMobiliario.Text = "Mobiliário";
-            // 
-            // mnuMobiliarioCadastro
-            // 
-            this.mnuMobiliarioCadastro.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CadastroEmpresaMenu,
-            this.EscritorioContabilMenu});
-            this.mnuMobiliarioCadastro.Name = "mnuMobiliarioCadastro";
-            this.mnuMobiliarioCadastro.Size = new System.Drawing.Size(121, 22);
-            this.mnuMobiliarioCadastro.Text = "Cadastro";
-            // 
-            // CadastroEmpresaMenu
-            // 
-            this.CadastroEmpresaMenu.Name = "CadastroEmpresaMenu";
-            this.CadastroEmpresaMenu.Size = new System.Drawing.Size(169, 22);
-            this.CadastroEmpresaMenu.Text = "Empresa";
-            // 
-            // EscritorioContabilMenu
-            // 
-            this.EscritorioContabilMenu.Name = "EscritorioContabilMenu";
-            this.EscritorioContabilMenu.Size = new System.Drawing.Size(169, 22);
-            this.EscritorioContabilMenu.Text = "Escritório contábil";
-            // 
-            // tabelasToolStripMenuItem
-            // 
-            this.tabelasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AtividadeEmpresaMenu});
-            this.tabelasToolStripMenuItem.Name = "tabelasToolStripMenuItem";
-            this.tabelasToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
-            this.tabelasToolStripMenuItem.Text = "Tabelas";
-            // 
-            // AtividadeEmpresaMenu
-            // 
-            this.AtividadeEmpresaMenu.Name = "AtividadeEmpresaMenu";
-            this.AtividadeEmpresaMenu.Size = new System.Drawing.Size(203, 22);
-            this.AtividadeEmpresaMenu.Text = "Atividades das empresas";
-            // 
-            // mnuAtendimento
-            // 
-            this.mnuAtendimento.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CadastroCidadaoMenu,
-            this.toolStripMenuItem1});
-            this.mnuAtendimento.Name = "mnuAtendimento";
-            this.mnuAtendimento.Size = new System.Drawing.Size(89, 20);
-            this.mnuAtendimento.Text = "Atendimento";
-            // 
-            // CadastroCidadaoMenu
-            // 
-            this.CadastroCidadaoMenu.Name = "CadastroCidadaoMenu";
-            this.CadastroCidadaoMenu.Size = new System.Drawing.Size(195, 22);
-            this.CadastroCidadaoMenu.Text = "Cadastro de cidadão";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(195, 22);
-            this.toolStripMenuItem1.Text = "Extrato do contribuinte";
-            // 
-            // mnuTributario
-            // 
-            this.mnuTributario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuTributarioTabelas,
-            this.dividaAtivaToolStripMenuItem,
-            this.bancosToolStripMenuItem});
-            this.mnuTributario.Name = "mnuTributario";
-            this.mnuTributario.Size = new System.Drawing.Size(70, 20);
-            this.mnuTributario.Text = "Tributário";
-            // 
-            // mnuTributarioTabelas
-            // 
-            this.mnuTributarioTabelas.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CadastroLancamentoMenu,
-            this.CadastroTributosMenu});
-            this.mnuTributarioTabelas.Name = "mnuTributarioTabelas";
-            this.mnuTributarioTabelas.Size = new System.Drawing.Size(137, 22);
-            this.mnuTributarioTabelas.Text = "Tabelas";
-            // 
-            // CadastroLancamentoMenu
-            // 
-            this.CadastroLancamentoMenu.Name = "CadastroLancamentoMenu";
-            this.CadastroLancamentoMenu.Size = new System.Drawing.Size(208, 22);
-            this.CadastroLancamentoMenu.Text = "Cadastro de lançamentos";
-            // 
-            // CadastroTributosMenu
-            // 
-            this.CadastroTributosMenu.Name = "CadastroTributosMenu";
-            this.CadastroTributosMenu.Size = new System.Drawing.Size(208, 22);
-            this.CadastroTributosMenu.Text = "Cadastro de tributos";
-            // 
-            // dividaAtivaToolStripMenuItem
-            // 
-            this.dividaAtivaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CartaCobrancaMenu});
-            this.dividaAtivaToolStripMenuItem.Name = "dividaAtivaToolStripMenuItem";
-            this.dividaAtivaToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
-            this.dividaAtivaToolStripMenuItem.Text = "Divida Ativa";
-            // 
-            // CartaCobrancaMenu
-            // 
-            this.CartaCobrancaMenu.Name = "CartaCobrancaMenu";
-            this.CartaCobrancaMenu.Size = new System.Drawing.Size(170, 22);
-            this.CartaCobrancaMenu.Text = "Carta de cobrança";
-            // 
-            // bancosToolStripMenuItem
-            // 
-            this.bancosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.RegistroBancarioMenu});
-            this.bancosToolStripMenuItem.Name = "bancosToolStripMenuItem";
-            this.bancosToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
-            this.bancosToolStripMenuItem.Text = "Bancos";
-            // 
-            // RegistroBancarioMenu
-            // 
-            this.RegistroBancarioMenu.Name = "RegistroBancarioMenu";
-            this.RegistroBancarioMenu.Size = new System.Drawing.Size(166, 22);
-            this.RegistroBancarioMenu.Text = "Registro bancário";
-            // 
-            // mnuProtocolo
-            // 
-            this.mnuProtocolo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tabelasBásicasToolStripMenuItem,
-            this.mnuControleProcesso,
-            this.relatóriosToolStripMenuItem});
-            this.mnuProtocolo.Name = "mnuProtocolo";
-            this.mnuProtocolo.Size = new System.Drawing.Size(71, 20);
-            this.mnuProtocolo.Text = "Protocolo";
-            // 
-            // tabelasBásicasToolStripMenuItem
-            // 
-            this.tabelasBásicasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.documentaçãoParaProcessosToolStripMenuItem,
-            this.despachosDosTrâmitesToolStripMenuItem,
-            this.assuntosDoProcessoToolStripMenuItem,
-            this.localDeTramitaçãoDeProcessosToolStripMenuItem});
-            this.tabelasBásicasToolStripMenuItem.Name = "tabelasBásicasToolStripMenuItem";
-            this.tabelasBásicasToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.tabelasBásicasToolStripMenuItem.Text = "Tabelas básicas";
-            // 
-            // documentaçãoParaProcessosToolStripMenuItem
-            // 
-            this.documentaçãoParaProcessosToolStripMenuItem.Name = "documentaçãoParaProcessosToolStripMenuItem";
-            this.documentaçãoParaProcessosToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
-            this.documentaçãoParaProcessosToolStripMenuItem.Text = "Documentação para processos";
-            // 
-            // despachosDosTrâmitesToolStripMenuItem
-            // 
-            this.despachosDosTrâmitesToolStripMenuItem.Name = "despachosDosTrâmitesToolStripMenuItem";
-            this.despachosDosTrâmitesToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
-            this.despachosDosTrâmitesToolStripMenuItem.Text = "Despachos dos trâmites";
-            // 
-            // assuntosDoProcessoToolStripMenuItem
-            // 
-            this.assuntosDoProcessoToolStripMenuItem.Name = "assuntosDoProcessoToolStripMenuItem";
-            this.assuntosDoProcessoToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
-            this.assuntosDoProcessoToolStripMenuItem.Text = "Assuntos do processo";
-            // 
-            // localDeTramitaçãoDeProcessosToolStripMenuItem
-            // 
-            this.localDeTramitaçãoDeProcessosToolStripMenuItem.Name = "localDeTramitaçãoDeProcessosToolStripMenuItem";
-            this.localDeTramitaçãoDeProcessosToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
-            this.localDeTramitaçãoDeProcessosToolStripMenuItem.Text = "Local de tramitação de processos";
-            // 
-            // mnuControleProcesso
-            // 
-            this.mnuControleProcesso.Name = "mnuControleProcesso";
-            this.mnuControleProcesso.Size = new System.Drawing.Size(191, 22);
-            this.mnuControleProcesso.Text = "Controle de processos";
-            // 
-            // relatóriosToolStripMenuItem
-            // 
-            this.relatóriosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ProcessoAtrasoMenu});
-            this.relatóriosToolStripMenuItem.Name = "relatóriosToolStripMenuItem";
-            this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.relatóriosToolStripMenuItem.Text = "Relatórios";
-            // 
-            // ProcessoAtrasoMenu
-            // 
-            this.ProcessoAtrasoMenu.Name = "ProcessoAtrasoMenu";
-            this.ProcessoAtrasoMenu.Size = new System.Drawing.Size(181, 22);
-            this.ProcessoAtrasoMenu.Text = "Processos em atraso";
-            // 
-            // mnuOutros
-            // 
-            this.mnuOutros.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ConfigMenu,
-            this.mnuSecurity,
-            this.administrativoToolStripMenuItem});
-            this.mnuOutros.Name = "mnuOutros";
-            this.mnuOutros.Size = new System.Drawing.Size(55, 20);
-            this.mnuOutros.Text = "Outros";
-            // 
-            // ConfigMenu
-            // 
-            this.ConfigMenu.Name = "ConfigMenu";
-            this.ConfigMenu.Size = new System.Drawing.Size(152, 22);
-            this.ConfigMenu.Text = "Configuração";
-            // 
-            // mnuSecurity
-            // 
-            this.mnuSecurity.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CadastroUsuariosMenu,
-            this.CadastroEventoMenu,
-            this.AtribuicaoAcessoMenu});
-            this.mnuSecurity.Name = "mnuSecurity";
-            this.mnuSecurity.Size = new System.Drawing.Size(152, 22);
-            this.mnuSecurity.Text = "Segurança";
-            // 
-            // CadastroUsuariosMenu
-            // 
-            this.CadastroUsuariosMenu.Name = "CadastroUsuariosMenu";
-            this.CadastroUsuariosMenu.Size = new System.Drawing.Size(188, 22);
-            this.CadastroUsuariosMenu.Text = "Cadastro de usuários";
-            // 
-            // CadastroEventoMenu
-            // 
-            this.CadastroEventoMenu.Name = "CadastroEventoMenu";
-            this.CadastroEventoMenu.Size = new System.Drawing.Size(188, 22);
-            this.CadastroEventoMenu.Text = "Eventos do sistema";
-            // 
-            // AtribuicaoAcessoMenu
-            // 
-            this.AtribuicaoAcessoMenu.Name = "AtribuicaoAcessoMenu";
-            this.AtribuicaoAcessoMenu.Size = new System.Drawing.Size(188, 22);
-            this.AtribuicaoAcessoMenu.Text = "Atribuição de acessos";
-            // 
-            // administrativoToolStripMenuItem
-            // 
-            this.administrativoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CalculoImpostoMenu});
-            this.administrativoToolStripMenuItem.Name = "administrativoToolStripMenuItem";
-            this.administrativoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.administrativoToolStripMenuItem.Text = "Administrativo";
-            // 
-            // CalculoImpostoMenu
-            // 
-            this.CalculoImpostoMenu.Name = "CalculoImpostoMenu";
-            this.CalculoImpostoMenu.Size = new System.Drawing.Size(177, 22);
-            this.CalculoImpostoMenu.Text = "Calculo de Imposto";
-            // 
-            // mnuJanela
-            // 
-            this.mnuJanela.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.minimizarTodasToolStripMenuItem,
-            this.restaurarTodasToolStripMenuItem,
-            this.fecharTodasToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.emCascataToolStripMenuItem,
-            this.ladoALadoToolStripMenuItem});
-            this.mnuJanela.Name = "mnuJanela";
-            this.mnuJanela.Size = new System.Drawing.Size(51, 20);
-            this.mnuJanela.Text = "Janela";
-            // 
-            // minimizarTodasToolStripMenuItem
-            // 
-            this.minimizarTodasToolStripMenuItem.Name = "minimizarTodasToolStripMenuItem";
-            this.minimizarTodasToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.minimizarTodasToolStripMenuItem.Text = "Minimizar todas";
-            // 
-            // restaurarTodasToolStripMenuItem
-            // 
-            this.restaurarTodasToolStripMenuItem.Name = "restaurarTodasToolStripMenuItem";
-            this.restaurarTodasToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.restaurarTodasToolStripMenuItem.Text = "Restaurar todas";
-            // 
-            // fecharTodasToolStripMenuItem
-            // 
-            this.fecharTodasToolStripMenuItem.Name = "fecharTodasToolStripMenuItem";
-            this.fecharTodasToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.fecharTodasToolStripMenuItem.Text = "Fechar todas";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(156, 6);
-            // 
-            // emCascataToolStripMenuItem
-            // 
-            this.emCascataToolStripMenuItem.Name = "emCascataToolStripMenuItem";
-            this.emCascataToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.emCascataToolStripMenuItem.Text = "Em cascata";
-            // 
-            // ladoALadoToolStripMenuItem
-            // 
-            this.ladoALadoToolStripMenuItem.Name = "ladoALadoToolStripMenuItem";
-            this.ladoALadoToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.ladoALadoToolStripMenuItem.Text = "Lado a lado";
-            // 
-            // testeToolStripMenuItem
-            // 
-            this.testeToolStripMenuItem.Name = "testeToolStripMenuItem";
-            this.testeToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.testeToolStripMenuItem.Text = "teste";
+            // GridPanel
+            // 
+            this.GridPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.GridPanel.BackColor = System.Drawing.Color.Linen;
+            this.GridPanel.BorderColor = System.Drawing.Color.Gray;
+            this.GridPanel.Controls.Add(this.ObservacaoPanel);
+            this.GridPanel.Controls.Add(this.DocumentoPanel);
+            this.GridPanel.Controls.Add(this.ExtratoDataGrid);
+            this.GridPanel.GradientEndColor = System.Drawing.SystemColors.Control;
+            this.GridPanel.GradientStartColor = System.Drawing.Color.White;
+            this.GridPanel.Image = null;
+            this.GridPanel.ImageLocation = new System.Drawing.Point(4, 4);
+            this.GridPanel.Location = new System.Drawing.Point(6, 70);
+            this.GridPanel.Name = "GridPanel";
+            this.GridPanel.ShadowOffSet = 3;
+            this.GridPanel.Size = new System.Drawing.Size(955, 498);
+            this.GridPanel.TabIndex = 120;
+            // 
+            // ObservacaoGeralMenu
+            // 
+            this.ObservacaoGeralMenu.Name = "ObservacaoGeralMenu";
+            this.ObservacaoGeralMenu.Size = new System.Drawing.Size(180, 22);
+            this.ObservacaoGeralMenu.Text = "Geral";
+            this.ObservacaoGeralMenu.Click += new System.EventHandler(this.ObservacaoGeralMenu_Click);
+            // 
+            // ObservacaoParcelaMenu
+            // 
+            this.ObservacaoParcelaMenu.Name = "ObservacaoParcelaMenu";
+            this.ObservacaoParcelaMenu.Size = new System.Drawing.Size(180, 22);
+            this.ObservacaoParcelaMenu.Text = "Parcela";
+            this.ObservacaoParcelaMenu.Click += new System.EventHandler(this.ObservacaoParcelaMenu_Click);
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.toolStripStatusLabel2.BorderStyle = System.Windows.Forms.Border3DStyle.RaisedInner;
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(4, 17);
+            // 
+            // TipoCadastroLabel
+            // 
+            this.TipoCadastroLabel.Name = "TipoCadastroLabel";
+            this.TipoCadastroLabel.Size = new System.Drawing.Size(22, 17);
+            this.TipoCadastroLabel.Text = "     ";
+            // 
+            // SituacaoCadastroLabel
+            // 
+            this.SituacaoCadastroLabel.Name = "SituacaoCadastroLabel";
+            this.SituacaoCadastroLabel.Size = new System.Drawing.Size(16, 17);
+            this.SituacaoCadastroLabel.Text = "   ";
+            // 
+            // toolStripStatusLabel4
+            // 
+            this.toolStripStatusLabel4.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.toolStripStatusLabel4.BorderStyle = System.Windows.Forms.Border3DStyle.RaisedInner;
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(4, 17);
+            // 
+            // SerasaLabel
+            // 
+            this.SerasaLabel.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.SerasaLabel.ForeColor = System.Drawing.Color.DarkRed;
+            this.SerasaLabel.Name = "SerasaLabel";
+            this.SerasaLabel.Size = new System.Drawing.Size(136, 17);
+            this.SerasaLabel.Text = "Incluído no Serasa";
             // 
             // Extrato
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Linen;
             this.ClientSize = new System.Drawing.Size(964, 593);
             this.Controls.Add(this.FiltroPanel);
             this.Controls.Add(this.GridPanel);
@@ -1571,16 +1238,17 @@
             this.sBar.ResumeLayout(false);
             this.sBar.PerformLayout();
             this.mnuMain.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ExtratoDataGrid)).EndInit();
             this.a1Panel2.ResumeLayout(false);
             this.a1Panel2.PerformLayout();
+            this.MainMenu.ResumeLayout(false);
+            this.MainMenu.PerformLayout();
             this.FiltroPanel.ResumeLayout(false);
             this.FiltroPanel.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.GridPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ExtratoDataGrid)).EndInit();
             this.DocumentoPanel.ResumeLayout(false);
             this.DocumentoPanel.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -1589,10 +1257,7 @@
             this.ObservacaoPanel.PerformLayout();
             this.tBar.ResumeLayout(false);
             this.tBar.PerformLayout();
-            this.MainMenu.ResumeLayout(false);
-            this.MainMenu.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.GridPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1611,8 +1276,6 @@
         private System.Windows.Forms.ToolStripStatusLabel lblTotalSel;
         internal System.Windows.Forms.ContextMenuStrip mnuMain;
         internal System.Windows.Forms.ToolStripMenuItem mnuEditaParcela;
-        internal System.Windows.Forms.DataGridView ExtratoDataGrid;
-        internal System.Windows.Forms.Label Label1;
         private System.Windows.Forms.TextBox CodigoText;
         private System.Windows.Forms.Button RefreshButton;
         private System.Windows.Forms.Button ConsultarCodigoButton;
@@ -1630,13 +1293,27 @@
         private System.Windows.Forms.Button BtSelectLancamento;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button BtSelectStatus;
-        private Owf.Controls.A1Panel GridPanel;
         private System.Windows.Forms.CheckBox ChkParcelaOculta;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox CmbDivAtiva;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox CmbAjuizado;
         private System.Windows.Forms.Button OcultarButton;
+        private System.Windows.Forms.MenuStrip MainMenu;
+        private System.Windows.Forms.ToolStripMenuItem FiltroMenu;
+        private System.Windows.Forms.ToolStripMenuItem ObsGeralMenu;
+        private System.Windows.Forms.ToolStripMenuItem Detalhemenu;
+        private System.Windows.Forms.ToolStripMenuItem ExtratoMenu;
+        private System.Windows.Forms.ToolStripMenuItem DocumentoMenu;
+        private System.Windows.Forms.ToolStripMenuItem ParcelamentoMenu;
+        private System.Windows.Forms.ToolStripMenuItem DamMenu;
+        private System.Windows.Forms.ToolStripMenuItem ExecFiscalMenu;
+        private System.Windows.Forms.ToolStripMenuItem OutrosMenu;
+        internal System.Windows.Forms.Label Label1;
+        private System.Windows.Forms.ToolStripMenuItem filtradoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem completoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dividaAtivaToolStripMenuItem;
+        internal System.Windows.Forms.DataGridView ExtratoDataGrid;
         private System.Windows.Forms.DataGridViewImageColumn imgCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ano;
         private System.Windows.Forms.DataGridViewTextBoxColumn lancamento;
@@ -1653,22 +1330,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn exec_fiscal;
         private System.Windows.Forms.DataGridViewTextBoxColumn certidao;
         private System.Windows.Forms.DataGridViewTextBoxColumn data_remessa;
-        private Owf.Controls.A1Panel ObservacaoPanel;
-        private System.Windows.Forms.TextBox ObservacaoText;
-        private System.Windows.Forms.ListView ObservacaoListView;
-        private System.Windows.Forms.ToolStrip tBar;
-        private System.Windows.Forms.ToolStripButton NovaObsButton;
-        private System.Windows.Forms.ToolStripButton AlterarObsButton;
-        private System.Windows.Forms.ToolStripButton ExcluirObsButton;
-        private System.Windows.Forms.ToolStripButton SairObsButton;
-        private System.Windows.Forms.ToolStripButton GravarObsButton;
-        private System.Windows.Forms.ToolStripButton CancelarObsButton;
-        private System.Windows.Forms.Label TituloObsLabel;
-        private System.Windows.Forms.ColumnHeader Seq;
-        private System.Windows.Forms.ColumnHeader Data;
-        private System.Windows.Forms.ColumnHeader User;
-        private System.Windows.Forms.ColumnHeader Obs;
-        private System.Windows.Forms.ToolStripButton ZoomButton;
         private Owf.Controls.A1Panel DocumentoPanel;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton PesquisarDocumentoButton;
@@ -1678,69 +1339,30 @@
         private System.Windows.Forms.ColumnHeader Doc;
         private System.Windows.Forms.ColumnHeader DataDoc;
         private System.Windows.Forms.ColumnHeader ValorGuia;
-        private System.Windows.Forms.MenuStrip MainMenu;
-        private System.Windows.Forms.ToolStripMenuItem FiltroMenu;
-        private System.Windows.Forms.ToolStripMenuItem ObsGeralMenu;
-        private System.Windows.Forms.ToolStripMenuItem Detalhemenu;
-        private System.Windows.Forms.ToolStripMenuItem ExtratoMenu;
-        private System.Windows.Forms.ToolStripMenuItem DocumentoMenu;
-        private System.Windows.Forms.ToolStripMenuItem ParcelamentoMenu;
-        private System.Windows.Forms.ToolStripMenuItem DamMenu;
-        private System.Windows.Forms.ToolStripMenuItem ExecFiscalMenu;
-        private System.Windows.Forms.ToolStripMenuItem OutrosMenu;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem mnuParametros;
-        private System.Windows.Forms.ToolStripMenuItem CadastroBairroMenu;
-        private System.Windows.Forms.ToolStripMenuItem CadastroPaisMenu;
-        private System.Windows.Forms.ToolStripMenuItem CadastroProfissaoMenu;
-        private System.Windows.Forms.ToolStripMenuItem mnuImobiliario;
-        private System.Windows.Forms.ToolStripMenuItem mnuCadastro;
-        private System.Windows.Forms.ToolStripMenuItem CadastroImovelMenu;
-        private System.Windows.Forms.ToolStripMenuItem CadastroCondominioMenu;
-        private System.Windows.Forms.ToolStripMenuItem FaceQuadraMenu;
-        private System.Windows.Forms.ToolStripMenuItem relatórioToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ComunicadoIsencaoMenu;
-        private System.Windows.Forms.ToolStripMenuItem mnuMobiliario;
-        private System.Windows.Forms.ToolStripMenuItem mnuMobiliarioCadastro;
-        private System.Windows.Forms.ToolStripMenuItem CadastroEmpresaMenu;
-        private System.Windows.Forms.ToolStripMenuItem EscritorioContabilMenu;
-        private System.Windows.Forms.ToolStripMenuItem tabelasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem AtividadeEmpresaMenu;
-        private System.Windows.Forms.ToolStripMenuItem mnuAtendimento;
-        private System.Windows.Forms.ToolStripMenuItem CadastroCidadaoMenu;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem mnuTributario;
-        private System.Windows.Forms.ToolStripMenuItem mnuTributarioTabelas;
-        private System.Windows.Forms.ToolStripMenuItem CadastroLancamentoMenu;
-        private System.Windows.Forms.ToolStripMenuItem CadastroTributosMenu;
-        private System.Windows.Forms.ToolStripMenuItem dividaAtivaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem CartaCobrancaMenu;
-        private System.Windows.Forms.ToolStripMenuItem bancosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem RegistroBancarioMenu;
-        private System.Windows.Forms.ToolStripMenuItem mnuProtocolo;
-        private System.Windows.Forms.ToolStripMenuItem tabelasBásicasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem documentaçãoParaProcessosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem despachosDosTrâmitesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem assuntosDoProcessoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem localDeTramitaçãoDeProcessosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mnuControleProcesso;
-        private System.Windows.Forms.ToolStripMenuItem relatóriosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ProcessoAtrasoMenu;
-        private System.Windows.Forms.ToolStripMenuItem mnuOutros;
-        private System.Windows.Forms.ToolStripMenuItem ConfigMenu;
-        private System.Windows.Forms.ToolStripMenuItem mnuSecurity;
-        private System.Windows.Forms.ToolStripMenuItem CadastroUsuariosMenu;
-        private System.Windows.Forms.ToolStripMenuItem CadastroEventoMenu;
-        private System.Windows.Forms.ToolStripMenuItem AtribuicaoAcessoMenu;
-        private System.Windows.Forms.ToolStripMenuItem administrativoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem CalculoImpostoMenu;
-        private System.Windows.Forms.ToolStripMenuItem mnuJanela;
-        private System.Windows.Forms.ToolStripMenuItem minimizarTodasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem restaurarTodasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fecharTodasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem emCascataToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ladoALadoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem testeToolStripMenuItem;
+        private System.Windows.Forms.ToolStrip miniToolStrip;
+        private Owf.Controls.A1Panel ObservacaoPanel;
+        private System.Windows.Forms.Label TituloObsLabel;
+        private System.Windows.Forms.ToolStrip tBar;
+        private System.Windows.Forms.ToolStripButton NovaObsButton;
+        private System.Windows.Forms.ToolStripButton AlterarObsButton;
+        private System.Windows.Forms.ToolStripButton ExcluirObsButton;
+        private System.Windows.Forms.ToolStripButton GravarObsButton;
+        private System.Windows.Forms.ToolStripButton CancelarObsButton;
+        private System.Windows.Forms.ToolStripButton SairObsButton;
+        private System.Windows.Forms.ToolStripButton ZoomButton;
+        private System.Windows.Forms.TextBox ObservacaoText;
+        private System.Windows.Forms.ListView ObservacaoListView;
+        private System.Windows.Forms.ColumnHeader Seq;
+        private System.Windows.Forms.ColumnHeader Data;
+        private System.Windows.Forms.ColumnHeader User;
+        private System.Windows.Forms.ColumnHeader Obs;
+        private Owf.Controls.A1Panel GridPanel;
+        private System.Windows.Forms.ToolStripMenuItem ObservacaoGeralMenu;
+        private System.Windows.Forms.ToolStripMenuItem ObservacaoParcelaMenu;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel TipoCadastroLabel;
+        private System.Windows.Forms.ToolStripStatusLabel SituacaoCadastroLabel;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.ToolStripStatusLabel SerasaLabel;
     }
 }
