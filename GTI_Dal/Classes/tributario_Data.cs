@@ -287,7 +287,8 @@ namespace GTI_Dal.Classes {
                         Valorpago = item.Valorpago,
                         Valorpagoreal = item.Valorpagoreal,
                         Abrevtributo = item.Abrevtributo,
-                        Codtributo = item.Codtributo
+                        Codtributo = item.Codtributo,
+                        UserId=item.UserId
                     };
                     reg.Valortributo = item.Valortributo;
                     reg.Anoexecfiscal = item.Anoexecfiscal;
@@ -355,7 +356,7 @@ namespace GTI_Dal.Classes {
                         Valorpago = item.Valorpago,
                         Valorpagoreal = item.Valorpagoreal,
                         Abrevtributo = item.Abrevtributo,
-                        Codtributo = item.Codtributo
+                        Codtributo = item.Codtributo,
                     };
                     reg.Valortributo = item.Valortributo;
                     reg.Anoexecfiscal = item.Anoexecfiscal;
@@ -413,7 +414,8 @@ namespace GTI_Dal.Classes {
                         Numexecfiscal = item.Numexecfiscal,
                         Processocnj = item.Processocnj,
                         Prot_certidao = item.Prot_certidao,
-                        Prot_dtremessa = item.Prot_dtremessa
+                        Prot_dtremessa = item.Prot_dtremessa,
+                        UserId=item.UserId
                     };
                     reg.Valorpago = item.Valorpago==null?0:item.Valorpago;
                     reg.Valorpagoreal = item.Valorpagoreal==null?0:item.Valorpagoreal;
@@ -1952,6 +1954,52 @@ Proximo:;
             }
             return bRet;
         }
+
+        public DebitoPagoStruct Retorna_DebitoPago_Parcela(Debitoparcela Reg) {
+            
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                DebitoPagoStruct ret = new DebitoPagoStruct();
+                var item = (from m in db.Debitopago
+                           join b in db.Banco on m.Codbanco equals b.Codbanco into bm from b in bm.DefaultIfEmpty()
+                           where m.Codreduzido==Reg.Codreduzido && m.Anoexercicio==Reg.Anoexercicio && m.Codlancamento==Reg.Codlancamento && m.Seqlancamento==Reg.Seqlancamento && m.Numparcela==Reg.Numparcela && m.Codcomplemento==Reg.Codcomplemento && m.Restituido == null
+                           orderby m.Seqpag
+                           select new DebitoPagoStruct {
+                               Ano = m.Anoexercicio, Banco_Codigo = m.Codbanco, Banco_Nome = b.Nomebanco,
+                               Codigo = m.Codreduzido, Codigo_Agencia = m.Codagencia, Complemento = m.Codcomplemento, Data_Pagamento = m.Datapagamento, Data_Recebimento = m.Datarecebimento,
+                               Lancamento = m.Codlancamento, Parcela = m.Numparcela, Restituido = m.Restituido, Sequencia = m.Seqlancamento, Sequencia_Pagamento = m.Seqpag, Valor_Pago = m.Valorpago,
+                               Valor_Pago_Real = m.Valorpagoreal, Data_Pagamento_Calc = m.Datapagamentocalc, Numero_Documento = m.Numdocumento,Valor_Tarifa=m.Valortarifa,Valor_Dif=m.Valordif
+                           }).FirstOrDefault();
+                if (item == null)
+                    ret= null;
+                else {
+                    ret = new DebitoPagoStruct {
+                        Codigo = item.Codigo,
+                        Ano = item.Ano,
+                        Banco_Codigo = item.Banco_Codigo,
+                        Banco_Nome = item.Banco_Nome,
+                        Codigo_Agencia = item.Codigo_Agencia,
+                        Complemento = item.Complemento,
+                        Data_Pagamento = item.Data_Pagamento,
+                        Data_Recebimento = item.Data_Recebimento,
+                        Lancamento = item.Lancamento,
+                        Numero_Documento = item.Numero_Documento,
+                        Parcela = item.Parcela,
+                        Restituido = item.Restituido,
+                        Sequencia = item.Sequencia,
+                        Sequencia_Pagamento = item.Sequencia_Pagamento,
+                        Valor_Pago = item.Valor_Pago,
+                        Valor_Pago_Real = item.Valor_Pago_Real,
+                        Valor_Tarifa = item.Valor_Tarifa,
+                        Valor_Dif = item.Valor_Dif,
+                        Data_Pagamento_Calc = item.Data_Pagamento_Calc
+                    };
+                }
+                return ret;
+            }
+        }
+
+
+
 
     }//end class
 }

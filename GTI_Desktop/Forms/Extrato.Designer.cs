@@ -1197,7 +1197,7 @@
             this.exec_fiscal.HeaderText = "Exec.Fiscal";
             this.exec_fiscal.Name = "exec_fiscal";
             this.exec_fiscal.ReadOnly = true;
-            this.exec_fiscal.Width = 160;
+            this.exec_fiscal.Width = 155;
             // 
             // certidao
             // 

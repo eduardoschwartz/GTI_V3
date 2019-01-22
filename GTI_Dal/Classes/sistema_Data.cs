@@ -206,6 +206,14 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public string Retorna_User_FullName(int idUser) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                string Sql = (from u in db.Usuario where u.Id == idUser select u.Nomecompleto).FirstOrDefault();
+                return Sql;
+            }
+        }
+
+
         public string Retorna_User_LoginName(string fullName) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 string Sql = (from u in db.Usuario where u.Nomecompleto == fullName select u.Nomelogin).FirstOrDefault();

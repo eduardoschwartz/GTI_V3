@@ -65,14 +65,17 @@ namespace GTI_Models.Models {
         [Column(Order = 7)]
         public byte Sequencia_Pagamento { get; set; }
         public DateTime Data_Pagamento { get; set; }
+        public DateTime? Data_Pagamento_Calc { get; set; }
         public DateTime Data_Recebimento { get; set; }
         public decimal Valor_Pago { get; set; }
+        public decimal? Valor_Tarifa { get; set; }
         public short? Banco_Codigo { get; set; }
         public string Banco_Nome { get; set; }
         public int? Codigo_Agencia { get; set; }
         public DateTime? Restituido { get; set; }
         public int? Numero_Documento { get; set; }
         public decimal? Valor_Pago_Real { get; set; }
+        public decimal? Valor_Dif { get; set; }
     }
 
 }

@@ -58,6 +58,7 @@ namespace GTI_Models.Models {
         public string Processocnj { get; set; }
         public int? Prot_certidao { get; set; }
         public DateTime? Prot_dtremessa { get; set; }
+        public int? UserId { get; set; }
         
     }
 

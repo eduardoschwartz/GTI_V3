@@ -16,6 +16,7 @@ namespace GTI_Models.Models {
         public string Emissor { get; set; }
         public decimal? Valorguia { get; set; }
         public bool? Registrado { get; set; }
+        public int? Userid { get; set; }
     }
 
 

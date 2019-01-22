@@ -24,17 +24,17 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            this.Label43 = new System.Windows.Forms.Label();
-            this.lblBanco = new System.Windows.Forms.Label();
-            this.lblNumDoc = new System.Windows.Forms.Label();
-            this.lblValorPago = new System.Windows.Forms.Label();
-            this.lblValorDif = new System.Windows.Forms.Label();
-            this.lblValorAtual = new System.Windows.Forms.Label();
-            this.lblValorLanc = new System.Windows.Forms.Label();
-            this.lblDataReceita = new System.Windows.Forms.Label();
-            this.lblDataPagto = new System.Windows.Forms.Label();
-            this.lblDataVencto = new System.Windows.Forms.Label();
-            this.lblDataBase = new System.Windows.Forms.Label();
+            this.DuplicadoLabel = new System.Windows.Forms.Label();
+            this.BancoLabel = new System.Windows.Forms.Label();
+            this.NumDocLabel = new System.Windows.Forms.Label();
+            this.ValorPagoLabel = new System.Windows.Forms.Label();
+            this.ValorDifLabel = new System.Windows.Forms.Label();
+            this.ValorAtualLabel = new System.Windows.Forms.Label();
+            this.ValorLancadoLabel = new System.Windows.Forms.Label();
+            this.DataReceitaLabel = new System.Windows.Forms.Label();
+            this.DataPagtoLabel = new System.Windows.Forms.Label();
+            this.DataVenctoLabel = new System.Windows.Forms.Label();
+            this.DataBaseLabel = new System.Windows.Forms.Label();
             this.Label25 = new System.Windows.Forms.Label();
             this.Label23 = new System.Windows.Forms.Label();
             this.Label24 = new System.Windows.Forms.Label();
@@ -57,19 +57,19 @@
             this.Label2 = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
             this.Col5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvTributo = new System.Windows.Forms.ListView();
+            this.TributoListView = new System.Windows.Forms.ListView();
             this.a1Panel1 = new Owf.Controls.A1Panel();
-            this.lblNumProtocolo = new System.Windows.Forms.Label();
-            this.lblProcessoCNJ = new System.Windows.Forms.Label();
-            this.lblDataRemessa = new System.Windows.Forms.Label();
+            this.NumProtocoloLabel = new System.Windows.Forms.Label();
+            this.ProcessoCNJLabel = new System.Windows.Forms.Label();
+            this.DataRemessaLabel = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.lblCertidao = new System.Windows.Forms.Label();
-            this.lblPagina = new System.Windows.Forms.Label();
-            this.lblLivro = new System.Windows.Forms.Label();
-            this.lblAjuizamento = new System.Windows.Forms.Label();
-            this.lblDataInscricao = new System.Windows.Forms.Label();
+            this.CertidaoLabel = new System.Windows.Forms.Label();
+            this.PaginaLabel = new System.Windows.Forms.Label();
+            this.LivroLabel = new System.Windows.Forms.Label();
+            this.AjuizamentoLabel = new System.Windows.Forms.Label();
+            this.DataInscricaoLabel = new System.Windows.Forms.Label();
             this.Label21 = new System.Windows.Forms.Label();
             this.Label19 = new System.Windows.Forms.Label();
             this.Label20 = new System.Windows.Forms.Label();
@@ -77,148 +77,148 @@
             this.Label18 = new System.Windows.Forms.Label();
             this.Label4 = new System.Windows.Forms.Label();
             this.a1Panel2 = new Owf.Controls.A1Panel();
-            this.label32 = new System.Windows.Forms.Label();
+            this.DataPagtoCalcLabel = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
-            this.lblDataVenctoCalc = new System.Windows.Forms.Label();
+            this.DataVenctoCalcLabel = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.lblLancamento = new System.Windows.Forms.Label();
-            this.lblNome = new System.Windows.Forms.Label();
-            this.lblStatus = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
+            this.LancamentoLabel = new System.Windows.Forms.Label();
+            this.NomeLabel = new System.Windows.Forms.Label();
+            this.StatusLabel = new System.Windows.Forms.Label();
+            this.IsentoLabel = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
+            this.DescontoLabel = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
-            this.btSenha = new System.Windows.Forms.Button();
-            this.cmdSair = new System.Windows.Forms.Button();
+            this.ImprimirButton = new System.Windows.Forms.Button();
+            this.SairButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btFindCodigo = new System.Windows.Forms.Button();
+            this.FindCodigoButton = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
-            this.lblTaxaExp = new System.Windows.Forms.Label();
+            this.TaxaExpLabel = new System.Windows.Forms.Label();
             this.a1Panel1.SuspendLayout();
             this.a1Panel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // Label43
+            // DuplicadoLabel
             // 
-            this.Label43.AutoSize = true;
-            this.Label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label43.ForeColor = System.Drawing.Color.Navy;
-            this.Label43.Location = new System.Drawing.Point(645, 302);
-            this.Label43.Name = "Label43";
-            this.Label43.Size = new System.Drawing.Size(27, 13);
-            this.Label43.TabIndex = 114;
-            this.Label43.Text = "Não";
+            this.DuplicadoLabel.AutoSize = true;
+            this.DuplicadoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DuplicadoLabel.ForeColor = System.Drawing.Color.Navy;
+            this.DuplicadoLabel.Location = new System.Drawing.Point(645, 302);
+            this.DuplicadoLabel.Name = "DuplicadoLabel";
+            this.DuplicadoLabel.Size = new System.Drawing.Size(27, 13);
+            this.DuplicadoLabel.TabIndex = 114;
+            this.DuplicadoLabel.Text = "Não";
             // 
-            // lblBanco
+            // BancoLabel
             // 
-            this.lblBanco.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBanco.ForeColor = System.Drawing.Color.Navy;
-            this.lblBanco.Location = new System.Drawing.Point(102, 200);
-            this.lblBanco.Name = "lblBanco";
-            this.lblBanco.Size = new System.Drawing.Size(88, 13);
-            this.lblBanco.TabIndex = 106;
-            this.lblBanco.Text = "000 / 0000";
-            this.lblBanco.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BancoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BancoLabel.ForeColor = System.Drawing.Color.Navy;
+            this.BancoLabel.Location = new System.Drawing.Point(102, 200);
+            this.BancoLabel.Name = "BancoLabel";
+            this.BancoLabel.Size = new System.Drawing.Size(88, 13);
+            this.BancoLabel.TabIndex = 106;
+            this.BancoLabel.Text = "000/0000";
+            this.BancoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblNumDoc
+            // NumDocLabel
             // 
-            this.lblNumDoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumDoc.ForeColor = System.Drawing.Color.Navy;
-            this.lblNumDoc.Location = new System.Drawing.Point(102, 220);
-            this.lblNumDoc.Name = "lblNumDoc";
-            this.lblNumDoc.Size = new System.Drawing.Size(88, 13);
-            this.lblNumDoc.TabIndex = 105;
-            this.lblNumDoc.Text = "0000000-0";
-            this.lblNumDoc.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.NumDocLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumDocLabel.ForeColor = System.Drawing.Color.Navy;
+            this.NumDocLabel.Location = new System.Drawing.Point(102, 220);
+            this.NumDocLabel.Name = "NumDocLabel";
+            this.NumDocLabel.Size = new System.Drawing.Size(88, 13);
+            this.NumDocLabel.TabIndex = 105;
+            this.NumDocLabel.Text = "0000000-0";
+            this.NumDocLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblValorPago
+            // ValorPagoLabel
             // 
-            this.lblValorPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblValorPago.ForeColor = System.Drawing.Color.Navy;
-            this.lblValorPago.Location = new System.Drawing.Point(102, 240);
-            this.lblValorPago.Name = "lblValorPago";
-            this.lblValorPago.Size = new System.Drawing.Size(88, 13);
-            this.lblValorPago.TabIndex = 103;
-            this.lblValorPago.Text = "0,00";
-            this.lblValorPago.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ValorPagoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ValorPagoLabel.ForeColor = System.Drawing.Color.Navy;
+            this.ValorPagoLabel.Location = new System.Drawing.Point(102, 240);
+            this.ValorPagoLabel.Name = "ValorPagoLabel";
+            this.ValorPagoLabel.Size = new System.Drawing.Size(88, 13);
+            this.ValorPagoLabel.TabIndex = 103;
+            this.ValorPagoLabel.Text = "0,00";
+            this.ValorPagoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblValorDif
+            // ValorDifLabel
             // 
-            this.lblValorDif.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblValorDif.ForeColor = System.Drawing.Color.Navy;
-            this.lblValorDif.Location = new System.Drawing.Point(102, 260);
-            this.lblValorDif.Name = "lblValorDif";
-            this.lblValorDif.Size = new System.Drawing.Size(88, 13);
-            this.lblValorDif.TabIndex = 102;
-            this.lblValorDif.Text = "0,00";
-            this.lblValorDif.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ValorDifLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ValorDifLabel.ForeColor = System.Drawing.Color.Navy;
+            this.ValorDifLabel.Location = new System.Drawing.Point(102, 260);
+            this.ValorDifLabel.Name = "ValorDifLabel";
+            this.ValorDifLabel.Size = new System.Drawing.Size(88, 13);
+            this.ValorDifLabel.TabIndex = 102;
+            this.ValorDifLabel.Text = "0,00";
+            this.ValorDifLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblValorAtual
+            // ValorAtualLabel
             // 
-            this.lblValorAtual.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblValorAtual.ForeColor = System.Drawing.Color.Navy;
-            this.lblValorAtual.Location = new System.Drawing.Point(103, 100);
-            this.lblValorAtual.Name = "lblValorAtual";
-            this.lblValorAtual.Size = new System.Drawing.Size(88, 13);
-            this.lblValorAtual.TabIndex = 101;
-            this.lblValorAtual.Text = "0,00";
-            this.lblValorAtual.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ValorAtualLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ValorAtualLabel.ForeColor = System.Drawing.Color.Navy;
+            this.ValorAtualLabel.Location = new System.Drawing.Point(103, 100);
+            this.ValorAtualLabel.Name = "ValorAtualLabel";
+            this.ValorAtualLabel.Size = new System.Drawing.Size(88, 13);
+            this.ValorAtualLabel.TabIndex = 101;
+            this.ValorAtualLabel.Text = "0,00";
+            this.ValorAtualLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblValorLanc
+            // ValorLancadoLabel
             // 
-            this.lblValorLanc.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblValorLanc.ForeColor = System.Drawing.Color.Navy;
-            this.lblValorLanc.Location = new System.Drawing.Point(103, 80);
-            this.lblValorLanc.Name = "lblValorLanc";
-            this.lblValorLanc.Size = new System.Drawing.Size(88, 13);
-            this.lblValorLanc.TabIndex = 100;
-            this.lblValorLanc.Text = "0,00";
-            this.lblValorLanc.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ValorLancadoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ValorLancadoLabel.ForeColor = System.Drawing.Color.Navy;
+            this.ValorLancadoLabel.Location = new System.Drawing.Point(103, 80);
+            this.ValorLancadoLabel.Name = "ValorLancadoLabel";
+            this.ValorLancadoLabel.Size = new System.Drawing.Size(88, 13);
+            this.ValorLancadoLabel.TabIndex = 100;
+            this.ValorLancadoLabel.Text = "0,00";
+            this.ValorLancadoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblDataReceita
+            // DataReceitaLabel
             // 
-            this.lblDataReceita.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDataReceita.ForeColor = System.Drawing.Color.Navy;
-            this.lblDataReceita.Location = new System.Drawing.Point(102, 180);
-            this.lblDataReceita.Name = "lblDataReceita";
-            this.lblDataReceita.Size = new System.Drawing.Size(88, 13);
-            this.lblDataReceita.TabIndex = 99;
-            this.lblDataReceita.Text = "01/01/1900";
-            this.lblDataReceita.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.DataReceitaLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DataReceitaLabel.ForeColor = System.Drawing.Color.Navy;
+            this.DataReceitaLabel.Location = new System.Drawing.Point(102, 180);
+            this.DataReceitaLabel.Name = "DataReceitaLabel";
+            this.DataReceitaLabel.Size = new System.Drawing.Size(88, 13);
+            this.DataReceitaLabel.TabIndex = 99;
+            this.DataReceitaLabel.Text = "  /  /    ";
+            this.DataReceitaLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblDataPagto
+            // DataPagtoLabel
             // 
-            this.lblDataPagto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDataPagto.ForeColor = System.Drawing.Color.Navy;
-            this.lblDataPagto.Location = new System.Drawing.Point(102, 140);
-            this.lblDataPagto.Name = "lblDataPagto";
-            this.lblDataPagto.Size = new System.Drawing.Size(88, 13);
-            this.lblDataPagto.TabIndex = 98;
-            this.lblDataPagto.Text = "01/01/1900";
-            this.lblDataPagto.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.DataPagtoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DataPagtoLabel.ForeColor = System.Drawing.Color.Navy;
+            this.DataPagtoLabel.Location = new System.Drawing.Point(102, 140);
+            this.DataPagtoLabel.Name = "DataPagtoLabel";
+            this.DataPagtoLabel.Size = new System.Drawing.Size(88, 13);
+            this.DataPagtoLabel.TabIndex = 98;
+            this.DataPagtoLabel.Text = "  /  /    ";
+            this.DataPagtoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblDataVencto
+            // DataVenctoLabel
             // 
-            this.lblDataVencto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDataVencto.ForeColor = System.Drawing.Color.Navy;
-            this.lblDataVencto.Location = new System.Drawing.Point(103, 40);
-            this.lblDataVencto.Name = "lblDataVencto";
-            this.lblDataVencto.Size = new System.Drawing.Size(88, 13);
-            this.lblDataVencto.TabIndex = 97;
-            this.lblDataVencto.Text = "01/01/1900";
-            this.lblDataVencto.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.DataVenctoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DataVenctoLabel.ForeColor = System.Drawing.Color.Navy;
+            this.DataVenctoLabel.Location = new System.Drawing.Point(103, 40);
+            this.DataVenctoLabel.Name = "DataVenctoLabel";
+            this.DataVenctoLabel.Size = new System.Drawing.Size(88, 13);
+            this.DataVenctoLabel.TabIndex = 97;
+            this.DataVenctoLabel.Text = "  /  /    ";
+            this.DataVenctoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblDataBase
+            // DataBaseLabel
             // 
-            this.lblDataBase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDataBase.ForeColor = System.Drawing.Color.Navy;
-            this.lblDataBase.Location = new System.Drawing.Point(103, 20);
-            this.lblDataBase.Name = "lblDataBase";
-            this.lblDataBase.Size = new System.Drawing.Size(88, 13);
-            this.lblDataBase.TabIndex = 96;
-            this.lblDataBase.Text = "01/01/1900";
-            this.lblDataBase.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.DataBaseLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DataBaseLabel.ForeColor = System.Drawing.Color.Navy;
+            this.DataBaseLabel.Location = new System.Drawing.Point(103, 20);
+            this.DataBaseLabel.Name = "DataBaseLabel";
+            this.DataBaseLabel.Size = new System.Drawing.Size(88, 13);
+            this.DataBaseLabel.TabIndex = 96;
+            this.DataBaseLabel.Text = "  /  /    ";
+            this.DataBaseLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Label25
             // 
@@ -419,44 +419,44 @@
             this.Col5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Col5.Width = 65;
             // 
-            // lvTributo
+            // TributoListView
             // 
-            this.lvTributo.BackColor = System.Drawing.Color.White;
-            this.lvTributo.CausesValidation = false;
-            this.lvTributo.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.TributoListView.BackColor = System.Drawing.Color.White;
+            this.TributoListView.CausesValidation = false;
+            this.TributoListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Col0,
             this.Col1,
             this.Col2,
             this.Col3,
             this.Col4,
             this.Col5});
-            this.lvTributo.FullRowSelect = true;
-            this.lvTributo.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.lvTributo.LabelWrap = false;
-            this.lvTributo.Location = new System.Drawing.Point(3, 21);
-            this.lvTributo.MultiSelect = false;
-            this.lvTributo.Name = "lvTributo";
-            this.lvTributo.ShowGroups = false;
-            this.lvTributo.ShowItemToolTips = true;
-            this.lvTributo.Size = new System.Drawing.Size(497, 175);
-            this.lvTributo.TabIndex = 71;
-            this.lvTributo.UseCompatibleStateImageBehavior = false;
-            this.lvTributo.View = System.Windows.Forms.View.Details;
+            this.TributoListView.FullRowSelect = true;
+            this.TributoListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.TributoListView.LabelWrap = false;
+            this.TributoListView.Location = new System.Drawing.Point(3, 21);
+            this.TributoListView.MultiSelect = false;
+            this.TributoListView.Name = "TributoListView";
+            this.TributoListView.ShowGroups = false;
+            this.TributoListView.ShowItemToolTips = true;
+            this.TributoListView.Size = new System.Drawing.Size(497, 175);
+            this.TributoListView.TabIndex = 71;
+            this.TributoListView.UseCompatibleStateImageBehavior = false;
+            this.TributoListView.View = System.Windows.Forms.View.Details;
             // 
             // a1Panel1
             // 
             this.a1Panel1.BorderColor = System.Drawing.Color.Gray;
-            this.a1Panel1.Controls.Add(this.lblNumProtocolo);
-            this.a1Panel1.Controls.Add(this.lblProcessoCNJ);
-            this.a1Panel1.Controls.Add(this.lblDataRemessa);
+            this.a1Panel1.Controls.Add(this.NumProtocoloLabel);
+            this.a1Panel1.Controls.Add(this.ProcessoCNJLabel);
+            this.a1Panel1.Controls.Add(this.DataRemessaLabel);
             this.a1Panel1.Controls.Add(this.label27);
             this.a1Panel1.Controls.Add(this.label26);
             this.a1Panel1.Controls.Add(this.label9);
-            this.a1Panel1.Controls.Add(this.lblCertidao);
-            this.a1Panel1.Controls.Add(this.lblPagina);
-            this.a1Panel1.Controls.Add(this.lblLivro);
-            this.a1Panel1.Controls.Add(this.lblAjuizamento);
-            this.a1Panel1.Controls.Add(this.lblDataInscricao);
+            this.a1Panel1.Controls.Add(this.CertidaoLabel);
+            this.a1Panel1.Controls.Add(this.PaginaLabel);
+            this.a1Panel1.Controls.Add(this.LivroLabel);
+            this.a1Panel1.Controls.Add(this.AjuizamentoLabel);
+            this.a1Panel1.Controls.Add(this.DataInscricaoLabel);
             this.a1Panel1.Controls.Add(this.Label21);
             this.a1Panel1.Controls.Add(this.Label19);
             this.a1Panel1.Controls.Add(this.Label20);
@@ -473,40 +473,40 @@
             this.a1Panel1.Size = new System.Drawing.Size(502, 91);
             this.a1Panel1.TabIndex = 119;
             // 
-            // lblNumProtocolo
+            // NumProtocoloLabel
             // 
-            this.lblNumProtocolo.AutoSize = true;
-            this.lblNumProtocolo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumProtocolo.ForeColor = System.Drawing.Color.Navy;
-            this.lblNumProtocolo.Location = new System.Drawing.Point(88, 62);
-            this.lblNumProtocolo.Name = "lblNumProtocolo";
-            this.lblNumProtocolo.Size = new System.Drawing.Size(43, 13);
-            this.lblNumProtocolo.TabIndex = 135;
-            this.lblNumProtocolo.Text = "000000";
-            this.lblNumProtocolo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.NumProtocoloLabel.AutoSize = true;
+            this.NumProtocoloLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumProtocoloLabel.ForeColor = System.Drawing.Color.Navy;
+            this.NumProtocoloLabel.Location = new System.Drawing.Point(88, 62);
+            this.NumProtocoloLabel.Name = "NumProtocoloLabel";
+            this.NumProtocoloLabel.Size = new System.Drawing.Size(43, 13);
+            this.NumProtocoloLabel.TabIndex = 135;
+            this.NumProtocoloLabel.Text = "000000";
+            this.NumProtocoloLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lblProcessoCNJ
+            // ProcessoCNJLabel
             // 
-            this.lblProcessoCNJ.AutoSize = true;
-            this.lblProcessoCNJ.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProcessoCNJ.ForeColor = System.Drawing.Color.Navy;
-            this.lblProcessoCNJ.Location = new System.Drawing.Point(242, 43);
-            this.lblProcessoCNJ.Name = "lblProcessoCNJ";
-            this.lblProcessoCNJ.Size = new System.Drawing.Size(43, 13);
-            this.lblProcessoCNJ.TabIndex = 134;
-            this.lblProcessoCNJ.Text = "000000";
-            this.lblProcessoCNJ.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ProcessoCNJLabel.AutoSize = true;
+            this.ProcessoCNJLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProcessoCNJLabel.ForeColor = System.Drawing.Color.Navy;
+            this.ProcessoCNJLabel.Location = new System.Drawing.Point(242, 43);
+            this.ProcessoCNJLabel.Name = "ProcessoCNJLabel";
+            this.ProcessoCNJLabel.Size = new System.Drawing.Size(43, 13);
+            this.ProcessoCNJLabel.TabIndex = 134;
+            this.ProcessoCNJLabel.Text = "000000";
+            this.ProcessoCNJLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lblDataRemessa
+            // DataRemessaLabel
             // 
-            this.lblDataRemessa.AutoSize = true;
-            this.lblDataRemessa.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDataRemessa.ForeColor = System.Drawing.Color.Navy;
-            this.lblDataRemessa.Location = new System.Drawing.Point(242, 62);
-            this.lblDataRemessa.Name = "lblDataRemessa";
-            this.lblDataRemessa.Size = new System.Drawing.Size(65, 13);
-            this.lblDataRemessa.TabIndex = 133;
-            this.lblDataRemessa.Text = "01/01/1900";
+            this.DataRemessaLabel.AutoSize = true;
+            this.DataRemessaLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DataRemessaLabel.ForeColor = System.Drawing.Color.Navy;
+            this.DataRemessaLabel.Location = new System.Drawing.Point(242, 62);
+            this.DataRemessaLabel.Name = "DataRemessaLabel";
+            this.DataRemessaLabel.Size = new System.Drawing.Size(65, 13);
+            this.DataRemessaLabel.TabIndex = 133;
+            this.DataRemessaLabel.Text = "01/01/1900";
             // 
             // label27
             // 
@@ -538,63 +538,63 @@
             this.label9.TabIndex = 130;
             this.label9.Text = "Processo CNJ..:";
             // 
-            // lblCertidao
+            // CertidaoLabel
             // 
-            this.lblCertidao.AutoSize = true;
-            this.lblCertidao.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCertidao.ForeColor = System.Drawing.Color.Navy;
-            this.lblCertidao.Location = new System.Drawing.Point(433, 22);
-            this.lblCertidao.Name = "lblCertidao";
-            this.lblCertidao.Size = new System.Drawing.Size(43, 13);
-            this.lblCertidao.TabIndex = 129;
-            this.lblCertidao.Text = "000000";
-            this.lblCertidao.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.CertidaoLabel.AutoSize = true;
+            this.CertidaoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CertidaoLabel.ForeColor = System.Drawing.Color.Navy;
+            this.CertidaoLabel.Location = new System.Drawing.Point(433, 22);
+            this.CertidaoLabel.Name = "CertidaoLabel";
+            this.CertidaoLabel.Size = new System.Drawing.Size(43, 13);
+            this.CertidaoLabel.TabIndex = 129;
+            this.CertidaoLabel.Text = "000000";
+            this.CertidaoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lblPagina
+            // PaginaLabel
             // 
-            this.lblPagina.AutoSize = true;
-            this.lblPagina.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPagina.ForeColor = System.Drawing.Color.Navy;
-            this.lblPagina.Location = new System.Drawing.Point(311, 22);
-            this.lblPagina.Name = "lblPagina";
-            this.lblPagina.Size = new System.Drawing.Size(31, 13);
-            this.lblPagina.TabIndex = 128;
-            this.lblPagina.Text = "0000";
-            this.lblPagina.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.PaginaLabel.AutoSize = true;
+            this.PaginaLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PaginaLabel.ForeColor = System.Drawing.Color.Navy;
+            this.PaginaLabel.Location = new System.Drawing.Point(311, 22);
+            this.PaginaLabel.Name = "PaginaLabel";
+            this.PaginaLabel.Size = new System.Drawing.Size(31, 13);
+            this.PaginaLabel.TabIndex = 128;
+            this.PaginaLabel.Text = "0000";
+            this.PaginaLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblLivro
+            // LivroLabel
             // 
-            this.lblLivro.AutoSize = true;
-            this.lblLivro.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLivro.ForeColor = System.Drawing.Color.Navy;
-            this.lblLivro.Location = new System.Drawing.Point(51, 22);
-            this.lblLivro.Name = "lblLivro";
-            this.lblLivro.Size = new System.Drawing.Size(31, 13);
-            this.lblLivro.TabIndex = 127;
-            this.lblLivro.Text = "0000";
-            this.lblLivro.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.LivroLabel.AutoSize = true;
+            this.LivroLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LivroLabel.ForeColor = System.Drawing.Color.Navy;
+            this.LivroLabel.Location = new System.Drawing.Point(51, 22);
+            this.LivroLabel.Name = "LivroLabel";
+            this.LivroLabel.Size = new System.Drawing.Size(31, 13);
+            this.LivroLabel.TabIndex = 127;
+            this.LivroLabel.Text = "0000";
+            this.LivroLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblAjuizamento
+            // AjuizamentoLabel
             // 
-            this.lblAjuizamento.AutoSize = true;
-            this.lblAjuizamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAjuizamento.ForeColor = System.Drawing.Color.Navy;
-            this.lblAjuizamento.Location = new System.Drawing.Point(76, 42);
-            this.lblAjuizamento.Name = "lblAjuizamento";
-            this.lblAjuizamento.Size = new System.Drawing.Size(65, 13);
-            this.lblAjuizamento.TabIndex = 126;
-            this.lblAjuizamento.Text = "01/01/1900";
+            this.AjuizamentoLabel.AutoSize = true;
+            this.AjuizamentoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AjuizamentoLabel.ForeColor = System.Drawing.Color.Navy;
+            this.AjuizamentoLabel.Location = new System.Drawing.Point(76, 42);
+            this.AjuizamentoLabel.Name = "AjuizamentoLabel";
+            this.AjuizamentoLabel.Size = new System.Drawing.Size(65, 13);
+            this.AjuizamentoLabel.TabIndex = 126;
+            this.AjuizamentoLabel.Text = "01/01/1900";
             // 
-            // lblDataInscricao
+            // DataInscricaoLabel
             // 
-            this.lblDataInscricao.AutoSize = true;
-            this.lblDataInscricao.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDataInscricao.ForeColor = System.Drawing.Color.Navy;
-            this.lblDataInscricao.Location = new System.Drawing.Point(165, 22);
-            this.lblDataInscricao.Name = "lblDataInscricao";
-            this.lblDataInscricao.Size = new System.Drawing.Size(65, 13);
-            this.lblDataInscricao.TabIndex = 125;
-            this.lblDataInscricao.Text = "01/01/1900";
+            this.DataInscricaoLabel.AutoSize = true;
+            this.DataInscricaoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DataInscricaoLabel.ForeColor = System.Drawing.Color.Navy;
+            this.DataInscricaoLabel.Location = new System.Drawing.Point(165, 22);
+            this.DataInscricaoLabel.Name = "DataInscricaoLabel";
+            this.DataInscricaoLabel.Size = new System.Drawing.Size(65, 13);
+            this.DataInscricaoLabel.TabIndex = 125;
+            this.DataInscricaoLabel.Text = "01/01/1900";
             // 
             // Label21
             // 
@@ -660,28 +660,28 @@
             // a1Panel2
             // 
             this.a1Panel2.BorderColor = System.Drawing.Color.Gray;
-            this.a1Panel2.Controls.Add(this.label32);
+            this.a1Panel2.Controls.Add(this.DataPagtoCalcLabel);
             this.a1Panel2.Controls.Add(this.label33);
-            this.a1Panel2.Controls.Add(this.lblDataVenctoCalc);
+            this.a1Panel2.Controls.Add(this.DataVenctoCalcLabel);
             this.a1Panel2.Controls.Add(this.label31);
             this.a1Panel2.Controls.Add(this.Label2);
-            this.a1Panel2.Controls.Add(this.lblValorDif);
-            this.a1Panel2.Controls.Add(this.lblValorPago);
-            this.a1Panel2.Controls.Add(this.lblNumDoc);
-            this.a1Panel2.Controls.Add(this.lblBanco);
-            this.a1Panel2.Controls.Add(this.lblDataVencto);
+            this.a1Panel2.Controls.Add(this.ValorDifLabel);
+            this.a1Panel2.Controls.Add(this.ValorPagoLabel);
+            this.a1Panel2.Controls.Add(this.NumDocLabel);
+            this.a1Panel2.Controls.Add(this.BancoLabel);
+            this.a1Panel2.Controls.Add(this.DataVenctoLabel);
             this.a1Panel2.Controls.Add(this.Label13);
             this.a1Panel2.Controls.Add(this.Label5);
             this.a1Panel2.Controls.Add(this.Label6);
-            this.a1Panel2.Controls.Add(this.lblDataBase);
+            this.a1Panel2.Controls.Add(this.DataBaseLabel);
             this.a1Panel2.Controls.Add(this.Label14);
-            this.a1Panel2.Controls.Add(this.lblValorAtual);
-            this.a1Panel2.Controls.Add(this.lblDataReceita);
+            this.a1Panel2.Controls.Add(this.ValorAtualLabel);
+            this.a1Panel2.Controls.Add(this.DataReceitaLabel);
             this.a1Panel2.Controls.Add(this.Label7);
             this.a1Panel2.Controls.Add(this.Label16);
             this.a1Panel2.Controls.Add(this.Label8);
-            this.a1Panel2.Controls.Add(this.lblValorLanc);
-            this.a1Panel2.Controls.Add(this.lblDataPagto);
+            this.a1Panel2.Controls.Add(this.ValorLancadoLabel);
+            this.a1Panel2.Controls.Add(this.DataPagtoLabel);
             this.a1Panel2.Controls.Add(this.Label3);
             this.a1Panel2.Controls.Add(this.Label12);
             this.a1Panel2.Controls.Add(this.Label10);
@@ -696,16 +696,16 @@
             this.a1Panel2.Size = new System.Drawing.Size(200, 288);
             this.a1Panel2.TabIndex = 120;
             // 
-            // label32
+            // DataPagtoCalcLabel
             // 
-            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.ForeColor = System.Drawing.Color.Navy;
-            this.label32.Location = new System.Drawing.Point(102, 160);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(88, 13);
-            this.label32.TabIndex = 103;
-            this.label32.Text = "01/01/1900";
-            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.DataPagtoCalcLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DataPagtoCalcLabel.ForeColor = System.Drawing.Color.Navy;
+            this.DataPagtoCalcLabel.Location = new System.Drawing.Point(102, 160);
+            this.DataPagtoCalcLabel.Name = "DataPagtoCalcLabel";
+            this.DataPagtoCalcLabel.Size = new System.Drawing.Size(88, 13);
+            this.DataPagtoCalcLabel.TabIndex = 103;
+            this.DataPagtoCalcLabel.Text = "  /  /    ";
+            this.DataPagtoCalcLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label33
             // 
@@ -717,16 +717,16 @@
             this.label33.TabIndex = 102;
             this.label33.Text = "Data Pagto Calc....:";
             // 
-            // lblDataVenctoCalc
+            // DataVenctoCalcLabel
             // 
-            this.lblDataVenctoCalc.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDataVenctoCalc.ForeColor = System.Drawing.Color.Navy;
-            this.lblDataVenctoCalc.Location = new System.Drawing.Point(103, 60);
-            this.lblDataVenctoCalc.Name = "lblDataVenctoCalc";
-            this.lblDataVenctoCalc.Size = new System.Drawing.Size(88, 13);
-            this.lblDataVenctoCalc.TabIndex = 99;
-            this.lblDataVenctoCalc.Text = "01/01/1900";
-            this.lblDataVenctoCalc.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.DataVenctoCalcLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DataVenctoCalcLabel.ForeColor = System.Drawing.Color.Navy;
+            this.DataVenctoCalcLabel.Location = new System.Drawing.Point(103, 60);
+            this.DataVenctoCalcLabel.Name = "DataVenctoCalcLabel";
+            this.DataVenctoCalcLabel.Size = new System.Drawing.Size(88, 13);
+            this.DataVenctoCalcLabel.TabIndex = 99;
+            this.DataVenctoCalcLabel.Text = "  /  /    ";
+            this.DataVenctoCalcLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label31
             // 
@@ -748,43 +748,43 @@
             this.label15.TabIndex = 121;
             this.label15.Text = "Contribuinte..:";
             // 
-            // lblLancamento
+            // LancamentoLabel
             // 
-            this.lblLancamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLancamento.Location = new System.Drawing.Point(78, 300);
-            this.lblLancamento.Name = "lblLancamento";
-            this.lblLancamento.Size = new System.Drawing.Size(282, 15);
-            this.lblLancamento.TabIndex = 122;
-            this.lblLancamento.Text = "00";
+            this.LancamentoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LancamentoLabel.Location = new System.Drawing.Point(78, 300);
+            this.LancamentoLabel.Name = "LancamentoLabel";
+            this.LancamentoLabel.Size = new System.Drawing.Size(282, 15);
+            this.LancamentoLabel.TabIndex = 122;
+            this.LancamentoLabel.Text = "00";
             // 
-            // lblNome
+            // NomeLabel
             // 
-            this.lblNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNome.Location = new System.Drawing.Point(78, 320);
-            this.lblNome.Name = "lblNome";
-            this.lblNome.Size = new System.Drawing.Size(474, 15);
-            this.lblNome.TabIndex = 123;
-            this.lblNome.Text = "000000";
+            this.NomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NomeLabel.Location = new System.Drawing.Point(78, 320);
+            this.NomeLabel.Name = "NomeLabel";
+            this.NomeLabel.Size = new System.Drawing.Size(474, 15);
+            this.NomeLabel.TabIndex = 123;
+            this.NomeLabel.Text = "000000";
             // 
-            // lblStatus
+            // StatusLabel
             // 
-            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(78, 340);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(308, 15);
-            this.lblStatus.TabIndex = 124;
-            this.lblStatus.Text = "00";
+            this.StatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StatusLabel.Location = new System.Drawing.Point(78, 340);
+            this.StatusLabel.Name = "StatusLabel";
+            this.StatusLabel.Size = new System.Drawing.Size(285, 15);
+            this.StatusLabel.TabIndex = 124;
+            this.StatusLabel.Text = "00";
             // 
-            // label37
+            // IsentoLabel
             // 
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.ForeColor = System.Drawing.Color.Navy;
-            this.label37.Location = new System.Drawing.Point(436, 302);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(27, 13);
-            this.label37.TabIndex = 126;
-            this.label37.Text = "Não";
+            this.IsentoLabel.AutoSize = true;
+            this.IsentoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IsentoLabel.ForeColor = System.Drawing.Color.Navy;
+            this.IsentoLabel.Location = new System.Drawing.Point(430, 302);
+            this.IsentoLabel.Name = "IsentoLabel";
+            this.IsentoLabel.Size = new System.Drawing.Size(27, 13);
+            this.IsentoLabel.TabIndex = 126;
+            this.IsentoLabel.Text = "Não";
             // 
             // label38
             // 
@@ -796,120 +796,120 @@
             this.label38.TabIndex = 125;
             this.label38.Text = "Isento M/J.:";
             // 
-            // label39
+            // DescontoLabel
             // 
-            this.label39.AutoSize = true;
-            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label39.ForeColor = System.Drawing.Color.Navy;
-            this.label39.Location = new System.Drawing.Point(548, 302);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(21, 13);
-            this.label39.TabIndex = 128;
-            this.label39.Text = "0%";
+            this.DescontoLabel.AutoSize = true;
+            this.DescontoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DescontoLabel.ForeColor = System.Drawing.Color.Navy;
+            this.DescontoLabel.Location = new System.Drawing.Point(530, 302);
+            this.DescontoLabel.Name = "DescontoLabel";
+            this.DescontoLabel.Size = new System.Drawing.Size(21, 13);
+            this.DescontoLabel.TabIndex = 128;
+            this.DescontoLabel.Text = "0%";
             // 
             // label40
             // 
             this.label40.AutoSize = true;
             this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label40.Location = new System.Drawing.Point(478, 302);
+            this.label40.Location = new System.Drawing.Point(468, 302);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(62, 13);
             this.label40.TabIndex = 127;
             this.label40.Text = "Desconto..:";
             // 
-            // btSenha
+            // ImprimirButton
             // 
-            this.btSenha.Image = global::GTI_Desktop.Properties.Resources.print;
-            this.btSenha.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btSenha.Location = new System.Drawing.Point(547, 331);
-            this.btSenha.Name = "btSenha";
-            this.btSenha.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.btSenha.Size = new System.Drawing.Size(72, 24);
-            this.btSenha.TabIndex = 130;
-            this.btSenha.Text = "Imprimir";
-            this.btSenha.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.toolTip1.SetToolTip(this.btSenha, "Imprimir os detalhes da parcela");
-            this.btSenha.UseVisualStyleBackColor = false;
-            this.btSenha.Click += new System.EventHandler(this.BtSenha_Click);
+            this.ImprimirButton.Image = global::GTI_Desktop.Properties.Resources.print;
+            this.ImprimirButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ImprimirButton.Location = new System.Drawing.Point(547, 331);
+            this.ImprimirButton.Name = "ImprimirButton";
+            this.ImprimirButton.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.ImprimirButton.Size = new System.Drawing.Size(72, 24);
+            this.ImprimirButton.TabIndex = 130;
+            this.ImprimirButton.Text = "Imprimir";
+            this.ImprimirButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.ImprimirButton, "Imprimir os detalhes da parcela");
+            this.ImprimirButton.UseVisualStyleBackColor = false;
+            this.ImprimirButton.Click += new System.EventHandler(this.BtSenha_Click);
             // 
-            // cmdSair
+            // SairButton
             // 
-            this.cmdSair.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cmdSair.Image = global::GTI_Desktop.Properties.Resources.Exit;
-            this.cmdSair.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cmdSair.Location = new System.Drawing.Point(625, 331);
-            this.cmdSair.Name = "cmdSair";
-            this.cmdSair.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.cmdSair.Size = new System.Drawing.Size(72, 24);
-            this.cmdSair.TabIndex = 129;
-            this.cmdSair.Text = "   &Sair";
-            this.toolTip1.SetToolTip(this.cmdSair, "Fechar a tela de detalhes da parcela");
-            this.cmdSair.UseVisualStyleBackColor = false;
-            this.cmdSair.Click += new System.EventHandler(this.CmdSair_Click);
+            this.SairButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.SairButton.Image = global::GTI_Desktop.Properties.Resources.Exit;
+            this.SairButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.SairButton.Location = new System.Drawing.Point(625, 331);
+            this.SairButton.Name = "SairButton";
+            this.SairButton.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.SairButton.Size = new System.Drawing.Size(72, 24);
+            this.SairButton.TabIndex = 129;
+            this.SairButton.Text = "   &Sair";
+            this.toolTip1.SetToolTip(this.SairButton, "Fechar a tela de detalhes da parcela");
+            this.SairButton.UseVisualStyleBackColor = false;
+            this.SairButton.Click += new System.EventHandler(this.CmdSair_Click);
             // 
-            // btFindCodigo
+            // FindCodigoButton
             // 
-            this.btFindCodigo.AutoSize = true;
-            this.btFindCodigo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btFindCodigo.Image = global::GTI_Desktop.Properties.Resources.anexo;
-            this.btFindCodigo.Location = new System.Drawing.Point(676, 296);
-            this.btFindCodigo.Name = "btFindCodigo";
-            this.btFindCodigo.Size = new System.Drawing.Size(23, 23);
-            this.btFindCodigo.TabIndex = 131;
-            this.btFindCodigo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.toolTip1.SetToolTip(this.btFindCodigo, "Exibir duplicados quando houver");
-            this.btFindCodigo.UseVisualStyleBackColor = true;
-            this.btFindCodigo.Click += new System.EventHandler(this.BtFindCodigo_Click);
+            this.FindCodigoButton.AutoSize = true;
+            this.FindCodigoButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FindCodigoButton.Image = global::GTI_Desktop.Properties.Resources.anexo;
+            this.FindCodigoButton.Location = new System.Drawing.Point(676, 296);
+            this.FindCodigoButton.Name = "FindCodigoButton";
+            this.FindCodigoButton.Size = new System.Drawing.Size(23, 23);
+            this.FindCodigoButton.TabIndex = 131;
+            this.FindCodigoButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.FindCodigoButton, "Exibir duplicados quando houver");
+            this.FindCodigoButton.UseVisualStyleBackColor = true;
+            this.FindCodigoButton.Click += new System.EventHandler(this.BtFindCodigo_Click);
             // 
             // label22
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(369, 340);
+            this.label22.Location = new System.Drawing.Point(366, 340);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(61, 13);
             this.label22.TabIndex = 132;
             this.label22.Text = "Taxa Exp..:";
             // 
-            // lblTaxaExp
+            // TaxaExpLabel
             // 
-            this.lblTaxaExp.AutoSize = true;
-            this.lblTaxaExp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTaxaExp.ForeColor = System.Drawing.Color.Navy;
-            this.lblTaxaExp.Location = new System.Drawing.Point(439, 340);
-            this.lblTaxaExp.Name = "lblTaxaExp";
-            this.lblTaxaExp.Size = new System.Drawing.Size(28, 13);
-            this.lblTaxaExp.TabIndex = 133;
-            this.lblTaxaExp.Text = "0,00";
+            this.TaxaExpLabel.AutoSize = true;
+            this.TaxaExpLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TaxaExpLabel.ForeColor = System.Drawing.Color.Navy;
+            this.TaxaExpLabel.Location = new System.Drawing.Point(430, 340);
+            this.TaxaExpLabel.Name = "TaxaExpLabel";
+            this.TaxaExpLabel.Size = new System.Drawing.Size(28, 13);
+            this.TaxaExpLabel.TabIndex = 133;
+            this.TaxaExpLabel.Text = "0,00";
             // 
             // Parcela_Detalhe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.CancelButton = this.cmdSair;
+            this.CancelButton = this.SairButton;
             this.ClientSize = new System.Drawing.Size(705, 362);
-            this.Controls.Add(this.lblTaxaExp);
+            this.Controls.Add(this.TaxaExpLabel);
             this.Controls.Add(this.label22);
-            this.Controls.Add(this.btFindCodigo);
-            this.Controls.Add(this.btSenha);
-            this.Controls.Add(this.cmdSair);
-            this.Controls.Add(this.label39);
+            this.Controls.Add(this.FindCodigoButton);
+            this.Controls.Add(this.ImprimirButton);
+            this.Controls.Add(this.SairButton);
+            this.Controls.Add(this.DescontoLabel);
             this.Controls.Add(this.label40);
-            this.Controls.Add(this.label37);
+            this.Controls.Add(this.IsentoLabel);
             this.Controls.Add(this.label38);
-            this.Controls.Add(this.lblStatus);
-            this.Controls.Add(this.lblNome);
-            this.Controls.Add(this.lblLancamento);
+            this.Controls.Add(this.StatusLabel);
+            this.Controls.Add(this.NomeLabel);
+            this.Controls.Add(this.LancamentoLabel);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.a1Panel2);
             this.Controls.Add(this.a1Panel1);
-            this.Controls.Add(this.Label43);
+            this.Controls.Add(this.DuplicadoLabel);
             this.Controls.Add(this.Label25);
             this.Controls.Add(this.Label23);
             this.Controls.Add(this.Label24);
             this.Controls.Add(this.Label1);
-            this.Controls.Add(this.lvTributo);
+            this.Controls.Add(this.TributoListView);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
@@ -930,17 +930,17 @@
 
         #endregion
 
-        internal System.Windows.Forms.Label Label43;
-        internal System.Windows.Forms.Label lblBanco;
-        internal System.Windows.Forms.Label lblNumDoc;
-        internal System.Windows.Forms.Label lblValorPago;
-        internal System.Windows.Forms.Label lblValorDif;
-        internal System.Windows.Forms.Label lblValorAtual;
-        internal System.Windows.Forms.Label lblValorLanc;
-        internal System.Windows.Forms.Label lblDataReceita;
-        internal System.Windows.Forms.Label lblDataPagto;
-        internal System.Windows.Forms.Label lblDataVencto;
-        internal System.Windows.Forms.Label lblDataBase;
+        internal System.Windows.Forms.Label DuplicadoLabel;
+        internal System.Windows.Forms.Label BancoLabel;
+        internal System.Windows.Forms.Label NumDocLabel;
+        internal System.Windows.Forms.Label ValorPagoLabel;
+        internal System.Windows.Forms.Label ValorDifLabel;
+        internal System.Windows.Forms.Label ValorAtualLabel;
+        internal System.Windows.Forms.Label ValorLancadoLabel;
+        internal System.Windows.Forms.Label DataReceitaLabel;
+        internal System.Windows.Forms.Label DataPagtoLabel;
+        internal System.Windows.Forms.Label DataVenctoLabel;
+        internal System.Windows.Forms.Label DataBaseLabel;
         internal System.Windows.Forms.Label Label25;
         internal System.Windows.Forms.Label Label23;
         internal System.Windows.Forms.Label Label24;
@@ -963,43 +963,43 @@
         internal System.Windows.Forms.Label Label2;
         internal System.Windows.Forms.Label Label1;
         internal System.Windows.Forms.ColumnHeader Col5;
-        internal System.Windows.Forms.ListView lvTributo;
+        internal System.Windows.Forms.ListView TributoListView;
         private Owf.Controls.A1Panel a1Panel1;
-        internal System.Windows.Forms.Label lblProcessoCNJ;
-        internal System.Windows.Forms.Label lblDataRemessa;
+        internal System.Windows.Forms.Label ProcessoCNJLabel;
+        internal System.Windows.Forms.Label DataRemessaLabel;
         internal System.Windows.Forms.Label label27;
         internal System.Windows.Forms.Label label26;
         internal System.Windows.Forms.Label label9;
-        internal System.Windows.Forms.Label lblCertidao;
-        internal System.Windows.Forms.Label lblPagina;
-        internal System.Windows.Forms.Label lblLivro;
-        internal System.Windows.Forms.Label lblAjuizamento;
-        internal System.Windows.Forms.Label lblDataInscricao;
+        internal System.Windows.Forms.Label CertidaoLabel;
+        internal System.Windows.Forms.Label PaginaLabel;
+        internal System.Windows.Forms.Label LivroLabel;
+        internal System.Windows.Forms.Label AjuizamentoLabel;
+        internal System.Windows.Forms.Label DataInscricaoLabel;
         internal System.Windows.Forms.Label Label21;
         internal System.Windows.Forms.Label Label19;
         internal System.Windows.Forms.Label Label20;
         internal System.Windows.Forms.Label Label17;
         internal System.Windows.Forms.Label Label18;
         internal System.Windows.Forms.Label Label4;
-        internal System.Windows.Forms.Label lblNumProtocolo;
+        internal System.Windows.Forms.Label NumProtocoloLabel;
         private Owf.Controls.A1Panel a1Panel2;
-        internal System.Windows.Forms.Label lblDataVenctoCalc;
+        internal System.Windows.Forms.Label DataVenctoCalcLabel;
         internal System.Windows.Forms.Label label31;
-        internal System.Windows.Forms.Label label32;
+        internal System.Windows.Forms.Label DataPagtoCalcLabel;
         internal System.Windows.Forms.Label label33;
         internal System.Windows.Forms.Label label15;
-        internal System.Windows.Forms.Label lblLancamento;
-        internal System.Windows.Forms.Label lblNome;
-        internal System.Windows.Forms.Label lblStatus;
-        internal System.Windows.Forms.Label label37;
+        internal System.Windows.Forms.Label LancamentoLabel;
+        internal System.Windows.Forms.Label NomeLabel;
+        internal System.Windows.Forms.Label StatusLabel;
+        internal System.Windows.Forms.Label IsentoLabel;
         internal System.Windows.Forms.Label label38;
-        internal System.Windows.Forms.Label label39;
+        internal System.Windows.Forms.Label DescontoLabel;
         internal System.Windows.Forms.Label label40;
-        internal System.Windows.Forms.Button btSenha;
-        internal System.Windows.Forms.Button cmdSair;
+        internal System.Windows.Forms.Button ImprimirButton;
+        internal System.Windows.Forms.Button SairButton;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button btFindCodigo;
+        private System.Windows.Forms.Button FindCodigoButton;
         internal System.Windows.Forms.Label label22;
-        internal System.Windows.Forms.Label lblTaxaExp;
+        internal System.Windows.Forms.Label TaxaExpLabel;
     }
 }

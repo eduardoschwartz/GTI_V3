@@ -967,6 +967,17 @@ namespace GTI_Bll.Classes {
             return obj.InSerasa(Codigo);
         }
 
+        /// <summary>
+        /// Retorna os dados de pagamento de uma parcela
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public DebitoPagoStruct Retorna_DebitoPago_Parcela(Debitoparcela Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Retorna_DebitoPago_Parcela(Reg);
+        }
+
+
     }//end class
 }
 

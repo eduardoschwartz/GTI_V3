@@ -21,6 +21,11 @@ namespace GTI_Bll.Classes {
             return obj.Retorna_User_FullName(loginName);
         }
 
+        public string Retorna_User_FullName(int idUser) {
+            Sistema_Data obj = new Sistema_Data(_connection);
+            return obj.Retorna_User_FullName(idUser);
+        }
+
 
         /// <summary>Retorna o login do usuário pelo nome completo.
         /// </summary>
