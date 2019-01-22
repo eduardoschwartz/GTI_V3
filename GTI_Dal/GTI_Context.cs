@@ -132,5 +132,6 @@ namespace GTI_Dal {
         public DbSet<Cnae> Cnae { get; set; }
         public DbSet<Cnae_criterio> Cnae_criterio { get; set; }
         public DbSet<Tabelaiss> Tabelaiss { get; set; }
+        public DbSet<Serasa> Serasa { get; set; }
     }
 }

@@ -814,8 +814,9 @@
             // btCidadao
             // 
             this.btCidadao.AutoSize = false;
-            this.btCidadao.BackgroundImage = global::GTI_Desktop.Properties.Resources.usuarios;
+            this.btCidadao.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btCidadao.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btCidadao.Image = global::GTI_Desktop.Properties.Resources.Pessoas;
             this.btCidadao.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btCidadao.Name = "btCidadao";
             this.btCidadao.Size = new System.Drawing.Size(52, 52);
@@ -888,7 +889,7 @@
             // CertidaoButton
             // 
             this.CertidaoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.CertidaoButton.Image = global::GTI_Desktop.Properties.Resources.if_Gnome_Application_Certificate_48_55221;
+            this.CertidaoButton.Image = global::GTI_Desktop.Properties.Resources.Diploma;
             this.CertidaoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.CertidaoButton.Name = "CertidaoButton";
             this.CertidaoButton.Size = new System.Drawing.Size(52, 52);

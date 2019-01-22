@@ -47,6 +47,11 @@
             this.toolStripStatusLabel8 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblTotalSel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.TipoCadastroLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.SituacaoCadastroLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.SerasaLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.BtSelectLancamento = new System.Windows.Forms.Button();
             this.BtSelectStatus = new System.Windows.Forms.Button();
@@ -62,6 +67,8 @@
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.FiltroMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ObsGeralMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.ObservacaoGeralMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.ObservacaoParcelaMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.Detalhemenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ExtratoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.filtradoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,22 +95,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.CmbAnoInicial = new System.Windows.Forms.ComboBox();
             this.ExtratoDataGrid = new System.Windows.Forms.DataGridView();
-            this.imgCol = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Ano = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lancamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sequencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.parcela = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.complemento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.data_vencimento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AJ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valor_lancado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valor_atual = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.notificado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.exec_fiscal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.certidao = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.data_remessa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DocumentoPanel = new Owf.Controls.A1Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.PesquisarDocumentoButton = new System.Windows.Forms.ToolStripButton();
@@ -131,13 +122,22 @@
             this.User = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Obs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.GridPanel = new Owf.Controls.A1Panel();
-            this.ObservacaoGeralMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.ObservacaoParcelaMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.TipoCadastroLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.SituacaoCadastroLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.SerasaLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.imgCol = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Ano = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lancamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sequencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.parcela = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.complemento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.data_vencimento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AJ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valor_lancado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valor_atual = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.notificado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.exec_fiscal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.certidao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.data_remessa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sBar.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.a1Panel2.SuspendLayout();
@@ -234,6 +234,44 @@
             this.lblTotalSel.Name = "lblTotalSel";
             this.lblTotalSel.Size = new System.Drawing.Size(28, 17);
             this.lblTotalSel.Text = "0,00";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.toolStripStatusLabel2.BorderStyle = System.Windows.Forms.Border3DStyle.RaisedInner;
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(4, 17);
+            // 
+            // TipoCadastroLabel
+            // 
+            this.TipoCadastroLabel.Name = "TipoCadastroLabel";
+            this.TipoCadastroLabel.Size = new System.Drawing.Size(22, 17);
+            this.TipoCadastroLabel.Text = "     ";
+            // 
+            // SituacaoCadastroLabel
+            // 
+            this.SituacaoCadastroLabel.Name = "SituacaoCadastroLabel";
+            this.SituacaoCadastroLabel.Size = new System.Drawing.Size(16, 17);
+            this.SituacaoCadastroLabel.Text = "   ";
+            // 
+            // toolStripStatusLabel4
+            // 
+            this.toolStripStatusLabel4.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.toolStripStatusLabel4.BorderStyle = System.Windows.Forms.Border3DStyle.RaisedInner;
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(4, 17);
+            // 
+            // SerasaLabel
+            // 
+            this.SerasaLabel.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.SerasaLabel.ForeColor = System.Drawing.Color.DarkRed;
+            this.SerasaLabel.Name = "SerasaLabel";
+            this.SerasaLabel.Size = new System.Drawing.Size(136, 17);
+            this.SerasaLabel.Text = "Incluído no Serasa";
             // 
             // BtSelectLancamento
             // 
@@ -397,6 +435,20 @@
             this.ObsGeralMenu.Name = "ObsGeralMenu";
             this.ObsGeralMenu.Size = new System.Drawing.Size(81, 20);
             this.ObsGeralMenu.Text = "Observação";
+            // 
+            // ObservacaoGeralMenu
+            // 
+            this.ObservacaoGeralMenu.Name = "ObservacaoGeralMenu";
+            this.ObservacaoGeralMenu.Size = new System.Drawing.Size(112, 22);
+            this.ObservacaoGeralMenu.Text = "Geral";
+            this.ObservacaoGeralMenu.Click += new System.EventHandler(this.ObservacaoGeralMenu_Click);
+            // 
+            // ObservacaoParcelaMenu
+            // 
+            this.ObservacaoParcelaMenu.Name = "ObservacaoParcelaMenu";
+            this.ObservacaoParcelaMenu.Size = new System.Drawing.Size(112, 22);
+            this.ObservacaoParcelaMenu.Text = "Parcela";
+            this.ObservacaoParcelaMenu.Click += new System.EventHandler(this.ObservacaoParcelaMenu_Click);
             // 
             // Detalhemenu
             // 
@@ -734,139 +786,6 @@
             this.ExtratoDataGrid.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.ExtratoDataGrid_CellMouseEnter);
             this.ExtratoDataGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ExtratoDataGrid_MouseClick);
             // 
-            // imgCol
-            // 
-            this.imgCol.HeaderText = "Obs";
-            this.imgCol.Name = "imgCol";
-            this.imgCol.ReadOnly = true;
-            this.imgCol.Width = 30;
-            // 
-            // Ano
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Ano.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Ano.HeaderText = "Ano";
-            this.Ano.Name = "Ano";
-            this.Ano.ReadOnly = true;
-            this.Ano.Width = 42;
-            // 
-            // lancamento
-            // 
-            this.lancamento.HeaderText = "Lançamento";
-            this.lancamento.Name = "lancamento";
-            this.lancamento.ReadOnly = true;
-            this.lancamento.Width = 175;
-            // 
-            // sequencia
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.sequencia.DefaultCellStyle = dataGridViewCellStyle3;
-            this.sequencia.HeaderText = "Sq";
-            this.sequencia.Name = "sequencia";
-            this.sequencia.ReadOnly = true;
-            this.sequencia.Width = 28;
-            // 
-            // parcela
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.parcela.DefaultCellStyle = dataGridViewCellStyle4;
-            this.parcela.HeaderText = "Pc";
-            this.parcela.Name = "parcela";
-            this.parcela.ReadOnly = true;
-            this.parcela.Width = 28;
-            // 
-            // complemento
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.complemento.DefaultCellStyle = dataGridViewCellStyle5;
-            this.complemento.HeaderText = "Cp";
-            this.complemento.Name = "complemento";
-            this.complemento.ReadOnly = true;
-            this.complemento.Width = 28;
-            // 
-            // status
-            // 
-            this.status.HeaderText = "Status";
-            this.status.Name = "status";
-            this.status.ReadOnly = true;
-            this.status.Width = 110;
-            // 
-            // data_vencimento
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.data_vencimento.DefaultCellStyle = dataGridViewCellStyle6;
-            this.data_vencimento.HeaderText = "Dt.Vencto";
-            this.data_vencimento.Name = "data_vencimento";
-            this.data_vencimento.ReadOnly = true;
-            this.data_vencimento.Width = 70;
-            // 
-            // DA
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DA.DefaultCellStyle = dataGridViewCellStyle7;
-            this.DA.HeaderText = "D";
-            this.DA.Name = "DA";
-            this.DA.ReadOnly = true;
-            this.DA.Width = 20;
-            // 
-            // AJ
-            // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.AJ.DefaultCellStyle = dataGridViewCellStyle8;
-            this.AJ.HeaderText = "A";
-            this.AJ.Name = "AJ";
-            this.AJ.ReadOnly = true;
-            this.AJ.Width = 20;
-            // 
-            // valor_lancado
-            // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.valor_lancado.DefaultCellStyle = dataGridViewCellStyle9;
-            this.valor_lancado.HeaderText = "Vl.Lanc";
-            this.valor_lancado.Name = "valor_lancado";
-            this.valor_lancado.ReadOnly = true;
-            this.valor_lancado.Width = 75;
-            // 
-            // valor_atual
-            // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.valor_atual.DefaultCellStyle = dataGridViewCellStyle10;
-            this.valor_atual.HeaderText = "Vl.Atual";
-            this.valor_atual.Name = "valor_atual";
-            this.valor_atual.ReadOnly = true;
-            this.valor_atual.Width = 75;
-            // 
-            // notificado
-            // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.notificado.DefaultCellStyle = dataGridViewCellStyle11;
-            this.notificado.HeaderText = "N";
-            this.notificado.Name = "notificado";
-            this.notificado.ReadOnly = true;
-            this.notificado.Width = 35;
-            // 
-            // exec_fiscal
-            // 
-            this.exec_fiscal.HeaderText = "Exec.Fiscal";
-            this.exec_fiscal.Name = "exec_fiscal";
-            this.exec_fiscal.ReadOnly = true;
-            // 
-            // certidao
-            // 
-            this.certidao.HeaderText = "Certidão";
-            this.certidao.Name = "certidao";
-            this.certidao.ReadOnly = true;
-            this.certidao.Width = 70;
-            // 
-            // data_remessa
-            // 
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.data_remessa.DefaultCellStyle = dataGridViewCellStyle12;
-            this.data_remessa.HeaderText = "Dt.Remessa";
-            this.data_remessa.Name = "data_remessa";
-            this.data_remessa.ReadOnly = true;
-            this.data_remessa.Width = 70;
-            // 
             // DocumentoPanel
             // 
             this.DocumentoPanel.BorderColor = System.Drawing.Color.Gray;
@@ -1162,57 +1081,139 @@
             this.GridPanel.Size = new System.Drawing.Size(955, 498);
             this.GridPanel.TabIndex = 120;
             // 
-            // ObservacaoGeralMenu
+            // imgCol
             // 
-            this.ObservacaoGeralMenu.Name = "ObservacaoGeralMenu";
-            this.ObservacaoGeralMenu.Size = new System.Drawing.Size(180, 22);
-            this.ObservacaoGeralMenu.Text = "Geral";
-            this.ObservacaoGeralMenu.Click += new System.EventHandler(this.ObservacaoGeralMenu_Click);
+            this.imgCol.HeaderText = "Obs";
+            this.imgCol.Name = "imgCol";
+            this.imgCol.ReadOnly = true;
+            this.imgCol.Width = 30;
             // 
-            // ObservacaoParcelaMenu
+            // Ano
             // 
-            this.ObservacaoParcelaMenu.Name = "ObservacaoParcelaMenu";
-            this.ObservacaoParcelaMenu.Size = new System.Drawing.Size(180, 22);
-            this.ObservacaoParcelaMenu.Text = "Parcela";
-            this.ObservacaoParcelaMenu.Click += new System.EventHandler(this.ObservacaoParcelaMenu_Click);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Ano.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Ano.HeaderText = "Ano";
+            this.Ano.Name = "Ano";
+            this.Ano.ReadOnly = true;
+            this.Ano.Width = 42;
             // 
-            // toolStripStatusLabel2
+            // lancamento
             // 
-            this.toolStripStatusLabel2.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
-            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
-            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
-            this.toolStripStatusLabel2.BorderStyle = System.Windows.Forms.Border3DStyle.RaisedInner;
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(4, 17);
+            this.lancamento.HeaderText = "Lançamento";
+            this.lancamento.Name = "lancamento";
+            this.lancamento.ReadOnly = true;
+            this.lancamento.Width = 175;
             // 
-            // TipoCadastroLabel
+            // sequencia
             // 
-            this.TipoCadastroLabel.Name = "TipoCadastroLabel";
-            this.TipoCadastroLabel.Size = new System.Drawing.Size(22, 17);
-            this.TipoCadastroLabel.Text = "     ";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.sequencia.DefaultCellStyle = dataGridViewCellStyle3;
+            this.sequencia.HeaderText = "Sq";
+            this.sequencia.Name = "sequencia";
+            this.sequencia.ReadOnly = true;
+            this.sequencia.Width = 28;
             // 
-            // SituacaoCadastroLabel
+            // parcela
             // 
-            this.SituacaoCadastroLabel.Name = "SituacaoCadastroLabel";
-            this.SituacaoCadastroLabel.Size = new System.Drawing.Size(16, 17);
-            this.SituacaoCadastroLabel.Text = "   ";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.parcela.DefaultCellStyle = dataGridViewCellStyle4;
+            this.parcela.HeaderText = "Pc";
+            this.parcela.Name = "parcela";
+            this.parcela.ReadOnly = true;
+            this.parcela.Width = 28;
             // 
-            // toolStripStatusLabel4
+            // complemento
             // 
-            this.toolStripStatusLabel4.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
-            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
-            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
-            this.toolStripStatusLabel4.BorderStyle = System.Windows.Forms.Border3DStyle.RaisedInner;
-            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(4, 17);
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.complemento.DefaultCellStyle = dataGridViewCellStyle5;
+            this.complemento.HeaderText = "Cp";
+            this.complemento.Name = "complemento";
+            this.complemento.ReadOnly = true;
+            this.complemento.Width = 28;
             // 
-            // SerasaLabel
+            // status
             // 
-            this.SerasaLabel.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.SerasaLabel.ForeColor = System.Drawing.Color.DarkRed;
-            this.SerasaLabel.Name = "SerasaLabel";
-            this.SerasaLabel.Size = new System.Drawing.Size(136, 17);
-            this.SerasaLabel.Text = "Incluído no Serasa";
+            this.status.HeaderText = "Status";
+            this.status.Name = "status";
+            this.status.ReadOnly = true;
+            this.status.Width = 110;
+            // 
+            // data_vencimento
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.data_vencimento.DefaultCellStyle = dataGridViewCellStyle6;
+            this.data_vencimento.HeaderText = "Dt.Vencto";
+            this.data_vencimento.Name = "data_vencimento";
+            this.data_vencimento.ReadOnly = true;
+            this.data_vencimento.Width = 70;
+            // 
+            // DA
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DA.DefaultCellStyle = dataGridViewCellStyle7;
+            this.DA.HeaderText = "D";
+            this.DA.Name = "DA";
+            this.DA.ReadOnly = true;
+            this.DA.Width = 20;
+            // 
+            // AJ
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.AJ.DefaultCellStyle = dataGridViewCellStyle8;
+            this.AJ.HeaderText = "A";
+            this.AJ.Name = "AJ";
+            this.AJ.ReadOnly = true;
+            this.AJ.Width = 20;
+            // 
+            // valor_lancado
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.valor_lancado.DefaultCellStyle = dataGridViewCellStyle9;
+            this.valor_lancado.HeaderText = "Vl.Lanc";
+            this.valor_lancado.Name = "valor_lancado";
+            this.valor_lancado.ReadOnly = true;
+            this.valor_lancado.Width = 75;
+            // 
+            // valor_atual
+            // 
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.valor_atual.DefaultCellStyle = dataGridViewCellStyle10;
+            this.valor_atual.HeaderText = "Vl.Atual";
+            this.valor_atual.Name = "valor_atual";
+            this.valor_atual.ReadOnly = true;
+            this.valor_atual.Width = 75;
+            // 
+            // notificado
+            // 
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.notificado.DefaultCellStyle = dataGridViewCellStyle11;
+            this.notificado.HeaderText = "N";
+            this.notificado.Name = "notificado";
+            this.notificado.ReadOnly = true;
+            this.notificado.Width = 35;
+            // 
+            // exec_fiscal
+            // 
+            this.exec_fiscal.HeaderText = "Exec.Fiscal";
+            this.exec_fiscal.Name = "exec_fiscal";
+            this.exec_fiscal.ReadOnly = true;
+            this.exec_fiscal.Width = 160;
+            // 
+            // certidao
+            // 
+            this.certidao.HeaderText = "Certidão";
+            this.certidao.Name = "certidao";
+            this.certidao.ReadOnly = true;
+            this.certidao.Width = 70;
+            // 
+            // data_remessa
+            // 
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.data_remessa.DefaultCellStyle = dataGridViewCellStyle12;
+            this.data_remessa.HeaderText = "Dt.Remessa";
+            this.data_remessa.Name = "data_remessa";
+            this.data_remessa.ReadOnly = true;
+            this.data_remessa.Width = 70;
             // 
             // Extrato
             // 
@@ -1314,22 +1315,6 @@
         private System.Windows.Forms.ToolStripMenuItem completoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dividaAtivaToolStripMenuItem;
         internal System.Windows.Forms.DataGridView ExtratoDataGrid;
-        private System.Windows.Forms.DataGridViewImageColumn imgCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ano;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lancamento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sequencia;
-        private System.Windows.Forms.DataGridViewTextBoxColumn parcela;
-        private System.Windows.Forms.DataGridViewTextBoxColumn complemento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn status;
-        private System.Windows.Forms.DataGridViewTextBoxColumn data_vencimento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DA;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AJ;
-        private System.Windows.Forms.DataGridViewTextBoxColumn valor_lancado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn valor_atual;
-        private System.Windows.Forms.DataGridViewTextBoxColumn notificado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn exec_fiscal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn certidao;
-        private System.Windows.Forms.DataGridViewTextBoxColumn data_remessa;
         private Owf.Controls.A1Panel DocumentoPanel;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton PesquisarDocumentoButton;
@@ -1364,5 +1349,21 @@
         private System.Windows.Forms.ToolStripStatusLabel SituacaoCadastroLabel;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel SerasaLabel;
+        private System.Windows.Forms.DataGridViewImageColumn imgCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ano;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lancamento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sequencia;
+        private System.Windows.Forms.DataGridViewTextBoxColumn parcela;
+        private System.Windows.Forms.DataGridViewTextBoxColumn complemento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn data_vencimento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AJ;
+        private System.Windows.Forms.DataGridViewTextBoxColumn valor_lancado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn valor_atual;
+        private System.Windows.Forms.DataGridViewTextBoxColumn notificado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn exec_fiscal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn certidao;
+        private System.Windows.Forms.DataGridViewTextBoxColumn data_remessa;
     }
 }

@@ -329,6 +329,12 @@
     <Compile Include="Forms\Pais.designer.cs">
       <DependentUpon>Pais.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Parcelamento_Lista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Parcelamento_Lista.Designer.cs">
+      <DependentUpon>Parcelamento_Lista.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Parcela_Detalhe.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -639,6 +645,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pais.resx">
       <DependentUpon>Pais.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Parcelamento_Lista.resx">
+      <DependentUpon>Parcelamento_Lista.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Parcela_Detalhe.resx">
       <DependentUpon>Parcela_Detalhe.cs</DependentUpon>
@@ -1043,6 +1052,7 @@
     <None Include="Resources\usuarios.png" />
     <None Include="Resources\pasta-azul-lupa1.png" />
     <None Include="Resources\people2.png" />
+    <None Include="Resources\texture21.jpg" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

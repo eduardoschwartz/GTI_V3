@@ -957,6 +957,15 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Detalhe_Documento(Numero);
         }
 
+        /// <summary>
+        /// Retorna true se o contribuinte estiver no Serasa
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public bool InSerasa(int Codigo) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.InSerasa(Codigo);
+        }
 
     }//end class
 }

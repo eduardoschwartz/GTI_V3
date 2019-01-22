@@ -63,26 +63,6 @@ namespace GTI_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _1588_64x64 {
-            get {
-                object obj = ResourceManager.GetObject("1588_64x64", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap _7837_64x64 {
-            get {
-                object obj = ResourceManager.GetObject("7837_64x64", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Abaixo {
             get {
                 object obj = ResourceManager.GetObject("Abaixo", resourceCulture);
@@ -266,6 +246,16 @@ namespace GTI_Desktop.Properties {
         internal static System.Drawing.Bitmap delete {
             get {
                 object obj = ResourceManager.GetObject("delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Diploma {
+            get {
+                object obj = ResourceManager.GetObject("Diploma", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -493,16 +483,6 @@ namespace GTI_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap if_Gnome_Application_Certificate_48_55221 {
-            get {
-                object obj = ResourceManager.GetObject("if_Gnome-Application-Certificate-48_55221", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap if_Login_73221 {
             get {
                 object obj = ResourceManager.GetObject("if_Login_73221", resourceCulture);
@@ -593,9 +573,9 @@ namespace GTI_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pasta_azul_lupa {
+        internal static System.Drawing.Bitmap PastaAzul {
             get {
-                object obj = ResourceManager.GetObject("pasta-azul-lupa", resourceCulture);
+                object obj = ResourceManager.GetObject("PastaAzul", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -613,9 +593,29 @@ namespace GTI_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Pessoas {
+            get {
+                object obj = ResourceManager.GetObject("Pessoas", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap photo_16x16 {
             get {
                 object obj = ResourceManager.GetObject("photo_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Prancheta {
+            get {
+                object obj = ResourceManager.GetObject("Prancheta", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -716,6 +716,16 @@ namespace GTI_Desktop.Properties {
         internal static System.Drawing.Bitmap search {
             get {
                 object obj = ResourceManager.GetObject("search", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap texture2 {
+            get {
+                object obj = ResourceManager.GetObject("texture2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

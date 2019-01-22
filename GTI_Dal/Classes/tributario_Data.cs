@@ -1942,5 +1942,16 @@ Proximo:;
             }
         }
 
+        public bool InSerasa(int Codigo) {
+            bool bRet = false;
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var existingReg = db.Serasa.Count(a => a.Codigo == Codigo && a.Dtsaida==null);
+                if (existingReg != 0) {
+                    bRet = true;
+                }
+            }
+            return bRet;
+        }
+
     }//end class
 }

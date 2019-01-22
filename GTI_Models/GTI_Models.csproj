@@ -134,6 +134,7 @@
     <Compile Include="Models\certidao_inscricao_extrato.cs" />
     <Compile Include="Models\security_event.cs" />
     <Compile Include="Models\segunda_via_web.cs" />
+    <Compile Include="Models\serasa.cs" />
     <Compile Include="Models\sil.cs" />
     <Compile Include="Models\sistema.cs" />
     <Compile Include="Models\situacao.cs" />

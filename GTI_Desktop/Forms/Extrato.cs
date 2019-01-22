@@ -141,6 +141,10 @@ namespace GTI_Desktop.Forms {
                         SituacaoCadastroLabel.ForeColor = Color.Red;
                     }
 
+                    Tributario_bll tributario_Class = new Tributario_bll(_connection);
+                    if (tributario_Class.InSerasa(Codigo))
+                        SerasaLabel.Visible = true;
+
                     Carrega_Extrato(Convert.ToInt32(CodigoText.Text));
                     Exibe_Extrato();
                     gtiCore.Liberado(this);
@@ -163,6 +167,7 @@ namespace GTI_Desktop.Forms {
             TipoCadastroLabel.Text = "Tipo de";
             SituacaoCadastroLabel.Text = "Cadastro";
             SituacaoCadastroLabel.ForeColor = Color.Black;
+            SerasaLabel.Visible = false;
         }
 
         private void Grid_Format() {
@@ -281,6 +286,8 @@ namespace GTI_Desktop.Forms {
                     string sValorLanc = item.Valortributo.ToString("#0.00");
                     string sValorAtual = item.Valortotal.ToString("#0.00");
                     string sNotificado = item.Notificado == null ? "N" : item.Notificado == true ? "S" : "N";
+                    string sCertidao = item.Prot_certidao == null ? "" : item.Prot_certidao.ToString();
+                    string sDataRemessa = item.Prot_dtremessa == null ? "" : Convert.ToDateTime(item.Prot_dtremessa).ToString("dd/MM/yyyy");
 
                     string sExecFiscal = "";
                     if (item.Processocnj != null)
@@ -292,7 +299,8 @@ namespace GTI_Desktop.Forms {
 
                     bool bHasObs = Parcela_Tem_Observacao(item.Anoexercicio, item.Codlancamento, item.Seqlancamento, item.Numparcela, item.Codcomplemento);
 
-                    ExtratoDataGrid.Rows.Add(bHasObs ? Resources.write : new Bitmap(1, 1), sExercicio, sLancamento, sSeqLancamento, sNumParcela, sComplemento, sStatus + "-" + sSituacao, sDataVencto, sDA, sAJ, sValorLanc, sValorAtual);
+                    ExtratoDataGrid.Rows.Add(bHasObs ? Resources.write : new Bitmap(1, 1), sExercicio, sLancamento, sSeqLancamento, sNumParcela, sComplemento, sStatus + "-" + sSituacao, sDataVencto, sDA, sAJ, sValorLanc,
+                                             sValorAtual,sNotificado,sExecFiscal,sCertidao,sDataRemessa);
                     int nIndex = ExtratoDataGrid.Rows.Count - 1;
                     ExtratoDataGrid.Rows[nIndex].Tag = "";
                     ExtratoDataGrid.Rows[nIndex].Visible = Line_isVisible(nIndex);
@@ -368,6 +376,11 @@ namespace GTI_Desktop.Forms {
             DateTime Vencimento = Convert.ToDateTime(Linha.Cells["data_vencimento"].Value.ToString());
             string sDA = Linha.Cells["DA"].Value.ToString();
             string sAJ = Linha.Cells["AJ"].Value.ToString();
+
+            if (nStatus == 3 || nStatus == 42 || nStatus==43 || nStatus == 19 || nStatus == 20 || nStatus == 25)
+                return true;
+
+
 
             if (!ChkAllExercicio.Checked) {
                 if (nAno > _filtro_exercicio_fim) {
@@ -535,6 +548,8 @@ namespace GTI_Desktop.Forms {
         }
 
         private void BtFiltro_Click(object sender, EventArgs e) {
+            if (CmbAnoInicial.Items.Count == 0)
+                return;
             _filtro_exercio_inicio = Convert.ToInt16(CmbAnoInicial.Text);
             _filtro_exercicio_fim = Convert.ToInt16(CmbAnoFinal.Text);
             Exibe_Extrato();
@@ -549,19 +564,6 @@ namespace GTI_Desktop.Forms {
             } else {
                 CmbAnoInicial.Enabled = true;
                 CmbAnoFinal.Enabled = true;
-            }
-        }
-
-        private void FiltroLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            if (ExtratoDataGrid.Rows.Count == 0)
-                MessageBox.Show("Filtro indisponível!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else {
-                if (FiltroPanel.Visible)
-                    FiltroPanel.Visible = false;
-                else {
-                    FiltroPanel.Visible = true;
-                    FiltroPanel.BringToFront();
-                }
             }
         }
 
@@ -906,16 +908,16 @@ InicioObs:
         }
 
         private void FiltroMenu_Click(object sender, EventArgs e) {
-            if (ExtratoDataGrid.Rows.Count == 0)
-                MessageBox.Show("Filtro indisponível!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else {
+            //if (ExtratoDataGrid.Rows.Count == 0)
+            //    MessageBox.Show("Filtro indisponível!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //else {
                 if (FiltroPanel.Visible)
                     FiltroPanel.Visible = false;
                 else {
                     FiltroPanel.Visible = true;
                     FiltroPanel.BringToFront();
                 }
-            }
+           // }
         }
 
         private void Detalhemenu_Click(object sender, EventArgs e) {
@@ -954,7 +956,11 @@ InicioObs:
         }
 
         private void ParcelamentoMenu_Click(object sender, EventArgs e) {
-
+            if (ExtratoDataGrid.SelectedRows.Count > 0) {
+                Parcelamento_Lista f1 = new Parcelamento_Lista();
+                f1.ShowDialog();
+            } else
+                MessageBox.Show("Selecione um contribuinte.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void ObservacaoGeralMenu_Click(object sender, EventArgs e) {
