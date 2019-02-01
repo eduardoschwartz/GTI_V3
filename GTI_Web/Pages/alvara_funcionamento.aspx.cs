@@ -91,8 +91,12 @@ namespace GTI_Web.Pages {
         }
 
         private void Exibe_Validacao(Alvara_funcionamento alvara) {
+            string _tipo = alvara.Controle.Substring(alvara.Controle.Length - 2, 2);
             ReportDocument crystalReport = new ReportDocument();
-            crystalReport.Load(Server.MapPath("~/Report/AlvaraFuncionamentoValida.rpt"));
+            if(_tipo=="AF" || _tipo=="AN")
+                crystalReport.Load(Server.MapPath("~/Report/AlvaraFuncionamentoValida.rpt"));
+            else
+                crystalReport.Load(Server.MapPath("~/Report/AlvaraFuncionamentoProvisorioValida.rpt"));
             crystalReport.SetParameterValue("CADASTRO", alvara.Codigo.ToString());
             crystalReport.SetParameterValue("NOME", alvara.Razao_social);
             crystalReport.SetParameterValue("AUTENTICIDADE", alvara.Controle);
@@ -101,6 +105,7 @@ namespace GTI_Web.Pages {
             crystalReport.SetParameterValue("BAIRRO", alvara.Bairro);
             crystalReport.SetParameterValue("ATIVIDADE", alvara.Atividade);
             crystalReport.SetParameterValue("HORARIO", alvara.Horario);
+            crystalReport.SetParameterValue("VALIDADE", alvara.Validade);
 
             HttpContext.Current.Response.Buffer = false;
             HttpContext.Current.Response.ClearContent();
@@ -147,20 +152,32 @@ namespace GTI_Web.Pages {
                                     lblmsg.Text = "Esta empresa encontra-se encerrada.";
                                     return;
                                 } else {
-                                    bool bIsentoTaxa;
-                                    if (empresa.Isento_taxa == 1)
-                                        bIsentoTaxa = true;
-                                    else
-                                        bIsentoTaxa = false;
-
-                                    if (!bIsentoTaxa) {
-                                        int _qtde = empresa_Class.Qtde_Parcelas_TLL_Vencidas(Num);
-                                        if (_qtde > 0) {
-                                            lblmsg.Text = "A taxa de licença não esta paga, favor dirigir-se ao Sistema Prático da Prefeitura para regularizar.";
+                                    if (Convert.ToDateTime(empresa.Data_abertura).Year == DateTime.Now.Year) {
+                                        lblmsg.Text = "Empresa aberta este ano não pode renovar o alvará.";
+                                        return;
+                                    } else {
+                                        int _atividade_codigo = (int)empresa.Atividade_codigo;
+                                        bool bAtividadeAlvara = empresa_Class.Atividade_tem_Alvara(_atividade_codigo);
+                                        if (!bAtividadeAlvara) {
+                                            lblmsg.Text = "Atividade da empresa não permite renovar o alvará.";
                                             return;
+                                        } else {
+                                            bool bIsentoTaxa;
+                                            if (empresa.Isento_taxa == 1)
+                                                bIsentoTaxa = true;
+                                            else
+                                                bIsentoTaxa = false;
+
+                                            if (!bIsentoTaxa) {
+                                                int _qtde = empresa_Class.Qtde_Parcelas_TLL_Vencidas(Num);
+                                                if (_qtde > 0) {
+                                                    lblmsg.Text = "A taxa de licença não esta paga, favor dirigir-se ao Sistema Prático da Prefeitura para regularizar.";
+                                                    return;
+                                                }
+                                            }
+                                            EmiteAlvara(Num);
                                         }
                                     }
-                                    EmiteAlvara(Num);
                                 }
                             }
                         }

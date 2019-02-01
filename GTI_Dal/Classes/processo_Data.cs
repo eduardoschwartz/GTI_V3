@@ -1112,6 +1112,14 @@ Inicio:;
             }
         }
 
+        public List<Processo_Numero> Lista_Processo_Parcelamento_Header(int Codigo) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var Sql = (from p in db.Processoreparc where p.Codigoresp==Codigo orderby p.Anoproc,p.Numproc
+                           select new Processo_Numero { Numero_processo=p.Numprocesso,Numero=p.Numproc,Ano=p.Anoproc});
+                return Sql.ToList();
+            }
+        }
+
 
     }
 }

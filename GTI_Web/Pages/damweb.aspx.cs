@@ -421,7 +421,7 @@ namespace UIWeb.Pages {
 
             PlanoLabel.Text = nPlano.ToString();
             foreach (var item in ListaParcela) {
-                if (item.Statuslanc == 3 || item.Statuslanc == 19 || item.Statuslanc == 38 || item.Statuslanc == 39 ) {
+                if (item.Statuslanc == 3 || item.Statuslanc == 19 || item.Statuslanc == 38 || item.Statuslanc == 39 || item.Statuslanc == 42 || item.Statuslanc == 43) {
                     DebitoStructure reg = new DebitoStructure();
                     reg.Codigo_Reduzido = item.Codreduzido;
                     reg.Ano_Exercicio = item.Anoexercicio;

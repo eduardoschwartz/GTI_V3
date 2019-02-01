@@ -957,8 +957,23 @@ InicioObs:
 
         private void ParcelamentoMenu_Click(object sender, EventArgs e) {
             if (ExtratoDataGrid.SelectedRows.Count > 0) {
-                Parcelamento_Lista f1 = new Parcelamento_Lista();
-                f1.ShowDialog();
+                Processo_bll processo_Class = new Processo_bll(_connection);
+                List<Processo_Numero> Lista = processo_Class.Lista_Processo_Parcelamento_Header(Convert.ToInt32(CodigoText.Text));
+                if (Lista.Count > 0) {
+                    int _pos = 0;
+                    foreach (Processo_Numero item in Lista) {
+                        if (item.Numero == null) {//processos antigos que não separavam o numero do ano, teremos que separar manualmente.
+                            Lista[_pos].Numero = processo_Class.ExtractNumeroProcessoNoDV(item.Numero_processo);
+                            Lista[_pos].Ano = processo_Class.ExtractAnoProcesso(item.Numero_processo);
+                        }
+                        int _numero = Convert.ToInt32(Lista[_pos].Numero);
+                        Lista[_pos].Numero_processo = _numero.ToString("00000") + "-" + processo_Class.DvProcesso(_numero) + "/" + Lista[_pos].Ano.ToString();
+                        _pos++;
+                    }
+                    Parcelamento_Lista f1 = new Parcelamento_Lista(Lista);
+                    f1.ShowDialog();
+                }else
+                    MessageBox.Show("Esta inscrição não possui parcelamentos cadastrados.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             } else
                 MessageBox.Show("Selecione um contribuinte.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }

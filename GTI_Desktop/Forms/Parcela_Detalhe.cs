@@ -31,7 +31,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void CmdSair_Click(object sender, EventArgs e) {
-            this.Close();
+            Close();
         }
 
         private void Carrega_Detalhe(List<SpExtrato> Lista) {
@@ -57,6 +57,7 @@ namespace GTI_Desktop.Forms {
                 _valorCorrecao += item.Valorcorrecao;
                 _valorTotal += item.Valortotal;
             }
+
             ListViewItem lvItem2 = new ListViewItem {
                 Text = "Total ==>",
                 ForeColor = Color.Brown,
@@ -126,11 +127,12 @@ namespace GTI_Desktop.Forms {
             if (reg.UserId>0) {
                 Sistema_bll sistema_Class = new Sistema_bll(_connection);
                 string _nome = sistema_Class.Retorna_User_FullName(Convert.ToInt32(reg.UserId));
-                this.Text += " (Gerado por: " + _nome + ")";
+                Text += " (Gerado por: " + _nome + ")";
             }
 
 
         }
+
 
 
     }//end Class

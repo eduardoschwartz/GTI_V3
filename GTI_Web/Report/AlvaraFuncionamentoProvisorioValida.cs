@@ -16,14 +16,14 @@ namespace GTI_Web.Report {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class AlvaraFuncionamentoValida : ReportClass {
+    public class AlvaraFuncionamentoProvisorioValida : ReportClass {
         
-        public AlvaraFuncionamentoValida() {
+        public AlvaraFuncionamentoProvisorioValida() {
         }
         
         public override string ResourceName {
             get {
-                return "AlvaraFuncionamentoValida.rpt";
+                return "AlvaraFuncionamentoProvisorioValida.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace GTI_Web.Report {
         
         public override string FullResourceName {
             get {
-                return "GTI_Web.Report.AlvaraFuncionamentoValida.rpt";
+                return "GTI_Web.Report.AlvaraFuncionamentoProvisorioValida.rpt";
             }
             set {
                 // Do nothing
@@ -170,9 +170,9 @@ namespace GTI_Web.Report {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedAlvaraFuncionamentoValida : Component, ICachedReport {
+    public class CachedAlvaraFuncionamentoProvisorioValida : Component, ICachedReport {
         
-        public CachedAlvaraFuncionamentoValida() {
+        public CachedAlvaraFuncionamentoProvisorioValida() {
         }
         
         [Browsable(false)]
@@ -209,7 +209,7 @@ namespace GTI_Web.Report {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            AlvaraFuncionamentoValida rpt = new AlvaraFuncionamentoValida();
+            AlvaraFuncionamentoProvisorioValida rpt = new AlvaraFuncionamentoProvisorioValida();
             rpt.Site = this.Site;
             return rpt;
         }

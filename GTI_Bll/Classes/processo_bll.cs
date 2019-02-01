@@ -486,5 +486,16 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        /// <summary>
+        /// Retorna os números de processo de parcelamento de uma inscrição
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public List<Processo_Numero> Lista_Processo_Parcelamento_Header(int Codigo) {
+            Processo_Data obj = new Processo_Data(_connection);
+            return obj.Lista_Processo_Parcelamento_Header(Codigo);
+        }
+
+
     }
 }

@@ -55,12 +55,12 @@ namespace GTI_Web.Pages {
                                 EmpresaStruct reg = empresa_Class.Retorna_Empresa(_codigo);
                                 if (optCPF.Checked) {
                                     if (Convert.ToInt64(gtiCore.RetornaNumero(reg.Cpf_cnpj)).ToString("00000000000") != num_cpf_cnpj) {
-                                        lblMsg.Text = "CPF não pertence ao proprietário deste imóvel!";
+                                        lblMsg.Text = "CPF não pertence ao proprietário desta empresa!";
                                         return;
                                     }
                                 } else {
                                     if (Convert.ToInt64(gtiCore.RetornaNumero(reg.Cpf_cnpj)).ToString("00000000000000") != num_cpf_cnpj) {
-                                        lblMsg.Text = "CNPJ não pertence ao proprietário deste imóvel!";
+                                        lblMsg.Text = "CNPJ não pertence ao proprietário desta empresa!";
                                         return;
                                     }
                                 }

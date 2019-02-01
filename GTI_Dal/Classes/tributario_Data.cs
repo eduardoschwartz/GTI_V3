@@ -1389,7 +1389,7 @@ namespace GTI_Dal.Classes {
                     //*** não pagos
                     TimeSpan difference =DateTime.Now- item.Datavencimento ;
                     var days = difference.TotalDays;
-                    if ((item.Statuslanc == 3 | item.Statuslanc==18) && days>1) {
+                    if ((item.Statuslanc == 3 | item.Statuslanc== 18 | item.Statuslanc == 42 | item.Statuslanc == 43) && days>1) {
                         bNaoPagoVencido = true;
                         for (int i = 0; i < alArrayNaoPagoVencido.Count; i++) {
                             if (item.Codtributo == 26 || item.Codtributo == 90 || item.Codtributo == 112 || item.Codtributo == 113 || item.Codtributo == 585 || item.Codtributo == 587 || item.Codtributo == 24 || item.Codtributo == 28) {
@@ -1424,7 +1424,7 @@ namespace GTI_Dal.Classes {
                     }
 
                     //*** parcelados
-                    if (item.Codlancamento == 20 && (item.Statuslanc == 3 || item.Statuslanc == 18) && item.Datavencimento >= DateTime.Now) {
+                    if (item.Codlancamento == 20 && (item.Statuslanc == 3 || item.Statuslanc == 18 || item.Statuslanc == 42 || item.Statuslanc == 43) && item.Datavencimento >= DateTime.Now) {
                         bParceladoAVencer = true;
                         for (int i = 0; i < alArrayParceladoAVencer.Count; i++) {
                             if(item.Codtributo==26 || item.Codtributo==90 || item.Codtributo==112 || item.Codtributo==113||item.Codtributo==585 || item.Codtributo == 587 || item.Codtributo==24 ||item.Codtributo==28 ) {

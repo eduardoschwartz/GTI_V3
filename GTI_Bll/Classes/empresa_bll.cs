@@ -764,5 +764,16 @@ namespace GTI_Bll.Classes {
             return obj.Retorna_Alvara_Disponivel(Ano);
         }
 
+        /// <summary>
+        /// Verifica se a atividade permite alvará automático
+        /// </summary>
+        /// <param name="Codigo_Atividade"></param>
+        /// <returns></returns>
+        public bool Atividade_tem_Alvara(int Codigo_Atividade) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Atividade_tem_Alvara(Codigo_Atividade);
+        }
+
+
     }
 }

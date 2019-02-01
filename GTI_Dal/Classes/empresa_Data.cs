@@ -238,6 +238,18 @@ namespace GTI_Dal.Classes {
             return ret;
         }
 
+        public bool Atividade_tem_Alvara(int Codigo_Atividade) {
+            bool ret;
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                byte? alvara = (from m in db.Atividade where m.Codatividade == Codigo_Atividade && m.Alvara == 1 select m.Alvara).FirstOrDefault();
+                if (alvara == null)
+                    ret = false;
+                else
+                    ret = Convert.ToBoolean(alvara);
+            }
+            return ret;
+        }
+
         public string Regime_Empresa(int nCodigo) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 int tributo = (from m in db.Mobiliarioatividadeiss where m.Codmobiliario == nCodigo select m.Codtributo).FirstOrDefault();

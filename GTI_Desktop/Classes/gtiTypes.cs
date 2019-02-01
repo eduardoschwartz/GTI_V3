@@ -70,6 +70,21 @@ namespace GTI_Desktop.Classes {
             }
         }
 
+        internal class CustomListBoxItem5 {
+            public string _name { get; set; }
+            public int _value { get; set; }
+            public int _value2 { get; set; }
+
+            public CustomListBoxItem5(string name, int value, int value2) {
+                _name = name;
+                _value = value;
+                _value2 = value2;
+            }
+
+            public override string ToString() {
+                return _name;
+            }
+        }
 
     }
 
