@@ -1572,7 +1572,6 @@
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="nome">
-                          <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
@@ -1594,9 +1593,6 @@
                             <Border>
                               <Style>None</Style>
                             </Border>
-                            <BottomBorder>
-                              <Style>None</Style>
-                            </BottomBorder>
                             <RightBorder>
                               <Color>Black</Color>
                               <Style>Dotted</Style>
@@ -1620,7 +1616,6 @@
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="endereco">
-                          <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
@@ -1654,6 +1649,7 @@
                           </Style>
                         </Textbox>
                         <ColSpan>2</ColSpan>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell />

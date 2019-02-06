@@ -137,11 +137,11 @@ namespace GTI_Web.Pages {
                         lblmsg.Text = "Inscrição Municipal inválida!";
                         return;
                     } else {
-                        bool bAlvara = empresa_Class.Empresa_tem_Alvara(Num);
-                        if (!bAlvara) {
-                            lblmsg.Text = "Esta empresa não pode emitir alvará pela internet.";
-                            return;
-                        } else {
+                        //bool bAlvara = empresa_Class.Empresa_tem_Alvara(Num);
+                        //if (!bAlvara) {
+                        //    lblmsg.Text = "Esta empresa não pode emitir alvará pela internet.";
+                        //    return;
+                        //} else {
                             bool bSuspenso = empresa_Class.EmpresaSuspensa(Num);
                             if (bSuspenso) {
                                 lblmsg.Text = "Esta empresa encontra-se suspensa.";
@@ -159,7 +159,7 @@ namespace GTI_Web.Pages {
                                         int _atividade_codigo = (int)empresa.Atividade_codigo;
                                         bool bAtividadeAlvara = empresa_Class.Atividade_tem_Alvara(_atividade_codigo);
                                         if (!bAtividadeAlvara) {
-                                            lblmsg.Text = "Atividade da empresa não permite renovar o alvará.";
+                                            lblmsg.Text = "Atividade da empresa não permite renovar o alvará .";
                                             return;
                                         } else {
                                             bool bIsentoTaxa;
@@ -179,7 +179,7 @@ namespace GTI_Web.Pages {
                                         }
                                     }
                                 }
-                            }
+//                            }
                         }
                     }
                 }

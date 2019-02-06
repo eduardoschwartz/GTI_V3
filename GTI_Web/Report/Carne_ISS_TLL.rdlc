@@ -1487,7 +1487,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.2406cm</Height>
+                  <Height>0.2797cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -1532,12 +1532,11 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.32706cm</Height>
+                  <Height>0.28796cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="nome">
-                          <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
@@ -1559,9 +1558,6 @@
                             <Border>
                               <Style>None</Style>
                             </Border>
-                            <BottomBorder>
-                              <Style>None</Style>
-                            </BottomBorder>
                             <RightBorder>
                               <Color>Black</Color>
                               <Style>Dotted</Style>
@@ -1585,7 +1581,6 @@
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="endereco">
-                          <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
@@ -1630,7 +1625,6 @@
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="cpf">
-                          <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
@@ -1719,11 +1713,11 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.30561cm</Height>
+                  <Height>0.2825cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox44">
+                        <Textbox Name="Textbox26">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -1732,7 +1726,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
-                                    <FontSize>5pt</FontSize>
+                                    <FontSize>6pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1742,14 +1736,11 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox44</rd:DefaultName>
+                          <rd:DefaultName>Textbox26</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
                             </Border>
-                            <RightBorder>
-                              <Color>Black</Color>
-                            </RightBorder>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1812,7 +1803,7 @@
             <DataSetName>dsBoletoGuia</DataSetName>
             <Top>9.58647cm</Top>
             <Left>0.21901cm</Left>
-            <Height>9.69885cm</Height>
+            <Height>9.67574cm</Height>
             <Width>3.45521cm</Width>
             <Style>
               <Border>
@@ -1853,7 +1844,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.53796cm</Height>
+                  <Height>0.52407cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -1963,7 +1954,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.3cm</Height>
+                  <Height>0.28611cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2081,7 +2072,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.4cm</Height>
+                  <Height>0.38611cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2211,7 +2202,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.3cm</Height>
+                  <Height>0.28611cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2299,7 +2290,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.4cm</Height>
+                  <Height>0.38611cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2390,7 +2381,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.3cm</Height>
+                  <Height>0.28611cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2614,7 +2605,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.4cm</Height>
+                  <Height>0.38611cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2862,7 +2853,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.3cm</Height>
+                  <Height>0.28611cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3090,7 +3081,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.4cm</Height>
+                  <Height>0.38611cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3369,7 +3360,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.3cm</Height>
+                  <Height>0.28611cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3452,7 +3443,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.4cm</Height>
+                  <Height>0.38611cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3536,7 +3527,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.3cm</Height>
+                  <Height>0.28611cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3617,7 +3608,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.4cm</Height>
+                  <Height>0.38611cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3703,7 +3694,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.3cm</Height>
+                  <Height>0.28611cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3783,7 +3774,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.4cm</Height>
+                  <Height>0.38611cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3876,7 +3867,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.3cm</Height>
+                  <Height>0.28611cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3956,7 +3947,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.4cm</Height>
+                  <Height>0.38611cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4043,7 +4034,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.3cm</Height>
+                  <Height>0.28611cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4164,7 +4155,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.4cm</Height>
+                  <Height>0.38611cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4279,7 +4270,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.4cm</Height>
+                  <Height>0.38611cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4386,7 +4377,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.4cm</Height>
+                  <Height>0.38611cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4506,7 +4497,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>2.06089cm</Height>
+                  <Height>2.047cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -4636,7 +4627,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Ficha de Compensação</Value>
+                                  <Value />
                                   <Style>
                                     <FontSize>6pt</FontSize>
                                   </Style>
@@ -4662,6 +4653,54 @@
                         <ColSpan>2</ColSpan>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell />
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.2825cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox31">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily>SAdvI25d</FontFamily>
+                                    <FontSize>16pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox31</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>6pt</PaddingLeft>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>9</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
                     <TablixCell />
                   </TablixCells>
                 </TablixRow>
@@ -4707,6 +4746,7 @@
                     <TablixMember />
                     <TablixMember />
                     <TablixMember />
+                    <TablixMember />
                   </TablixMembers>
                 </TablixMember>
               </TablixMembers>
@@ -4714,7 +4754,7 @@
             <DataSetName>dsBoletoGuia</DataSetName>
             <Top>9.58647cm</Top>
             <Left>3.91591cm</Left>
-            <Height>9.69885cm</Height>
+            <Height>9.67574cm</Height>
             <Width>16.85996cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
@@ -5833,7 +5873,7 @@
             </Style>
           </Rectangle>
         </ReportItems>
-        <Height>7.60804in</Height>
+        <Height>7.67383in</Height>
         <Style />
       </Body>
       <Width>8.24342in</Width>
