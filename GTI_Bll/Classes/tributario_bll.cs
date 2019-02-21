@@ -13,7 +13,7 @@ namespace GTI_Bll.Classes {
             _connection = sConnection;
         }
 
-        ///<summary> Retorna o dígito verificador de um númerode documento.
+        ///<summary> Retorna o dígito verificador de um número de documento.
         ///</summary>
         public int DvDocumento(int Numero) {
             string sFromN = Numero.ToString("00000000");
@@ -975,6 +975,40 @@ namespace GTI_Bll.Classes {
         public DebitoPagoStruct Retorna_DebitoPago_Parcela(Debitoparcela Reg) {
             Tributario_Data obj = new Tributario_Data(_connection);
             return obj.Retorna_DebitoPago_Parcela(Reg);
+        }
+
+        /// <summary>
+        /// Retorna verdadeiro se existir parcela única não paga no exercício 
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <param name="Ano"></param>
+        /// <returns></returns>
+        public bool Parcela_Unica_IPTU_NaoPago(int Codigo, int Ano) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Parcela_Unica_IPTU_NaoPago(Codigo,Ano);
+        }
+
+
+        /// <summary>
+        /// Inserir um documento para registro
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Ficha_Compensacao_Documento(Ficha_compensacao_documento Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Ficha_Compensacao_Documento(Reg);
+            return ex;
+        }
+
+        /// <summary>
+        /// Marcar o documento como registrado
+        /// </summary>
+        /// <param name="_documento"></param>
+        /// <returns></returns>
+        public Exception Marcar_Documento_Registrado(int _documento) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Marcar_Documento_Registrado(_documento);
+            return ex;
         }
 
 

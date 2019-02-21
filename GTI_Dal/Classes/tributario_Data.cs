@@ -1806,13 +1806,15 @@ namespace GTI_Dal.Classes {
 
         public List<DebitoStructure> Lista_Parcelas_Taxa(int nCodigo, int nAno) {
             using (GTI_Context db = new GTI_Context(_connection)) {
+
+                //Retornar a lista das parcelas registradas
                 var reg = (from dp in db.Debitoparcela
                            join dt in db.Debitotributo on new { p1 = dp.Codreduzido, p2 = dp.Anoexercicio, p3 = dp.Codlancamento, p4 = dp.Seqlancamento, p5 = dp.Numparcela, p6 = dp.Codcomplemento }
                                                    equals new { p1 = dt.Codreduzido, p2 = dt.Anoexercicio, p3 = dt.Codlancamento, p4 = dt.Seqlancamento, p5 = dt.Numparcela, p6 = dt.Codcomplemento } into dpdt from dt in dpdt.DefaultIfEmpty()
                            join pd in db.Parceladocumento on new { p1 = dp.Codreduzido, p2 = dp.Anoexercicio, p3 = dp.Codlancamento, p4 = dp.Seqlancamento, p5 = dp.Numparcela, p6 = dp.Codcomplemento }
                                                       equals new { p1 = pd.Codreduzido, p2 = pd.Anoexercicio, p3 = pd.Codlancamento, p4 = pd.Seqlancamento, p5 = pd.Numparcela, p6 = pd.Codcomplemento } into dppd from pd in dppd.DefaultIfEmpty()
                            join nd in db.Numdocumento on pd.Numdocumento equals nd.numdocumento
-                           where dp.Codreduzido == nCodigo && dp.Anoexercicio == nAno && dp.Codlancamento == 6 && dp.Seqlancamento == 0 && (dp.Statuslanc == 3 || dp.Statuslanc == 18) && nd.Registrado == true
+                           where dp.Codreduzido == nCodigo && dp.Anoexercicio == nAno && dp.Codlancamento == 6 && dp.Seqlancamento == 0 && (dp.Statuslanc == 3 || dp.Statuslanc == 18) 
                            orderby new { dp.Numparcela, dp.Codcomplemento }
                            select new { dp.Codreduzido, dp.Anoexercicio, dp.Codlancamento, dp.Seqlancamento, dp.Numparcela, dp.Codcomplemento, dp.Datavencimento, dt.Valortributo, pd.Numdocumento, nd.Datadocumento });
 
@@ -1834,8 +1836,14 @@ namespace GTI_Dal.Classes {
                     Linha.Numero_Documento = query.Numdocumento;
                     Linha.Data_Base = Convert.ToDateTime(query.Datadocumento);
                     Lista.Add(Linha);
+
+                    //Caso algum documento de ISS/TLL esteja sem registro bancário, enviar para registro
+                    
+
+
 Proximo:;
                 }
+
                 return Lista;
             }
         }
@@ -1848,9 +1856,9 @@ Proximo:;
                            join pd in db.Parceladocumento on new { p1 = dp.Codreduzido, p2 = dp.Anoexercicio, p3 = dp.Codlancamento, p4 = dp.Seqlancamento, p5 = dp.Numparcela, p6 = dp.Codcomplemento }
                                                       equals new { p1 = pd.Codreduzido, p2 = pd.Anoexercicio, p3 = pd.Codlancamento, p4 = pd.Seqlancamento, p5 = pd.Numparcela, p6 = pd.Codcomplemento } into dppd from pd in dppd.DefaultIfEmpty()
                            join nd in db.Numdocumento on pd.Numdocumento equals nd.numdocumento
-                           where dp.Codreduzido == nCodigo && dp.Anoexercicio == nAno && dp.Codlancamento == 14 && dp.Seqlancamento == 0 && (dp.Statuslanc == 3 || dp.Statuslanc == 18) && nd.Registrado == true
+                           where dp.Codreduzido == nCodigo && dp.Anoexercicio == nAno && dp.Codlancamento == 14 && dp.Seqlancamento == 0 && (dp.Statuslanc == 3 || dp.Statuslanc == 18) 
                            orderby new { dp.Numparcela, dp.Codcomplemento }
-                           select new { dp.Codreduzido, dp.Anoexercicio, dp.Codlancamento, dp.Seqlancamento, dp.Numparcela, dp.Codcomplemento, dp.Datavencimento, dt.Valortributo, pd.Numdocumento, nd.Datadocumento });
+                           select new { dp.Codreduzido, dp.Anoexercicio, dp.Codlancamento, dp.Seqlancamento, dp.Numparcela, dp.Codcomplemento, dp.Datavencimento, dt.Valortributo, pd.Numdocumento, nd.Datadocumento,nd.Registrado });
 
                 List<DebitoStructure> Lista = new List<DebitoStructure>();
                 foreach (var query in reg) {
@@ -1869,12 +1877,50 @@ Proximo:;
                     Linha.Data_Vencimento = query.Datavencimento;
                     Linha.Numero_Documento = query.Numdocumento;
                     Linha.Data_Base = Convert.ToDateTime(query.Datadocumento);
+                    Linha.Registrado = query.Registrado;
                     Lista.Add(Linha);
+
 Proximo:;
                 }
                 return Lista;
             }
         }
+
+        public Exception Marcar_Documento_Registrado(int _documento) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                Numdocumento d = db.Numdocumento.First(i => i.numdocumento == _documento);
+                d.Registrado = true;
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Exception Insert_Ficha_Compensacao_Documento(Ficha_compensacao_documento Reg) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                try {
+                    db.Database.ExecuteSqlCommand("INSERT INTO ficha_compensacao_documento(numero_documento,data_vencimento,valor_documento,nome,cpf,endereco,bairro,cep,cidade,uf) " +
+                        "VALUES(@numero_documento, @data_vencimento,@valor_documento,@nome,@cpf,@endereco,@bairro,@cep,@cidade,@uf)",
+                        new SqlParameter("@numero_documento", Reg.Numero_documento),
+                        new SqlParameter("@data_vencimento", Reg.Data_vencimento),
+                        new SqlParameter("@valor_documento", Reg.Valor_documento),
+                        new SqlParameter("@nome", Reg.Nome),
+                        new SqlParameter("@cpf", Reg.Cpf),
+                        new SqlParameter("@endereco", Reg.Endereco),
+                        new SqlParameter("@bairro", Reg.Bairro),
+                        new SqlParameter("@cep", Reg.Cep),
+                        new SqlParameter("@cidade", Reg.Cidade),
+                        new SqlParameter("@uf", Reg.Uf));
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
 
         public List<DebitoStructure> Lista_Parcelas_Vigilancia(int nCodigo, int nAno) {
             using (GTI_Context db = new GTI_Context(_connection)) {
@@ -1998,7 +2044,21 @@ Proximo:;
             }
         }
 
+        public bool Parcela_Unica_IPTU_NaoPago(int Codigo, int Ano) {
+            bool bRet = false;
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var existingReg = db.Debitoparcela.Count(a => a.Codreduzido == Codigo && a.Anoexercicio == Ano && a.Codlancamento==1 && a.Numparcela==0 && a.Statuslanc==3);
+                if (existingReg != 0) {
+                    bRet = true;
+                    existingReg = db.Debitoparcela.Count(a => a.Codreduzido == Codigo && a.Anoexercicio < DateTime.Now.Year  && (a.Statuslanc == 3 | a.Statuslanc == 42 | a.Statuslanc == 43));
+                    if (existingReg != 0) {
+                        bRet = false;
+                    }
+                }
 
+            }
+            return bRet;
+        }
 
 
     }//end class

@@ -100,7 +100,7 @@ namespace GTI_Web.Pages {
 
         private void PrintReport(List<int>_codigos) {
             ReportDocument crystalReport = new ReportDocument();
-            string sData = "18/04/2012", sTributo = "";
+            string sData = "18/04/2012", sTributo = "",sNao="",sCertifica = "";
             short  nRet = 0;
             List<Certidao_debito_documento> _lista_certidao = new List<Certidao_debito_documento>();
             RetornoCertidaoDebito _tipo_Certidao; 
@@ -114,6 +114,7 @@ namespace GTI_Web.Pages {
                 goto SEM_INSCRICAO;
             }
 
+            bool  bEmpresa = false, bCidadao = false;
             foreach (int _codigo in _codigos) {
                 TipoCadastro _tipo_cadastro = _codigo < 100000 ? TipoCadastro.Imovel : _codigo >= 100000 && _codigo < 500000 ? TipoCadastro.Empresa : TipoCadastro.Cidadao;
                 Sistema_bll sistema_Class = new Sistema_bll("GTIconnection");
@@ -127,6 +128,8 @@ namespace GTI_Web.Pages {
                     sTributo = "";
                 } else {
                     if (dadosCertidao.Tipo_Retorno == RetornoCertidaoDebito.Positiva) {
+                        if (_tipo_cadastro == TipoCadastro.Empresa) bEmpresa = true;
+                        if (_tipo_cadastro == TipoCadastro.Cidadao) bCidadao = true;
                         nRet = 4;
                         sTributo = dadosCertidao.Descricao_Lancamentos;
                     } else {
@@ -141,7 +144,7 @@ namespace GTI_Web.Pages {
                 reg._Codigo = _codigo;
                 reg._Ret = nRet;
                 reg._Tributo = sTributo;
-                reg._Nome = sNome;
+                reg._Nome = sNome.Trim();
                 _lista_certidao.Add(reg);
             }
 
@@ -154,6 +157,7 @@ namespace GTI_Web.Pages {
             }
             if (!_find) {
                 _tipo_Certidao = RetornoCertidaoDebito.Negativa;
+                sNao = " não";
             } else {
                 _find = false;
                 foreach (Certidao_debito_documento reg in _lista_certidao) {
@@ -164,6 +168,20 @@ namespace GTI_Web.Pages {
                 }
                 if (_find) {
                     _tipo_Certidao = RetornoCertidaoDebito.Positiva;
+                    if (!bEmpresa && !bCidadao) {
+                        //Se a certidão positiva for apenas de imóvel, verifica se esta no prazo das parcelas únicas em aberto.
+                        bool bUnicaNaoPago = false;
+                        foreach (int _codigo in _codigos) {
+                            bUnicaNaoPago = tributario_Class.Parcela_Unica_IPTU_NaoPago(_codigo, DateTime.Now.Year);
+                            if (bUnicaNaoPago) break;
+                        }
+                        if (bUnicaNaoPago) {
+                            sCertifica = " embora conste parcela(s) não paga(s) do IPTU de " + DateTime.Now.Year.ToString() + ", em razão da possibilidade do pagamento integral deste imposto em data futura, ";
+                            sNao = " não";
+                            nRet = 3;
+                            _tipo_Certidao = RetornoCertidaoDebito.Negativa;
+                        }
+                    }
                 } else {
                     _tipo_Certidao = RetornoCertidaoDebito.NegativaPositiva;
                 }
@@ -210,6 +228,8 @@ namespace GTI_Web.Pages {
                     crystalReport.SetParameterValue("CONTROLE", _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _lista_certidao[0]._Codigo.ToString() + "-IN");
                     crystalReport.SetParameterValue("NOME", _lista_certidao[0]._Nome);
                     crystalReport.SetParameterValue("DOC", optCPF.Checked ? txtCPF.Text : txtCNPJ.Text);
+                    crystalReport.SetParameterValue("NAO", sNao);
+                    crystalReport.SetParameterValue("CERTIFICA", sCertifica);
                     HttpContext.Current.Response.Buffer = false;
                     HttpContext.Current.Response.ClearContent();
                     HttpContext.Current.Response.ClearHeaders();
@@ -223,6 +243,7 @@ namespace GTI_Web.Pages {
                     }
                 } else {
                     if (_tipo_Certidao == RetornoCertidaoDebito.Positiva) {
+
                         crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoDocumentoP.rpt"));
                         crystalReport.SetParameterValue("NUMCERTIDAO", _numero_certidao.ToString("00000") + "/" + _ano_certidao.ToString("0000"));
                         crystalReport.SetParameterValue("DATAEMISSAO", DateTime.Now.ToString("dd/MM/yyyy") + " às " + DateTime.Now.ToString("HH:mm:ss"));

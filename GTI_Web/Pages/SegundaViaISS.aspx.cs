@@ -108,54 +108,155 @@ namespace GTI_Web.Pages {
                             bool _temtaxa = Lista_Taxa.Count > 0 ? true : false;
                             bool _temiss = Lista_Iss.Count > 0 ? true : false;
 
+                            List<Numdocumento> _lista_novos_documentos = new List<Numdocumento>();
                             List<DebitoStructure> Lista_Unificada = new List<DebitoStructure>();
-                            foreach (DebitoStructure item in Lista_Taxa) {//carrega a lista unificada com os dados das taxas
-                                DebitoStructure reg = new DebitoStructure();
-                                reg.Codigo_Tributo = item.Codigo_Tributo;
-                                reg.Abreviatura_Tributo = item.Abreviatura_Tributo;
-                                reg.Data_Vencimento = item.Data_Vencimento;
-                                reg.Numero_Parcela = item.Numero_Parcela;
-                                reg.Numero_Documento = item.Numero_Documento;
-                                reg.Soma_Principal = item.Soma_Principal;
-                                reg.Data_Base = item.Data_Base;
-                                Lista_Unificada.Add(reg);
-                                if (item.Numero_Parcela > 0)
-                                    _SomaTaxa += item.Soma_Principal;
+
+                            if (_temtaxa) {
+                                foreach (DebitoStructure item in Lista_Taxa) {
+                                    //criamos um documento novo para cada parcela da taxa de licença
+                                    Numdocumento regDoc = new Numdocumento();
+                                    regDoc.Valorguia = item.Soma_Principal;
+                                    regDoc.Emissor = "Gti.Web/2ViaISS";
+                                    regDoc.Datadocumento = DateTime.Now;
+                                    regDoc.Registrado = false;
+                                    regDoc.Percisencao = 0;
+                                    regDoc.Percisencao = 0;
+                                    int _novo_documento = tributario_Class.Insert_Documento(regDoc);
+                                    regDoc.numdocumento = _novo_documento;
+                                    _lista_novos_documentos.Add(regDoc);
+
+                                    //grava o documento na parcela
+                                    Parceladocumento regParc = new Parceladocumento();
+                                    regParc.Codreduzido = item.Codigo_Reduzido;
+                                    regParc.Anoexercicio = Convert.ToInt16(item.Ano_Exercicio);
+                                    regParc.Codlancamento = Convert.ToInt16(item.Codigo_Lancamento);
+                                    regParc.Seqlancamento = Convert.ToInt16(item.Sequencia_Lancamento);
+                                    regParc.Numparcela = Convert.ToByte(item.Numero_Parcela);
+                                    regParc.Codcomplemento = Convert.ToByte(item.Complemento);
+                                    regParc.Numdocumento = _novo_documento;
+                                    regParc.Valorjuros = 0;
+                                    regParc.Valormulta = 0;
+                                    regParc.Valorcorrecao = 0;
+                                    regParc.Plano = 0;
+                                    tributario_Class.Insert_Parcela_Documento(regParc);
+
+                                    //grava os débitos
+                                    DebitoStructure regDebito = new DebitoStructure();
+                                    regDebito.Data_Vencimento = item.Data_Vencimento;
+                                    regDebito.Numero_Documento = _novo_documento;
+                                    regDebito.Soma_Principal = item.Soma_Principal;
+                                    regDebito.Codigo_Tributo = item.Codigo_Tributo;
+                                    regDebito.Abreviatura_Tributo = item.Abreviatura_Tributo;
+                                    regDebito.Numero_Parcela = item.Numero_Parcela;
+                                    regDebito.Data_Base = item.Data_Base;
+                                    Lista_Unificada.Add(regDebito);
+                                    if(item.Numero_Parcela>0)
+                                        _SomaTaxa += item.Soma_Principal;
+                                }
                             }
 
                             if (_temiss) {
-                                if (_temtaxa) {//se tiver taxa, tem que juntar os dois na lista unificada
-                                    bFind = false;
-                                    int _index = 0;
-                                    foreach (DebitoStructure item in Lista_Taxa) {
-                                        decimal _valor_principal = 0;
-                                        foreach (var item2 in Lista_Iss) {
-                                            if (item.Numero_Documento == item2.Numero_Documento) {
-                                                _valor_principal = item2.Soma_Principal;
-                                                Lista_Unificada[_index].Soma_Principal+=_valor_principal;
-                                                if (item.Numero_Parcela > 0)
-                                                    _SomaISS += item2.Soma_Principal;
-                                                _index++;
+                                if (_temtaxa) {
+                                    int nPos = 0,nPos2=0;
+                                    foreach (DebitoStructure item in Lista_Iss) {
+                                        _lista_novos_documentos[nPos].Valorguia += item.Soma_Principal;
+                                        
+                                        //grava o documento na parcela
+                                        Parceladocumento regParc = new Parceladocumento();
+                                        regParc.Codreduzido = item.Codigo_Reduzido;
+                                        regParc.Anoexercicio = Convert.ToInt16(item.Ano_Exercicio);
+                                        regParc.Codlancamento = Convert.ToInt16(item.Codigo_Lancamento);
+                                        regParc.Seqlancamento = Convert.ToInt16(item.Sequencia_Lancamento);
+                                        regParc.Numparcela = Convert.ToByte(item.Numero_Parcela);
+                                        regParc.Codcomplemento = Convert.ToByte(item.Complemento);
+                                        regParc.Numdocumento = _lista_novos_documentos[nPos].numdocumento;
+                                        regParc.Valorjuros = 0;
+                                        regParc.Valormulta = 0;
+                                        regParc.Valorcorrecao = 0;
+                                        regParc.Plano = 0;
+                                        tributario_Class.Insert_Parcela_Documento(regParc);
+                                        nPos++;
+
+                                        nPos2 = 0;
+                                        foreach (DebitoStructure itemUnificado in Lista_Unificada) {
+                                            if(itemUnificado.Numero_Documento== regParc.Numdocumento) {
+                                                Lista_Unificada[nPos2].Soma_Principal += item.Soma_Principal;
+                                                if (itemUnificado.Numero_Parcela > 0)
+                                                    _SomaISS += item.Soma_Principal;
                                                 break;
                                             }
+                                            nPos2++;
                                         }
                                     }
-                                } else { //se não tiver taxa, a lista unficada conterá apenas os dados de iss
+                                } else {
                                     foreach (DebitoStructure item in Lista_Iss) {
-                                        DebitoStructure reg = new DebitoStructure();
-                                        reg.Codigo_Tributo = item.Codigo_Tributo;
-                                        reg.Abreviatura_Tributo = item.Abreviatura_Tributo;
-                                        reg.Data_Vencimento = item.Data_Vencimento;
-                                        reg.Numero_Parcela = item.Numero_Parcela;
-                                        reg.Numero_Documento = item.Numero_Documento;
-                                        reg.Soma_Principal = item.Soma_Principal;
-                                        reg.Data_Base = item.Data_Base;
-                                        Lista_Unificada.Add(reg);
+                                        //criamos um documento novo para cada parcela da taxa de licença
+                                        Numdocumento regDoc = new Numdocumento();
+                                        regDoc.Valorguia = item.Soma_Principal;
+                                        regDoc.Emissor = "Gti.Web/2ViaISS";
+                                        regDoc.Datadocumento = DateTime.Now;
+                                        regDoc.Registrado = false;
+                                        regDoc.Percisencao = 0;
+                                        regDoc.Percisencao = 0;
+                                        int _novo_documento = tributario_Class.Insert_Documento(regDoc);
+                                        regDoc.numdocumento = _novo_documento;
+                                        _lista_novos_documentos.Add(regDoc);
+
+                                        //grava o documento na parcela
+                                        Parceladocumento regParc = new Parceladocumento();
+                                        regParc.Codreduzido = item.Codigo_Reduzido;
+                                        regParc.Anoexercicio = Convert.ToInt16(item.Ano_Exercicio);
+                                        regParc.Codlancamento = Convert.ToInt16(item.Codigo_Lancamento);
+                                        regParc.Seqlancamento = Convert.ToInt16(item.Sequencia_Lancamento);
+                                        regParc.Numparcela = Convert.ToByte(item.Numero_Parcela);
+                                        regParc.Codcomplemento = Convert.ToByte(item.Complemento);
+                                        regParc.Numdocumento = _novo_documento;
+                                        regParc.Valorjuros = 0;
+                                        regParc.Valormulta = 0;
+                                        regParc.Valorcorrecao = 0;
+                                        regParc.Plano = 0;
+                                        tributario_Class.Insert_Parcela_Documento(regParc);
+
+                                        //grava os débitos
+                                        DebitoStructure regDebito = new DebitoStructure();
+                                        regDebito.Data_Vencimento = item.Data_Vencimento;
+                                        regDebito.Numero_Documento = _novo_documento;
+                                        regDebito.Soma_Principal = item.Soma_Principal;
+                                        regDebito.Codigo_Tributo = item.Codigo_Tributo;
+                                        regDebito.Abreviatura_Tributo = item.Abreviatura_Tributo;
+                                        regDebito.Numero_Parcela = item.Numero_Parcela;
+                                        regDebito.Data_Base = item.Data_Base;
+                                        Lista_Unificada.Add(regDebito);
                                         if (item.Numero_Parcela > 0)
                                             _SomaISS += item.Soma_Principal;
+
                                     }
                                 }
                             }
+
+
+                            //Registrar os novos documentos
+                            foreach (DebitoStructure _cod  in Lista_Unificada) {
+                                EmpresaStruct _empresa = empresa_Class.Retorna_Empresa(_codigo);
+                                Ficha_compensacao_documento ficha = new Ficha_compensacao_documento();
+                                ficha.Nome = _empresa.Razao_social.Length > 40 ? _empresa.Razao_social.Substring(0, 40) : _empresa.Razao_social;
+                                string _endereco = _empresa.Endereco_nome + ", " + _empresa.Numero.ToString() + " " + _empresa.Complemento;
+                                ficha.Endereco = _endereco.Length > 40 ? _endereco.Substring(0, 40) : _endereco;
+                                ficha.Bairro = _empresa.Bairro_nome.Length > 15 ? _empresa.Bairro_nome.Substring(0, 15) : _empresa.Bairro_nome;
+                                ficha.Cidade = _empresa.Cidade_nome.Length > 30 ? _empresa.Cidade_nome.Substring(0, 30) : _empresa.Cidade_nome;
+                                ficha.Uf = _empresa.UF;
+                                ficha.Cep = gtiCore.RetornaNumero(_empresa.Cep);
+                                ficha.Cpf = _empresa.Cpf_cnpj;
+                                ficha.Numero_documento = (int)_cod.Numero_Documento;
+                                ficha.Data_vencimento = Convert.ToDateTime(_cod.Data_Vencimento);
+                                ficha.Valor_documento = Convert.ToDecimal(_cod.Soma_Principal);
+                                Exception ex = tributario_Class.Insert_Ficha_Compensacao_Documento(ficha);
+                                if (ex == null)
+                                    ex = tributario_Class.Marcar_Documento_Registrado((int)_cod.Numero_Documento);
+                            }
+
+
+
 
                             if (!_temtaxa && !_temiss) {
                                 lblMsg.Text = "Não é possível emitir segunda via para este código";

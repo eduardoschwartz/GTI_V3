@@ -80,6 +80,7 @@ namespace GTI_Models.Models {
         public int? Numero_Execucao { get; set; }
         public int? Ano_execucao { get; set; }
         public string Processo_CNJ { get; set; }
+        public bool? Registrado { get; set; }
     }
 
 
