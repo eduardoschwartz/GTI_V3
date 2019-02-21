@@ -1649,7 +1649,6 @@
                           </Style>
                         </Textbox>
                         <ColSpan>2</ColSpan>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell />
@@ -5469,7 +5468,6 @@
                 </Style>
               </Textbox>
               <Textbox Name="ATIVIDADE">
-                <CanGrow>true</CanGrow>
                 <KeepTogether>true</KeepTogether>
                 <Paragraphs>
                   <Paragraph>
@@ -5477,8 +5475,7 @@
                       <TextRun>
                         <Value>=Parameters!ATIVIDADE.Value</Value>
                         <Style>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
+                          <FontSize>6pt</FontSize>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -5486,9 +5483,9 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>ATIVIDADE</rd:DefaultName>
-                <Top>5.23679cm</Top>
+                <Top>5.17329cm</Top>
                 <Left>0.12645cm</Left>
-                <Height>0.64371cm</Height>
+                <Height>0.74601cm</Height>
                 <Width>14.91606cm</Width>
                 <ZIndex>23</ZIndex>
                 <Style>

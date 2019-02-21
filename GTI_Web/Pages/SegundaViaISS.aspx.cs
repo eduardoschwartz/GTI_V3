@@ -100,7 +100,7 @@ namespace GTI_Web.Pages {
                             Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
 
                             Paramparcela _parametro_parcela = tributario_Class.Retorna_Parametro_Parcela(_ano, (int)modelCore.TipoCarne.Iss_Taxa);
-                            int _qtde_parcela = (int)_parametro_parcela.Qtdeparcela;
+                            //int _qtde_parcela = (int)_parametro_parcela.Qtdeparcela;
                             decimal _SomaISS = 0, _SomaTaxa = 0;
 
                             List<DebitoStructure> Lista_Taxa = tributario_Class.Lista_Parcelas_Taxa(_codigo, 2019);
@@ -291,7 +291,13 @@ namespace GTI_Web.Pages {
 
                                 short _index = 0;
                                 string _convenio = "2873532";
+
+                                int _qtde_lista=0;
                                 foreach (DebitoStructure item in Lista_Unificada) {
+                                    if (item.Numero_Parcela > 0)
+                                        _qtde_lista++;
+                                }
+                                    foreach (DebitoStructure item in Lista_Unificada) {
 
                                     Boletoguia reg = new Boletoguia();
                                     reg.Usuario = "Gti.Web/2ViaISSTLL";
@@ -343,11 +349,13 @@ namespace GTI_Web.Pages {
                                     _linha_digitavel += _digitavel.Substring(21, 5) + "." + _digitavel.Substring(26, 6) + " " + _digitavel.Substring(32, 1) + " " + gtiCore.StringRight(_digitavel, 14);
                                     string _codigo_barra = gtiCore.Gera2of5Str(_barra);
                                     //**************************************************
+                                    int _qtde_parcela = Lista_Unificada.Count-1;
                                     reg.Totparcela = (short)_qtde_parcela;
                                     if (item.Numero_Parcela == 0) {
                                             reg.Parcela = "Única";
                                     } else
-                                        reg.Parcela = reg.Numparcela.ToString("00") + "/" + reg.Totparcela.ToString("00");
+                                    //    reg.Parcela = reg.Numparcela.ToString("00") + "/" + reg.Totparcela.ToString("00");
+                                    reg.Parcela = reg.Numparcela.ToString("00") + "/" + _qtde_lista.ToString("00");
 
 
                                     reg.Digitavel = _linha_digitavel;

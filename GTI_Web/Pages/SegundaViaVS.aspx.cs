@@ -87,6 +87,58 @@ namespace GTI_Web.Pages {
                                 int nSid = gtiCore.GetRandomNumber();
 
                                 EmpresaStruct _empresa = empresa_Class.Retorna_Empresa(_codigo);
+
+                                int nPos = 0;
+                                foreach (DebitoStructure item in Lista_Taxa) {
+
+                                    //criamos um documento novo para cada parcela da taxa de licença
+                                    Numdocumento regDoc = new Numdocumento();
+                                    regDoc.Valorguia = item.Soma_Principal;
+                                    regDoc.Emissor = "Gti.Web/2ViaVS";
+                                    regDoc.Datadocumento = DateTime.Now;
+                                    regDoc.Registrado = false;
+                                    regDoc.Percisencao = 0;
+                                    regDoc.Percisencao = 0;
+                                    int _novo_documento = tributario_Class.Insert_Documento(regDoc);
+                                    regDoc.numdocumento = _novo_documento;
+                                    Lista_Taxa[nPos].Numero_Documento = _novo_documento;
+
+                                    //grava o documento na parcela
+                                    Parceladocumento regParc = new Parceladocumento();
+                                    regParc.Codreduzido = item.Codigo_Reduzido;
+                                    regParc.Anoexercicio = Convert.ToInt16(item.Ano_Exercicio);
+                                    regParc.Codlancamento = Convert.ToInt16(item.Codigo_Lancamento);
+                                    regParc.Seqlancamento = Convert.ToInt16(item.Sequencia_Lancamento);
+                                    regParc.Numparcela = Convert.ToByte(item.Numero_Parcela);
+                                    regParc.Codcomplemento = Convert.ToByte(item.Complemento);
+                                    regParc.Numdocumento = _novo_documento;
+                                    regParc.Valorjuros = 0;
+                                    regParc.Valormulta = 0;
+                                    regParc.Valorcorrecao = 0;
+                                    regParc.Plano = 0;
+                                    tributario_Class.Insert_Parcela_Documento(regParc);
+
+                                    //Registrar os novos documentos
+                                    _empresa = empresa_Class.Retorna_Empresa(_codigo);
+                                    Ficha_compensacao_documento ficha = new Ficha_compensacao_documento();
+                                    ficha.Nome = _empresa.Razao_social.Length > 40 ? _empresa.Razao_social.Substring(0, 40) : _empresa.Razao_social;
+                                    string _enderecoReg = _empresa.Endereco_nome + ", " + _empresa.Numero.ToString() + " " + _empresa.Complemento;
+                                    ficha.Endereco = _enderecoReg.Length > 40 ? _enderecoReg.Substring(0, 40) : _enderecoReg;
+                                    ficha.Bairro = _empresa.Bairro_nome.Length > 15 ? _empresa.Bairro_nome.Substring(0, 15) : _empresa.Bairro_nome;
+                                    ficha.Cidade = _empresa.Cidade_nome.Length > 30 ? _empresa.Cidade_nome.Substring(0, 30) : _empresa.Cidade_nome;
+                                    ficha.Uf = _empresa.UF;
+                                    ficha.Cep = gtiCore.RetornaNumero(_empresa.Cep);
+                                    ficha.Cpf = _empresa.Cpf_cnpj;
+                                    ficha.Numero_documento = _novo_documento;
+                                    ficha.Data_vencimento = Convert.ToDateTime(item.Data_Vencimento);
+                                    ficha.Valor_documento = Convert.ToDecimal(item.Soma_Principal);
+                                    Exception ex = tributario_Class.Insert_Ficha_Compensacao_Documento(ficha);
+                                    if (ex == null)
+                                        ex = tributario_Class.Marcar_Documento_Registrado(_novo_documento);
+                                    nPos++;
+                                }
+
+
                                 string _razao = _empresa.Razao_social;
                                 string _cpfcnpj;
                                 if (_empresa.Juridica)
@@ -161,13 +213,18 @@ namespace GTI_Web.Pages {
                                     if (item.Numero_Parcela == 0) {
                                         reg.Parcela = "Única";
                                     } else
-                                        reg.Parcela = reg.Numparcela.ToString("00") + "/" + reg.Totparcela.ToString("00");
+                                    //    reg.Parcela = reg.Numparcela.ToString("00") + "/" + reg.Totparcela.ToString("00");
+                                    reg.Parcela = reg.Numparcela.ToString("00") + "/" + (Lista_Taxa.Count-1).ToString("00");
 
 
                                     reg.Digitavel = _linha_digitavel;
                                     reg.Codbarra = _codigo_barra;
                                     reg.Nossonumero = _convenio + String.Format("{0:D10}", Convert.ToInt64(reg.Numdoc));
                                     tributario_Class.Insert_Boleto_Guia(reg);
+
+
+
+
 
                                     _index++;
                                 }
