@@ -63,16 +63,20 @@ namespace UIWeb {
             int nImovel = Convert.ToInt32(txtCod.Text);
             Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
             Imovel_bll imovel_Class = new Imovel_bll("GTIconnection");
-            List<DebitoStructure> Extrato_Lista = tributario_Class.Lista_Parcelas_IPTU(nImovel, 2019);
+            List<DebitoStructure> Extrato_Lista = tributario_Class.Lista_Parcelas_IPTU( nImovel, 2019);
             if (Extrato_Lista.Count == 0) {
                 lblmsg.Text = "Não é possível emitir segunda via para este código";
                 return 0;
             }
             short nSeq = 0;
+            ImovelStruct dados_imovel = imovel_Class.Dados_Imovel(nImovel);
+            List<ProprietarioStruct> lstProprietario = imovel_Class.Lista_Proprietario(nImovel, true);
+
             foreach (DebitoStructure item in Extrato_Lista) {
-                ImovelStruct dados_imovel = imovel_Class.Dados_Imovel(item.Codigo_Reduzido);
-                List<ProprietarioStruct>lstProprietario= imovel_Class.Lista_Proprietario(item.Codigo_Reduzido, true);
-                Boletoguia reg = new Boletoguia();
+
+
+
+            Boletoguia reg = new Boletoguia();
                 reg.Usuario = "Gti.Web/2ViaIPTU";
                 reg.Computer = "web";
                 reg.Sid =nSid;
@@ -81,7 +85,7 @@ namespace UIWeb {
                 reg.Nome = lstProprietario[0].Nome;
                 reg.Cpf = lstProprietario[0].CPF;
                 reg.Numimovel = (short)dados_imovel.Numero;
-                reg.Endereco = dados_imovel.NomeLogradouro + ", " + reg.Numimovel.ToString();
+                reg.Endereco = dados_imovel.NomeLogradouro + ", " + dados_imovel.Numero.ToString();
                 reg.Complemento = dados_imovel.Complemento.Length > 10 ? dados_imovel.Complemento.Substring(0, 10) : dados_imovel.Complemento;
                 reg.Bairro = dados_imovel.NomeBairro;
                 reg.Cidade = "JABOTICABAL";
@@ -133,14 +137,6 @@ namespace UIWeb {
                 //decimal nValorguia = Math.Truncate(Convert.ToDecimal(reg.Valorguia * 100));
                 string _convenio = "2873532";
 
-                //*** CÓDIGO DE BARRAS ***
-                //string NumBarra = gtiCore.Gera2of5Cod((nValorguia).ToString(), Convert.ToDateTime(item.Data_Vencimento), Convert.ToInt32(reg.Numdoc), Convert.ToInt32(reg.Codreduzido));
-                //reg.Numbarra2a = NumBarra.Substring(0, 13);
-                //reg.Numbarra2b = NumBarra.Substring(13, 13);
-                //reg.Numbarra2c = NumBarra.Substring(26, 13);
-                //reg.Numbarra2d = NumBarra.Substring(39, 13);
-                //string strBarra = gtiCore.Gera2of5Str(reg.Numbarra2a.Substring(0, 11) + reg.Numbarra2b.Substring(0, 11) + reg.Numbarra2c.Substring(0, 11) + reg.Numbarra2d.Substring(0, 11));
-                //reg.Codbarra = gtiCore.Mask(strBarra);
 
                 //***** GERA CÓDIGO DE BARRAS BOLETO REGISTRADO*****
                 DateTime _data_base = Convert.ToDateTime("07/10/1997");

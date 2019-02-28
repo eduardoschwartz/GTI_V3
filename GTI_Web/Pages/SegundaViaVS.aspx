@@ -96,5 +96,5 @@
             <br />
 
         </div>
-        <br />
+            <span style="color: #CC0000">**ATENÇÃO, poderá ocorrer demora no Registro dos títulos no banco, portanto caso isso ocorrer tente pagar mais tarde.</span><br />
 </asp:Content>

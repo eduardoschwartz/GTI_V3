@@ -91,7 +91,7 @@ namespace GTI_Web.Pages {
                                 int nPos = 0;
                                 foreach (DebitoStructure item in Lista_Taxa) {
 
-                                    //criamos um documento novo para cada parcela da taxa de licença
+                                    //criamos um documento novo para cada parcela da vigilância
                                     Numdocumento regDoc = new Numdocumento();
                                     regDoc.Valorguia = item.Soma_Principal;
                                     regDoc.Emissor = "Gti.Web/2ViaVS";

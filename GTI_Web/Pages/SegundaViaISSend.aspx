@@ -24,6 +24,8 @@
             <asp:Label ID="lblMsg" runat="server" ForeColor="Red"></asp:Label>
             <br />
             <br />
+            <span style="color: #CC0000">**ATENÇÃO, poderá ocorrer demora no Registro dos títulos no banco, portanto caso isso ocorrer tente pagar mais tarde.</span><br />
+            <br />
             <asp:HyperLink ID="HyperLink1" runat="server" Font-Size="Small" NavigateUrl="~/Pages/SegundaViaISS.aspx?d=gti">Emitir carnê de outra empresa</asp:HyperLink>
             <br />
         </div>

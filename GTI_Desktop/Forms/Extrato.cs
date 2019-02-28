@@ -18,8 +18,8 @@ namespace GTI_Desktop.Forms {
         List<ObsparcelaStruct> Lista_Observacao;
         List<CustomListBoxItem2> Lista_Lancamento = new List<CustomListBoxItem2>();
         List<CustomListBoxItem2> Lista_Status = new List<CustomListBoxItem2>();
-        int _filtro_exercio_inicio, _filtro_exercicio_fim;
-        bool bAddNew, bObsGeral;
+        int _filtro_exercicio_inicio, _filtro_exercicio_fim;
+        bool bAddNew, bObsGeral,bFiltroAtivo;
 
         public Extrato() {
             InitializeComponent();
@@ -97,13 +97,15 @@ namespace GTI_Desktop.Forms {
 
         private void BtRefresh_Click(object sender, EventArgs e) {
             ExtratoDataGrid.Rows.Clear();
-            Exibe_Extrato();
+            bFiltroAtivo = false;
+            GeraExtrato();
         }
 
         private void GeraExtrato() {
             if (CodigoText.Text.Trim() == "") return;
             int Codigo = Convert.ToInt32(CodigoText.Text);
             gtiCore.Ocupado(this);
+            FiltroPanel.Visible = false;
             Sistema_bll clsSistema = new Sistema_bll(_connection);
             if (!clsSistema.Existe_Cadastro(Codigo)) {
                 MessageBox.Show("Cadastro não localizado!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -207,6 +209,7 @@ namespace GTI_Desktop.Forms {
             }
             Lista_Observacao = clsTributario.Lista_Observacao_Parcela(Codigo);
             //carrega o filtro
+            bFiltroAtivo = false;
 
             //Exercício
             CmbAnoInicial.Items.Clear();
@@ -222,7 +225,7 @@ namespace GTI_Desktop.Forms {
             CmbAnoInicial.Text = (DateTime.Now.Year - 5).ToString();
             CmbAnoFinal.Text = nAnoFim.ToString();
 
-            _filtro_exercio_inicio = DateTime.Now.Year - 5;
+            _filtro_exercicio_inicio = DateTime.Now.Year - 5;
             _filtro_exercicio_fim = nAnoFim;
 
             //Lançamento
@@ -377,16 +380,16 @@ namespace GTI_Desktop.Forms {
             string sDA = Linha.Cells["DA"].Value.ToString();
             string sAJ = Linha.Cells["AJ"].Value.ToString();
 
-            if (nStatus == 3 || nStatus == 42 || nStatus==43 || nStatus == 19 || nStatus == 20 || nStatus == 25)
-                return true;
-
-
+            if (!bFiltroAtivo) {
+                if (nStatus == 3 || nStatus == 42 || nStatus == 43 || nStatus == 19 || nStatus == 20 || nStatus == 25)
+                    return true;
+            }
 
             if (!ChkAllExercicio.Checked) {
                 if (nAno > _filtro_exercicio_fim) {
                     return false;
                 }
-                if (nAno < _filtro_exercio_inicio) {
+                if (nAno < _filtro_exercicio_inicio) {
 
                     return false;
                 }
@@ -403,6 +406,14 @@ namespace GTI_Desktop.Forms {
                         return false;
                 }
             }
+
+            foreach (GtiTypes.CustomListBoxItem2 item in Lista_Status) {
+                if (nStatus == item._value) {
+                    if (item._ativo == false)
+                        return false;
+                }
+            }
+
 
             if (CmbDivAtiva.SelectedIndex == 1) {
                 if (sDA == "N")
@@ -550,9 +561,15 @@ namespace GTI_Desktop.Forms {
         private void BtFiltro_Click(object sender, EventArgs e) {
             if (CmbAnoInicial.Items.Count == 0)
                 return;
-            _filtro_exercio_inicio = Convert.ToInt16(CmbAnoInicial.Text);
+            _filtro_exercicio_inicio = Convert.ToInt16(CmbAnoInicial.Text);
             _filtro_exercicio_fim = Convert.ToInt16(CmbAnoFinal.Text);
-            Exibe_Extrato();
+
+            if (_filtro_exercicio_inicio > _filtro_exercicio_fim)
+                MessageBox.Show("Ano inicial não pode ser maior que o ano final.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else {
+                bFiltroAtivo = true;
+                Exibe_Extrato();
+            }
         }
 
         private void ChkAllExercicio_CheckedChanged(object sender, EventArgs e) {
