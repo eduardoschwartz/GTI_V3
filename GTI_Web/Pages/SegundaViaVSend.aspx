@@ -7,7 +7,7 @@
             <br />
             &nbsp;<br />
             
-            Impressão do carnê de Vigilância Sanitária - 2019<br />
+            Emissão de 2ª via do carnê de Vigilância Sanitária - 2019<br />
             <br />
             <br />
             <asp:Label ID="Label6" runat="server" Font-Size="Small" Text="Inscrição Municipal: "></asp:Label>

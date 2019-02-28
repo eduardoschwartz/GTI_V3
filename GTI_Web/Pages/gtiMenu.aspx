@@ -12,9 +12,9 @@
             <ul>
                 <li><a href="gtiMenu2.aspx?d=gti" style="width: 600px">Consulta e atualização de boletos vencidos para pagamento</a></li>
                 <%--<li><a href="wait.aspx?d=gti" style="width: 600px">Consulta e atualização de boletos vencidos para pagamento</a></li>--%>
-                <li><a href="SegundaViaIPTU.aspx?d=gti" style="width: 600px; color: #CC0000;">Impressão do carnê de IPTU (2019)</a> </li>
-                <li><a href="SegundaViaISS.aspx?d=gti" style="width: 600px;  color: #CC0000;">Impressão do carnê de ISS Fixo/Taxa de Licença (2019)</a> </li>
-                <li><a href="SegundaViaVS.aspx?d=gti" style="width: 600px;  color: #CC0000;">Impressão do carnê de Vigilância Sanitária (2019)</a> </li>
+                <li><a href="SegundaViaIPTU.aspx?d=gti" style="width: 600px; color: #CC0000;">Emissão de 2ª via do carnê de IPTU (2019)</a> </li>
+                <li><a href="SegundaViaISS.aspx?d=gti" style="width: 600px;  color: #CC0000;">Emissão de 2ª via do carnê de ISS Fixo/Taxa de Licença (2019)</a> </li>
+                <li><a href="SegundaViaVS.aspx?d=gti" style="width: 600px;  color: #CC0000;">Emissão de 2ª via do carnê de Vigilância Sanitária (2019)</a> </li>
                 <li><a href="ConsultaProcesso.aspx?d=gti" style="width: 600px; ">Consulta de Processos</a> </li>
                 <li><a href="SegundaViaCIP.aspx?d=gti" style="width: 600px">Emissão de 2ª via da contribuição de iluminação pública (CIP) (2018)</a></li>
                 <li><a href="cipendereco.aspx?d=gti" style="width: 600px">Consultar endereço da contribuição de iluminação pública (CIP) (2018)</a></li>
