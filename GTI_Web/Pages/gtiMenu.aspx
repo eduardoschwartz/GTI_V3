@@ -23,7 +23,6 @@
                 <li><a href="../Deca/DECA2018.pdf" style="width: 600px">Download da declaração cadastral (DECA)</a></li>
                 <li><a href="readVRExml.aspx?d=gti" style="width: 600px">Importação de arquivos Via Rápida Empresa (VRE)</a></li>
                 <li><a href="alvara_funcionamento.aspx?d=gti" style="width: 600px">Renovação de alvará de funcionamento</a></li>
-                <li><a href="alvara_vre.aspx?d=gti" style="width: 600px">Alvará Via Rápida Empresa (VRE)</a></li>
                 <li><a href="gticertidao.aspx?d=gti" style="width: 600px">Emissão de certidões / Verificar autenticidade</a></li>
                 <%--<li><a href="dadosEmpresa.aspx?d=gti" style="width: 600px">Dados cadastrais de uma empresa</a></li>--%>
                 <li><a href="cpv_pagto.aspx?d=gti" style="width: 600px">Impressão de comprovante de pagamento</a></li>

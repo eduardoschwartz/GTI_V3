@@ -49,7 +49,19 @@ namespace GTI_Web.Pages {
             alvara.Data_Gravada = DateTime.Now;
 
             Exception ex = tributario_Class.Insert_Alvara_Funcionamento(alvara);
-            
+
+            //Grava no histórico
+            List<MobiliarioHistoricoStruct> _historicos = empresa_Class.Lista_Empresa_Historico(Codigo);
+            MobiliarioHistoricoStruct _newHist = new MobiliarioHistoricoStruct() {
+                Codigo=Codigo,
+                Seq=(short)(_historicos.Count+1),
+                Observacao="Emissão de álvara via Internet",
+                Data=DateTime.Now,
+                Usuario_id=478
+            };
+            _historicos.Add(_newHist);
+            ex = empresa_Class.Incluir_Empresa_Historico(_historicos);
+
             ReportDocument crystalReport = new ReportDocument();
             crystalReport.Load(Server.MapPath("~/Report/AlvaraFuncionamento.rpt"));
             crystalReport.SetParameterValue("CADASTRO", Codigo.ToString());
@@ -119,9 +131,7 @@ namespace GTI_Web.Pages {
                 crystalReport.Dispose();
             }
         }
-
-
-
+               
         protected void btPrint_Click(object sender, EventArgs e) {
             int Num = 0;
 

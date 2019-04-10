@@ -444,8 +444,7 @@ namespace GTI_Bll.Classes {
             Empresa_Data obj = new Empresa_Data(_connection);
             return obj.Retorna_Codigo_por_CPF(CPF);
         }
-
-
+        
         /// <summary>
         /// Retrorna os dados do alvara gravado para validação
         /// </summary>
@@ -456,8 +455,12 @@ namespace GTI_Bll.Classes {
             return obj.Alvara_Funcionamento_gravado(Controle);
         }
 
-
-
+        public Exception Incluir_Empresa_Historico(List<MobiliarioHistoricoStruct> historicos) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            Exception ex = obj.Incluir_Empresa_Historico(historicos);
+            return ex;
+        }
+        
         /// <summary>
         /// Retorna as inscrições cadastrais da empresa através do nº de CNPJ
         /// </summary>
@@ -513,8 +516,7 @@ namespace GTI_Bll.Classes {
             Empresa_Data obj = new Empresa_Data(_connection);
             return obj.Retorna_Nome_Atividade(id_atividade);
         }
-
-
+        
         /// <summary>
         /// Separa o Cnae em suas partes
         /// </summary>

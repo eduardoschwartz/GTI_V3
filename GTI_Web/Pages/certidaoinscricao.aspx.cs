@@ -97,7 +97,7 @@ namespace GTI_Web.Pages {
             sEmail = Reg.Email_contato;
             sArea = Convert.ToSingle(Reg.Area).ToString("#0.00");
             sDoc = gtiCore.FormatarCpfCnpj( Reg.Cpf_cnpj);
-            sProcAbertura = Reg.Numprocesso.ToString();
+            sProcAbertura = Reg.Numprocesso==null?"": Reg.Numprocesso.ToString();
             dDataAbertura = Reg.Data_abertura;
             if (Reg.Data_Encerramento != null) {
                 dDataEncerramento = Reg.Data_Encerramento;
@@ -195,7 +195,10 @@ namespace GTI_Web.Pages {
             cert.Nome_fantasia = sFantasia;
             cert.Situacao = sSituacao;
             cert.Taxa_licenca = sTaxaLicenca;
-            cert.Telefone = sFone.Length>30? sFone.Substring(0,30)  : sFone;
+            if (sFone == null)
+                cert.Telefone = "";
+            else
+                cert.Telefone =  sFone.Length>30? sFone.Substring(0,30)  : sFone;
             cert.Vigilancia_sanitaria = sVigilancia;
 
             Exception ex = tributario_Class.Insert_Certidao_Inscricao(cert);
@@ -214,17 +217,17 @@ namespace GTI_Web.Pages {
                 crystalReport.SetParameterValue("CIDADE", sCidade + "/" + sUF);
                 crystalReport.SetParameterValue("ATIVIDADE", sAtividade);
                 crystalReport.SetParameterValue("DATAABERTURA", dDataAbertura);
-                crystalReport.SetParameterValue("PROCESSOABERTURA", sProcAbertura);
+                crystalReport.SetParameterValue("PROCESSOABERTURA", sProcAbertura==null?"":sProcAbertura);
                 crystalReport.SetParameterValue("DATAENCERRAMENTO", dDataEncerramento==null?DateTime.Now:dDataEncerramento);
                 crystalReport.SetParameterValue("PROCESSOENCERRAMENTO", sProcEncerramento);
-                crystalReport.SetParameterValue("IESTADUAL", sInscEstadual);
+                crystalReport.SetParameterValue("IESTADUAL", sInscEstadual==null?"":sInscEstadual);
                 crystalReport.SetParameterValue("FANTASIA", sFantasia);
                 crystalReport.SetParameterValue("ATIVIDADE2", sAtividade2);
-                crystalReport.SetParameterValue("COMPLEMENTO", sComplemento);
+                crystalReport.SetParameterValue("COMPLEMENTO", sComplemento==null?"":sComplemento);
                 crystalReport.SetParameterValue("CEP", sCep);
                 crystalReport.SetParameterValue("SITUACAO", sSituacao);
-                crystalReport.SetParameterValue("TELEFONE", sFone);
-                crystalReport.SetParameterValue("EMAIL",sEmail);
+                crystalReport.SetParameterValue("TELEFONE", sFone==null?"":sFone);
+                crystalReport.SetParameterValue("EMAIL",sEmail==null?"":sEmail);
                 crystalReport.SetParameterValue("TAXALICENCA", sTaxaLicenca);
                 crystalReport.SetParameterValue("VIGILANCIA", sVigilancia);
                 crystalReport.SetParameterValue("MEI", sMei);
@@ -334,12 +337,12 @@ namespace GTI_Web.Pages {
             crystalReport.SetParameterValue("DATAABERTURA", Convert.ToDateTime(dados.Data_abertura).ToString("dd/MM/yyyy"));
             crystalReport.SetParameterValue("FANTASIA", dados.Nome_fantasia);
             crystalReport.SetParameterValue("ATIVIDADE2", dados.Atividade_secundaria);
-            crystalReport.SetParameterValue("COMPLEMENTO", dados.Complemento);
+            crystalReport.SetParameterValue("COMPLEMENTO", dados.Complemento==null?"":dados.Complemento);
             crystalReport.SetParameterValue("CEP", dados.Cep);
             crystalReport.SetParameterValue("RG", "");
             crystalReport.SetParameterValue("SITUACAO", dados.Situacao);
-            crystalReport.SetParameterValue("TELEFONE", dados.Telefone);
-            crystalReport.SetParameterValue("EMAIL", dados.Email);
+            crystalReport.SetParameterValue("TELEFONE", dados.Telefone==null?"":dados.Telefone);
+            crystalReport.SetParameterValue("EMAIL", dados.Email==null?"":dados.Email);
             crystalReport.SetParameterValue("TAXALICENCA", dados.Taxa_licenca);
             crystalReport.SetParameterValue("VIGILANCIA", dados.Vigilancia_sanitaria);
             crystalReport.SetParameterValue("MEI", dados.Mei);

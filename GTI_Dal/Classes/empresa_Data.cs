@@ -530,6 +530,36 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Exception Incluir_Empresa_Historico(List<MobiliarioHistoricoStruct> historicos) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                try {
+                    db.Database.ExecuteSqlCommand("DELETE FROM MOBILIARIOHIST WHERE CODMOBILIARIO=@Codigo",
+                        new SqlParameter("@Codigo", historicos[0].Codigo));
+                } catch (Exception ex) {
+                    return ex;
+                }
+                short x = 0;
+                foreach (MobiliarioHistoricoStruct item in historicos) {
+                    Mobiliariohist reg = new Mobiliariohist {
+                        Codmobiliario = item.Codigo,
+                        Seq = x,
+                        Datahist = item.Data,
+                        Obs = item.Observacao,
+                        Userid = item.Usuario_id
+                    };
+                    db.Mobiliariohist.Add(reg);
+                    try {
+                        db.SaveChanges();
+                    } catch (Exception ex) {
+                        return ex;
+                    }
+                    x++;
+                }
+                return null;
+            }
+        }
+
+
         public List<MobiliarioproprietarioStruct> Lista_Empresa_Proprietario(int Codigo) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from m in db.Mobiliarioproprietario

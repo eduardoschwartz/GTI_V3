@@ -194,30 +194,36 @@ namespace GTI_Web.Pages {
             }
             if(_tributo.Length>0)
                 _tributo = _tributo.Substring(0, _tributo.Length - 1);
-            int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Debito);
+            int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Debito_Doc);
             int _ano_certidao = DateTime.Now.Year;
-            Certidao_debito cert = new Certidao_debito();
-            cert.Codigo = 0;
+            certidao_debito_doc cert = new certidao_debito_doc();
             cert.Ano = (short)_ano_certidao;
-            cert.Ret = nRet;
+            
             cert.Numero = _numero_certidao;
-            cert.Datagravada = DateTime.Now;
-            cert.Inscricao = "";
+            cert.Data_emissao = DateTime.Now;
             cert.Nome = _lista_certidao[0]._Nome;
-            cert.Logradouro = "";
-            cert.Numimovel = 0;
-            cert.Bairro = "";
-            cert.Cidade = "";
-            cert.UF = "";
-            cert.Processo = "";
-            cert.Dataprocesso = dDataProc;
-            cert.Atendente = "GTI.Web";
-            cert.Cpf = txtCPF.Text;
-            cert.Cnpj = txtCNPJ.Text;
-            cert.Atividade = "";
-            cert.Lancamento = _tributo;
-            Exception ex = tributario_Class.Insert_Certidao_Debito(cert);
+            cert.Cpf_cnpj = optCPF.Checked ? txtCPF.Text : txtCNPJ.Text;
 
+            if (_tipo_Certidao == RetornoCertidaoDebito.Negativa) {
+                cert.Validacao = _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _lista_certidao[0]._Codigo.ToString() + "-IN";
+                cert.Tributo = "Não consta débito apurado contra o(a) mesmo(a).";
+                cert.Ret = 1;
+            } else {
+                if (_tipo_Certidao == RetornoCertidaoDebito.Positiva) {
+                    cert.Validacao = _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _lista_certidao[0]._Codigo.ToString() + "-IP";
+                    cert.Tributo = "Consta débito apurado contra o(a) mesmo(a) com referência a: " + _tributo;
+                    cert.Ret = 2;
+                } else {
+                    if (_tipo_Certidao == RetornoCertidaoDebito.NegativaPositiva) {
+                        cert.Validacao = _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _lista_certidao[0]._Codigo.ToString() + "-IS";
+                        cert.Tributo = "Consta débito apurado contra o(a) mesmo(a) com referência a: " + _tributo + " que se encontram em sua exigibilidade suspensa, em razão de parcelamento dos débitos";
+                        cert.Ret = 3;
+                    }
+                }
+            }
+
+            Exception ex = tributario_Class.Insert_Certidao_Debito_Doc(cert);
+                    
             if (ex != null) {
                 throw ex;
             } else {
@@ -225,7 +231,7 @@ namespace GTI_Web.Pages {
                     crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoDocumentoN.rpt"));
                     crystalReport.SetParameterValue("NUMCERTIDAO", _numero_certidao.ToString("00000") + "/" + _ano_certidao.ToString("0000"));
                     crystalReport.SetParameterValue("DATAEMISSAO", DateTime.Now.ToString("dd/MM/yyyy") + " às " + DateTime.Now.ToString("HH:mm:ss"));
-                    crystalReport.SetParameterValue("CONTROLE", _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _lista_certidao[0]._Codigo.ToString() + "-IN");
+                    crystalReport.SetParameterValue("CONTROLE", cert.Validacao);
                     crystalReport.SetParameterValue("NOME", _lista_certidao[0]._Nome);
                     crystalReport.SetParameterValue("DOC", optCPF.Checked ? txtCPF.Text : txtCNPJ.Text);
                     crystalReport.SetParameterValue("NAO", sNao);
@@ -247,7 +253,7 @@ namespace GTI_Web.Pages {
                         crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoDocumentoP.rpt"));
                         crystalReport.SetParameterValue("NUMCERTIDAO", _numero_certidao.ToString("00000") + "/" + _ano_certidao.ToString("0000"));
                         crystalReport.SetParameterValue("DATAEMISSAO", DateTime.Now.ToString("dd/MM/yyyy") + " às " + DateTime.Now.ToString("HH:mm:ss"));
-                        crystalReport.SetParameterValue("CONTROLE", _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _lista_certidao[0]._Codigo.ToString() + "-IP");
+                        crystalReport.SetParameterValue("CONTROLE", cert.Validacao);
                         crystalReport.SetParameterValue("NOME", _lista_certidao[0]._Nome);
                         crystalReport.SetParameterValue("TRIBUTO", _tributo);
                         crystalReport.SetParameterValue("DOC", optCPF.Checked ? txtCPF.Text : txtCNPJ.Text);
@@ -267,7 +273,7 @@ namespace GTI_Web.Pages {
                             crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoDocumentoPN.rpt"));
                             crystalReport.SetParameterValue("NUMCERTIDAO", _numero_certidao.ToString("00000") + "/" + _ano_certidao.ToString("0000"));
                             crystalReport.SetParameterValue("DATAEMISSAO", DateTime.Now.ToString("dd/MM/yyyy") + " às " + DateTime.Now.ToString("HH:mm:ss"));
-                            crystalReport.SetParameterValue("CONTROLE", _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _lista_certidao[0]._Codigo.ToString() + "-IS");
+                            crystalReport.SetParameterValue("CONTROLE", cert.Validacao);
                             crystalReport.SetParameterValue("NOME", _lista_certidao[0]._Nome);
                             crystalReport.SetParameterValue("TRIBUTO", _tributo);
                             crystalReport.SetParameterValue("DOC", optCPF.Checked ? txtCPF.Text : txtCNPJ.Text);
@@ -291,9 +297,87 @@ SEM_INSCRICAO:;
 
         }
 
-
         protected void ValidarButton_Click(object sender, EventArgs e) {
+            string sCod = Codigo.Text.Trim();
+            string sTipo = "";
+            lblMsg.Text = "";
+            int nPos = 0, nPos2 = 0, nCodigo = 0, nAno = 0, nNumero = 0;
+            if (sCod.Length < 8)
+                lblMsg.Text = "Código de validação inválido.";
+            else {
+                nPos = sCod.IndexOf("-");
+                if (nPos < 6)
+                    lblMsg.Text = "Código de validação inválido.";
+                else {
+                    nPos2 = sCod.IndexOf("/");
+                    if (nPos2 < 5 || nPos - nPos2 < 2)
+                        lblMsg.Text = "Código de validação inválido.";
+                    else {
+                        nCodigo = Convert.ToInt32(sCod.Substring(nPos2 + 1, nPos - nPos2 - 1));
+                        nAno = Convert.ToInt32(sCod.Substring(nPos2 - 4, 4));
+                        nNumero = Convert.ToInt32(sCod.Substring(0, 5));
+                        if (nAno < 2010 || nAno > DateTime.Now.Year + 1)
+                            lblMsg.Text = "Código de validação inválido.";
+                        else {
+                            sTipo = sCod.Substring(sCod.Length - 2, 2);
+                            if (sTipo == "IN" || sTipo == "IP" || sTipo == "IS") {
+                                certidao_debito_doc dados = Valida_Dados(sCod);
+                                if (dados != null)
+                                  Exibe_Certidao_Debito(dados);
+                                else
+                                    lblMsg.Text = "Certidão não cadastrada.";
+                            } else {
+                                lblMsg.Text = "Código de validação inválido.";
+                            }
+                        }
+                    }
+                }
+            }
         }
+
+        private certidao_debito_doc Valida_Dados(string Validacao) {
+            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
+            certidao_debito_doc dados = tributario_Class.Retorna_Certidao_Debito_Doc(Validacao);
+            return dados;
+        }
+
+        private void Exibe_Certidao_Debito(certidao_debito_doc dados) {
+            lblMsg.Text = "";
+            string sTipo = "";
+            if (dados.Ret == 2)
+                sTipo = "CERTDÂO POSITIVA";
+            else {
+                if (dados.Ret == 3)
+                    sTipo = "CERTIDÃO POSITIVA EFEITO NEGATIVA";
+                else
+                    sTipo = "CERTIDÃO NEGATIVA";
+            }
+
+            ReportDocument crystalReport = new ReportDocument();
+            crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoDocValida.rpt"));
+            crystalReport.SetParameterValue("NUMCERTIDAO", dados.Numero.ToString("00000") + "/" + dados.Ano.ToString("0000"));
+            crystalReport.SetParameterValue("DATAEMISSAO", Convert.ToDateTime(dados.Data_emissao).ToString("dd/MM/yyyy") + " às " + Convert.ToDateTime(dados.Data_emissao).ToString("HH:mm:ss"));
+            crystalReport.SetParameterValue("CONTROLE", dados.Validacao);
+            crystalReport.SetParameterValue("NOME", dados.Nome);
+            crystalReport.SetParameterValue("CPF", dados.Cpf_cnpj);
+            crystalReport.SetParameterValue("TIPO", sTipo);
+            crystalReport.SetParameterValue("TRIBUTO", string.IsNullOrWhiteSpace(dados.Tributo) ? "N/A" : dados.Tributo);
+
+            HttpContext.Current.Response.Buffer = false;
+            HttpContext.Current.Response.ClearContent();
+            HttpContext.Current.Response.ClearHeaders();
+
+            try {
+                crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true, "comp" + dados.Numero.ToString() + dados.Ano.ToString());
+            } catch {
+            } finally {
+                crystalReport.Close();
+                crystalReport.Dispose();
+            }
+
+        }
+
+
 
     }
 

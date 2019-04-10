@@ -642,6 +642,16 @@ namespace GTI_Bll.Classes {
         }
 
         /// <summary>
+        /// Retorna os dados da certidão de débitos
+        /// </summary>
+        /// <param name="Validacao"></param>
+        /// <returns></returns>
+        public certidao_debito_doc Retorna_Certidao_Debito_Doc(string Validacao) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Retorna_Certidao_Debito_Doc(Validacao);
+        }
+
+        /// <summary>
         /// Insere na tabela certidao_valor_venal
         /// </summary>
         /// <param name="Reg"></param>
@@ -684,6 +694,18 @@ namespace GTI_Bll.Classes {
             Exception ex = obj.Insert_Certidao_Debito(Reg);
             return ex;
         }
+
+        /// <summary>
+        /// Insere na tabela certidao_debito_doc
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Certidao_Debito_Doc(certidao_debito_doc Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Certidao_Debito_Doc(Reg);
+            return ex;
+        }
+
 
         /// <summary>
         /// Retorna as infomações para a certidão de débitos

@@ -237,7 +237,7 @@ namespace GTI_Dal.Classes {
         public List<SpExtrato> Lista_Extrato_Tributo(int Codigo, short Ano1 = 1990, short Ano2 = 2050, short Lancamento1 = 1, short Lancamento2 = 99, short Sequencia1 = 0, short Sequencia2 = 9999,
             short Parcela1 = 0, short Parcela2 = 999, short Complemento1 = 0, short Complemento2 = 999, short Status1 = 0, short Status2 = 99, DateTime? Data_Atualizacao = null, string Usuario = "") {
             using (GTI_Context db = new GTI_Context(_connection)) {
-
+                db.Database.CommandTimeout = 180; 
                 var prmCod1 = new SqlParameter { ParameterName = "@CodReduz1", SqlDbType = SqlDbType.Int, SqlValue = Codigo };
                 var prmCod2 = new SqlParameter { ParameterName = "@CodReduz2", SqlDbType = SqlDbType.Int, SqlValue = Codigo };
                 var prmAno1 = new SqlParameter { ParameterName = "@AnoExercicio1", SqlDbType = SqlDbType.SmallInt, SqlValue = Ano1 };
@@ -1157,6 +1157,10 @@ namespace GTI_Dal.Classes {
                                 else {
                                     if (tipo_certidao == TipoCertidao.Alvara)
                                         Sql = Sql.Where(c => c.Nomeparam == "ALVARA");
+                                    else {
+                                        if (tipo_certidao == TipoCertidao.Debito_Doc)
+                                            Sql = Sql.Where(c => c.Nomeparam == "CDB_DOC");
+                                    }
                                 }
                             }
                         }
@@ -1199,6 +1203,10 @@ namespace GTI_Dal.Classes {
                                 else {
                                     if (tipo_certidao == TipoCertidao.Alvara)
                                         p = db.Parametros.First(i => i.Nomeparam == "ALVARA");
+                                    else {
+                                        if (tipo_certidao == TipoCertidao.Debito_Doc)
+                                            p = db.Parametros.First(i => i.Nomeparam == "CDB_DOC");
+                                    }
                                 }
                             }
                         }
@@ -1335,6 +1343,18 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public Exception Insert_Certidao_Debito_Doc(certidao_debito_doc Reg) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                try {
+                    db.Certidao_debito_doc.Add(Reg);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
         public Exception Insert_Certidao_Inscricao(Certidao_inscricao Reg) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
@@ -1350,6 +1370,13 @@ namespace GTI_Dal.Classes {
         public Certidao_debito Retorna_Certidao_Debito(int Ano, int Numero, int Codigo) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Certidao_debito where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
+                return Sql;
+            }
+        }
+
+        public certidao_debito_doc Retorna_Certidao_Debito_Doc(string Validacao) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var Sql = (from p in db.Certidao_debito_doc where p.Validacao == Validacao select p).FirstOrDefault();
                 return Sql;
             }
         }

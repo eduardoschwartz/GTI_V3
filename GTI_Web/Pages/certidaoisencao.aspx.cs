@@ -138,55 +138,55 @@ namespace GTI_Web.Pages {
                         crystalReport.SetParameterValue("DATAPROCESSO", sDataProcesso);
                     }
                 }
+            }
+            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
+            int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Isencao);
+            int _ano_certidao = DateTime.Now.Year;
 
-                Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
-                int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Isencao);
-                int _ano_certidao = DateTime.Now.Year;
+            Certidao_isencao cert = new Certidao_isencao();
+            cert.Codigo = Codigo;
+            cert.Ano = _ano_certidao;
+            cert.Numero = _numero_certidao;
+            cert.Data = DateTime.Now;
+            cert.Inscricao = sInscricao;
+            cert.Nomecidadao = sNome;
+            cert.Logradouro = Reg.NomeLogradouro;
+            cert.Li_num = Convert.ToInt32(Reg.Numero);
+            cert.Li_compl = Reg.Complemento;
+            cert.Descbairro = sBairro;
+            cert.Li_quadras = Reg.QuadraOriginal;
+            cert.Li_lotes = Reg.LoteOriginal;
+            cert.Area = SomaArea;
+            cert.Percisencao = nPerc;
 
-                Certidao_isencao cert = new Certidao_isencao();
-                cert.Codigo = Codigo;
-                cert.Ano = _ano_certidao;
-                cert.Numero = _numero_certidao;
-                cert.Data = DateTime.Now;
-                cert.Inscricao = sInscricao;
-                cert.Nomecidadao = sNome;
-                cert.Logradouro = Reg.NomeLogradouro;
-                cert.Li_num = Convert.ToInt32(Reg.Numero);
-                cert.Li_compl = Reg.Complemento;
-                cert.Descbairro = sBairro;
-                cert.Li_quadras = Reg.QuadraOriginal;
-                cert.Li_lotes = Reg.LoteOriginal;
-                cert.Area = SomaArea;
-                cert.Percisencao = nPerc;
+            Exception ex = tributario_Class.Insert_Certidao_Isencao(cert);
+            if (ex != null) {
+                throw ex;
+            } else {
+                crystalReport.SetParameterValue("NUMCERTIDAO", _numero_certidao.ToString("00000") + "/" + _ano_certidao.ToString("0000"));
+                crystalReport.SetParameterValue("DATAEMISSAO", DateTime.Now.ToString("dd/MM/yyyy") + " às " + DateTime.Now.ToString("HH:mm:ss"));
+                crystalReport.SetParameterValue("CONTROLE", _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + Codigo.ToString() + "-CI");
+                crystalReport.SetParameterValue("ENDERECO", sEndereco);
+                crystalReport.SetParameterValue("CADASTRO", Codigo.ToString("000000"));
+                crystalReport.SetParameterValue("NOME", sNome);
+                crystalReport.SetParameterValue("INSCRICAO", sInscricao);
+                crystalReport.SetParameterValue("BAIRRO", sBairro);
+                crystalReport.SetParameterValue("ANO", DateTime.Now.Year.ToString());
+                crystalReport.SetParameterValue("AREA", string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:#,###.##}m²", SomaArea));
+                crystalReport.SetParameterValue("NUMPROCESSO", sNumeroProcesso);
 
-                Exception ex = tributario_Class.Insert_Certidao_Isencao(cert);
-                if (ex != null) {
-                    throw ex;
-                } else {
-                    crystalReport.SetParameterValue("NUMCERTIDAO", _numero_certidao.ToString("00000") + "/" + _ano_certidao.ToString("0000"));
-                    crystalReport.SetParameterValue("DATAEMISSAO", DateTime.Now.ToString("dd/MM/yyyy") + " às " + DateTime.Now.ToString("HH:mm:ss"));
-                    crystalReport.SetParameterValue("CONTROLE", _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + Codigo.ToString() + "-CI");
-                    crystalReport.SetParameterValue("ENDERECO", sEndereco);
-                    crystalReport.SetParameterValue("CADASTRO", Codigo.ToString("000000"));
-                    crystalReport.SetParameterValue("NOME", sNome);
-                    crystalReport.SetParameterValue("INSCRICAO", sInscricao);
-                    crystalReport.SetParameterValue("BAIRRO", sBairro);
-                    crystalReport.SetParameterValue("ANO", DateTime.Now.Year.ToString());
-                    crystalReport.SetParameterValue("AREA", string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:#,###.##}m²", SomaArea));
-                    crystalReport.SetParameterValue("NUMPROCESSO", sNumeroProcesso);
+                HttpContext.Current.Response.Buffer = false;
+                HttpContext.Current.Response.ClearContent();
+                HttpContext.Current.Response.ClearHeaders();
 
-                    HttpContext.Current.Response.Buffer = false;
-                    HttpContext.Current.Response.ClearContent();
-                    HttpContext.Current.Response.ClearHeaders();
-
-                    try {
-                        crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true, "certidao" + _numero_certidao.ToString() + _ano_certidao.ToString());
-                    } catch {
-                    } finally {
-                        crystalReport.Close();
-                        crystalReport.Dispose();
-                    }
+                try {
+                    crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true, "certidao" + _numero_certidao.ToString() + _ano_certidao.ToString());
+                } catch {
+                } finally {
+                    crystalReport.Close();
+                    crystalReport.Dispose();
                 }
+
             }
         }
 

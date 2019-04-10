@@ -44,7 +44,7 @@
              Comprovante de inscrição e situação cadastral<br />
              <br />
              <table style="width: 624px; height: 62px;">
-                 <tr><td class="panel" style="height: 51px">&nbsp;
+                 <tr><td class="panel" style="height: 51px; width: 140px;">&nbsp;
                         <asp:RadioButton ID="optCPF" runat="server" AutoPostBack="True" Checked="True" GroupName="optDoc" OnCheckedChanged="optCPF_CheckedChanged" Text="CPF" />
                         &nbsp;&nbsp;
                         <asp:RadioButton ID="optCNPJ" runat="server" AutoPostBack="True" GroupName="optDoc" OnCheckedChanged="optCNPJ_CheckedChanged" Text="CNPJ" />
@@ -59,7 +59,7 @@
                          
                         </td></tr>
                  <tr>
-                        <td></td>
+                        <td style="width: 140px"></td>
                         <td>&nbsp;<asp:Label ID="Label4" runat="server" Text="Selecione a Inscrição Municipal"></asp:Label>
 &nbsp;
                             <asp:DropDownList ID="CodigoList" runat="server">
@@ -71,14 +71,14 @@
                         </td>
                     </tr>
                     <tr>
-                        <td></td>
+                        <td style="width: 140px"></td>
                         <td><asp:CheckBox ID="ExtratoCheckBox" runat="server" ForeColor="#006600" Text="  Exibir o resumo dos pagamentos  na certidão" ToolTip="Marque esta opção para exibir o resumo dos pagamentos na certidão" /><br />
                             <br />
                         </td>
                     </tr>
                 
                  <tr>
-                     <td style="width: 134px; vertical-align: bottom">
+                     <td style="width: 140px; vertical-align: bottom">
                          <img height="30" alt="" src="Turing.aspx" width="80" />&nbsp;</td>
 
                      <td class="panel">&nbsp;Digite o conteúdo da imagem                                              
@@ -88,23 +88,21 @@
                      </td>
                  </tr>
                  <tr>
-                     <td>
+                     <td style="width: 140px">
                          <br />
                          <asp:Label ID="Label1" runat="server" Text="Validação da certidão:" ForeColor="Maroon"></asp:Label>
                      </td>
                      </tr>
                  <tr>
-                     <td class="auto-style1" style="width: 134px">Código de validação..:</td>
+                     <td class="auto-style1" style="width: 140px">Código de validação..:</td>
                 
                      <td>
                          <asp:TextBox ID="Codigo" runat="server" Width="147px" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="20" ></asp:TextBox>
                          &nbsp;
                          <asp:Button ID="ValidarButton" class="button1" runat="server" Text="Validar" OnClick="ValidarButton_Click" />
                          <br />
-                         <br />
-                         <br />
-                         <br />
-                         <br />
+                        
+                         
                      </td>
                  </tr>
                 
