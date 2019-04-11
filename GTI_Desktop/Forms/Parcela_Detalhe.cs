@@ -36,7 +36,7 @@ namespace GTI_Desktop.Forms {
 
         private void Carrega_Detalhe(List<SpExtrato> Lista) {
             decimal _valorTributo = 0,_valorMulta=0,_valorJuros=0,_valorCorrecao=0,_valorTotal=0;
-            double _valorPago = 0,_valorTaxa=0;
+            double _valorPago = 0;
             Tributario_bll tributario_Class = new Tributario_bll(_connection);
 
             foreach (SpExtrato item in Lista) {

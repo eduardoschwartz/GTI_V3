@@ -121,14 +121,11 @@
   <data name="Brasao" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Brasao.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Error" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Error.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Direita" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Direita.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="executar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\executar.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="fabrica" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\fabrica.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Alterar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Alterar.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -193,8 +190,8 @@
   <data name="GTI_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GTI_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="downarrow1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\downarrow1.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="option" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\option.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="config" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\config.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -226,6 +223,12 @@
   <data name="Home" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Home.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="texture2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\texture21.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fabrica" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fabrica.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="leftarrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\leftarrow.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -237,6 +240,9 @@
   </data>
   <data name="cancel2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cancel2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="whatsapp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\whatsapp.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Diploma" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\if_Gnome-Application-Certificate-48_55221.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -256,11 +262,8 @@
   <data name="gravar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\gravar.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="option" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\option.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Direita" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Direita.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="downarrow1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\downarrow1.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ledred" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ledred.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -283,8 +286,8 @@
   <data name="add_file" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\add_file.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Alterar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Alterar.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="executar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\executar.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="print" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\print.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -310,6 +313,9 @@
   <data name="Acima" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Acima.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Error" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Error.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="OK" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\OK.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -325,7 +331,7 @@
   <data name="processo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\processo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="texture2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\texture21.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="PhoneCancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PhoneCancel.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

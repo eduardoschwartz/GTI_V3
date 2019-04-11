@@ -603,6 +603,16 @@ namespace GTI_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap PhoneCancel {
+            get {
+                object obj = ResourceManager.GetObject("PhoneCancel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap photo_16x16 {
             get {
                 object obj = ResourceManager.GetObject("photo_16x16", resourceCulture);
@@ -736,6 +746,16 @@ namespace GTI_Desktop.Properties {
         internal static System.Drawing.Bitmap uparrow {
             get {
                 object obj = ResourceManager.GetObject("uparrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap whatsapp {
+            get {
+                object obj = ResourceManager.GetObject("whatsapp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

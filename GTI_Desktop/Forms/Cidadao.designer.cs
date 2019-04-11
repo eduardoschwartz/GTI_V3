@@ -25,49 +25,51 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.label28 = new System.Windows.Forms.Label();
-            this.txtEmailR = new System.Windows.Forms.TextBox();
-            this.mskDataNascto = new System.Windows.Forms.MaskedTextBox();
+            this.EmailRText = new System.Windows.Forms.TextBox();
+            this.DataNasctoMask = new System.Windows.Forms.MaskedTextBox();
             this.label27 = new System.Windows.Forms.Label();
-            this.mskCPF = new System.Windows.Forms.MaskedTextBox();
+            this.CPFMask = new System.Windows.Forms.MaskedTextBox();
             this.Label1 = new System.Windows.Forms.Label();
             this.Label2 = new System.Windows.Forms.Label();
             this.Label3 = new System.Windows.Forms.Label();
-            this.lblCod = new System.Windows.Forms.Label();
+            this.CodigoText = new System.Windows.Forms.Label();
             this.Label5 = new System.Windows.Forms.Label();
-            this.lblNomeDoc = new System.Windows.Forms.Label();
-            this.mskCNPJ = new System.Windows.Forms.MaskedTextBox();
-            this.txtRG = new System.Windows.Forms.TextBox();
-            this.txtNome = new System.Windows.Forms.TextBox();
+            this.NomeDocText = new System.Windows.Forms.Label();
+            this.CNPJMask = new System.Windows.Forms.MaskedTextBox();
+            this.RGText = new System.Windows.Forms.TextBox();
+            this.NomeText = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.cmbPessoa = new System.Windows.Forms.ComboBox();
-            this.txtFoneR = new System.Windows.Forms.TextBox();
-            this.cmbProfissao = new System.Windows.Forms.ComboBox();
+            this.PessoaList = new System.Windows.Forms.ComboBox();
+            this.FoneRText = new System.Windows.Forms.TextBox();
+            this.ProfissaoList = new System.Windows.Forms.ComboBox();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tBar = new System.Windows.Forms.ToolStrip();
-            this.btAdd = new System.Windows.Forms.ToolStripButton();
-            this.btEdit = new System.Windows.Forms.ToolStripButton();
-            this.btDel = new System.Windows.Forms.ToolStripButton();
-            this.btFind = new System.Windows.Forms.ToolStripButton();
-            this.btExit = new System.Windows.Forms.ToolStripButton();
-            this.btGravar = new System.Windows.Forms.ToolStripButton();
-            this.btCancelar = new System.Windows.Forms.ToolStripButton();
-            this.btHistorico = new System.Windows.Forms.ToolStripButton();
-            this.btObservação = new System.Windows.Forms.ToolStripButton();
-            this.pnlEndC = new System.Windows.Forms.GroupBox();
-            this.chkEtiquetaC = new System.Windows.Forms.RadioButton();
-            this.txtFoneC = new System.Windows.Forms.TextBox();
+            this.BarToolStrip = new System.Windows.Forms.ToolStrip();
+            this.AddButton = new System.Windows.Forms.ToolStripButton();
+            this.EditButton = new System.Windows.Forms.ToolStripButton();
+            this.DelButton = new System.Windows.Forms.ToolStripButton();
+            this.FindButton = new System.Windows.Forms.ToolStripButton();
+            this.ExitButton = new System.Windows.Forms.ToolStripButton();
+            this.GravarButton = new System.Windows.Forms.ToolStripButton();
+            this.CancelarButton = new System.Windows.Forms.ToolStripButton();
+            this.HistoricoButton = new System.Windows.Forms.ToolStripButton();
+            this.ObservaçãoButton = new System.Windows.Forms.ToolStripButton();
+            this.EndCPanel = new System.Windows.Forms.GroupBox();
+            this.TemFoneCCheck = new System.Windows.Forms.CheckBox();
+            this.WhatsAppCCheck = new System.Windows.Forms.CheckBox();
+            this.EtiquetaCButton = new System.Windows.Forms.RadioButton();
+            this.FoneCText = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
-            this.txtEmailC = new System.Windows.Forms.TextBox();
-            this.txtPaisC = new System.Windows.Forms.TextBox();
-            this.txtCepC = new System.Windows.Forms.TextBox();
-            this.txtUFC = new System.Windows.Forms.TextBox();
-            this.txtCidadeC = new System.Windows.Forms.TextBox();
-            this.txtComplementoC = new System.Windows.Forms.TextBox();
-            this.txtBairroC = new System.Windows.Forms.TextBox();
-            this.txtNumeroC = new System.Windows.Forms.TextBox();
-            this.txtLogradouroC = new System.Windows.Forms.TextBox();
+            this.EmailCText = new System.Windows.Forms.TextBox();
+            this.PaisCText = new System.Windows.Forms.TextBox();
+            this.CepCText = new System.Windows.Forms.TextBox();
+            this.UFCText = new System.Windows.Forms.TextBox();
+            this.CidadeCText = new System.Windows.Forms.TextBox();
+            this.ComplementoCText = new System.Windows.Forms.TextBox();
+            this.BairroCText = new System.Windows.Forms.TextBox();
+            this.NumeroCText = new System.Windows.Forms.TextBox();
+            this.LogradouroCText = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -76,16 +78,18 @@
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
-            this.pnlEndR = new System.Windows.Forms.GroupBox();
-            this.chkEtiquetaR = new System.Windows.Forms.RadioButton();
-            this.txtPaisR = new System.Windows.Forms.TextBox();
-            this.txtCepR = new System.Windows.Forms.TextBox();
-            this.txtUFR = new System.Windows.Forms.TextBox();
-            this.txtCidadeR = new System.Windows.Forms.TextBox();
-            this.txtComplementoR = new System.Windows.Forms.TextBox();
-            this.txtBairroR = new System.Windows.Forms.TextBox();
-            this.txtNumeroR = new System.Windows.Forms.TextBox();
-            this.txtLogradouroR = new System.Windows.Forms.TextBox();
+            this.EndRPanel = new System.Windows.Forms.GroupBox();
+            this.TemFoneRCheck = new System.Windows.Forms.CheckBox();
+            this.WhatsAppRCheck = new System.Windows.Forms.CheckBox();
+            this.EtiquetaRCheck = new System.Windows.Forms.RadioButton();
+            this.PaisRText = new System.Windows.Forms.TextBox();
+            this.CepRText = new System.Windows.Forms.TextBox();
+            this.UFRText = new System.Windows.Forms.TextBox();
+            this.CidadeRText = new System.Windows.Forms.TextBox();
+            this.ComplementoRText = new System.Windows.Forms.TextBox();
+            this.BairroRText = new System.Windows.Forms.TextBox();
+            this.NumeroRText = new System.Windows.Forms.TextBox();
+            this.LogradouroRText = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -94,24 +98,24 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.txtPessoa = new System.Windows.Forms.TextBox();
-            this.txtProfissao = new System.Windows.Forms.TextBox();
-            this.btFindCodigo = new System.Windows.Forms.Button();
-            this.btCpfCnpj = new System.Windows.Forms.Button();
-            this.btProfissao_Del = new System.Windows.Forms.Button();
-            this.btProfissao_Edit = new System.Windows.Forms.Button();
-            this.chkJuridica = new System.Windows.Forms.CheckBox();
-            this.btAddEnderecoR = new System.Windows.Forms.Button();
-            this.btDelEnderecoR = new System.Windows.Forms.Button();
-            this.btDelEnderecoC = new System.Windows.Forms.Button();
-            this.btAddEnderecoC = new System.Windows.Forms.Button();
-            this.tTip = new System.Windows.Forms.ToolTip(this.components);
-            this.lblTipoCidadao = new System.Windows.Forms.Label();
+            this.PessoaText = new System.Windows.Forms.TextBox();
+            this.ProfissaoText = new System.Windows.Forms.TextBox();
+            this.JuridicaCheck = new System.Windows.Forms.CheckBox();
+            this.Ttp = new System.Windows.Forms.ToolTip(this.components);
+            this.DelEnderecoCButton = new System.Windows.Forms.Button();
+            this.AddEnderecoCButton = new System.Windows.Forms.Button();
+            this.DelEnderecoRButton = new System.Windows.Forms.Button();
+            this.AddEnderecoRButton = new System.Windows.Forms.Button();
+            this.FindCodigoButton = new System.Windows.Forms.Button();
+            this.CpfCnpjButton = new System.Windows.Forms.Button();
+            this.Profissao_DelButton = new System.Windows.Forms.Button();
+            this.Profissao_EditButton = new System.Windows.Forms.Button();
+            this.TipoCidadaoText = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
-            this.txtOrgao = new System.Windows.Forms.TextBox();
-            this.tBar.SuspendLayout();
-            this.pnlEndC.SuspendLayout();
-            this.pnlEndR.SuspendLayout();
+            this.OrgaoText = new System.Windows.Forms.TextBox();
+            this.BarToolStrip.SuspendLayout();
+            this.EndCPanel.SuspendLayout();
+            this.EndRPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // label28
@@ -123,21 +127,21 @@
             this.label28.TabIndex = 153;
             this.label28.Text = "Profissão..:";
             // 
-            // txtEmailR
+            // EmailRText
             // 
-            this.txtEmailR.Location = new System.Drawing.Point(70, 114);
-            this.txtEmailR.MaxLength = 50;
-            this.txtEmailR.Name = "txtEmailR";
-            this.txtEmailR.Size = new System.Drawing.Size(367, 20);
-            this.txtEmailR.TabIndex = 12;
+            this.EmailRText.Location = new System.Drawing.Point(70, 114);
+            this.EmailRText.MaxLength = 50;
+            this.EmailRText.Name = "EmailRText";
+            this.EmailRText.Size = new System.Drawing.Size(290, 20);
+            this.EmailRText.TabIndex = 12;
             // 
-            // mskDataNascto
+            // DataNasctoMask
             // 
-            this.mskDataNascto.Location = new System.Drawing.Point(362, 59);
-            this.mskDataNascto.Mask = "00/00/0000";
-            this.mskDataNascto.Name = "mskDataNascto";
-            this.mskDataNascto.Size = new System.Drawing.Size(88, 20);
-            this.mskDataNascto.TabIndex = 4;
+            this.DataNasctoMask.Location = new System.Drawing.Point(362, 59);
+            this.DataNasctoMask.Mask = "00/00/0000";
+            this.DataNasctoMask.Name = "DataNasctoMask";
+            this.DataNasctoMask.Size = new System.Drawing.Size(88, 20);
+            this.DataNasctoMask.TabIndex = 4;
             // 
             // label27
             // 
@@ -148,14 +152,14 @@
             this.label27.TabIndex = 152;
             this.label27.Text = "Data Nascto.:";
             // 
-            // mskCPF
+            // CPFMask
             // 
-            this.mskCPF.Location = new System.Drawing.Point(226, 83);
-            this.mskCPF.Mask = "999,999,999-99";
-            this.mskCPF.Name = "mskCPF";
-            this.mskCPF.Size = new System.Drawing.Size(110, 20);
-            this.mskCPF.TabIndex = 7;
-            this.mskCPF.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.CPFMask.Location = new System.Drawing.Point(226, 83);
+            this.CPFMask.Mask = "999,999,999-99";
+            this.CPFMask.Name = "CPFMask";
+            this.CPFMask.Size = new System.Drawing.Size(110, 20);
+            this.CPFMask.TabIndex = 7;
+            this.CPFMask.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // Label1
             // 
@@ -184,15 +188,15 @@
             this.Label3.TabIndex = 147;
             this.Label3.Text = "RG/Orgão:";
             // 
-            // lblCod
+            // CodigoText
             // 
-            this.lblCod.AutoSize = true;
-            this.lblCod.ForeColor = System.Drawing.Color.Navy;
-            this.lblCod.Location = new System.Drawing.Point(67, 12);
-            this.lblCod.Name = "lblCod";
-            this.lblCod.Size = new System.Drawing.Size(43, 13);
-            this.lblCod.TabIndex = 144;
-            this.lblCod.Text = "000000";
+            this.CodigoText.AutoSize = true;
+            this.CodigoText.ForeColor = System.Drawing.Color.Navy;
+            this.CodigoText.Location = new System.Drawing.Point(67, 12);
+            this.CodigoText.Name = "CodigoText";
+            this.CodigoText.Size = new System.Drawing.Size(43, 13);
+            this.CodigoText.TabIndex = 144;
+            this.CodigoText.Text = "000000";
             // 
             // Label5
             // 
@@ -203,40 +207,40 @@
             this.Label5.TabIndex = 149;
             this.Label5.Text = "Pessoa.....:";
             // 
-            // lblNomeDoc
+            // NomeDocText
             // 
-            this.lblNomeDoc.AutoSize = true;
-            this.lblNomeDoc.Location = new System.Drawing.Point(180, 88);
-            this.lblNomeDoc.Name = "lblNomeDoc";
-            this.lblNomeDoc.Size = new System.Drawing.Size(43, 13);
-            this.lblNomeDoc.TabIndex = 150;
-            this.lblNomeDoc.Text = "CNPJ..:";
+            this.NomeDocText.AutoSize = true;
+            this.NomeDocText.Location = new System.Drawing.Point(180, 88);
+            this.NomeDocText.Name = "NomeDocText";
+            this.NomeDocText.Size = new System.Drawing.Size(43, 13);
+            this.NomeDocText.TabIndex = 150;
+            this.NomeDocText.Text = "CNPJ..:";
             // 
-            // mskCNPJ
+            // CNPJMask
             // 
-            this.mskCNPJ.Location = new System.Drawing.Point(226, 83);
-            this.mskCNPJ.Mask = "99,999,999/9999-99";
-            this.mskCNPJ.Name = "mskCNPJ";
-            this.mskCNPJ.Size = new System.Drawing.Size(110, 20);
-            this.mskCNPJ.TabIndex = 6;
-            this.mskCNPJ.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.CNPJMask.Location = new System.Drawing.Point(226, 83);
+            this.CNPJMask.Mask = "99,999,999/9999-99";
+            this.CNPJMask.Name = "CNPJMask";
+            this.CNPJMask.Size = new System.Drawing.Size(110, 20);
+            this.CNPJMask.TabIndex = 6;
+            this.CNPJMask.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
-            // txtRG
+            // RGText
             // 
-            this.txtRG.Location = new System.Drawing.Point(70, 59);
-            this.txtRG.MaxLength = 25;
-            this.txtRG.Name = "txtRG";
-            this.txtRG.Size = new System.Drawing.Size(153, 20);
-            this.txtRG.TabIndex = 3;
+            this.RGText.Location = new System.Drawing.Point(70, 59);
+            this.RGText.MaxLength = 25;
+            this.RGText.Name = "RGText";
+            this.RGText.Size = new System.Drawing.Size(153, 20);
+            this.RGText.TabIndex = 3;
             // 
-            // txtNome
+            // NomeText
             // 
-            this.txtNome.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtNome.Location = new System.Drawing.Point(70, 35);
-            this.txtNome.MaxLength = 100;
-            this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(380, 20);
-            this.txtNome.TabIndex = 2;
+            this.NomeText.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.NomeText.Location = new System.Drawing.Point(70, 35);
+            this.NomeText.MaxLength = 100;
+            this.NomeText.Name = "NomeText";
+            this.NomeText.Size = new System.Drawing.Size(380, 20);
+            this.NomeText.TabIndex = 2;
             // 
             // label16
             // 
@@ -258,218 +262,244 @@
             this.label17.TabIndex = 157;
             this.label17.Text = "Fone....:";
             // 
-            // cmbPessoa
+            // PessoaList
             // 
-            this.cmbPessoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPessoa.FormattingEnabled = true;
-            this.cmbPessoa.Items.AddRange(new object[] {
+            this.PessoaList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.PessoaList.FormattingEnabled = true;
+            this.PessoaList.Items.AddRange(new object[] {
             "Física",
             "Jurídica"});
-            this.cmbPessoa.Location = new System.Drawing.Point(70, 83);
-            this.cmbPessoa.Name = "cmbPessoa";
-            this.cmbPessoa.Size = new System.Drawing.Size(94, 21);
-            this.cmbPessoa.TabIndex = 5;
-            this.cmbPessoa.SelectedIndexChanged += new System.EventHandler(this.CmbPessoa_SelectedIndexChanged);
+            this.PessoaList.Location = new System.Drawing.Point(70, 83);
+            this.PessoaList.Name = "PessoaList";
+            this.PessoaList.Size = new System.Drawing.Size(94, 21);
+            this.PessoaList.TabIndex = 5;
+            this.PessoaList.SelectedIndexChanged += new System.EventHandler(this.CmbPessoa_SelectedIndexChanged);
             // 
-            // txtFoneR
+            // FoneRText
             // 
-            this.txtFoneR.Location = new System.Drawing.Point(272, 90);
-            this.txtFoneR.MaxLength = 50;
-            this.txtFoneR.Name = "txtFoneR";
-            this.txtFoneR.Size = new System.Drawing.Size(165, 20);
-            this.txtFoneR.TabIndex = 13;
+            this.FoneRText.Location = new System.Drawing.Point(272, 90);
+            this.FoneRText.MaxLength = 50;
+            this.FoneRText.Name = "FoneRText";
+            this.FoneRText.Size = new System.Drawing.Size(164, 20);
+            this.FoneRText.TabIndex = 13;
             // 
-            // cmbProfissao
+            // ProfissaoList
             // 
-            this.cmbProfissao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbProfissao.FormattingEnabled = true;
-            this.cmbProfissao.Location = new System.Drawing.Point(70, 109);
-            this.cmbProfissao.Name = "cmbProfissao";
-            this.cmbProfissao.Size = new System.Drawing.Size(312, 21);
-            this.cmbProfissao.TabIndex = 9;
-            this.cmbProfissao.SelectedIndexChanged += new System.EventHandler(this.CmbProfissao_SelectedIndexChanged);
+            this.ProfissaoList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ProfissaoList.FormattingEnabled = true;
+            this.ProfissaoList.Location = new System.Drawing.Point(70, 109);
+            this.ProfissaoList.Name = "ProfissaoList";
+            this.ProfissaoList.Size = new System.Drawing.Size(312, 21);
+            this.ProfissaoList.TabIndex = 9;
+            this.ProfissaoList.SelectedIndexChanged += new System.EventHandler(this.CmbProfissao_SelectedIndexChanged);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // tBar
+            // BarToolStrip
             // 
-            this.tBar.AllowMerge = false;
-            this.tBar.BackColor = System.Drawing.SystemColors.Control;
-            this.tBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.tBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btAdd,
-            this.btEdit,
-            this.btDel,
-            this.btFind,
-            this.btExit,
+            this.BarToolStrip.AllowMerge = false;
+            this.BarToolStrip.BackColor = System.Drawing.SystemColors.Control;
+            this.BarToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.BarToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.BarToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AddButton,
+            this.EditButton,
+            this.DelButton,
+            this.FindButton,
+            this.ExitButton,
             this.toolStripSeparator1,
-            this.btGravar,
-            this.btCancelar,
-            this.btHistorico,
-            this.btObservação});
-            this.tBar.Location = new System.Drawing.Point(0, 433);
-            this.tBar.Name = "tBar";
-            this.tBar.Padding = new System.Windows.Forms.Padding(6, 0, 1, 0);
-            this.tBar.Size = new System.Drawing.Size(457, 25);
-            this.tBar.TabIndex = 154;
-            this.tBar.Text = "toolStrip1";
+            this.GravarButton,
+            this.CancelarButton,
+            this.HistoricoButton,
+            this.ObservaçãoButton});
+            this.BarToolStrip.Location = new System.Drawing.Point(0, 433);
+            this.BarToolStrip.Name = "BarToolStrip";
+            this.BarToolStrip.Padding = new System.Windows.Forms.Padding(6, 0, 1, 0);
+            this.BarToolStrip.Size = new System.Drawing.Size(457, 25);
+            this.BarToolStrip.TabIndex = 154;
+            this.BarToolStrip.Text = "toolStrip1";
             // 
-            // btAdd
+            // AddButton
             // 
-            this.btAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btAdd.Image = global::GTI_Desktop.Properties.Resources.add_file;
-            this.btAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btAdd.Name = "btAdd";
-            this.btAdd.Size = new System.Drawing.Size(23, 22);
-            this.btAdd.Text = "toolStripButton1";
-            this.btAdd.ToolTipText = "Novo registro";
-            this.btAdd.Click += new System.EventHandler(this.BtAdd_Click);
+            this.AddButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.AddButton.Image = global::GTI_Desktop.Properties.Resources.add_file;
+            this.AddButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AddButton.Name = "AddButton";
+            this.AddButton.Size = new System.Drawing.Size(23, 22);
+            this.AddButton.Text = "toolStripButton1";
+            this.AddButton.ToolTipText = "Novo registro";
+            this.AddButton.Click += new System.EventHandler(this.BtAdd_Click);
             // 
-            // btEdit
+            // EditButton
             // 
-            this.btEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btEdit.Image = global::GTI_Desktop.Properties.Resources.Alterar;
-            this.btEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btEdit.Name = "btEdit";
-            this.btEdit.Size = new System.Drawing.Size(23, 22);
-            this.btEdit.Text = "toolStripButton2";
-            this.btEdit.ToolTipText = "Alterar registro";
-            this.btEdit.Click += new System.EventHandler(this.BtEdit_Click);
+            this.EditButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.EditButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
+            this.EditButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.EditButton.Name = "EditButton";
+            this.EditButton.Size = new System.Drawing.Size(23, 22);
+            this.EditButton.Text = "toolStripButton2";
+            this.EditButton.ToolTipText = "Alterar registro";
+            this.EditButton.Click += new System.EventHandler(this.BtEdit_Click);
             // 
-            // btDel
+            // DelButton
             // 
-            this.btDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btDel.Image = global::GTI_Desktop.Properties.Resources.delete;
-            this.btDel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btDel.Name = "btDel";
-            this.btDel.Size = new System.Drawing.Size(23, 22);
-            this.btDel.Text = "toolStripButton3";
-            this.btDel.ToolTipText = "Excluir registro";
-            this.btDel.Click += new System.EventHandler(this.BtDel_Click);
+            this.DelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.DelButton.Image = global::GTI_Desktop.Properties.Resources.delete;
+            this.DelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DelButton.Name = "DelButton";
+            this.DelButton.Size = new System.Drawing.Size(23, 22);
+            this.DelButton.Text = "toolStripButton3";
+            this.DelButton.ToolTipText = "Excluir registro";
+            this.DelButton.Click += new System.EventHandler(this.BtDel_Click);
             // 
-            // btFind
+            // FindButton
             // 
-            this.btFind.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btFind.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.btFind.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btFind.Name = "btFind";
-            this.btFind.Size = new System.Drawing.Size(23, 22);
-            this.btFind.Text = "toolStripButton4";
-            this.btFind.ToolTipText = "Abrir tela de pesquisa";
-            this.btFind.Click += new System.EventHandler(this.BtFind_Click);
+            this.FindButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.FindButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.FindButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.FindButton.Name = "FindButton";
+            this.FindButton.Size = new System.Drawing.Size(23, 22);
+            this.FindButton.Text = "toolStripButton4";
+            this.FindButton.ToolTipText = "Abrir tela de pesquisa";
+            this.FindButton.Click += new System.EventHandler(this.BtFind_Click);
             // 
-            // btExit
+            // ExitButton
             // 
-            this.btExit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btExit.Image = global::GTI_Desktop.Properties.Resources.Exit;
-            this.btExit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btExit.Name = "btExit";
-            this.btExit.Size = new System.Drawing.Size(23, 22);
-            this.btExit.Text = "toolStripButton5";
-            this.btExit.ToolTipText = "Sair";
-            this.btExit.Click += new System.EventHandler(this.BtExit_Click);
+            this.ExitButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ExitButton.Image = global::GTI_Desktop.Properties.Resources.Exit;
+            this.ExitButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ExitButton.Name = "ExitButton";
+            this.ExitButton.Size = new System.Drawing.Size(23, 22);
+            this.ExitButton.Text = "toolStripButton5";
+            this.ExitButton.ToolTipText = "Sair";
+            this.ExitButton.Click += new System.EventHandler(this.BtExit_Click);
             // 
-            // btGravar
+            // GravarButton
             // 
-            this.btGravar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btGravar.Image = global::GTI_Desktop.Properties.Resources.gravar;
-            this.btGravar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btGravar.Name = "btGravar";
-            this.btGravar.Size = new System.Drawing.Size(23, 22);
-            this.btGravar.Text = "btGravar";
-            this.btGravar.ToolTipText = "Gravar os dados";
-            this.btGravar.Click += new System.EventHandler(this.BtGravar_Click);
+            this.GravarButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.GravarButton.Image = global::GTI_Desktop.Properties.Resources.gravar;
+            this.GravarButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.GravarButton.Name = "GravarButton";
+            this.GravarButton.Size = new System.Drawing.Size(23, 22);
+            this.GravarButton.Text = "btGravar";
+            this.GravarButton.ToolTipText = "Gravar os dados";
+            this.GravarButton.Click += new System.EventHandler(this.BtGravar_Click);
             // 
-            // btCancelar
+            // CancelarButton
             // 
-            this.btCancelar.AccessibleDescription = "Cancelar operação";
-            this.btCancelar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btCancelar.Image = global::GTI_Desktop.Properties.Resources.cancel2;
-            this.btCancelar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btCancelar.Name = "btCancelar";
-            this.btCancelar.Size = new System.Drawing.Size(23, 22);
-            this.btCancelar.Text = "btCancelar";
-            this.btCancelar.ToolTipText = "Cancelar inclusão/alteração";
-            this.btCancelar.Click += new System.EventHandler(this.BtCancelar_Click);
+            this.CancelarButton.AccessibleDescription = "Cancelar operação";
+            this.CancelarButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.CancelarButton.Image = global::GTI_Desktop.Properties.Resources.cancel2;
+            this.CancelarButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.CancelarButton.Name = "CancelarButton";
+            this.CancelarButton.Size = new System.Drawing.Size(23, 22);
+            this.CancelarButton.Text = "btCancelar";
+            this.CancelarButton.ToolTipText = "Cancelar inclusão/alteração";
+            this.CancelarButton.Click += new System.EventHandler(this.BtCancelar_Click);
             // 
-            // btHistorico
+            // HistoricoButton
             // 
-            this.btHistorico.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btHistorico.Image = global::GTI_Desktop.Properties.Resources.more_1_;
-            this.btHistorico.ImageTransparentColor = System.Drawing.Color.White;
-            this.btHistorico.Name = "btHistorico";
-            this.btHistorico.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.btHistorico.Size = new System.Drawing.Size(79, 22);
-            this.btHistorico.Text = "Histórico";
-            this.btHistorico.ToolTipText = "Exibir o histórico do cidadão";
+            this.HistoricoButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.HistoricoButton.Image = global::GTI_Desktop.Properties.Resources.more_1_;
+            this.HistoricoButton.ImageTransparentColor = System.Drawing.Color.White;
+            this.HistoricoButton.Name = "HistoricoButton";
+            this.HistoricoButton.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.HistoricoButton.Size = new System.Drawing.Size(79, 22);
+            this.HistoricoButton.Text = "Histórico";
+            this.HistoricoButton.ToolTipText = "Exibir o histórico do cidadão";
             // 
-            // btObservação
+            // ObservaçãoButton
             // 
-            this.btObservação.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btObservação.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btObservação.Name = "btObservação";
-            this.btObservação.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.btObservação.Size = new System.Drawing.Size(93, 22);
-            this.btObservação.Text = "Observação";
-            this.btObservação.ToolTipText = "Abrir campo de observação do cidadão";
+            this.ObservaçãoButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.ObservaçãoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ObservaçãoButton.Name = "ObservaçãoButton";
+            this.ObservaçãoButton.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.ObservaçãoButton.Size = new System.Drawing.Size(77, 22);
+            this.ObservaçãoButton.Text = "Observação";
+            this.ObservaçãoButton.ToolTipText = "Abrir campo de observação do cidadão";
             // 
-            // pnlEndC
+            // EndCPanel
             // 
-            this.pnlEndC.Controls.Add(this.chkEtiquetaC);
-            this.pnlEndC.Controls.Add(this.txtFoneC);
-            this.pnlEndC.Controls.Add(this.label4);
-            this.pnlEndC.Controls.Add(this.label24);
-            this.pnlEndC.Controls.Add(this.txtEmailC);
-            this.pnlEndC.Controls.Add(this.txtPaisC);
-            this.pnlEndC.Controls.Add(this.txtCepC);
-            this.pnlEndC.Controls.Add(this.txtUFC);
-            this.pnlEndC.Controls.Add(this.txtCidadeC);
-            this.pnlEndC.Controls.Add(this.txtComplementoC);
-            this.pnlEndC.Controls.Add(this.txtBairroC);
-            this.pnlEndC.Controls.Add(this.txtNumeroC);
-            this.pnlEndC.Controls.Add(this.txtLogradouroC);
-            this.pnlEndC.Controls.Add(this.label6);
-            this.pnlEndC.Controls.Add(this.label7);
-            this.pnlEndC.Controls.Add(this.label18);
-            this.pnlEndC.Controls.Add(this.label19);
-            this.pnlEndC.Controls.Add(this.label20);
-            this.pnlEndC.Controls.Add(this.label21);
-            this.pnlEndC.Controls.Add(this.label22);
-            this.pnlEndC.Controls.Add(this.label23);
-            this.pnlEndC.ForeColor = System.Drawing.Color.Maroon;
-            this.pnlEndC.Location = new System.Drawing.Point(8, 285);
-            this.pnlEndC.Name = "pnlEndC";
-            this.pnlEndC.Size = new System.Drawing.Size(442, 145);
-            this.pnlEndC.TabIndex = 157;
-            this.pnlEndC.TabStop = false;
-            this.pnlEndC.Text = "Endereço Comercial";
+            this.EndCPanel.Controls.Add(this.TemFoneCCheck);
+            this.EndCPanel.Controls.Add(this.WhatsAppCCheck);
+            this.EndCPanel.Controls.Add(this.EtiquetaCButton);
+            this.EndCPanel.Controls.Add(this.FoneCText);
+            this.EndCPanel.Controls.Add(this.label4);
+            this.EndCPanel.Controls.Add(this.label24);
+            this.EndCPanel.Controls.Add(this.EmailCText);
+            this.EndCPanel.Controls.Add(this.PaisCText);
+            this.EndCPanel.Controls.Add(this.CepCText);
+            this.EndCPanel.Controls.Add(this.UFCText);
+            this.EndCPanel.Controls.Add(this.CidadeCText);
+            this.EndCPanel.Controls.Add(this.ComplementoCText);
+            this.EndCPanel.Controls.Add(this.BairroCText);
+            this.EndCPanel.Controls.Add(this.NumeroCText);
+            this.EndCPanel.Controls.Add(this.LogradouroCText);
+            this.EndCPanel.Controls.Add(this.label6);
+            this.EndCPanel.Controls.Add(this.label7);
+            this.EndCPanel.Controls.Add(this.label18);
+            this.EndCPanel.Controls.Add(this.label19);
+            this.EndCPanel.Controls.Add(this.label20);
+            this.EndCPanel.Controls.Add(this.label21);
+            this.EndCPanel.Controls.Add(this.label22);
+            this.EndCPanel.Controls.Add(this.label23);
+            this.EndCPanel.ForeColor = System.Drawing.Color.Maroon;
+            this.EndCPanel.Location = new System.Drawing.Point(8, 285);
+            this.EndCPanel.Name = "EndCPanel";
+            this.EndCPanel.Size = new System.Drawing.Size(442, 145);
+            this.EndCPanel.TabIndex = 157;
+            this.EndCPanel.TabStop = false;
+            this.EndCPanel.Text = "Endereço Comercial";
             // 
-            // chkEtiquetaC
+            // TemFoneCCheck
             // 
-            this.chkEtiquetaC.AutoSize = true;
-            this.chkEtiquetaC.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkEtiquetaC.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chkEtiquetaC.ForeColor = System.Drawing.Color.Navy;
-            this.chkEtiquetaC.Location = new System.Drawing.Point(320, -1);
-            this.chkEtiquetaC.Name = "chkEtiquetaC";
-            this.chkEtiquetaC.Size = new System.Drawing.Size(114, 17);
-            this.chkEtiquetaC.TabIndex = 15;
-            this.chkEtiquetaC.TabStop = true;
-            this.chkEtiquetaC.Text = "Endereço Principal";
-            this.chkEtiquetaC.UseVisualStyleBackColor = true;
-            this.chkEtiquetaC.CheckedChanged += new System.EventHandler(this.ChkEtiquetaC_CheckedChanged);
+            this.TemFoneCCheck.AutoSize = true;
+            this.TemFoneCCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TemFoneCCheck.Image = global::GTI_Desktop.Properties.Resources.PhoneCancel;
+            this.TemFoneCCheck.Location = new System.Drawing.Point(404, 120);
+            this.TemFoneCCheck.Name = "TemFoneCCheck";
+            this.TemFoneCCheck.Size = new System.Drawing.Size(28, 16);
+            this.TemFoneCCheck.TabIndex = 163;
+            this.Ttp.SetToolTip(this.TemFoneCCheck, "Não possui telefone");
+            this.TemFoneCCheck.UseVisualStyleBackColor = true;
             // 
-            // txtFoneC
+            // WhatsAppCCheck
             // 
-            this.txtFoneC.Location = new System.Drawing.Point(272, 90);
-            this.txtFoneC.MaxLength = 50;
-            this.txtFoneC.Name = "txtFoneC";
-            this.txtFoneC.Size = new System.Drawing.Size(165, 20);
-            this.txtFoneC.TabIndex = 159;
+            this.WhatsAppCCheck.AutoSize = true;
+            this.WhatsAppCCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.WhatsAppCCheck.Image = global::GTI_Desktop.Properties.Resources.whatsapp;
+            this.WhatsAppCCheck.Location = new System.Drawing.Point(370, 119);
+            this.WhatsAppCCheck.Name = "WhatsAppCCheck";
+            this.WhatsAppCCheck.Size = new System.Drawing.Size(28, 17);
+            this.WhatsAppCCheck.TabIndex = 162;
+            this.Ttp.SetToolTip(this.WhatsAppCCheck, "Possui WhatsApp");
+            this.WhatsAppCCheck.UseVisualStyleBackColor = true;
+            // 
+            // EtiquetaCButton
+            // 
+            this.EtiquetaCButton.AutoSize = true;
+            this.EtiquetaCButton.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.EtiquetaCButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.EtiquetaCButton.ForeColor = System.Drawing.Color.Navy;
+            this.EtiquetaCButton.Location = new System.Drawing.Point(320, -1);
+            this.EtiquetaCButton.Name = "EtiquetaCButton";
+            this.EtiquetaCButton.Size = new System.Drawing.Size(114, 17);
+            this.EtiquetaCButton.TabIndex = 15;
+            this.EtiquetaCButton.TabStop = true;
+            this.EtiquetaCButton.Text = "Endereço Principal";
+            this.EtiquetaCButton.UseVisualStyleBackColor = true;
+            this.EtiquetaCButton.CheckedChanged += new System.EventHandler(this.ChkEtiquetaC_CheckedChanged);
+            // 
+            // FoneCText
+            // 
+            this.FoneCText.Location = new System.Drawing.Point(272, 90);
+            this.FoneCText.MaxLength = 50;
+            this.FoneCText.Name = "FoneCText";
+            this.FoneCText.Size = new System.Drawing.Size(165, 20);
+            this.FoneCText.TabIndex = 159;
             // 
             // label4
             // 
@@ -491,109 +521,109 @@
             this.label24.TabIndex = 160;
             this.label24.Text = "Email........:";
             // 
-            // txtEmailC
+            // EmailCText
             // 
-            this.txtEmailC.Location = new System.Drawing.Point(70, 116);
-            this.txtEmailC.MaxLength = 50;
-            this.txtEmailC.Name = "txtEmailC";
-            this.txtEmailC.Size = new System.Drawing.Size(366, 20);
-            this.txtEmailC.TabIndex = 158;
+            this.EmailCText.Location = new System.Drawing.Point(70, 116);
+            this.EmailCText.MaxLength = 50;
+            this.EmailCText.Name = "EmailCText";
+            this.EmailCText.Size = new System.Drawing.Size(290, 20);
+            this.EmailCText.TabIndex = 158;
             // 
-            // txtPaisC
+            // PaisCText
             // 
-            this.txtPaisC.BackColor = System.Drawing.Color.White;
-            this.txtPaisC.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtPaisC.Location = new System.Drawing.Point(70, 90);
-            this.txtPaisC.MaxLength = 25;
-            this.txtPaisC.Name = "txtPaisC";
-            this.txtPaisC.ReadOnly = true;
-            this.txtPaisC.Size = new System.Drawing.Size(147, 20);
-            this.txtPaisC.TabIndex = 25;
-            this.txtPaisC.TabStop = false;
+            this.PaisCText.BackColor = System.Drawing.Color.White;
+            this.PaisCText.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.PaisCText.Location = new System.Drawing.Point(70, 90);
+            this.PaisCText.MaxLength = 25;
+            this.PaisCText.Name = "PaisCText";
+            this.PaisCText.ReadOnly = true;
+            this.PaisCText.Size = new System.Drawing.Size(147, 20);
+            this.PaisCText.TabIndex = 25;
+            this.PaisCText.TabStop = false;
             // 
-            // txtCepC
+            // CepCText
             // 
-            this.txtCepC.BackColor = System.Drawing.Color.White;
-            this.txtCepC.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtCepC.Location = new System.Drawing.Point(359, 66);
-            this.txtCepC.MaxLength = 25;
-            this.txtCepC.Name = "txtCepC";
-            this.txtCepC.ReadOnly = true;
-            this.txtCepC.Size = new System.Drawing.Size(78, 20);
-            this.txtCepC.TabIndex = 24;
-            this.txtCepC.TabStop = false;
+            this.CepCText.BackColor = System.Drawing.Color.White;
+            this.CepCText.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.CepCText.Location = new System.Drawing.Point(359, 66);
+            this.CepCText.MaxLength = 25;
+            this.CepCText.Name = "CepCText";
+            this.CepCText.ReadOnly = true;
+            this.CepCText.Size = new System.Drawing.Size(78, 20);
+            this.CepCText.TabIndex = 24;
+            this.CepCText.TabStop = false;
             // 
-            // txtUFC
+            // UFCText
             // 
-            this.txtUFC.BackColor = System.Drawing.Color.White;
-            this.txtUFC.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtUFC.Location = new System.Drawing.Point(272, 66);
-            this.txtUFC.MaxLength = 25;
-            this.txtUFC.Name = "txtUFC";
-            this.txtUFC.ReadOnly = true;
-            this.txtUFC.Size = new System.Drawing.Size(33, 20);
-            this.txtUFC.TabIndex = 23;
-            this.txtUFC.TabStop = false;
+            this.UFCText.BackColor = System.Drawing.Color.White;
+            this.UFCText.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.UFCText.Location = new System.Drawing.Point(272, 66);
+            this.UFCText.MaxLength = 25;
+            this.UFCText.Name = "UFCText";
+            this.UFCText.ReadOnly = true;
+            this.UFCText.Size = new System.Drawing.Size(33, 20);
+            this.UFCText.TabIndex = 23;
+            this.UFCText.TabStop = false;
             // 
-            // txtCidadeC
+            // CidadeCText
             // 
-            this.txtCidadeC.BackColor = System.Drawing.Color.White;
-            this.txtCidadeC.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtCidadeC.Location = new System.Drawing.Point(70, 66);
-            this.txtCidadeC.MaxLength = 25;
-            this.txtCidadeC.Name = "txtCidadeC";
-            this.txtCidadeC.ReadOnly = true;
-            this.txtCidadeC.Size = new System.Drawing.Size(147, 20);
-            this.txtCidadeC.TabIndex = 22;
-            this.txtCidadeC.TabStop = false;
+            this.CidadeCText.BackColor = System.Drawing.Color.White;
+            this.CidadeCText.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.CidadeCText.Location = new System.Drawing.Point(70, 66);
+            this.CidadeCText.MaxLength = 25;
+            this.CidadeCText.Name = "CidadeCText";
+            this.CidadeCText.ReadOnly = true;
+            this.CidadeCText.Size = new System.Drawing.Size(147, 20);
+            this.CidadeCText.TabIndex = 22;
+            this.CidadeCText.TabStop = false;
             // 
-            // txtComplementoC
+            // ComplementoCText
             // 
-            this.txtComplementoC.BackColor = System.Drawing.Color.White;
-            this.txtComplementoC.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtComplementoC.Location = new System.Drawing.Point(272, 42);
-            this.txtComplementoC.MaxLength = 25;
-            this.txtComplementoC.Name = "txtComplementoC";
-            this.txtComplementoC.ReadOnly = true;
-            this.txtComplementoC.Size = new System.Drawing.Size(165, 20);
-            this.txtComplementoC.TabIndex = 21;
-            this.txtComplementoC.TabStop = false;
+            this.ComplementoCText.BackColor = System.Drawing.Color.White;
+            this.ComplementoCText.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.ComplementoCText.Location = new System.Drawing.Point(272, 42);
+            this.ComplementoCText.MaxLength = 25;
+            this.ComplementoCText.Name = "ComplementoCText";
+            this.ComplementoCText.ReadOnly = true;
+            this.ComplementoCText.Size = new System.Drawing.Size(165, 20);
+            this.ComplementoCText.TabIndex = 21;
+            this.ComplementoCText.TabStop = false;
             // 
-            // txtBairroC
+            // BairroCText
             // 
-            this.txtBairroC.BackColor = System.Drawing.Color.White;
-            this.txtBairroC.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtBairroC.Location = new System.Drawing.Point(70, 42);
-            this.txtBairroC.MaxLength = 25;
-            this.txtBairroC.Name = "txtBairroC";
-            this.txtBairroC.ReadOnly = true;
-            this.txtBairroC.Size = new System.Drawing.Size(147, 20);
-            this.txtBairroC.TabIndex = 20;
-            this.txtBairroC.TabStop = false;
+            this.BairroCText.BackColor = System.Drawing.Color.White;
+            this.BairroCText.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.BairroCText.Location = new System.Drawing.Point(70, 42);
+            this.BairroCText.MaxLength = 25;
+            this.BairroCText.Name = "BairroCText";
+            this.BairroCText.ReadOnly = true;
+            this.BairroCText.Size = new System.Drawing.Size(147, 20);
+            this.BairroCText.TabIndex = 20;
+            this.BairroCText.TabStop = false;
             // 
-            // txtNumeroC
+            // NumeroCText
             // 
-            this.txtNumeroC.BackColor = System.Drawing.Color.White;
-            this.txtNumeroC.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtNumeroC.Location = new System.Drawing.Point(365, 18);
-            this.txtNumeroC.MaxLength = 25;
-            this.txtNumeroC.Name = "txtNumeroC";
-            this.txtNumeroC.ReadOnly = true;
-            this.txtNumeroC.Size = new System.Drawing.Size(71, 20);
-            this.txtNumeroC.TabIndex = 19;
-            this.txtNumeroC.TabStop = false;
+            this.NumeroCText.BackColor = System.Drawing.Color.White;
+            this.NumeroCText.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.NumeroCText.Location = new System.Drawing.Point(365, 18);
+            this.NumeroCText.MaxLength = 25;
+            this.NumeroCText.Name = "NumeroCText";
+            this.NumeroCText.ReadOnly = true;
+            this.NumeroCText.Size = new System.Drawing.Size(71, 20);
+            this.NumeroCText.TabIndex = 19;
+            this.NumeroCText.TabStop = false;
             // 
-            // txtLogradouroC
+            // LogradouroCText
             // 
-            this.txtLogradouroC.BackColor = System.Drawing.Color.White;
-            this.txtLogradouroC.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtLogradouroC.Location = new System.Drawing.Point(70, 18);
-            this.txtLogradouroC.MaxLength = 25;
-            this.txtLogradouroC.Name = "txtLogradouroC";
-            this.txtLogradouroC.ReadOnly = true;
-            this.txtLogradouroC.Size = new System.Drawing.Size(258, 20);
-            this.txtLogradouroC.TabIndex = 18;
-            this.txtLogradouroC.TabStop = false;
+            this.LogradouroCText.BackColor = System.Drawing.Color.White;
+            this.LogradouroCText.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.LogradouroCText.Location = new System.Drawing.Point(70, 18);
+            this.LogradouroCText.MaxLength = 25;
+            this.LogradouroCText.Name = "LogradouroCText";
+            this.LogradouroCText.ReadOnly = true;
+            this.LogradouroCText.Size = new System.Drawing.Size(258, 20);
+            this.LogradouroCText.TabIndex = 18;
+            this.LogradouroCText.TabStop = false;
             // 
             // label6
             // 
@@ -675,147 +705,174 @@
             this.label23.TabIndex = 116;
             this.label23.Text = "Logradouro:";
             // 
-            // pnlEndR
+            // EndRPanel
             // 
-            this.pnlEndR.Controls.Add(this.chkEtiquetaR);
-            this.pnlEndR.Controls.Add(this.txtPaisR);
-            this.pnlEndR.Controls.Add(this.txtCepR);
-            this.pnlEndR.Controls.Add(this.txtUFR);
-            this.pnlEndR.Controls.Add(this.txtCidadeR);
-            this.pnlEndR.Controls.Add(this.txtComplementoR);
-            this.pnlEndR.Controls.Add(this.txtBairroR);
-            this.pnlEndR.Controls.Add(this.txtNumeroR);
-            this.pnlEndR.Controls.Add(this.txtFoneR);
-            this.pnlEndR.Controls.Add(this.txtLogradouroR);
-            this.pnlEndR.Controls.Add(this.label17);
-            this.pnlEndR.Controls.Add(this.label16);
-            this.pnlEndR.Controls.Add(this.label15);
-            this.pnlEndR.Controls.Add(this.label14);
-            this.pnlEndR.Controls.Add(this.label13);
-            this.pnlEndR.Controls.Add(this.txtEmailR);
-            this.pnlEndR.Controls.Add(this.label12);
-            this.pnlEndR.Controls.Add(this.label11);
-            this.pnlEndR.Controls.Add(this.label10);
-            this.pnlEndR.Controls.Add(this.label9);
-            this.pnlEndR.Controls.Add(this.label8);
-            this.pnlEndR.ForeColor = System.Drawing.Color.Maroon;
-            this.pnlEndR.Location = new System.Drawing.Point(8, 137);
-            this.pnlEndR.Name = "pnlEndR";
-            this.pnlEndR.Size = new System.Drawing.Size(442, 142);
-            this.pnlEndR.TabIndex = 156;
-            this.pnlEndR.TabStop = false;
-            this.pnlEndR.Text = "Endereço Residencial";
+            this.EndRPanel.Controls.Add(this.TemFoneRCheck);
+            this.EndRPanel.Controls.Add(this.WhatsAppRCheck);
+            this.EndRPanel.Controls.Add(this.EtiquetaRCheck);
+            this.EndRPanel.Controls.Add(this.PaisRText);
+            this.EndRPanel.Controls.Add(this.CepRText);
+            this.EndRPanel.Controls.Add(this.UFRText);
+            this.EndRPanel.Controls.Add(this.CidadeRText);
+            this.EndRPanel.Controls.Add(this.ComplementoRText);
+            this.EndRPanel.Controls.Add(this.BairroRText);
+            this.EndRPanel.Controls.Add(this.NumeroRText);
+            this.EndRPanel.Controls.Add(this.FoneRText);
+            this.EndRPanel.Controls.Add(this.LogradouroRText);
+            this.EndRPanel.Controls.Add(this.label17);
+            this.EndRPanel.Controls.Add(this.label16);
+            this.EndRPanel.Controls.Add(this.label15);
+            this.EndRPanel.Controls.Add(this.label14);
+            this.EndRPanel.Controls.Add(this.label13);
+            this.EndRPanel.Controls.Add(this.EmailRText);
+            this.EndRPanel.Controls.Add(this.label12);
+            this.EndRPanel.Controls.Add(this.label11);
+            this.EndRPanel.Controls.Add(this.label10);
+            this.EndRPanel.Controls.Add(this.label9);
+            this.EndRPanel.Controls.Add(this.label8);
+            this.EndRPanel.ForeColor = System.Drawing.Color.Maroon;
+            this.EndRPanel.Location = new System.Drawing.Point(8, 137);
+            this.EndRPanel.Name = "EndRPanel";
+            this.EndRPanel.Size = new System.Drawing.Size(442, 142);
+            this.EndRPanel.TabIndex = 156;
+            this.EndRPanel.TabStop = false;
+            this.EndRPanel.Text = "Endereço Residencial";
             // 
-            // chkEtiquetaR
+            // TemFoneRCheck
             // 
-            this.chkEtiquetaR.AutoSize = true;
-            this.chkEtiquetaR.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkEtiquetaR.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chkEtiquetaR.ForeColor = System.Drawing.Color.Navy;
-            this.chkEtiquetaR.Location = new System.Drawing.Point(320, -1);
-            this.chkEtiquetaR.Name = "chkEtiquetaR";
-            this.chkEtiquetaR.Size = new System.Drawing.Size(114, 17);
-            this.chkEtiquetaR.TabIndex = 12;
-            this.chkEtiquetaR.TabStop = true;
-            this.chkEtiquetaR.Text = "Endereço Principal";
-            this.chkEtiquetaR.UseVisualStyleBackColor = true;
-            this.chkEtiquetaR.CheckedChanged += new System.EventHandler(this.ChkEtiquetaR_CheckedChanged);
+            this.TemFoneRCheck.AutoSize = true;
+            this.TemFoneRCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TemFoneRCheck.Image = global::GTI_Desktop.Properties.Resources.PhoneCancel;
+            this.TemFoneRCheck.Location = new System.Drawing.Point(404, 116);
+            this.TemFoneRCheck.Name = "TemFoneRCheck";
+            this.TemFoneRCheck.Size = new System.Drawing.Size(28, 16);
+            this.TemFoneRCheck.TabIndex = 159;
+            this.Ttp.SetToolTip(this.TemFoneRCheck, "Não possui telefone");
+            this.TemFoneRCheck.UseVisualStyleBackColor = true;
+            this.TemFoneRCheck.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
-            // txtPaisR
+            // WhatsAppRCheck
             // 
-            this.txtPaisR.BackColor = System.Drawing.Color.White;
-            this.txtPaisR.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtPaisR.Location = new System.Drawing.Point(70, 90);
-            this.txtPaisR.MaxLength = 25;
-            this.txtPaisR.Name = "txtPaisR";
-            this.txtPaisR.ReadOnly = true;
-            this.txtPaisR.Size = new System.Drawing.Size(147, 20);
-            this.txtPaisR.TabIndex = 25;
-            this.txtPaisR.TabStop = false;
+            this.WhatsAppRCheck.AutoSize = true;
+            this.WhatsAppRCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.WhatsAppRCheck.Image = global::GTI_Desktop.Properties.Resources.whatsapp;
+            this.WhatsAppRCheck.Location = new System.Drawing.Point(370, 115);
+            this.WhatsAppRCheck.Name = "WhatsAppRCheck";
+            this.WhatsAppRCheck.Size = new System.Drawing.Size(28, 17);
+            this.WhatsAppRCheck.TabIndex = 158;
+            this.Ttp.SetToolTip(this.WhatsAppRCheck, "Possui WhatsApp");
+            this.WhatsAppRCheck.UseVisualStyleBackColor = true;
             // 
-            // txtCepR
+            // EtiquetaRCheck
             // 
-            this.txtCepR.BackColor = System.Drawing.Color.White;
-            this.txtCepR.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtCepR.Location = new System.Drawing.Point(359, 66);
-            this.txtCepR.MaxLength = 25;
-            this.txtCepR.Name = "txtCepR";
-            this.txtCepR.ReadOnly = true;
-            this.txtCepR.Size = new System.Drawing.Size(77, 20);
-            this.txtCepR.TabIndex = 24;
-            this.txtCepR.TabStop = false;
+            this.EtiquetaRCheck.AutoSize = true;
+            this.EtiquetaRCheck.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.EtiquetaRCheck.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.EtiquetaRCheck.ForeColor = System.Drawing.Color.Navy;
+            this.EtiquetaRCheck.Location = new System.Drawing.Point(320, -1);
+            this.EtiquetaRCheck.Name = "EtiquetaRCheck";
+            this.EtiquetaRCheck.Size = new System.Drawing.Size(114, 17);
+            this.EtiquetaRCheck.TabIndex = 12;
+            this.EtiquetaRCheck.TabStop = true;
+            this.EtiquetaRCheck.Text = "Endereço Principal";
+            this.EtiquetaRCheck.UseVisualStyleBackColor = true;
+            this.EtiquetaRCheck.CheckedChanged += new System.EventHandler(this.ChkEtiquetaR_CheckedChanged);
             // 
-            // txtUFR
+            // PaisRText
             // 
-            this.txtUFR.BackColor = System.Drawing.Color.White;
-            this.txtUFR.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtUFR.Location = new System.Drawing.Point(272, 66);
-            this.txtUFR.MaxLength = 25;
-            this.txtUFR.Name = "txtUFR";
-            this.txtUFR.ReadOnly = true;
-            this.txtUFR.Size = new System.Drawing.Size(33, 20);
-            this.txtUFR.TabIndex = 23;
-            this.txtUFR.TabStop = false;
+            this.PaisRText.BackColor = System.Drawing.Color.White;
+            this.PaisRText.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.PaisRText.Location = new System.Drawing.Point(70, 90);
+            this.PaisRText.MaxLength = 25;
+            this.PaisRText.Name = "PaisRText";
+            this.PaisRText.ReadOnly = true;
+            this.PaisRText.Size = new System.Drawing.Size(147, 20);
+            this.PaisRText.TabIndex = 25;
+            this.PaisRText.TabStop = false;
             // 
-            // txtCidadeR
+            // CepRText
             // 
-            this.txtCidadeR.BackColor = System.Drawing.Color.White;
-            this.txtCidadeR.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtCidadeR.Location = new System.Drawing.Point(70, 66);
-            this.txtCidadeR.MaxLength = 25;
-            this.txtCidadeR.Name = "txtCidadeR";
-            this.txtCidadeR.ReadOnly = true;
-            this.txtCidadeR.Size = new System.Drawing.Size(147, 20);
-            this.txtCidadeR.TabIndex = 22;
-            this.txtCidadeR.TabStop = false;
+            this.CepRText.BackColor = System.Drawing.Color.White;
+            this.CepRText.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.CepRText.Location = new System.Drawing.Point(359, 66);
+            this.CepRText.MaxLength = 25;
+            this.CepRText.Name = "CepRText";
+            this.CepRText.ReadOnly = true;
+            this.CepRText.Size = new System.Drawing.Size(77, 20);
+            this.CepRText.TabIndex = 24;
+            this.CepRText.TabStop = false;
             // 
-            // txtComplementoR
+            // UFRText
             // 
-            this.txtComplementoR.BackColor = System.Drawing.Color.White;
-            this.txtComplementoR.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtComplementoR.Location = new System.Drawing.Point(272, 42);
-            this.txtComplementoR.MaxLength = 25;
-            this.txtComplementoR.Name = "txtComplementoR";
-            this.txtComplementoR.ReadOnly = true;
-            this.txtComplementoR.Size = new System.Drawing.Size(164, 20);
-            this.txtComplementoR.TabIndex = 21;
-            this.txtComplementoR.TabStop = false;
+            this.UFRText.BackColor = System.Drawing.Color.White;
+            this.UFRText.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.UFRText.Location = new System.Drawing.Point(272, 66);
+            this.UFRText.MaxLength = 25;
+            this.UFRText.Name = "UFRText";
+            this.UFRText.ReadOnly = true;
+            this.UFRText.Size = new System.Drawing.Size(33, 20);
+            this.UFRText.TabIndex = 23;
+            this.UFRText.TabStop = false;
             // 
-            // txtBairroR
+            // CidadeRText
             // 
-            this.txtBairroR.BackColor = System.Drawing.Color.White;
-            this.txtBairroR.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtBairroR.Location = new System.Drawing.Point(70, 42);
-            this.txtBairroR.MaxLength = 25;
-            this.txtBairroR.Name = "txtBairroR";
-            this.txtBairroR.ReadOnly = true;
-            this.txtBairroR.Size = new System.Drawing.Size(147, 20);
-            this.txtBairroR.TabIndex = 20;
-            this.txtBairroR.TabStop = false;
+            this.CidadeRText.BackColor = System.Drawing.Color.White;
+            this.CidadeRText.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.CidadeRText.Location = new System.Drawing.Point(70, 66);
+            this.CidadeRText.MaxLength = 25;
+            this.CidadeRText.Name = "CidadeRText";
+            this.CidadeRText.ReadOnly = true;
+            this.CidadeRText.Size = new System.Drawing.Size(147, 20);
+            this.CidadeRText.TabIndex = 22;
+            this.CidadeRText.TabStop = false;
             // 
-            // txtNumeroR
+            // ComplementoRText
             // 
-            this.txtNumeroR.BackColor = System.Drawing.Color.White;
-            this.txtNumeroR.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtNumeroR.Location = new System.Drawing.Point(365, 18);
-            this.txtNumeroR.MaxLength = 25;
-            this.txtNumeroR.Name = "txtNumeroR";
-            this.txtNumeroR.ReadOnly = true;
-            this.txtNumeroR.Size = new System.Drawing.Size(71, 20);
-            this.txtNumeroR.TabIndex = 19;
-            this.txtNumeroR.TabStop = false;
+            this.ComplementoRText.BackColor = System.Drawing.Color.White;
+            this.ComplementoRText.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.ComplementoRText.Location = new System.Drawing.Point(272, 42);
+            this.ComplementoRText.MaxLength = 25;
+            this.ComplementoRText.Name = "ComplementoRText";
+            this.ComplementoRText.ReadOnly = true;
+            this.ComplementoRText.Size = new System.Drawing.Size(164, 20);
+            this.ComplementoRText.TabIndex = 21;
+            this.ComplementoRText.TabStop = false;
             // 
-            // txtLogradouroR
+            // BairroRText
             // 
-            this.txtLogradouroR.BackColor = System.Drawing.Color.White;
-            this.txtLogradouroR.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtLogradouroR.Location = new System.Drawing.Point(70, 18);
-            this.txtLogradouroR.MaxLength = 25;
-            this.txtLogradouroR.Name = "txtLogradouroR";
-            this.txtLogradouroR.ReadOnly = true;
-            this.txtLogradouroR.Size = new System.Drawing.Size(258, 20);
-            this.txtLogradouroR.TabIndex = 135;
-            this.txtLogradouroR.TabStop = false;
+            this.BairroRText.BackColor = System.Drawing.Color.White;
+            this.BairroRText.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.BairroRText.Location = new System.Drawing.Point(70, 42);
+            this.BairroRText.MaxLength = 25;
+            this.BairroRText.Name = "BairroRText";
+            this.BairroRText.ReadOnly = true;
+            this.BairroRText.Size = new System.Drawing.Size(147, 20);
+            this.BairroRText.TabIndex = 20;
+            this.BairroRText.TabStop = false;
+            // 
+            // NumeroRText
+            // 
+            this.NumeroRText.BackColor = System.Drawing.Color.White;
+            this.NumeroRText.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.NumeroRText.Location = new System.Drawing.Point(365, 18);
+            this.NumeroRText.MaxLength = 25;
+            this.NumeroRText.Name = "NumeroRText";
+            this.NumeroRText.ReadOnly = true;
+            this.NumeroRText.Size = new System.Drawing.Size(71, 20);
+            this.NumeroRText.TabIndex = 19;
+            this.NumeroRText.TabStop = false;
+            // 
+            // LogradouroRText
+            // 
+            this.LogradouroRText.BackColor = System.Drawing.Color.White;
+            this.LogradouroRText.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.LogradouroRText.Location = new System.Drawing.Point(70, 18);
+            this.LogradouroRText.MaxLength = 25;
+            this.LogradouroRText.Name = "LogradouroRText";
+            this.LogradouroRText.ReadOnly = true;
+            this.LogradouroRText.Size = new System.Drawing.Size(258, 20);
+            this.LogradouroRText.TabIndex = 135;
+            this.LogradouroRText.TabStop = false;
             // 
             // label15
             // 
@@ -897,146 +954,146 @@
             this.label8.TabIndex = 116;
             this.label8.Text = "Logradouro:";
             // 
-            // txtPessoa
+            // PessoaText
             // 
-            this.txtPessoa.Location = new System.Drawing.Point(70, 83);
-            this.txtPessoa.Name = "txtPessoa";
-            this.txtPessoa.Size = new System.Drawing.Size(94, 20);
-            this.txtPessoa.TabIndex = 159;
-            this.txtPessoa.TabStop = false;
+            this.PessoaText.Location = new System.Drawing.Point(70, 83);
+            this.PessoaText.Name = "PessoaText";
+            this.PessoaText.Size = new System.Drawing.Size(94, 20);
+            this.PessoaText.TabIndex = 159;
+            this.PessoaText.TabStop = false;
             // 
-            // txtProfissao
+            // ProfissaoText
             // 
-            this.txtProfissao.Location = new System.Drawing.Point(70, 109);
-            this.txtProfissao.Name = "txtProfissao";
-            this.txtProfissao.Size = new System.Drawing.Size(312, 20);
-            this.txtProfissao.TabIndex = 160;
-            this.txtProfissao.TabStop = false;
+            this.ProfissaoText.Location = new System.Drawing.Point(70, 109);
+            this.ProfissaoText.Name = "ProfissaoText";
+            this.ProfissaoText.Size = new System.Drawing.Size(312, 20);
+            this.ProfissaoText.TabIndex = 160;
+            this.ProfissaoText.TabStop = false;
             // 
-            // btFindCodigo
+            // JuridicaCheck
             // 
-            this.btFindCodigo.AutoSize = true;
-            this.btFindCodigo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btFindCodigo.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.btFindCodigo.Location = new System.Drawing.Point(116, 6);
-            this.btFindCodigo.Name = "btFindCodigo";
-            this.btFindCodigo.Size = new System.Drawing.Size(25, 25);
-            this.btFindCodigo.TabIndex = 0;
-            this.btFindCodigo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.tTip.SetToolTip(this.btFindCodigo, "Carregar dados de um cidadão pelo código");
-            this.btFindCodigo.UseVisualStyleBackColor = true;
-            this.btFindCodigo.Click += new System.EventHandler(this.BtFindCodigo_Click);
+            this.JuridicaCheck.AutoSize = true;
+            this.JuridicaCheck.ForeColor = System.Drawing.Color.Navy;
+            this.JuridicaCheck.Location = new System.Drawing.Point(386, 87);
+            this.JuridicaCheck.Name = "JuridicaCheck";
+            this.JuridicaCheck.Size = new System.Drawing.Size(64, 17);
+            this.JuridicaCheck.TabIndex = 8;
+            this.JuridicaCheck.Text = "Jurídica";
+            this.JuridicaCheck.UseVisualStyleBackColor = true;
             // 
-            // btCpfCnpj
+            // DelEnderecoCButton
             // 
-            this.btCpfCnpj.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btCpfCnpj.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.btCpfCnpj.Location = new System.Drawing.Point(338, 80);
-            this.btCpfCnpj.Name = "btCpfCnpj";
-            this.btCpfCnpj.Size = new System.Drawing.Size(25, 25);
-            this.btCpfCnpj.TabIndex = 7;
-            this.btCpfCnpj.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.tTip.SetToolTip(this.btCpfCnpj, "Verificar situação tributária do cidadão");
-            this.btCpfCnpj.UseVisualStyleBackColor = true;
+            this.DelEnderecoCButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DelEnderecoCButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.DelEnderecoCButton.Location = new System.Drawing.Point(162, 281);
+            this.DelEnderecoCButton.Name = "DelEnderecoCButton";
+            this.DelEnderecoCButton.Size = new System.Drawing.Size(30, 20);
+            this.DelEnderecoCButton.TabIndex = 14;
+            this.DelEnderecoCButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.DelEnderecoCButton, "Apagar o endereço comercial");
+            this.DelEnderecoCButton.UseVisualStyleBackColor = true;
             // 
-            // btProfissao_Del
+            // AddEnderecoCButton
             // 
-            this.btProfissao_Del.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btProfissao_Del.Image = global::GTI_Desktop.Properties.Resources.delete;
-            this.btProfissao_Del.Location = new System.Drawing.Point(415, 106);
-            this.btProfissao_Del.Name = "btProfissao_Del";
-            this.btProfissao_Del.Size = new System.Drawing.Size(25, 25);
-            this.btProfissao_Del.TabIndex = 11;
-            this.btProfissao_Del.TabStop = false;
-            this.btProfissao_Del.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.tTip.SetToolTip(this.btProfissao_Del, "Limpar campo de profissão");
-            this.btProfissao_Del.UseVisualStyleBackColor = true;
-            this.btProfissao_Del.Click += new System.EventHandler(this.BtProfissao_Del_Click);
+            this.AddEnderecoCButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AddEnderecoCButton.Image = global::GTI_Desktop.Properties.Resources.add;
+            this.AddEnderecoCButton.Location = new System.Drawing.Point(129, 281);
+            this.AddEnderecoCButton.Name = "AddEnderecoCButton";
+            this.AddEnderecoCButton.Size = new System.Drawing.Size(30, 20);
+            this.AddEnderecoCButton.TabIndex = 13;
+            this.AddEnderecoCButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.AddEnderecoCButton, "Adicionar/Alterar o endereço comercial");
+            this.AddEnderecoCButton.UseVisualStyleBackColor = true;
+            this.AddEnderecoCButton.Click += new System.EventHandler(this.BtAddEnderecoC_Click);
             // 
-            // btProfissao_Edit
+            // DelEnderecoRButton
             // 
-            this.btProfissao_Edit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btProfissao_Edit.Image = global::GTI_Desktop.Properties.Resources.refresh_16x16;
-            this.btProfissao_Edit.Location = new System.Drawing.Point(388, 106);
-            this.btProfissao_Edit.Name = "btProfissao_Edit";
-            this.btProfissao_Edit.Size = new System.Drawing.Size(25, 25);
-            this.btProfissao_Edit.TabIndex = 10;
-            this.btProfissao_Edit.TabStop = false;
-            this.btProfissao_Edit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.tTip.SetToolTip(this.btProfissao_Edit, "Atualizar a lista de profissões");
-            this.btProfissao_Edit.UseVisualStyleBackColor = true;
-            this.btProfissao_Edit.Click += new System.EventHandler(this.BtProfissao_Edit_Click);
+            this.DelEnderecoRButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DelEnderecoRButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.DelEnderecoRButton.Location = new System.Drawing.Point(162, 133);
+            this.DelEnderecoRButton.Name = "DelEnderecoRButton";
+            this.DelEnderecoRButton.Size = new System.Drawing.Size(30, 20);
+            this.DelEnderecoRButton.TabIndex = 11;
+            this.DelEnderecoRButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.DelEnderecoRButton, "Apagar o endereço residencial");
+            this.DelEnderecoRButton.UseVisualStyleBackColor = true;
             // 
-            // chkJuridica
+            // AddEnderecoRButton
             // 
-            this.chkJuridica.AutoSize = true;
-            this.chkJuridica.ForeColor = System.Drawing.Color.Navy;
-            this.chkJuridica.Location = new System.Drawing.Point(386, 87);
-            this.chkJuridica.Name = "chkJuridica";
-            this.chkJuridica.Size = new System.Drawing.Size(64, 17);
-            this.chkJuridica.TabIndex = 8;
-            this.chkJuridica.Text = "Jurídica";
-            this.chkJuridica.UseVisualStyleBackColor = true;
+            this.AddEnderecoRButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AddEnderecoRButton.Image = global::GTI_Desktop.Properties.Resources.add;
+            this.AddEnderecoRButton.Location = new System.Drawing.Point(129, 133);
+            this.AddEnderecoRButton.Name = "AddEnderecoRButton";
+            this.AddEnderecoRButton.Size = new System.Drawing.Size(30, 20);
+            this.AddEnderecoRButton.TabIndex = 10;
+            this.AddEnderecoRButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.AddEnderecoRButton, "Adicionar/Alterar o endereço residencial");
+            this.AddEnderecoRButton.UseVisualStyleBackColor = true;
+            this.AddEnderecoRButton.Click += new System.EventHandler(this.BtAddEnderecoR_Click);
             // 
-            // btAddEnderecoR
+            // FindCodigoButton
             // 
-            this.btAddEnderecoR.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btAddEnderecoR.Image = global::GTI_Desktop.Properties.Resources.add;
-            this.btAddEnderecoR.Location = new System.Drawing.Point(129, 133);
-            this.btAddEnderecoR.Name = "btAddEnderecoR";
-            this.btAddEnderecoR.Size = new System.Drawing.Size(30, 20);
-            this.btAddEnderecoR.TabIndex = 10;
-            this.btAddEnderecoR.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.tTip.SetToolTip(this.btAddEnderecoR, "Adicionar/Alterar o endereço residencial");
-            this.btAddEnderecoR.UseVisualStyleBackColor = true;
-            this.btAddEnderecoR.Click += new System.EventHandler(this.BtAddEnderecoR_Click);
+            this.FindCodigoButton.AutoSize = true;
+            this.FindCodigoButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FindCodigoButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.FindCodigoButton.Location = new System.Drawing.Point(116, 6);
+            this.FindCodigoButton.Name = "FindCodigoButton";
+            this.FindCodigoButton.Size = new System.Drawing.Size(25, 25);
+            this.FindCodigoButton.TabIndex = 0;
+            this.FindCodigoButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.FindCodigoButton, "Carregar dados de um cidadão pelo código");
+            this.FindCodigoButton.UseVisualStyleBackColor = true;
+            this.FindCodigoButton.Click += new System.EventHandler(this.BtFindCodigo_Click);
             // 
-            // btDelEnderecoR
+            // CpfCnpjButton
             // 
-            this.btDelEnderecoR.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btDelEnderecoR.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.btDelEnderecoR.Location = new System.Drawing.Point(162, 133);
-            this.btDelEnderecoR.Name = "btDelEnderecoR";
-            this.btDelEnderecoR.Size = new System.Drawing.Size(30, 20);
-            this.btDelEnderecoR.TabIndex = 11;
-            this.btDelEnderecoR.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.tTip.SetToolTip(this.btDelEnderecoR, "Apagar o endereço residencial");
-            this.btDelEnderecoR.UseVisualStyleBackColor = true;
+            this.CpfCnpjButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CpfCnpjButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.CpfCnpjButton.Location = new System.Drawing.Point(338, 80);
+            this.CpfCnpjButton.Name = "CpfCnpjButton";
+            this.CpfCnpjButton.Size = new System.Drawing.Size(25, 25);
+            this.CpfCnpjButton.TabIndex = 7;
+            this.CpfCnpjButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.CpfCnpjButton, "Verificar situação tributária do cidadão");
+            this.CpfCnpjButton.UseVisualStyleBackColor = true;
             // 
-            // btDelEnderecoC
+            // Profissao_DelButton
             // 
-            this.btDelEnderecoC.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btDelEnderecoC.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.btDelEnderecoC.Location = new System.Drawing.Point(162, 281);
-            this.btDelEnderecoC.Name = "btDelEnderecoC";
-            this.btDelEnderecoC.Size = new System.Drawing.Size(30, 20);
-            this.btDelEnderecoC.TabIndex = 14;
-            this.btDelEnderecoC.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.tTip.SetToolTip(this.btDelEnderecoC, "Apagar o endereço comercial");
-            this.btDelEnderecoC.UseVisualStyleBackColor = true;
+            this.Profissao_DelButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Profissao_DelButton.Image = global::GTI_Desktop.Properties.Resources.delete;
+            this.Profissao_DelButton.Location = new System.Drawing.Point(415, 106);
+            this.Profissao_DelButton.Name = "Profissao_DelButton";
+            this.Profissao_DelButton.Size = new System.Drawing.Size(25, 25);
+            this.Profissao_DelButton.TabIndex = 11;
+            this.Profissao_DelButton.TabStop = false;
+            this.Profissao_DelButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.Profissao_DelButton, "Limpar campo de profissão");
+            this.Profissao_DelButton.UseVisualStyleBackColor = true;
+            this.Profissao_DelButton.Click += new System.EventHandler(this.BtProfissao_Del_Click);
             // 
-            // btAddEnderecoC
+            // Profissao_EditButton
             // 
-            this.btAddEnderecoC.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btAddEnderecoC.Image = global::GTI_Desktop.Properties.Resources.add;
-            this.btAddEnderecoC.Location = new System.Drawing.Point(129, 281);
-            this.btAddEnderecoC.Name = "btAddEnderecoC";
-            this.btAddEnderecoC.Size = new System.Drawing.Size(30, 20);
-            this.btAddEnderecoC.TabIndex = 13;
-            this.btAddEnderecoC.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.tTip.SetToolTip(this.btAddEnderecoC, "Adicionar/Alterar o endereço comercial");
-            this.btAddEnderecoC.UseVisualStyleBackColor = true;
-            this.btAddEnderecoC.Click += new System.EventHandler(this.BtAddEnderecoC_Click);
+            this.Profissao_EditButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Profissao_EditButton.Image = global::GTI_Desktop.Properties.Resources.refresh_16x16;
+            this.Profissao_EditButton.Location = new System.Drawing.Point(388, 106);
+            this.Profissao_EditButton.Name = "Profissao_EditButton";
+            this.Profissao_EditButton.Size = new System.Drawing.Size(25, 25);
+            this.Profissao_EditButton.TabIndex = 10;
+            this.Profissao_EditButton.TabStop = false;
+            this.Profissao_EditButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.Profissao_EditButton, "Atualizar a lista de profissões");
+            this.Profissao_EditButton.UseVisualStyleBackColor = true;
+            this.Profissao_EditButton.Click += new System.EventHandler(this.BtProfissao_Edit_Click);
             // 
-            // lblTipoCidadao
+            // TipoCidadaoText
             // 
-            this.lblTipoCidadao.AutoSize = true;
-            this.lblTipoCidadao.ForeColor = System.Drawing.Color.Navy;
-            this.lblTipoCidadao.Location = new System.Drawing.Point(205, 12);
-            this.lblTipoCidadao.Name = "lblTipoCidadao";
-            this.lblTipoCidadao.Size = new System.Drawing.Size(40, 13);
-            this.lblTipoCidadao.TabIndex = 161;
-            this.lblTipoCidadao.Text = "Normal";
+            this.TipoCidadaoText.AutoSize = true;
+            this.TipoCidadaoText.ForeColor = System.Drawing.Color.Navy;
+            this.TipoCidadaoText.Location = new System.Drawing.Point(205, 12);
+            this.TipoCidadaoText.Name = "TipoCidadaoText";
+            this.TipoCidadaoText.Size = new System.Drawing.Size(40, 13);
+            this.TipoCidadaoText.TabIndex = 161;
+            this.TipoCidadaoText.Text = "Normal";
             // 
             // label25
             // 
@@ -1047,63 +1104,63 @@
             this.label25.TabIndex = 162;
             this.label25.Text = "Tipo...:";
             // 
-            // txtOrgao
+            // OrgaoText
             // 
-            this.txtOrgao.Location = new System.Drawing.Point(226, 59);
-            this.txtOrgao.MaxLength = 25;
-            this.txtOrgao.Name = "txtOrgao";
-            this.txtOrgao.Size = new System.Drawing.Size(53, 20);
-            this.txtOrgao.TabIndex = 4;
+            this.OrgaoText.Location = new System.Drawing.Point(226, 59);
+            this.OrgaoText.MaxLength = 25;
+            this.OrgaoText.Name = "OrgaoText";
+            this.OrgaoText.Size = new System.Drawing.Size(53, 20);
+            this.OrgaoText.TabIndex = 4;
             // 
             // Cidadao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(457, 458);
-            this.Controls.Add(this.txtOrgao);
+            this.Controls.Add(this.OrgaoText);
             this.Controls.Add(this.label25);
-            this.Controls.Add(this.lblTipoCidadao);
-            this.Controls.Add(this.btDelEnderecoC);
-            this.Controls.Add(this.btAddEnderecoC);
-            this.Controls.Add(this.btDelEnderecoR);
-            this.Controls.Add(this.btAddEnderecoR);
-            this.Controls.Add(this.chkJuridica);
-            this.Controls.Add(this.pnlEndR);
-            this.Controls.Add(this.pnlEndC);
-            this.Controls.Add(this.txtProfissao);
-            this.Controls.Add(this.txtPessoa);
-            this.Controls.Add(this.btFindCodigo);
-            this.Controls.Add(this.btCpfCnpj);
-            this.Controls.Add(this.btProfissao_Del);
-            this.Controls.Add(this.btProfissao_Edit);
-            this.Controls.Add(this.cmbProfissao);
-            this.Controls.Add(this.cmbPessoa);
-            this.Controls.Add(this.tBar);
+            this.Controls.Add(this.TipoCidadaoText);
+            this.Controls.Add(this.DelEnderecoCButton);
+            this.Controls.Add(this.AddEnderecoCButton);
+            this.Controls.Add(this.DelEnderecoRButton);
+            this.Controls.Add(this.AddEnderecoRButton);
+            this.Controls.Add(this.JuridicaCheck);
+            this.Controls.Add(this.EndRPanel);
+            this.Controls.Add(this.EndCPanel);
+            this.Controls.Add(this.ProfissaoText);
+            this.Controls.Add(this.PessoaText);
+            this.Controls.Add(this.FindCodigoButton);
+            this.Controls.Add(this.CpfCnpjButton);
+            this.Controls.Add(this.Profissao_DelButton);
+            this.Controls.Add(this.Profissao_EditButton);
+            this.Controls.Add(this.ProfissaoList);
+            this.Controls.Add(this.PessoaList);
+            this.Controls.Add(this.BarToolStrip);
             this.Controls.Add(this.label28);
-            this.Controls.Add(this.mskDataNascto);
+            this.Controls.Add(this.DataNasctoMask);
             this.Controls.Add(this.label27);
             this.Controls.Add(this.Label1);
             this.Controls.Add(this.Label2);
             this.Controls.Add(this.Label3);
-            this.Controls.Add(this.lblCod);
+            this.Controls.Add(this.CodigoText);
             this.Controls.Add(this.Label5);
-            this.Controls.Add(this.lblNomeDoc);
-            this.Controls.Add(this.mskCNPJ);
-            this.Controls.Add(this.txtRG);
-            this.Controls.Add(this.txtNome);
-            this.Controls.Add(this.mskCPF);
+            this.Controls.Add(this.NomeDocText);
+            this.Controls.Add(this.CNPJMask);
+            this.Controls.Add(this.RGText);
+            this.Controls.Add(this.NomeText);
+            this.Controls.Add(this.CPFMask);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Cidadao";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de cidadão";
-            this.tBar.ResumeLayout(false);
-            this.tBar.PerformLayout();
-            this.pnlEndC.ResumeLayout(false);
-            this.pnlEndC.PerformLayout();
-            this.pnlEndR.ResumeLayout(false);
-            this.pnlEndR.PerformLayout();
+            this.BarToolStrip.ResumeLayout(false);
+            this.BarToolStrip.PerformLayout();
+            this.EndCPanel.ResumeLayout(false);
+            this.EndCPanel.PerformLayout();
+            this.EndRPanel.ResumeLayout(false);
+            this.EndRPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1112,38 +1169,38 @@
         #endregion
 
         internal System.Windows.Forms.Label label28;
-        internal System.Windows.Forms.TextBox txtEmailR;
-        internal System.Windows.Forms.MaskedTextBox mskDataNascto;
+        internal System.Windows.Forms.TextBox EmailRText;
+        internal System.Windows.Forms.MaskedTextBox DataNasctoMask;
         internal System.Windows.Forms.Label label27;
-        internal System.Windows.Forms.MaskedTextBox mskCPF;
+        internal System.Windows.Forms.MaskedTextBox CPFMask;
         internal System.Windows.Forms.Label Label1;
         internal System.Windows.Forms.Label Label2;
         internal System.Windows.Forms.Label Label3;
-        internal System.Windows.Forms.Label lblCod;
+        internal System.Windows.Forms.Label CodigoText;
         internal System.Windows.Forms.Label Label5;
-        internal System.Windows.Forms.Label lblNomeDoc;
-        internal System.Windows.Forms.MaskedTextBox mskCNPJ;
-        internal System.Windows.Forms.TextBox txtRG;
-        internal System.Windows.Forms.TextBox txtNome;
+        internal System.Windows.Forms.Label NomeDocText;
+        internal System.Windows.Forms.MaskedTextBox CNPJMask;
+        internal System.Windows.Forms.TextBox RGText;
+        internal System.Windows.Forms.TextBox NomeText;
         internal System.Windows.Forms.Label label16;
         internal System.Windows.Forms.Label label17;
-        private System.Windows.Forms.ComboBox cmbPessoa;
-        internal System.Windows.Forms.TextBox txtFoneR;
-        private System.Windows.Forms.Button btProfissao_Del;
-        private System.Windows.Forms.Button btProfissao_Edit;
-        private System.Windows.Forms.Button btCpfCnpj;
-        private System.Windows.Forms.ToolStripButton btAdd;
-        private System.Windows.Forms.ToolStripButton btEdit;
-        private System.Windows.Forms.ToolStripButton btDel;
-        private System.Windows.Forms.ToolStripButton btFind;
-        private System.Windows.Forms.ToolStripButton btExit;
+        private System.Windows.Forms.ComboBox PessoaList;
+        internal System.Windows.Forms.TextBox FoneRText;
+        private System.Windows.Forms.Button Profissao_DelButton;
+        private System.Windows.Forms.Button Profissao_EditButton;
+        private System.Windows.Forms.Button CpfCnpjButton;
+        private System.Windows.Forms.ToolStripButton AddButton;
+        private System.Windows.Forms.ToolStripButton EditButton;
+        private System.Windows.Forms.ToolStripButton DelButton;
+        private System.Windows.Forms.ToolStripButton FindButton;
+        private System.Windows.Forms.ToolStripButton ExitButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton btGravar;
-        private System.Windows.Forms.ToolStripButton btCancelar;
-        private System.Windows.Forms.ToolStrip tBar;
-        public System.Windows.Forms.ComboBox cmbProfissao;
-        private System.Windows.Forms.Button btFindCodigo;
-        private System.Windows.Forms.GroupBox pnlEndC;
+        private System.Windows.Forms.ToolStripButton GravarButton;
+        private System.Windows.Forms.ToolStripButton CancelarButton;
+        private System.Windows.Forms.ToolStrip BarToolStrip;
+        public System.Windows.Forms.ComboBox ProfissaoList;
+        private System.Windows.Forms.Button FindCodigoButton;
+        private System.Windows.Forms.GroupBox EndCPanel;
         internal System.Windows.Forms.Label label6;
         internal System.Windows.Forms.Label label7;
         internal System.Windows.Forms.Label label18;
@@ -1152,7 +1209,7 @@
         internal System.Windows.Forms.Label label21;
         internal System.Windows.Forms.Label label22;
         internal System.Windows.Forms.Label label23;
-        private System.Windows.Forms.GroupBox pnlEndR;
+        private System.Windows.Forms.GroupBox EndRPanel;
         internal System.Windows.Forms.Label label15;
         internal System.Windows.Forms.Label label14;
         internal System.Windows.Forms.Label label13;
@@ -1161,40 +1218,44 @@
         internal System.Windows.Forms.Label label10;
         internal System.Windows.Forms.Label label9;
         internal System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txtPessoa;
-        private System.Windows.Forms.TextBox txtProfissao;
-        private System.Windows.Forms.TextBox txtPaisC;
-        private System.Windows.Forms.TextBox txtCepC;
-        private System.Windows.Forms.TextBox txtUFC;
-        private System.Windows.Forms.TextBox txtCidadeC;
-        private System.Windows.Forms.TextBox txtComplementoC;
-        private System.Windows.Forms.TextBox txtBairroC;
-        private System.Windows.Forms.TextBox txtNumeroC;
-        private System.Windows.Forms.TextBox txtLogradouroC;
-        private System.Windows.Forms.TextBox txtPaisR;
-        private System.Windows.Forms.TextBox txtCepR;
-        private System.Windows.Forms.TextBox txtUFR;
-        private System.Windows.Forms.TextBox txtCidadeR;
-        private System.Windows.Forms.TextBox txtComplementoR;
-        private System.Windows.Forms.TextBox txtBairroR;
-        private System.Windows.Forms.TextBox txtNumeroR;
-        private System.Windows.Forms.TextBox txtLogradouroR;
-        private System.Windows.Forms.ToolStripButton btObservação;
-        private System.Windows.Forms.ToolStripButton btHistorico;
-        internal System.Windows.Forms.TextBox txtFoneC;
+        private System.Windows.Forms.TextBox PessoaText;
+        private System.Windows.Forms.TextBox ProfissaoText;
+        private System.Windows.Forms.TextBox PaisCText;
+        private System.Windows.Forms.TextBox CepCText;
+        private System.Windows.Forms.TextBox UFCText;
+        private System.Windows.Forms.TextBox CidadeCText;
+        private System.Windows.Forms.TextBox ComplementoCText;
+        private System.Windows.Forms.TextBox BairroCText;
+        private System.Windows.Forms.TextBox NumeroCText;
+        private System.Windows.Forms.TextBox LogradouroCText;
+        private System.Windows.Forms.TextBox PaisRText;
+        private System.Windows.Forms.TextBox CepRText;
+        private System.Windows.Forms.TextBox UFRText;
+        private System.Windows.Forms.TextBox CidadeRText;
+        private System.Windows.Forms.TextBox ComplementoRText;
+        private System.Windows.Forms.TextBox BairroRText;
+        private System.Windows.Forms.TextBox NumeroRText;
+        private System.Windows.Forms.TextBox LogradouroRText;
+        private System.Windows.Forms.ToolStripButton ObservaçãoButton;
+        private System.Windows.Forms.ToolStripButton HistoricoButton;
+        internal System.Windows.Forms.TextBox FoneCText;
         internal System.Windows.Forms.Label label4;
         internal System.Windows.Forms.Label label24;
-        internal System.Windows.Forms.TextBox txtEmailC;
-        private System.Windows.Forms.CheckBox chkJuridica;
-        private System.Windows.Forms.RadioButton chkEtiquetaC;
-        private System.Windows.Forms.RadioButton chkEtiquetaR;
-        private System.Windows.Forms.Button btAddEnderecoR;
-        private System.Windows.Forms.Button btDelEnderecoR;
-        private System.Windows.Forms.Button btDelEnderecoC;
-        private System.Windows.Forms.Button btAddEnderecoC;
-        private System.Windows.Forms.ToolTip tTip;
-        internal System.Windows.Forms.Label lblTipoCidadao;
+        internal System.Windows.Forms.TextBox EmailCText;
+        private System.Windows.Forms.CheckBox JuridicaCheck;
+        private System.Windows.Forms.RadioButton EtiquetaCButton;
+        private System.Windows.Forms.RadioButton EtiquetaRCheck;
+        private System.Windows.Forms.Button AddEnderecoRButton;
+        private System.Windows.Forms.Button DelEnderecoRButton;
+        private System.Windows.Forms.Button DelEnderecoCButton;
+        private System.Windows.Forms.Button AddEnderecoCButton;
+        private System.Windows.Forms.ToolTip Ttp;
+        internal System.Windows.Forms.Label TipoCidadaoText;
         private System.Windows.Forms.Label label25;
-        internal System.Windows.Forms.TextBox txtOrgao;
+        internal System.Windows.Forms.TextBox OrgaoText;
+        private System.Windows.Forms.CheckBox WhatsAppRCheck;
+        private System.Windows.Forms.CheckBox TemFoneRCheck;
+        private System.Windows.Forms.CheckBox TemFoneCCheck;
+        private System.Windows.Forms.CheckBox WhatsAppCCheck;
     }
 }

@@ -20,6 +20,9 @@ namespace GTI_Models.Models {
         public int Cep { get; set; }
         public  string Email { get; set; }
         public  bool Cancelar { get; set; }
+        public string Telefone { get; set; }
+        public bool? TemFone { get; set; }
+        public bool? WhatsApp { get; set; }
     }
 
 }

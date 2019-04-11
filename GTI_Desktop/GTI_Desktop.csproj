@@ -1053,6 +1053,10 @@
     <None Include="Resources\pasta-azul-lupa1.png" />
     <None Include="Resources\people2.png" />
     <None Include="Resources\texture21.jpg" />
+    <None Include="Resources\whatsapp.gif" />
+    <None Include="Resources\NoPhone.gif" />
+    <None Include="Resources\NoPhone1.gif" />
+    <None Include="Resources\PhoneCancel.gif" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

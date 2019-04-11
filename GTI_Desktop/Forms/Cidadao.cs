@@ -34,78 +34,82 @@ namespace GTI_Desktop.Forms {
         private void Carrega_Profissao() {
             Cidadao_bll clsProfissao = new Cidadao_bll(_connection);
             List<GTI_Models.Models.Profissao> lista = clsProfissao.Lista_Profissao();
-            cmbProfissao.DataSource = lista;
-            cmbProfissao.DisplayMember = "nome";
-            cmbProfissao.ValueMember = "codigo";
+            ProfissaoList.DataSource = lista;
+            ProfissaoList.DisplayMember = "nome";
+            ProfissaoList.ValueMember = "codigo";
         }
 
         private void CmbPessoa_SelectedIndexChanged(object sender, EventArgs e) {
-            if (cmbPessoa.SelectedIndex == 0) {
-                lblNomeDoc.Text = "CPF....:";
-                mskCPF.BringToFront();
-                mskCNPJ.SendToBack();
+            if (PessoaList.SelectedIndex == 0) {
+                NomeDocText.Text = "CPF....:";
+                CPFMask.BringToFront();
+                CNPJMask.SendToBack();
             } else {
-                lblNomeDoc.Text = "CNPJ..:";
-                mskCPF.SendToBack();
-                mskCNPJ.BringToFront();
+                NomeDocText.Text = "CNPJ..:";
+                CPFMask.SendToBack();
+                CNPJMask.BringToFront();
             }
-            txtPessoa.Text = cmbPessoa.Text;
-            txtPessoa.Tag = (cmbPessoa.SelectedIndex+1).ToString();
+            PessoaText.Text = PessoaList.Text;
+            PessoaText.Tag = (PessoaList.SelectedIndex+1).ToString();
         }
 
         private void Clear_Reg() {
-            lblCod.Text = "000000";
-            lblTipoCidadao.Text = "";
-            txtNome.Text = "";
-            cmbPessoa.SelectedIndex = 0;
-            txtPessoa.Text = "";
-            txtPessoa.Tag = "";
-            mskCPF.Text = "";
-            mskCNPJ.Text = "";
-            txtRG.Text = "";
-            txtOrgao.Text = "";
-            mskDataNascto.Text = "";
-            cmbProfissao.SelectedIndex = -1;
-            txtProfissao.Text = "";
-            txtProfissao.Tag = "";
-            txtEmailR.Text = "";
-            txtFoneR.Text = "";
-            txtLogradouroR.Text = "";
-            txtNumeroR.Text = "";
-            txtBairroR.Text = "";
-            txtComplementoR.Text = "";
-            txtCidadeR.Text = "";
-            txtUFR.Text = "";
-            txtCepR.Text = "";
-            txtPaisR.Text = "";
-            chkEtiquetaR.Checked = false;
-            txtLogradouroC.Text = "";
-            txtNumeroC.Text = "";
-            txtBairroC.Text = "";
-            txtComplementoC.Text = "";
-            txtCidadeC.Text = "";
-            txtUFC.Text = "";
-            txtCepC.Text = "";
-            txtPaisC.Text = "";
-            chkEtiquetaC.Checked = false;
+            CodigoText.Text = "000000";
+            TipoCidadaoText.Text = "";
+            NomeText.Text = "";
+            PessoaList.SelectedIndex = 0;
+            PessoaText.Text = "";
+            PessoaText.Tag = "";
+            CPFMask.Text = "";
+            CNPJMask.Text = "";
+            RGText.Text = "";
+            OrgaoText.Text = "";
+            DataNasctoMask.Text = "";
+            ProfissaoList.SelectedIndex = -1;
+            ProfissaoText.Text = "";
+            ProfissaoText.Tag = "";
+            EmailRText.Text = "";
+            FoneRText.Text = "";
+            LogradouroRText.Text = "";
+            NumeroRText.Text = "";
+            BairroRText.Text = "";
+            ComplementoRText.Text = "";
+            CidadeRText.Text = "";
+            UFRText.Text = "";
+            CepRText.Text = "";
+            PaisRText.Text = "";
+            EtiquetaRCheck.Checked = false;
+            TemFoneRCheck.Checked = false;
+            WhatsAppRCheck.Checked = false;
+            LogradouroCText.Text = "";
+            NumeroCText.Text = "";
+            BairroCText.Text = "";
+            ComplementoCText.Text = "";
+            CidadeCText.Text = "";
+            UFCText.Text = "";
+            CepCText.Text = "";
+            PaisCText.Text = "";
+            EtiquetaCButton.Checked = false;
+            TemFoneCCheck.Checked = false;
+            WhatsAppCCheck.Checked = false;
         }
 
         private void ControlBehaviour(bool bStart) {
             Color color_enable = Color.White, color_disable = this.BackColor;
-            btFindCodigo.Enabled = bStart;
-            btAdd.Enabled = bStart;
-            btEdit.Enabled = bStart;
-            btDel.Enabled = bStart;
-            btExit.Enabled = bStart;
-            btFind.Enabled = bStart;
-            btGravar.Enabled = !bStart;
-            btCancelar.Enabled = !bStart;
-            btProfissao_Edit.Enabled = !bStart;
-            btProfissao_Del.Enabled = !bStart;
-            btAddEnderecoR.Enabled = !bStart;
-            btAddEnderecoC.Enabled = !bStart;
-            btDelEnderecoR.Enabled = !bStart;
-            btDelEnderecoC.Enabled = !bStart;
+            FindCodigoButton.Enabled = bStart;
+            AddButton.Enabled = bStart;
+            EditButton.Enabled = bStart;
+            DelButton.Enabled = bStart;
+            ExitButton.Enabled = bStart;
+            FindButton.Enabled = bStart;
+            GravarButton.Enabled = !bStart;
+            CancelarButton.Enabled = !bStart;
+            Profissao_EditButton.Enabled = !bStart;
+            Profissao_DelButton.Enabled = !bStart;
+            AddEnderecoRButton.Enabled = !bStart;
+            AddEnderecoCButton.Enabled = !bStart;
+            DelEnderecoRButton.Enabled = !bStart;
+            DelEnderecoCButton.Enabled = !bStart;
 
             TextBox box;
             MaskedTextBox mbox;
@@ -120,7 +124,7 @@ namespace GTI_Desktop.Forms {
                 }
             }
 
-            foreach (Control c in this.pnlEndR.Controls) {
+            foreach (Control c in this.EndRPanel.Controls) {
                 if (c is TextBox) {
                     box = c as TextBox;
                     box.ReadOnly = true;
@@ -131,7 +135,7 @@ namespace GTI_Desktop.Forms {
                 }
             }
 
-            foreach (Control c in this.pnlEndC.Controls) {
+            foreach (Control c in this.EndCPanel.Controls) {
                 if (c is TextBox) {
                     box = c as TextBox;
                     box.ReadOnly = true;
@@ -142,16 +146,16 @@ namespace GTI_Desktop.Forms {
                 }
             }
 
-            txtPessoa.ReadOnly = true;
-            txtPessoa.Visible = bStart;
-            cmbPessoa.Enabled = !bStart;
-            cmbPessoa.Visible = !bStart;
-            txtProfissao.Visible = bStart;
-            cmbProfissao.Enabled = !bStart;
-            cmbProfissao.Visible = !bStart;
-            chkJuridica.Enabled = !bStart;
-            chkEtiquetaR.Enabled = !bStart;
-            chkEtiquetaC.Enabled = !bStart;
+            PessoaText.ReadOnly = true;
+            PessoaText.Visible = bStart;
+            PessoaList.Enabled = !bStart;
+            PessoaList.Visible = !bStart;
+            ProfissaoText.Visible = bStart;
+            ProfissaoList.Enabled = !bStart;
+            ProfissaoList.Visible = !bStart;
+            JuridicaCheck.Enabled = !bStart;
+            EtiquetaRCheck.Enabled = !bStart;
+            EtiquetaCButton.Enabled = !bStart;
         }
 
         private void BtFindCodigo_Click(object sender, EventArgs e) {
@@ -176,7 +180,7 @@ namespace GTI_Desktop.Forms {
                 bAddNew = true;
                 Clear_Reg();
                 ControlBehaviour(false);
-                txtNome.Focus();
+                NomeText.Focus();
             } else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -185,7 +189,7 @@ namespace GTI_Desktop.Forms {
         private void BtEdit_Click(object sender, EventArgs e) {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroCidadao_Alterar_Total);
             if (bAllow) {
-                if (Convert.ToInt32(lblCod.Text) == 0)
+                if (Convert.ToInt32(CodigoText.Text) == 0)
                     MessageBox.Show("Selecione um cidadão.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else {
                     bAddNew = false;
@@ -198,12 +202,12 @@ namespace GTI_Desktop.Forms {
         private void BtGravar_Click(object sender, EventArgs e) {
             if (ValidateReg()) {
                 SaveReg();
-                btFindCodigo.Focus();
+                FindCodigoButton.Focus();
             }
         }
 
         private void BtCancelar_Click(object sender, EventArgs e) {
-            Int32 nCod = Convert.ToInt32(lblCod.Text);
+            Int32 nCod = Convert.ToInt32(CodigoText.Text);
             if (nCod > 0)
                 LoadReg(nCod);
             ControlBehaviour(true);
@@ -226,155 +230,155 @@ namespace GTI_Desktop.Forms {
         private void LoadReg(Int32 nCodigo) {
             Cidadao_bll clsCidadao = new Cidadao_bll(_connection);
             CidadaoStruct reg = clsCidadao.LoadReg(nCodigo);
-            lblCod.Text = reg.Codigo.ToString("000000");
-            txtNome.Text = reg.Nome;
-            txtRG.Text = reg.Rg ?? "";
-            txtOrgao.Text = reg.Orgao ?? "";
+            CodigoText.Text = reg.Codigo.ToString("000000");
+            NomeText.Text = reg.Nome;
+            RGText.Text = reg.Rg ?? "";
+            OrgaoText.Text = reg.Orgao ?? "";
             if (reg.DataNascto != null)
-                mskDataNascto.Text = Convert.ToDateTime(reg.DataNascto).ToString("dd/MM/yyyy");
-            txtFoneR.Text = reg.TelefoneR ?? "";
-            txtEmailR.Text = reg.EmailR ?? "";
+                DataNasctoMask.Text = Convert.ToDateTime(reg.DataNascto).ToString("dd/MM/yyyy");
+            FoneRText.Text = reg.TelefoneR ?? "";
+            EmailRText.Text = reg.EmailR ?? "";
             if (reg.CodigoProfissao == null || reg.CodigoProfissao == 0) {
-                cmbProfissao.SelectedIndex = -1;
-                txtProfissao.Text = "";
-                txtProfissao.Tag = "";
+                ProfissaoList.SelectedIndex = -1;
+                ProfissaoText.Text = "";
+                ProfissaoText.Tag = "";
             } else {
-                cmbProfissao.SelectedValue = reg.CodigoProfissao;
-                txtProfissao.Text = cmbProfissao.Text;
-                txtProfissao.Tag = reg.CodigoProfissao;
+                ProfissaoList.SelectedValue = reg.CodigoProfissao;
+                ProfissaoText.Text = ProfissaoList.Text;
+                ProfissaoText.Tag = reg.CodigoProfissao;
             }
-            chkJuridica.Checked = reg.Juridica;
+            JuridicaCheck.Checked = reg.Juridica;
 
             if (reg.Tipodoc == 1) {
-                cmbPessoa.SelectedIndex = 0;
-                mskCPF.Text = reg.Cpf;
+                PessoaList.SelectedIndex = 0;
+                CPFMask.Text = reg.Cpf;
             } else if(reg.Tipodoc==2){
-                cmbPessoa.SelectedIndex = 1;
-                mskCNPJ.Text = reg.Cnpj;
+                PessoaList.SelectedIndex = 1;
+                CNPJMask.Text = reg.Cnpj;
             } else {
-                cmbPessoa.SelectedIndex = 0;
-                mskCPF.Text = "";
+                PessoaList.SelectedIndex = 0;
+                CPFMask.Text = "";
             }
-            txtPessoa.Text = cmbPessoa.Text;
-            txtPessoa.Tag = reg.Tipodoc;
+            PessoaText.Text = PessoaList.Text;
+            PessoaText.Tag = reg.Tipodoc;
 
-            txtLogradouroR.Text = reg.EnderecoR;
-            txtLogradouroR.Tag = reg.CodigoLogradouroR.ToString();
-            if(!string.IsNullOrWhiteSpace(txtLogradouroR.Text)) {
-                txtNumeroR.Text = reg.NumeroR.ToString();
-                txtComplementoR.Text = reg.ComplementoR;
-                txtBairroR.Text = reg.NomeBairroR;
-                txtBairroR.Tag = reg.CodigoBairroR.ToString();
-                txtCidadeR.Text = reg.NomeCidadeR;
-                txtCidadeR.Tag = reg.CodigoCidadeR.ToString();
-                txtUFR.Text = reg.UfR;
-                txtPaisR.Text = reg.PaisR;
-                txtPaisR.Tag = reg.CodigoPaisR.ToString();
-                txtCepR.Text = reg.CepR.ToString();
-                txtEmailR.Text = reg.EmailR;
-                chkEtiquetaR.Checked = reg.EtiquetaR == "S";
+            LogradouroRText.Text = reg.EnderecoR;
+            LogradouroRText.Tag = reg.CodigoLogradouroR.ToString();
+            if(!string.IsNullOrWhiteSpace(LogradouroRText.Text)) {
+                NumeroRText.Text = reg.NumeroR.ToString();
+                ComplementoRText.Text = reg.ComplementoR;
+                BairroRText.Text = reg.NomeBairroR;
+                BairroRText.Tag = reg.CodigoBairroR.ToString();
+                CidadeRText.Text = reg.NomeCidadeR;
+                CidadeRText.Tag = reg.CodigoCidadeR.ToString();
+                UFRText.Text = reg.UfR;
+                PaisRText.Text = reg.PaisR;
+                PaisRText.Tag = reg.CodigoPaisR.ToString();
+                CepRText.Text = reg.CepR.ToString();
+                EmailRText.Text = reg.EmailR;
+                EtiquetaRCheck.Checked = reg.EtiquetaR == "S";
             } else {
-                txtNumeroR.Text = "";
-                txtComplementoR.Text = "";
-                txtBairroR.Text = "";
-                txtBairroR.Tag = "";
-                txtCidadeR.Text = "";
-                txtCidadeR.Tag = "";
-                txtUFR.Text = "";
-                txtPaisR.Text = "";
-                txtPaisR.Tag = "";
-                txtCepR.Text = "";
-                txtEmailR.Text = "";
-                chkEtiquetaR.Checked =false;
-            }
-
-            txtLogradouroC.Text = reg.EnderecoC;
-            txtLogradouroC.Tag = reg.CodigoLogradouroC.ToString();
-            if (!string.IsNullOrWhiteSpace(txtLogradouroC.Text)) {
-                txtNumeroC.Text = reg.NumeroC.ToString();
-                txtComplementoC.Text = reg.ComplementoC;
-                txtBairroC.Text = reg.NomeBairroC;
-                txtBairroC.Tag = reg.CodigoBairroC.ToString();
-                txtCidadeC.Text = reg.NomeCidadeC;
-                txtCidadeC.Tag = reg.CodigoCidadeC.ToString();
-                txtUFC.Text = reg.UfC;
-                txtPaisC.Text = reg.PaisC;
-                txtPaisC.Tag = reg.CodigoPaisC.ToString();
-                txtCepC.Text = reg.CepC.ToString();
-                txtEmailC.Text = reg.EmailC;
-                chkEtiquetaC.Checked = reg.EtiquetaC == "S";
-            } else {
-                txtLogradouroC.Text = "";
-                txtLogradouroC.Tag = "";
-                txtNumeroC.Text = "";
-                txtComplementoC.Text = "";
-                txtBairroC.Text = "";
-                txtBairroC.Tag = "";
-                txtCidadeC.Text = "";
-                txtCidadeC.Tag = "";
-                txtUFC.Text = "";
-                txtPaisC.Text = "";
-                txtPaisC.Tag = "";
-                txtCepC.Text = "";
-                txtEmailC.Text = "";
-                chkEtiquetaC.Checked = false;
+                NumeroRText.Text = "";
+                ComplementoRText.Text = "";
+                BairroRText.Text = "";
+                BairroRText.Tag = "";
+                CidadeRText.Text = "";
+                CidadeRText.Tag = "";
+                UFRText.Text = "";
+                PaisRText.Text = "";
+                PaisRText.Tag = "";
+                CepRText.Text = "";
+                EmailRText.Text = "";
+                EtiquetaRCheck.Checked =false;
             }
 
-            if (!chkEtiquetaR.Checked && !chkEtiquetaC.Checked) chkEtiquetaR.Checked = true;
+            LogradouroCText.Text = reg.EnderecoC;
+            LogradouroCText.Tag = reg.CodigoLogradouroC.ToString();
+            if (!string.IsNullOrWhiteSpace(LogradouroCText.Text)) {
+                NumeroCText.Text = reg.NumeroC.ToString();
+                ComplementoCText.Text = reg.ComplementoC;
+                BairroCText.Text = reg.NomeBairroC;
+                BairroCText.Tag = reg.CodigoBairroC.ToString();
+                CidadeCText.Text = reg.NomeCidadeC;
+                CidadeCText.Tag = reg.CodigoCidadeC.ToString();
+                UFCText.Text = reg.UfC;
+                PaisCText.Text = reg.PaisC;
+                PaisCText.Tag = reg.CodigoPaisC.ToString();
+                CepCText.Text = reg.CepC.ToString();
+                EmailCText.Text = reg.EmailC;
+                EtiquetaCButton.Checked = reg.EtiquetaC == "S";
+            } else {
+                LogradouroCText.Text = "";
+                LogradouroCText.Tag = "";
+                NumeroCText.Text = "";
+                ComplementoCText.Text = "";
+                BairroCText.Text = "";
+                BairroCText.Tag = "";
+                CidadeCText.Text = "";
+                CidadeCText.Tag = "";
+                UFCText.Text = "";
+                PaisCText.Text = "";
+                PaisCText.Tag = "";
+                CepCText.Text = "";
+                EmailCText.Text = "";
+                EtiquetaCButton.Checked = false;
+            }
+
+            if (!EtiquetaRCheck.Checked && !EtiquetaCButton.Checked) EtiquetaRCheck.Checked = true;
         }
 
         private bool ValidateReg() {
-            if (!gtiCore.IsEmptyDate(mskDataNascto.Text) && !gtiCore.IsDate(mskDataNascto.Text)) {
+            if (!gtiCore.IsEmptyDate(DataNasctoMask.Text) && !gtiCore.IsDate(DataNasctoMask.Text)) {
                 MessageBox.Show("Data de nascimento inválida.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            if (string.IsNullOrEmpty(txtLogradouroR.Text) & string.IsNullOrEmpty(txtLogradouroC.Text)) {
+            if (string.IsNullOrEmpty(LogradouroRText.Text) & string.IsNullOrEmpty(LogradouroCText.Text)) {
                 MessageBox.Show("Digite um endereço válido.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            if (!chkEtiquetaR.Checked & !chkEtiquetaC.Checked) {
+            if (!EtiquetaRCheck.Checked & !EtiquetaCButton.Checked) {
                 MessageBox.Show("Selecione o endereço principal.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            if (chkEtiquetaR.Checked & chkEtiquetaC.Checked) {
+            if (EtiquetaRCheck.Checked & EtiquetaCButton.Checked) {
                 MessageBox.Show("Selecione apenas um endereço como principal.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            if ((string.IsNullOrEmpty(txtLogradouroC.Text) & chkEtiquetaC.Checked) || (string.IsNullOrEmpty(txtLogradouroR.Text) & chkEtiquetaR.Checked)) {
+            if ((string.IsNullOrEmpty(LogradouroCText.Text) & EtiquetaCButton.Checked) || (string.IsNullOrEmpty(LogradouroRText.Text) & EtiquetaRCheck.Checked)) {
                 MessageBox.Show("Endereço principal inválido.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            if (cmbPessoa.SelectedIndex==0 && !mskCPF.MaskFull) {
+            if (PessoaList.SelectedIndex==0 && !CPFMask.MaskFull) {
                 MessageBox.Show("Digite um CPF válido.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            if (cmbPessoa.SelectedIndex == 0 && !gtiCore.Valida_CPF(mskCPF.Text)) {
+            if (PessoaList.SelectedIndex == 0 && !gtiCore.Valida_CPF(CPFMask.Text)) {
                 MessageBox.Show("Digite um CPF válido.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            if (cmbPessoa.SelectedIndex == 1 && !mskCNPJ.MaskFull) {
+            if (PessoaList.SelectedIndex == 1 && !CNPJMask.MaskFull) {
                 MessageBox.Show("Digite um CNPJ válido.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            if (cmbPessoa.SelectedIndex == 1 && !gtiCore.Valida_CNPJ(mskCNPJ.Text)) {
+            if (PessoaList.SelectedIndex == 1 && !gtiCore.Valida_CNPJ(CNPJMask.Text)) {
                 MessageBox.Show("Digite um CNPJ válido.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            if (!string.IsNullOrEmpty(txtEmailR.Text) & !gtiCore.Valida_Email(txtEmailR.Text)) {
+            if (!string.IsNullOrEmpty(EmailRText.Text) & !gtiCore.Valida_Email(EmailRText.Text)) {
                 MessageBox.Show("Endereço de email inválido.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            if (!string.IsNullOrEmpty(txtEmailC.Text) & !gtiCore.Valida_Email(txtEmailC.Text)) {
+            if (!string.IsNullOrEmpty(EmailCText.Text) & !gtiCore.Valida_Email(EmailCText.Text)) {
                 MessageBox.Show("Endereço de email inválido.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
@@ -385,52 +389,52 @@ namespace GTI_Desktop.Forms {
         private void SaveReg() {
             if (MessageBox.Show("Gravar os dados?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question)== DialogResult.Yes){
                 GTI_Models.Models.Cidadao reg = new GTI_Models.Models.Cidadao {
-                    Nomecidadao = txtNome.Text,
-                    Rg = String.IsNullOrWhiteSpace(txtRG.Text) ? null : txtRG.Text,
-                    Orgao = String.IsNullOrWhiteSpace(txtOrgao.Text) ? null : txtOrgao.Text
+                    Nomecidadao = NomeText.Text,
+                    Rg = String.IsNullOrWhiteSpace(RGText.Text) ? null : RGText.Text,
+                    Orgao = String.IsNullOrWhiteSpace(OrgaoText.Text) ? null : OrgaoText.Text
                 };
-                if (cmbPessoa.SelectedIndex == 0) {
-                    if (mskCPF.Text != "")
-                        reg.Cpf = mskCPF.Text;
+                if (PessoaList.SelectedIndex == 0) {
+                    if (CPFMask.Text != "")
+                        reg.Cpf = CPFMask.Text;
                 } else {
-                    if (mskCNPJ.Text != "")
-                        reg.Cnpj = mskCNPJ.Text;
+                    if (CNPJMask.Text != "")
+                        reg.Cnpj = CNPJMask.Text;
                 }
-                reg.Telefone = String.IsNullOrWhiteSpace(txtFoneR.Text) ? null : txtFoneR.Text;
-                reg.Juridica = chkJuridica.Checked ? true : false;
-                if ( mskDataNascto.MaskCompleted &&  gtiCore.IsDate(mskDataNascto.Text))
-                    reg.Data_nascimento = Convert.ToDateTime(mskDataNascto.Text);
+                reg.Telefone = String.IsNullOrWhiteSpace(FoneRText.Text) ? null : FoneRText.Text;
+                reg.Juridica = JuridicaCheck.Checked ? true : false;
+                if ( DataNasctoMask.MaskCompleted &&  gtiCore.IsDate(DataNasctoMask.Text))
+                    reg.Data_nascimento = Convert.ToDateTime(DataNasctoMask.Text);
                 else
                     reg.Data_nascimento = null;
-                if (cmbProfissao.SelectedIndex > -1)
-                    reg.Codprofissao = Convert.ToInt32(cmbProfissao.SelectedValue);
+                if (ProfissaoList.SelectedIndex > -1)
+                    reg.Codprofissao = Convert.ToInt32(ProfissaoList.SelectedValue);
 
-                if (!string.IsNullOrWhiteSpace(txtLogradouroR.Text)) {
-                    reg.Codpais = txtPaisR.Tag == null ? 0 : Convert.ToInt32(txtPaisR.Tag.ToString());
-                    reg.Siglauf = txtUFR.Text;
-                    reg.Codcidade = string.IsNullOrWhiteSpace(txtCidadeR.Tag.ToString()) ? (short)0 : Convert.ToInt16(txtCidadeR.Tag.ToString());
-                    reg.Codbairro = string.IsNullOrWhiteSpace( txtBairroR.Tag.ToString())? (short)0 : Convert.ToInt16(txtBairroR.Tag.ToString());
-                    reg.Codlogradouro =string.IsNullOrWhiteSpace( txtLogradouroR.Tag.ToString()) ? 0 : Convert.ToInt32(txtLogradouroR.Tag.ToString());
-                    reg.Nomelogradouro = reg.Codcidade != 413 ? txtLogradouroR.Text : "";
-                    reg.Numimovel = txtNumeroR.Text == "" ? (short)0 : Convert.ToInt16(txtNumeroR.Text);
-                    reg.Complemento = txtComplementoR.Text;
-                    reg.Cep = reg.Codcidade != 413 ? txtCepR.Text == "" ? 0 : Convert.ToInt32(txtCepR.Text) : 0;
-                    reg.Email = txtEmailR.Text;
-                    reg.Etiqueta = chkEtiquetaR.Checked ? "S" : "N";
+                if (!string.IsNullOrWhiteSpace(LogradouroRText.Text)) {
+                    reg.Codpais = PaisRText.Tag == null ? 0 : Convert.ToInt32(PaisRText.Tag.ToString());
+                    reg.Siglauf = UFRText.Text;
+                    reg.Codcidade = string.IsNullOrWhiteSpace(CidadeRText.Tag.ToString()) ? (short)0 : Convert.ToInt16(CidadeRText.Tag.ToString());
+                    reg.Codbairro = string.IsNullOrWhiteSpace( BairroRText.Tag.ToString())? (short)0 : Convert.ToInt16(BairroRText.Tag.ToString());
+                    reg.Codlogradouro =string.IsNullOrWhiteSpace( LogradouroRText.Tag.ToString()) ? 0 : Convert.ToInt32(LogradouroRText.Tag.ToString());
+                    reg.Nomelogradouro = reg.Codcidade != 413 ? LogradouroRText.Text : "";
+                    reg.Numimovel = NumeroRText.Text == "" ? (short)0 : Convert.ToInt16(NumeroRText.Text);
+                    reg.Complemento = ComplementoRText.Text;
+                    reg.Cep = reg.Codcidade != 413 ? CepRText.Text == "" ? 0 : Convert.ToInt32(CepRText.Text) : 0;
+                    reg.Email = EmailRText.Text;
+                    reg.Etiqueta = EtiquetaRCheck.Checked ? "S" : "N";
                 }
 
-                if (!string.IsNullOrWhiteSpace(txtLogradouroC.Text)) {
-                    reg.Codpais2 = txtPaisC.Tag == null ? 0 : Convert.ToInt32(txtPaisC.Tag.ToString());
-                    reg.Siglauf2 = txtUFC.Text;
-                    reg.Codcidade2 = string.IsNullOrWhiteSpace(txtCidadeC.Tag.ToString()) ? (short)0 : Convert.ToInt16(txtCidadeC.Tag.ToString());
-                    reg.Codbairro2 = string.IsNullOrWhiteSpace(txtBairroC.Tag.ToString()) ? (short)0 : Convert.ToInt16(txtBairroC.Tag.ToString());
-                    reg.Codlogradouro2 = string.IsNullOrWhiteSpace( txtLogradouroC.Tag.ToString()) ? 0 : Convert.ToInt32(txtLogradouroC.Tag.ToString());
-                    reg.Nomelogradouro2 = reg.Codcidade2 != 413 ? txtLogradouroC.Text : "";
-                    reg.Numimovel2 = txtNumeroC.Text == "" ? (short)0 : Convert.ToInt16(txtNumeroC.Text);
-                    reg.Complemento2 = txtComplementoC.Text;
-                    reg.Cep2 = reg.Codcidade2 != 413 ? txtCepC.Text == "" ? 0 : Convert.ToInt32(txtCepC.Text) : 0;
-                    reg.Email2 = txtEmailC.Text;
-                    reg.Etiqueta2 = chkEtiquetaC.Checked ? "S" : "N";
+                if (!string.IsNullOrWhiteSpace(LogradouroCText.Text)) {
+                    reg.Codpais2 = PaisCText.Tag == null ? 0 : Convert.ToInt32(PaisCText.Tag.ToString());
+                    reg.Siglauf2 = UFCText.Text;
+                    reg.Codcidade2 = string.IsNullOrWhiteSpace(CidadeCText.Tag.ToString()) ? (short)0 : Convert.ToInt16(CidadeCText.Tag.ToString());
+                    reg.Codbairro2 = string.IsNullOrWhiteSpace(BairroCText.Tag.ToString()) ? (short)0 : Convert.ToInt16(BairroCText.Tag.ToString());
+                    reg.Codlogradouro2 = string.IsNullOrWhiteSpace( LogradouroCText.Tag.ToString()) ? 0 : Convert.ToInt32(LogradouroCText.Tag.ToString());
+                    reg.Nomelogradouro2 = reg.Codcidade2 != 413 ? LogradouroCText.Text : "";
+                    reg.Numimovel2 = NumeroCText.Text == "" ? (short)0 : Convert.ToInt16(NumeroCText.Text);
+                    reg.Complemento2 = ComplementoCText.Text;
+                    reg.Cep2 = reg.Codcidade2 != 413 ? CepCText.Text == "" ? 0 : Convert.ToInt32(CepCText.Text) : 0;
+                    reg.Email2 = EmailCText.Text;
+                    reg.Etiqueta2 = EtiquetaCButton.Checked ? "S" : "N";
                 }
 
                 Cidadao_bll clsCidadao = new Cidadao_bll(_connection);
@@ -447,7 +451,7 @@ namespace GTI_Desktop.Forms {
                         ControlBehaviour(true);
                     }
                 } else {
-                    reg.Codcidadao = Convert.ToInt32(lblCod.Text);
+                    reg.Codcidadao = Convert.ToInt32(CodigoText.Text);
                     ex = clsCidadao.Alterar_cidadao(reg);
                     if (ex != null) {
                         ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
@@ -461,7 +465,7 @@ namespace GTI_Desktop.Forms {
                 if (bAddNew)
                     nCodigo = clsCidadao.Retorna_Ultimo_Codigo_Cidadao();
                 else
-                    nCodigo = Convert.ToInt32(lblCod.Text);
+                    nCodigo = Convert.ToInt32(CodigoText.Text);
 
 
             }
@@ -470,7 +474,7 @@ namespace GTI_Desktop.Forms {
         private void BtDel_Click(object sender, EventArgs e) {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroCidadao_Alterar_Total);
             if (bAllow) {
-                int nCodigo = Convert.ToInt32(lblCod.Text);
+                int nCodigo = Convert.ToInt32(CodigoText.Text);
                 if (nCodigo == 0)
                     MessageBox.Show("Selecione um cidadão.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else {
@@ -490,7 +494,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void BtProfissao_Del_Click(object sender, EventArgs e) {
-            cmbProfissao.SelectedIndex = -1;
+            ProfissaoList.SelectedIndex = -1;
         }
 
         private void BtProfissao_Edit_Click(object sender, EventArgs e) {
@@ -498,93 +502,103 @@ namespace GTI_Desktop.Forms {
         }
 
         private void CmbProfissao_SelectedIndexChanged(object sender, EventArgs e) {
-            txtProfissao.Text = cmbProfissao.Text;
-            if (cmbProfissao.SelectedIndex==-1)
-                txtProfissao.Tag = "";
+            ProfissaoText.Text = ProfissaoList.Text;
+            if (ProfissaoList.SelectedIndex==-1)
+                ProfissaoText.Tag = "";
             else
-                txtProfissao.Tag = cmbProfissao.SelectedValue.ToString();
+                ProfissaoText.Tag = ProfissaoList.SelectedValue.ToString();
 
         }
 
         private void ChkEtiquetaR_CheckedChanged(object sender, EventArgs e) {
-            chkEtiquetaC.Checked = !chkEtiquetaR.Checked;
+            EtiquetaCButton.Checked = !EtiquetaRCheck.Checked;
         }
 
         private void ChkEtiquetaC_CheckedChanged(object sender, EventArgs e) {
-            chkEtiquetaR.Checked = !chkEtiquetaC.Checked;
+            EtiquetaRCheck.Checked = !EtiquetaCButton.Checked;
         }
 
         private void BtAddEnderecoR_Click(object sender, EventArgs e) {
             GTI_Models.Models.Endereco reg = new GTI_Models.Models.Endereco {
-                Id_pais = string.IsNullOrWhiteSpace(txtPaisR.Text) ? 1 : Convert.ToInt32(txtPaisR.Tag.ToString()),
-                Sigla_uf = txtUFR.Text == "" ? "SP" : txtUFR.Text,
-                Id_cidade = string.IsNullOrWhiteSpace(txtCidadeR.Text) ? 413 : Convert.ToInt32(txtCidadeR.Tag.ToString()),
-                Id_bairro = string.IsNullOrWhiteSpace(txtBairroR.Text) ? 0 : Convert.ToInt32(txtBairroR.Tag.ToString())
+                Id_pais = string.IsNullOrWhiteSpace(PaisRText.Text) ? 1 : Convert.ToInt32(PaisRText.Tag.ToString()),
+                Sigla_uf = UFRText.Text == "" ? "SP" : UFRText.Text,
+                Id_cidade = string.IsNullOrWhiteSpace(CidadeRText.Text) ? 413 : Convert.ToInt32(CidadeRText.Tag.ToString()),
+                Id_bairro = string.IsNullOrWhiteSpace(BairroRText.Text) ? 0 : Convert.ToInt32(BairroRText.Tag.ToString())
             };
-            if (txtLogradouroR.Tag == null) txtLogradouroR.Tag = "0";
-            if (string.IsNullOrWhiteSpace(txtLogradouroR.Tag.ToString()))
-                txtLogradouroR.Tag = "0";
-            reg.Id_logradouro = string.IsNullOrWhiteSpace(txtLogradouroR.Text) ? 0 : Convert.ToInt32(txtLogradouroR.Tag.ToString());
-            reg.Nome_logradouro = reg.Id_cidade != 413 ? txtLogradouroR.Text : "";
-            reg.Numero_imovel = txtNumeroR.Text == "" ? 0 : Convert.ToInt32(txtNumeroR.Text);
-            reg.Complemento = txtComplementoR.Text;
-            reg.Email = txtEmailR.Text;
-            reg.Cep = reg.Id_cidade != 413 ? txtCepR.Text == "" ? 0 : Convert.ToInt32(gtiCore.ExtractNumber( txtCepR.Text)) : 0;
+            if (LogradouroRText.Tag == null) LogradouroRText.Tag = "0";
+            if (string.IsNullOrWhiteSpace(LogradouroRText.Tag.ToString()))
+                LogradouroRText.Tag = "0";
+            reg.Id_logradouro = string.IsNullOrWhiteSpace(LogradouroRText.Text) ? 0 : Convert.ToInt32(LogradouroRText.Tag.ToString());
+            reg.Nome_logradouro = reg.Id_cidade != 413 ? LogradouroRText.Text : "";
+            reg.Numero_imovel = NumeroRText.Text == "" ? 0 : Convert.ToInt32(NumeroRText.Text);
+            reg.Complemento = ComplementoRText.Text;
+            reg.Email = EmailRText.Text;
+            reg.Cep = reg.Id_cidade != 413 ? CepRText.Text == "" ? 0 : Convert.ToInt32(gtiCore.ExtractNumber( CepRText.Text)) : 0;
+            reg.Telefone = FoneRText.Text;
+            reg.TemFone = TemFoneRCheck.Checked;
+            reg.WhatsApp = WhatsAppRCheck.Checked;
 
-            Forms.Endereco f1 = new Forms.Endereco(reg);
+            Forms.Endereco f1 = new Forms.Endereco(reg,false,true,true,true );
             f1.ShowDialog();
             if (!f1.EndRetorno.Cancelar) {
-                txtPaisR.Text = f1.EndRetorno.Nome_pais;
-                txtPaisR.Tag = f1.EndRetorno.Id_pais.ToString();
-                txtUFR.Text = f1.EndRetorno.Sigla_uf;
-                txtCidadeR.Text = f1.EndRetorno.Nome_cidade;
-                txtCidadeR.Tag = f1.EndRetorno.Id_cidade.ToString();
-                txtBairroR.Text = f1.EndRetorno.Nome_bairro;
-                txtBairroR.Tag = f1.EndRetorno.Id_bairro.ToString();
-                txtLogradouroR.Text = f1.EndRetorno.Nome_logradouro;
-                txtLogradouroR.Tag = f1.EndRetorno.Id_logradouro.ToString();
-                txtNumeroR.Text = f1.EndRetorno.Numero_imovel.ToString();
-                txtComplementoR.Text = f1.EndRetorno.Complemento;
-                txtEmailR.Text = f1.EndRetorno.Email;
-                txtCepR.Text = f1.EndRetorno.Cep.ToString("00000-000");
+                PaisRText.Text = f1.EndRetorno.Nome_pais;
+                PaisRText.Tag = f1.EndRetorno.Id_pais.ToString();
+                UFRText.Text = f1.EndRetorno.Sigla_uf;
+                CidadeRText.Text = f1.EndRetorno.Nome_cidade;
+                CidadeRText.Tag = f1.EndRetorno.Id_cidade.ToString();
+                BairroRText.Text = f1.EndRetorno.Nome_bairro;
+                BairroRText.Tag = f1.EndRetorno.Id_bairro.ToString();
+                LogradouroRText.Text = f1.EndRetorno.Nome_logradouro;
+                LogradouroRText.Tag = f1.EndRetorno.Id_logradouro.ToString();
+                NumeroRText.Text = f1.EndRetorno.Numero_imovel.ToString();
+                ComplementoRText.Text = f1.EndRetorno.Complemento;
+                EmailRText.Text = f1.EndRetorno.Email;
+                CepRText.Text = f1.EndRetorno.Cep.ToString("00000-000");
+                FoneRText.Text = f1.EndRetorno.Telefone;
+                TemFoneRCheck.Checked =(bool) f1.EndRetorno.TemFone;
+                WhatsAppRCheck.Checked = (bool)f1.EndRetorno.WhatsApp;
+
             }
         }
 
         private void BtAddEnderecoC_Click(object sender, EventArgs e) {
             GTI_Models.Models.Endereco reg = new GTI_Models.Models.Endereco {
-                Id_pais = string.IsNullOrWhiteSpace(txtPaisC.Text) ? 1 : Convert.ToInt32(txtPaisC.Tag.ToString()),
-                Sigla_uf = txtUFC.Text == "" ? "SP" : txtUFC.Text,
-                Id_cidade = string.IsNullOrWhiteSpace(txtCidadeC.Text) ? 413 : Convert.ToInt32(txtCidadeC.Tag.ToString()),
-                Id_bairro = string.IsNullOrWhiteSpace(txtBairroC.Text) ? 0 : Convert.ToInt32(txtBairroC.Tag.ToString())
+                Id_pais = string.IsNullOrWhiteSpace(PaisCText.Text) ? 1 : Convert.ToInt32(PaisCText.Tag.ToString()),
+                Sigla_uf = UFCText.Text == "" ? "SP" : UFCText.Text,
+                Id_cidade = string.IsNullOrWhiteSpace(CidadeCText.Text) ? 413 : Convert.ToInt32(CidadeCText.Tag.ToString()),
+                Id_bairro = string.IsNullOrWhiteSpace(BairroCText.Text) ? 0 : Convert.ToInt32(BairroCText.Tag.ToString())
             };
-            if (txtLogradouroC.Tag == null) txtLogradouroC.Tag = "0";
-            if (string.IsNullOrWhiteSpace(txtLogradouroC.Tag.ToString()))
-                txtLogradouroC.Tag = "0";
-            reg.Id_logradouro = string.IsNullOrWhiteSpace(txtLogradouroC.Text) ? 0 : Convert.ToInt32(txtLogradouroC.Tag.ToString());
-            reg.Nome_logradouro = reg.Id_cidade != 413 ? txtLogradouroC.Text : "";
-            reg.Numero_imovel = txtNumeroC.Text == "" ? 0 : Convert.ToInt32(txtNumeroC.Text);
-            reg.Complemento = txtComplementoC.Text;
-            reg.Email = txtEmailC.Text;
-            reg.Cep = reg.Id_cidade != 413 ? txtCepC.Text == "" ? 0 : Convert.ToInt32(gtiCore.ExtractNumber( txtCepC.Text)) : 0;
+            if (LogradouroCText.Tag == null) LogradouroCText.Tag = "0";
+            if (string.IsNullOrWhiteSpace(LogradouroCText.Tag.ToString()))
+                LogradouroCText.Tag = "0";
+            reg.Id_logradouro = string.IsNullOrWhiteSpace(LogradouroCText.Text) ? 0 : Convert.ToInt32(LogradouroCText.Tag.ToString());
+            reg.Nome_logradouro = reg.Id_cidade != 413 ? LogradouroCText.Text : "";
+            reg.Numero_imovel = NumeroCText.Text == "" ? 0 : Convert.ToInt32(NumeroCText.Text);
+            reg.Complemento = ComplementoCText.Text;
+            reg.Email = EmailCText.Text;
+            reg.Cep = reg.Id_cidade != 413 ? CepCText.Text == "" ? 0 : Convert.ToInt32(gtiCore.ExtractNumber( CepCText.Text)) : 0;
 
-            Forms.Endereco f1 = new Forms.Endereco(reg);
+            Forms.Endereco f1 = new Forms.Endereco(reg, false, true, true, true);
             f1.ShowDialog();
             if (!f1.EndRetorno.Cancelar) {
-                txtPaisC.Text = f1.EndRetorno.Nome_pais;
-                txtPaisC.Tag = f1.EndRetorno.Id_pais.ToString();
-                txtUFC.Text = f1.EndRetorno.Sigla_uf;
-                txtCidadeC.Text = f1.EndRetorno.Nome_cidade;
-                txtCidadeC.Tag = f1.EndRetorno.Id_cidade.ToString();
-                txtBairroC.Text = f1.EndRetorno.Nome_bairro;
-                txtBairroC.Tag = f1.EndRetorno.Id_bairro.ToString();
-                txtLogradouroC.Text = f1.EndRetorno.Nome_logradouro;
-                txtLogradouroC.Tag = f1.EndRetorno.Id_logradouro.ToString();
-                txtNumeroC.Text = f1.EndRetorno.Numero_imovel.ToString();
-                txtComplementoC.Text = f1.EndRetorno.Complemento;
-                txtEmailC.Text = f1.EndRetorno.Email;
-                txtCepC.Text = f1.EndRetorno.Cep.ToString("00000-000");
+                PaisCText.Text = f1.EndRetorno.Nome_pais;
+                PaisCText.Tag = f1.EndRetorno.Id_pais.ToString();
+                UFCText.Text = f1.EndRetorno.Sigla_uf;
+                CidadeCText.Text = f1.EndRetorno.Nome_cidade;
+                CidadeCText.Tag = f1.EndRetorno.Id_cidade.ToString();
+                BairroCText.Text = f1.EndRetorno.Nome_bairro;
+                BairroCText.Tag = f1.EndRetorno.Id_bairro.ToString();
+                LogradouroCText.Text = f1.EndRetorno.Nome_logradouro;
+                LogradouroCText.Tag = f1.EndRetorno.Id_logradouro.ToString();
+                NumeroCText.Text = f1.EndRetorno.Numero_imovel.ToString();
+                ComplementoCText.Text = f1.EndRetorno.Complemento;
+                EmailCText.Text = f1.EndRetorno.Email;
+                CepCText.Text = f1.EndRetorno.Cep.ToString("00000-000");
             }
         }
 
+        private void checkBox2_CheckedChanged(object sender, EventArgs e) {
+
+        }
     }
 }

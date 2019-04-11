@@ -764,7 +764,7 @@ namespace GTI_Desktop.Forms {
             reg.Complemento = Complemento.Text;
             reg.Email ="";
 
-            Forms.Endereco f1 = new Forms.Endereco(reg,true,true );
+            Forms.Endereco f1 = new Forms.Endereco(reg, true, true, true, true);
             f1.ShowDialog();
             if (!f1.EndRetorno.Cancelar) {
                 Bairro.Text = f1.EndRetorno.Nome_bairro;
@@ -797,7 +797,7 @@ namespace GTI_Desktop.Forms {
             reg.Email = "";
 
 
-            Endereco f1 = new Endereco(reg, false, true);
+            Endereco f1 = new Endereco(reg, false, true, true, false);
             f1.ShowDialog();
             if (!f1.EndRetorno.Cancelar) {
                 UF_EE.Text = f1.EndRetorno.Sigla_uf;

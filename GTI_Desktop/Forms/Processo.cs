@@ -1439,7 +1439,7 @@ namespace GTI_Desktop.Forms {
             reg.Id_pais = 1;
             reg.Sigla_uf = "SP";
             reg.Id_cidade = 413;
-            Forms.Endereco f1 = new Forms.Endereco(reg, true, false);
+            Forms.Endereco f1 = new Forms.Endereco(reg, true, false, true, false);
             f1.ShowDialog();
 
             if (!String.IsNullOrEmpty(f1.EndRetorno.Nome_logradouro.Trim())) {

@@ -253,7 +253,7 @@ namespace GTI_Desktop.Forms {
             reg.Complemento = "";
             reg.Email = "";
 
-            Forms.Endereco f1 = new Forms.Endereco(reg, true, true,false);
+            Forms.Endereco f1 = new Forms.Endereco(reg, true, true,false, true);
             f1.ShowDialog();
             if (!f1.EndRetorno.Cancelar) {
                 Bairro.Text = f1.EndRetorno.Nome_bairro;

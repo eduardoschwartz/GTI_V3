@@ -141,7 +141,7 @@ namespace GTI_Desktop.Forms {
             reg.Email = Email.Text;
             reg.Cep = reg.Id_cidade != 413 ? Cep.Text == "" ? 0 : Convert.ToInt32(gtiCore.ExtractNumber(Cep.Text)) : 0;
 
-            Forms.Endereco f1 = new Forms.Endereco(reg);
+            Forms.Endereco f1 = new Forms.Endereco(reg, false, true, true, true);
             f1.ShowDialog();
             if (!f1.EndRetorno.Cancelar) {
                 Pais.Text = "BRASIL";
