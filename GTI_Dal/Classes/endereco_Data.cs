@@ -40,9 +40,7 @@ namespace GTI_Dal.Classes {
                 return cntCod1 > 0 || cntCod2 > 0 ? true : false;
             }
         }
-
-
-
+               
         public List<Bairro> Lista_Bairro(string UF, int cidade) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from b in db.Bairro where b.Siglauf == UF && b.Codcidade == cidade orderby b.Descbairro select b);

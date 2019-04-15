@@ -400,7 +400,7 @@ namespace GTI_Desktop.Forms {
                     if (CNPJMask.Text != "")
                         reg.Cnpj = CNPJMask.Text;
                 }
-                reg.Telefone = String.IsNullOrWhiteSpace(FoneRText.Text) ? null : FoneRText.Text;
+                
                 reg.Juridica = JuridicaCheck.Checked ? true : false;
                 if ( DataNasctoMask.MaskCompleted &&  gtiCore.IsDate(DataNasctoMask.Text))
                     reg.Data_nascimento = Convert.ToDateTime(DataNasctoMask.Text);
@@ -421,6 +421,9 @@ namespace GTI_Desktop.Forms {
                     reg.Cep = reg.Codcidade != 413 ? CepRText.Text == "" ? 0 : Convert.ToInt32(CepRText.Text) : 0;
                     reg.Email = EmailRText.Text;
                     reg.Etiqueta = EtiquetaRCheck.Checked ? "S" : "N";
+                    reg.Telefone = String.IsNullOrWhiteSpace(FoneRText.Text) ? null : FoneRText.Text;
+                    reg.Temfone = TemFoneRCheck.Checked;
+                    reg.Whatsapp = WhatsAppRCheck.Checked;
                 }
 
                 if (!string.IsNullOrWhiteSpace(LogradouroCText.Text)) {
@@ -435,6 +438,9 @@ namespace GTI_Desktop.Forms {
                     reg.Cep2 = reg.Codcidade2 != 413 ? CepCText.Text == "" ? 0 : Convert.ToInt32(CepCText.Text) : 0;
                     reg.Email2 = EmailCText.Text;
                     reg.Etiqueta2 = EtiquetaCButton.Checked ? "S" : "N";
+                    reg.Telefone2 = String.IsNullOrWhiteSpace(FoneCText.Text) ? null : FoneCText.Text;
+                    reg.Temfone2 = TemFoneCCheck.Checked;
+                    reg.Whatsapp2 = WhatsAppCCheck.Checked;
                 }
 
                 Cidadao_bll clsCidadao = new Cidadao_bll(_connection);
@@ -597,8 +603,8 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void checkBox2_CheckedChanged(object sender, EventArgs e) {
+     
 
-        }
+        
     }
 }

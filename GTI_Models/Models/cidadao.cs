@@ -66,6 +66,10 @@ namespace GTI_Models.Models {
         public int? Codprofissao { get; set; }
         public int? Codpais { get; set; }
         public int? Codpais2 { get; set; }
+        public bool? Temfone { get; set; }
+        public bool? Temfone2 { get; set; }
+        public bool? Whatsapp { get; set; }
+        public bool? Whatsapp2 { get; set; }
     }
 
     public class CidadaoStruct {
@@ -110,6 +114,10 @@ namespace GTI_Models.Models {
         public byte Tipodoc { get; set; }
         public int? CodigoPaisR { get; set; }
         public int? CodigoPaisC { get; set; }
+        public bool? Temfone { get; set; }
+        public bool? Temfone2 { get; set; }
+        public bool? Whatsapp { get; set; }
+        public bool? Whatsapp2 { get; set; }
     }
 
 }

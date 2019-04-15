@@ -1057,6 +1057,13 @@
     <None Include="Resources\NoPhone.gif" />
     <None Include="Resources\NoPhone1.gif" />
     <None Include="Resources\PhoneCancel.gif" />
+    <None Include="Resources\backLago.jpg" />
+    <None Include="Resources\backlagoteste.jpg" />
+    <None Include="Resources\backlagoteste1.jpg" />
+    <None Include="Resources\backlago1.jpg" />
+    <None Include="Resources\beige.jpg" />
+    <None Include="Resources\bege.jpg" />
+    <None Include="Resources\rosa.jpg" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -252,7 +252,7 @@ namespace GTI_Desktop.Forms {
        //     string h = GtiTypes.UserBinary;
             Close();
             Main f1 = (Main)Application.OpenForms["Main"];
-            f1.sbUser.Text = gtiCore.Retorna_Last_User();
+            f1.UserToolStripStatus.Text = gtiCore.Retorna_Last_User();
             f1.LockForm(false);
             gtiCore.Liberado(this);
         }

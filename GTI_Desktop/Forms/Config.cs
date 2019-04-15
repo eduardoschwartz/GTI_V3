@@ -32,7 +32,7 @@ namespace GTI_Desktop.Forms {
                         Properties.Settings.Default.ServerName = e.ChangedItem.Value.ToString();
 
                         Main f1 = (Main)Application.OpenForms["Main"];
-                        f1.sbServidor.Text = e.ChangedItem.Value.ToString();
+                        f1.ServidorToolStripStatus.Text = e.ChangedItem.Value.ToString();
                         break;
                     default:
                         break;

@@ -6,7 +6,7 @@ using System.Linq;
 namespace GTI_Dal.Classes {
     public class Cidadao_Data {
 
-        private string _connection;
+        private readonly string _connection;
         public Cidadao_Data(string sConnection) {
             _connection = sConnection;
         }
@@ -81,13 +81,40 @@ namespace GTI_Dal.Classes {
                 Cidadao b = db.Cidadao.First(i => i.Codcidadao == reg.Codcidadao);
                 b.Nomecidadao = reg.Nomecidadao;
                 b.Rg = reg.Rg;
-                b.Telefone = reg.Telefone;
+                b.Juridica = reg.Juridica;
                 b.Cnpj = reg.Cnpj;
                 b.Cpf = reg.Cpf;
-                b.Telefone = reg.Telefone;
-                b.Email = reg.Email;
                 b.Data_nascimento = reg.Data_nascimento;
                 b.Codprofissao = reg.Codprofissao;
+
+                b.Etiqueta = reg.Etiqueta;
+                b.Codlogradouro = reg.Codlogradouro;
+                b.Numimovel = reg.Numimovel;
+                b.Complemento = reg.Complemento;
+                b.Codbairro = reg.Codbairro;
+                b.Codcidade = reg.Codcidade;
+                b.Siglauf = reg.Siglauf;
+                b.Cep = reg.Cep;
+                b.Pais = reg.Pais;
+                b.Telefone = reg.Telefone;
+                b.Email = reg.Email;
+                b.Temfone = reg.Temfone;
+                b.Whatsapp = reg.Whatsapp;
+
+                b.Etiqueta2 = reg.Etiqueta2;
+                b.Codlogradouro2 = reg.Codlogradouro2;
+                b.Numimovel2 = reg.Numimovel2;
+                b.Complemento2 = reg.Complemento2;
+                b.Codbairro2 = reg.Codbairro2;
+                b.Codcidade2 = reg.Codcidade2;
+                b.Siglauf2 = reg.Siglauf2;
+                b.Cep2 = reg.Cep2;
+                b.Pais2 = reg.Pais2;
+                b.Telefone2 = reg.Telefone2;
+                b.Email2 = reg.Email2;
+                b.Temfone2 = reg.Temfone2;
+                b.Whatsapp2 = reg.Whatsapp2;
+
                 try {
                     db.SaveChanges();
                 } catch (Exception ex) {
@@ -174,8 +201,7 @@ namespace GTI_Dal.Classes {
                 return cntCod1 > 0  ? true : false;
             }
         }
-
-
+        
         public CidadaoStruct LoadReg(Int32 nCodigo) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from c in db.Cidadao
@@ -193,7 +219,7 @@ namespace GTI_Dal.Classes {
                                c.Codlogradouro, c.Codlogradouro2, enderecoR = l.Endereco, enderecoC = l2.Endereco, c.Numimovel, c.Numimovel2, c.Complemento, c.Complemento2,
                                c.Etiqueta, c.Etiqueta2, c.Siglauf, c.Siglauf2, c.Codbairro, c.Codbairro2, c.Codcidade, c.Codcidade2 , c.Cep, c.Cep2, c.Codpais, c.Codpais2, c.Telefone, c.Telefone2,
                                c.Email, c.Email2, c.Nomelogradouro, c.Nomelogradouro2, c.Profissao, nomebairroR = b.Descbairro, nomebairroC = b2.Descbairro, nomecidadeR = d.Desccidade,
-                               nomecidadeC = d2.Desccidade, nomepaisR = p.Nome_pais, nomepaisC = p2.Nome_pais
+                               nomecidadeC = d2.Desccidade, nomepaisR = p.Nome_pais, nomepaisC = p2.Nome_pais,c.Temfone,c.Temfone2,c.Whatsapp,c.Whatsapp2
                            }).FirstOrDefault();
 
 
@@ -266,11 +292,13 @@ namespace GTI_Dal.Classes {
                 Linha.EmailC = reg.Email2;
                 Linha.CodigoPaisR = reg.Codpais;
                 Linha.CodigoPaisC = reg.Codpais2;
+                Linha.Temfone = reg.Temfone;
+                Linha.Temfone2 = reg.Temfone2;
+                Linha.Whatsapp = reg.Whatsapp;
+                Linha.Whatsapp2 = reg.Whatsapp2;
                 return Linha;
             }
         }
-
-
 
     }
 }

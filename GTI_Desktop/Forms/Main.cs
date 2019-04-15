@@ -4,6 +4,7 @@ using GTI_Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -30,13 +31,17 @@ namespace GTI_Desktop.Forms {
                 Width = 100,
                 Format = DateTimePickerFormat.Custom,
                 CustomFormat = "dd/MM/yyyy",
-                Name = "sbDataBase"
+                Name = "sbDataBase",
             };
-            topBar.Renderer = new MySR();
+            TopBarToolStrip.Renderer = new MySR();
             t.CloseUp += new System.EventHandler(SbDataBase_CloseUp);
-            sBar.Items.Insert(17, new ToolStripControlHost(t));
-            sbMaquina.Text = Environment.MachineName;
-            sbDataBase.Text = Properties.Settings.Default.DataBaseReal;
+            
+            BarStatus.Items.Insert(17, new ToolStripControlHost(t));
+            MaquinaToolStripStatus.Text = Environment.MachineName;
+            DataBaseToolStripStatus.Text = Properties.Settings.Default.DataBaseReal;
+
+           
+
         }
 
         private void Main_Load(object sender, EventArgs e) {
@@ -44,13 +49,16 @@ namespace GTI_Desktop.Forms {
             this.Refresh();
 
             this.SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
-             //CorFundo();
-            sbServidor.Text = Properties.Settings.Default.ServerName;
-            sbVersao.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            FillBackgroundImage(false);
+
+            ServidorToolStripStatus.Text = Properties.Settings.Default.ServerName;
+            VersaoToolStripStatus.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             LockForm(true);
             Forms.Login login = new Forms.Login();
             login.ShowDialog();
         }
+
+        
 
         private void CorFundo() {
             MdiClient ctlMDI;
@@ -60,7 +68,7 @@ namespace GTI_Desktop.Forms {
                     ctlMDI = (MdiClient)ctl;
                     ctlMDI.BackColor = this.BackColor;
                     //ctlMDI.BackgroundImage = Properties.Resources.GTI_logo;
-                    
+
                 } catch  {
                 }
             }
@@ -74,7 +82,7 @@ namespace GTI_Desktop.Forms {
             DateTime dValue = DateTime.Today;
 
             DateTimePicker dbox;
-            foreach (Control c in sBar.Controls) {
+            foreach (Control c in BarStatus.Controls) {
                 if (c is DateTimePicker) {
                     dbox = c as DateTimePicker;
                     dValue = dbox.Value.Date;
@@ -84,7 +92,7 @@ namespace GTI_Desktop.Forms {
         }
 
         public void LockForm(bool bLocked) {
-            foreach (ToolStripItem ts in topBar.Items) {
+            foreach (ToolStripItem ts in TopBarToolStrip.Items) {
                 ts.Enabled = !bLocked;
             }
 
@@ -92,12 +100,12 @@ namespace GTI_Desktop.Forms {
             foreach (var item in mItems) {
                 item.Enabled = !bLocked;
             }
-            optDv1.Enabled = !bLocked;
-            optDv2.Enabled = !bLocked;
-            txtDV.ReadOnly = bLocked;
-            lblDV.Enabled = !bLocked;
+            Dv1Option.Enabled = !bLocked;
+            Dv2Option.Enabled = !bLocked;
+            DVText.ReadOnly = bLocked;
+            DVLabel.Enabled = !bLocked;
             lblDV2.Enabled = !bLocked;
-            lblDV3.Enabled = !bLocked;
+            DV3label.Enabled = !bLocked;
         }
 
         public void Main_FormClosing(object sender, FormClosingEventArgs e) {
@@ -110,7 +118,6 @@ namespace GTI_Desktop.Forms {
                 foreach (Form chform in charr) {
                     chform.Close();
                 }
-
                 LockForm(true);
                 Forms.Login login = new Forms.Login();
                 login.ShowDialog();
@@ -136,15 +143,45 @@ namespace GTI_Desktop.Forms {
         }
 
         private void BaseRealToolStripMenuItem_Click(object sender, EventArgs e) {
-            sbDataBase.Text = Properties.Settings.Default.DataBaseReal;
+            Form[] charr = this.MdiChildren;
+            foreach (Form chform in charr)
+                chform.Close();
+
+            FillBackgroundImage(false);
+            DataBaseToolStripStatus.Text = Properties.Settings.Default.DataBaseReal;
             gtiCore.UpdateUserBinary();
             this.Refresh();
         }
 
         private void BaseDeTestesToolStripMenuItem_Click(object sender, EventArgs e) {
-            sbDataBase.Text = Properties.Settings.Default.DataBaseTeste;
+            Form[] charr = this.MdiChildren;
+            foreach (Form chform in charr)
+                chform.Close();
+
+            FillBackgroundImage(true);            
+            DataBaseToolStripStatus.Text = Properties.Settings.Default.DataBaseTeste;
             gtiCore.UpdateUserBinary();
             this.Refresh();
+
+        }
+
+        private void FillBackgroundImage(bool bTeste) {
+            Bitmap img = bTeste ? Properties.Resources.rosa : Properties.Resources.bege;
+            this.BackgroundImage = img;
+            BarStatus.BackgroundImage = img;
+            LedGreen.BackgroundImage = img;
+            LedRed.BackgroundImage = img;
+            VersaotoolStripStatusLabel.BackgroundImage = img;
+            VersaoToolStripStatus.BackgroundImage = img;
+            UsuariotoolStripStatusLabel.BackgroundImage = img;
+            UserToolStripStatus.BackgroundImage = img;
+            ServidorToolStripStatus.BackgroundImage = img;
+            ServidortoolStripStatusLabel.BackgroundImage = img;
+            DataBaseToolStripStatus.BackgroundImage = img;
+            DataBasetoolStripStatusLabel.BackgroundImage = img;
+            MaquinaToolStripStatus.BackgroundImage = img;
+            MaquinatoolStripStatusLabel.BackgroundImage = img;
+            NomeBaseDadostoolStripStatusLabel.BackgroundImage = img;
 
         }
 
@@ -297,10 +334,10 @@ namespace GTI_Desktop.Forms {
         }
 
         private void TxtDV_TextChanged(object sender, EventArgs e) {
-            if (txtDV.Text == "")
-                lblDV.Text = "X";
+            if (DVText.Text == "")
+                DVLabel.Text = "X";
             else
-                lblDV.Text = RetornaDV().ToString();
+                DVLabel.Text = RetornaDV().ToString();
         }
 
         private void TxtDV_KeyPress(object sender, KeyPressEventArgs e) {
@@ -310,9 +347,9 @@ namespace GTI_Desktop.Forms {
 
         private short RetornaDV() {
             short ret = 0;
-            if (txtDV.Text == "") txtDV.Text = "0";
-            int Numero = Convert.ToInt32(txtDV.Text);
-            if (optDv1.Checked) {
+            if (DVText.Text == "") DVText.Text = "0";
+            int Numero = Convert.ToInt32(DVText.Text);
+            if (Dv1Option.Checked) {
                 Processo_bll clsProcesso = new Processo_bll(_connection);
                 ret = Convert.ToInt16(clsProcesso.DvProcesso(Numero));
             } else {
@@ -324,18 +361,18 @@ namespace GTI_Desktop.Forms {
         }
 
         private void OptDv1_CheckedChanged(object sender, EventArgs e) {
-            lblDV.Text= RetornaDV().ToString();
-            txtDV.Focus();
+            DVLabel.Text= RetornaDV().ToString();
+            DVText.Focus();
         }
 
         private void OptDv2_CheckedChanged(object sender, EventArgs e) {
-            lblDV.Text = RetornaDV().ToString();
-            txtDV.Focus();
+            DVLabel.Text = RetornaDV().ToString();
+            DVText.Focus();
         }
 
         private void TxtDV_Enter(object sender, EventArgs e) {
-            txtDV.SelectionStart = 0;
-            txtDV.SelectionLength = txtDV.Text.Length;
+            DVText.SelectionStart = 0;
+            DVText.SelectionLength = DVText.Text.Length;
         }
 
         private void MnuCadastroLancamento_Click(object sender, EventArgs e) {
@@ -414,7 +451,7 @@ namespace GTI_Desktop.Forms {
             MnuEmpresa_Click(null, null);
         }
 
-        private void mnuCadastroEvento_Click(object sender, EventArgs e) {
+        private void CadastroEventoMenu_Click(object sender, EventArgs e) {
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.SecurityEventForm);
             if (formToShow != null) {
                 formToShow.Show();
@@ -428,7 +465,7 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void mnuAtribuicaoAcesso_Click(object sender, EventArgs e) {
+        private void AtribuicaoAcessoMenu_Click(object sender, EventArgs e) {
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.SecurityUserForm);
             if (formToShow != null) {
                 formToShow.Show();
@@ -442,7 +479,7 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void mnuCadastroUsuario_Click(object sender, EventArgs e) {
+        private void CadastroUsuario_Click(object sender, EventArgs e) {
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Usuario);
             if (formToShow != null) {
                 formToShow.Show();
@@ -457,18 +494,18 @@ namespace GTI_Desktop.Forms {
         }
 
         private void CadastroUsuarioMenu_Click(object sender, EventArgs e) {
-            mnuCadastroUsuario_Click(null, null);
+            CadastroUsuario_Click(null, null);
         }
 
         private void EventosDoSistemaMenu_Click(object sender, EventArgs e) {
-            mnuCadastroEvento_Click(null, null);
+            CadastroEventoMenu_Click(null, null);
         }
 
         private void AtribuicaoDeAcessoMenu_Click(object sender, EventArgs e) {
-            mnuAtribuicaoAcesso_Click(null, null);
+            AtribuicaoAcessoMenu_Click(null, null);
         }
 
-        private void mnuEscritorioContabil_Click(object sender, EventArgs e) {
+        private void EscritorioContabilMenu_Click(object sender, EventArgs e) {
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Escritorio_Contabil);
             if (formToShow != null) {
                 formToShow.Show();
@@ -482,7 +519,7 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void mnuCadastroCondominio_Click(object sender, EventArgs e) {
+        private void CadastroCondominioMenu_Click(object sender, EventArgs e) {
 
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroCondominio);
             if (bAllow) {
@@ -515,7 +552,7 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void mnuCadastroBairro_Click(object sender, EventArgs e) {
+        private void CadastroBairroMenu_Click(object sender, EventArgs e) {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroBairro);
             if (bAllow) {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Bairro);
@@ -532,7 +569,7 @@ namespace GTI_Desktop.Forms {
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void mnuCadastroPais_Click(object sender, EventArgs e) {
+        private void CadastroPaisMenu_Click(object sender, EventArgs e) {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroPais);
             if (bAllow) {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Pais);
@@ -549,7 +586,7 @@ namespace GTI_Desktop.Forms {
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void mnuCadastroProfissao_Click(object sender, EventArgs e) {
+        private void CadastroProfissaoMenu_Click(object sender, EventArgs e) {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroProfissao);
             if (bAllow) {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Profissao);
@@ -677,8 +714,6 @@ namespace GTI_Desktop.Forms {
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-
-
-
+       
     }//end class
 }

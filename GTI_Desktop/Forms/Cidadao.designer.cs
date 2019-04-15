@@ -456,6 +456,7 @@
             // 
             // TemFoneCCheck
             // 
+            this.TemFoneCCheck.AutoCheck = false;
             this.TemFoneCCheck.AutoSize = true;
             this.TemFoneCCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.TemFoneCCheck.Image = global::GTI_Desktop.Properties.Resources.PhoneCancel;
@@ -468,6 +469,7 @@
             // 
             // WhatsAppCCheck
             // 
+            this.WhatsAppCCheck.AutoCheck = false;
             this.WhatsAppCCheck.AutoSize = true;
             this.WhatsAppCCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.WhatsAppCCheck.Image = global::GTI_Desktop.Properties.Resources.whatsapp;
@@ -740,6 +742,7 @@
             // 
             // TemFoneRCheck
             // 
+            this.TemFoneRCheck.AutoCheck = false;
             this.TemFoneRCheck.AutoSize = true;
             this.TemFoneRCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.TemFoneRCheck.Image = global::GTI_Desktop.Properties.Resources.PhoneCancel;
@@ -749,10 +752,10 @@
             this.TemFoneRCheck.TabIndex = 159;
             this.Ttp.SetToolTip(this.TemFoneRCheck, "Não possui telefone");
             this.TemFoneRCheck.UseVisualStyleBackColor = true;
-            this.TemFoneRCheck.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // WhatsAppRCheck
             // 
+            this.WhatsAppRCheck.AutoCheck = false;
             this.WhatsAppRCheck.AutoSize = true;
             this.WhatsAppRCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.WhatsAppRCheck.Image = global::GTI_Desktop.Properties.Resources.whatsapp;
@@ -1152,7 +1155,9 @@
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Cidadao";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de cidadão";
             this.BarToolStrip.ResumeLayout(false);
