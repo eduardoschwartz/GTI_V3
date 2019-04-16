@@ -153,7 +153,7 @@ namespace UIWeb.Pages {
                 sSocio2 = sSocio2.Substring(0, sSocio2.Length - 2);
             PROPRIETARIO.Text = "<pre>" + sSocio + "</pre>";
 
-            List<CnaeStruct> ListaCnae = empresa_class.ListaCnae(Codigo);
+            List<CnaeStruct> ListaCnae = empresa_class.Lista_Cnae_Empresa(Codigo);
             string sCnae = "";
             sCnae2 = "";
             foreach (CnaeStruct cnae in ListaCnae) {

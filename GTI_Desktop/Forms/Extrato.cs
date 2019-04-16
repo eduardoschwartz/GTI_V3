@@ -326,7 +326,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void Ajustar_Cores(int Index) {
-            if (Index > Lista_Extrato_Parcela.Count) return;
+            if (Index >= Lista_Extrato_Parcela.Count) return;
             Color _cor_status_fonte = Color.Black;
             Color _cor_status_fundo = Color.White;
             SpExtrato item = Lista_Extrato_Parcela[Index];
@@ -338,6 +338,8 @@ namespace GTI_Desktop.Forms {
                     _cor_status_fonte = Color.Green;
                     break;
                 case 3:
+                case 42:
+                case 43:
                     _cor_status_fonte = Color.Red;
                     break;
                 case 4:
@@ -1000,6 +1002,26 @@ InicioObs:
                 ExibeObservacao(true);
             } else
                 MessageBox.Show("Selecione um contribuinte.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void ConsultarCodigoButton_Click(object sender, EventArgs e) {
+            HeaderMenu.Show(ConsultarCodigoButton,  new System.Drawing.Point(0, 20));
+        }
+
+        private void OutrosMenu_Click(object sender, EventArgs e) {
+
+        }
+
+        private void ImovelMenuItem_Click(object sender, EventArgs e) {
+            using (var form = new Imovel_Lista()) {
+                var result = form.ShowDialog(this);
+                if (result == DialogResult.OK) {
+                    int val = form.ReturnValue;
+                    CodigoText.Text = val.ToString();
+                    ClearAll();
+                    Carrega_Extrato(val);
+                }
+            }
         }
 
         private void ObservacaoParcelaMenu_Click(object sender, EventArgs e) {

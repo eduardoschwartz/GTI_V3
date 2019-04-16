@@ -30,21 +30,21 @@
             this.CPF = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.Busca = new System.Windows.Forms.TextBox();
+            this.BuscaText = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.tBar = new System.Windows.Forms.ToolStrip();
-            this.mnuTitle = new System.Windows.Forms.ToolStripDropDownButton();
-            this.mnuNome = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuCPF = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuCNPJ = new System.Windows.Forms.ToolStripMenuItem();
+            this.TopBar = new System.Windows.Forms.ToolStrip();
+            this.TitleMenu = new System.Windows.Forms.ToolStripDropDownButton();
+            this.NomeMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.CPFMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.CNPJMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.FindButton = new System.Windows.Forms.ToolStripButton();
             this.ReturnButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.StatusBar = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.TotalCidadao = new System.Windows.Forms.ToolStripLabel();
             this.panel1.SuspendLayout();
-            this.tBar.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.TopBar.SuspendLayout();
+            this.StatusBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainListView
@@ -89,23 +89,23 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.Busca);
+            this.panel1.Controls.Add(this.BuscaText);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.tBar);
+            this.panel1.Controls.Add(this.TopBar);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(648, 28);
             this.panel1.TabIndex = 73;
             // 
-            // Busca
+            // BuscaText
             // 
-            this.Busca.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.Busca.Location = new System.Drawing.Point(74, 3);
-            this.Busca.Name = "Busca";
-            this.Busca.Size = new System.Drawing.Size(393, 20);
-            this.Busca.TabIndex = 72;
-            this.Busca.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtBusca_KeyPress);
+            this.BuscaText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.BuscaText.Location = new System.Drawing.Point(74, 3);
+            this.BuscaText.Name = "BuscaText";
+            this.BuscaText.Size = new System.Drawing.Size(393, 20);
+            this.BuscaText.TabIndex = 72;
+            this.BuscaText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtBusca_KeyPress);
             // 
             // label1
             // 
@@ -116,59 +116,59 @@
             this.label1.TabIndex = 71;
             this.label1.Text = "Pesquisa..:";
             // 
-            // tBar
+            // TopBar
             // 
-            this.tBar.AllowMerge = false;
-            this.tBar.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.tBar.BackColor = System.Drawing.SystemColors.Control;
-            this.tBar.Dock = System.Windows.Forms.DockStyle.None;
-            this.tBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.tBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuTitle,
+            this.TopBar.AllowMerge = false;
+            this.TopBar.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.TopBar.BackColor = System.Drawing.SystemColors.Control;
+            this.TopBar.Dock = System.Windows.Forms.DockStyle.None;
+            this.TopBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.TopBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TitleMenu,
             this.FindButton,
             this.ReturnButton});
-            this.tBar.Location = new System.Drawing.Point(574, 0);
-            this.tBar.Name = "tBar";
-            this.tBar.Padding = new System.Windows.Forms.Padding(6, 0, 1, 0);
-            this.tBar.Size = new System.Drawing.Size(68, 25);
-            this.tBar.TabIndex = 70;
-            this.tBar.Text = "toolStrip1";
+            this.TopBar.Location = new System.Drawing.Point(574, 0);
+            this.TopBar.Name = "TopBar";
+            this.TopBar.Padding = new System.Windows.Forms.Padding(6, 0, 1, 0);
+            this.TopBar.Size = new System.Drawing.Size(68, 25);
+            this.TopBar.TabIndex = 70;
+            this.TopBar.Text = "toolStrip1";
             // 
-            // mnuTitle
+            // TitleMenu
             // 
-            this.mnuTitle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.mnuTitle.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuNome,
-            this.mnuCPF,
-            this.mnuCNPJ});
-            this.mnuTitle.Image = ((System.Drawing.Image)(resources.GetObject("mnuTitle.Image")));
-            this.mnuTitle.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnuTitle.Name = "mnuTitle";
-            this.mnuTitle.Size = new System.Drawing.Size(13, 22);
+            this.TitleMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.TitleMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.NomeMenu,
+            this.CPFMenu,
+            this.CNPJMenu});
+            this.TitleMenu.Image = ((System.Drawing.Image)(resources.GetObject("TitleMenu.Image")));
+            this.TitleMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TitleMenu.Name = "TitleMenu";
+            this.TitleMenu.Size = new System.Drawing.Size(13, 22);
             // 
-            // mnuNome
+            // NomeMenu
             // 
-            this.mnuNome.CheckOnClick = true;
-            this.mnuNome.Name = "mnuNome";
-            this.mnuNome.Size = new System.Drawing.Size(107, 22);
-            this.mnuNome.Text = "Nome";
-            this.mnuNome.Click += new System.EventHandler(this.MnuNome_Click);
+            this.NomeMenu.CheckOnClick = true;
+            this.NomeMenu.Name = "NomeMenu";
+            this.NomeMenu.Size = new System.Drawing.Size(180, 22);
+            this.NomeMenu.Text = "Nome";
+            this.NomeMenu.Click += new System.EventHandler(this.MnuNome_Click);
             // 
-            // mnuCPF
+            // CPFMenu
             // 
-            this.mnuCPF.CheckOnClick = true;
-            this.mnuCPF.Name = "mnuCPF";
-            this.mnuCPF.Size = new System.Drawing.Size(107, 22);
-            this.mnuCPF.Text = "CPF";
-            this.mnuCPF.Click += new System.EventHandler(this.MnuCPF_Click);
+            this.CPFMenu.CheckOnClick = true;
+            this.CPFMenu.Name = "CPFMenu";
+            this.CPFMenu.Size = new System.Drawing.Size(180, 22);
+            this.CPFMenu.Text = "CPF";
+            this.CPFMenu.Click += new System.EventHandler(this.MnuCPF_Click);
             // 
-            // mnuCNPJ
+            // CNPJMenu
             // 
-            this.mnuCNPJ.CheckOnClick = true;
-            this.mnuCNPJ.Name = "mnuCNPJ";
-            this.mnuCNPJ.Size = new System.Drawing.Size(107, 22);
-            this.mnuCNPJ.Text = "CNPJ";
-            this.mnuCNPJ.Click += new System.EventHandler(this.MnuCNPJ_Click);
+            this.CNPJMenu.CheckOnClick = true;
+            this.CNPJMenu.Name = "CNPJMenu";
+            this.CNPJMenu.Size = new System.Drawing.Size(180, 22);
+            this.CNPJMenu.Text = "CNPJ";
+            this.CNPJMenu.Click += new System.EventHandler(this.MnuCNPJ_Click);
             // 
             // FindButton
             // 
@@ -192,18 +192,18 @@
             this.ReturnButton.ToolTipText = "Retornar";
             this.ReturnButton.Click += new System.EventHandler(this.BtReturn_Click);
             // 
-            // toolStrip1
+            // StatusBar
             // 
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.StatusBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.StatusBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.StatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
             this.TotalCidadao});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 361);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(648, 25);
-            this.toolStrip1.TabIndex = 75;
-            this.toolStrip1.Text = "toolStrip1";
+            this.StatusBar.Location = new System.Drawing.Point(0, 361);
+            this.StatusBar.Name = "StatusBar";
+            this.StatusBar.Size = new System.Drawing.Size(648, 25);
+            this.StatusBar.TabIndex = 75;
+            this.StatusBar.Text = "toolStrip1";
             // 
             // toolStripLabel1
             // 
@@ -223,7 +223,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(648, 386);
-            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.StatusBar);
             this.Controls.Add(this.MainListView);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
@@ -235,10 +235,10 @@
             this.Activated += new System.EventHandler(this.Cidadao_Lista_Activated);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.tBar.ResumeLayout(false);
-            this.tBar.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.TopBar.ResumeLayout(false);
+            this.TopBar.PerformLayout();
+            this.StatusBar.ResumeLayout(false);
+            this.StatusBar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -252,16 +252,16 @@
         private System.Windows.Forms.ColumnHeader CPF;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox Busca;
+        private System.Windows.Forms.TextBox BuscaText;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ToolStrip tBar;
-        private System.Windows.Forms.ToolStripDropDownButton mnuTitle;
-        private System.Windows.Forms.ToolStripMenuItem mnuNome;
-        private System.Windows.Forms.ToolStripMenuItem mnuCPF;
-        private System.Windows.Forms.ToolStripMenuItem mnuCNPJ;
+        private System.Windows.Forms.ToolStrip TopBar;
+        private System.Windows.Forms.ToolStripDropDownButton TitleMenu;
+        private System.Windows.Forms.ToolStripMenuItem NomeMenu;
+        private System.Windows.Forms.ToolStripMenuItem CPFMenu;
+        private System.Windows.Forms.ToolStripMenuItem CNPJMenu;
         private System.Windows.Forms.ToolStripButton FindButton;
         private System.Windows.Forms.ToolStripButton ReturnButton;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip StatusBar;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripLabel TotalCidadao;
     }

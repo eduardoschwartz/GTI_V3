@@ -327,5 +327,9 @@ namespace GTI_Desktop.Forms {
             };
         }
 
+        private void Codigo_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Return)
+                FindButton_Click(sender, e);
+        }
     }
 }

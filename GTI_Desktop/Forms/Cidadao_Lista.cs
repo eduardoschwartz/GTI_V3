@@ -32,8 +32,8 @@ namespace GTI_Desktop.Forms {
                                                 select ltoolStripMenuItem))
                 (ltoolStripMenuItem).Checked = false;
 
-            mnuTitle.Text = "Critério: (" + selectedMenuItem.Text + ")";
-            mnuTitle.Tag = selectedMenuItem.Text;
+            TitleMenu.Text = "Critério: (" + selectedMenuItem.Text + ")";
+            TitleMenu.Tag = selectedMenuItem.Text;
         }
 
         private void MnuNome_Click(object sender, EventArgs e) {
@@ -54,25 +54,25 @@ namespace GTI_Desktop.Forms {
 
         private void BtFind_Click(object sender, EventArgs e) {
             MainListView.Items.Clear();
-            if (Busca.Text.Length < 3)
+            if (BuscaText.Text.Length < 3)
                 MessageBox.Show("Digite ao menos 3 caractéres.", "Informação inválida", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Fill_List();
         }
 
         private void Cidadao_Lista_Activated(object sender, EventArgs e) {
-            if (mnuTitle.Text.Equals(""))
-                UncheckOtherToolStripMenuItems(mnuNome);
+            if (TitleMenu.Text.Equals(""))
+                UncheckOtherToolStripMenuItems(NomeMenu);
         }
 
         private void Fill_List() {
             gtiCore.Ocupado(this);
-            string _valor = Busca.Text;
+            string _valor = BuscaText.Text;
             Cidadao_bll clsCidadao = new Cidadao_bll(_connection);
             List<GTI_Models.Models.Cidadao> Lista = new List<GTI_Models.Models.Cidadao>();
-            if (mnuTitle.Tag.ToString() == "Nome")
+            if (TitleMenu.Tag.ToString() == "Nome")
                 Lista = clsCidadao.Lista_Cidadao(_valor, "", "");
             else {
-                if (mnuTitle.Tag.ToString() == "CPF")
+                if (TitleMenu.Tag.ToString() == "CPF")
                     Lista = clsCidadao.Lista_Cidadao("", _valor, "");
                 else
                     Lista = clsCidadao.Lista_Cidadao("", "", _valor);
@@ -140,7 +140,7 @@ namespace GTI_Desktop.Forms {
             string[] aReg = new string[8];
             string[] aTmp = new string[1];
 
-            aLista.Add(gtiCore.ConvertDatReg("DS", new[] { Busca.Text }));
+            aLista.Add(gtiCore.ConvertDatReg("DS", new[] { BuscaText.Text }));
 
             for (int i = 0; i < MainListView.VirtualListSize; i++) {
                 aReg[0] = MainListView.Items[i].Text;
@@ -165,7 +165,7 @@ namespace GTI_Desktop.Forms {
             try {
                 aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "DS");
                 if (aDatResult[0].Count > 0)
-                    Busca.Text = aDatResult[0][0].ToString();
+                    BuscaText.Text = aDatResult[0][0].ToString();
 
                 aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "CD",false);
                 MainListView.VirtualListSize = aDatResult.Count;

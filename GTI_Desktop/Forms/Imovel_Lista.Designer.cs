@@ -417,6 +417,7 @@
             this.Codigo.Name = "Codigo";
             this.Codigo.Size = new System.Drawing.Size(65, 20);
             this.Codigo.TabIndex = 0;
+            this.Codigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Codigo_KeyDown);
             // 
             // label1
             // 
@@ -509,6 +510,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tBar);
             this.DoubleBuffered = true;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "Imovel_Lista";
             this.ShowInTaskbar = false;

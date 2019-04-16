@@ -366,10 +366,16 @@ namespace GTI_Bll.Classes {
         /// </summary>
         /// <param name="nCodigo"></param>
         /// <returns></returns>
-        public List<CnaeStruct> ListaCnae(int nCodigo) {
+        public List<CnaeStruct> ListaCnae() {
             Empresa_Data obj = new Empresa_Data(_connection);
             return obj.Lista_Cnae();
         }
+
+        //public List<CnaeStruct> Lista_Cnae_Empresa(int nCodigo) {
+        //    Empresa_Data obj = new Empresa_Data(_connection);
+        //    return obj.Lista_Cnae_Empresa(nCodigo);
+        //}
+
 
         /// <summary>
         /// Retorna o número Sil de uma empresa

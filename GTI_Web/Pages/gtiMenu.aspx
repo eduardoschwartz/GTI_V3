@@ -24,7 +24,7 @@
                 <li><a href="readVRExml.aspx?d=gti" style="width: 600px">Importação de arquivos Via Rápida Empresa (VRE)</a></li>
                 <li><a href="alvara_funcionamento.aspx?d=gti" style="width: 600px">Renovação de alvará de funcionamento</a></li>
                 <li><a href="gticertidao.aspx?d=gti" style="width: 600px">Emissão de certidões / Verificar autenticidade</a></li>
-                <%--<li><a href="dadosEmpresa.aspx?d=gti" style="width: 600px">Dados cadastrais de uma empresa</a></li>--%>
+                <li><a href="dadosEmpresa.aspx?d=gti" style="width: 600px">Dados cadastrais de uma empresa</a></li>
                 <li><a href="cpv_pagto.aspx?d=gti" style="width: 600px">Impressão de comprovante de pagamento</a></li>
                 <li><a href="situacao_pagto.aspx?d=gti" style="width: 600px">Situação dos débitos ref. a ISS Fixo, Taxa de Licença e Vig.Sanitária.</a></li>
                 <%--<li><a href="LoginFunc.aspx?d=gti" style="width: 600px">Área restrita do usuário.</a></li>--%>

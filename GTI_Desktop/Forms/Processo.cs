@@ -979,9 +979,10 @@ namespace GTI_Desktop.Forms {
                 List<AssuntoDocStruct> ListaDoc = new List<AssuntoDocStruct>();
                 ListaDoc = processo_Class.Lista_Assunto_Documento((short)Reg.CodigoAssunto);
                 foreach (AssuntoDocStruct item in ListaDoc) {
-                    ProcessoDocStruct reg = new ProcessoDocStruct();
-                    reg.CodigoDocumento = item.Codigo;
-                    reg.NomeDocumento = item.Nome;
+                    ProcessoDocStruct reg = new ProcessoDocStruct {
+                        CodigoDocumento = item.Codigo,
+                        NomeDocumento = item.Nome
+                    };
                     Reg.ListaProcessoDoc.Add(reg);
                 }
             }
@@ -1072,14 +1073,15 @@ namespace GTI_Desktop.Forms {
         }
 
         private Exception Grava_Processo() {
-            Processogti Reg = new Processogti();
-            Reg.Numero = _numero_processo;
-            Reg.Ano = _ano_processo;
-            Reg.Complemento = ComplementoText.Text.Trim();
-            Reg.Observacao = ObsText.Text.Trim();
-            Reg.Insc = Convert.ToInt32(InscricaoText.Text);
-            Reg.Dataentrada = Convert.ToDateTime(EntradaLabel.Text);
-            Reg.Hora = HoraLabel.Text;
+            Processogti Reg = new Processogti {
+                Numero = _numero_processo,
+                Ano = _ano_processo,
+                Complemento = ComplementoText.Text.Trim(),
+                Observacao = ObsText.Text.Trim(),
+                Insc = Convert.ToInt32(InscricaoText.Text),
+                Dataentrada = Convert.ToDateTime(EntradaLabel.Text),
+                Hora = HoraLabel.Text
+            };
             if (gtiCore.IsEmptyDate(SuspensaoLabel.Text))
                 Reg.Datasuspenso = null;
             else
@@ -1435,10 +1437,11 @@ namespace GTI_Desktop.Forms {
         #region Endereco
 
         private void BtAddEndereco_Click(object sender, EventArgs e)     {
-            GTI_Models.Models.Endereco reg = new GTI_Models.Models.Endereco();
-            reg.Id_pais = 1;
-            reg.Sigla_uf = "SP";
-            reg.Id_cidade = 413;
+            GTI_Models.Models.Endereco reg = new GTI_Models.Models.Endereco {
+                Id_pais = 1,
+                Sigla_uf = "SP",
+                Id_cidade = 413
+            };
             Forms.Endereco f1 = new Forms.Endereco(reg, true, false, true, false);
             f1.ShowDialog();
 
@@ -1490,9 +1493,10 @@ namespace GTI_Desktop.Forms {
                     
                     ListaDoc = processo_Class.Lista_Assunto_Documento(Convert.ToInt16( AssuntoCombo.SelectedValue));
                     foreach (AssuntoDocStruct item in ListaDoc) {
-                        ProcessoDocStruct reg = new ProcessoDocStruct();
-                        reg.CodigoDocumento = item.Codigo;
-                        reg.NomeDocumento = item.Nome;
+                        ProcessoDocStruct reg = new ProcessoDocStruct {
+                            CodigoDocumento = item.Codigo,
+                            NomeDocumento = item.Nome
+                        };
                         ListaProcessoDoc.Add(reg);
                     }
 
@@ -1567,6 +1571,10 @@ Jump:;
         }
 
         #endregion
+
+        private void GuiaButton_Click(object sender, EventArgs e) {
+
+        }
     }
 
 }
