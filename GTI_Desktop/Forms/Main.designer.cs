@@ -52,7 +52,7 @@
             this.NomeBaseDadostoolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.LedGreen = new System.Windows.Forms.ToolStripStatusLabel();
             this.LedRed = new System.Windows.Forms.ToolStripStatusLabel();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.MenuBarStrip = new System.Windows.Forms.MenuStrip();
             this.ParametrosMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.CadastroBairroMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.CadastroPaisMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -133,7 +133,7 @@
             this.Dv1Option = new System.Windows.Forms.RadioButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.BarStatus.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.MenuBarStrip.SuspendLayout();
             this.TopBarToolStrip.SuspendLayout();
             this.PanelDV.SuspendLayout();
             this.SuspendLayout();
@@ -141,6 +141,7 @@
             // BarStatus
             // 
             this.BarStatus.BackColor = System.Drawing.Color.White;
+            this.BarStatus.BackgroundImage = global::GTI_Desktop.Properties.Resources.bege;
             this.BarStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.VersaotoolStripStatusLabel,
             this.VersaoToolStripStatus,
@@ -170,12 +171,14 @@
             // 
             // VersaotoolStripStatusLabel
             // 
+            this.VersaotoolStripStatusLabel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("VersaotoolStripStatusLabel.BackgroundImage")));
             this.VersaotoolStripStatusLabel.Name = "VersaotoolStripStatusLabel";
             this.VersaotoolStripStatusLabel.Size = new System.Drawing.Size(88, 19);
             this.VersaotoolStripStatusLabel.Text = "gtiNet - Versão:";
             // 
             // VersaoToolStripStatus
             // 
+            this.VersaoToolStripStatus.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("VersaoToolStripStatus.BackgroundImage")));
             this.VersaoToolStripStatus.ForeColor = System.Drawing.Color.Maroon;
             this.VersaoToolStripStatus.Name = "VersaoToolStripStatus";
             this.VersaoToolStripStatus.Size = new System.Drawing.Size(31, 19);
@@ -183,21 +186,25 @@
             // 
             // Div1
             // 
+            this.Div1.BackColor = System.Drawing.Color.Transparent;
             this.Div1.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
-            this.Div1.BorderStyle = System.Windows.Forms.Border3DStyle.Raised;
+            this.Div1.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner;
+            this.Div1.ForeColor = System.Drawing.Color.Transparent;
             this.Div1.Name = "Div1";
             this.Div1.Size = new System.Drawing.Size(4, 19);
             // 
             // UsuariotoolStripStatusLabel
             // 
+            this.UsuariotoolStripStatusLabel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("UsuariotoolStripStatusLabel.BackgroundImage")));
             this.UsuariotoolStripStatusLabel.Name = "UsuariotoolStripStatusLabel";
             this.UsuariotoolStripStatusLabel.Size = new System.Drawing.Size(50, 19);
             this.UsuariotoolStripStatusLabel.Text = "Usuário:";
             // 
             // UserToolStripStatus
             // 
+            this.UserToolStripStatus.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("UserToolStripStatus.BackgroundImage")));
             this.UserToolStripStatus.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner;
             this.UserToolStripStatus.ForeColor = System.Drawing.Color.Maroon;
             this.UserToolStripStatus.Name = "UserToolStripStatus";
@@ -214,18 +221,20 @@
             this.Div2.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
-            this.Div2.BorderStyle = System.Windows.Forms.Border3DStyle.Raised;
+            this.Div2.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner;
             this.Div2.Name = "Div2";
             this.Div2.Size = new System.Drawing.Size(4, 19);
             // 
             // MaquinatoolStripStatusLabel
             // 
+            this.MaquinatoolStripStatusLabel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("MaquinatoolStripStatusLabel.BackgroundImage")));
             this.MaquinatoolStripStatusLabel.Name = "MaquinatoolStripStatusLabel";
             this.MaquinatoolStripStatusLabel.Size = new System.Drawing.Size(57, 19);
             this.MaquinatoolStripStatusLabel.Text = "Máquina:";
             // 
             // MaquinaToolStripStatus
             // 
+            this.MaquinaToolStripStatus.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("MaquinaToolStripStatus.BackgroundImage")));
             this.MaquinaToolStripStatus.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner;
             this.MaquinaToolStripStatus.ForeColor = System.Drawing.Color.Maroon;
             this.MaquinaToolStripStatus.Name = "MaquinaToolStripStatus";
@@ -237,18 +246,20 @@
             this.Div3.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
-            this.Div3.BorderStyle = System.Windows.Forms.Border3DStyle.Raised;
+            this.Div3.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner;
             this.Div3.Name = "Div3";
             this.Div3.Size = new System.Drawing.Size(4, 19);
             // 
             // ServidortoolStripStatusLabel
             // 
+            this.ServidortoolStripStatusLabel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ServidortoolStripStatusLabel.BackgroundImage")));
             this.ServidortoolStripStatusLabel.Name = "ServidortoolStripStatusLabel";
             this.ServidortoolStripStatusLabel.Size = new System.Drawing.Size(53, 19);
             this.ServidortoolStripStatusLabel.Text = "Servidor:";
             // 
             // ServidorToolStripStatus
             // 
+            this.ServidorToolStripStatus.BackgroundImage = global::GTI_Desktop.Properties.Resources.bege;
             this.ServidorToolStripStatus.ForeColor = System.Drawing.Color.Maroon;
             this.ServidorToolStripStatus.Name = "ServidorToolStripStatus";
             this.ServidorToolStripStatus.Size = new System.Drawing.Size(88, 19);
@@ -259,7 +270,7 @@
             this.Div4.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
-            this.Div4.BorderStyle = System.Windows.Forms.Border3DStyle.Raised;
+            this.Div4.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner;
             this.Div4.Name = "Div4";
             this.Div4.Size = new System.Drawing.Size(4, 19);
             // 
@@ -291,6 +302,7 @@
             // 
             // DataBaseToolStripStatus
             // 
+            this.DataBaseToolStripStatus.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DataBaseToolStripStatus.BackgroundImage")));
             this.DataBaseToolStripStatus.ForeColor = System.Drawing.Color.Maroon;
             this.DataBaseToolStripStatus.Name = "DataBaseToolStripStatus";
             this.DataBaseToolStripStatus.Size = new System.Drawing.Size(63, 19);
@@ -301,18 +313,20 @@
             this.Div5.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
-            this.Div5.BorderStyle = System.Windows.Forms.Border3DStyle.Raised;
+            this.Div5.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner;
             this.Div5.Name = "Div5";
             this.Div5.Size = new System.Drawing.Size(4, 19);
             // 
             // DataBasetoolStripStatusLabel
             // 
+            this.DataBasetoolStripStatusLabel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DataBasetoolStripStatusLabel.BackgroundImage")));
             this.DataBasetoolStripStatusLabel.Name = "DataBasetoolStripStatusLabel";
             this.DataBasetoolStripStatusLabel.Size = new System.Drawing.Size(61, 19);
             this.DataBasetoolStripStatusLabel.Text = "Data Base:";
             // 
             // NomeBaseDadostoolStripStatusLabel
             // 
+            this.NomeBaseDadostoolStripStatusLabel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("NomeBaseDadostoolStripStatusLabel.BackgroundImage")));
             this.NomeBaseDadostoolStripStatusLabel.BorderStyle = System.Windows.Forms.Border3DStyle.Raised;
             this.NomeBaseDadostoolStripStatusLabel.Name = "NomeBaseDadostoolStripStatusLabel";
             this.NomeBaseDadostoolStripStatusLabel.Size = new System.Drawing.Size(13, 19);
@@ -321,6 +335,7 @@
             // LedGreen
             // 
             this.LedGreen.AutoSize = false;
+            this.LedGreen.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("LedGreen.BackgroundImage")));
             this.LedGreen.Image = global::GTI_Desktop.Properties.Resources.ledgreen;
             this.LedGreen.Name = "LedGreen";
             this.LedGreen.Size = new System.Drawing.Size(20, 19);
@@ -328,15 +343,16 @@
             // LedRed
             // 
             this.LedRed.AutoSize = false;
+            this.LedRed.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("LedRed.BackgroundImage")));
             this.LedRed.Enabled = false;
             this.LedRed.Image = global::GTI_Desktop.Properties.Resources.ledred;
             this.LedRed.Name = "LedRed";
             this.LedRed.Size = new System.Drawing.Size(20, 19);
             // 
-            // menuStrip1
+            // MenuBarStrip
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.White;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuBarStrip.BackColor = System.Drawing.Color.OldLace;
+            this.MenuBarStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ParametrosMenu,
             this.ImobiliarioMenu,
             this.MobiliarioMenu,
@@ -345,11 +361,12 @@
             this.ProtocoloMenu,
             this.OutrosMenu,
             this.JanelaMenu});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1054, 24);
-            this.menuStrip1.TabIndex = 9;
-            this.menuStrip1.Text = "menuStrip1";
+            this.MenuBarStrip.Location = new System.Drawing.Point(0, 0);
+            this.MenuBarStrip.MdiWindowListItem = this.JanelaMenu;
+            this.MenuBarStrip.Name = "MenuBarStrip";
+            this.MenuBarStrip.Size = new System.Drawing.Size(1054, 24);
+            this.MenuBarStrip.TabIndex = 9;
+            this.MenuBarStrip.Text = "menuStrip1";
             // 
             // ParametrosMenu
             // 
@@ -653,7 +670,7 @@
             // ConfigMenu
             // 
             this.ConfigMenu.Name = "ConfigMenu";
-            this.ConfigMenu.Size = new System.Drawing.Size(152, 22);
+            this.ConfigMenu.Size = new System.Drawing.Size(180, 22);
             this.ConfigMenu.Text = "Configuração";
             this.ConfigMenu.Click += new System.EventHandler(this.MnuConfig_Click);
             // 
@@ -664,7 +681,7 @@
             this.CadastroEventoMenu,
             this.AtribuicaoAcessoMenu});
             this.SecurityMenu.Name = "SecurityMenu";
-            this.SecurityMenu.Size = new System.Drawing.Size(152, 22);
+            this.SecurityMenu.Size = new System.Drawing.Size(180, 22);
             this.SecurityMenu.Text = "Segurança";
             // 
             // CadastroUsuariosMenu
@@ -693,7 +710,7 @@
             this.AdministrativoMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CalculoImpostoMenu});
             this.AdministrativoMenu.Name = "AdministrativoMenu";
-            this.AdministrativoMenu.Size = new System.Drawing.Size(152, 22);
+            this.AdministrativoMenu.Size = new System.Drawing.Size(180, 22);
             this.AdministrativoMenu.Text = "Administrativo";
             // 
             // CalculoImpostoMenu
@@ -758,7 +775,7 @@
             // 
             // TopBarToolStrip
             // 
-            this.TopBarToolStrip.BackColor = System.Drawing.Color.White;
+            this.TopBarToolStrip.BackColor = System.Drawing.Color.OldLace;
             this.TopBarToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.TopBarToolStrip.ImageScalingSize = new System.Drawing.Size(48, 48);
             this.TopBarToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -980,7 +997,7 @@
             // PanelDV
             // 
             this.PanelDV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.PanelDV.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.PanelDV.BackColor = System.Drawing.Color.OldLace;
             this.PanelDV.BorderColor = System.Drawing.Color.Gray;
             this.PanelDV.Controls.Add(this.DV3label);
             this.PanelDV.Controls.Add(this.DVLabel);
@@ -988,7 +1005,7 @@
             this.PanelDV.Controls.Add(this.Dv1Option);
             this.PanelDV.Controls.Add(this.lblDV2);
             this.PanelDV.Controls.Add(this.DVText);
-            this.PanelDV.GradientEndColor = System.Drawing.Color.White;
+            this.PanelDV.GradientEndColor = System.Drawing.Color.OldLace;
             this.PanelDV.GradientStartColor = System.Drawing.Color.White;
             this.PanelDV.Image = null;
             this.PanelDV.ImageLocation = new System.Drawing.Point(4, 4);
@@ -1051,10 +1068,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
+            this.BackgroundImage = global::GTI_Desktop.Properties.Resources.bege;
             this.ClientSize = new System.Drawing.Size(1054, 496);
             this.Controls.Add(this.PanelDV);
             this.Controls.Add(this.TopBarToolStrip);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.MenuBarStrip);
             this.Controls.Add(this.BarStatus);
             this.DoubleBuffered = true;
             this.Name = "Main";
@@ -1066,8 +1084,8 @@
             this.Load += new System.EventHandler(this.Main_Load);
             this.BarStatus.ResumeLayout(false);
             this.BarStatus.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.MenuBarStrip.ResumeLayout(false);
+            this.MenuBarStrip.PerformLayout();
             this.TopBarToolStrip.ResumeLayout(false);
             this.TopBarToolStrip.PerformLayout();
             this.PanelDV.ResumeLayout(false);
@@ -1100,7 +1118,7 @@
         private System.Windows.Forms.ToolStripStatusLabel NomeBaseDadostoolStripStatusLabel;
         public System.Windows.Forms.ToolStripStatusLabel LedGreen;
         public System.Windows.Forms.ToolStripStatusLabel LedRed;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip MenuBarStrip;
         private System.Windows.Forms.ToolStripMenuItem ParametrosMenu;
         private System.Windows.Forms.ToolStripMenuItem CadastroBairroMenu;
         private System.Windows.Forms.ToolStripMenuItem ImobiliarioMenu;

@@ -13,6 +13,7 @@ namespace GTI_Desktop.Forms {
         bool _camposObrigatorios;
         bool _telefone;
         string _connection = gtiCore.Connection_Name();
+
         public GTI_Models.Models.Endereco EndRetorno { get; set; }
 
         public Endereco( GTI_Models.Models.Endereco  reg, bool EnderecoLocal , bool EditarBairro,bool CamposObrigatorios ,bool Telefone) {
@@ -182,6 +183,11 @@ namespace GTI_Desktop.Forms {
                     MessageBox.Show("Endereço de email inválido.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+
+                if (TelefoneText.Text.Trim()=="" && WhatsAppCheck.Checked) {
+                    MessageBox.Show("Digite o nº do WhatsApp, ou desmarque esta opção.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
 
 
@@ -341,5 +347,11 @@ namespace GTI_Desktop.Forms {
                     ReturnButton.Focus();
 
         }
+
+        private void TemFoneCheck_CheckedChanged(object sender, EventArgs e) {
+            if (TemFoneCheck.Checked)
+                TelefoneText.Text = "";
+        }
+
     }
 }

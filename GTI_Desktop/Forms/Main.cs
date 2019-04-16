@@ -4,7 +4,6 @@ using GTI_Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -18,7 +17,6 @@ namespace GTI_Desktop.Forms {
             get {
                 CreateParams myCp = base.CreateParams;
                 myCp.ClassStyle = myCp.ClassStyle | CP_NOCLOSE_BUTTON;
-                myCp.ExStyle=myCp.ExStyle | 0x2000000;
                 return myCp;
             }
         }
@@ -40,8 +38,6 @@ namespace GTI_Desktop.Forms {
             MaquinaToolStripStatus.Text = Environment.MachineName;
             DataBaseToolStripStatus.Text = Properties.Settings.Default.DataBaseReal;
 
-           
-
         }
 
         private void Main_Load(object sender, EventArgs e) {
@@ -51,14 +47,16 @@ namespace GTI_Desktop.Forms {
             this.SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
             FillBackgroundImage(false);
 
+            //###################
+            BaseDeTestesToolStripMenuItem_Click(sender, e);
+            //###############
+
             ServidorToolStripStatus.Text = Properties.Settings.Default.ServerName;
             VersaoToolStripStatus.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             LockForm(true);
             Forms.Login login = new Forms.Login();
             login.ShowDialog();
         }
-
-        
 
         private void CorFundo() {
             MdiClient ctlMDI;
@@ -96,7 +94,7 @@ namespace GTI_Desktop.Forms {
                 ts.Enabled = !bLocked;
             }
 
-            List<ToolStripMenuItem> mItems = gtiCore.GetItems(this.menuStrip1);
+            List<ToolStripMenuItem> mItems = gtiCore.GetItems(this.MenuBarStrip);
             foreach (var item in mItems) {
                 item.Enabled = !bLocked;
             }
@@ -162,11 +160,11 @@ namespace GTI_Desktop.Forms {
             DataBaseToolStripStatus.Text = Properties.Settings.Default.DataBaseTeste;
             gtiCore.UpdateUserBinary();
             this.Refresh();
-
         }
 
         private void FillBackgroundImage(bool bTeste) {
             Bitmap img = bTeste ? Properties.Resources.rosa : Properties.Resources.bege;
+            Color cor = bTeste ? Color.FromArgb(250, 218, 226) : Color.OldLace;
             this.BackgroundImage = img;
             BarStatus.BackgroundImage = img;
             LedGreen.BackgroundImage = img;
@@ -182,7 +180,15 @@ namespace GTI_Desktop.Forms {
             MaquinaToolStripStatus.BackgroundImage = img;
             MaquinatoolStripStatusLabel.BackgroundImage = img;
             NomeBaseDadostoolStripStatusLabel.BackgroundImage = img;
-
+            Div1.BackColor = cor;
+            Div2.BackColor = cor;
+            Div3.BackColor = cor;
+            Div4.BackColor = cor;
+            Div5.BackColor = cor;
+            MenuBarStrip.BackColor = cor;
+            TopBarToolStrip.BackColor = cor;
+            PanelDV.BackColor = cor;
+            PanelDV.GradientEndColor = cor;
         }
 
         private void BtCidadao_Click(object sender, EventArgs e) {

@@ -236,8 +236,6 @@ namespace GTI_Desktop.Forms {
             OrgaoText.Text = reg.Orgao ?? "";
             if (reg.DataNascto != null)
                 DataNasctoMask.Text = Convert.ToDateTime(reg.DataNascto).ToString("dd/MM/yyyy");
-            FoneRText.Text = reg.TelefoneR ?? "";
-            EmailRText.Text = reg.EmailR ?? "";
             if (reg.CodigoProfissao == null || reg.CodigoProfissao == 0) {
                 ProfissaoList.SelectedIndex = -1;
                 ProfissaoText.Text = "";
@@ -277,6 +275,9 @@ namespace GTI_Desktop.Forms {
                 CepRText.Text = reg.CepR.ToString();
                 EmailRText.Text = reg.EmailR;
                 EtiquetaRCheck.Checked = reg.EtiquetaR == "S";
+                FoneRText.Text = reg.TelefoneR ?? "";
+                TemFoneRCheck.Checked = reg.Temfone==null?false:(bool)reg.Temfone;
+                WhatsAppRCheck.Checked =  reg.Whatsapp==null?false:  (bool)reg.Whatsapp;
             } else {
                 NumeroRText.Text = "";
                 ComplementoRText.Text = "";
@@ -290,6 +291,9 @@ namespace GTI_Desktop.Forms {
                 CepRText.Text = "";
                 EmailRText.Text = "";
                 EtiquetaRCheck.Checked =false;
+                FoneRText.Text = "";
+                TemFoneRCheck.Checked = false;
+                WhatsAppRCheck.Checked = false;
             }
 
             LogradouroCText.Text = reg.EnderecoC;
@@ -307,6 +311,9 @@ namespace GTI_Desktop.Forms {
                 CepCText.Text = reg.CepC.ToString();
                 EmailCText.Text = reg.EmailC;
                 EtiquetaCButton.Checked = reg.EtiquetaC == "S";
+                FoneCText.Text = reg.TelefoneC ?? "";
+                TemFoneCCheck.Checked = reg.Temfone2==null?false: (bool)reg.Temfone2;
+                WhatsAppCCheck.Checked = reg.Whatsapp2==null?false: (bool)reg.Whatsapp2;
             } else {
                 LogradouroCText.Text = "";
                 LogradouroCText.Tag = "";
@@ -321,7 +328,10 @@ namespace GTI_Desktop.Forms {
                 PaisCText.Tag = "";
                 CepCText.Text = "";
                 EmailCText.Text = "";
+                FoneCText.Text = "";
                 EtiquetaCButton.Checked = false;
+                TemFoneCCheck.Checked = false;
+                WhatsAppCCheck.Checked = false;
             }
 
             if (!EtiquetaRCheck.Checked && !EtiquetaCButton.Checked) EtiquetaRCheck.Checked = true;
@@ -582,7 +592,10 @@ namespace GTI_Desktop.Forms {
             reg.Numero_imovel = NumeroCText.Text == "" ? 0 : Convert.ToInt32(NumeroCText.Text);
             reg.Complemento = ComplementoCText.Text;
             reg.Email = EmailCText.Text;
+            reg.Telefone = FoneCText.Text;
             reg.Cep = reg.Id_cidade != 413 ? CepCText.Text == "" ? 0 : Convert.ToInt32(gtiCore.ExtractNumber( CepCText.Text)) : 0;
+            reg.TemFone = TemFoneCCheck.Checked;
+            reg.WhatsApp = WhatsAppCCheck.Checked;
 
             Forms.Endereco f1 = new Forms.Endereco(reg, false, true, true, true);
             f1.ShowDialog();
@@ -600,11 +613,52 @@ namespace GTI_Desktop.Forms {
                 ComplementoCText.Text = f1.EndRetorno.Complemento;
                 EmailCText.Text = f1.EndRetorno.Email;
                 CepCText.Text = f1.EndRetorno.Cep.ToString("00000-000");
+                FoneCText.Text = f1.EndRetorno.Telefone;
+                TemFoneCCheck.Checked = (bool)f1.EndRetorno.TemFone;
+                WhatsAppCCheck.Checked = (bool)f1.EndRetorno.WhatsApp;
             }
         }
 
-     
+        private void DelEnderecoRButton_Click(object sender, EventArgs e) {
+            PaisRText.Text = "";
+            PaisRText.Tag = "";
+            UFRText.Text = "";
+            CidadeRText.Text = "";
+            CidadeRText.Tag = "";
+            BairroRText.Text = "";
+            BairroRText.Tag = "";
+            LogradouroRText.Text = "";
+            LogradouroRText.Tag = "";
+            NumeroRText.Text = "";
+            ComplementoRText.Text = "";
+            EmailRText.Text = "";
+            CepRText.Text = "";
+            FoneRText.Text = "";
+            TemFoneRCheck.Checked = false;
+            WhatsAppRCheck.Checked = false;
+        }
 
-        
+        private void DelEnderecoCButton_Click(object sender, EventArgs e) {
+            PaisCText.Text = "";
+            PaisCText.Tag = "";
+            UFCText.Text = "";
+            CidadeCText.Text = "";
+            CidadeCText.Tag = "";
+            BairroCText.Text = "";
+            BairroCText.Tag = "";
+            LogradouroCText.Text = "";
+            LogradouroCText.Tag = "";
+            NumeroCText.Text = "";
+            ComplementoCText.Text = "";
+            EmailCText.Text = "";
+            CepCText.Text = "";
+            FoneCText.Text = "";
+            TemFoneCCheck.Checked = false;
+            WhatsAppCCheck.Checked = false;
+        }
+
+        private void CpfCnpjButton_Click(object sender, EventArgs e) {
+
+        }
     }
 }

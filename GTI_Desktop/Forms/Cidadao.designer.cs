@@ -995,6 +995,7 @@
             this.DelEnderecoCButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.Ttp.SetToolTip(this.DelEnderecoCButton, "Apagar o endereço comercial");
             this.DelEnderecoCButton.UseVisualStyleBackColor = true;
+            this.DelEnderecoCButton.Click += new System.EventHandler(this.DelEnderecoCButton_Click);
             // 
             // AddEnderecoCButton
             // 
@@ -1020,6 +1021,7 @@
             this.DelEnderecoRButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.Ttp.SetToolTip(this.DelEnderecoRButton, "Apagar o endereço residencial");
             this.DelEnderecoRButton.UseVisualStyleBackColor = true;
+            this.DelEnderecoRButton.Click += new System.EventHandler(this.DelEnderecoRButton_Click);
             // 
             // AddEnderecoRButton
             // 
@@ -1059,6 +1061,7 @@
             this.CpfCnpjButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.Ttp.SetToolTip(this.CpfCnpjButton, "Verificar situação tributária do cidadão");
             this.CpfCnpjButton.UseVisualStyleBackColor = true;
+            this.CpfCnpjButton.Click += new System.EventHandler(this.CpfCnpjButton_Click);
             // 
             // Profissao_DelButton
             // 

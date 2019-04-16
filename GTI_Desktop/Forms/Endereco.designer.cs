@@ -139,6 +139,7 @@ namespace GTI_Desktop.Forms {
             this.PaisButton_Refresh.TabIndex = 7;
             this.PaisButton_Refresh.TabStop = false;
             this.PaisButton_Refresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.PaisButton_Refresh, "Atualizar lista de países");
             this.PaisButton_Refresh.UseVisualStyleBackColor = true;
             this.PaisButton_Refresh.Click += new System.EventHandler(this.BtPais_Refresh_Click);
             // 
@@ -152,6 +153,7 @@ namespace GTI_Desktop.Forms {
             this.BairroButton_Refresh.TabIndex = 4;
             this.BairroButton_Refresh.TabStop = false;
             this.BairroButton_Refresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.BairroButton_Refresh, "Atualizar lista de bairros");
             this.BairroButton_Refresh.UseVisualStyleBackColor = true;
             this.BairroButton_Refresh.Click += new System.EventHandler(this.BtBairro_Refresh_Click);
             // 
@@ -317,7 +319,9 @@ namespace GTI_Desktop.Forms {
             this.TemFoneCheck.Name = "TemFoneCheck";
             this.TemFoneCheck.Size = new System.Drawing.Size(28, 16);
             this.TemFoneCheck.TabIndex = 161;
+            this.toolTip1.SetToolTip(this.TemFoneCheck, "Não possui telefone");
             this.TemFoneCheck.UseVisualStyleBackColor = true;
+            this.TemFoneCheck.CheckedChanged += new System.EventHandler(this.TemFoneCheck_CheckedChanged);
             // 
             // WhatsAppCheck
             // 
@@ -328,6 +332,7 @@ namespace GTI_Desktop.Forms {
             this.WhatsAppCheck.Name = "WhatsAppCheck";
             this.WhatsAppCheck.Size = new System.Drawing.Size(28, 17);
             this.WhatsAppCheck.TabIndex = 160;
+            this.toolTip1.SetToolTip(this.WhatsAppCheck, "Possui WhatsApp");
             this.WhatsAppCheck.UseVisualStyleBackColor = true;
             // 
             // Endereco
