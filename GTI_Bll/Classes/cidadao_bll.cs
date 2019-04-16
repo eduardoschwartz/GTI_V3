@@ -139,7 +139,20 @@ namespace GTI_Bll.Classes {
             return AppEx;
         }
 
+        public List<Historico_CidadaoStruct> Lista_Historico(int CodigoCidadao) {
+            Cidadao_Data obj = new Cidadao_Data(_connection);
+            return obj.Lista_Historico(CodigoCidadao);
+        }
 
+        public List<Observacao_CidadaoStruct> Lista_Observacao(int CodigoCidadao) {
+            Cidadao_Data obj = new Cidadao_Data(_connection);
+            return obj.Lista_Observacao(CodigoCidadao);
+        }
 
+        public Exception Incluir_observacao_cidadao(obscidadao reg) {
+            Cidadao_Data obj = new Cidadao_Data(_connection);
+            Exception ex = obj.Incluir_observacao_cidadao(reg);
+            return ex;
+        }
     }
 }

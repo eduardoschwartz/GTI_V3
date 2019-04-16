@@ -660,5 +660,20 @@ namespace GTI_Desktop.Forms {
         private void CpfCnpjButton_Click(object sender, EventArgs e) {
 
         }
+
+        private void HistoricoButton_Click(object sender, EventArgs e) {
+            if (NomeText.Text != "") {
+                Cidadao_Historico frm = new Cidadao_Historico(Convert.ToInt32(CodigoText.Text),"H");
+                frm.ShowDialog();
+            }
+        }
+
+        private void ObservaçãoButton_Click(object sender, EventArgs e) {
+            if (NomeText.Text != "") {
+                Cidadao_Historico frm = new Cidadao_Historico(Convert.ToInt32(CodigoText.Text), "O");
+                frm.ShowDialog();
+            }
+
+        }
     }
 }

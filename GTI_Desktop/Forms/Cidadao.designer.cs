@@ -410,16 +410,19 @@
             this.HistoricoButton.Size = new System.Drawing.Size(79, 22);
             this.HistoricoButton.Text = "Histórico";
             this.HistoricoButton.ToolTipText = "Exibir o histórico do cidadão";
+            this.HistoricoButton.Click += new System.EventHandler(this.HistoricoButton_Click);
             // 
             // ObservaçãoButton
             // 
             this.ObservaçãoButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.ObservaçãoButton.Image = global::GTI_Desktop.Properties.Resources.comment;
             this.ObservaçãoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ObservaçãoButton.Name = "ObservaçãoButton";
             this.ObservaçãoButton.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.ObservaçãoButton.Size = new System.Drawing.Size(77, 22);
+            this.ObservaçãoButton.Size = new System.Drawing.Size(93, 22);
             this.ObservaçãoButton.Text = "Observação";
             this.ObservaçãoButton.ToolTipText = "Abrir campo de observação do cidadão";
+            this.ObservaçãoButton.Click += new System.EventHandler(this.ObservaçãoButton_Click);
             // 
             // EndCPanel
             // 

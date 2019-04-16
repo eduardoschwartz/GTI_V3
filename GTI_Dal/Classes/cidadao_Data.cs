@@ -300,5 +300,34 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public List<Historico_CidadaoStruct> Lista_Historico(int CodigoCidadao) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var Sql = (from h in db.Historicocidadao join u in db.Usuario on h.Userid equals u.Id where h.Codigo==CodigoCidadao orderby h.Data
+                           select new Historico_CidadaoStruct { Codigo=CodigoCidadao,Data=h.Data,Id=h.Id,Id_Usuario=h.Userid,Nome_Usuario=u.Nomecompleto,Obs=h.Obs});
+                return Sql.ToList();
+            }
+        }
+
+        public List<Observacao_CidadaoStruct> Lista_Observacao(int CodigoCidadao) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var Sql = (from h in db.Obscidadao join u in db.Usuario on h.Userid equals u.Id where h.Codigo == CodigoCidadao orderby h.timestamp
+                           select new Observacao_CidadaoStruct { Codigo = CodigoCidadao, Data_Hora = h.timestamp, Id = h.Id, Id_Usuario = h.Userid, Nome_Usuario = u.Nomecompleto, Obs = h.Obs });
+                return Sql.ToList();
+            }
+        }
+
+        public Exception Incluir_observacao_cidadao(obscidadao reg) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                db.Obscidadao.Add(reg);
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+
     }
 }

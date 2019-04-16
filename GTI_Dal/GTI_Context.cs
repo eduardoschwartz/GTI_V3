@@ -136,5 +136,7 @@ namespace GTI_Dal {
         public DbSet<Serasa> Serasa { get; set; }
         public DbSet<Processoreparc> Processoreparc { get; set; }
         public DbSet<Ficha_compensacao_documento> Ficha_compensacao_documento { get; set; }
+        public DbSet<historicocidadao> Historicocidadao { get; set; }
+        public DbSet<obscidadao> Obscidadao { get; set; }
     }
 }

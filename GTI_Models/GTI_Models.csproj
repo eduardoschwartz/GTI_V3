@@ -108,6 +108,7 @@
     <Compile Include="Models\facequadra.cs" />
     <Compile Include="Models\ficha_compensacao_documento.cs" />
     <Compile Include="Models\historico.cs" />
+    <Compile Include="Models\historicocidadao.cs" />
     <Compile Include="Models\horariofunc.cs" />
     <Compile Include="Models\isencao.cs" />
     <Compile Include="Models\lancamento.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Models\mobiliarioplaca.cs" />
     <Compile Include="Models\mobiliariovs.cs" />
     <Compile Include="Models\numdocumento.cs" />
+    <Compile Include="Models\obscidadao.cs" />
     <Compile Include="Models\obsparcela.cs" />
     <Compile Include="Models\parametros.cs" />
     <Compile Include="Models\paramparcela.cs" />
