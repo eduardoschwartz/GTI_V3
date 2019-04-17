@@ -932,7 +932,6 @@ namespace GTI_Desktop.Forms {
         }
 
         private void BtFind_Click(object sender, EventArgs e) {
-
             using (var form = new Imovel_Lista()) {
                 var result = form.ShowDialog(this);
                 if (result == DialogResult.OK) {

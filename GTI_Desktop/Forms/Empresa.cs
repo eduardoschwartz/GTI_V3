@@ -892,12 +892,9 @@ namespace GTI_Desktop.Forms {
             if (_logradouro == 0) return;
 
             Imovel_bll imovel_Class = new Imovel_bll(_connection);
-            ImovelStruct _reg = new ImovelStruct {
-                CodigoLogradouro = _logradouro,
-                Numero = _numero
-            };
-
-            List<ImovelStruct> Lista = imovel_Class.Lista_Imovel(_reg);
+            ImovelStruct _reg = new ImovelStruct { CodigoLogradouro = _logradouro, Numero = _numero };
+            ImovelStruct _orderby = new ImovelStruct { Codigo = 1 };
+            List<ImovelStruct> Lista = imovel_Class.Lista_Imovel(_reg,_orderby);
             if (Lista.Count > 0) {
                 Distrito.Text = Lista[0].Distrito.ToString();
                 Setor.Text = Lista[0].Setor.ToString("00");
@@ -1266,7 +1263,15 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-
-
+        private void FindButton_Click(object sender, EventArgs e) {
+            using (var form = new Empresa_Lista()) {
+                var result = form.ShowDialog(this);
+                if (result == DialogResult.OK) {
+                    int val = form.ReturnValue;
+                    ClearFields();
+                    Carrega_Empresa(val);
+                }
+            }
+        }
     }
 }

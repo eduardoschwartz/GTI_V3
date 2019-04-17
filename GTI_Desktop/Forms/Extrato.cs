@@ -1020,6 +1020,32 @@ InicioObs:
                     CodigoText.Text = val.ToString();
                     ClearAll();
                     Carrega_Extrato(val);
+                    Exibe_Extrato();
+                }
+            }
+        }
+
+        private void EmpresaMenuItem_Click(object sender, EventArgs e) {
+            //using (var form = new Empresa_Lista()) {
+            //    var result = form.ShowDialog(this);
+            //    if (result == DialogResult.OK) {
+            //        int val = form.ReturnValue;
+            //        CodigoText.Text = val.ToString();
+            //        ClearAll();
+            //        Carrega_Extrato(val);
+            //    }
+            //}
+        }
+
+        private void CidadaoMenuItem_Click(object sender, EventArgs e) {
+            using (var form = new Cidadao_Lista()) {
+                var result = form.ShowDialog(this);
+                if (result == DialogResult.OK) {
+                    int val = form.ReturnValue;
+                    CodigoText.Text = val.ToString();
+                    ClearAll();
+                    Carrega_Extrato(val);
+                    Exibe_Extrato();
                 }
             }
         }

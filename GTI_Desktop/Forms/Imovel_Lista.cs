@@ -1,13 +1,13 @@
 ﻿using GTI_Bll.Classes;
 using GTI_Desktop.Classes;
 using GTI_Models.Models;
+using OfficeOpenXml;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using OfficeOpenXml;
 
 namespace GTI_Desktop.Forms {
     public partial class Imovel_Lista : Form {
@@ -22,17 +22,21 @@ namespace GTI_Desktop.Forms {
             ProprietarioToolStrip.Renderer = new MySR();
             CondominioToolStrip.Renderer = new MySR();
             ReadDatFile();
+            string[] _ordem = new string[] { "Código", "Inscrição", "Proprietário", "Endereco", "Bairro", "Condomínio" };
+            OrdemList.Items.AddRange(_ordem);
+            OrdemList.SelectedIndex = 0;
+
         }
 
         private void SelectButton_Click(object sender, EventArgs e) {
             ListView.SelectedIndexCollection col = MainListView.SelectedIndices;
-            if (col.Count>0) {
+            if (col.Count > 0) {
                 DialogResult = DialogResult.OK;
                 ReturnValue = Convert.ToInt32(MainListView.Items[col[0]].Text);
                 SaveDatFile();
                 Close();
             } else {
-                MessageBox.Show("Selecione um imóvel.","Atenção",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                MessageBox.Show("Selecione um imóvel.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -127,7 +131,7 @@ namespace GTI_Desktop.Forms {
 
                 aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "IM", false);
                 MainListView.VirtualListSize = aDatResult.Count;
-            } catch  {
+            } catch {
             }
 
         }
@@ -145,7 +149,7 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void CallPB(System.Windows.Forms.ToolStripProgressBar pBar,  int nPos,int nTot) {
+        private void CallPB(System.Windows.Forms.ToolStripProgressBar pBar, int nPos, int nTot) {
             pBar.Value = nPos * 100 / nTot;
         }
 
@@ -158,46 +162,61 @@ namespace GTI_Desktop.Forms {
             gtiCore.Ocupado(this);
             Imovel_bll imovel_Class = new Imovel_bll(_connection);
 
-            ImovelStruct Reg = new ImovelStruct();
-            Reg.Codigo = string.IsNullOrEmpty(Codigo.Text) ? 0 : Convert.ToInt32(Codigo.Text);
-            Reg.Proprietario_Principal = PrincipalCheckBox.Checked;
+            ImovelStruct Reg = new ImovelStruct {
+                Codigo = string.IsNullOrEmpty(Codigo.Text) ? 0 : Convert.ToInt32(Codigo.Text),
+                Proprietario_Principal = PrincipalCheckBox.Checked
+            };
             if (Proprietario.Tag == null || Proprietario.Tag.ToString() == "") Proprietario.Tag = "0";
-            Reg.Proprietario_Codigo =  Convert.ToInt32(Proprietario.Tag.ToString());
+            Reg.Proprietario_Codigo = Convert.ToInt32(Proprietario.Tag.ToString());
             Reg.Distrito = Inscricao.Text.Substring(0, 1).Trim() == "" ? (short)0 : Convert.ToInt16(Inscricao.Text.Substring(0, 1).Trim());
             Reg.Setor = Inscricao.Text.Substring(2, 2).Trim() == "" ? (short)0 : Convert.ToInt16(Inscricao.Text.Substring(2, 2).Trim());
             Reg.Quadra = Inscricao.Text.Substring(5, 4).Trim() == "" ? (short)0 : Convert.ToInt16(Inscricao.Text.Substring(5, 4).Trim());
             Reg.Lote = Inscricao.Text.Substring(10, 5).Trim() == "" ? 0 : Convert.ToInt32(Inscricao.Text.Substring(10, 5).Trim());
             Condominio.Tag = Condominio.Tag ?? "";
-            Reg.CodigoCondominio= string.IsNullOrWhiteSpace(Condominio.Tag.ToString()) ? 0 : Convert.ToInt32(Condominio.Tag.ToString());
+            Reg.CodigoCondominio = string.IsNullOrWhiteSpace(Condominio.Tag.ToString()) ? 0 : Convert.ToInt32(Condominio.Tag.ToString());
             Logradouro.Tag = Logradouro.Tag ?? "";
             Reg.CodigoLogradouro = string.IsNullOrWhiteSpace(Logradouro.Tag.ToString()) ? 0 : Convert.ToInt32(Logradouro.Tag.ToString());
             Bairro.Tag = Bairro.Tag ?? "";
             Reg.CodigoBairro = string.IsNullOrWhiteSpace(Bairro.Tag.ToString()) ? (short)0 : Convert.ToInt16(Bairro.Tag.ToString());
             Reg.Numero = Numero.Text.Trim() == "" ? (short)0 : Convert.ToInt16(Numero.Text);
 
-            if(Reg.Codigo==0 && Reg.Proprietario_Codigo==0 && Reg.Distrito==0 && Reg.Setor==0 & Reg.Quadra==0 & Reg.Lote==0 && Reg.CodigoCondominio==0 && 
-                Reg.CodigoLogradouro==0 && Reg.Numero==0 && Reg.CodigoBairro == 0) {
+            if (Reg.Codigo == 0 && Reg.Proprietario_Codigo == 0 && Reg.Distrito == 0 && Reg.Setor == 0 & Reg.Quadra == 0 & Reg.Lote == 0 && Reg.CodigoCondominio == 0 &&
+                Reg.CodigoLogradouro == 0 && Reg.Numero == 0 && Reg.CodigoBairro == 0) {
                 gtiCore.Liberado(this);
-                MessageBox.Show("Selecione ao menos um critério para filtrar.","Atenção",MessageBoxButtons.OK,MessageBoxIcon.Error);
+//                MessageBox.Show("Selecione ao menos um critério para filtrar.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
+
             MainListView.ListViewItemSorter = null;
-            List<ImovelStruct> Lista = imovel_Class.Lista_Imovel(Reg);
+            ImovelStruct _orderby = new ImovelStruct();
+            if (OrdemList.SelectedIndex == 0)
+                _orderby.Codigo = 1;
+            else if (OrdemList.SelectedIndex == 1)
+                _orderby.Inscricao = "X";
+            else if (OrdemList.SelectedIndex == 2)
+                _orderby.Proprietario_Nome = "X";
+            else if (OrdemList.SelectedIndex == 3)
+                _orderby.NomeLogradouro = "X";
+            else if (OrdemList.SelectedIndex == 4)
+                _orderby.NomeBairro = "X";
+            else if (OrdemList.SelectedIndex == 5)
+                _orderby.NomeCondominio = "X";
+            List<ImovelStruct> Lista = imovel_Class.Lista_Imovel(Reg, _orderby);
 
             int _pos = 0, _total = Lista.Count;
             if (aDatResult == null) aDatResult = new List<ArrayList>();
             aDatResult.Clear();
             foreach (var item in Lista) {
-                ArrayList itemlv = new ArrayList(8);
-                itemlv.Add(item.Codigo.ToString("000000"));
-                itemlv.Add(item.Inscricao.ToString());
-                itemlv.Add(item.Proprietario_Nome.ToString());
-                itemlv.Add(item.NomeLogradouro.ToString());
-                itemlv.Add(item.Numero.ToString());
-                itemlv.Add(item.Complemento == null ? "" : item.Complemento.ToString());
-                itemlv.Add(item.NomeBairro.ToString());
-                itemlv.Add(item.CodigoCondominio == 999 ? "" : item.NomeCondominio.ToString());
+                ArrayList itemlv = new ArrayList(8) {
+                    item.Codigo.ToString("000000"),
+                    item.Inscricao.ToString(),
+                    item.Proprietario_Nome.ToString(),
+                    item.NomeLogradouro.ToString(),
+                    item.Numero.ToString(),
+                    item.Complemento == null ? "" : item.Complemento.ToString(),
+                    item.NomeBairro.ToString(),
+                    item.CodigoCondominio == 999 ? "" : item.NomeCondominio.ToString()
+                };
                 aDatResult.Add(itemlv);
                 _pos++;
             }
@@ -205,12 +224,10 @@ namespace GTI_Desktop.Forms {
             MainListView.VirtualListSize = aDatResult.Count;
             MainListView.EndUpdate();
 
-            //MainListView.ListViewItemSorter = lvwColumnSorter;
-
             TotalImovel.Text = _total.ToString();
             gtiCore.Liberado(this);
-            if(MainListView.Items.Count==0)
-                MessageBox.Show("Nenhum imóvel coincide com os critérios especificados","Atenção",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            if (MainListView.Items.Count == 0)
+                MessageBox.Show("Nenhum imóvel coincide com os critérios especificados", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
 
@@ -248,12 +265,12 @@ namespace GTI_Desktop.Forms {
             if (string.IsNullOrWhiteSpace(Logradouro.Tag.ToString()))
                 Logradouro.Tag = "0";
             reg.Id_logradouro = string.IsNullOrWhiteSpace(Logradouro.Text) ? 0 : Convert.ToInt32(Logradouro.Tag.ToString());
-            reg.Nome_logradouro = Logradouro.Text ;
+            reg.Nome_logradouro = Logradouro.Text;
             reg.Numero_imovel = Numero.Text == "" ? 0 : Convert.ToInt32(Numero.Text);
             reg.Complemento = "";
             reg.Email = "";
 
-            Forms.Endereco f1 = new Forms.Endereco(reg, true, true,false, true);
+            Forms.Endereco f1 = new Forms.Endereco(reg, true, true, false, true);
             f1.ShowDialog();
             if (!f1.EndRetorno.Cancelar) {
                 Bairro.Text = f1.EndRetorno.Nome_bairro;
@@ -309,7 +326,7 @@ namespace GTI_Desktop.Forms {
                     worksheet.Cells.AutoFitColumns(0);  //Autofit columns for all cells
                     var xlFile = gtiCore.GetFileInfo(sfd.FileName);
                     package.SaveAs(xlFile);
-                 
+
                     gtiCore.Liberado(this);
                     MessageBox.Show("Seus dados foram exportados para o Excel com sucesso.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -330,6 +347,29 @@ namespace GTI_Desktop.Forms {
         private void Codigo_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Return)
                 FindButton_Click(sender, e);
+        }
+
+        private void OrdemList_SelectedIndexChanged(object sender, EventArgs e) {
+            FindButton_Click(sender, e);
+        }
+
+        private void ClearButton_Click(object sender, EventArgs e) {
+            Codigo.Text = "";
+            PrincipalCheckBox.Checked = false;
+            Inscricao.Text = "";
+            Proprietario.Text = "";
+            Proprietario.Tag = "";
+            Logradouro.Text = "";
+            Numero.Text = "";
+            Bairro.Text = "";
+            Bairro.Tag = "";
+            Condominio.Text = "";
+            Condominio.Tag = "";
+            MainListView.BeginUpdate();
+            MainListView.VirtualListSize = 0;
+            MainListView.EndUpdate();
+            TotalImovel.Text = "0";
+            SaveDatFile();
         }
     }
 }

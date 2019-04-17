@@ -61,10 +61,14 @@
             this.tBar = new System.Windows.Forms.ToolStrip();
             this.FindButton = new System.Windows.Forms.ToolStripButton();
             this.SelectButton = new System.Windows.Forms.ToolStripButton();
+            this.ClearButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.TotalImovel = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.ExcelButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.OrdemList = new System.Windows.Forms.ToolStripComboBox();
             this.panel1.SuspendLayout();
             this.CondominioToolStrip.SuspendLayout();
             this.ProprietarioToolStrip.SuspendLayout();
@@ -437,10 +441,14 @@
             this.tBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FindButton,
             this.SelectButton,
+            this.ClearButton,
             this.toolStripSeparator1,
             this.TotalImovel,
             this.toolStripLabel2,
-            this.ExcelButton});
+            this.ExcelButton,
+            this.toolStripSeparator2,
+            this.toolStripLabel1,
+            this.OrdemList});
             this.tBar.Location = new System.Drawing.Point(0, 393);
             this.tBar.Name = "tBar";
             this.tBar.Padding = new System.Windows.Forms.Padding(6, 0, 1, 0);
@@ -469,6 +477,17 @@
             this.SelectButton.Text = "toolStripButton2";
             this.SelectButton.ToolTipText = "Retornar";
             this.SelectButton.Click += new System.EventHandler(this.SelectButton_Click);
+            // 
+            // ClearButton
+            // 
+            this.ClearButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ClearButton.Image = global::GTI_Desktop.Properties.Resources.delete;
+            this.ClearButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ClearButton.Name = "ClearButton";
+            this.ClearButton.Size = new System.Drawing.Size(23, 22);
+            this.ClearButton.Text = "toolStripButton1";
+            this.ClearButton.ToolTipText = "Limpar todos os campos";
+            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
             // toolStripSeparator1
             // 
@@ -500,6 +519,26 @@
             this.ExcelButton.Text = "toolStripButton1";
             this.ExcelButton.ToolTipText = "Exportar resultado para o Excel";
             this.ExcelButton.Click += new System.EventHandler(this.ExcelButton_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(74, 22);
+            this.toolStripLabel1.Text = "Ordenar por:";
+            // 
+            // OrdemList
+            // 
+            this.OrdemList.BackColor = System.Drawing.SystemColors.Control;
+            this.OrdemList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.OrdemList.ForeColor = System.Drawing.Color.DarkRed;
+            this.OrdemList.Name = "OrdemList";
+            this.OrdemList.Size = new System.Drawing.Size(121, 25);
+            this.OrdemList.SelectedIndexChanged += new System.EventHandler(this.OrdemList_SelectedIndexChanged);
             // 
             // Imovel_Lista
             // 
@@ -577,5 +616,9 @@
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ToolStripButton ExcelButton;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripComboBox OrdemList;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton ClearButton;
     }
 }

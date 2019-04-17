@@ -200,9 +200,9 @@ namespace GTI_Bll.Classes {
         /// </summary>
         /// <param name="Reg"></param>
         /// <returns></returns>
-        public List<ImovelStruct> Lista_Imovel(ImovelStruct Reg) {
+        public List<ImovelStruct> Lista_Imovel(ImovelStruct Reg, ImovelStruct OrderByField) {
             Imovel_Data obj = new Imovel_Data(_connection);
-            return obj.Lista_Imovel(Reg);
+            return obj.Lista_Imovel(Reg,OrderByField);
         }
 
         /// <summary>

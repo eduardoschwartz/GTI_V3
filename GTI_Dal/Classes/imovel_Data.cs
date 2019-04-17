@@ -9,7 +9,7 @@ using static GTI_Models.modelCore;
 namespace GTI_Dal.Classes {
     public class Imovel_Data {
 
-        private string _connection;
+        private readonly string _connection;
 
         public Imovel_Data(string sConnection) {
             _connection = sConnection;
@@ -653,7 +653,7 @@ namespace GTI_Dal.Classes {
             }
         }
 
-        public List<ImovelStruct> Lista_Imovel(ImovelStruct Reg) {
+        public List<ImovelStruct> Lista_Imovel(ImovelStruct Reg,ImovelStruct OrderByField) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Cadimob
                            join f in db.Facequadra on new { p1 = c.Distrito, p2 = c.Setor, p3 = c.Quadra, p4 = c.Seq } equals new { p1 = f.Coddistrito, p2 = f.Codsetor, p3 = f.Codquadra, p4 = f.Codface } into fc from f in fc.DefaultIfEmpty()
@@ -662,7 +662,6 @@ namespace GTI_Dal.Classes {
                            join o in db.Condominio on c.Codcondominio equals o.Cd_codigo into co from o in co.DefaultIfEmpty()
                            join p in db.Proprietario on c.Codreduzido equals p.Codreduzido into pc from p in pc.DefaultIfEmpty()
                            join i in db.Cidadao on p.Codcidadao equals i.Codcidadao into ip from i in ip.DefaultIfEmpty()
-                           orderby c.Codreduzido
                            select new ImovelStruct {
                                Codigo = c.Codreduzido, Distrito = c.Distrito, Setor = c.Setor, Quadra = c.Quadra, Lote = c.Lote, Seq = c.Seq, Unidade = c.Unidade,
                                SubUnidade = c.Subunidade, Proprietario_Codigo = p.Codcidadao, Proprietario_Nome = i.Nomecidadao, Proprietario_Principal = p.Principal, CodigoLogradouro = f.Codlogr,
@@ -691,6 +690,19 @@ namespace GTI_Dal.Classes {
                     Sql = Sql.Where(c => c.CodigoBairro == Reg.CodigoBairro);
                 if (Reg.Numero > 0)
                     Sql = Sql.Where(c => c.Numero == Reg.Numero);
+
+                if (OrderByField.Codigo > 0)
+                    Sql = Sql.OrderBy(c => c.Codigo);
+                if (!string.IsNullOrWhiteSpace(OrderByField.Inscricao))
+                    Sql = Sql.OrderBy(c => c.Inscricao);
+                if (!string.IsNullOrWhiteSpace(OrderByField.Proprietario_Nome))
+                    Sql = Sql.OrderBy(c => c.Proprietario_Nome);
+                if (!string.IsNullOrWhiteSpace(OrderByField.NomeLogradouro))
+                    Sql = Sql.OrderBy(c => c.NomeLogradouro);
+                if (!string.IsNullOrWhiteSpace(OrderByField.NomeBairro))
+                    Sql = Sql.OrderBy(c => c.NomeBairro);
+                if (!string.IsNullOrWhiteSpace(OrderByField.NomeCondominio))
+                    Sql = Sql.OrderBy(c => c.NomeCondominio);
 
                 List<ImovelStruct> Lista = new List<ImovelStruct>();
                 foreach (var item in Sql) {
