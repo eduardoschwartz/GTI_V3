@@ -45,7 +45,10 @@
             this.MainListView = new System.Windows.Forms.ListView();
             this.chCodigo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chDoc = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chRazao = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chProp = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chAtivNome = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chAtivCod = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chEnd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chNum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chCompl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -71,9 +74,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.LogradouroText = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.chAtivNome = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chRazao = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chAtivCod = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.EnderecoToolStrip.SuspendLayout();
             this.tBar.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -179,10 +179,10 @@
             this.toolStripSeparator2,
             this.toolStripLabel1,
             this.OrdemList});
-            this.tBar.Location = new System.Drawing.Point(0, 414);
+            this.tBar.Location = new System.Drawing.Point(0, 400);
             this.tBar.Name = "tBar";
             this.tBar.Padding = new System.Windows.Forms.Padding(6, 0, 1, 0);
-            this.tBar.Size = new System.Drawing.Size(713, 25);
+            this.tBar.Size = new System.Drawing.Size(656, 25);
             this.tBar.TabIndex = 77;
             this.tBar.Text = "toolStrip1";
             // 
@@ -293,7 +293,7 @@
             this.MainListView.FullRowSelect = true;
             this.MainListView.Location = new System.Drawing.Point(0, 181);
             this.MainListView.Name = "MainListView";
-            this.MainListView.Size = new System.Drawing.Size(713, 230);
+            this.MainListView.Size = new System.Drawing.Size(656, 216);
             this.MainListView.TabIndex = 76;
             this.MainListView.UseCompatibleStateImageBehavior = false;
             this.MainListView.View = System.Windows.Forms.View.Details;
@@ -309,10 +309,24 @@
             this.chDoc.Text = "CPF/CNPJ";
             this.chDoc.Width = 120;
             // 
+            // chRazao
+            // 
+            this.chRazao.Text = "Razão Social";
+            this.chRazao.Width = 200;
+            // 
             // chProp
             // 
             this.chProp.Text = "Proprietário";
             this.chProp.Width = 220;
+            // 
+            // chAtivNome
+            // 
+            this.chAtivNome.Text = "Atividade";
+            this.chAtivNome.Width = 200;
+            // 
+            // chAtivCod
+            // 
+            this.chAtivCod.Text = "AtivCod";
             // 
             // chEnd
             // 
@@ -356,7 +370,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(713, 181);
+            this.panel1.Size = new System.Drawing.Size(656, 181);
             this.panel1.TabIndex = 78;
             // 
             // AtividadeToolStrip
@@ -393,6 +407,7 @@
             this.AtividadeDelButton.Size = new System.Drawing.Size(23, 22);
             this.AtividadeDelButton.Text = "Remover o condomínio";
             this.AtividadeDelButton.ToolTipText = "Remover o condomínio";
+            this.AtividadeDelButton.Click += new System.EventHandler(this.AtividadeDelButton_Click);
             // 
             // AtividadeText
             // 
@@ -490,6 +505,7 @@
             this.ProprietarioDelButton.Size = new System.Drawing.Size(23, 22);
             this.ProprietarioDelButton.Text = "Remover o condomínio";
             this.ProprietarioDelButton.ToolTipText = "Remover o condomínio";
+            this.ProprietarioDelButton.Click += new System.EventHandler(this.ProprietarioDelButton_Click);
             // 
             // ProprietarioText
             // 
@@ -572,28 +588,15 @@
             this.label4.TabIndex = 86;
             this.label4.Text = "Logradouro.:";
             // 
-            // chAtivNome
-            // 
-            this.chAtivNome.Text = "Atividade";
-            this.chAtivNome.Width = 200;
-            // 
-            // chRazao
-            // 
-            this.chRazao.Text = "Razão Social";
-            this.chRazao.Width = 200;
-            // 
-            // chAtivCod
-            // 
-            this.chAtivCod.Text = "AtivCod";
-            // 
             // Empresa_Lista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(713, 439);
+            this.ClientSize = new System.Drawing.Size(656, 425);
             this.Controls.Add(this.tBar);
             this.Controls.Add(this.MainListView);
             this.Controls.Add(this.panel1);
+            this.MinimumSize = new System.Drawing.Size(530, 380);
             this.Name = "Empresa_Lista";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lista das empresas cadastradas";

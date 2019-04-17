@@ -28,6 +28,37 @@ namespace GTI_Desktop.Forms {
         }
 
         private void FindButton_Click(object sender, EventArgs e) {
+            MainListView.BeginUpdate();
+            MainListView.VirtualListSize = 0;
+            MainListView.EndUpdate();
+
+            gtiCore.Ocupado(this);
+            Empresa_bll empresa_Class = new Empresa_bll(_connection);
+
+            EmpresaStruct Reg = new EmpresaStruct {
+                Codigo = string.IsNullOrEmpty(Codigo.Text) ? 0 : Convert.ToInt32(Codigo.Text),
+            };
+
+            Reg.Razao_social = RazaoSocialText.Text;
+            LogradouroText.Tag = LogradouroText.Tag ?? "";
+            AtividadeText.Tag = AtividadeText.Tag ?? "";
+            Reg.Atividade_codigo = string.IsNullOrWhiteSpace(AtividadeText.Tag.ToString()) ? 0 : Convert.ToInt32(AtividadeText.Tag.ToString());
+            Reg.Endereco_codigo = string.IsNullOrWhiteSpace(LogradouroText.Tag.ToString()) ? 0 : Convert.ToInt32(LogradouroText.Tag.ToString());
+            BairroText.Tag = BairroText.Tag ?? "";
+            Reg.Bairro_codigo = string.IsNullOrWhiteSpace(BairroText.Tag.ToString()) ? (short)0 : Convert.ToInt16(BairroText.Tag.ToString());
+            Reg.Numero = NumeroText.Text.Trim() == "" ? (short)0 : Convert.ToInt16(NumeroText.Text);
+            if (CNPJOption.Checked) {
+                Reg.Juridica = true;
+                Reg.Cnpj = CNPJText.Text;
+                Reg.Cpf_cnpj = CNPJText.Text;
+            } else {
+                Reg.Juridica = false;
+                Reg.Cnpj = CPFText.Text;
+                Reg.Cpf_cnpj = CPFText.Text;
+            }
+
+
+
 
         }
 
@@ -39,7 +70,7 @@ namespace GTI_Desktop.Forms {
                 SaveDatFile();
                 Close();
             } else {
-                MessageBox.Show("Selecione um imóvel.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Selecione uma empresa.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -124,6 +155,16 @@ namespace GTI_Desktop.Forms {
             NumeroText.Text = "";
             BairroText.Text = "";
             BairroText.Tag = "";
+        }
+
+        private void ProprietarioDelButton_Click(object sender, EventArgs e) {
+            ProprietarioText.Text = "";
+            ProprietarioText.Tag = "";
+        }
+
+        private void AtividadeDelButton_Click(object sender, EventArgs e) {
+            AtividadeText.Text = "";
+            AtividadeText.Tag = "";
         }
 
         private void ExcelButton_Click(object sender, EventArgs e) {
@@ -220,5 +261,6 @@ namespace GTI_Desktop.Forms {
             CNPJText.Visible = true;
             CNPJText.Focus();
         }
+
     }
 }

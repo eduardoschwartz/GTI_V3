@@ -94,7 +94,7 @@
             this.MainListView.FullRowSelect = true;
             this.MainListView.Location = new System.Drawing.Point(0, 171);
             this.MainListView.Name = "MainListView";
-            this.MainListView.Size = new System.Drawing.Size(713, 219);
+            this.MainListView.Size = new System.Drawing.Size(689, 220);
             this.MainListView.TabIndex = 6;
             this.MainListView.UseCompatibleStateImageBehavior = false;
             this.MainListView.View = System.Windows.Forms.View.Details;
@@ -159,7 +159,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(713, 169);
+            this.panel1.Size = new System.Drawing.Size(689, 169);
             this.panel1.TabIndex = 75;
             // 
             // CondominioToolStrip
@@ -449,10 +449,10 @@
             this.toolStripSeparator2,
             this.toolStripLabel1,
             this.OrdemList});
-            this.tBar.Location = new System.Drawing.Point(0, 393);
+            this.tBar.Location = new System.Drawing.Point(0, 394);
             this.tBar.Name = "tBar";
             this.tBar.Padding = new System.Windows.Forms.Padding(6, 0, 1, 0);
-            this.tBar.Size = new System.Drawing.Size(713, 25);
+            this.tBar.Size = new System.Drawing.Size(689, 25);
             this.tBar.TabIndex = 70;
             this.tBar.Text = "toolStrip1";
             // 
@@ -544,13 +544,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(713, 418);
+            this.ClientSize = new System.Drawing.Size(689, 419);
             this.Controls.Add(this.MainListView);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tBar);
             this.DoubleBuffered = true;
             this.KeyPreview = true;
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(530, 380);
             this.Name = "Imovel_Lista";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
