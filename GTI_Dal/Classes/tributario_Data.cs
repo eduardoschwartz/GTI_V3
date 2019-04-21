@@ -1557,12 +1557,13 @@ namespace GTI_Dal.Classes {
                 decimal _mes_atual = _mes_inicial, _ano_atual = _ano_inicial;
 
                 while (true) {
-                    if (_ano_atual < 2015) //apenas para competencias acima de abril de 2015(Inicio da Giss)
+                    if (_ano_atual < 2017) //apenas para competencias acima de abril de 2015(Inicio da Giss)
+                    //    if (_ano_atual < 2015) //apenas para competencias acima de abril de 2015(Inicio da Giss)
                         goto Continue;
-                    else {
-                        if(_ano_atual==2015 && _mes_atual<5)
-                            goto Continue;
-                    }
+  //                  else {
+                        //if(_ano_atual==2015 && _mes_atual<5)
+//                                goto Continue;
+    //                }
 
                     CompetenciaISS reg = new CompetenciaISS();
                     reg.Codigo = Codigo;

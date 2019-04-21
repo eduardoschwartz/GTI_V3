@@ -110,6 +110,7 @@
     <Compile Include="Models\historico.cs" />
     <Compile Include="Models\historicocidadao.cs" />
     <Compile Include="Models\horariofunc.cs" />
+    <Compile Include="Models\horario_funcionamento.cs" />
     <Compile Include="Models\isencao.cs" />
     <Compile Include="Models\lancamento.cs" />
     <Compile Include="Models\laseriptu.cs" />

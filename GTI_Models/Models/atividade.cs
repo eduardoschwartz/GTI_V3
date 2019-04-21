@@ -10,5 +10,6 @@ namespace GTI_Models.Models {
         public decimal Valoraliq3 { get; set; }
         public string Tipo { get; set; }
         public byte? Alvara { get; set; }
+        public int? Horario { get; set; }
     }
 }

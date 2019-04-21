@@ -296,8 +296,8 @@ namespace GTI_Dal.Classes {
                            join b in db.Bairro on new { p1 = (short)m.Codbairro, p2 = (short)m.Codcidade, p3 = m.Siglauf } equals new { p1 = b.Codbairro, p2 = b.Codcidade, p3 = b.Siglauf } into mb from b in mb.DefaultIfEmpty()
                            join c in db.Cidade on new { p1 = (short)m.Codcidade, p2 = m.Siglauf } equals new { p1 = c.Codcidade, p2 = c.Siglauf } into mc from c in mc.DefaultIfEmpty()
                            join l in db.Logradouro on m.Codlogradouro equals l.Codlogradouro into lm from l in lm.DefaultIfEmpty()
-                           join h in db.Horariofunc on m.Horario equals h.Codhorario into hm from h in hm.DefaultIfEmpty()
                            join a in db.Atividade on m.Codatividade equals a.Codatividade into am from a in am.DefaultIfEmpty()
+                           join h in db.Horario_funcionamento on a.Horario equals h.Id into ha from h in ha.DefaultIfEmpty()
                            join p in db.Cidadao on m.Codprofresp equals p.Codcidadao into mp from p in mp.DefaultIfEmpty()
                            where m.Codigomob == Codigo
                            select new EmpresaStruct{Codigo= m.Codigomob, Razao_social= m.Razaosocial,Nome_fantasia=m.Nomefantasia,Endereco_codigo=m.Codlogradouro,Endereco_nome= l.Endereco,Numero=  m.Numero,Complemento= m.Complemento,
@@ -312,7 +312,7 @@ namespace GTI_Dal.Classes {
                                                     Dispensa_ie_processo=m.Dispensaieproc,Data_alvara_provisorio=m.Dtalvaraprovisorio,Senha_iss=m.Senhaiss,Inscricao_temporaria=m.Insctemp,Horas_24=m.Horas24,Isento_iss=m.Isentoiss,
                                                     Bombonieri=m.Bombonieri,Emite_nf=m.Emitenf,Danfe=m.Danfe,Imovel=m.Imovel,Sil=m.Sil,Substituto_tributario_issqn=m.Substituto_tributario_issqn,Individual=m.Individual,
                                                     Ponto_agencia=m.Ponto_agencia,Cadastro_vre=m.Cadastro_vre,Liberado_vre=m.Liberado_vre,Cpf=m.Cpf,Cnpj=m.Cnpj,Prof_responsavel_registro=m.Numregistroresp,
-                                                    Prof_responsavel_conselho=m.Nomeorgao,prof_responsavel_nome=p.Nomecidadao,Horario_Nome=h.Deschorario,Atividade_nome=a.Descatividade
+                                                    Prof_responsavel_conselho=m.Nomeorgao,prof_responsavel_nome=p.Nomecidadao,Horario_Nome=h.descricao,Atividade_nome=a.Descatividade
                            }).FirstOrDefault();
 
 
@@ -558,7 +558,6 @@ namespace GTI_Dal.Classes {
                 return null;
             }
         }
-
 
         public List<MobiliarioproprietarioStruct> Lista_Empresa_Proprietario(int Codigo) {
             using (GTI_Context db = new GTI_Context(_connection)) {

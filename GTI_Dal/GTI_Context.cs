@@ -138,5 +138,6 @@ namespace GTI_Dal {
         public DbSet<Ficha_compensacao_documento> Ficha_compensacao_documento { get; set; }
         public DbSet<historicocidadao> Historicocidadao { get; set; }
         public DbSet<obscidadao> Obscidadao { get; set; }
+        public DbSet<Horario_funcionamento> Horario_funcionamento { get; set; }
     }
 }
