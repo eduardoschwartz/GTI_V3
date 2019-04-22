@@ -475,6 +475,15 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        /// <summary>
+        /// Retorna a lista das fotos de um imóvel
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <returns></returns>
+        public List<Foto_imovel> Lista_Foto_Imovel(int Codigo) {
+            Imovel_Data obj = new Imovel_Data(_connection);
+            return obj.Lista_Foto_Imovel(Codigo);
+        }
 
     }//end class
 }

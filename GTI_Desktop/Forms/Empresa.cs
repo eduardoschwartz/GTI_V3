@@ -65,9 +65,6 @@ namespace GTI_Desktop.Forms {
             NumProcessoAbertura.ReadOnly = bStart;
             DataEncerramento.ReadOnly = bStart;
             NumProcessoEncerramento.ReadOnly = bStart;
-            HorarioFuncionamento.Visible = bStart;
-            HorarioList.Visible = !bStart;
-            HorarioList.Enabled = !bStart;
             PontoAgencia.ReadOnly = bStart;
             HorarioExtenso.ReadOnly = bStart;
             QtdeFuncionario.ReadOnly = bStart;
@@ -127,7 +124,6 @@ namespace GTI_Desktop.Forms {
             NumProcessoEncerramento.Text = "";
             DataProcessoEncerramento.Text = "";
             HorarioFuncionamento.Text = "";
-            HorarioList.SelectedIndex = -1;
             PontoAgencia.Text = "";
             HorarioExtenso.Text = "";
             QtdeFuncionario.Text = "";
@@ -203,10 +199,6 @@ namespace GTI_Desktop.Forms {
 
         private void CarregaLista() {
             Empresa_bll empresa_Class = new Empresa_bll(_connection);
-            HorarioList.DataSource = empresa_Class.Lista_Horario();
-            HorarioList.DisplayMember = "deschorario";
-            HorarioList.ValueMember = "codhorario";
-
             ContadorList.DataSource = empresa_Class.Lista_Escritorio_Contabil();
             ContadorList.DisplayMember = "Nomeesc";
             ContadorList.ValueMember = "Codigoesc";
@@ -269,7 +261,7 @@ namespace GTI_Desktop.Forms {
             bool _liberado_vre = LiberadoVRE_chk.Checked ? true : false;
             bool _sub_tributario = SubstitutoTrib_chk.Checked ? true : false;
             byte _vistoria = Vistoria_chk.Checked ? (byte)1 : (byte)0;
-            short? _horario = HorarioFuncionamento.Tag.ToString() == "" ? (short?)null : Convert.ToInt16(HorarioFuncionamento.Tag.ToString());
+            //short? _horario = HorarioFuncionamento.Tag.ToString() == "" ? (short?)null : Convert.ToInt16(HorarioFuncionamento.Tag.ToString());
             string _horarioext = HorarioExtenso.Text.Trim() == "" ? null : HorarioExtenso.Text.Trim();
             string _insc_estadual = InscEstadual.Text.Trim() == "" ? null : InscEstadual.Text.Trim();
             int? _codigo_imovel = Convert.ToInt32(CodigoImovel.Text) == 0 ? (int?)null : Convert.ToInt32(CodigoImovel.Text.ToString());
@@ -312,7 +304,7 @@ namespace GTI_Desktop.Forms {
                 Emailcontato = _contato_email,
                 Fonecontato = _contato_fone,
                 Homepage = _homepage,
-                Horario = _horario,
+//                Horario = _horario,
                 Horarioext = _horarioext,
                 Horas24 = _horas24,
                 Imovel = _codigo_imovel,
@@ -492,16 +484,6 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void HorarioList_SelectedIndexChanged(object sender, EventArgs e) {
-            if (HorarioList.SelectedIndex > -1) {
-                HorarioFuncionamento.Text = HorarioList.Text;
-                HorarioFuncionamento.Tag = HorarioList.SelectedValue.ToString();
-            } else {
-                HorarioFuncionamento.Text = "";
-                HorarioFuncionamento.Tag = "0";
-            }
-        }
-
         private void ContadorList_SelectedIndexChanged(object sender, EventArgs e) {
             if (ContadorList.SelectedIndex > -1) {
                 ContadorNome.Text = ContadorList.Text;
@@ -615,10 +597,10 @@ namespace GTI_Desktop.Forms {
                 if (gtiCore.IsDate(Reg.Dataprocencerramento.ToString()))
                     DataProcessoEncerramento.Text = Convert.ToDateTime(Reg.Dataprocencerramento).ToString("dd/MM/yyyy");
             }
-            if(Reg.Horario!=null)
-                HorarioList.SelectedValue = Reg.Horario;
             PontoAgencia.Text = Reg.Ponto_agencia;
             HorarioExtenso.Text = Reg.Horario_extenso;
+            if (HorarioExtenso.Text.Trim() == "")
+                HorarioFuncionamento.Text = Reg.Horario_Nome;
             QtdeFuncionario.Text = Reg.Qtde_empregado.ToString();
             CapitalSocial.Text = Reg.Capital_social.ToString();
             InscTemp_chk.Checked = Reg.Inscricao_temporaria == 1 ? true : false;
@@ -1022,6 +1004,7 @@ namespace GTI_Desktop.Forms {
                     string _nome_atividade = empresa_Class.Retorna_Nome_Atividade(_id_atividade);
                     Atividade_Principal.Text = _id_atividade.ToString() + " - " + _nome_atividade;
                     Atividade_Principal.Tag = _id_atividade.ToString();
+                    HorarioFuncionamento.Text = empresa_Class.Retorna_Horario_Funcionamento(_id_atividade).descricao;
                     Aliquota.Text = f1.ReturnAliquota;
                 }
             }

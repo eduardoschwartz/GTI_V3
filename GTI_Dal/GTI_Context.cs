@@ -139,5 +139,6 @@ namespace GTI_Dal {
         public DbSet<historicocidadao> Historicocidadao { get; set; }
         public DbSet<obscidadao> Obscidadao { get; set; }
         public DbSet<Horario_funcionamento> Horario_funcionamento { get; set; }
+        public DbSet<Foto_imovel> Foto_imovel { get; set; }
     }
 }

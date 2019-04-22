@@ -154,5 +154,29 @@ namespace GTI_Desktop.Properties {
                 this["Form_Processo_Lista_height"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\Trabalho\\GTI\\Documentos\\")]
+        public string Path_Anexo_Local {
+            get {
+                return ((string)(this["Path_Anexo_Local"]));
+            }
+            set {
+                this["Path_Anexo_Local"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\\\192.168.200.130\\atualizagti\\documentos\\")]
+        public string Path_Anexo_Net {
+            get {
+                return ((string)(this["Path_Anexo_Net"]));
+            }
+            set {
+                this["Path_Anexo_Net"] = value;
+            }
+        }
     }
 }

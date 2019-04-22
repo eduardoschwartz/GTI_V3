@@ -928,7 +928,18 @@ namespace GTI_Desktop.Forms {
         }
 
         private void BtFoto_Click(object sender, EventArgs e) {
-            //TODO: Visualizar/manipular fotos do imóvel
+            if (!bAddNew){
+                int _codigo = Convert.ToInt32(Codigo.Text);
+                Imovel_bll imovel_Class = new Imovel_bll(_connection);
+                List<Foto_imovel> Lista = imovel_Class.Lista_Foto_Imovel(_codigo);
+                if (Lista.Count > 0)
+                {
+                    Foto_Imovel frm = new Foto_Imovel(_codigo);
+                    frm.ShowDialog(this);
+                }
+                else
+                    MessageBox.Show("Não existem fotos cadastradas para este imóvel.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void BtFind_Click(object sender, EventArgs e) {

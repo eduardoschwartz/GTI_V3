@@ -30,7 +30,6 @@ namespace GTI_Bll.Classes {
             return obj.Qtde_Parcelas_TLL_Vencidas(Codigo);
         }
 
-
         /// <summary>
         /// Retorna o cadastro da empresa
         /// </summary>
@@ -375,7 +374,6 @@ namespace GTI_Bll.Classes {
         //    Empresa_Data obj = new Empresa_Data(_connection);
         //    return obj.Lista_Cnae_Empresa(nCodigo);
         //}
-
 
         /// <summary>
         /// Retorna o número Sil de uma empresa
@@ -782,6 +780,15 @@ namespace GTI_Bll.Classes {
             return obj.Atividade_tem_Alvara(Codigo_Atividade);
         }
 
+        /// <summary>
+        /// Retorna o horário de funcionamento de uma atividade
+        /// </summary>
+        /// <param name="Codigo_Atividade"></param>
+        /// <returns></returns>
+        public Horario_funcionamento Retorna_Horario_Funcionamento(int Codigo_Atividade) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Retorna_Horario_Funcionamento(Codigo_Atividade);
+        }
 
     }
 }

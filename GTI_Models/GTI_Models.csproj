@@ -107,6 +107,7 @@
     <Compile Include="Models\escritoriocontabil.cs" />
     <Compile Include="Models\facequadra.cs" />
     <Compile Include="Models\ficha_compensacao_documento.cs" />
+    <Compile Include="Models\foto_imovel.cs" />
     <Compile Include="Models\historico.cs" />
     <Compile Include="Models\historicocidadao.cs" />
     <Compile Include="Models\horariofunc.cs" />

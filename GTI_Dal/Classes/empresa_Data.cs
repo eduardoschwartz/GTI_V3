@@ -1556,5 +1556,12 @@ namespace GTI_Dal.Classes {
             return maxCod;
         }
 
+        public Horario_funcionamento Retorna_Horario_Funcionamento(int Codigo_Atividade){
+            using (GTI_Context db = new GTI_Context(_connection))
+            {
+                return (from a in db.Atividade join h in db.Horario_funcionamento on a.Horario equals h.Id where a.Codatividade == Codigo_Atividade select h).FirstOrDefault();
+            }
+        }
+
     }
 }

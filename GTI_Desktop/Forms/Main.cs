@@ -1,6 +1,5 @@
 ﻿using GTI_Bll.Classes;
 using GTI_Desktop.Classes;
-using GTI_Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,8 +7,10 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace GTI_Desktop.Forms {
-    public partial class Main : Form {
+namespace GTI_Desktop.Forms
+{
+    public partial class Main : Form
+    {
         string _connection = gtiCore.Connection_Name();
         private const int CP_NOCLOSE_BUTTON = 0x200;
 
@@ -21,10 +22,12 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        public Main() {
+        public Main()
+        {
             InitializeComponent();
             this.DoubleBuffered = true;
-            DateTimePicker t = new DateTimePicker {
+            DateTimePicker t = new DateTimePicker
+            {
                 AutoSize = false,
                 Width = 100,
                 Format = DateTimePickerFormat.Custom,
@@ -33,23 +36,20 @@ namespace GTI_Desktop.Forms {
             };
             TopBarToolStrip.Renderer = new MySR();
             t.CloseUp += new System.EventHandler(SbDataBase_CloseUp);
-            
+
             BarStatus.Items.Insert(17, new ToolStripControlHost(t));
             MaquinaToolStripStatus.Text = Environment.MachineName;
             DataBaseToolStripStatus.Text = Properties.Settings.Default.DataBaseReal;
 
         }
 
-        private void Main_Load(object sender, EventArgs e) {
+        private void Main_Load(object sender, EventArgs e)
+        {
             this.IsMdiContainer = true;
             this.Refresh();
 
             this.SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
             FillBackgroundImage(false);
-
-            //###################
-            BaseDeTestesToolStripMenuItem_Click(sender, e);
-            //###############
 
             ServidorToolStripStatus.Text = Properties.Settings.Default.ServerName;
             VersaoToolStripStatus.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -58,30 +58,39 @@ namespace GTI_Desktop.Forms {
             login.ShowDialog();
         }
 
-        private void CorFundo() {
+        private void CorFundo()
+        {
             MdiClient ctlMDI;
 
-            foreach (Control ctl in this.Controls) {
-                try {
+            foreach (Control ctl in this.Controls)
+            {
+                try
+                {
                     ctlMDI = (MdiClient)ctl;
                     ctlMDI.BackColor = this.BackColor;
                     //ctlMDI.BackgroundImage = Properties.Resources.GTI_logo;
 
-                } catch  {
+                }
+                catch
+                {
                 }
             }
         }
 
-        private void SbDataBase_CloseUp(object sender, EventArgs e) {
+        private void SbDataBase_CloseUp(object sender, EventArgs e)
+        {
             MessageBox.Show(ReturnDataBaseValue().ToString());
         }
 
-        public DateTime ReturnDataBaseValue() {
+        public DateTime ReturnDataBaseValue()
+        {
             DateTime dValue = DateTime.Today;
 
             DateTimePicker dbox;
-            foreach (Control c in BarStatus.Controls) {
-                if (c is DateTimePicker) {
+            foreach (Control c in BarStatus.Controls)
+            {
+                if (c is DateTimePicker)
+                {
                     dbox = c as DateTimePicker;
                     dValue = dbox.Value.Date;
                 }
@@ -89,13 +98,16 @@ namespace GTI_Desktop.Forms {
             return dValue;
         }
 
-        public void LockForm(bool bLocked) {
-            foreach (ToolStripItem ts in TopBarToolStrip.Items) {
+        public void LockForm(bool bLocked)
+        {
+            foreach (ToolStripItem ts in TopBarToolStrip.Items)
+            {
                 ts.Enabled = !bLocked;
             }
 
             List<ToolStripMenuItem> mItems = gtiCore.GetItems(this.MenuBarStrip);
-            foreach (var item in mItems) {
+            foreach (var item in mItems)
+            {
                 item.Enabled = !bLocked;
             }
             Dv1Option.Enabled = !bLocked;
@@ -106,14 +118,18 @@ namespace GTI_Desktop.Forms {
             DV3label.Enabled = !bLocked;
         }
 
-        public void Main_FormClosing(object sender, FormClosingEventArgs e) {
-             Application.Exit();
+        public void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
 
-        private void BtSair_Click(object sender, EventArgs e) {
-            if (MessageBox.Show("Deseja fechar todas as janelas e retornar a tela de login?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+        private void BtSair_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Deseja fechar todas as janelas e retornar a tela de login?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
                 Form[] charr = this.MdiChildren;
-                foreach (Form chform in charr) {
+                foreach (Form chform in charr)
+                {
                     chform.Close();
                 }
                 LockForm(true);
@@ -122,12 +138,17 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void MnuConfig_Click(object sender, EventArgs e) {
+        private void MnuConfig_Click(object sender, EventArgs e)
+        {
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Config);
-            if (formToShow != null) {
+            if (formToShow != null)
+            {
                 formToShow.Show();
-            } else {
-                Forms.Config f1 = new Forms.Config {
+            }
+            else
+            {
+                Forms.Config f1 = new Forms.Config
+                {
                     Tag = "Menu",
                     MdiParent = this
                 };
@@ -136,11 +157,13 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void BtConfig_Click(object sender, EventArgs e) {
+        private void BtConfig_Click(object sender, EventArgs e)
+        {
             MnuConfig_Click(sender, e);
         }
 
-        private void BaseRealToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void BaseRealToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             Form[] charr = this.MdiChildren;
             foreach (Form chform in charr)
                 chform.Close();
@@ -151,18 +174,20 @@ namespace GTI_Desktop.Forms {
             this.Refresh();
         }
 
-        private void BaseDeTestesToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void BaseDeTestesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             Form[] charr = this.MdiChildren;
             foreach (Form chform in charr)
                 chform.Close();
 
-            FillBackgroundImage(true);            
+            FillBackgroundImage(true);
             DataBaseToolStripStatus.Text = Properties.Settings.Default.DataBaseTeste;
             gtiCore.UpdateUserBinary();
             this.Refresh();
         }
 
-        private void FillBackgroundImage(bool bTeste) {
+        private void FillBackgroundImage(bool bTeste)
+        {
             Bitmap img = bTeste ? Properties.Resources.rosa : Properties.Resources.bege;
             Color cor = bTeste ? Color.FromArgb(250, 218, 226) : Color.OldLace;
             this.BackgroundImage = img;
@@ -191,33 +216,46 @@ namespace GTI_Desktop.Forms {
             PanelDV.GradientEndColor = cor;
         }
 
-        private void BtCidadao_Click(object sender, EventArgs e) {
+        private void BtCidadao_Click(object sender, EventArgs e)
+        {
             MnuCidadao_Click(sender, e);
         }
 
-        private void MnuCidadao_Click(object sender, EventArgs e) {
+        private void MnuCidadao_Click(object sender, EventArgs e)
+        {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroCidadao);
-            if (bAllow) {
+            if (bAllow)
+            {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Cidadao);
-                if (formToShow != null) {
+                if (formToShow != null)
+                {
                     formToShow.Show();
-                } else {
-                    Cidadao f1 = new Cidadao {
+                }
+                else
+                {
+                    Cidadao f1 = new Cidadao
+                    {
                         Tag = "Menu",
                         MdiParent = this
                     };
                     f1.Show();
                 }
-            } else
+            }
+            else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void DocumentaçãoParaProcessosToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void DocumentaçãoParaProcessosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Processo_Documento);
-            if (formToShow != null) {
+            if (formToShow != null)
+            {
                 formToShow.Show();
-            } else {
-                Processo_Documento f1 = new Processo_Documento {
+            }
+            else
+            {
+                Processo_Documento f1 = new Processo_Documento
+                {
                     Tag = "Menu",
                     MdiParent = this
                 };
@@ -225,12 +263,17 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void DespachosDosTrâmitesToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void DespachosDosTrâmitesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Processo_Despacho);
-            if (formToShow != null) {
+            if (formToShow != null)
+            {
                 formToShow.Show();
-            } else {
-                Processo_Despacho f1 = new Processo_Despacho {
+            }
+            else
+            {
+                Processo_Despacho f1 = new Processo_Despacho
+                {
                     Tag = "Menu",
                     MdiParent = this
                 };
@@ -238,12 +281,17 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void AssuntosDoProcessoToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void AssuntosDoProcessoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Processo_Assunto);
-            if (formToShow != null) {
+            if (formToShow != null)
+            {
                 formToShow.Show();
-            } else {
-                Processo_Assunto f1 = new Processo_Assunto {
+            }
+            else
+            {
+                Processo_Assunto f1 = new Processo_Assunto
+                {
                     Tag = "Menu",
                     MdiParent = this
                 };
@@ -251,12 +299,17 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void LocalDeTramitaçãoDeProcessosToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void LocalDeTramitaçãoDeProcessosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Processo_Local);
-            if (formToShow != null) {
+            if (formToShow != null)
+            {
                 formToShow.Show();
-            } else {
-                Processo_Local f1 = new Processo_Local {
+            }
+            else
+            {
+                Processo_Local f1 = new Processo_Local
+                {
                     Tag = "Menu",
                     MdiParent = this
                 };
@@ -264,101 +317,129 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void MinimizarTodasToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void MinimizarTodasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             Form[] charr = this.MdiChildren;
             foreach (Form chform in charr)
                 chform.WindowState = FormWindowState.Minimized;
         }
 
-        private void RestaurarTodasToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void RestaurarTodasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             Form[] charr = this.MdiChildren;
             foreach (Form chform in charr)
                 chform.WindowState = FormWindowState.Normal;
         }
 
-        private void FecharTodasToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void FecharTodasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             Form[] charr = this.MdiChildren;
             foreach (Form chform in charr)
                 chform.Close();
         }
 
-        private void EmCascataToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void EmCascataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             this.LayoutMdi(System.Windows.Forms.MdiLayout.Cascade);
         }
 
-        private void LadoALadoToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void LadoALadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             this.LayoutMdi(System.Windows.Forms.MdiLayout.TileVertical);
         }
 
-        private void ControleDeProcessosToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void ControleDeProcessosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
         }
 
-        private void BtProtocolo_Click(object sender, EventArgs e) {
+        private void BtProtocolo_Click(object sender, EventArgs e)
+        {
             MnuControleProcesso_Click(sender, e);
         }
 
-        private void MnuControleProcesso_Click(object sender, EventArgs e) {
+        private void MnuControleProcesso_Click(object sender, EventArgs e)
+        {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroProcesso);
-            if (bAllow) {
+            if (bAllow)
+            {
 
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Processo);
-                if (formToShow != null) {
+                if (formToShow != null)
+                {
                     formToShow.Show();
-                } else {
-                    Processo f1 = new Processo {
+                }
+                else
+                {
+                    Processo f1 = new Processo
+                    {
                         Tag = "Menu",
                         MdiParent = this
                     };
                     f1.Show();
                 }
-            }else
+            }
+            else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void MnuCadImob_Click(object sender, EventArgs e) {
+        private void MnuCadImob_Click(object sender, EventArgs e)
+        {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroImovel);
-            if (bAllow) {
+            if (bAllow)
+            {
                 gtiCore.Ocupado(this);
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Imovel);
-                if (formToShow != null) {
+                if (formToShow != null)
+                {
                     formToShow.Show();
-                } else {
-                    Imovel f1 = new Imovel {
+                }
+                else
+                {
+                    Imovel f1 = new Imovel
+                    {
                         Tag = "Menu",
                         MdiParent = this
                     };
                     f1.Show();
                 }
                 gtiCore.Liberado(this);
-            }else
+            }
+            else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void BtImobiliario_Click(object sender, EventArgs e) {
+        private void BtImobiliario_Click(object sender, EventArgs e)
+        {
             MnuCadImob_Click(null, null);
         }
 
-        private void TxtDV_TextChanged(object sender, EventArgs e) {
+        private void TxtDV_TextChanged(object sender, EventArgs e)
+        {
             if (DVText.Text == "")
                 DVLabel.Text = "X";
             else
                 DVLabel.Text = RetornaDV().ToString();
         }
 
-        private void TxtDV_KeyPress(object sender, KeyPressEventArgs e) {
+        private void TxtDV_KeyPress(object sender, KeyPressEventArgs e)
+        {
             const char Delete = (char)8;
             e.Handled = !Char.IsDigit(e.KeyChar) && e.KeyChar != Delete;
         }
 
-        private short RetornaDV() {
+        private short RetornaDV()
+        {
             short ret = 0;
             if (DVText.Text == "") DVText.Text = "0";
             int Numero = Convert.ToInt32(DVText.Text);
-            if (Dv1Option.Checked) {
+            if (Dv1Option.Checked)
+            {
                 Processo_bll clsProcesso = new Processo_bll(_connection);
                 ret = Convert.ToInt16(clsProcesso.DvProcesso(Numero));
-            } else {
+            }
+            else
+            {
                 Tributario_bll clsTributario = new Tributario_bll(_connection);
                 ret = Convert.ToInt16(clsTributario.DvDocumento(Numero));
             }
@@ -366,28 +447,36 @@ namespace GTI_Desktop.Forms {
             return ret;
         }
 
-        private void OptDv1_CheckedChanged(object sender, EventArgs e) {
-            DVLabel.Text= RetornaDV().ToString();
-            DVText.Focus();
-        }
-
-        private void OptDv2_CheckedChanged(object sender, EventArgs e) {
+        private void OptDv1_CheckedChanged(object sender, EventArgs e)
+        {
             DVLabel.Text = RetornaDV().ToString();
             DVText.Focus();
         }
 
-        private void TxtDV_Enter(object sender, EventArgs e) {
+        private void OptDv2_CheckedChanged(object sender, EventArgs e)
+        {
+            DVLabel.Text = RetornaDV().ToString();
+            DVText.Focus();
+        }
+
+        private void TxtDV_Enter(object sender, EventArgs e)
+        {
             DVText.SelectionStart = 0;
             DVText.SelectionLength = DVText.Text.Length;
         }
 
-        private void MnuCadastroLancamento_Click(object sender, EventArgs e) {
+        private void MnuCadastroLancamento_Click(object sender, EventArgs e)
+        {
             gtiCore.Ocupado(this);
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Lancamento);
-            if (formToShow != null) {
+            if (formToShow != null)
+            {
                 formToShow.Show();
-            } else {
-                Lancamento f1 = new Lancamento {
+            }
+            else
+            {
+                Lancamento f1 = new Lancamento
+                {
                     Tag = "Menu",
                     MdiParent = this
                 };
@@ -396,13 +485,18 @@ namespace GTI_Desktop.Forms {
             gtiCore.Liberado(this);
         }
 
-        private void MnuTributos_Click(object sender, EventArgs e) {
+        private void MnuTributos_Click(object sender, EventArgs e)
+        {
             gtiCore.Ocupado(this);
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Tributo);
-            if (formToShow != null) {
+            if (formToShow != null)
+            {
                 formToShow.Show();
-            } else {
-                Tributo f1 = new Tributo {
+            }
+            else
+            {
+                Tributo f1 = new Tributo
+                {
                     Tag = "Menu",
                     MdiParent = this
                 };
@@ -411,58 +505,79 @@ namespace GTI_Desktop.Forms {
             gtiCore.Liberado(this);
         }
 
-        private void MnuExtrato_Click(object sender, EventArgs e) {
+        private void MnuExtrato_Click(object sender, EventArgs e)
+        {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.ExtratoContribuinte);
-            if (bAllow) {
+            if (bAllow)
+            {
                 gtiCore.Ocupado(this);
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Extrato);
-                if (formToShow != null) {
+                if (formToShow != null)
+                {
                     formToShow.Show();
-                } else {
-                    Extrato f1 = new Extrato {
+                }
+                else
+                {
+                    Extrato f1 = new Extrato
+                    {
                         Tag = "Menu",
                         MdiParent = this
                     };
                     f1.Show();
                 }
                 gtiCore.Liberado(this);
-            }else
+            }
+            else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void BtExtrato_Click(object sender, EventArgs e) {
-            MnuExtrato_Click(null,null);
+        private void BtExtrato_Click(object sender, EventArgs e)
+        {
+            MnuExtrato_Click(null, null);
         }
 
-        private void MnuEmpresa_Click(object sender, EventArgs e) {
+        private void MnuEmpresa_Click(object sender, EventArgs e)
+        {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroEmpresa);
-            if (bAllow) {
+            if (bAllow)
+            {
                 gtiCore.Ocupado(this);
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Empresa);
-                if (formToShow != null) {
+                if (formToShow != null)
+                {
                     formToShow.Show();
-                } else {
-                    Empresa f1 = new Empresa {
+                }
+                else
+                {
+                    Empresa f1 = new Empresa
+                    {
                         Tag = "Menu",
                         MdiParent = this
                     };
                     f1.Show();
                 }
                 gtiCore.Liberado(this);
-            }else
+            }
+            else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void BtMobiliario_Click(object sender, EventArgs e) {
+        private void BtMobiliario_Click(object sender, EventArgs e)
+        {
             MnuEmpresa_Click(null, null);
         }
 
-        private void CadastroEventoMenu_Click(object sender, EventArgs e) {
+        private void CadastroEventoMenu_Click(object sender, EventArgs e)
+        {
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.SecurityEventForm);
-            if (formToShow != null) {
+            if (formToShow != null)
+            {
                 formToShow.Show();
-            } else {
-                Forms.SecurityEventForm f1 = new Forms.SecurityEventForm {
+            }
+            else
+            {
+                Forms.SecurityEventForm f1 = new Forms.SecurityEventForm
+                {
                     Tag = "Menu",
                     MdiParent = this
                 };
@@ -471,12 +586,17 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void AtribuicaoAcessoMenu_Click(object sender, EventArgs e) {
+        private void AtribuicaoAcessoMenu_Click(object sender, EventArgs e)
+        {
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.SecurityUserForm);
-            if (formToShow != null) {
+            if (formToShow != null)
+            {
                 formToShow.Show();
-            } else {
-                Forms.SecurityUserForm f1 = new Forms.SecurityUserForm {
+            }
+            else
+            {
+                Forms.SecurityUserForm f1 = new Forms.SecurityUserForm
+                {
                     Tag = "Menu",
                     MdiParent = this
                 };
@@ -485,12 +605,17 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void CadastroUsuario_Click(object sender, EventArgs e) {
+        private void CadastroUsuario_Click(object sender, EventArgs e)
+        {
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Usuario);
-            if (formToShow != null) {
+            if (formToShow != null)
+            {
                 formToShow.Show();
-            } else {
-                Forms.Usuario f1 = new Forms.Usuario {
+            }
+            else
+            {
+                Forms.Usuario f1 = new Forms.Usuario
+                {
                     Tag = "Menu",
                     MdiParent = this
                 };
@@ -499,24 +624,32 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void CadastroUsuarioMenu_Click(object sender, EventArgs e) {
+        private void CadastroUsuarioMenu_Click(object sender, EventArgs e)
+        {
             CadastroUsuario_Click(null, null);
         }
 
-        private void EventosDoSistemaMenu_Click(object sender, EventArgs e) {
+        private void EventosDoSistemaMenu_Click(object sender, EventArgs e)
+        {
             CadastroEventoMenu_Click(null, null);
         }
 
-        private void AtribuicaoDeAcessoMenu_Click(object sender, EventArgs e) {
+        private void AtribuicaoDeAcessoMenu_Click(object sender, EventArgs e)
+        {
             AtribuicaoAcessoMenu_Click(null, null);
         }
 
-        private void EscritorioContabilMenu_Click(object sender, EventArgs e) {
+        private void EscritorioContabilMenu_Click(object sender, EventArgs e)
+        {
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Escritorio_Contabil);
-            if (formToShow != null) {
+            if (formToShow != null)
+            {
                 formToShow.Show();
-            } else {
-                Forms.Escritorio_Contabil f1 = new Forms.Escritorio_Contabil {
+            }
+            else
+            {
+                Forms.Escritorio_Contabil f1 = new Forms.Escritorio_Contabil
+                {
                     Tag = "Menu",
                     MdiParent = this
                 };
@@ -525,31 +658,43 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void CadastroCondominioMenu_Click(object sender, EventArgs e) {
+        private void CadastroCondominioMenu_Click(object sender, EventArgs e)
+        {
 
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroCondominio);
-            if (bAllow) {
+            if (bAllow)
+            {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Condominio);
-                if (formToShow != null) {
+                if (formToShow != null)
+                {
                     formToShow.Show();
-                } else {
-                    Forms.Condominio f1 = new Forms.Condominio {
+                }
+                else
+                {
+                    Forms.Condominio f1 = new Forms.Condominio
+                    {
                         Tag = "Menu",
                         MdiParent = this
                     };
                     f1.Show();
                     f1.BringToFront();
                 }
-            } else
+            }
+            else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void CertidaoButton_Click(object sender, EventArgs e) {
+        private void CertidaoButton_Click(object sender, EventArgs e)
+        {
             var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Certidao);
-            if (formToShow != null) {
+            if (formToShow != null)
+            {
                 formToShow.Show();
-            } else {
-                Certidao f1 = new Certidao {
+            }
+            else
+            {
+                Certidao f1 = new Certidao
+                {
                     Tag = "Menu",
                     MdiParent = this
                 };
@@ -558,168 +703,234 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void CadastroBairroMenu_Click(object sender, EventArgs e) {
+        private void CadastroBairroMenu_Click(object sender, EventArgs e)
+        {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroBairro);
-            if (bAllow) {
+            if (bAllow)
+            {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Bairro);
-                if (formToShow != null) {
+                if (formToShow != null)
+                {
                     formToShow.Show();
-                } else {
-                    Forms.Bairro f1 = new Forms.Bairro {
+                }
+                else
+                {
+                    Forms.Bairro f1 = new Forms.Bairro
+                    {
                         Tag = "Menu",
                         MdiParent = this
                     };
                     f1.Show();
                 }
-            } else
+            }
+            else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void CadastroPaisMenu_Click(object sender, EventArgs e) {
+        private void CadastroPaisMenu_Click(object sender, EventArgs e)
+        {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroPais);
-            if (bAllow) {
+            if (bAllow)
+            {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Pais);
-                if (formToShow != null) {
+                if (formToShow != null)
+                {
                     formToShow.Show();
-                } else {
-                    Pais f1 = new Pais {
+                }
+                else
+                {
+                    Pais f1 = new Pais
+                    {
                         Tag = "Menu",
                         MdiParent = this
                     };
                     f1.Show();
                 }
-            } else
+            }
+            else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void CadastroProfissaoMenu_Click(object sender, EventArgs e) {
+        private void CadastroProfissaoMenu_Click(object sender, EventArgs e)
+        {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.CadastroProfissao);
-            if (bAllow) {
+            if (bAllow)
+            {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Profissao);
-                if (formToShow != null) {
+                if (formToShow != null)
+                {
                     formToShow.Show();
-                } else {
-                    Profissao f1 = new Profissao {
+                }
+                else
+                {
+                    Profissao f1 = new Profissao
+                    {
                         Tag = "Menu",
                         MdiParent = this
                     };
                     f1.Show();
                 }
-            } else
+            }
+            else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void CartaCobrancaMenu_Click(object sender, EventArgs e) {
+        private void CartaCobrancaMenu_Click(object sender, EventArgs e)
+        {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.Carta_Cobranca);
-            if (bAllow) {
+            if (bAllow)
+            {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Carta_Cobranca);
-                if (formToShow != null) {
+                if (formToShow != null)
+                {
                     formToShow.Show();
-                } else {
-                    Carta_Cobranca f1 = new Carta_Cobranca {
+                }
+                else
+                {
+                    Carta_Cobranca f1 = new Carta_Cobranca
+                    {
                         Tag = "Menu",
                         MdiParent = this
                     };
                     f1.Show();
                 }
-            } else
+            }
+            else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void RegistroBancarioMenu_Click(object sender, EventArgs e) {
+        private void RegistroBancarioMenu_Click(object sender, EventArgs e)
+        {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.Registro_Bancario);
-            if (bAllow) {
+            if (bAllow)
+            {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Registro_Bancario);
-                if (formToShow != null) {
+                if (formToShow != null)
+                {
                     formToShow.Show();
-                } else {
-                    Registro_Bancario f1 = new Registro_Bancario {
+                }
+                else
+                {
+                    Registro_Bancario f1 = new Registro_Bancario
+                    {
                         Tag = "Menu",
                         MdiParent = this
                     };
                     f1.Show();
                 }
-            } else
+            }
+            else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void ProcessoAtrasoMenu_Click(object sender, EventArgs e) {
+        private void ProcessoAtrasoMenu_Click(object sender, EventArgs e)
+        {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.Registro_Bancario);
-            if (bAllow) {
+            if (bAllow)
+            {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Processo_Atraso);
-                if (formToShow != null) {
+                if (formToShow != null)
+                {
                     formToShow.Show();
-                } else {
-                    Processo_Atraso f1 = new Processo_Atraso {
+                }
+                else
+                {
+                    Processo_Atraso f1 = new Processo_Atraso
+                    {
                         Tag = "Menu",
                         MdiParent = this
                     };
                     f1.Show();
                 }
-            } else
+            }
+            else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void AtividadeEmpresaMenu_Click(object sender, EventArgs e) {
+        private void AtividadeEmpresaMenu_Click(object sender, EventArgs e)
+        {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.Atividade_Empresa);
-            if (bAllow) {
+            if (bAllow)
+            {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Empresa_Atividade);
-                if (formToShow != null) {
+                if (formToShow != null)
+                {
                     formToShow.Show();
-                } else {
-                    Empresa_Atividade f1 = new Empresa_Atividade(0) {
+                }
+                else
+                {
+                    Empresa_Atividade f1 = new Empresa_Atividade(0)
+                    {
                         Tag = "Menu",
                         MdiParent = this
                     };
                     f1.Show();
                 }
-            } else
+            }
+            else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void CalculoImpostoMenu_Click(object sender, EventArgs e) {
+        private void CalculoImpostoMenu_Click(object sender, EventArgs e)
+        {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.Calculo_Imposto);
-            if (bAllow) {
+            if (bAllow)
+            {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Calculo_Imposto);
-                if (formToShow != null) {
+                if (formToShow != null)
+                {
                     formToShow.Show();
-                } else {
-                    Calculo_Imposto f1 = new Calculo_Imposto() {
+                }
+                else
+                {
+                    Calculo_Imposto f1 = new Calculo_Imposto()
+                    {
                         Tag = "Menu",
                         MdiParent = this
                     };
                     f1.Show();
                 }
-            } else
+            }
+            else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void ComunicadoIsencaoMenu_Click(object sender, EventArgs e) {
+        private void ComunicadoIsencaoMenu_Click(object sender, EventArgs e)
+        {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.Comunicado_Isencao);
-            if (bAllow) {
+            if (bAllow)
+            {
                 var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Comunicado_Isencao);
-                if (formToShow != null) {
+                if (formToShow != null)
+                {
                     formToShow.Show();
-                } else {
-                    Comunicado_Isencao f1 = new Comunicado_Isencao() {
+                }
+                else
+                {
+                    Comunicado_Isencao f1 = new Comunicado_Isencao()
+                    {
                         Tag = "Menu",
                         MdiParent = this
                     };
                     f1.Show();
                 }
-            } else
+            }
+            else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void ConsultaDocButton_Click(object sender, EventArgs e) {
+        private void ConsultaDocButton_Click(object sender, EventArgs e)
+        {
             bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.Consulta_documento);
-            if (bAllow) {
+            if (bAllow)
+            {
                 Documento_Detalhe f1 = new Documento_Detalhe();
                 f1.ShowDialog();
-            } else
+            }
+            else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-       
+
     }//end class
 }
