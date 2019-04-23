@@ -1279,9 +1279,13 @@ namespace GTI_Desktop.Forms {
         }
 
         private void MnuAdicionarA_Click(object sender, EventArgs e) {
-            CategoriaConstrucaoList.SelectedIndex = 0;
-            UsoConstrucaoList.SelectedIndex = 0;
-            TipoConstrucaoList.SelectedIndex = 0;
+            AreaConstruida.Text = "";
+            UsoConstrucaoList.SelectedIndex=0;
+            TipoConstrucaoList.SelectedIndex=0;
+            CategoriaConstrucaoList.SelectedIndex=0;
+            QtdePavimentos.Text = "";
+            DataAprovacao.Text = "";
+            ProcessoArea.Text = "";
             bNovaArea = true;
             ImovelTab.Enabled = false;
             BarToolStrip.Enabled = false;

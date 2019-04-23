@@ -290,6 +290,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void ExcelButton_Click(object sender, EventArgs e) {
+            if (MainListView.Items.Count == 0) return;
             using (SaveFileDialog sfd = new SaveFileDialog() {
                 Filter = "Excel |* .xlsx",
                 InitialDirectory = @"c:\dados\xlsx",

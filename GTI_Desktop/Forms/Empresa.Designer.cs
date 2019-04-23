@@ -1793,6 +1793,7 @@
             this.FotoButton.Size = new System.Drawing.Size(23, 22);
             this.FotoButton.Text = "toolStripButton4";
             this.FotoButton.ToolTipText = "Imagem da Empresa";
+            this.FotoButton.Click += new System.EventHandler(this.FotoButton_Click);
             // 
             // EnderecoButton
             // 

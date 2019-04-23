@@ -25,6 +25,7 @@ namespace GTI_Desktop.Forms {
             string[] _ordem = new string[] { "Código", "Inscrição", "Proprietário", "Endereco", "Bairro", "Condomínio" };
             OrdemList.Items.AddRange(_ordem);
             OrdemList.SelectedIndex = 0;
+            gtiCore.Liberado(this);
         }
 
         private void FindButton_Click(object sender, EventArgs e) {
@@ -57,8 +58,7 @@ namespace GTI_Desktop.Forms {
                 Reg.Cpf_cnpj = CPFText.Text;
             }
 
-
-
+            gtiCore.Liberado(this);
 
         }
 
@@ -138,7 +138,7 @@ namespace GTI_Desktop.Forms {
             reg.Complemento = "";
             reg.Email = "";
 
-            Forms.Endereco f1 = new Forms.Endereco(reg, true, true, false, true);
+            Forms.Endereco f1 = new Forms.Endereco(reg, true,  true, false, false);
             f1.ShowDialog();
             if (!f1.EndRetorno.Cancelar) {
                 BairroText.Text = f1.EndRetorno.Nome_bairro;
@@ -168,6 +168,8 @@ namespace GTI_Desktop.Forms {
         }
 
         private void ExcelButton_Click(object sender, EventArgs e) {
+            if (MainListView.Items.Count == 0) return;
+
             using (SaveFileDialog sfd = new SaveFileDialog() {
                 Filter = "Excel |* .xlsx",
                 InitialDirectory = @"c:\dados\xlsx",
@@ -262,5 +264,22 @@ namespace GTI_Desktop.Forms {
             CNPJText.Focus();
         }
 
+        private void AtividadeAddButton_Click(object sender, EventArgs e) {
+            Empresa_Atividade f1 = new Empresa_Atividade(0,false) {
+                Tag = Name
+            };
+            var result = f1.ShowDialog(this);
+            if (result == DialogResult.OK) {
+                int _id_atividade = f1.ReturnValue;
+                Empresa_bll empresa_Class = new Empresa_bll(_connection);
+                string _nome_atividade = empresa_Class.Retorna_Nome_Atividade(_id_atividade);
+                AtividadeText.Text = _id_atividade.ToString() + " - " + _nome_atividade;
+            }
+
+        }
+
+        private void ProprietarioAddButton_Click(object sender, EventArgs e) {
+
+        }
     }
 }

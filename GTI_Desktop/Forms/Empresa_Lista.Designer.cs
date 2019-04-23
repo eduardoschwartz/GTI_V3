@@ -397,6 +397,7 @@
             this.AtividadeAddButton.Size = new System.Drawing.Size(23, 22);
             this.AtividadeAddButton.Text = "Adicionar um condomínio";
             this.AtividadeAddButton.ToolTipText = "Adicionar um condomínio";
+            this.AtividadeAddButton.Click += new System.EventHandler(this.AtividadeAddButton_Click);
             // 
             // AtividadeDelButton
             // 
@@ -482,7 +483,7 @@
             this.ProprietarioToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.ProprietarioToolStrip.Location = new System.Drawing.Point(410, 51);
             this.ProprietarioToolStrip.Name = "ProprietarioToolStrip";
-            this.ProprietarioToolStrip.Size = new System.Drawing.Size(49, 25);
+            this.ProprietarioToolStrip.Size = new System.Drawing.Size(80, 25);
             this.ProprietarioToolStrip.TabIndex = 208;
             this.ProprietarioToolStrip.Text = "toolStrip2";
             // 
@@ -495,6 +496,7 @@
             this.ProprietarioAddButton.Size = new System.Drawing.Size(23, 22);
             this.ProprietarioAddButton.Text = "Adicionar um condomínio";
             this.ProprietarioAddButton.ToolTipText = "Adicionar um condomínio";
+            this.ProprietarioAddButton.Click += new System.EventHandler(this.ProprietarioAddButton_Click);
             // 
             // ProprietarioDelButton
             // 

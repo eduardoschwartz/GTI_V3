@@ -12,12 +12,13 @@ namespace GTI_Desktop.Forms {
         public int ReturnValue { get; set; }
         public string ReturnAliquota { get; set; }
         int OriginValue = 0;
-        bool bAddNew;
+        bool bAddNew,_selecionarAliquota;
         ListViewColumnSorter lvwColumnSorter;
 
-        public Empresa_Atividade(int Origin_Value) {
+        public Empresa_Atividade(int Origin_Value, bool SelecionarAliquota) {
             InitializeComponent();
             OriginValue = Origin_Value;
+            _selecionarAliquota = SelecionarAliquota;
             lvwColumnSorter = new ListViewColumnSorter();
             MainListView.ListViewItemSorter = lvwColumnSorter;
             tBar.Renderer = new MySR();
@@ -137,12 +138,10 @@ namespace GTI_Desktop.Forms {
         }
 
         private void GravarButton_Click(object sender, EventArgs e) {
-            int _codigo = 0;
-            decimal _aliq1=0, _aliq2=0, _aliq3=0;
-            decimal.TryParse(Aliquota1.Text,out _aliq1);
-            decimal.TryParse(Aliquota2.Text, out _aliq2);
-            decimal.TryParse(Aliquota3.Text, out _aliq3);
-            int.TryParse(Codigo.Text, out _codigo);
+            decimal.TryParse(Aliquota1.Text, out decimal _aliq1);
+            decimal.TryParse(Aliquota2.Text, out decimal _aliq2);
+            decimal.TryParse(Aliquota3.Text, out decimal _aliq3);
+            int.TryParse(Codigo.Text, out int _codigo);
             string _descricao = Descricao.Text.Trim();
 
             if (_codigo == 0)
@@ -154,10 +153,10 @@ namespace GTI_Desktop.Forms {
                     if (_descricao == "")
                         MessageBox.Show("Digite a descrição da atividade", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     else {
-                        if (_aliq1 == 0 && (_aliq2 > 0 || _aliq3 > 0))
+                        if ((decimal)0 == 0 && ((decimal)0 > 0 || _aliq3 > 0))
                             MessageBox.Show("Não é possível cadastar aliquotas 2 e 3 sem cadastrar a aliquota 1", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         else {
-                            if (_aliq2 == 0 && _aliq3 > 0)
+                            if ((decimal)0 == 0 && _aliq3 > 0)
                                 MessageBox.Show("Não é possível cadastar aliquota 3 sem cadastrar a aliquota 2", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             else {
                                 bool _find = false;
@@ -220,21 +219,20 @@ namespace GTI_Desktop.Forms {
         }
 
         private void Gravar_Atividade() {
-            int _codigo = 0;
-            decimal _aliq1 = 0, _aliq2 = 0, _aliq3 = 0;
-            decimal.TryParse(Aliquota1.Text, out _aliq1);
-            decimal.TryParse(Aliquota2.Text, out _aliq2);
-            decimal.TryParse(Aliquota3.Text, out _aliq3);
-            int.TryParse(Codigo.Text, out _codigo);
+            decimal.TryParse(Aliquota1.Text, out decimal _aliq1);
+            decimal.TryParse(Aliquota2.Text, out decimal _aliq2);
+            decimal.TryParse(Aliquota3.Text, out decimal _aliq3);
+            int.TryParse(Codigo.Text, out int _codigo);
             string _descricao = Descricao.Text.Trim();
 
             Tributario_bll tributario_Class = new Tributario_bll(_connection);
-            Atividade reg = new Atividade();
-            reg.Codatividade = _codigo;
-            reg.Descatividade = _descricao;
-            reg.Valoraliq1 = _aliq1;
-            reg.Valoraliq2 = _aliq2;
-            reg.Valoraliq3 = _aliq3;
+            Atividade reg = new Atividade {
+                Codatividade = _codigo,
+                Descatividade = _descricao,
+                Valoraliq1 = _aliq1,
+                Valoraliq2 = _aliq2,
+                Valoraliq3 = _aliq3
+            };
             Exception ex;
             if (bAddNew) {
                 ex = tributario_Class.Insert_Atividade(reg);
@@ -285,9 +283,8 @@ namespace GTI_Desktop.Forms {
         }
 
         private void DelButton_Click(object sender, EventArgs e) {
-            int _codigo = 0;
-            int.TryParse(Codigo.Text, out _codigo);
-            
+            int.TryParse(Codigo.Text, out int _codigo);
+
             if (_codigo == 0)
                 MessageBox.Show("Selecione uma atividade.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
@@ -310,16 +307,14 @@ namespace GTI_Desktop.Forms {
         private void SelecionarButton_Click(object sender, EventArgs e) {
             ListView.SelectedIndexCollection col = MainListView.SelectedIndices;
             if (col.Count > 0) {
-                decimal _aliq1 = 0, _aliq2 = 0, _aliq3 = 0;
-                decimal.TryParse(Aliquota1.Text, out _aliq1);
-                decimal.TryParse(Aliquota2.Text, out _aliq2);
-                decimal.TryParse(Aliquota3.Text, out _aliq3);
+                decimal.TryParse(Aliquota1.Text, out decimal _aliq1);
+                decimal.TryParse(Aliquota2.Text, out decimal _aliq2);
+                decimal.TryParse(Aliquota3.Text, out decimal _aliq3);
 
                 DialogResult = DialogResult.OK;
                 ReturnValue = Convert.ToInt32(MainListView.Items[col[0]].Text);
 
-
-                if (_aliq2 > 0) {
+                if (_aliq2 > 0 && _selecionarAliquota ) {
                     MessageBoxManager.Yes = string.Format("{0:0.00}", _aliq1);
                     MessageBoxManager.No = string.Format("{0:0.00}", _aliq2);
                     MessageBoxManager.Cancel = string.Format("{0:0.00}", _aliq3);

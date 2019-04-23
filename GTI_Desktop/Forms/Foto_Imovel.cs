@@ -15,6 +15,7 @@ namespace GTI_Desktop.Forms {
         public Foto_Imovel(int Codigo)
         {
             InitializeComponent();
+            HeaderToolStrip.Renderer = new MySR();
             Imovel_bll imovel_Class = new Imovel_bll(_connection);
             List<Foto_imovel> Lista = imovel_Class.Lista_Foto_Imovel(Codigo);
             foreach (GTI_Models.Models.Foto_imovel item in Lista){

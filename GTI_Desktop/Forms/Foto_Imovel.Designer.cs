@@ -55,6 +55,7 @@
             // 
             // HeaderToolStrip
             // 
+            this.HeaderToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.HeaderToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AnteriorButton,
             this.ProximoButton});

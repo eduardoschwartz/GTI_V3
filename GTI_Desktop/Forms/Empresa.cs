@@ -521,7 +521,7 @@ namespace GTI_Desktop.Forms {
                 if (hoveredIndex > -1) {
                     Ttp.Active = false;
                     try {
-                        Ttp.SetToolTip(SILList, ((sil)SILList.Items[hoveredIndex]).Sil);
+                        Ttp.SetToolTip(SILList, SILList.Items[hoveredIndex].ToString());
                     } catch {
                     }
                     Ttp.Active = true;
@@ -994,7 +994,7 @@ namespace GTI_Desktop.Forms {
             else {
                 if (Atividade_Principal.Tag == null || Atividade_Principal.Tag.ToString() == "")
                     Atividade_Principal.Tag = "0";
-                Empresa_Atividade f1 = new Empresa_Atividade(Convert.ToInt32(Atividade_Principal.Tag.ToString())) {
+                Empresa_Atividade f1 = new Empresa_Atividade(Convert.ToInt32(Atividade_Principal.Tag.ToString()),true) {
                     Tag = Name
                 };
                 var result = f1.ShowDialog(this);
@@ -1254,6 +1254,19 @@ namespace GTI_Desktop.Forms {
                     ClearFields();
                     Carrega_Empresa(val);
                 }
+            }
+        }
+
+        private void FotoButton_Click(object sender, EventArgs e) {
+            if (!bAddNew) {
+                int _codigo = Convert.ToInt32(CodigoImovel.Text);
+                Imovel_bll imovel_Class = new Imovel_bll(_connection);
+                List<Foto_imovel> Lista = imovel_Class.Lista_Foto_Imovel(_codigo);
+                if (Lista.Count > 0) {
+                    Foto_Imovel frm = new Foto_Imovel(_codigo);
+                    frm.ShowDialog(this);
+                } else
+                    MessageBox.Show("Não existem fotos cadastradas para esta empresa.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

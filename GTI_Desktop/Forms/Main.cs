@@ -859,7 +859,7 @@ namespace GTI_Desktop.Forms
                 }
                 else
                 {
-                    Empresa_Atividade f1 = new Empresa_Atividade(0)
+                    Empresa_Atividade f1 = new Empresa_Atividade(0,false)
                     {
                         Tag = "Menu",
                         MdiParent = this
