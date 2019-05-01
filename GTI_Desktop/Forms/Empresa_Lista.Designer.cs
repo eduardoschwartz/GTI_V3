@@ -36,7 +36,7 @@
             this.SelectButton = new System.Windows.Forms.ToolStripButton();
             this.ClearButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.TotalImovel = new System.Windows.Forms.ToolStripLabel();
+            this.TotalEmpresa = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.ExcelButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -173,7 +173,7 @@
             this.SelectButton,
             this.ClearButton,
             this.toolStripSeparator1,
-            this.TotalImovel,
+            this.TotalEmpresa,
             this.toolStripLabel2,
             this.ExcelButton,
             this.toolStripSeparator2,
@@ -224,13 +224,13 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // TotalImovel
+            // TotalEmpresa
             // 
-            this.TotalImovel.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.TotalImovel.ForeColor = System.Drawing.Color.Maroon;
-            this.TotalImovel.Name = "TotalImovel";
-            this.TotalImovel.Size = new System.Drawing.Size(13, 22);
-            this.TotalImovel.Text = "0";
+            this.TotalEmpresa.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.TotalEmpresa.ForeColor = System.Drawing.Color.Maroon;
+            this.TotalEmpresa.Name = "TotalEmpresa";
+            this.TotalEmpresa.Size = new System.Drawing.Size(13, 22);
+            this.TotalEmpresa.Text = "0";
             // 
             // toolStripLabel2
             // 
@@ -483,7 +483,7 @@
             this.ProprietarioToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.ProprietarioToolStrip.Location = new System.Drawing.Point(410, 51);
             this.ProprietarioToolStrip.Name = "ProprietarioToolStrip";
-            this.ProprietarioToolStrip.Size = new System.Drawing.Size(80, 25);
+            this.ProprietarioToolStrip.Size = new System.Drawing.Size(49, 25);
             this.ProprietarioToolStrip.TabIndex = 208;
             this.ProprietarioToolStrip.Text = "toolStrip2";
             // 
@@ -634,7 +634,7 @@
         private System.Windows.Forms.ToolStripButton SelectButton;
         private System.Windows.Forms.ToolStripButton ClearButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripLabel TotalImovel;
+        private System.Windows.Forms.ToolStripLabel TotalEmpresa;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripButton ExcelButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;

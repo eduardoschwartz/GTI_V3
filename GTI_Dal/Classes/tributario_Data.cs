@@ -1667,7 +1667,7 @@ namespace GTI_Dal.Classes {
 
         public Exception Insert_Carta_Cobranca(Carta_cobranca Reg) {
             using(var db=new GTI_Context(_connection)) {
-                object[] Parametros = new object[27];
+                object[] Parametros = new object[28];
                 Parametros[0] = new SqlParameter { ParameterName = "@remessa", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Remessa };
                 Parametros[1] = new SqlParameter { ParameterName = "@codigo", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codigo };
                 Parametros[2] = new SqlParameter { ParameterName = "@parcela", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Parcela };
@@ -1695,10 +1695,11 @@ namespace GTI_Dal.Classes {
                 Parametros[24] = new SqlParameter { ParameterName = "@digitavel", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Digitavel };
                 Parametros[25] = new SqlParameter { ParameterName = "@codbarra", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Codbarra };
                 Parametros[26] = new SqlParameter { ParameterName = "@Cep_entrega_cod", SqlDbType = SqlDbType.Int, SqlValue = Reg.Cep_entrega_cod };
+                Parametros[27] = new SqlParameter { ParameterName = "@Lancamento", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Lancamento };
 
                 db.Database.ExecuteSqlCommand("INSERT INTO carta_cobranca(remessa,codigo,parcela,total_parcela,parcela_label,nome,cpf_cnpj,endereco,bairro,cidade,cep,endereco_entrega,bairro_entrega,cidade_entrega,cep_entrega,data_vencimento," +
-                    "data_documento,inscricao,lote,quadra,atividade,numero_documento,nosso_numero,valor_boleto,digitavel,codbarra,Cep_entrega_cod) VALUES(@remessa,@codigo,@parcela,@total_parcela,@parcela_label,@nome,@cpf_cnpj,@endereco,@bairro," +
-                    "@cidade,@cep,@endereco_entrega,@bairro_entrega,@cidade_entrega,@cep_entrega,@data_vencimento,@data_documento,@inscricao,@lote,@quadra,@atividade,@numero_documento,@nosso_numero,@valor_boleto,@digitavel,@codbarra,@Cep_entrega_cod)", Parametros);
+                    "data_documento,inscricao,lote,quadra,atividade,numero_documento,nosso_numero,valor_boleto,digitavel,codbarra,Cep_entrega_cod,Lancamento) VALUES(@remessa,@codigo,@parcela,@total_parcela,@parcela_label,@nome,@cpf_cnpj,@endereco,@bairro," +
+                    "@cidade,@cep,@endereco_entrega,@bairro_entrega,@cidade_entrega,@cep_entrega,@data_vencimento,@data_documento,@inscricao,@lote,@quadra,@atividade,@numero_documento,@nosso_numero,@valor_boleto,@digitavel,@codbarra,@Cep_entrega_cod,@Lancamento)", Parametros);
 
                 try {
                     db.SaveChanges();

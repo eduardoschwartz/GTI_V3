@@ -14,7 +14,7 @@ namespace GTI_Desktop.Forms {
     public partial class Carta_Cobranca : Form {
         private string _connection = gtiCore.Connection_Name();
         private bool _stop = false;
-        short _remessa = 2;
+        short _remessa = 3; //29/04/2019
 
         public Carta_Cobranca() {
             InitializeComponent();
@@ -65,8 +65,8 @@ namespace GTI_Desktop.Forms {
         }
 
         private void Gera_Matriz(int _codigo_ini, int _codigo_fim, DateTime _data_vencto) {
-            int _total = _codigo_fim - _codigo_ini + 1, _pos = 1, _numero_documento = 5115270; //5.100.001 até 5.400.000
-            DateTime _data_vencimento = Convert.ToDateTime("30/11/2018");
+            int _total = _codigo_fim - _codigo_ini + 1, _pos = 1, _numero_documento = 5125920; //5.100.001 até 5.400.000
+            DateTime _data_vencimento = Convert.ToDateTime("10/06/2019");
 
             Exception ex = null;
             List<SpExtrato_carta> Lista_Resumo = new List<SpExtrato_carta>();
@@ -120,11 +120,26 @@ namespace GTI_Desktop.Forms {
 
                 List<SpExtrato_carta> Lista_Extrato_Parcela = tributario_Class.Lista_Extrato_Parcela_Carta(Lista_Extrato_Tributo);
                 Lista_Resumo.Clear();
+                List<string> _lista_lancamento = new List<string>();
+                string _descricao_lancamento = "";
+                bool _find = false;
                 foreach (SpExtrato_carta item in Lista_Extrato_Parcela) {
-                    if ( item.Codlancamento != 20 && item.Datavencimento <= _data_vencto) {
+                    if ( item.Codlancamento!=5 && item.Codlancamento!=11 && item.Datavencimento <= _data_vencto) {
                         Lista_Resumo.Add(item);
+                        _find = false;
+                        foreach (string lanc in _lista_lancamento) {
+                            if (lanc == item.Desclancamento) {
+                                _find = true;
+                                break;
+                            }
+                            
+                        }if (!_find) {
+                            _descricao_lancamento += item.Desclancamento + ", ";
+                            _lista_lancamento.Add(item.Desclancamento);
+                        }
                     }
                 }
+                _descricao_lancamento = _descricao_lancamento.Length==0?"": _descricao_lancamento.Substring(0, _descricao_lancamento.Length - 2);
 
                 if (Lista_Resumo.Count == 0)
                     goto Proximo;
@@ -134,7 +149,7 @@ namespace GTI_Desktop.Forms {
                 int nPercDesconto = 0;
 
                 foreach (SpExtrato_carta item in Lista_Resumo) {
-                    bool _find = false;
+                    _find = false;
                     int _index = 0;
                     foreach (SpExtrato_carta item2 in Lista_Final) {
                         if (item.Anoexercicio == item2.Anoexercicio) {
@@ -212,7 +227,7 @@ namespace GTI_Desktop.Forms {
                         EmpresaStruct endEmpresa = empresa_Class.Retorna_Empresa(_codigo_atual);
                         //mobiliarioendentrega endEmpresa = empresa_Class.Empresa_Endereco_entrega(_codigo_atual);
                         _complemento_entrega = endEmpresa.Complemento == "" ? "" : " " + endEmpresa.Complemento;
-                        _endereco_entrega = endEmpresa.Nome_logradouro + ", " + endEmpresa.Numero.ToString() + _complemento_entrega;
+                        _endereco_entrega = endEmpresa.Nome_logradouro + ", " + endEmpresa.Numero.ToString() + _complemento;
                         _bairro_entrega = endEmpresa.Bairro_nome;
                         _cidade_entrega = endEmpresa.Cidade_nome + "/" + endEmpresa.UF;
                         _cep_entrega = endEmpresa.Cep;
@@ -318,6 +333,7 @@ namespace GTI_Desktop.Forms {
                 Reg.Digitavel = _linha_digitavel;
                 Reg.Codbarra = _codigo_barra;
                 Reg.Cep_entrega_cod = _cep_numero;
+                Reg.Lancamento = _descricao_lancamento;
 
                 ex = tributario_Class.Insert_Carta_Cobranca(Reg);
                 if (ex != null) {

@@ -180,10 +180,16 @@ namespace GTI_Web.Pages {
 
                                             if (!bIsentoTaxa) {
                                                 int _qtde = empresa_Class.Qtde_Parcelas_TLL_Vencidas(Num);
-                                                if (_qtde > 0) {
-                                                    lblmsg.Text = "A taxa de licença não esta paga, favor dirigir-se ao Sistema Prático da Prefeitura para regularizar.";
+                                            if (_qtde > 0) {
+                                                lblmsg.Text = "A taxa de licença não esta paga, favor dirigir-se ao Sistema Prático da Prefeitura para regularizar.";
+                                                return;
+                                            } else {
+                                                if(empresa.Endereco_codigo==123 && empresa.Numero==146 ) {
+                                                    lblmsg.Text = "O endereço desta empresa não permite a emissão de alvará automático.";
                                                     return;
                                                 }
+                                            }
+
                                             }
                                             EmiteAlvara(Num);
                                         }

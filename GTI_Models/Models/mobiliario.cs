@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -175,6 +176,7 @@ namespace GTI_Models.Models {
         public short Seq { get; set; }
         public short Unidade { get; set; }
         public short Subunidade { get; set; }
+        public List<MobiliarioproprietarioStruct> Socios { get; set; }
     }
 
     //public class CnaeStruct {

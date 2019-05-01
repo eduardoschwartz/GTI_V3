@@ -790,5 +790,16 @@ namespace GTI_Bll.Classes {
             return obj.Retorna_Horario_Funcionamento(Codigo_Atividade);
         }
 
+        /// <summary>
+        /// Retorna a lista filtrada de empresas.
+        /// </summary>
+        /// <param name="Filter"></param>
+        /// <returns></returns>
+        public List<EmpresaStruct> Lista_Empresa(EmpresaStruct Filter) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Lista_Empresa(Filter);
+        }
+
+
     }
 }

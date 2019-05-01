@@ -35,5 +35,6 @@ namespace GTI_Models.Models {
         public string Digitavel { get; set; }
         public string Codbarra { get; set; }
         public int Cep_entrega_cod { get; set; }
+        public string Lancamento { get; set; }
     }
 }

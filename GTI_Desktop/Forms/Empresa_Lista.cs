@@ -14,9 +14,11 @@ namespace GTI_Desktop.Forms {
         string _connection = gtiCore.Connection_Name();
         public int ReturnValue { get; set; }
         List<ArrayList> aDatResult;
+        bool _bExec=false;
 
         public Empresa_Lista() {
             InitializeComponent();
+            _bExec = false;
             tBar.Renderer = new MySR();
             EnderecoToolStrip.Renderer = new MySR();
             ProprietarioToolStrip.Renderer = new MySR();
@@ -25,10 +27,12 @@ namespace GTI_Desktop.Forms {
             string[] _ordem = new string[] { "Código", "Inscrição", "Proprietário", "Endereco", "Bairro", "Condomínio" };
             OrdemList.Items.AddRange(_ordem);
             OrdemList.SelectedIndex = 0;
+            _bExec = true;
             gtiCore.Liberado(this);
         }
 
         private void FindButton_Click(object sender, EventArgs e) {
+            if (!_bExec) return;
             MainListView.BeginUpdate();
             MainListView.VirtualListSize = 0;
             MainListView.EndUpdate();
@@ -40,7 +44,7 @@ namespace GTI_Desktop.Forms {
                 Codigo = string.IsNullOrEmpty(Codigo.Text) ? 0 : Convert.ToInt32(Codigo.Text),
             };
 
-            Reg.Razao_social = RazaoSocialText.Text;
+            Reg.Razao_social = RazaoSocialText.Text.Trim();
             LogradouroText.Tag = LogradouroText.Tag ?? "";
             AtividadeText.Tag = AtividadeText.Tag ?? "";
             Reg.Atividade_codigo = string.IsNullOrWhiteSpace(AtividadeText.Tag.ToString()) ? 0 : Convert.ToInt32(AtividadeText.Tag.ToString());
@@ -57,6 +61,36 @@ namespace GTI_Desktop.Forms {
                 Reg.Cnpj = CPFText.Text;
                 Reg.Cpf_cnpj = CPFText.Text;
             }
+
+            int _pos = 0, _total = 0;
+            if (Reg.Codigo==0 && Reg.Razao_social=="") 
+                MessageBox.Show("Selecione ao menos um critério.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else{
+                List<EmpresaStruct> Lista = empresa_Class.Lista_Empresa(Reg);
+                _total = Lista.Count;
+                if (aDatResult == null) aDatResult = new List<ArrayList>();
+                aDatResult.Clear();
+                foreach (var item in Lista) {
+                    ArrayList itemlv = new ArrayList(10) {
+                    item.Codigo.ToString("000000"),
+                    item.Cpf_cnpj??"",
+                    item.Razao_social,
+                    item.Socios[0].Nome??"",
+                    item.Atividade_nome??"",
+                    item.Atividade_codigo==null?"0":item.Atividade_codigo.ToString(),
+                    item.Endereco_nome??"",
+                    item.Numero==null?"0":item.Numero.ToString(),
+                    item.Complemento??"",
+                    item.Bairro_nome??""
+                };
+                    aDatResult.Add(itemlv);
+                    _pos++;
+                }
+                MainListView.BeginUpdate();
+                MainListView.VirtualListSize = aDatResult.Count;
+                MainListView.EndUpdate();
+            }
+            TotalEmpresa.Text = _total.ToString();
 
             gtiCore.Liberado(this);
 
@@ -217,7 +251,8 @@ namespace GTI_Desktop.Forms {
             var acc = aDatResult[e.ItemIndex];
             e.Item = new ListViewItem(
                 new string[]
-                { acc[0].ToString(), acc[1].ToString(), acc[2].ToString() ,acc[3].ToString(),acc[4].ToString(),acc[5].ToString(),acc[6].ToString(),acc[7].ToString()}) {
+                { acc[0].ToString(), acc[1].ToString(), acc[2].ToString(), acc[3].ToString(), acc[4].ToString(), acc[5].ToString(),
+                  acc[6].ToString(), acc[7].ToString(), acc[8].ToString(), acc[9].ToString()}) {
                 Tag = acc,
                 BackColor = e.ItemIndex % 2 == 0 ? Color.Beige : Color.White
             };
@@ -246,7 +281,7 @@ namespace GTI_Desktop.Forms {
             MainListView.BeginUpdate();
             MainListView.VirtualListSize = 0;
             MainListView.EndUpdate();
-            TotalImovel.Text = "0";
+            TotalEmpresa.Text = "0";
             SaveDatFile();
         }
 
@@ -279,7 +314,19 @@ namespace GTI_Desktop.Forms {
         }
 
         private void ProprietarioAddButton_Click(object sender, EventArgs e) {
-
+            using (var form = new Cidadao_Lista()) {
+                var result = form.ShowDialog(this);
+                if (result == DialogResult.OK) {
+                    int val = form.ReturnValue;
+                    Cidadao_bll cidadao_Class = new Cidadao_bll(_connection);
+                    string _nome = cidadao_Class.Retorna_Nome_Cidadao(val);
+                    ProprietarioText.Text = _nome;
+                    ProprietarioText.Tag = val.ToString();
+                }
+            }
         }
+
+
+
     }
 }

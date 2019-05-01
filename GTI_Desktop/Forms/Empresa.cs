@@ -958,7 +958,7 @@ namespace GTI_Desktop.Forms {
         private void ProprietarioAddButton_Click(object sender, EventArgs e) {
             inputBox z = new inputBox();
             Cidadao_bll cidadao_Class = new Cidadao_bll(_connection);
-            String _prop = z.Show("", "Propritários", "Digite o código do proprietário.", 6, gtiCore.eTweakMode.IntegerPositive);
+            String _prop = z.Show("", "Proprietários", "Digite o código do proprietário.", 6, gtiCore.eTweakMode.IntegerPositive);
             if (!string.IsNullOrWhiteSpace(_prop)) {
                 int _codigo = Convert.ToInt32(_prop);
                 bool _find = false;
