@@ -271,11 +271,11 @@ namespace GTI_Dal.Classes {
         public bool Empresa_Mei(int nCodigo) {
             bool ret = true;
             using (GTI_Context db = new GTI_Context(_connection)) {
-                var existingReg = db.Mei.Count(a => a.Codigo == nCodigo);
+                var existingReg = db.Periodomei.Count(a => a.Codigo == nCodigo);
                 if (existingReg == 0) {
                     ret = false;
                 } else {
-                    DateTime? datafim = (from m in db.Mei where m.Codigo == nCodigo select m.Datafim).FirstOrDefault();
+                    DateTime? datafim = (from m in db.Periodomei orderby m.Datainicio descending where m.Codigo == nCodigo select m.Datafim).FirstOrDefault();
                     if (dalCore.IsDate(datafim))
                         return false;
                 }
@@ -1609,6 +1609,17 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public bool Existe_Debito_TaxaLicenca(int Codigo,int Ano) {
+            int _contador = 0;
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                try {
+                    _contador = db.Debitoparcela.Count(d => d.Codreduzido == Codigo && d.Anoexercicio==Ano && d.Codlancamento == 6 && d.Numparcela > 0);
+                } catch {
+
+                }
+                return _contador > 0 ? true : false;
+            }
+        }
 
     }
 }

@@ -800,6 +800,16 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Empresa(Filter);
         }
 
+        /// <summary>
+        /// Retorna sim se a empresa possuir lançamento de taxa de licença no ano especificado.
+        /// </summary>
+        /// <param name="Codigo"></param>
+        /// <param name="Ano"></param>
+        /// <returns></returns>
+        public bool Existe_Debito_TaxaLicenca(int Codigo, int Ano) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Existe_Debito_TaxaLicenca(Codigo,Ano);
+        }
 
     }
 }

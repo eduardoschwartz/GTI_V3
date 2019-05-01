@@ -104,7 +104,7 @@ namespace GTI_Web.Pages {
                 sProcEncerramento = Reg.Numprocessoencerramento.ToString();
             }
             sVigilancia = empresa_Class.Empresa_tem_VS(Codigo) ? "SIM" : "NÃO";
-            sTaxaLicenca = empresa_Class.Empresa_tem_TL(Codigo) ? "SIM" : "NÃO";
+            sTaxaLicenca = empresa_Class.Existe_Debito_TaxaLicenca(Codigo,DateTime.Now.Year) ? "SIM" : "NÃO";
             sMei = empresa_Class.Empresa_Mei(Codigo) ? "SIM" : "NÃO";
             sSituacao = Reg.Situacao;
 

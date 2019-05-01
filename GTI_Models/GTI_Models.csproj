@@ -132,6 +132,7 @@
     <Compile Include="Models\paramparcela.cs" />
     <Compile Include="Models\parceladocumento.cs" />
     <Compile Include="Models\pedologia.cs" />
+    <Compile Include="Models\periodomei.cs" />
     <Compile Include="Models\processocidadao.cs" />
     <Compile Include="Models\processodoc.cs" />
     <Compile Include="Models\processoend.cs" />
