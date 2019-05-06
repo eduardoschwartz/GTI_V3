@@ -15,6 +15,7 @@ namespace GTI_Desktop.Forms {
         public int ReturnValue { get; set; }
         List<ArrayList> aDatResult;
         bool _bExec=false;
+        int _File_Version = Properties.Settings.Default.gti_004_version;
 
         public Empresa_Lista() {
             InitializeComponent();
@@ -24,11 +25,11 @@ namespace GTI_Desktop.Forms {
             ProprietarioToolStrip.Renderer = new MySR();
             AtividadeToolStrip.Renderer = new MySR();
             ReadDatFile();
-            string[] _ordem = new string[] { "Código", "Inscrição", "Proprietário", "Endereco", "Bairro", "Condomínio" };
+            string[] _ordem = new string[] { "Código", "Inscrição", "Razão Social", "Atividade", "Endereco", "Bairro" };
             OrdemList.Items.AddRange(_ordem);
             OrdemList.SelectedIndex = 0;
             _bExec = true;
-            gtiCore.Liberado(this);
+//            gtiCore.Liberado(this);
         }
 
         private void FindButton_Click(object sender, EventArgs e) {
@@ -63,7 +64,7 @@ namespace GTI_Desktop.Forms {
             }
 
             int _pos = 0, _total = 0;
-            if (Reg.Codigo==0 && Reg.Razao_social=="") 
+            if (Reg.Codigo==0 && Reg.Razao_social=="" && Reg.Atividade_codigo==0 && Reg.Endereco_codigo==0 && Reg.Bairro_codigo==0) 
                 MessageBox.Show("Selecione ao menos um critério.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else{
                 List<EmpresaStruct> Lista = empresa_Class.Lista_Empresa(Reg);
@@ -75,7 +76,7 @@ namespace GTI_Desktop.Forms {
                     item.Codigo.ToString("000000"),
                     item.Cpf_cnpj??"",
                     item.Razao_social,
-                    item.Socios[0].Nome??"",
+                    item.Socios.Count==0?"":item.Socios[0].Nome,
                     item.Atividade_nome??"",
                     item.Atividade_codigo==null?"0":item.Atividade_codigo.ToString(),
                     item.Endereco_nome??"",
@@ -110,21 +111,41 @@ namespace GTI_Desktop.Forms {
 
         private void SaveDatFile() {
             List<string> aLista = new List<string>();
-            string[] aReg = new string[8];
+            string[] aReg = new string[10];
             string[] aTmp = new string[1];
-
+            aLista.Add(gtiCore.ConvertDatReg("ZZ", _File_Version.ToString().Split())); //Versão do arquivo
             aLista.Add(gtiCore.ConvertDatReg("CD", Codigo.Text.Split()));
+            aTmp[0] = RazaoSocialText.Text;
+            aLista.Add(gtiCore.ConvertDatReg("RS", aTmp));
+            if (ProprietarioText.Tag == null || ProprietarioText.Tag.ToString() == "") ProprietarioText.Tag = "0";
+            aTmp[0] = ProprietarioText.Text;
+            aLista.Add(gtiCore.ConvertDatReg("PN", aTmp));
+            aLista.Add(gtiCore.ConvertDatReg("PC", ProprietarioText.Tag.ToString().Split()));
+            if (AtividadeText.Tag == null || AtividadeText.Tag.ToString() == "") AtividadeText.Tag = "0";
+            aTmp[0] = AtividadeText.Text;
+            aLista.Add(gtiCore.ConvertDatReg("AN", aTmp));
+            aLista.Add(gtiCore.ConvertDatReg("AC", AtividadeText.Tag.ToString().Split()));
+            if (LogradouroText.Tag == null || LogradouroText.Tag.ToString() == "") LogradouroText.Tag = "0";
+            aTmp[0] = LogradouroText.Text;
+            aLista.Add(gtiCore.ConvertDatReg("EN", aTmp));
+            aLista.Add(gtiCore.ConvertDatReg("EC", LogradouroText.Tag.ToString().Split()));
+            if (BairroText.Tag == null || BairroText.Tag.ToString() == "") BairroText.Tag = "0";
+            aTmp[0] = BairroText.Text;
+            aLista.Add(gtiCore.ConvertDatReg("BN", aTmp));
+            aLista.Add(gtiCore.ConvertDatReg("BC", BairroText.Tag.ToString().Split()));
 
             for (int i = 0; i < MainListView.VirtualListSize; i++) {
                 aReg[0] = MainListView.Items[i].Text;
-                aReg[1] = MainListView.Items[i].SubItems[1].Text;
-                aReg[2] = MainListView.Items[i].SubItems[2].Text;
+                aReg[1] = MainListView.Items[i].SubItems[1].Text == "" ? " " : MainListView.Items[i].SubItems[1].Text;
+                aReg[2] = MainListView.Items[i].SubItems[2].Text == "" ? " " : MainListView.Items[i].SubItems[2].Text;
                 aReg[3] = MainListView.Items[i].SubItems[3].Text == "" ? " " : MainListView.Items[i].SubItems[3].Text;
                 aReg[4] = MainListView.Items[i].SubItems[4].Text == "" ? " " : MainListView.Items[i].SubItems[4].Text;
                 aReg[5] = MainListView.Items[i].SubItems[5].Text == "" ? " " : MainListView.Items[i].SubItems[5].Text;
                 aReg[6] = MainListView.Items[i].SubItems[6].Text == "" ? " " : MainListView.Items[i].SubItems[6].Text;
                 aReg[7] = MainListView.Items[i].SubItems[7].Text == "" ? " " : MainListView.Items[i].SubItems[7].Text;
-                aLista.Add(gtiCore.ConvertDatReg("IM", aReg));
+                aReg[8] = MainListView.Items[i].SubItems[8].Text == "" ? " " : MainListView.Items[i].SubItems[8].Text;
+                aReg[9] = MainListView.Items[i].SubItems[9].Text == "" ? " " : MainListView.Items[i].SubItems[9].Text;
+                aLista.Add(gtiCore.ConvertDatReg("EM", aReg));
             }
 
             string sDir = AppDomain.CurrentDomain.BaseDirectory;
@@ -140,14 +161,46 @@ namespace GTI_Desktop.Forms {
             if (File.GetLastWriteTime(sDir + sFileName).ToString("MM/dd/yyyy") != DateTime.Now.ToString("MM/dd/yyyy")) return;
             //lê o q arquivo
             try {
+                aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "ZZ");
+                if (Convert.ToInt32(aDatResult[0][0].ToString()) != _File_Version) {
+                    return;
+                }
                 aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "CD");
                 if (aDatResult[0].Count > 0)
                     Codigo.Text = aDatResult[0][0].ToString();
+                aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "RS");
+                if (aDatResult[0].Count > 0)
+                    RazaoSocialText.Text = aDatResult[0][0].ToString(); ;
+                aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "PN");
+                if (aDatResult[0].Count > 0)
+                    ProprietarioText.Text = aDatResult[0][0].ToString();
+                aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "PC");
+                if (aDatResult[0].Count > 0)
+                    ProprietarioText.Tag = aDatResult[0][0].ToString();
+                aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "AN");
+                if (aDatResult[0].Count > 0)
+                    AtividadeText.Text = aDatResult[0][0].ToString();
+                aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "AC");
+                if (aDatResult[0].Count > 0)
+                    AtividadeText.Tag = aDatResult[0][0].ToString();
+                aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "EN");
+                if (aDatResult[0].Count > 0)
+                    LogradouroText.Text = aDatResult[0][0].ToString();
+                aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "EC");
+                if (aDatResult[0].Count > 0)
+                    LogradouroText.Tag= aDatResult[0][0].ToString();
+                aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "BN");
+                if (aDatResult[0].Count > 0)
+                    BairroText.Text = aDatResult[0][0].ToString();
+                aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "BC");
+                if (aDatResult[0].Count > 0)
+                    BairroText.Tag = aDatResult[0][0].ToString();
 
-                aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "IM", false);
+                aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "EM", false);
                 MainListView.VirtualListSize = aDatResult.Count;
             } catch {
             }
+
 
         }
 
@@ -249,14 +302,10 @@ namespace GTI_Desktop.Forms {
 
         private void MainListView_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e) {
             var acc = aDatResult[e.ItemIndex];
-            e.Item = new ListViewItem(
-                new string[]
-                { acc[0].ToString(), acc[1].ToString(), acc[2].ToString(), acc[3].ToString(), acc[4].ToString(), acc[5].ToString(),
-                  acc[6].ToString(), acc[7].ToString(), acc[8].ToString(), acc[9].ToString()}) {
-                Tag = acc,
-                BackColor = e.ItemIndex % 2 == 0 ? Color.Beige : Color.White
-            };
-
+            if (acc.Count == 10) {
+                e.Item = new ListViewItem(new string[] { acc[0].ToString(), acc[1].ToString(), acc[2].ToString(), acc[3].ToString(), acc[4].ToString(), acc[5].ToString(),
+                  acc[6].ToString(), acc[7].ToString(), acc[8].ToString(), acc[9].ToString()}) {  Tag = acc, BackColor = e.ItemIndex % 2 == 0 ? Color.Beige : Color.White };
+            }
         }
 
         private void Codigo_KeyDown(object sender, KeyEventArgs e) {
@@ -309,6 +358,7 @@ namespace GTI_Desktop.Forms {
                 Empresa_bll empresa_Class = new Empresa_bll(_connection);
                 string _nome_atividade = empresa_Class.Retorna_Nome_Atividade(_id_atividade);
                 AtividadeText.Text = _id_atividade.ToString() + " - " + _nome_atividade;
+                AtividadeText.Tag = _id_atividade.ToString();
             }
 
         }

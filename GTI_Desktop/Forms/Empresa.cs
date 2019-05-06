@@ -562,9 +562,10 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void Carrega_Empresa(int Codigo) {
+        private void Carrega_Empresa(int _codigo) {
             Empresa_bll empresa_Class = new Empresa_bll(_connection);
-            EmpresaStruct Reg = empresa_Class.Retorna_Empresa(Codigo);
+            EmpresaStruct Reg = empresa_Class.Retorna_Empresa(_codigo);
+            Codigo.Text = _codigo.ToString("000000");
             RazaoSocial.Text = Reg.Razao_social;
             NomeFantasia.Text = Reg.Nome_fantasia;
             InscEstadual.Text = Reg.Inscricao_estadual;
@@ -613,17 +614,17 @@ namespace GTI_Desktop.Forms {
             Bombonieri_chk.Checked = Reg.Bombonieri == 1 ? true : false;
             Vistoria_chk.Checked = Reg.Vistoria == 1 ? true : false;
 
-            List<string>_placas = empresa_Class.Lista_Placas(Codigo);
+            List<string>_placas = empresa_Class.Lista_Placas(_codigo);
             foreach (string item in _placas) {
                 PlacaLista.Items.Add(item);
             }
 
-            List<sil>_lista_sil = empresa_Class.Lista_Sil(Codigo);
+            List<sil>_lista_sil = empresa_Class.Lista_Sil(_codigo);
             foreach (sil _sil in _lista_sil) {
                 SILList.Items.Add(_sil.Sil);
             }
 
-            bool bMei = empresa_Class.Empresa_Mei(Codigo);
+            bool bMei = empresa_Class.Empresa_Mei(_codigo);
             if (bMei) {
                 OptanteMei.Text = "SIM";
                 OptanteMei.ForeColor = Color.Green;
@@ -632,7 +633,7 @@ namespace GTI_Desktop.Forms {
                 OptanteMei.ForeColor = Color.DarkRed;
             }
 
-            bool bSimples = empresa_Class.Empresa_Simples(Codigo,DateTime.Now);
+            bool bSimples = empresa_Class.Empresa_Simples(_codigo,DateTime.Now);
             if (bSimples) {
                 SimplesNacional.Text =  "SIM" ;
                 SimplesNacional.ForeColor = Color.Green;
@@ -654,7 +655,7 @@ namespace GTI_Desktop.Forms {
             UF.Text = Reg.UF;
             Cep.Text = Reg.Cep;
 
-            mobiliarioendentrega endEntrega = empresa_Class.Empresa_Endereco_entrega(Codigo);
+            mobiliarioendentrega endEntrega = empresa_Class.Empresa_Endereco_entrega(_codigo);
             if (!string.IsNullOrWhiteSpace(endEntrega.Nomelogradouro)) {
                 Logradouro_EE.Text = endEntrega.Nomelogradouro;
                 Logradouro_EE.Tag = endEntrega.Codlogradouro.ToString();
@@ -685,9 +686,9 @@ namespace GTI_Desktop.Forms {
             Atividade_Principal.Tag = Convert.ToInt32( Reg.Atividade_codigo).ToString("00000");
             Atividade_Extenso.Text = Reg.Atividade_extenso;
             Nivel.Text = Reg.Codigo_aliquota.ToString();
-            Aliquota.Text = empresa_Class.Aliquota_Taxa_Licenca(Codigo).ToString("#0.00");
+            Aliquota.Text = empresa_Class.Aliquota_Taxa_Licenca(_codigo).ToString("#0.00");
 
-            List<MobiliarioproprietarioStruct>Lista_Prop = empresa_Class.Lista_Empresa_Proprietario(Codigo);
+            List<MobiliarioproprietarioStruct>Lista_Prop = empresa_Class.Lista_Empresa_Proprietario(_codigo);
             foreach (MobiliarioproprietarioStruct _prop in Lista_Prop) {
                 CustomListBoxItem listBoxItem = new CustomListBoxItem(_prop.Nome, _prop.Codcidadao);
                 ProprietarioList.Items.Add(listBoxItem);
@@ -712,8 +713,8 @@ namespace GTI_Desktop.Forms {
             ProfissionalRegistro.Text = Reg.Prof_responsavel_registro;
 
             //CNAE
-            Lista_Cnae = empresa_Class.Lista_Cnae_Empresa(Codigo);
-            Lista_Cnae_VS = empresa_Class.Lista_Cnae_Empresa_VS(Codigo);
+            Lista_Cnae = empresa_Class.Lista_Cnae_Empresa(_codigo);
+            Lista_Cnae_VS = empresa_Class.Lista_Cnae_Empresa_VS(_codigo);
 
             //Remove Cnae Duplicado
 //Inicio:;
@@ -727,7 +728,7 @@ namespace GTI_Desktop.Forms {
             //}
 
             //Preenche lista de Atividade ISS
-            List<MobiliarioAtividadeISSStruct> Lista_ISS = empresa_Class.Lista_AtividadeISS_Empresa(Codigo);
+            List<MobiliarioAtividadeISSStruct> Lista_ISS = empresa_Class.Lista_AtividadeISS_Empresa(_codigo);
             foreach (MobiliarioAtividadeISSStruct item in Lista_ISS) {
                 ListViewItem lvItem = new ListViewItem(item.Codigo_tributo == 11 ? "F" : item.Codigo_tributo == 12 ? "E" : "V");
                 lvItem.SubItems.Add(item.Codigo_atividade.ToString("000"));
@@ -764,7 +765,7 @@ namespace GTI_Desktop.Forms {
             }
             
             //Preenche lista de Histórico
-            List<MobiliarioHistoricoStruct> Lista_Hist = empresa_Class.Lista_Empresa_Historico(Codigo);
+            List<MobiliarioHistoricoStruct> Lista_Hist = empresa_Class.Lista_Empresa_Historico(_codigo);
             foreach (MobiliarioHistoricoStruct item in Lista_Hist) {
                 ListViewItem lvItem = new ListViewItem(item.Data.ToString("dd/MM/yyyy"));
                 lvItem.SubItems.Add(item.Seq.ToString("000"));
@@ -777,7 +778,7 @@ namespace GTI_Desktop.Forms {
             //Preenche lista de Processos
             Processo_bll processo_Class = new Processo_bll(_connection);
             ProcessoFilter Reg2 = new ProcessoFilter {
-                Inscricao = Codigo
+                Inscricao = _codigo
             };
 
             List<ProcessoStruct> Lista_Proc = processo_Class.Lista_Processos(Reg2);
@@ -1247,8 +1248,8 @@ namespace GTI_Desktop.Forms {
         }
 
         private void FindButton_Click(object sender, EventArgs e) {
-            using (var form = new Empresa_Lista()) {
-                var result = form.ShowDialog(this);
+            using (Empresa_Lista form = new Empresa_Lista()) {
+                DialogResult result = form.ShowDialog(this);
                 if (result == DialogResult.OK) {
                     int val = form.ReturnValue;
                     ClearFields();

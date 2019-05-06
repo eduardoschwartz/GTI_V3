@@ -17,6 +17,6 @@ namespace GTI_Models.Models {
         public int Codmobiliario { get; set; }
         public int Codcidadao { get; set; }
         public string Nome { get; set; }
-        public int Principal { get; set; }
+        public int? Principal { get; set; }
     }
 }

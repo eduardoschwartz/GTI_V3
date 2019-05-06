@@ -41,5 +41,17 @@
     <Setting Name="Path_Anexo_Net" Type="System.String" Scope="User">
       <Value Profile="(Default)">\\192.168.200.130\atualizagti\documentos\</Value>
     </Setting>
+    <Setting Name="gti_001_version" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="gti_002_version" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="gti_003_version" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="gti_004_version" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

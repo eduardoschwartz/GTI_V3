@@ -65,7 +65,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void Gera_Matriz(int _codigo_ini, int _codigo_fim, DateTime _data_vencto) {
-            int _total = _codigo_fim - _codigo_ini + 1, _pos = 1, _numero_documento = 5125920; //5.100.001 até 5.400.000
+            int _total = _codigo_fim - _codigo_ini + 1, _pos = 1, _numero_documento =  5125920; //5.100.001 até 5.400.000
             DateTime _data_vencimento = Convert.ToDateTime("10/06/2019");
 
             Exception ex = null;
@@ -114,7 +114,7 @@ namespace GTI_Desktop.Forms {
                         goto Proximo;
                 }
 
-                List<SpExtrato_carta> Lista_Extrato_Tributo = tributario_Class.Lista_Extrato_Tributo_Carta(Codigo: _codigo_atual,Data_Atualizacao:Convert.ToDateTime("30/11/2018"));
+                List<SpExtrato_carta> Lista_Extrato_Tributo = tributario_Class.Lista_Extrato_Tributo_Carta(Codigo: _codigo_atual,Data_Atualizacao:DateTime.Now);
                 if (Lista_Extrato_Tributo.Count == 0)
                     goto Proximo;
 
@@ -146,7 +146,7 @@ namespace GTI_Desktop.Forms {
 
                 Lista_Final.Clear();
 
-                int nPercDesconto = 0;
+                int nPercDesconto = 1;
 
                 foreach (SpExtrato_carta item in Lista_Resumo) {
                     _find = false;

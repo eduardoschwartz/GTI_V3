@@ -130,7 +130,6 @@
             this.RazaoSocialText.Location = new System.Drawing.Point(85, 32);
             this.RazaoSocialText.MaxLength = 0;
             this.RazaoSocialText.Name = "RazaoSocialText";
-            this.RazaoSocialText.ReadOnly = true;
             this.RazaoSocialText.Size = new System.Drawing.Size(322, 20);
             this.RazaoSocialText.TabIndex = 75;
             this.RazaoSocialText.TabStop = false;

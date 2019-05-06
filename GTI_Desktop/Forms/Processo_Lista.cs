@@ -16,6 +16,7 @@ namespace GTI_Desktop.Forms {
         string _connection = gtiCore.Connection_Name();
         public ProcessoNumero ReturnValue { get; set; } = new ProcessoNumero();
         List<ArrayList> aDatResult;
+        int _File_Version = Properties.Settings.Default.gti_003_version;
 
         public Processo_Lista()
         {
@@ -66,6 +67,11 @@ namespace GTI_Desktop.Forms {
             if (File.GetLastWriteTime(sDir + sFileName).ToString("MM/dd/yyyy") != DateTime.Now.ToString("MM/dd/yyyy")) return;
             //lê o q arquivo
             try {
+                aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "ZZ");
+                if (Convert.ToInt32(aDatResult[0][0].ToString()) != _File_Version) {
+                    return;
+                }
+
                 aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "NP");
                 if (aDatResult[0].Count > 0)
                     NumeroProcesso.Text = aDatResult[0][0].ToString();
@@ -109,6 +115,7 @@ namespace GTI_Desktop.Forms {
             string[] aReg = new string[12];
             string[] aTmp = new string[1];
 
+            aLista.Add(gtiCore.ConvertDatReg("ZZ", _File_Version.ToString().Split())); //Versão do arquivo
             aLista.Add(gtiCore.ConvertDatReg("NP", new[] { NumeroProcesso.Text }));
             aLista.Add(gtiCore.ConvertDatReg("AI", new[] { AnoInicial.Text }));
             aLista.Add(gtiCore.ConvertDatReg("AF", new[] { AnoFinal.Text }));

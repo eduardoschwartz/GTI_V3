@@ -167,13 +167,13 @@ namespace GTI_Dal.Classes {
                            where m.Codigomob==_codigo select new  {a.Valoraliq1,a.Valoraliq2,a.Valoraliq3 }).FirstOrDefault();
                 if (Sql != null) {
                     if (Sql.Valoraliq1 > 0)
-                        _aliquota = Sql.Valoraliq1;
+                        _aliquota = (decimal)Sql.Valoraliq1;
                     else {
                         if (Sql.Valoraliq2 > 0)
-                            _aliquota = Sql.Valoraliq2;
+                            _aliquota = (decimal)Sql.Valoraliq2;
                         else {
                             if (Sql.Valoraliq3 > 0)
-                                _aliquota = Sql.Valoraliq3;
+                                _aliquota = (decimal)Sql.Valoraliq3;
                         }
                     }
                 }
@@ -1565,48 +1565,62 @@ namespace GTI_Dal.Classes {
 
         public List<EmpresaStruct> Lista_Empresa(EmpresaStruct Filter) {
             List<EmpresaStruct> Lista = new List<EmpresaStruct>();
-            using (GTI_Context db = new GTI_Context(_connection)) {
-                var Sql = (from m in db.Mobiliario
-                           join a in db.Atividade on m.Codatividade equals a.Codatividade into am from a in am.DefaultIfEmpty()
-                           join b in db.Bairro on new { p1 = (short)m.Codbairro, p2 = (short)m.Codcidade, p3 = m.Siglauf } equals new { p1 = b.Codbairro, p2 = b.Codcidade, p3 = b.Siglauf } into mb from b in mb.DefaultIfEmpty()
-                           join c in db.Cidade on new { p1 = (short)m.Codcidade, p2 = m.Siglauf } equals new { p1 = c.Codcidade, p2 = c.Siglauf } into mc from c in mc.DefaultIfEmpty()
-                           join l in db.Logradouro on m.Codlogradouro equals l.Codlogradouro into lm from l in lm.DefaultIfEmpty()
-                           select new EmpresaStruct { Codigo=m.Codigomob,Razao_social=m.Razaosocial,Atividade_codigo=m.Codatividade,Atividade_nome=a.Descatividade,
-                           Nome_logradouro=l.Endereco,Numero=m.Numero,Complemento=m.Complemento,Bairro_nome=b.Descbairro});
+            GTI_Context db = new GTI_Context(_connection);
+            var Sql = (from m in db.Mobiliario
+                       join a in db.Atividade on m.Codatividade equals a.Codatividade into am from a in am.DefaultIfEmpty()
+                       join b in db.Bairro on new { p1 = (short)m.Codbairro, p2 = (short)m.Codcidade, p3 = m.Siglauf } equals new { p1 = b.Codbairro, p2 = b.Codcidade, p3 = b.Siglauf } into mb from b in mb.DefaultIfEmpty()
+                       join c in db.Cidade on new { p1 = (short)m.Codcidade, p2 = m.Siglauf } equals new { p1 = c.Codcidade, p2 = c.Siglauf } into mc from c in mc.DefaultIfEmpty()
+                       join l in db.Logradouro on m.Codlogradouro equals l.Codlogradouro into lm from l in lm.DefaultIfEmpty()
+                       select new EmpresaStruct {
+                           Codigo = m.Codigomob, Razao_social = m.Razaosocial, Atividade_codigo = m.Codatividade, Atividade_nome = a.Descatividade,
+                           Nome_logradouro = l.Endereco, Numero = m.Numero, Complemento = m.Complemento, Bairro_nome = b.Descbairro
+                       });
 
-                if (Filter.Codigo > 0)
-                    Sql = Sql.Where(c => c.Codigo == Filter.Codigo);
-                if (!string.IsNullOrWhiteSpace(Filter.Razao_social))
-                    Sql = Sql.Where(c => c.Razao_social.Contains( Filter.Razao_social));
+            if (Filter.Codigo > 0)
+                Sql = Sql.Where(c => c.Codigo == Filter.Codigo);
+            if (!string.IsNullOrWhiteSpace(Filter.Razao_social))
+                Sql = Sql.Where(c => c.Razao_social.Contains(Filter.Razao_social));
+            if(Filter.Atividade_codigo>0)
+                Sql = Sql.Where(c => c.Atividade_codigo == Filter.Atividade_codigo);
+            if (Filter.Endereco_codigo > 0)
+                Sql = Sql.Where(c => c.Endereco_codigo == Filter.Endereco_codigo);
+            if (Filter.Bairro_codigo > 0)
+                Sql = Sql.Where(c => c.Bairro_codigo == Filter.Bairro_codigo);
 
-                foreach (var reg in Sql) {
-                    EmpresaStruct Linha = new EmpresaStruct {
-                        Codigo = reg.Codigo,
-                        Razao_social = reg.Razao_social,
-                        Atividade_nome=reg.Atividade_nome,
-                        Atividade_codigo=reg.Atividade_codigo
-                    };
-                    if (!string.IsNullOrEmpty(reg.Cpf) && reg.Cpf.Length > 10) {
-                        Linha.Juridica = false;
-                        Linha.Cpf_cnpj = reg.Cpf;
-                        Linha.Cpf = reg.Cpf;
-                    } else {
-                        if (!string.IsNullOrEmpty(reg.Cnpj) && reg.Cnpj.Length > 13) {
-                            Linha.Cpf_cnpj = reg.Cnpj;
-                            Linha.Cnpj = reg.Cnpj;
-                            Linha.Juridica = true;
-                        }
+            foreach (var reg in Sql) {
+                EmpresaStruct Linha = new EmpresaStruct {
+                    Codigo = reg.Codigo,
+                    Razao_social = reg.Razao_social,
+                    Atividade_nome = reg.Atividade_nome,
+                    Atividade_codigo = reg.Atividade_codigo,
+                    Endereco_nome=reg.Nome_logradouro,
+                    Numero=reg.Numero,
+                    Complemento=reg.Complemento,
+                    Bairro_nome=reg.Bairro_nome
+                };
+                if (!string.IsNullOrEmpty(reg.Cpf) && reg.Cpf.Length > 10) {
+                    Linha.Juridica = false;
+                    Linha.Cpf_cnpj = reg.Cpf;
+                    Linha.Cpf = reg.Cpf;
+                } else {
+                    if (!string.IsNullOrEmpty(reg.Cnpj) && reg.Cnpj.Length > 13) {
+                        Linha.Cpf_cnpj = reg.Cnpj;
+                        Linha.Cnpj = reg.Cnpj;
+                        Linha.Juridica = true;
                     }
-
-                    List<MobiliarioproprietarioStruct> _listaSocios = (from p in db.Mobiliarioproprietario
-                                join c in db.Cidadao on p.Codcidadao equals c.Codcidadao into pc from c in pc where p.Codmobiliario == reg.Codigo
-                                select new MobiliarioproprietarioStruct { Codmobiliario=reg.Codigo,Nome=c.Nomecidadao,Codcidadao=p.Codcidadao,Principal=p.Principal}).ToList();
-                    Linha.Socios = _listaSocios;
-
-                    Lista.Add(Linha);
                 }
-                return Lista;
+                Lista.Add(Linha);
             }
+            db.Dispose();
+            db = new GTI_Context(_connection);
+
+            foreach (var reg in Lista) {
+                List<MobiliarioproprietarioStruct> _listaSocios = (from p in db.Mobiliarioproprietario
+                                                                   join c in db.Cidadao on p.Codcidadao equals c.Codcidadao into pc from c in pc where p.Codmobiliario == reg.Codigo
+                                                                   select new MobiliarioproprietarioStruct { Codmobiliario = reg.Codigo, Nome = c.Nomecidadao, Codcidadao = p.Codcidadao, Principal = p.Principal }).ToList();
+                reg.Socios = _listaSocios;
+            }
+            return Lista;
         }
 
         public bool Existe_Debito_TaxaLicenca(int Codigo,int Ano) {

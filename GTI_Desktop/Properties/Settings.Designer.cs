@@ -178,5 +178,53 @@ namespace GTI_Desktop.Properties {
                 this["Path_Anexo_Net"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int gti_001_version {
+            get {
+                return ((int)(this["gti_001_version"]));
+            }
+            set {
+                this["gti_001_version"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int gti_002_version {
+            get {
+                return ((int)(this["gti_002_version"]));
+            }
+            set {
+                this["gti_002_version"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int gti_003_version {
+            get {
+                return ((int)(this["gti_003_version"]));
+            }
+            set {
+                this["gti_003_version"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int gti_004_version {
+            get {
+                return ((int)(this["gti_004_version"]));
+            }
+            set {
+                this["gti_004_version"] = value;
+            }
+        }
     }
 }

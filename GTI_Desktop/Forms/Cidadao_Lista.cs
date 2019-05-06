@@ -15,6 +15,7 @@ namespace GTI_Desktop.Forms {
         string _connection = gtiCore.Connection_Name();
         public int ReturnValue { get; set; }
         List<ArrayList> aDatResult;
+        int _File_Version = Properties.Settings.Default.gti_002_version;
 
         public Cidadao_Lista() {
             InitializeComponent();
@@ -139,7 +140,7 @@ namespace GTI_Desktop.Forms {
             List<string> aLista = new List<string>();
             string[] aReg = new string[8];
             string[] aTmp = new string[1];
-
+            aLista.Add(gtiCore.ConvertDatReg("ZZ", _File_Version.ToString().Split())); //Versão do arquivo
             aLista.Add(gtiCore.ConvertDatReg("DS", new[] { BuscaText.Text }));
 
             for (int i = 0; i < MainListView.VirtualListSize; i++) {
@@ -163,6 +164,11 @@ namespace GTI_Desktop.Forms {
             if (File.GetLastWriteTime(sDir + sFileName).ToString("MM/dd/yyyy") != DateTime.Now.ToString("MM/dd/yyyy")) return;
             //lê o q arquivo
             try {
+                aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "ZZ");
+                if (Convert.ToInt32(aDatResult[0][0].ToString()) != _File_Version) {
+                    return;
+                }
+
                 aDatResult = gtiCore.ReadFromDatFile(sDir + sFileName, "DS");
                 if (aDatResult[0].Count > 0)
                     BuscaText.Text = aDatResult[0][0].ToString();
