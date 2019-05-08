@@ -15,6 +15,7 @@ namespace GTI_Desktop.Forms {
                 DataBaseTeste = Properties.Settings.Default.DataBaseTeste
             };
             Pms.PathReport = Pms.PathApp + "\\report";
+            Pms.PathAnexo = Properties.Settings.Default.Path_Anexo_Local;
             Pms.ServerName = Properties.Settings.Default.ServerName;
             Pms.ComputerName = Environment.MachineName;
             Pms.UserName = gtiCore.Retorna_Last_User();

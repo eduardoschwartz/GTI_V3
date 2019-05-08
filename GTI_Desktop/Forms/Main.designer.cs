@@ -670,7 +670,7 @@
             // ConfigMenu
             // 
             this.ConfigMenu.Name = "ConfigMenu";
-            this.ConfigMenu.Size = new System.Drawing.Size(180, 22);
+            this.ConfigMenu.Size = new System.Drawing.Size(152, 22);
             this.ConfigMenu.Text = "Configuração";
             this.ConfigMenu.Click += new System.EventHandler(this.MnuConfig_Click);
             // 
@@ -681,7 +681,7 @@
             this.CadastroEventoMenu,
             this.AtribuicaoAcessoMenu});
             this.SecurityMenu.Name = "SecurityMenu";
-            this.SecurityMenu.Size = new System.Drawing.Size(180, 22);
+            this.SecurityMenu.Size = new System.Drawing.Size(152, 22);
             this.SecurityMenu.Text = "Segurança";
             // 
             // CadastroUsuariosMenu
@@ -710,7 +710,7 @@
             this.AdministrativoMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CalculoImpostoMenu});
             this.AdministrativoMenu.Name = "AdministrativoMenu";
-            this.AdministrativoMenu.Size = new System.Drawing.Size(180, 22);
+            this.AdministrativoMenu.Size = new System.Drawing.Size(152, 22);
             this.AdministrativoMenu.Text = "Administrativo";
             // 
             // CalculoImpostoMenu
@@ -1078,7 +1078,7 @@
             this.Name = "Main";
             this.Tag = "232; 232; 213";
             this.Text = "Gestão de Tributação Municipal Integrada  (G.T.I.) - Prefeitura Municipal de Jabo" +
-    "ticabal - Versão: 3.0.1";
+    "ticabal - Versão: ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);

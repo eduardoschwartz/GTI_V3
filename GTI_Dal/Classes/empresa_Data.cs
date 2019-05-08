@@ -1572,8 +1572,8 @@ namespace GTI_Dal.Classes {
                        join c in db.Cidade on new { p1 = (short)m.Codcidade, p2 = m.Siglauf } equals new { p1 = c.Codcidade, p2 = c.Siglauf } into mc from c in mc.DefaultIfEmpty()
                        join l in db.Logradouro on m.Codlogradouro equals l.Codlogradouro into lm from l in lm.DefaultIfEmpty()
                        select new EmpresaStruct {
-                           Codigo = m.Codigomob, Razao_social = m.Razaosocial, Atividade_codigo = m.Codatividade, Atividade_nome = a.Descatividade,
-                           Nome_logradouro = l.Endereco, Numero = m.Numero, Complemento = m.Complemento, Bairro_nome = b.Descbairro
+                           Codigo = m.Codigomob, Razao_social = m.Razaosocial, Atividade_codigo = m.Codatividade, Atividade_nome = a.Descatividade,Bairro_codigo=m.Codbairro,
+                           Nome_logradouro = l.Endereco,Endereco_codigo=m.Codlogradouro, Numero = m.Numero, Complemento = m.Complemento, Bairro_nome = b.Descbairro
                        });
 
             if (Filter.Codigo > 0)

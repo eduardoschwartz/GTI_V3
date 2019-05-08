@@ -9,6 +9,7 @@ namespace GTI_Desktop.Classes {
         private string _databaseteste;
         private string _pathapp;
         private string _pathreport;
+        private string _pathanexo;
         private string _computername;
         private string _username;
 
@@ -40,6 +41,12 @@ namespace GTI_Desktop.Classes {
         public string PathReport {
             get { return _pathreport; }
             set { _pathreport = value; }
+        }
+
+        [CategoryAttribute("Acesso"), DescriptionAttribute("Caminho dos anexos"), ReadOnly(true), DisplayName("Caminho dos Anexos")]
+        public string PathAnexo {
+            get { return _pathanexo; }
+            set { _pathanexo = value; }
         }
 
         [CategoryAttribute("Computador"), DescriptionAttribute("Nome do computador"), ReadOnly(true), DisplayName("Nome do Computador")]
