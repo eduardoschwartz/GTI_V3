@@ -5,8 +5,6 @@ using GTI_Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
-using System.Text;
 using System.Windows.Forms;
 using static GTI_Models.modelCore;
 
@@ -65,7 +63,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void Gera_Matriz(int _codigo_ini, int _codigo_fim, DateTime _data_vencto) {
-            int _total = _codigo_fim - _codigo_ini + 1, _pos = 1, _numero_documento =  5125920; //5.100.001 até 5.400.000
+            int _total = _codigo_fim - _codigo_ini + 1, _pos = 1, _numero_documento = 5125920; //5.100.001 até 5.400.000
             DateTime _data_vencimento = Convert.ToDateTime("10/06/2019");
 
             Exception ex = null;
@@ -80,7 +78,6 @@ namespace GTI_Desktop.Forms {
             Cidadao_bll cidadao_Class = new Cidadao_bll(_connection);
 
             List<int> _lista_codigos = tributario_Class.Lista_Codigo_Carta(_codigo_ini, _codigo_fim, _data_vencto);
-
 
             PBar.Value = 0;
             //ex = tributario_Class.Excluir_Carta_Cobranca(_remessa);
@@ -108,13 +105,12 @@ namespace GTI_Desktop.Forms {
                 }
                 if (!bFind) goto Proximo;
                 
-                
                 if (_codigo_atual > 100000 && _codigo_atual < 300000) {
                     if (empresa_Class.EmpresaSuspensa(_codigo_atual))
                         goto Proximo;
                 }
 
-                List<SpExtrato_carta> Lista_Extrato_Tributo = tributario_Class.Lista_Extrato_Tributo_Carta(Codigo: _codigo_atual,Data_Atualizacao:DateTime.Now);
+                List<SpExtrato_carta> Lista_Extrato_Tributo = tributario_Class.Lista_Extrato_Tributo_Carta(Codigo: _codigo_atual,Data_Atualizacao:_data_vencimento);
                 if (Lista_Extrato_Tributo.Count == 0)
                     goto Proximo;
 
@@ -145,7 +141,6 @@ namespace GTI_Desktop.Forms {
                     goto Proximo;
 
                 Lista_Final.Clear();
-
                 int nPercDesconto = 1;
 
                 foreach (SpExtrato_carta item in Lista_Resumo) {
@@ -213,7 +208,6 @@ namespace GTI_Desktop.Forms {
                 if (_tipo==TipoCadastro.Empresa &&  !dados.Ativo)
                     goto Proximo;
 
-
                 //Endereço de Entrega
                 if (_tipo == TipoCadastro.Imovel) {
                     EnderecoStruct endImovel = imovel_Class.Dados_Endereco(_codigo_atual, dados.TipoEndereco);
@@ -257,7 +251,6 @@ namespace GTI_Desktop.Forms {
                             _bairro = _bairro_entrega;
                             _cidade = _cidade_entrega;
                             _cep = _cep_entrega;
-
                         }
                     }
                 }
@@ -340,7 +333,6 @@ namespace GTI_Desktop.Forms {
                     ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
                     eBox.ShowDialog();
                 }
-                
 
                 //****** GRAVA DETALHE**************
 

@@ -9,7 +9,7 @@ using System.Linq;
 namespace GTI_Dal.Classes {
     public class Empresa_Data {
 
-        private string _connection;
+        private readonly string _connection;
 
         public Empresa_Data(string sConnection) {
             _connection = sConnection;
@@ -94,10 +94,11 @@ namespace GTI_Dal.Classes {
                 for (int i = 0; i < ListaGeral.Count; i++) {
                     for (int w = 0; w < ListaAtivos.Count; w++) {
                         if (ListaGeral[i].Codigo == ListaAtivos[w]) {
-                            MobiliariovsStruct reg = new MobiliariovsStruct();
-                            reg.Codigo = ListaGeral[i].Codigo;
-                            reg.Qtde = ListaGeral[i].Qtde;
-                            reg.Valor = ListaGeral[i].Valor;
+                            MobiliariovsStruct reg = new MobiliariovsStruct {
+                                Codigo = ListaGeral[i].Codigo,
+                                Qtde = ListaGeral[i].Qtde,
+                                Valor = ListaGeral[i].Valor
+                            };
                             ListaFinal.Add(reg);
                         }
                     }
@@ -121,14 +122,15 @@ namespace GTI_Dal.Classes {
                     if (item.Isento_taxa == null || item.Isento_taxa == 0) {
                         for (int w = 0; w < ListaAtivos.Count; w++) {
                             if (item.Codigo == ListaAtivos[w]) {
-                                EmpresaStruct reg = new EmpresaStruct();
-                                reg.Codigo = item.Codigo;
-                                reg.Area = item.Area;
-                                reg.Codigo_aliquota = item.Codigo_aliquota;
-                                reg.Valor_aliquota1 = item.Valor_aliquota1;
-                                reg.Valor_aliquota2 = item.Valor_aliquota2;
-                                reg.Valor_aliquota3 = item.Valor_aliquota3;
-                                reg.Vistoria = item.Vistoria;
+                                EmpresaStruct reg = new EmpresaStruct {
+                                    Codigo = item.Codigo,
+                                    Area = item.Area,
+                                    Codigo_aliquota = item.Codigo_aliquota,
+                                    Valor_aliquota1 = item.Valor_aliquota1,
+                                    Valor_aliquota2 = item.Valor_aliquota2,
+                                    Valor_aliquota3 = item.Valor_aliquota3,
+                                    Vistoria = item.Vistoria
+                                };
                                 ListaFinal.Add(reg);
                             }
                         }
@@ -147,10 +149,11 @@ namespace GTI_Dal.Classes {
                 for (int i = 0; i < ListaGeral.Count; i++) {
                     for (int w = 0; w < ListaAtivos.Count; w++) {
                         if (ListaGeral[i].Codmobiliario == ListaAtivos[w]) {
-                            Mobiliarioatividadeiss reg = new Mobiliarioatividadeiss();
-                            reg.Codmobiliario = ListaGeral[i].Codmobiliario;
-                            reg.Qtdeiss = ListaGeral[i].Qtdeiss;
-                            reg.Valoriss = ListaGeral[i].Valoriss;
+                            Mobiliarioatividadeiss reg = new Mobiliarioatividadeiss {
+                                Codmobiliario = ListaGeral[i].Codmobiliario,
+                                Qtdeiss = ListaGeral[i].Qtdeiss,
+                                Valoriss = ListaGeral[i].Valoriss
+                            };
                             ListaFinal.Add(reg);
                         }
                     }
@@ -342,7 +345,7 @@ namespace GTI_Dal.Classes {
                 row.Cidade_nome = reg.Cidade_nome;
                 row.UF = reg.UF;
                 row.Endereco_codigo = reg.Endereco_codigo;
-                row.Endereco_nome = reg.Endereco_nome==null?reg.Nome_logradouro:reg.Endereco_nome;
+                row.Endereco_nome = reg.Endereco_nome ?? reg.Nome_logradouro;
                 row.Numero = reg.Numero;
                 row.Complemento = reg.Complemento;
 
@@ -391,7 +394,7 @@ namespace GTI_Dal.Classes {
                 row.Atividade_nome = reg.Atividade_nome ?? "";
                 row.Atividade_extenso = reg.Atividade_extenso ?? "";
 
-                row.Cep = reg.Cep==null?"00000-000":reg.Cep;
+                row.Cep = reg.Cep ?? "00000-000";
                 if (reg.Cidade_codigo == 413) {
                     Endereco_Data Cep_Class = new Endereco_Data(_connection);
                     int nCep = Cep_Class.RetornaCep((int)reg.Endereco_codigo, (short)reg.Numero);
@@ -516,13 +519,14 @@ namespace GTI_Dal.Classes {
                            orderby m.Datahist select new MobiliarioHistoricoStruct { Codigo=Codigo,Seq=m.Seq,Data=m.Datahist,Observacao=m.Obs,Usuario_id=m.Userid,Usuario_Nome=u.Nomelogin }).ToList();
                 List<MobiliarioHistoricoStruct> Lista = new List<MobiliarioHistoricoStruct>();
                 foreach (MobiliarioHistoricoStruct item in Sql) {
-                    MobiliarioHistoricoStruct reg = new MobiliarioHistoricoStruct();
-                    reg.Codigo = Codigo;
-                    reg.Seq = item.Seq;
-                    reg.Data = item.Data;
-                    reg.Observacao = item.Observacao;
-                    reg.Usuario_id = item.Usuario_id == null ? 0 : item.Usuario_id;
-                    reg.Usuario_Nome = item.Usuario_Nome.ToString();
+                    MobiliarioHistoricoStruct reg = new MobiliarioHistoricoStruct {
+                        Codigo = Codigo,
+                        Seq = item.Seq,
+                        Data = item.Data,
+                        Observacao = item.Observacao,
+                        Usuario_id = item.Usuario_id == null ? 0 : item.Usuario_id,
+                        Usuario_Nome = item.Usuario_Nome.ToString()
+                    };
                     Lista.Add(reg);
                 }
 
@@ -767,14 +771,15 @@ namespace GTI_Dal.Classes {
                             select new  MobiliarioAtividadeISSStruct{Codigo_empresa=  m.Codmobiliario,Codigo_atividade=m.Codatividade,Codigo_tributo =m.Codtributo,
                                                                      Descricao =a.Descatividade,Item=a.Item,Quantidade=m.Qtdeiss,Valor=t.Aliquota });
                 foreach (var reg in rows) {
-                    MobiliarioAtividadeISSStruct Linha = new MobiliarioAtividadeISSStruct();
-                    Linha.Codigo_empresa = reg.Codigo_empresa;
-                    Linha.Codigo_atividade = reg.Codigo_atividade;
-                    Linha.Codigo_tributo = reg.Codigo_tributo;
-                    Linha.Descricao = reg.Descricao;
-                    Linha.Quantidade = reg.Quantidade;
-                    Linha.Valor = reg.Valor;
-                    Linha.Item = reg.Item;
+                    MobiliarioAtividadeISSStruct Linha = new MobiliarioAtividadeISSStruct {
+                        Codigo_empresa = reg.Codigo_empresa,
+                        Codigo_atividade = reg.Codigo_atividade,
+                        Codigo_tributo = reg.Codigo_tributo,
+                        Descricao = reg.Descricao,
+                        Quantidade = reg.Quantidade,
+                        Valor = reg.Valor,
+                        Item = reg.Item
+                    };
                     Lista.Add(Linha);
                 }
                 return Lista;
@@ -791,11 +796,12 @@ namespace GTI_Dal.Classes {
                                 Descricao = a.Descatividade, Aliquota   = t.Aliquota
                             });
                 foreach (var reg in rows) {
-                    AtividadeIssStruct Linha = new AtividadeIssStruct();
-                    Linha.Codigo_atividade = reg.Codigo_atividade;
-                    Linha.Tipo = reg.Tipo;
-                    Linha.Descricao = reg.Descricao;
-                    Linha.Aliquota = reg.Aliquota;
+                    AtividadeIssStruct Linha = new AtividadeIssStruct {
+                        Codigo_atividade = reg.Codigo_atividade,
+                        Tipo = reg.Tipo,
+                        Descricao = reg.Descricao,
+                        Aliquota = reg.Aliquota
+                    };
                     Lista.Add(Linha);
                 }
                 return Lista;
@@ -811,10 +817,11 @@ namespace GTI_Dal.Classes {
                             where m.Codmobiliario == nCodigo
                             select new { m.Cnae, c.Descricao,m.Principal });
                 foreach (var reg in rows) {
-                    CnaeStruct Linha = new CnaeStruct();
-                    Linha.CNAE = reg.Cnae;
-                    Linha.Descricao = reg.Descricao;
-                    Linha.Principal = reg.Principal == 1 ? true : false;
+                    CnaeStruct Linha = new CnaeStruct {
+                        CNAE = reg.Cnae,
+                        Descricao = reg.Descricao,
+                        Principal = reg.Principal == 1 ? true : false
+                    };
                     Lista.Add(Linha);
                 }
                 return Lista;
@@ -828,12 +835,13 @@ namespace GTI_Dal.Classes {
                             where m.Codigo == nCodigo
                             select new { m.Cnae, c.Descricao, m.Criterio, m.Qtde, a.Valor });
                 foreach (var reg in rows) {
-                    CnaeStruct Linha = new CnaeStruct();
-                    Linha.Descricao = reg.Descricao.ToUpper();
-                    Linha.Criterio = reg.Criterio;
-                    Linha.Qtde = (int)reg.Qtde;
-                    Linha.Valor = (decimal)reg.Valor;
-                    Linha.CNAE = Convert.ToInt32( reg.Cnae).ToString("0000-0/00");
+                    CnaeStruct Linha = new CnaeStruct {
+                        Descricao = reg.Descricao.ToUpper(),
+                        Criterio = reg.Criterio,
+                        Qtde = (int)reg.Qtde,
+                        Valor = (decimal)reg.Valor,
+                        CNAE = Convert.ToInt32(reg.Cnae).ToString("0000-0/00")
+                    };
                     Lista.Add(Linha);
                 }
                 return Lista;
@@ -846,13 +854,14 @@ namespace GTI_Dal.Classes {
                 var rows = (from c in db.Cnaesubclasse 
                             select new { c.Divisao, c.Grupo, c.Classe,c.Subclasse,c.Descricao });
                 foreach (var reg in rows) {
-                    CnaeStruct Linha = new CnaeStruct();
-                    Linha.Divisao = reg.Divisao;
-                    Linha.Grupo = reg.Grupo;
-                    Linha.Classe = reg.Classe;
-                    Linha.Subclasse = reg.Subclasse;
-                    Linha.Descricao = reg.Descricao;
-                    Linha.CNAE = dalCore.Unifica_Cnae(reg.Divisao, reg.Grupo, reg.Classe, reg.Subclasse);
+                    CnaeStruct Linha = new CnaeStruct {
+                        Divisao = reg.Divisao,
+                        Grupo = reg.Grupo,
+                        Classe = reg.Classe,
+                        Subclasse = reg.Subclasse,
+                        Descricao = reg.Descricao,
+                        CNAE = dalCore.Unifica_Cnae(reg.Divisao, reg.Grupo, reg.Classe, reg.Subclasse)
+                    };
                     Lista.Add(Linha);
                 }
                 return Lista;
@@ -865,11 +874,12 @@ namespace GTI_Dal.Classes {
                 var rows = (from c in db.Cnae_criterio join d in db.Cnaecriteriodesc on c.Criterio equals d.Criterio where c.Cnae==Cnae
                             select new CnaecriterioStruct { Cnae=c.Cnae,Criterio=c.Criterio,Valor=(decimal)d.Valor,Descricao=d.Descricao});
                 foreach (var reg in rows) {
-                    CnaecriterioStruct Linha = new CnaecriterioStruct();
-                    Linha.Cnae = reg.Cnae;
-                    Linha.Valor = reg.Valor;
-                    Linha.Criterio = reg.Criterio;
-                    Linha.Descricao = reg.Descricao;
+                    CnaecriterioStruct Linha = new CnaecriterioStruct {
+                        Cnae = reg.Cnae,
+                        Valor = reg.Valor,
+                        Criterio = reg.Criterio,
+                        Descricao = reg.Descricao
+                    };
                     Lista.Add(Linha);
                 }
             }
