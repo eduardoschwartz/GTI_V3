@@ -52,7 +52,11 @@ namespace GTI_Desktop.Forms
             FillBackgroundImage(false);
 
             ServidorToolStripStatus.Text = Properties.Settings.Default.ServerName;
-            VersaoToolStripStatus.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+            Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            VersaoToolStripStatus.Text = $"{version.Major}"+"."+ $"{version.Minor}" +"."+ $"{version.Build}";
+            this.Text += VersaoToolStripStatus.Text;
+
             LockForm(true);
             Forms.Login login = new Forms.Login();
             login.ShowDialog();

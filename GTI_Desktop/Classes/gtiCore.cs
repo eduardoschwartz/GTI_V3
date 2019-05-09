@@ -612,7 +612,7 @@ namespace GTI_Desktop.Classes {
 
         public static string Retorna_Path_Anexo() {
             string _path;
-            if (Properties.Settings.Default.ServerName == "SKYNET")
+            if (Properties.Settings.Default.ServerName == "SKYNET" || Properties.Settings.Default.ServerName == "DEUTSCH")
                 _path = Properties.Settings.Default.Path_Anexo_Local;
             else
                 _path = Properties.Settings.Default.Path_Anexo_Net;
