@@ -422,24 +422,25 @@ namespace UIWeb.Pages {
             PlanoLabel.Text = nPlano.ToString();
             foreach (var item in ListaParcela) {
                 if (item.Statuslanc == 3 || item.Statuslanc == 19 || item.Statuslanc == 38 || item.Statuslanc == 39 || item.Statuslanc == 42 || item.Statuslanc == 43) {
-                    DebitoStructure reg = new DebitoStructure();
-                    reg.Codigo_Reduzido = item.Codreduzido;
-                    reg.Ano_Exercicio = item.Anoexercicio;
-                    reg.Codigo_Lancamento = Convert.ToInt16(item.Codlancamento);
-                    reg.Descricao_Lancamento = item.Desclancamento;
-                    reg.Sequencia_Lancamento = Convert.ToInt16(item.Seqlancamento);
-                    reg.Numero_Parcela = Convert.ToInt16(item.Numparcela);
-                    reg.Complemento = item.Codcomplemento;
-                    reg.Data_Vencimento = Convert.ToDateTime(item.Datavencimento);
-                    reg.Codigo_Situacao = Convert.ToInt16(item.Statuslanc);
-                    reg.Soma_Principal = item.Valortributo;
-                    reg.Soma_Juros = item.Valorjuros;
-                    reg.Soma_Multa = item.Valormulta;
-                    reg.Soma_Correcao = item.Valorcorrecao;
-                    reg.Soma_Total = item.Valortotal;
-                    reg.Data_Ajuizamento = item.Dataajuiza;
-
-                    debitos2.Add(reg);
+                    if (item.Codlancamento != 16 && item.Codlancamento != 38) {
+                        DebitoStructure reg = new DebitoStructure();
+                        reg.Codigo_Reduzido = item.Codreduzido;
+                        reg.Ano_Exercicio = item.Anoexercicio;
+                        reg.Codigo_Lancamento = Convert.ToInt16(item.Codlancamento);
+                        reg.Descricao_Lancamento = item.Desclancamento;
+                        reg.Sequencia_Lancamento = Convert.ToInt16(item.Seqlancamento);
+                        reg.Numero_Parcela = Convert.ToInt16(item.Numparcela);
+                        reg.Complemento = item.Codcomplemento;
+                        reg.Data_Vencimento = Convert.ToDateTime(item.Datavencimento);
+                        reg.Codigo_Situacao = Convert.ToInt16(item.Statuslanc);
+                        reg.Soma_Principal = item.Valortributo;
+                        reg.Soma_Juros = item.Valorjuros;
+                        reg.Soma_Multa = item.Valormulta;
+                        reg.Soma_Correcao = item.Valorcorrecao;
+                        reg.Soma_Total = item.Valortotal;
+                        reg.Data_Ajuizamento = item.Dataajuiza;
+                        debitos2.Add(reg);
+                    }
                 }
             }
 
