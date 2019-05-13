@@ -259,6 +259,7 @@
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.AtividadeISSDelButton = new System.Windows.Forms.Button();
             this.a1Panel1.SuspendLayout();
             this.CodigoToolStrip.SuspendLayout();
             this.tBar.SuspendLayout();
@@ -630,7 +631,7 @@
             // 
             this.CnaeVSDelButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.CnaeVSDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
-            this.CnaeVSDelButton.Location = new System.Drawing.Point(698, 23);
+            this.CnaeVSDelButton.Location = new System.Drawing.Point(698, 56);
             this.CnaeVSDelButton.Name = "CnaeVSDelButton";
             this.CnaeVSDelButton.Size = new System.Drawing.Size(23, 22);
             this.CnaeVSDelButton.TabIndex = 226;
@@ -643,7 +644,7 @@
             // 
             this.CnaeVSButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.CnaeVSButton.Image = global::GTI_Desktop.Properties.Resources.add;
-            this.CnaeVSButton.Location = new System.Drawing.Point(698, 51);
+            this.CnaeVSButton.Location = new System.Drawing.Point(698, 31);
             this.CnaeVSButton.Name = "CnaeVSButton";
             this.CnaeVSButton.Size = new System.Drawing.Size(23, 22);
             this.CnaeVSButton.TabIndex = 195;
@@ -2558,6 +2559,7 @@
             // a1Panel10
             // 
             this.a1Panel10.BorderColor = System.Drawing.Color.Gray;
+            this.a1Panel10.Controls.Add(this.AtividadeISSDelButton);
             this.a1Panel10.Controls.Add(this.AtividadeISSListView);
             this.a1Panel10.Controls.Add(this.label80);
             this.a1Panel10.Controls.Add(this.AtividadeISSButton);
@@ -2631,12 +2633,13 @@
             // AtividadeISSButton
             // 
             this.AtividadeISSButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.AtividadeISSButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.AtividadeISSButton.Location = new System.Drawing.Point(698, 51);
+            this.AtividadeISSButton.Image = global::GTI_Desktop.Properties.Resources.add;
+            this.AtividadeISSButton.Location = new System.Drawing.Point(698, 31);
             this.AtividadeISSButton.Name = "AtividadeISSButton";
             this.AtividadeISSButton.Size = new System.Drawing.Size(23, 22);
             this.AtividadeISSButton.TabIndex = 195;
             this.AtividadeISSButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.AtividadeISSButton, "Adicionar uma atividade de ISS");
             this.AtividadeISSButton.UseVisualStyleBackColor = true;
             this.AtividadeISSButton.Click += new System.EventHandler(this.AtividadeISSButton_Click);
             // 
@@ -3002,6 +3005,19 @@
             this.columnHeader15.Text = "UsuarioId";
             this.columnHeader15.Width = 0;
             // 
+            // AtividadeISSDelButton
+            // 
+            this.AtividadeISSDelButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AtividadeISSDelButton.Image = global::GTI_Desktop.Properties.Resources.cancelar;
+            this.AtividadeISSDelButton.Location = new System.Drawing.Point(698, 56);
+            this.AtividadeISSDelButton.Name = "AtividadeISSDelButton";
+            this.AtividadeISSDelButton.Size = new System.Drawing.Size(23, 22);
+            this.AtividadeISSDelButton.TabIndex = 227;
+            this.AtividadeISSDelButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Ttp.SetToolTip(this.AtividadeISSDelButton, "Remover uma atividade de ISS");
+            this.AtividadeISSDelButton.UseVisualStyleBackColor = true;
+            this.AtividadeISSDelButton.Click += new System.EventHandler(this.AtividadeISSDeslButton_Click);
+            // 
             // Empresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3310,5 +3326,6 @@
         private System.Windows.Forms.ToolStripButton EditHistoricoButton;
         private System.Windows.Forms.ToolStripButton DelHistoricoButton;
         private System.Windows.Forms.ToolStripButton ZoomHistoricoButton;
+        private System.Windows.Forms.Button AtividadeISSDelButton;
     }
 }

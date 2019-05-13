@@ -132,6 +132,7 @@
             this.Dv2Option = new System.Windows.Forms.RadioButton();
             this.Dv1Option = new System.Windows.Forms.RadioButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.TabelaCnaeMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.BarStatus.SuspendLayout();
             this.MenuBarStrip.SuspendLayout();
             this.TopBarToolStrip.SuspendLayout();
@@ -468,7 +469,7 @@
             this.CadastroEmpresaMenu,
             this.EscritorioContabilMenu});
             this.MobiliarioCadastroMenu.Name = "MobiliarioCadastroMenu";
-            this.MobiliarioCadastroMenu.Size = new System.Drawing.Size(121, 22);
+            this.MobiliarioCadastroMenu.Size = new System.Drawing.Size(180, 22);
             this.MobiliarioCadastroMenu.Text = "Cadastro";
             // 
             // CadastroEmpresaMenu
@@ -488,9 +489,10 @@
             // MobiliarioTabelaMenu
             // 
             this.MobiliarioTabelaMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AtividadeEmpresaMenu});
+            this.AtividadeEmpresaMenu,
+            this.TabelaCnaeMenu});
             this.MobiliarioTabelaMenu.Name = "MobiliarioTabelaMenu";
-            this.MobiliarioTabelaMenu.Size = new System.Drawing.Size(121, 22);
+            this.MobiliarioTabelaMenu.Size = new System.Drawing.Size(180, 22);
             this.MobiliarioTabelaMenu.Text = "Tabelas";
             // 
             // AtividadeEmpresaMenu
@@ -1063,6 +1065,13 @@
             this.Dv1Option.UseVisualStyleBackColor = false;
             this.Dv1Option.CheckedChanged += new System.EventHandler(this.OptDv1_CheckedChanged);
             // 
+            // TabelaCnaeMenu
+            // 
+            this.TabelaCnaeMenu.Name = "TabelaCnaeMenu";
+            this.TabelaCnaeMenu.Size = new System.Drawing.Size(203, 22);
+            this.TabelaCnaeMenu.Text = "Tabela CNAE";
+            this.TabelaCnaeMenu.Click += new System.EventHandler(this.TabelaCnaeMenu_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1199,6 +1208,7 @@
         private System.Windows.Forms.ToolStripMenuItem CalculoImpostoMenu;
         private System.Windows.Forms.ToolStripMenuItem RelatorioImobMenu;
         private System.Windows.Forms.ToolStripMenuItem ComunicadoIsencaoMenu;
+        private System.Windows.Forms.ToolStripMenuItem TabelaCnaeMenu;
     }
 }
 

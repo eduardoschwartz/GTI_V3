@@ -103,6 +103,7 @@ namespace GTI_Desktop.Forms {
             AtividadePrincipalButton.Enabled = !bStart;
             CnaeButton.Enabled = !bStart;
             AtividadeISSButton.Enabled = !bStart;
+            AtividadeISSDelButton.Enabled = !bStart;
             AddHistoricoButton.Enabled = !bStart;
             EditHistoricoButton.Enabled = !bStart;
             DelHistoricoButton.Enabled = !bStart;
@@ -1046,15 +1047,15 @@ namespace GTI_Desktop.Forms {
                         }
                     }
                     Lista_Cnae_VS.Add(itemVS);
-                }
 
-                foreach (CnaeStruct item in Lista_Cnae_VS) {
-                    ListViewItem lvItem = new ListViewItem(item.CNAE);
-                    lvItem.SubItems.Add(item.Descricao);
-                    lvItem.SubItems.Add(item.Criterio.ToString("00"));
-                    lvItem.SubItems.Add(item.Qtde.ToString("00"));
-                    lvItem.SubItems.Add(string.Format("{0:0.00}", item.Valor));
-                    AtividadeVSListView.Items.Add(lvItem);
+                    foreach (CnaeStruct item in Lista_Cnae_VS) {
+                        ListViewItem lvItem = new ListViewItem(item.CNAE);
+                        lvItem.SubItems.Add(item.Descricao);
+                        lvItem.SubItems.Add(item.Criterio.ToString("00"));
+                        lvItem.SubItems.Add(item.Qtde.ToString("00"));
+                        lvItem.SubItems.Add(string.Format("{0:0.00}", item.Valor));
+                        AtividadeVSListView.Items.Add(lvItem);
+                    }
                 }
             }
         }
@@ -1227,7 +1228,7 @@ namespace GTI_Desktop.Forms {
                     string _tipo = _ret.Tipo_str;
                     bool _find = false;
                     foreach (ListViewItem item in AtividadeISSListView.Items) {
-                        if(Convert.ToInt32(item.Text)==_codigo_atividade && item.SubItems[1].Text == _tipo) {
+                        if(Convert.ToInt32(item.SubItems[1].Text)==_codigo_atividade && item.Text == _tipo) {
                             _find = true;
                             break;
                         }
@@ -1244,6 +1245,13 @@ namespace GTI_Desktop.Forms {
                         MessageBox.Show("Atividade já cadastrada.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 }
+            }
+        }
+
+        private void AtividadeISSDeslButton_Click(object sender, EventArgs e) {
+            if (AtividadeISSListView.SelectedItems.Count > 0) {
+                string _cnae = AtividadeISSListView.SelectedItems[0].Text;
+                AtividadeISSListView.SelectedItems[0].Remove();
             }
         }
 
@@ -1270,5 +1278,6 @@ namespace GTI_Desktop.Forms {
                     MessageBox.Show("Não existem fotos cadastradas para esta empresa.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        
     }
 }

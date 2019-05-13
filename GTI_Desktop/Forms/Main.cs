@@ -935,6 +935,16 @@ namespace GTI_Desktop.Forms
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-
+        private void TabelaCnaeMenu_Click(object sender, EventArgs e) {
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.Atividade_Empresa);
+            if (bAllow) {
+                Cnae f1 = new Cnae() {
+                    Tag = "Menu",
+                    MdiParent = this
+                };
+                f1.Show();
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }//end class
 }

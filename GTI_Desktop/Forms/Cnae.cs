@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using static GTI_Desktop.Classes.GtiTypes;
 
 namespace GTI_Desktop.Forms {
     public partial class Cnae : Form {
@@ -30,6 +31,16 @@ namespace GTI_Desktop.Forms {
 
         private void Carrega_Lista() {
             MainListView.Items.Clear();
+
+            Empresa_bll empresa_Class = new Empresa_bll(_connection);
+            List<Cnaecriteriodesc> Lista_Cnae_Criterio = empresa_Class.Lista_Cnae_Criterio();
+            List<CustomListBoxItem4> myItems = new List<CustomListBoxItem4>();
+            foreach (Cnaecriteriodesc item in Lista_Cnae_Criterio) {
+                myItems.Add(new CustomListBoxItem4(item.Descricao, item.Criterio,(decimal)item.Valor));
+            }
+            CriterioList.DisplayMember = "_name";
+            CriterioList.ValueMember = "_value";
+            CriterioList.DataSource = myItems;
 
             if (Busca.Text != "") {
                 if (gtiCore.IsNumeric(Busca.Text.Substring(0, 1))) {
@@ -79,7 +90,66 @@ namespace GTI_Desktop.Forms {
             DialogResult = DialogResult.Cancel;
             Close();
         }
-    }
 
+        private void CriterioList_SelectedIndexChanged(object sender, EventArgs e) {
+            if (CriterioList.SelectedIndex == -1) return;
+            CustomListBoxItem4 item = (CustomListBoxItem4)CriterioList.SelectedItem;
+            ValorText.Text = item._value2.ToString("#0.00");
+        }
+
+        private void btCC1_Click(object sender, EventArgs e) {
+            if (CriterioList.SelectedIndex == -1) return;
+            CustomListBoxItem4 item = (CustomListBoxItem4)CriterioList.SelectedItem;
+            bool _find = false;
+            foreach (ListViewItem lv in CriterioListView.Items) {
+                if(Convert.ToInt32(lv.Text) == item._value) {
+                    _find = true;
+                    break;
+                }
+            }
+            if (!_find) {
+                ListViewItem itemLV = MainListView.SelectedItems[0];
+                string _cnae = itemLV.Text;
+                int _criterio = Convert.ToInt32(CriterioListView.SelectedItems[0].Text);
+                Empresa_bll empresa_Class = new Empresa_bll(_connection);
+                Cnae_criterio reg = new Cnae_criterio {
+                    Cnae = _cnae,
+                    Criterio=_criterio
+                };
+                Exception ex = empresa_Class.Incluir_Cnae_Criterio(reg);
+                if (ex == null) {
+                    ListViewItem lv = new ListViewItem(item._value.ToString());
+                    lv.SubItems.Add(item._name);
+                    lv.SubItems.Add(item._value2.ToString("#0.00"));
+                    CriterioListView.Items.Add(lv);
+                } else {
+                    ErrorBox eBox = new ErrorBox("Atenção", "Erro de inclusão.", ex);
+                    eBox.ShowDialog();
+                }
+            } else
+                MessageBox.Show("Critério já incluso na lista.", "Erro",MessageBoxButtons.OK,MessageBoxIcon.Error);
+        }
+
+        private void btCC2_Click(object sender, EventArgs e) {
+            if (CriterioListView.Items.Count == 0) return;
+            if (CriterioListView.SelectedItems.Count > 0) {
+                ListViewItem item = MainListView.SelectedItems[0];
+                string _cnae = item.Text;
+                int _criterio = Convert.ToInt32(CriterioListView.SelectedItems[0].Text);
+                Empresa_bll empresa_Class = new Empresa_bll(_connection);
+                Exception ex = empresa_Class.Excluir_Cnae_Criterio(_cnae, _criterio);
+                if (ex == null) 
+                    CriterioListView.SelectedItems[0].Remove();
+                else {
+                    ErrorBox eBox = new ErrorBox("Atenção", "Erro de exclusão.", ex);
+                    eBox.ShowDialog();
+                }
+            }
+        }
+
+
+
+
+    }
 
 }

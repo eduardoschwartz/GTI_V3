@@ -886,6 +886,22 @@ namespace GTI_Dal.Classes {
             return Lista;
         }
 
+        public List<Cnaecriteriodesc> Lista_Cnae_Criterio() {
+            List<Cnaecriteriodesc> Lista = new List<Cnaecriteriodesc>();
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var rows = (from c in db.Cnaecriteriodesc orderby c.Descricao select c).ToList();
+                foreach (var reg in rows) {
+                    Cnaecriteriodesc Linha = new Cnaecriteriodesc {
+                        Valor = reg.Valor,
+                        Criterio = reg.Criterio,
+                        Descricao = reg.Descricao
+                    };
+                    Lista.Add(Linha);
+                }
+            }
+            return Lista;
+        }
+
         public SilStructure CarregaSil(int Codigo) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from s in db.Sil where s.Codigo == Codigo
@@ -1644,6 +1660,44 @@ namespace GTI_Dal.Classes {
                 return _contador > 0 ? true : false;
             }
         }
+
+        public Exception Incluir_Cnae_Criterio(Cnae_criterio reg) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                try {
+                    db.Cnae_criterio.Add(reg);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Exception Excluir_Cnae_Criterio(string _cnae,int _criterio) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                try {
+                    Cnae_criterio b = db.Cnae_criterio.First(i => i.Cnae == _cnae && i.Criterio==_criterio);
+                    db.Cnae_criterio.Remove(b);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public bool Existe_Cnae_Criterio_Empresa(string _cnae,int _criterio) {
+            int _contador = 0;
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                try {
+                    _contador = (from p in db.Mobiliariovs where p.Cnae == _cnae && p.Criterio==_criterio select p.Codigo).Count();
+                } catch {
+
+                }
+                return _contador > 0 ? true : false;
+            }
+        }
+
 
     }
 }

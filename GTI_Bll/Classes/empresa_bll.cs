@@ -811,5 +811,65 @@ namespace GTI_Bll.Classes {
             return obj.Existe_Debito_TaxaLicenca(Codigo,Ano);
         }
 
+        /// <summary>
+        /// Lista tabela CNAE criterio descricao
+        /// </summary>
+        /// <returns></returns>
+        public List<Cnaecriteriodesc> Lista_Cnae_Criterio() {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Lista_Cnae_Criterio();
+        }
+
+        /// <summary>
+        /// Incluir um critério de um Cnae
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Incluir_Cnae_Criterio(Cnae_criterio reg) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            Exception ex = obj.Incluir_Cnae_Criterio(reg);
+            return ex;
+        }
+
+        /// <summary>
+        /// Remove um critério de um Cnae
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Excluir_Cnae_Criterio(string _cnae, int _criterio) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            Exception ex = Cnae_criterio_em_uso(_cnae,_criterio);
+            if (ex == null)
+                ex = obj.Excluir_Cnae_Criterio(_cnae, _criterio);
+            return ex;
+        }
+
+        /// <summary>
+        /// Verifica se o critério de um Cnae esta sendo utilizado por alguma empresa
+        /// </summary>
+        /// <param name="_cnae"></param>
+        /// <param name="_criterio"></param>
+        /// <returns></returns>
+        public bool Existe_Cnae_Criterio_Empresa(string _cnae, int _criterio) {
+            Empresa_Data obj = new Empresa_Data(_connection);
+            return obj.Existe_Cnae_Criterio_Empresa(_cnae,_criterio);
+        }
+
+        /// <summary>
+        /// Verifica se o critério Cnae pode ser excluido ou se esta sendo utilizado por alguma empresa
+        /// </summary>
+        /// <param name="_cnae"></param>
+        /// <param name="_criterio"></param>
+        /// <returns></returns>
+        private Exception Cnae_criterio_em_uso(string _cnae, int _criterio) {
+            Exception AppEx = null;
+            Empresa_Data obj = new Empresa_Data(_connection);
+
+            bool bCriterio = obj.Existe_Cnae_Criterio_Empresa(_cnae,_criterio);
+            if (bCriterio  )
+                AppEx = new Exception("Exclusão não permitida. Critério em uso.");
+            return AppEx;
+        }
     }
 }
+
