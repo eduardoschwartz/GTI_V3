@@ -2115,5 +2115,20 @@ Proximo:;
             }
         }
 
+        public Processo_Parcelamento_Struct Retorna_Dados_Parcelamento(int _ano, int _numero) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                Processo_Parcelamento_Struct Reg = (from p in db.Processoreparc
+                                                    join u in db.Usuario on p.Userid equals u.Id into pu from u in pu.DefaultIfEmpty()
+                                                    where p.Anoproc == _ano && p.Numproc == _numero 
+                            select new Processo_Parcelamento_Struct {Numero_Processo_Unificado = p.Numprocesso, Ano_Processo = p.Anoproc, Numero_Processo = p.Numproc,
+                                Codigo_Reduzido = p.Codigoresp,Calcula_Correcao=p.Calculacorrecao,Calcula_Juros=p.Calculajuros,Calcula_Multa=p.Calculamulta,Cancelado=p.Cancelado,
+                            Data_Cancelado=p.Datacancel,Data_Exportacao=p.Data_exportacao,Data_Parcelamento=p.Datareparc,Data_Processo=p.Dataprocesso,Funcionario=p.Funcionario,
+                            Funcionario_Cancelado=p.Funcionariocancel,Honorario=p.Honorario,Novo=p.Novo,Numero_Protocolo=p.Numprotocolo,Penhora=p.Penhora,Percentual_Entrada=p.Percentrada,
+                            Plano=p.Plano,Qtde_Parcela=p.Qtdeparcela,Userid=p.Userid,Valor_Entrada=p.Valorentrada,Usuario_Nome=u.Nomecompleto}).FirstOrDefault();
+                return Reg;
+            }
+        }
+
+
     }//end class
 }

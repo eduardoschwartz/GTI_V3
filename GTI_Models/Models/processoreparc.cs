@@ -35,4 +35,34 @@ namespace GTI_Models.Models {
         public short? Ano { get; set; }
     }
 
+    public class Processo_Parcelamento_Struct {
+        [Key]
+        public string Numero_Processo_Unificado { get; set; }
+        public int? Numero_Processo { get; set; }
+        public short? Ano_Processo { get; set; }
+        public DateTime? Data_Processo { get; set; }
+        public DateTime? Data_Parcelamento { get; set; }
+        public byte? Qtde_Parcela { get; set; }
+        public decimal? Valor_Entrada { get; set; }
+        public decimal? Percentual_Entrada { get; set; }
+        public bool? Calcula_Multa { get; set; }
+        public bool? Calcula_Juros { get; set; }
+        public bool? Calcula_Correcao { get; set; }
+        public bool? Penhora { get; set; }
+        public bool? Honorario { get; set; }
+        public int Codigo_Reduzido { get; set; }
+        public string Funcionario { get; set; }
+        public bool? Cancelado { get; set; }
+        public DateTime? Data_Cancelado { get; set; }
+        public string Funcionario_Cancelado { get; set; }
+        public string Numero_Protocolo { get; set; }
+        public string Plano { get; set; }
+        public bool? Novo { get; set; }
+        public DateTime? Data_Exportacao { get; set; }
+        public int? Userid { get; set; }
+        public string Usuario_Nome { get; set; }
+    }
+
+
+
 }

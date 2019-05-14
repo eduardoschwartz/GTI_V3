@@ -1055,6 +1055,17 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Destino_Parcelamento(_ano, _numero);
         }
 
+        /// <summary>
+        /// Retorna os dados de um parcelamento
+        /// </summary>
+        /// <param name="_ano"></param>
+        /// <param name="_numero"></param>
+        /// <returns></returns>
+        public Processo_Parcelamento_Struct Retorna_Dados_Parcelamento(int _ano, int _numero) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Retorna_Dados_Parcelamento(_ano, _numero);
+        }
+
 
     }//end class
 }

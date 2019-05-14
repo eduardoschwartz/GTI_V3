@@ -1,6 +1,7 @@
 ﻿using GTI_Bll.Classes;
 using GTI_Desktop.Classes;
 using GTI_Models.Models;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using static GTI_Desktop.Classes.GtiTypes;
@@ -27,6 +28,7 @@ namespace GTI_Desktop.Forms {
                 int _numero_processo = selectedItem._value;
                 int _ano_processo = selectedItem._value2;
 
+                Carrega_Dados(_ano_processo, _numero_processo);
                 Carrega_Origem(_ano_processo, _numero_processo);
                 Carrega_Destino(_ano_processo, _numero_processo);
             }
@@ -59,6 +61,13 @@ namespace GTI_Desktop.Forms {
                 lv.SubItems.Add(item.Situacao_Lancamento_Descricao);
                 DestinoListView.Items.Add(lv);
             }
+        }
+
+        private void Carrega_Dados(int _ano_processo, int _numero_processo) {
+            Tributario_bll tributario_Class = new Tributario_bll(_connection);
+            Processo_Parcelamento_Struct _reg = tributario_Class.Retorna_Dados_Parcelamento(_ano_processo, _numero_processo);
+            ParceladoEmText.Text = Convert.ToDateTime(_reg.Data_Parcelamento).ToString("dd/MM/yyyy");
+            ParceladoPorText.Text = _reg.Usuario_Nome;
         }
 
     }
