@@ -258,7 +258,7 @@
             // 
             // btCC1
             // 
-            this.btCC1.Image = global::GTI_Desktop.Properties.Resources.Direita;
+            this.btCC1.Image = global::GTI_Desktop.Properties.Resources.rightarrow;
             this.btCC1.Location = new System.Drawing.Point(562, 81);
             this.btCC1.Name = "btCC1";
             this.btCC1.Size = new System.Drawing.Size(26, 22);
@@ -269,7 +269,7 @@
             // 
             // btCC2
             // 
-            this.btCC2.Image = global::GTI_Desktop.Properties.Resources.Esquerda;
+            this.btCC2.Image = global::GTI_Desktop.Properties.Resources.leftarrow;
             this.btCC2.Location = new System.Drawing.Point(561, 109);
             this.btCC2.Name = "btCC2";
             this.btCC2.Size = new System.Drawing.Size(26, 22);
@@ -280,7 +280,7 @@
             // 
             // btDoc2
             // 
-            this.btDoc2.Image = global::GTI_Desktop.Properties.Resources.Esquerda;
+            this.btDoc2.Image = global::GTI_Desktop.Properties.Resources.leftarrow;
             this.btDoc2.Location = new System.Drawing.Point(559, 301);
             this.btDoc2.Name = "btDoc2";
             this.btDoc2.Size = new System.Drawing.Size(26, 22);
@@ -291,7 +291,7 @@
             // 
             // btDoc1
             // 
-            this.btDoc1.Image = global::GTI_Desktop.Properties.Resources.Direita;
+            this.btDoc1.Image = global::GTI_Desktop.Properties.Resources.rightarrow;
             this.btDoc1.Location = new System.Drawing.Point(560, 273);
             this.btDoc1.Name = "btDoc1";
             this.btDoc1.Size = new System.Drawing.Size(26, 22);

@@ -99,6 +99,7 @@ namespace GTI_Desktop.Forms {
 
         private void btCC1_Click(object sender, EventArgs e) {
             if (CriterioList.SelectedIndex == -1) return;
+            if (MainListView.SelectedItems.Count == 0) return;
             CustomListBoxItem4 item = (CustomListBoxItem4)CriterioList.SelectedItem;
             bool _find = false;
             foreach (ListViewItem lv in CriterioListView.Items) {
@@ -108,13 +109,12 @@ namespace GTI_Desktop.Forms {
                 }
             }
             if (!_find) {
-                ListViewItem itemLV = MainListView.SelectedItems[0];
-                string _cnae = itemLV.Text;
-                int _criterio = Convert.ToInt32(CriterioListView.SelectedItems[0].Text);
+                string _cnae =gtiCore.RetornaNumero( MainListView.SelectedItems[0].Text);
+
                 Empresa_bll empresa_Class = new Empresa_bll(_connection);
                 Cnae_criterio reg = new Cnae_criterio {
-                    Cnae = _cnae,
-                    Criterio=_criterio
+                    Cnae =_cnae,
+                    Criterio=item._value
                 };
                 Exception ex = empresa_Class.Incluir_Cnae_Criterio(reg);
                 if (ex == null) {
@@ -141,15 +141,30 @@ namespace GTI_Desktop.Forms {
                 if (ex == null) 
                     CriterioListView.SelectedItems[0].Remove();
                 else {
-                    ErrorBox eBox = new ErrorBox("Atenção", "Erro de exclusão.", ex);
+                    ErrorBox eBox = new ErrorBox("Não é possível excluir", "Atividade em uso.", ex);
                     eBox.ShowDialog();
                 }
             }
         }
 
+        private void Carregar_Criterio_Cnae(string _cnae) {
+            CriterioListView.Items.Clear();
+            Empresa_bll empresa_Class = new Empresa_bll(_connection);
+            List<CnaecriterioStruct> Lista = empresa_Class.Lista_Cnae_Criterio(_cnae);
+            foreach (CnaecriterioStruct item in Lista) {
+                ListViewItem lv = new ListViewItem(item.Criterio.ToString());
+                lv.SubItems.Add(item.Descricao);
+                lv.SubItems.Add(item.Valor.ToString("#0.00"));
+                CriterioListView.Items.Add(lv);
+            }
+        }
 
-
-
+        private void MainListView_SelectedIndexChanged(object sender, EventArgs e) {
+            if (MainListView.SelectedItems.Count > 0) {
+                string _cnae = gtiCore.RetornaNumero( MainListView.SelectedItems[0].Text);
+                Carregar_Criterio_Cnae(_cnae);
+            }
+        }
     }
 
 }

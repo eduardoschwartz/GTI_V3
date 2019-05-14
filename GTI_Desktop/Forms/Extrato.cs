@@ -277,7 +277,7 @@ namespace GTI_Desktop.Forms {
                     GeraExtrato();
                 foreach (SpExtrato item in Lista_Extrato_Parcela) {
                     string sLancamento = item.Codlancamento.ToString("00") + "-" + item.Desclancamento;
-                    string sSeqLancamento = item.Seqlancamento.ToString("00");
+                    string sSeqLancamento = item.Seqlancamento.ToString();
                     string sNumParcela = item.Numparcela.ToString("00");
                     string sComplemento = item.Codcomplemento.ToString("00");
                     string sStatus = item.Statuslanc.ToString("00");

@@ -128,6 +128,7 @@
     <Compile Include="Models\numdocumento.cs" />
     <Compile Include="Models\obscidadao.cs" />
     <Compile Include="Models\obsparcela.cs" />
+    <Compile Include="Models\origemreparc.cs" />
     <Compile Include="Models\parametros.cs" />
     <Compile Include="Models\paramparcela.cs" />
     <Compile Include="Models\parceladocumento.cs" />

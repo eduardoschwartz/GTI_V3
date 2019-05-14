@@ -1033,6 +1033,16 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        /// <summary>
+        /// Lista os débitos de origem de um parcelamento
+        /// </summary>
+        /// <param name="_ano"></param>
+        /// <param name="_numero"></param>
+        /// <returns></returns>
+        public List<OrigemReparcStruct> Lista_Origem_Parcelamento(int _ano, int _numero) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Lista_Origem_Parcelamento(_ano,_numero);
+        }
 
     }//end class
 }

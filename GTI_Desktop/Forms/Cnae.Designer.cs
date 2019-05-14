@@ -32,16 +32,16 @@
             this.Busca = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.a1Panel2 = new Owf.Controls.A1Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.CriterioList = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.ValorText = new System.Windows.Forms.Label();
-            this.btCC2 = new System.Windows.Forms.Button();
-            this.btCC1 = new System.Windows.Forms.Button();
             this.CriterioListView = new System.Windows.Forms.ListView();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btCC2 = new System.Windows.Forms.Button();
+            this.btCC1 = new System.Windows.Forms.Button();
+            this.ValorText = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.CriterioList = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.a1Panel1.SuspendLayout();
             this.a1Panel2.SuspendLayout();
             this.SuspendLayout();
@@ -62,6 +62,7 @@
             this.MainListView.TabIndex = 2;
             this.MainListView.UseCompatibleStateImageBehavior = false;
             this.MainListView.View = System.Windows.Forms.View.Details;
+            this.MainListView.SelectedIndexChanged += new System.EventHandler(this.MainListView_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -163,64 +164,6 @@
             this.a1Panel2.Size = new System.Drawing.Size(576, 91);
             this.a1Panel2.TabIndex = 3;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 11);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Critério..:";
-            // 
-            // CriterioList
-            // 
-            this.CriterioList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CriterioList.FormattingEnabled = true;
-            this.CriterioList.Location = new System.Drawing.Point(12, 27);
-            this.CriterioList.Name = "CriterioList";
-            this.CriterioList.Size = new System.Drawing.Size(205, 21);
-            this.CriterioList.TabIndex = 1;
-            this.CriterioList.SelectedIndexChanged += new System.EventHandler(this.CriterioList_SelectedIndexChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 60);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Valor..:";
-            // 
-            // ValorText
-            // 
-            this.ValorText.AutoSize = true;
-            this.ValorText.ForeColor = System.Drawing.Color.Navy;
-            this.ValorText.Location = new System.Drawing.Point(52, 60);
-            this.ValorText.Name = "ValorText";
-            this.ValorText.Size = new System.Drawing.Size(28, 13);
-            this.ValorText.TabIndex = 3;
-            this.ValorText.Text = "0,00";
-            // 
-            // btCC2
-            // 
-            this.btCC2.Image = global::GTI_Desktop.Properties.Resources.Esquerda;
-            this.btCC2.Location = new System.Drawing.Point(237, 50);
-            this.btCC2.Name = "btCC2";
-            this.btCC2.Size = new System.Drawing.Size(26, 22);
-            this.btCC2.TabIndex = 7;
-            this.btCC2.UseVisualStyleBackColor = true;
-            this.btCC2.Click += new System.EventHandler(this.btCC2_Click);
-            // 
-            // btCC1
-            // 
-            this.btCC1.Image = global::GTI_Desktop.Properties.Resources.Direita;
-            this.btCC1.Location = new System.Drawing.Point(238, 25);
-            this.btCC1.Name = "btCC1";
-            this.btCC1.Size = new System.Drawing.Size(26, 22);
-            this.btCC1.TabIndex = 6;
-            this.btCC1.UseVisualStyleBackColor = true;
-            this.btCC1.Click += new System.EventHandler(this.btCC1_Click);
-            // 
             // CriterioListView
             // 
             this.CriterioListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -249,6 +192,64 @@
             // 
             this.columnHeader5.Text = "Valor";
             this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // btCC2
+            // 
+            this.btCC2.Image = global::GTI_Desktop.Properties.Resources.leftarrow;
+            this.btCC2.Location = new System.Drawing.Point(237, 50);
+            this.btCC2.Name = "btCC2";
+            this.btCC2.Size = new System.Drawing.Size(26, 22);
+            this.btCC2.TabIndex = 7;
+            this.btCC2.UseVisualStyleBackColor = true;
+            this.btCC2.Click += new System.EventHandler(this.btCC2_Click);
+            // 
+            // btCC1
+            // 
+            this.btCC1.Image = global::GTI_Desktop.Properties.Resources.rightarrow;
+            this.btCC1.Location = new System.Drawing.Point(238, 25);
+            this.btCC1.Name = "btCC1";
+            this.btCC1.Size = new System.Drawing.Size(26, 22);
+            this.btCC1.TabIndex = 6;
+            this.btCC1.UseVisualStyleBackColor = true;
+            this.btCC1.Click += new System.EventHandler(this.btCC1_Click);
+            // 
+            // ValorText
+            // 
+            this.ValorText.AutoSize = true;
+            this.ValorText.ForeColor = System.Drawing.Color.Navy;
+            this.ValorText.Location = new System.Drawing.Point(52, 60);
+            this.ValorText.Name = "ValorText";
+            this.ValorText.Size = new System.Drawing.Size(28, 13);
+            this.ValorText.TabIndex = 3;
+            this.ValorText.Text = "0,00";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 60);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Valor..:";
+            // 
+            // CriterioList
+            // 
+            this.CriterioList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CriterioList.FormattingEnabled = true;
+            this.CriterioList.Location = new System.Drawing.Point(12, 27);
+            this.CriterioList.Name = "CriterioList";
+            this.CriterioList.Size = new System.Drawing.Size(205, 21);
+            this.CriterioList.TabIndex = 1;
+            this.CriterioList.SelectedIndexChanged += new System.EventHandler(this.CriterioList_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 11);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(48, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Critério..:";
             // 
             // Cnae
             // 

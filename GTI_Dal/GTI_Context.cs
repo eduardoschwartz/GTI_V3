@@ -141,5 +141,6 @@ namespace GTI_Dal {
         public DbSet<Horario_funcionamento> Horario_funcionamento { get; set; }
         public DbSet<Foto_imovel> Foto_imovel { get; set; }
         public DbSet<Periodomei> Periodomei { get; set; }
+        public DbSet<Origemreparc> Origemreparc { get; set; }
     }
 }

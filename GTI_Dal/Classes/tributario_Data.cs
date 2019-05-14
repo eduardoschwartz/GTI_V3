@@ -2087,6 +2087,18 @@ Proximo:;
             return bRet;
         }
 
+        public List<OrigemReparcStruct> Lista_Origem_Parcelamento(int _ano,int _numero) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+
+                List<OrigemReparcStruct> Lista = (from o in db.Origemreparc join l in db.Lancamento on o.Codlancamento equals l.Codlancamento
+                           where o.Anoproc == _ano && o.Numproc == _numero orderby o.Anoexercicio, o.Codlancamento, o.Numsequencia, o.Numparcela,o.Codcomplemento
+                           select new OrigemReparcStruct {Numero_Processo_Unificado=o.Numprocesso,Ano_Processo=o.Anoproc,Numero_Processo=o.Numproc,
+                           Codigo=o.Codreduzido,Exercicio=o.Anoexercicio,Lancamento_Codigo=o.Codlancamento,Lancamento_Descricao=l.Descreduz,
+                           Sequencia=o.Numsequencia,Parcela=o.Numparcela,Complemento=o.Codcomplemento}).ToList();
+
+                return Lista;
+            }
+        }
 
     }//end class
 }
