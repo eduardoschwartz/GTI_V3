@@ -2089,12 +2089,27 @@ Proximo:;
 
         public List<OrigemReparcStruct> Lista_Origem_Parcelamento(int _ano,int _numero) {
             using (GTI_Context db = new GTI_Context(_connection)) {
-
                 List<OrigemReparcStruct> Lista = (from o in db.Origemreparc join l in db.Lancamento on o.Codlancamento equals l.Codlancamento
                            where o.Anoproc == _ano && o.Numproc == _numero orderby o.Anoexercicio, o.Codlancamento, o.Numsequencia, o.Numparcela,o.Codcomplemento
                            select new OrigemReparcStruct {Numero_Processo_Unificado=o.Numprocesso,Ano_Processo=o.Anoproc,Numero_Processo=o.Numproc,
                            Codigo=o.Codreduzido,Exercicio=o.Anoexercicio,Lancamento_Codigo=o.Codlancamento,Lancamento_Descricao=l.Descreduz,
                            Sequencia=o.Numsequencia,Parcela=o.Numparcela,Complemento=o.Codcomplemento}).ToList();
+
+                return Lista;
+            }
+        }
+
+        public List<DestinoreparcStruct> Lista_Destino_Parcelamento(int _ano, int _numero) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                List<DestinoreparcStruct> Lista = (from o in db.Destinoreparc
+                                                   join d in db.Debitoparcela on new {p1 = o.Codreduzido,p2=o.Anoexercicio,p3=o.Codlancamento,p4= (short)o.Numsequencia, p5 = o.Numparcela,p6=o.Codcomplemento}
+                                                   equals new { p1=d.Codreduzido,p2=d.Anoexercicio,p3=d.Codlancamento,p4=d.Seqlancamento,p5=d.Numparcela,p6=d.Codcomplemento}
+                                                   join s in db.Situacaolancamento on d.Statuslanc equals s.Codsituacao
+                                                  where o.Anoproc == _ano && o.Numproc == _numero orderby o.Anoexercicio, o.Codlancamento, o.Numsequencia, o.Numparcela, o.Codcomplemento
+                                                  select new DestinoreparcStruct {
+                                                      Numero_Processo_Unificado = o.Numprocesso, Ano_Processo = o.Anoproc, Numero_Processo = o.Numproc, Codigo = o.Codreduzido, Exercicio = o.Anoexercicio, Lancamento_Codigo = o.Codlancamento, 
+                                                      Sequencia = o.Numsequencia, Parcela = o.Numparcela, Complemento = o.Codcomplemento,Data_Vencimento=d.Datavencimento,Situacao_Lancamento_Codigo=d.Statuslanc,Situacao_Lancamento_Descricao=s.Descsituacao
+                                                  }).ToList();
 
                 return Lista;
             }

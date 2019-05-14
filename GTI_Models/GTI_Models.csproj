@@ -102,6 +102,7 @@
     <Compile Include="Models\debitoparcela.cs" />
     <Compile Include="Models\debitotributo.cs" />
     <Compile Include="Models\DEmpresa.cs" />
+    <Compile Include="Models\destinoreparc.cs" />
     <Compile Include="Models\endentrega.cs" />
     <Compile Include="Models\endereco.cs" />
     <Compile Include="Models\escritoriocontabil.cs" />

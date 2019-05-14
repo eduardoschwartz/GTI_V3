@@ -1044,6 +1044,18 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Origem_Parcelamento(_ano,_numero);
         }
 
+        /// <summary>
+        /// Lista os débitos de destino de um parcelamento
+        /// </summary>
+        /// <param name="_ano"></param>
+        /// <param name="_numero"></param>
+        /// <returns></returns>
+        public List<DestinoreparcStruct> Lista_Destino_Parcelamento(int _ano, int _numero) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Lista_Destino_Parcelamento(_ano, _numero);
+        }
+
+
     }//end class
 }
 

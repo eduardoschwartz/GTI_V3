@@ -39,14 +39,19 @@
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 24);
+            this.label1.ForeColor = System.Drawing.Color.Navy;
+            this.label1.Location = new System.Drawing.Point(8, 38);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 13);
             this.label1.TabIndex = 0;
@@ -56,7 +61,7 @@
             // 
             this.ProcessoList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ProcessoList.FormattingEnabled = true;
-            this.ProcessoList.Location = new System.Drawing.Point(106, 21);
+            this.ProcessoList.Location = new System.Drawing.Point(103, 35);
             this.ProcessoList.Name = "ProcessoList";
             this.ProcessoList.Size = new System.Drawing.Size(104, 21);
             this.ProcessoList.TabIndex = 1;
@@ -138,7 +143,9 @@
             this.columnHeader7,
             this.columnHeader8,
             this.columnHeader9,
-            this.columnHeader10});
+            this.columnHeader10,
+            this.columnHeader11,
+            this.columnHeader12});
             this.DestinoListView.FullRowSelect = true;
             this.DestinoListView.GridLines = true;
             this.DestinoListView.Location = new System.Drawing.Point(9, 22);
@@ -155,8 +162,8 @@
             // 
             // columnHeader7
             // 
-            this.columnHeader7.Text = "Lançamento";
-            this.columnHeader7.Width = 200;
+            this.columnHeader7.Text = "Lc";
+            this.columnHeader7.Width = 30;
             // 
             // columnHeader8
             // 
@@ -176,15 +183,38 @@
             this.columnHeader10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeader10.Width = 30;
             // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "Dt.Vencto";
+            this.columnHeader11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader11.Width = 80;
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "Situação";
+            this.columnHeader12.Width = 90;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.ProcessoList);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.ForeColor = System.Drawing.Color.Maroon;
+            this.groupBox3.Location = new System.Drawing.Point(6, 12);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(232, 356);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Dados do parcelamento";
+            // 
             // Parcelamento_Lista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LemonChiffon;
             this.ClientSize = new System.Drawing.Size(629, 374);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.ProcessoList);
-            this.Controls.Add(this.label1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -193,8 +223,9 @@
             this.Text = "Lista de Parcelamentos";
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -216,5 +247,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.ColumnHeader columnHeader10;
+        private System.Windows.Forms.ColumnHeader columnHeader11;
+        private System.Windows.Forms.ColumnHeader columnHeader12;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }

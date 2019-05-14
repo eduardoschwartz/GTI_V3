@@ -142,5 +142,6 @@ namespace GTI_Dal {
         public DbSet<Foto_imovel> Foto_imovel { get; set; }
         public DbSet<Periodomei> Periodomei { get; set; }
         public DbSet<Origemreparc> Origemreparc { get; set; }
+        public DbSet<Destinoreparc> Destinoreparc { get; set; }
     }
 }

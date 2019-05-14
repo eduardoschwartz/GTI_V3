@@ -27,20 +27,39 @@ namespace GTI_Desktop.Forms {
                 int _numero_processo = selectedItem._value;
                 int _ano_processo = selectedItem._value2;
 
-                Tributario_bll tributario_Class = new Tributario_bll(_connection);
-                List<OrigemReparcStruct> Lista = tributario_Class.Lista_Origem_Parcelamento(_ano_processo, _numero_processo);
-                foreach (OrigemReparcStruct item in Lista) {
-                    ListViewItem lv = new ListViewItem(item.Exercicio.ToString());
-                    lv.SubItems.Add(item.Lancamento_Codigo.ToString("00") + "-" + item.Lancamento_Descricao   );
-                    lv.SubItems.Add(item.Sequencia.ToString());
-                    lv.SubItems.Add(item.Parcela.ToString("00"));
-                    lv.SubItems.Add(item.Complemento.ToString("00"));
-                    OrigemListView.Items.Add(lv);
-                }
+                Carrega_Origem(_ano_processo, _numero_processo);
+                Carrega_Destino(_ano_processo, _numero_processo);
             }
             gtiCore.Liberado(this);
         }
 
+        private void Carrega_Origem(int _ano_processo,int _numero_processo) {
+            Tributario_bll tributario_Class = new Tributario_bll(_connection);
+            List<OrigemReparcStruct> Lista = tributario_Class.Lista_Origem_Parcelamento(_ano_processo, _numero_processo);
+            foreach (OrigemReparcStruct item in Lista) {
+                ListViewItem lv = new ListViewItem(item.Exercicio.ToString());
+                lv.SubItems.Add(item.Lancamento_Codigo.ToString("00") + "-" + item.Lancamento_Descricao);
+                lv.SubItems.Add(item.Sequencia.ToString());
+                lv.SubItems.Add(item.Parcela.ToString("00"));
+                lv.SubItems.Add(item.Complemento.ToString("00"));
+                OrigemListView.Items.Add(lv);
+            }
+        }
+
+        private void Carrega_Destino(int _ano_processo, int _numero_processo) {
+            Tributario_bll tributario_Class = new Tributario_bll(_connection);
+            List<DestinoreparcStruct> Lista = tributario_Class.Lista_Destino_Parcelamento(_ano_processo, _numero_processo);
+            foreach (DestinoreparcStruct item in Lista) {
+                ListViewItem lv = new ListViewItem(item.Exercicio.ToString());
+                lv.SubItems.Add(item.Lancamento_Codigo.ToString("00"));
+                lv.SubItems.Add(item.Sequencia.ToString());
+                lv.SubItems.Add(item.Parcela.ToString("00"));
+                lv.SubItems.Add(item.Complemento.ToString("00"));
+                lv.SubItems.Add(item.Data_Vencimento.ToString("dd/MM/yyyy"));
+                lv.SubItems.Add(item.Situacao_Lancamento_Descricao);
+                DestinoListView.Items.Add(lv);
+            }
+        }
 
     }
 }
