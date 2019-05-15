@@ -680,14 +680,6 @@
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
-      <rd:DataSetInfo>
-        <rd:DataSetName>dsProcessoRequerente</rd:DataSetName>
-        <rd:SchemaPathD:\Work\GTI_netVersion\GTI_netVersion\GTI_Desktop\Datasets\dsProcessoRequerente.xsd</rd:SchemaPath>
-        <rd:TableName>dtProcessoRequerente</rd:TableName>
-        <rd:TableAdapterFillMethod />
-        <rd:TableAdapterGetDataMethod />
-        <rd:TableAdapterName />
-      </rd:DataSetInfo>
     </DataSet>
   </DataSets>
   <EmbeddedImages>

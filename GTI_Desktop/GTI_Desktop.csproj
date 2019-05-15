@@ -137,6 +137,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsCartaCobranca.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Datasets\dsDetalheParcela.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsDetalheParcela.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Datasets\dsProcessoDoc.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -798,6 +803,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\ComunicadoDoc.rdlc" />
+    <EmbeddedResource Include="Report\Detalhe_Parcela.rdlc" />
     <EmbeddedResource Include="Report\ProcessoRequerente.rdlc" />
     <EmbeddedResource Include="Report\RequerimentoAbertura.rdlc" />
     <EmbeddedResource Include="Report\RequerimentoCancelamento.rdlc" />
@@ -817,6 +823,17 @@
     </None>
     <None Include="Datasets\dsCartaCobranca.xss">
       <DependentUpon>dsCartaCobranca.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsDetalheParcela.xsc">
+      <DependentUpon>dsDetalheParcela.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsDetalheParcela.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsDetalheParcela.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\dsDetalheParcela.xss">
+      <DependentUpon>dsDetalheParcela.xsd</DependentUpon>
     </None>
     <None Include="Datasets\dsProcessoDoc.xsc">
       <DependentUpon>dsProcessoDoc.xsd</DependentUpon>
