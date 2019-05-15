@@ -1,8 +1,11 @@
 ﻿using GTI_Bll.Classes;
 using GTI_Desktop.Classes;
+using GTI_Desktop.Datasets;
 using GTI_Models.Models;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -23,7 +26,30 @@ namespace GTI_Desktop.Forms {
         }
 
         private void BtSenha_Click(object sender, EventArgs e) {
-            //TODO: Imprimir os detalhes da parcela
+            gtiCore.Ocupado(this);
+            String sReportName = "Detalhe_Parcela";
+            dsDetalheParcela Ds = new dsDetalheParcela();
+            DataTable dTable = new dsDetalheParcela.DetalheParcelaDataTable();
+
+            foreach (ListViewItem Item in TributoListView.Items) {
+                DataRow dRow = dTable.NewRow();
+                dRow["Descricao"] = Item.Text;
+                dRow["Principal"] = Item.SubItems[1].Text;
+                dRow["Juros"] = Item.SubItems[2].Text;
+                dRow["Multa"] = Item.SubItems[3].Text;
+                dRow["Correcao"] = Item.SubItems[4].Text;
+                dRow["Total"] = Item.SubItems[5].Text;
+                dTable.Rows.Add(dRow);
+            }
+            Ds.Tables.Add(dTable);
+
+            ReportParameter p1 = new ReportParameter("prmContribuinte", NomeLabel.Text);
+            gtiCore.Liberado(this);
+            Report f1 = new Report(sReportName, Ds, 1, true, new ReportParameter[] { p1 }) {
+                Tag = this.Name
+            };
+            f1.ShowDialog();
+
         }
 
         private void BtFindCodigo_Click(object sender, EventArgs e) {
