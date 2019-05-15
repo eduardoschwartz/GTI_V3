@@ -42,10 +42,16 @@
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.ParceladoEmText = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.ParceladoPorText = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.ParceladoPorText = new System.Windows.Forms.TextBox();
+            this.ParceladoEmText = new System.Windows.Forms.TextBox();
+            this.SituacaoText = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.CanceladoPorText = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.CanceladoEmText = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -200,9 +206,16 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.BackColor = System.Drawing.Color.LemonChiffon;
+            this.groupBox3.Controls.Add(this.CanceladoEmText);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.CanceladoPorText);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.SituacaoText);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.ParceladoEmText);
             this.groupBox3.Controls.Add(this.ParceladoPorText);
             this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.ParceladoEmText);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.ProcessoList);
             this.groupBox3.Controls.Add(this.label1);
@@ -214,15 +227,15 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Dados do parcelamento";
             // 
-            // ParceladoEmText
+            // label3
             // 
-            this.ParceladoEmText.AutoSize = true;
-            this.ParceladoEmText.ForeColor = System.Drawing.Color.Purple;
-            this.ParceladoEmText.Location = new System.Drawing.Point(95, 63);
-            this.ParceladoEmText.Name = "ParceladoEmText";
-            this.ParceladoEmText.Size = new System.Drawing.Size(10, 13);
-            this.ParceladoEmText.TabIndex = 3;
-            this.ParceladoEmText.Text = ".";
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.Navy;
+            this.label3.Location = new System.Drawing.Point(8, 88);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(82, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Parcelado por..:";
             // 
             // label2
             // 
@@ -234,25 +247,90 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Parcelado em..:";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.Navy;
-            this.label3.Location = new System.Drawing.Point(8, 88);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Parcelado por..:";
-            // 
             // ParceladoPorText
             // 
-            this.ParceladoPorText.AutoSize = true;
-            this.ParceladoPorText.ForeColor = System.Drawing.Color.Purple;
-            this.ParceladoPorText.Location = new System.Drawing.Point(95, 88);
+            this.ParceladoPorText.BackColor = System.Drawing.Color.LemonChiffon;
+            this.ParceladoPorText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ParceladoPorText.Location = new System.Drawing.Point(96, 88);
             this.ParceladoPorText.Name = "ParceladoPorText";
-            this.ParceladoPorText.Size = new System.Drawing.Size(10, 13);
+            this.ParceladoPorText.ReadOnly = true;
+            this.ParceladoPorText.Size = new System.Drawing.Size(130, 13);
             this.ParceladoPorText.TabIndex = 5;
-            this.ParceladoPorText.Text = ".";
+            this.ParceladoPorText.TabStop = false;
+            // 
+            // ParceladoEmText
+            // 
+            this.ParceladoEmText.BackColor = System.Drawing.Color.LemonChiffon;
+            this.ParceladoEmText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ParceladoEmText.Location = new System.Drawing.Point(95, 63);
+            this.ParceladoEmText.Name = "ParceladoEmText";
+            this.ParceladoEmText.ReadOnly = true;
+            this.ParceladoEmText.Size = new System.Drawing.Size(130, 13);
+            this.ParceladoEmText.TabIndex = 6;
+            this.ParceladoEmText.TabStop = false;
+            // 
+            // SituacaoText
+            // 
+            this.SituacaoText.BackColor = System.Drawing.Color.LemonChiffon;
+            this.SituacaoText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.SituacaoText.Location = new System.Drawing.Point(96, 113);
+            this.SituacaoText.Name = "SituacaoText";
+            this.SituacaoText.ReadOnly = true;
+            this.SituacaoText.Size = new System.Drawing.Size(130, 13);
+            this.SituacaoText.TabIndex = 8;
+            this.SituacaoText.TabStop = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.Navy;
+            this.label4.Location = new System.Drawing.Point(8, 113);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(82, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Situação..........:";
+            // 
+            // CanceladoPorText
+            // 
+            this.CanceladoPorText.BackColor = System.Drawing.Color.LemonChiffon;
+            this.CanceladoPorText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.CanceladoPorText.Location = new System.Drawing.Point(96, 137);
+            this.CanceladoPorText.Name = "CanceladoPorText";
+            this.CanceladoPorText.ReadOnly = true;
+            this.CanceladoPorText.Size = new System.Drawing.Size(130, 13);
+            this.CanceladoPorText.TabIndex = 10;
+            this.CanceladoPorText.TabStop = false;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.Navy;
+            this.label5.Location = new System.Drawing.Point(8, 137);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(82, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Cancelado por.:";
+            // 
+            // CanceladoEmText
+            // 
+            this.CanceladoEmText.BackColor = System.Drawing.Color.LemonChiffon;
+            this.CanceladoEmText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.CanceladoEmText.Location = new System.Drawing.Point(96, 163);
+            this.CanceladoEmText.Name = "CanceladoEmText";
+            this.CanceladoEmText.ReadOnly = true;
+            this.CanceladoEmText.Size = new System.Drawing.Size(130, 13);
+            this.CanceladoEmText.TabIndex = 12;
+            this.CanceladoEmText.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.Navy;
+            this.label6.Location = new System.Drawing.Point(8, 163);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(81, 13);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Cancelado em.:";
             // 
             // Parcelamento_Lista
             // 
@@ -298,9 +376,15 @@
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.ColumnHeader columnHeader12;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label ParceladoEmText;
-        private System.Windows.Forms.Label ParceladoPorText;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox ParceladoPorText;
+        private System.Windows.Forms.TextBox ParceladoEmText;
+        private System.Windows.Forms.TextBox CanceladoEmText;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox CanceladoPorText;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox SituacaoText;
+        private System.Windows.Forms.Label label4;
     }
 }

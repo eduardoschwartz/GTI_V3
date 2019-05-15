@@ -28,6 +28,14 @@ namespace GTI_Desktop.Forms {
                 int _numero_processo = selectedItem._value;
                 int _ano_processo = selectedItem._value2;
 
+                OrigemListView.Items.Clear();
+                DestinoListView.Items.Clear();
+                CanceladoPorText.Text = "";
+                CanceladoEmText.Text = "";
+                SituacaoText.Text = "";
+                ParceladoEmText.Text = "";
+                ParceladoPorText.Text = "";
+
                 Carrega_Dados(_ano_processo, _numero_processo);
                 Carrega_Origem(_ano_processo, _numero_processo);
                 Carrega_Destino(_ano_processo, _numero_processo);
@@ -68,7 +76,31 @@ namespace GTI_Desktop.Forms {
             Processo_Parcelamento_Struct _reg = tributario_Class.Retorna_Dados_Parcelamento(_ano_processo, _numero_processo);
             ParceladoEmText.Text = Convert.ToDateTime(_reg.Data_Parcelamento).ToString("dd/MM/yyyy");
             ParceladoPorText.Text = _reg.Usuario_Nome;
+            if (_reg.Data_Cancelado != null) {
+                CanceladoPorText.Text = _reg.Funcionario_Cancelado??"";
+                CanceladoEmText.Text = _reg.Data_Cancelado==null?"":Convert.ToDateTime(_reg.Data_Cancelado).ToString("dd/MM/yyyy");
+                SituacaoText.Text = "CANCELADO";
+            } else {
+                CanceladoPorText.Text = "";
+                CanceladoEmText.Text = "";
+                if (DestinoListView.Items.Count == 0)
+                    SituacaoText.Text = "CANCELADO";
+                else {
+                    bool _find = false;
+                    for (int i = 0; i < DestinoListView.Items.Count; i++) {
+                        if (DestinoListView.Items[i].SubItems[6].Text == "NÃO PAGO") {
+                            _find = true;
+                            break;
+                        }
+                    }
+                    if (!_find)
+                        SituacaoText.Text = "PAGO";
+                    else
+                        SituacaoText.Text = "ATIVO";
+                }
+            }
         }
+
 
     }
 }
