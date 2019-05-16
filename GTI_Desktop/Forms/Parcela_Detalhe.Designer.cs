@@ -490,7 +490,7 @@
             this.ProcessoCNJLabel.AutoSize = true;
             this.ProcessoCNJLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProcessoCNJLabel.ForeColor = System.Drawing.Color.Navy;
-            this.ProcessoCNJLabel.Location = new System.Drawing.Point(242, 43);
+            this.ProcessoCNJLabel.Location = new System.Drawing.Point(248, 42);
             this.ProcessoCNJLabel.Name = "ProcessoCNJLabel";
             this.ProcessoCNJLabel.Size = new System.Drawing.Size(43, 13);
             this.ProcessoCNJLabel.TabIndex = 134;
@@ -502,7 +502,7 @@
             this.DataRemessaLabel.AutoSize = true;
             this.DataRemessaLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DataRemessaLabel.ForeColor = System.Drawing.Color.Navy;
-            this.DataRemessaLabel.Location = new System.Drawing.Point(242, 62);
+            this.DataRemessaLabel.Location = new System.Drawing.Point(238, 62);
             this.DataRemessaLabel.Name = "DataRemessaLabel";
             this.DataRemessaLabel.Size = new System.Drawing.Size(65, 13);
             this.DataRemessaLabel.TabIndex = 133;
@@ -830,7 +830,7 @@
             this.ImprimirButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.toolTip1.SetToolTip(this.ImprimirButton, "Imprimir os detalhes da parcela");
             this.ImprimirButton.UseVisualStyleBackColor = false;
-            this.ImprimirButton.Click += new System.EventHandler(this.BtSenha_Click);
+            this.ImprimirButton.Click += new System.EventHandler(this.BtPrint_Click);
             // 
             // SairButton
             // 

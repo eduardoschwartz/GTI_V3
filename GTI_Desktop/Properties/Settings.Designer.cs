@@ -226,5 +226,29 @@ namespace GTI_Desktop.Properties {
                 this["gti_004_version"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("700")]
+        public int Form_Report_width {
+            get {
+                return ((int)(this["Form_Report_width"]));
+            }
+            set {
+                this["Form_Report_width"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        public int Form_Report_height {
+            get {
+                return ((int)(this["Form_Report_height"]));
+            }
+            set {
+                this["Form_Report_height"] = value;
+            }
+        }
     }
 }

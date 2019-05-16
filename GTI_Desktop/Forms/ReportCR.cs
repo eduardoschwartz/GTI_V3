@@ -18,16 +18,17 @@ namespace GTI_Desktop.Forms {
 
         public ReportCR(String ReportName,Report_Data Dados, DataSet Ds,int Valor1=0) {
             InitializeComponent();
+            this.Size = new System.Drawing.Size(Properties.Settings.Default.Form_Report_width, Properties.Settings.Default.Form_Report_height);
 
             crConnectionInfo.ServerName = Properties.Settings.Default.ServerName;
             crConnectionInfo.DatabaseName = "Tributacao";
             crConnectionInfo.UserID = gtiCore.Ul;
             crConnectionInfo.Password = gtiCore.Up;
 
-            showReport(ReportName,Dados,Ds,Valor1);
+            ShowReport(ReportName,Dados,Ds,Valor1);
         }
 
-        private void showReport(String _nome,Report_Data _dados, DataSet Ds, int Valor1 ) {
+        private void ShowReport(String _nome,Report_Data _dados, DataSet Ds, int Valor1 ) {
             crViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             string _usuario = Properties.Settings.Default.LastUser;
 
@@ -48,7 +49,7 @@ namespace GTI_Desktop.Forms {
                     rpt_endereco.SetParameterValue("DATAPROCESSO", _dados.Data_Processo);
                     rpt_endereco.SetParameterValue("QUADRA", _dados.Quadra_original);
                     rpt_endereco.SetParameterValue("LOTE", _dados.Lote_original);
-                    rpt_endereco.SetParameterValue("DOCUMENTO", _dados.Cpf_cnpj==null?"": _dados.Cpf_cnpj);
+                    rpt_endereco.SetParameterValue("DOCUMENTO", _dados.Cpf_cnpj ?? "");
                     rpt_endereco.RecordSelectionFormula = "{Assinatura.Usuario}='" + _usuario + "'";
                     crViewer.ReportSource = rpt_endereco;
                     break;
@@ -69,7 +70,7 @@ namespace GTI_Desktop.Forms {
                     rpt_imunidade.SetParameterValue("ANO", _dados.AnoIsencao);
                     rpt_imunidade.SetParameterValue("AREA", _dados.Area);
                     rpt_imunidade.SetParameterValue("PERC", _dados.Perc_Isencao);
-                    rpt_imunidade.SetParameterValue("DOC", _dados.Cpf_cnpj == null ? "" : _dados.Cpf_cnpj);
+                    rpt_imunidade.SetParameterValue("DOC", _dados.Cpf_cnpj ?? "");
                     rpt_imunidade.RecordSelectionFormula = "{Assinatura.Usuario}='" + _usuario + "'";
                     crViewer.ReportSource = rpt_imunidade;
                     break;
@@ -92,7 +93,7 @@ namespace GTI_Desktop.Forms {
                     rpt_isencao.SetParameterValue("ANO", _dados.AnoIsencao);
                     rpt_isencao.SetParameterValue("AREA", _dados.Area);
                     rpt_isencao.SetParameterValue("PERC", _dados.Perc_Isencao);
-                    rpt_isencao.SetParameterValue("DOC", _dados.Cpf_cnpj == null ? "" : _dados.Cpf_cnpj);
+                    rpt_isencao.SetParameterValue("DOC", _dados.Cpf_cnpj ?? "");
                     rpt_isencao.RecordSelectionFormula = "{Assinatura.Usuario}='" + _usuario + "'";
                     crViewer.ReportSource = rpt_isencao;
                     break;
@@ -113,7 +114,7 @@ namespace GTI_Desktop.Forms {
                     rpt_isencao65.SetParameterValue("ANO", _dados.AnoIsencao);
                     rpt_isencao65.SetParameterValue("AREA", _dados.Area);
                     rpt_isencao65.SetParameterValue("PERC", _dados.Perc_Isencao);
-                    rpt_isencao65.SetParameterValue("DOC", _dados.Cpf_cnpj == null ? "" : _dados.Cpf_cnpj);
+                    rpt_isencao65.SetParameterValue("DOC", _dados.Cpf_cnpj ?? "");
                     rpt_isencao65.RecordSelectionFormula = "{Assinatura.Usuario}='" + _usuario + "'";
                     crViewer.ReportSource = rpt_isencao65;
                     break;
@@ -135,7 +136,7 @@ namespace GTI_Desktop.Forms {
                     rpt_vvenal.SetParameterValue("DATAPROCESSO", _dados.Data_Processo);
                     rpt_vvenal.SetParameterValue("QUADRA", _dados.Quadra_original);
                     rpt_vvenal.SetParameterValue("LOTE", _dados.Lote_original);
-                    rpt_vvenal.SetParameterValue("DOCUMENTO", _dados.Cpf_cnpj == null ? "" : _dados.Cpf_cnpj);
+                    rpt_vvenal.SetParameterValue("DOCUMENTO", _dados.Cpf_cnpj ?? "");
                     rpt_vvenal.SetParameterValue("VVT", RegCalculo.Vvt);
                     rpt_vvenal.SetParameterValue("VVP", RegCalculo.Vvp);
                     rpt_vvenal.SetParameterValue("VVI", RegCalculo.Vvi);
@@ -161,7 +162,7 @@ namespace GTI_Desktop.Forms {
                     rpt_cdebitoimovel.SetParameterValue("CIDADE", _dados.Nome_cidade);
                     rpt_cdebitoimovel.SetParameterValue("PROCESSO", _dados.Processo);
                     rpt_cdebitoimovel.SetParameterValue("DATAPROCESSO", _dados.Data_Processo);
-                    rpt_cdebitoimovel.SetParameterValue("DOCUMENTO", _dados.Cpf_cnpj == null ? "" : _dados.Cpf_cnpj);
+                    rpt_cdebitoimovel.SetParameterValue("DOCUMENTO", _dados.Cpf_cnpj ?? "");
                     rpt_cdebitoimovel.RecordSelectionFormula = "{Assinatura.Usuario}='" + _usuario + "'";
                     crViewer.ReportSource = rpt_cdebitoimovel;
                     break;
@@ -184,7 +185,7 @@ namespace GTI_Desktop.Forms {
                     rpt_cdebitoempresa.SetParameterValue("CIDADE", _dados.Nome_cidade);
                     rpt_cdebitoempresa.SetParameterValue("PROCESSO", _dados.Processo);
                     rpt_cdebitoempresa.SetParameterValue("DATAPROCESSO", _dados.Data_Processo);
-                    rpt_cdebitoempresa.SetParameterValue("DOCUMENTO", _dados.Cpf_cnpj == null ? "" : _dados.Cpf_cnpj);
+                    rpt_cdebitoempresa.SetParameterValue("DOCUMENTO", _dados.Cpf_cnpj ?? "");
                     rpt_cdebitoempresa.RecordSelectionFormula = "{Assinatura.Usuario}='" + _usuario + "'";
                     crViewer.ReportSource = rpt_cdebitoempresa;
                     break;
@@ -207,7 +208,7 @@ namespace GTI_Desktop.Forms {
                     rpt_cdebitoimovelpn.SetParameterValue("CIDADE", _dados.Nome_cidade);
                     rpt_cdebitoimovelpn.SetParameterValue("PROCESSO", _dados.Processo);
                     rpt_cdebitoimovelpn.SetParameterValue("DATAPROCESSO", _dados.Data_Processo);
-                    rpt_cdebitoimovelpn.SetParameterValue("DOCUMENTO", _dados.Cpf_cnpj == null ? "" : _dados.Cpf_cnpj);
+                    rpt_cdebitoimovelpn.SetParameterValue("DOCUMENTO", _dados.Cpf_cnpj ?? "");
                     rpt_cdebitoimovelpn.RecordSelectionFormula = "{Assinatura.Usuario}='" + _usuario + "'";
                     crViewer.ReportSource = rpt_cdebitoimovelpn;
                     break;
@@ -230,7 +231,7 @@ namespace GTI_Desktop.Forms {
                     rpt_cdebitoempresapn.SetParameterValue("CIDADE", _dados.Nome_cidade);
                     rpt_cdebitoempresapn.SetParameterValue("PROCESSO", _dados.Processo);
                     rpt_cdebitoempresapn.SetParameterValue("DATAPROCESSO", _dados.Data_Processo);
-                    rpt_cdebitoempresapn.SetParameterValue("DOCUMENTO", _dados.Cpf_cnpj == null ? "" : _dados.Cpf_cnpj);
+                    rpt_cdebitoempresapn.SetParameterValue("DOCUMENTO", _dados.Cpf_cnpj ?? "");
                     rpt_cdebitoempresapn.RecordSelectionFormula = "{Assinatura.Usuario}='" + _usuario + "'";
                     crViewer.ReportSource = rpt_cdebitoempresapn;
                     break;
@@ -264,6 +265,11 @@ namespace GTI_Desktop.Forms {
 
         }//End showReport
 
+        private void ReportCR_FormClosing(object sender, FormClosingEventArgs e) {
+            Properties.Settings.Default.Form_Report_width = Size.Width;
+            Properties.Settings.Default.Form_Report_height = Size.Height;
+            Properties.Settings.Default.Save();
 
+        }
     }
 }

@@ -17,35 +17,66 @@ namespace GTI_Desktop.Forms {
         Font _font = new Font("Microsoft Sans Serif", 8, FontStyle.Regular);
         int _codigo;
         string _connection = gtiCore.Connection_Name(),_nome;
+        List<SpExtrato> Lista_Extrato_Tributo=new List<SpExtrato>();
 
-        public Parcela_Detalhe(int Codigo,string Nome, List<SpExtrato> Lista_Extrato_Tributo) {
+        public Parcela_Detalhe(int Codigo,string Nome, List<SpExtrato> Lista_Extrato) {
             InitializeComponent();
             _codigo = Codigo;
             _nome = Nome;
-            Carrega_Detalhe(Lista_Extrato_Tributo);
+            Carrega_Detalhe(Lista_Extrato);
+            Lista_Extrato_Tributo = Lista_Extrato;
         }
 
-        private void BtSenha_Click(object sender, EventArgs e) {
+        private void BtPrint_Click(object sender, EventArgs e) {
             gtiCore.Ocupado(this);
             String sReportName = "Detalhe_Parcela";
             dsDetalheParcela Ds = new dsDetalheParcela();
             DataTable dTable = new dsDetalheParcela.DetalheParcelaDataTable();
 
             foreach (ListViewItem Item in TributoListView.Items) {
-                DataRow dRow = dTable.NewRow();
-                dRow["Descricao"] = Item.Text;
-                dRow["Principal"] = Item.SubItems[1].Text;
-                dRow["Juros"] = Item.SubItems[2].Text;
-                dRow["Multa"] = Item.SubItems[3].Text;
-                dRow["Correcao"] = Item.SubItems[4].Text;
-                dRow["Total"] = Item.SubItems[5].Text;
-                dTable.Rows.Add(dRow);
+                if (Item.Index < TributoListView.Items.Count-1) {
+                    DataRow dRow = dTable.NewRow();
+                    dRow["Descricao"] = Item.Text;
+                    dRow["Principal"] = Item.SubItems[1].Text;
+                    dRow["Juros"] = Item.SubItems[2].Text;
+                    dRow["Multa"] = Item.SubItems[3].Text;
+                    dRow["Correcao"] = Item.SubItems[4].Text;
+                    dRow["Total"] = Item.SubItems[5].Text;
+                    dTable.Rows.Add(dRow);
+                }
             }
             Ds.Tables.Add(dTable);
 
             ReportParameter p1 = new ReportParameter("prmContribuinte", NomeLabel.Text);
+            ReportParameter p2 = new ReportParameter("prmExercicio", Lista_Extrato_Tributo[0].Anoexercicio.ToString());
+            ReportParameter p3 = new ReportParameter("prmLancamento", LancamentoLabel.Text);
+            ReportParameter p4 = new ReportParameter("prmSequencia", Lista_Extrato_Tributo[0].Seqlancamento.ToString());
+            ReportParameter p5 = new ReportParameter("prmParcela", Lista_Extrato_Tributo[0].Numparcela.ToString("00"));
+            ReportParameter p6 = new ReportParameter("prmComplemento", Lista_Extrato_Tributo[0].Codcomplemento.ToString("00"));
+            ReportParameter p7 = new ReportParameter("prmSituacao", StatusLabel.Text);
+            ReportParameter p8 = new ReportParameter("prmIsento", IsentoLabel.Text);
+            ReportParameter p9 = new ReportParameter("prmDesconto", DescontoLabel.Text);
+            ReportParameter p10 = new ReportParameter("prmLivro", LivroLabel.Text);
+            ReportParameter p11 = new ReportParameter("prmInscricao", DataInscricaoLabel.Text);
+            ReportParameter p12 = new ReportParameter("prmPagina", PaginaLabel.Text);
+            ReportParameter p13 = new ReportParameter("prmCertidao", CertidaoLabel.Text);
+            ReportParameter p14 = new ReportParameter("prmAjuizamento", AjuizamentoLabel.Text);
+            ReportParameter p15 = new ReportParameter("prmProcessoCNJ", ProcessoCNJLabel.Text);
+            ReportParameter p16 = new ReportParameter("prmProtocolo", NumProtocoloLabel.Text);
+            ReportParameter p17 = new ReportParameter("prmDataRemessa", DataRemessaLabel.Text);
+            ReportParameter p18 = new ReportParameter("prmDataBase", DataBaseLabel.Text);
+            ReportParameter p19 = new ReportParameter("prmDataVencimento", DataVenctoLabel.Text);
+            ReportParameter p20 = new ReportParameter("prmDataVencimentoCalc", DataVenctoCalcLabel.Text);
+            ReportParameter p21 = new ReportParameter("prmValorLancado", ValorLancadoLabel.Text);
+            ReportParameter p22 = new ReportParameter("prmValorAtual", ValorAtualLabel.Text);
+            ReportParameter p23 = new ReportParameter("prmDataPagamento", DataPagtoLabel.Text);
+            ReportParameter p24 = new ReportParameter("prmDataReceita", DataReceitaLabel.Text);
+            ReportParameter p25 = new ReportParameter("prmBanco", BancoLabel.Text);
+            ReportParameter p26 = new ReportParameter("prmValorPago", ValorPagoLabel.Text);
+            ReportParameter p27 = new ReportParameter("prmValorDif", ValorDifLabel.Text);
+
             gtiCore.Liberado(this);
-            Report f1 = new Report(sReportName, Ds, 1, true, new ReportParameter[] { p1 }) {
+            Report f1 = new Report(sReportName, Ds, 1, true, new ReportParameter[] { p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22,p23,p24,p25,p26,p27 }) {
                 Tag = this.Name
             };
             f1.ShowDialog();

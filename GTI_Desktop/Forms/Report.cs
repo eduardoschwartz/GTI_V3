@@ -9,7 +9,8 @@ namespace GTI_Desktop.Forms {
 
         public Report(String ReportName,DataSet Ds,int nTable,bool ShowDialog,ReportParameter[] rParam) {
             InitializeComponent();
-            if(!ShowDialog) {
+            this.Size = new System.Drawing.Size(Properties.Settings.Default.Form_Report_width, Properties.Settings.Default.Form_Report_height);
+            if (!ShowDialog) {
                 Main MdiForm = (Main)Application.OpenForms["MainForm"];
                 MdiParent = MdiForm;
             }
@@ -37,5 +38,10 @@ namespace GTI_Desktop.Forms {
             reportViewer.RefreshReport();
         }
 
+        private void Report_FormClosing(object sender, FormClosingEventArgs e) {
+            Properties.Settings.Default.Form_Report_width = Size.Width;
+            Properties.Settings.Default.Form_Report_height = Size.Height;
+            Properties.Settings.Default.Save();
+        }
     }
 }
