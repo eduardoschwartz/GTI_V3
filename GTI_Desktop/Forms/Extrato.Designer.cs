@@ -55,8 +55,6 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.BtSelectLancamento = new System.Windows.Forms.Button();
             this.BtSelectStatus = new System.Windows.Forms.Button();
-            this.ConsultarCodigoButton = new System.Windows.Forms.Button();
-            this.RefreshButton = new System.Windows.Forms.Button();
             this.mnuMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuEditaParcela = new System.Windows.Forms.ToolStripMenuItem();
             this.CodigoText = new System.Windows.Forms.TextBox();
@@ -80,7 +78,6 @@
             this.OutrosMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.dividaAtivaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FiltroPanel = new Owf.Controls.A1Panel();
-            this.OcultarButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.CmbDivAtiva = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -88,7 +85,6 @@
             this.ChkParcelaOculta = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.FiltroButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.CmbAnoFinal = new System.Windows.Forms.ComboBox();
@@ -113,8 +109,6 @@
             this.data_remessa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DocumentoPanel = new Owf.Controls.A1Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.PesquisarDocumentoButton = new System.Windows.Forms.ToolStripButton();
-            this.SairDocumentoButton = new System.Windows.Forms.ToolStripButton();
             this.label6 = new System.Windows.Forms.Label();
             this.DocumentoListView = new System.Windows.Forms.ListView();
             this.Doc = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -124,13 +118,6 @@
             this.ObservacaoPanel = new Owf.Controls.A1Panel();
             this.TituloObsLabel = new System.Windows.Forms.Label();
             this.tBar = new System.Windows.Forms.ToolStrip();
-            this.NovaObsButton = new System.Windows.Forms.ToolStripButton();
-            this.AlterarObsButton = new System.Windows.Forms.ToolStripButton();
-            this.ExcluirObsButton = new System.Windows.Forms.ToolStripButton();
-            this.GravarObsButton = new System.Windows.Forms.ToolStripButton();
-            this.CancelarObsButton = new System.Windows.Forms.ToolStripButton();
-            this.SairObsButton = new System.Windows.Forms.ToolStripButton();
-            this.ZoomButton = new System.Windows.Forms.ToolStripButton();
             this.ObservacaoText = new System.Windows.Forms.TextBox();
             this.ObservacaoListView = new System.Windows.Forms.ListView();
             this.Seq = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -139,9 +126,23 @@
             this.Obs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.GridPanel = new Owf.Controls.A1Panel();
             this.HeaderMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.NovaObsButton = new System.Windows.Forms.ToolStripButton();
+            this.AlterarObsButton = new System.Windows.Forms.ToolStripButton();
+            this.ExcluirObsButton = new System.Windows.Forms.ToolStripButton();
+            this.GravarObsButton = new System.Windows.Forms.ToolStripButton();
+            this.CancelarObsButton = new System.Windows.Forms.ToolStripButton();
+            this.SairObsButton = new System.Windows.Forms.ToolStripButton();
+            this.ZoomButton = new System.Windows.Forms.ToolStripButton();
+            this.PesquisarDocumentoButton = new System.Windows.Forms.ToolStripButton();
+            this.SairDocumentoButton = new System.Windows.Forms.ToolStripButton();
+            this.ConsultarCodigoButton = new System.Windows.Forms.Button();
+            this.RefreshButton = new System.Windows.Forms.Button();
+            this.OcultarButton = new System.Windows.Forms.Button();
+            this.FiltroButton = new System.Windows.Forms.Button();
             this.ImovelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EmpresaMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CidadaoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CancelamentoDebitoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.sBar.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.a1Panel2.SuspendLayout();
@@ -299,28 +300,6 @@
             this.toolTip1.SetToolTip(this.BtSelectStatus, "Escolher quais situações de lançamento serão exibidas");
             this.BtSelectStatus.UseVisualStyleBackColor = true;
             this.BtSelectStatus.Click += new System.EventHandler(this.BtSelectStatus_Click);
-            // 
-            // ConsultarCodigoButton
-            // 
-            this.ConsultarCodigoButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.ConsultarCodigoButton.Location = new System.Drawing.Point(134, 7);
-            this.ConsultarCodigoButton.Name = "ConsultarCodigoButton";
-            this.ConsultarCodigoButton.Size = new System.Drawing.Size(22, 22);
-            this.ConsultarCodigoButton.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.ConsultarCodigoButton, "Pesquisar código");
-            this.ConsultarCodigoButton.UseVisualStyleBackColor = true;
-            this.ConsultarCodigoButton.Click += new System.EventHandler(this.ConsultarCodigoButton_Click);
-            // 
-            // RefreshButton
-            // 
-            this.RefreshButton.Image = global::GTI_Desktop.Properties.Resources.refresh_16x16;
-            this.RefreshButton.Location = new System.Drawing.Point(158, 7);
-            this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.Size = new System.Drawing.Size(22, 22);
-            this.RefreshButton.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.RefreshButton, "Atualizar o extrato");
-            this.RefreshButton.UseVisualStyleBackColor = true;
-            this.RefreshButton.Click += new System.EventHandler(this.BtRefresh_Click);
             // 
             // mnuMain
             // 
@@ -524,11 +503,13 @@
             this.ExecFiscalMenu.Name = "ExecFiscalMenu";
             this.ExecFiscalMenu.Size = new System.Drawing.Size(98, 20);
             this.ExecFiscalMenu.Text = "Execução fiscal";
+            this.ExecFiscalMenu.Click += new System.EventHandler(this.ExecFiscalMenu_Click);
             // 
             // OutrosMenu
             // 
             this.OutrosMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dividaAtivaToolStripMenuItem});
+            this.dividaAtivaToolStripMenuItem,
+            this.CancelamentoDebitoMenu});
             this.OutrosMenu.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.OutrosMenu.ForeColor = System.Drawing.Color.Black;
             this.OutrosMenu.Name = "OutrosMenu";
@@ -540,7 +521,7 @@
             // 
             this.dividaAtivaToolStripMenuItem.BackColor = System.Drawing.Color.Linen;
             this.dividaAtivaToolStripMenuItem.Name = "dividaAtivaToolStripMenuItem";
-            this.dividaAtivaToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.dividaAtivaToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.dividaAtivaToolStripMenuItem.Text = "Divida Ativa";
             // 
             // FiltroPanel
@@ -567,20 +548,6 @@
             this.FiltroPanel.Name = "FiltroPanel";
             this.FiltroPanel.Size = new System.Drawing.Size(956, 74);
             this.FiltroPanel.TabIndex = 4;
-            // 
-            // OcultarButton
-            // 
-            this.OcultarButton.ForeColor = System.Drawing.Color.Navy;
-            this.OcultarButton.Image = global::GTI_Desktop.Properties.Resources.cancel2;
-            this.OcultarButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.OcultarButton.Location = new System.Drawing.Point(852, 36);
-            this.OcultarButton.Name = "OcultarButton";
-            this.OcultarButton.Size = new System.Drawing.Size(92, 24);
-            this.OcultarButton.TabIndex = 14;
-            this.OcultarButton.Text = "Ocultar Filtro";
-            this.OcultarButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.OcultarButton.UseVisualStyleBackColor = true;
-            this.OcultarButton.Click += new System.EventHandler(this.BTOcultar_Click);
             // 
             // label5
             // 
@@ -657,20 +624,6 @@
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lançamentos";
-            // 
-            // FiltroButton
-            // 
-            this.FiltroButton.ForeColor = System.Drawing.Color.Navy;
-            this.FiltroButton.Image = global::GTI_Desktop.Properties.Resources.funnel;
-            this.FiltroButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.FiltroButton.Location = new System.Drawing.Point(852, 9);
-            this.FiltroButton.Name = "FiltroButton";
-            this.FiltroButton.Size = new System.Drawing.Size(92, 24);
-            this.FiltroButton.TabIndex = 13;
-            this.FiltroButton.Text = "Aplicar Filtro";
-            this.FiltroButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.FiltroButton.UseVisualStyleBackColor = true;
-            this.FiltroButton.Click += new System.EventHandler(this.BtFiltro_Click);
             // 
             // groupBox1
             // 
@@ -957,26 +910,6 @@
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // PesquisarDocumentoButton
-            // 
-            this.PesquisarDocumentoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.PesquisarDocumentoButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.PesquisarDocumentoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.PesquisarDocumentoButton.Name = "PesquisarDocumentoButton";
-            this.PesquisarDocumentoButton.Size = new System.Drawing.Size(23, 22);
-            this.PesquisarDocumentoButton.Text = "toolStripButton1";
-            this.PesquisarDocumentoButton.Click += new System.EventHandler(this.PesquisarDocumentoButton_Click);
-            // 
-            // SairDocumentoButton
-            // 
-            this.SairDocumentoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SairDocumentoButton.Image = global::GTI_Desktop.Properties.Resources.Exit;
-            this.SairDocumentoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SairDocumentoButton.Name = "SairDocumentoButton";
-            this.SairDocumentoButton.Size = new System.Drawing.Size(23, 22);
-            this.SairDocumentoButton.Text = "Fechar";
-            this.SairDocumentoButton.Click += new System.EventHandler(this.SairDocumentoButton_Click);
-            // 
             // label6
             // 
             this.label6.BackColor = System.Drawing.Color.SkyBlue;
@@ -1081,82 +1014,6 @@
             this.tBar.TabIndex = 25;
             this.tBar.Text = "toolStrip1";
             // 
-            // NovaObsButton
-            // 
-            this.NovaObsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.NovaObsButton.Image = global::GTI_Desktop.Properties.Resources.add_file;
-            this.NovaObsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.NovaObsButton.Name = "NovaObsButton";
-            this.NovaObsButton.Size = new System.Drawing.Size(23, 22);
-            this.NovaObsButton.Text = "toolStripButton1";
-            this.NovaObsButton.ToolTipText = "Nova observação";
-            this.NovaObsButton.Click += new System.EventHandler(this.NovaObsButton_Click);
-            // 
-            // AlterarObsButton
-            // 
-            this.AlterarObsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.AlterarObsButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
-            this.AlterarObsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.AlterarObsButton.Name = "AlterarObsButton";
-            this.AlterarObsButton.Size = new System.Drawing.Size(23, 22);
-            this.AlterarObsButton.Text = "toolStripButton2";
-            this.AlterarObsButton.ToolTipText = "Alterar observação";
-            this.AlterarObsButton.Click += new System.EventHandler(this.AlterarObsButton_Click);
-            // 
-            // ExcluirObsButton
-            // 
-            this.ExcluirObsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ExcluirObsButton.Image = global::GTI_Desktop.Properties.Resources.delete;
-            this.ExcluirObsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ExcluirObsButton.Name = "ExcluirObsButton";
-            this.ExcluirObsButton.Size = new System.Drawing.Size(23, 22);
-            this.ExcluirObsButton.Text = "toolStripButton3";
-            this.ExcluirObsButton.ToolTipText = "Excluir observação";
-            this.ExcluirObsButton.Click += new System.EventHandler(this.ExcluirObsButton_Click);
-            // 
-            // GravarObsButton
-            // 
-            this.GravarObsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.GravarObsButton.Image = global::GTI_Desktop.Properties.Resources.gravar;
-            this.GravarObsButton.ImageTransparentColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.GravarObsButton.Name = "GravarObsButton";
-            this.GravarObsButton.Size = new System.Drawing.Size(23, 22);
-            this.GravarObsButton.Text = "toolStripButton1";
-            this.GravarObsButton.ToolTipText = "Gravar observação";
-            this.GravarObsButton.Click += new System.EventHandler(this.GravarObsButton_Click);
-            // 
-            // CancelarObsButton
-            // 
-            this.CancelarObsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.CancelarObsButton.Image = global::GTI_Desktop.Properties.Resources.cancel2;
-            this.CancelarObsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.CancelarObsButton.Name = "CancelarObsButton";
-            this.CancelarObsButton.Size = new System.Drawing.Size(23, 22);
-            this.CancelarObsButton.Text = "toolStripButton2";
-            this.CancelarObsButton.ToolTipText = "Cancelar operação";
-            this.CancelarObsButton.Click += new System.EventHandler(this.CancelarObsButton_Click);
-            // 
-            // SairObsButton
-            // 
-            this.SairObsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SairObsButton.Image = global::GTI_Desktop.Properties.Resources.Exit;
-            this.SairObsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SairObsButton.Name = "SairObsButton";
-            this.SairObsButton.Size = new System.Drawing.Size(23, 22);
-            this.SairObsButton.Text = "Fechar";
-            this.SairObsButton.ToolTipText = "Fechar tela de observação";
-            this.SairObsButton.Click += new System.EventHandler(this.SairObsButton_Click);
-            // 
-            // ZoomButton
-            // 
-            this.ZoomButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.ZoomButton.Image = global::GTI_Desktop.Properties.Resources.more_1_;
-            this.ZoomButton.ImageTransparentColor = System.Drawing.Color.White;
-            this.ZoomButton.Name = "ZoomButton";
-            this.ZoomButton.Size = new System.Drawing.Size(59, 22);
-            this.ZoomButton.Text = "Zoom";
-            this.ZoomButton.Click += new System.EventHandler(this.ZoomButton_Click);
-            // 
             // ObservacaoText
             // 
             this.ObservacaoText.Location = new System.Drawing.Point(6, 192);
@@ -1233,6 +1090,152 @@
             this.HeaderMenu.Name = "HeaderMenu";
             this.HeaderMenu.Size = new System.Drawing.Size(120, 70);
             // 
+            // NovaObsButton
+            // 
+            this.NovaObsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.NovaObsButton.Image = global::GTI_Desktop.Properties.Resources.add_file;
+            this.NovaObsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.NovaObsButton.Name = "NovaObsButton";
+            this.NovaObsButton.Size = new System.Drawing.Size(23, 22);
+            this.NovaObsButton.Text = "toolStripButton1";
+            this.NovaObsButton.ToolTipText = "Nova observação";
+            this.NovaObsButton.Click += new System.EventHandler(this.NovaObsButton_Click);
+            // 
+            // AlterarObsButton
+            // 
+            this.AlterarObsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.AlterarObsButton.Image = global::GTI_Desktop.Properties.Resources.Alterar;
+            this.AlterarObsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AlterarObsButton.Name = "AlterarObsButton";
+            this.AlterarObsButton.Size = new System.Drawing.Size(23, 22);
+            this.AlterarObsButton.Text = "toolStripButton2";
+            this.AlterarObsButton.ToolTipText = "Alterar observação";
+            this.AlterarObsButton.Click += new System.EventHandler(this.AlterarObsButton_Click);
+            // 
+            // ExcluirObsButton
+            // 
+            this.ExcluirObsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ExcluirObsButton.Image = global::GTI_Desktop.Properties.Resources.delete;
+            this.ExcluirObsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ExcluirObsButton.Name = "ExcluirObsButton";
+            this.ExcluirObsButton.Size = new System.Drawing.Size(23, 22);
+            this.ExcluirObsButton.Text = "toolStripButton3";
+            this.ExcluirObsButton.ToolTipText = "Excluir observação";
+            this.ExcluirObsButton.Click += new System.EventHandler(this.ExcluirObsButton_Click);
+            // 
+            // GravarObsButton
+            // 
+            this.GravarObsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.GravarObsButton.Image = global::GTI_Desktop.Properties.Resources.gravar;
+            this.GravarObsButton.ImageTransparentColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.GravarObsButton.Name = "GravarObsButton";
+            this.GravarObsButton.Size = new System.Drawing.Size(23, 22);
+            this.GravarObsButton.Text = "toolStripButton1";
+            this.GravarObsButton.ToolTipText = "Gravar observação";
+            this.GravarObsButton.Click += new System.EventHandler(this.GravarObsButton_Click);
+            // 
+            // CancelarObsButton
+            // 
+            this.CancelarObsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.CancelarObsButton.Image = global::GTI_Desktop.Properties.Resources.cancel2;
+            this.CancelarObsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.CancelarObsButton.Name = "CancelarObsButton";
+            this.CancelarObsButton.Size = new System.Drawing.Size(23, 22);
+            this.CancelarObsButton.Text = "toolStripButton2";
+            this.CancelarObsButton.ToolTipText = "Cancelar operação";
+            this.CancelarObsButton.Click += new System.EventHandler(this.CancelarObsButton_Click);
+            // 
+            // SairObsButton
+            // 
+            this.SairObsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SairObsButton.Image = global::GTI_Desktop.Properties.Resources.Exit;
+            this.SairObsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SairObsButton.Name = "SairObsButton";
+            this.SairObsButton.Size = new System.Drawing.Size(23, 22);
+            this.SairObsButton.Text = "Fechar";
+            this.SairObsButton.ToolTipText = "Fechar tela de observação";
+            this.SairObsButton.Click += new System.EventHandler(this.SairObsButton_Click);
+            // 
+            // ZoomButton
+            // 
+            this.ZoomButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.ZoomButton.Image = global::GTI_Desktop.Properties.Resources.more_1_;
+            this.ZoomButton.ImageTransparentColor = System.Drawing.Color.White;
+            this.ZoomButton.Name = "ZoomButton";
+            this.ZoomButton.Size = new System.Drawing.Size(59, 22);
+            this.ZoomButton.Text = "Zoom";
+            this.ZoomButton.Click += new System.EventHandler(this.ZoomButton_Click);
+            // 
+            // PesquisarDocumentoButton
+            // 
+            this.PesquisarDocumentoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.PesquisarDocumentoButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.PesquisarDocumentoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.PesquisarDocumentoButton.Name = "PesquisarDocumentoButton";
+            this.PesquisarDocumentoButton.Size = new System.Drawing.Size(23, 22);
+            this.PesquisarDocumentoButton.Text = "toolStripButton1";
+            this.PesquisarDocumentoButton.Click += new System.EventHandler(this.PesquisarDocumentoButton_Click);
+            // 
+            // SairDocumentoButton
+            // 
+            this.SairDocumentoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SairDocumentoButton.Image = global::GTI_Desktop.Properties.Resources.Exit;
+            this.SairDocumentoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SairDocumentoButton.Name = "SairDocumentoButton";
+            this.SairDocumentoButton.Size = new System.Drawing.Size(23, 22);
+            this.SairDocumentoButton.Text = "Fechar";
+            this.SairDocumentoButton.Click += new System.EventHandler(this.SairDocumentoButton_Click);
+            // 
+            // ConsultarCodigoButton
+            // 
+            this.ConsultarCodigoButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.ConsultarCodigoButton.Location = new System.Drawing.Point(134, 7);
+            this.ConsultarCodigoButton.Name = "ConsultarCodigoButton";
+            this.ConsultarCodigoButton.Size = new System.Drawing.Size(22, 22);
+            this.ConsultarCodigoButton.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.ConsultarCodigoButton, "Pesquisar código");
+            this.ConsultarCodigoButton.UseVisualStyleBackColor = true;
+            this.ConsultarCodigoButton.Click += new System.EventHandler(this.ConsultarCodigoButton_Click);
+            // 
+            // RefreshButton
+            // 
+            this.RefreshButton.Image = global::GTI_Desktop.Properties.Resources.refresh_16x16;
+            this.RefreshButton.Location = new System.Drawing.Point(158, 7);
+            this.RefreshButton.Name = "RefreshButton";
+            this.RefreshButton.Size = new System.Drawing.Size(22, 22);
+            this.RefreshButton.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.RefreshButton, "Atualizar o extrato");
+            this.RefreshButton.UseVisualStyleBackColor = true;
+            this.RefreshButton.Click += new System.EventHandler(this.BtRefresh_Click);
+            // 
+            // OcultarButton
+            // 
+            this.OcultarButton.ForeColor = System.Drawing.Color.Navy;
+            this.OcultarButton.Image = global::GTI_Desktop.Properties.Resources.cancel2;
+            this.OcultarButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.OcultarButton.Location = new System.Drawing.Point(852, 36);
+            this.OcultarButton.Name = "OcultarButton";
+            this.OcultarButton.Size = new System.Drawing.Size(92, 24);
+            this.OcultarButton.TabIndex = 14;
+            this.OcultarButton.Text = "Ocultar Filtro";
+            this.OcultarButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.OcultarButton.UseVisualStyleBackColor = true;
+            this.OcultarButton.Click += new System.EventHandler(this.BTOcultar_Click);
+            // 
+            // FiltroButton
+            // 
+            this.FiltroButton.ForeColor = System.Drawing.Color.Navy;
+            this.FiltroButton.Image = global::GTI_Desktop.Properties.Resources.funnel;
+            this.FiltroButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.FiltroButton.Location = new System.Drawing.Point(852, 9);
+            this.FiltroButton.Name = "FiltroButton";
+            this.FiltroButton.Size = new System.Drawing.Size(92, 24);
+            this.FiltroButton.TabIndex = 13;
+            this.FiltroButton.Text = "Aplicar Filtro";
+            this.FiltroButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.FiltroButton.UseVisualStyleBackColor = true;
+            this.FiltroButton.Click += new System.EventHandler(this.BtFiltro_Click);
+            // 
             // ImovelMenuItem
             // 
             this.ImovelMenuItem.Image = global::GTI_Desktop.Properties.Resources.Home;
@@ -1256,6 +1259,12 @@
             this.CidadaoMenuItem.Size = new System.Drawing.Size(119, 22);
             this.CidadaoMenuItem.Text = "Cidadão";
             this.CidadaoMenuItem.Click += new System.EventHandler(this.CidadaoMenuItem_Click);
+            // 
+            // CancelamentoDebitoMenu
+            // 
+            this.CancelamentoDebitoMenu.Name = "CancelamentoDebitoMenu";
+            this.CancelamentoDebitoMenu.Size = new System.Drawing.Size(204, 22);
+            this.CancelamentoDebitoMenu.Text = "Cancelamento de débito";
             // 
             // Extrato
             // 
@@ -1412,5 +1421,6 @@
         private System.Windows.Forms.ToolStripMenuItem ImovelMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EmpresaMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CidadaoMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CancelamentoDebitoMenu;
     }
 }

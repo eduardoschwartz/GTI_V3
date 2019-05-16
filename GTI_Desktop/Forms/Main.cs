@@ -946,5 +946,9 @@ namespace GTI_Desktop.Forms
             } else
                 MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+        private void EmissaoGuiaButton_Click(object sender, EventArgs e) {
+
+        }
     }//end class
 }

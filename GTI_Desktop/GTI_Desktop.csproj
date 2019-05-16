@@ -1108,6 +1108,11 @@
     <None Include="Resources\beige.jpg" />
     <None Include="Resources\bege.jpg" />
     <None Include="Resources\rosa.jpg" />
+    <None Include="Resources\Hourglass.png" />
+    <None Include="Resources\History.png" />
+    <None Include="Resources\History1.png" />
+    <None Include="Resources\History2.png" />
+    <None Include="Resources\History21.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

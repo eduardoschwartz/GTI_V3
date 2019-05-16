@@ -187,9 +187,7 @@ namespace GTI_Desktop.Forms {
                 Text += " (Gerado por: " + _nome + ")";
             }
 
-
         }
-
 
 
     }//end Class

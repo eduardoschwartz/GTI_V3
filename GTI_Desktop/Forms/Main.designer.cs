@@ -70,6 +70,7 @@
             this.EscritorioContabilMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.MobiliarioTabelaMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.AtividadeEmpresaMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.TabelaCnaeMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.AtendimentoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.CadastroCidadaoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ExtratoMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -117,6 +118,7 @@
             this.AlvaraButton = new System.Windows.Forms.ToolStripButton();
             this.CertidaoButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.HistoryButton = new System.Windows.Forms.ToolStripButton();
             this.ConfigButton = new System.Windows.Forms.ToolStripButton();
             this.SecurityButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.CadastroUsuarioMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -132,7 +134,6 @@
             this.Dv2Option = new System.Windows.Forms.RadioButton();
             this.Dv1Option = new System.Windows.Forms.RadioButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.TabelaCnaeMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.BarStatus.SuspendLayout();
             this.MenuBarStrip.SuspendLayout();
             this.TopBarToolStrip.SuspendLayout();
@@ -469,7 +470,7 @@
             this.CadastroEmpresaMenu,
             this.EscritorioContabilMenu});
             this.MobiliarioCadastroMenu.Name = "MobiliarioCadastroMenu";
-            this.MobiliarioCadastroMenu.Size = new System.Drawing.Size(180, 22);
+            this.MobiliarioCadastroMenu.Size = new System.Drawing.Size(121, 22);
             this.MobiliarioCadastroMenu.Text = "Cadastro";
             // 
             // CadastroEmpresaMenu
@@ -492,7 +493,7 @@
             this.AtividadeEmpresaMenu,
             this.TabelaCnaeMenu});
             this.MobiliarioTabelaMenu.Name = "MobiliarioTabelaMenu";
-            this.MobiliarioTabelaMenu.Size = new System.Drawing.Size(180, 22);
+            this.MobiliarioTabelaMenu.Size = new System.Drawing.Size(121, 22);
             this.MobiliarioTabelaMenu.Text = "Tabelas";
             // 
             // AtividadeEmpresaMenu
@@ -501,6 +502,13 @@
             this.AtividadeEmpresaMenu.Size = new System.Drawing.Size(203, 22);
             this.AtividadeEmpresaMenu.Text = "Atividades das empresas";
             this.AtividadeEmpresaMenu.Click += new System.EventHandler(this.AtividadeEmpresaMenu_Click);
+            // 
+            // TabelaCnaeMenu
+            // 
+            this.TabelaCnaeMenu.Name = "TabelaCnaeMenu";
+            this.TabelaCnaeMenu.Size = new System.Drawing.Size(203, 22);
+            this.TabelaCnaeMenu.Text = "Tabela CNAE";
+            this.TabelaCnaeMenu.Click += new System.EventHandler(this.TabelaCnaeMenu_Click);
             // 
             // AtendimentoMenu
             // 
@@ -792,6 +800,7 @@
             this.AlvaraButton,
             this.CertidaoButton,
             this.toolStripSeparator2,
+            this.HistoryButton,
             this.ConfigButton,
             this.SecurityButton,
             this.SairButton,
@@ -844,6 +853,7 @@
             this.EmissaoGuiaButton.Size = new System.Drawing.Size(52, 52);
             this.EmissaoGuiaButton.Text = "toolStripButton2";
             this.EmissaoGuiaButton.ToolTipText = "Emissão de guias";
+            this.EmissaoGuiaButton.Click += new System.EventHandler(this.EmissaoGuiaButton_Click);
             // 
             // ParcelamentoButton
             // 
@@ -912,6 +922,16 @@
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 55);
+            // 
+            // HistoryButton
+            // 
+            this.HistoryButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.HistoryButton.Image = global::GTI_Desktop.Properties.Resources.History2;
+            this.HistoryButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.HistoryButton.Name = "HistoryButton";
+            this.HistoryButton.Size = new System.Drawing.Size(52, 52);
+            this.HistoryButton.Text = "toolStripButton1";
+            this.HistoryButton.ToolTipText = "Histórico de Utilização";
             // 
             // ConfigButton
             // 
@@ -1065,13 +1085,6 @@
             this.Dv1Option.UseVisualStyleBackColor = false;
             this.Dv1Option.CheckedChanged += new System.EventHandler(this.OptDv1_CheckedChanged);
             // 
-            // TabelaCnaeMenu
-            // 
-            this.TabelaCnaeMenu.Name = "TabelaCnaeMenu";
-            this.TabelaCnaeMenu.Size = new System.Drawing.Size(203, 22);
-            this.TabelaCnaeMenu.Text = "Tabela CNAE";
-            this.TabelaCnaeMenu.Click += new System.EventHandler(this.TabelaCnaeMenu_Click);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1209,6 +1222,7 @@
         private System.Windows.Forms.ToolStripMenuItem RelatorioImobMenu;
         private System.Windows.Forms.ToolStripMenuItem ComunicadoIsencaoMenu;
         private System.Windows.Forms.ToolStripMenuItem TabelaCnaeMenu;
+        private System.Windows.Forms.ToolStripButton HistoryButton;
     }
 }
 

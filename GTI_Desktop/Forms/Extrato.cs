@@ -34,21 +34,55 @@ namespace GTI_Desktop.Forms {
             if (keyData == Keys.Enter) {
                 if (ExtratoDataGrid.SelectedRows.Count > 0) {
                     int RowIndex = ExtratoDataGrid.SelectedRows[0].Index;
-                    if (ExtratoDataGrid.Rows[RowIndex].Tag.ToString() == "1") {
-                        ExtratoDataGrid.Rows[RowIndex].Tag = "";
-                        for (int i = 0; i < ExtratoDataGrid.ColumnCount; i++) {
-                            ExtratoDataGrid.Rows[RowIndex].DefaultCellStyle.BackColor = Color.White;
-                            ExtratoDataGrid.Rows[RowIndex].DefaultCellStyle.ForeColor = Color.Black;
-                            ExtratoDataGrid.Rows[RowIndex].DefaultCellStyle.SelectionBackColor = Color.DarkRed;
-                            ExtratoDataGrid.Rows[RowIndex].DefaultCellStyle.SelectionForeColor = Color.White;
+                    DataGridViewRow linha = ExtratoDataGrid.Rows[RowIndex];
+                    int nStatus = Convert.ToInt32(linha.Cells["status"].Value.ToString().Substring(0, 2));
+                    if (nStatus == 3 | nStatus == 42 | nStatus == 43) {
+                        if (ExtratoDataGrid.Rows[RowIndex].Tag.ToString() == "1") {
+                            ExtratoDataGrid.Rows[RowIndex].Tag = "";
+                            for (int i = 0; i < ExtratoDataGrid.ColumnCount; i++) {
+                                ExtratoDataGrid.Rows[RowIndex].DefaultCellStyle.BackColor = Color.White;
+                                ExtratoDataGrid.Rows[RowIndex].DefaultCellStyle.ForeColor = Color.Black;
+                                ExtratoDataGrid.Rows[RowIndex].DefaultCellStyle.SelectionBackColor = Color.DarkRed;
+                                ExtratoDataGrid.Rows[RowIndex].DefaultCellStyle.SelectionForeColor = Color.White;
+                                ExtratoDataGrid.Rows[RowIndex].Cells["status"].Style.BackColor = Color.White;
+                            }
+                        } else {
+                            ExtratoDataGrid.Rows[RowIndex].Tag = "1";
+                            for (int i = 0; i < ExtratoDataGrid.ColumnCount; i++) {
+                                ExtratoDataGrid.Rows[RowIndex].DefaultCellStyle.BackColor = Color.Aquamarine;
+                                ExtratoDataGrid.Rows[RowIndex].DefaultCellStyle.ForeColor = Color.Black;
+                                ExtratoDataGrid.Rows[RowIndex].DefaultCellStyle.SelectionBackColor = Color.DarkRed;
+                                ExtratoDataGrid.Rows[RowIndex].DefaultCellStyle.SelectionForeColor = Color.White;
+                                ExtratoDataGrid.Rows[RowIndex].Cells["status"].Style.BackColor = Color.Aquamarine;
+                            }
                         }
-                    } else {
-                        ExtratoDataGrid.Rows[RowIndex].Tag = "1";
-                        for (int i = 0; i < ExtratoDataGrid.ColumnCount; i++) {
-                            ExtratoDataGrid.Rows[RowIndex].DefaultCellStyle.BackColor = Color.Aquamarine;
-                            ExtratoDataGrid.Rows[RowIndex].DefaultCellStyle.ForeColor = Color.Black;
-                            ExtratoDataGrid.Rows[RowIndex].DefaultCellStyle.SelectionBackColor = Color.DarkRed;
-                            ExtratoDataGrid.Rows[RowIndex].DefaultCellStyle.SelectionForeColor = Color.White;
+                    }
+                }
+                Atualiza_Total();
+                return true;
+            } else if (keyData == Keys.F8) {
+                for (int i = 0; i < ExtratoDataGrid.Rows.Count; i++) {
+                    DataGridViewRow linha = ExtratoDataGrid.Rows[i];
+                    int nStatus = Convert.ToInt32(linha.Cells["status"].Value.ToString().Substring(0, 2));
+                    if ( nStatus==3 | nStatus ==42 | nStatus == 43) {
+                        if (linha.Tag.ToString() == "1") {
+                            linha.Tag = "";
+                            for (int j = 0; j < ExtratoDataGrid.ColumnCount; j++) {
+                                linha.DefaultCellStyle.BackColor = Color.White;
+                                linha.DefaultCellStyle.ForeColor = Color.Black;
+                                linha.DefaultCellStyle.SelectionBackColor = Color.DarkRed;
+                                linha.DefaultCellStyle.SelectionForeColor = Color.White;
+                                ExtratoDataGrid.Rows[i].Cells["status"].Style.BackColor = Color.White;
+                            }
+                        } else {
+                            linha.Tag = "1";
+                            for (int j = 0; j < ExtratoDataGrid.ColumnCount; j++) {
+                                linha.DefaultCellStyle.BackColor = Color.Aquamarine;
+                                linha.DefaultCellStyle.ForeColor = Color.Black;
+                                linha.DefaultCellStyle.SelectionBackColor = Color.DarkRed;
+                                linha.DefaultCellStyle.SelectionForeColor = Color.White;
+                                ExtratoDataGrid.Rows[i].Cells["status"].Style.BackColor = Color.Aquamarine;
+                            }
                         }
                     }
                 }
@@ -455,7 +489,7 @@ namespace GTI_Desktop.Forms {
                     DateTime _data_vencto = Convert.ToDateTime(linha.Cells["data_vencimento"].Value);
                     decimal _valor_atual = Convert.ToDecimal(linha.Cells["valor_atual"].Value);
 
-                    if (_status == 3) {
+                    if (_status == 3|_status==42|_status==43) {
                         _valorNaoPagoTotal += _valor_atual;
                         if (_data_vencto < DateTime.Now) {
                             _valorNaoPagoVencido += _valor_atual;
@@ -1019,22 +1053,22 @@ InicioObs:
                     int val = form.ReturnValue;
                     CodigoText.Text = val.ToString();
                     ClearAll();
-                    Carrega_Extrato(val);
+                    GeraExtrato();
                     Exibe_Extrato();
                 }
             }
         }
 
         private void EmpresaMenuItem_Click(object sender, EventArgs e) {
-            //using (var form = new Empresa_Lista()) {
-            //    var result = form.ShowDialog(this);
-            //    if (result == DialogResult.OK) {
-            //        int val = form.ReturnValue;
-            //        CodigoText.Text = val.ToString();
-            //        ClearAll();
-            //        Carrega_Extrato(val);
-            //    }
-            //}
+            using (var form = new Empresa_Lista()) {
+                var result = form.ShowDialog(this);
+                if (result == DialogResult.OK) {
+                    int val = form.ReturnValue;
+                    CodigoText.Text = val.ToString();
+                    ClearAll();
+                    GeraExtrato();
+                }
+            }
         }
 
         private void CidadaoMenuItem_Click(object sender, EventArgs e) {
@@ -1044,10 +1078,13 @@ InicioObs:
                     int val = form.ReturnValue;
                     CodigoText.Text = val.ToString();
                     ClearAll();
-                    Carrega_Extrato(val);
-                    Exibe_Extrato();
+                    GeraExtrato();
                 }
             }
+        }
+
+        private void ExecFiscalMenu_Click(object sender, EventArgs e) {
+            //TODO Rotina de Execução Fiscal
         }
 
         private void ObservacaoParcelaMenu_Click(object sender, EventArgs e) {
