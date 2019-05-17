@@ -25,7 +25,7 @@ namespace GTI_Desktop.Forms {
             InitializeComponent();
             this.Size = new System.Drawing.Size(Properties.Settings.Default.Form_Extrato_width, Properties.Settings.Default.Form_Extrato_height);
             Grid_Format();
-            ClearAll();
+            ClearAll(true);
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
@@ -108,14 +108,14 @@ namespace GTI_Desktop.Forms {
                         Lista.Add(reg);
                     }
                 }
-                Parcela_Detalhe frm = new Parcela_Detalhe(Convert.ToInt32(CodigoText.Text), txtNome.Text, Lista);
+                Parcela_Detalhe frm = new Parcela_Detalhe(Convert.ToInt32(CodigoText.Text), NomeText.Text, Lista);
                 frm.ShowDialog(this);
             } else
                 MessageBox.Show("Selecione uma parcela.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void TxtCodigo_TextChanged(object sender, EventArgs e) {
-            ClearAll();
+            ClearAll(true);
         }
 
         private void TxtCodigo_KeyPress(object sender, KeyPressEventArgs e) {
@@ -143,17 +143,17 @@ namespace GTI_Desktop.Forms {
             Sistema_bll clsSistema = new Sistema_bll(_connection);
             if (!clsSistema.Existe_Cadastro(Codigo)) {
                 MessageBox.Show("Cadastro não localizado!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtNome.Text = "";
+                NomeText.Text = "";
                 gtiCore.Liberado(this);
             } else {
                 Contribuinte_Header_Struct reg = clsSistema.Contribuinte_Header(Codigo);
                 this.Refresh();
                 if (string.IsNullOrWhiteSpace(reg.Nome)) {
                     MessageBox.Show("Cadastro não localizado!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtNome.Text = "";
+                    NomeText.Text = "";
                     gtiCore.Liberado(this);
                 } else {
-                    txtNome.Text = reg.Nome;
+                    NomeText.Text = reg.Nome;
                     if (reg.Tipo == TipoCadastro.Imovel) {
                         TipoCadastroLabel.Text = "Imóvel";
                     } else {
@@ -188,10 +188,11 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        private void ClearAll() {
+        private void ClearAll(bool ClearName) {
+            if (ClearName)
+                NomeText.Text = "";
             FiltroPanel.Visible = false;
             ExtratoDataGrid.Rows.Clear();
-            txtNome.Text = "";
             ChkAllExercicio.Checked = false;
             ChkParcelaOculta.Checked = false;
             CmbDivAtiva.SelectedIndex = 0;
@@ -1052,7 +1053,7 @@ InicioObs:
                 if (result == DialogResult.OK) {
                     int val = form.ReturnValue;
                     CodigoText.Text = val.ToString();
-                    ClearAll();
+                    ClearAll(true);
                     GeraExtrato();
                     Exibe_Extrato();
                 }
@@ -1065,7 +1066,7 @@ InicioObs:
                 if (result == DialogResult.OK) {
                     int val = form.ReturnValue;
                     CodigoText.Text = val.ToString();
-                    ClearAll();
+                    ClearAll(true);
                     GeraExtrato();
                 }
             }
@@ -1077,7 +1078,7 @@ InicioObs:
                 if (result == DialogResult.OK) {
                     int val = form.ReturnValue;
                     CodigoText.Text = val.ToString();
-                    ClearAll();
+                    ClearAll(true);
                     GeraExtrato();
                 }
             }
@@ -1114,6 +1115,42 @@ InicioObs:
             LockScreen(false);
         }
 
-
+        private void CancelamentoDebitoMenu_Click(object sender, EventArgs e) {
+            bool _find = false;
+            foreach (DataGridViewRow item in ExtratoDataGrid.Rows) {
+                if (item.Tag.ToString() == "1") {
+                    _find = true;
+                    break;
+                }
+            }
+            if (!_find)
+                MessageBox.Show("Nenhum débito selecionado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else {
+                List<SpExtrato> Lista = new List<SpExtrato>();
+                foreach (DataGridViewRow item in ExtratoDataGrid.Rows) {
+                    if (item.Tag.ToString() == "1") {
+                        SpExtrato reg = new SpExtrato();
+                        reg.Anoexercicio = Convert.ToInt16(item.Cells["Ano"].Value);
+                        reg.Desclancamento = item.Cells["lancamento"].Value.ToString();
+                        reg.Seqlancamento = Convert.ToInt16(item.Cells["sequencia"].Value);
+                        reg.Numparcela = Convert.ToInt16(item.Cells["parcela"].Value);
+                        reg.Codcomplemento = Convert.ToByte(item.Cells["complemento"].Value);
+                        reg.Datavencimento = Convert.ToDateTime(item.Cells["data_vencimento"].Value);
+                        reg.Valortributo = Convert.ToDecimal(item.Cells["valor_lancado"].Value);
+                        Lista.Add(reg);
+                    }
+                }
+                string _codigo = CodigoText.Text;
+                using (var form = new Extrato_Debito_Cancelar(Lista)) {
+                    var result = form.ShowDialog(this);
+                    if (result == DialogResult.OK) {
+                        int val = form.ReturnValue;
+                        CodigoText.Text = _codigo;
+                        ClearAll(false);
+                        GeraExtrato();
+                    }
+                }
+            }
+        }
     }//end class
 }

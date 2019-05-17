@@ -118,7 +118,6 @@
             this.AlvaraButton = new System.Windows.Forms.ToolStripButton();
             this.CertidaoButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.HistoryButton = new System.Windows.Forms.ToolStripButton();
             this.ConfigButton = new System.Windows.Forms.ToolStripButton();
             this.SecurityButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.CadastroUsuarioMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -800,7 +799,6 @@
             this.AlvaraButton,
             this.CertidaoButton,
             this.toolStripSeparator2,
-            this.HistoryButton,
             this.ConfigButton,
             this.SecurityButton,
             this.SairButton,
@@ -922,16 +920,6 @@
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 55);
-            // 
-            // HistoryButton
-            // 
-            this.HistoryButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.HistoryButton.Image = global::GTI_Desktop.Properties.Resources.History2;
-            this.HistoryButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.HistoryButton.Name = "HistoryButton";
-            this.HistoryButton.Size = new System.Drawing.Size(52, 52);
-            this.HistoryButton.Text = "toolStripButton1";
-            this.HistoryButton.ToolTipText = "Histórico de Utilização";
             // 
             // ConfigButton
             // 
@@ -1222,7 +1210,6 @@
         private System.Windows.Forms.ToolStripMenuItem RelatorioImobMenu;
         private System.Windows.Forms.ToolStripMenuItem ComunicadoIsencaoMenu;
         private System.Windows.Forms.ToolStripMenuItem TabelaCnaeMenu;
-        private System.Windows.Forms.ToolStripButton HistoryButton;
     }
 }
 

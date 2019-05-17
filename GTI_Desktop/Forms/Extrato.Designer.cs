@@ -55,13 +55,15 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.BtSelectLancamento = new System.Windows.Forms.Button();
             this.BtSelectStatus = new System.Windows.Forms.Button();
+            this.ConsultarCodigoButton = new System.Windows.Forms.Button();
+            this.RefreshButton = new System.Windows.Forms.Button();
             this.mnuMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuEditaParcela = new System.Windows.Forms.ToolStripMenuItem();
             this.CodigoText = new System.Windows.Forms.TextBox();
             this.ChkAllExercicio = new System.Windows.Forms.CheckBox();
             this.a1Panel2 = new Owf.Controls.A1Panel();
             this.Label1 = new System.Windows.Forms.Label();
-            this.txtNome = new System.Windows.Forms.TextBox();
+            this.NomeText = new System.Windows.Forms.TextBox();
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.FiltroMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ObsGeralMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,7 +79,9 @@
             this.ExecFiscalMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OutrosMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.dividaAtivaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CancelamentoDebitoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.FiltroPanel = new Owf.Controls.A1Panel();
+            this.OcultarButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.CmbDivAtiva = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -85,6 +89,7 @@
             this.ChkParcelaOculta = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.FiltroButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.CmbAnoFinal = new System.Windows.Forms.ComboBox();
@@ -109,6 +114,8 @@
             this.data_remessa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DocumentoPanel = new Owf.Controls.A1Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.PesquisarDocumentoButton = new System.Windows.Forms.ToolStripButton();
+            this.SairDocumentoButton = new System.Windows.Forms.ToolStripButton();
             this.label6 = new System.Windows.Forms.Label();
             this.DocumentoListView = new System.Windows.Forms.ListView();
             this.Doc = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -118,6 +125,13 @@
             this.ObservacaoPanel = new Owf.Controls.A1Panel();
             this.TituloObsLabel = new System.Windows.Forms.Label();
             this.tBar = new System.Windows.Forms.ToolStrip();
+            this.NovaObsButton = new System.Windows.Forms.ToolStripButton();
+            this.AlterarObsButton = new System.Windows.Forms.ToolStripButton();
+            this.ExcluirObsButton = new System.Windows.Forms.ToolStripButton();
+            this.GravarObsButton = new System.Windows.Forms.ToolStripButton();
+            this.CancelarObsButton = new System.Windows.Forms.ToolStripButton();
+            this.SairObsButton = new System.Windows.Forms.ToolStripButton();
+            this.ZoomButton = new System.Windows.Forms.ToolStripButton();
             this.ObservacaoText = new System.Windows.Forms.TextBox();
             this.ObservacaoListView = new System.Windows.Forms.ListView();
             this.Seq = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -126,23 +140,9 @@
             this.Obs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.GridPanel = new Owf.Controls.A1Panel();
             this.HeaderMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.NovaObsButton = new System.Windows.Forms.ToolStripButton();
-            this.AlterarObsButton = new System.Windows.Forms.ToolStripButton();
-            this.ExcluirObsButton = new System.Windows.Forms.ToolStripButton();
-            this.GravarObsButton = new System.Windows.Forms.ToolStripButton();
-            this.CancelarObsButton = new System.Windows.Forms.ToolStripButton();
-            this.SairObsButton = new System.Windows.Forms.ToolStripButton();
-            this.ZoomButton = new System.Windows.Forms.ToolStripButton();
-            this.PesquisarDocumentoButton = new System.Windows.Forms.ToolStripButton();
-            this.SairDocumentoButton = new System.Windows.Forms.ToolStripButton();
-            this.ConsultarCodigoButton = new System.Windows.Forms.Button();
-            this.RefreshButton = new System.Windows.Forms.Button();
-            this.OcultarButton = new System.Windows.Forms.Button();
-            this.FiltroButton = new System.Windows.Forms.Button();
             this.ImovelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EmpresaMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CidadaoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CancelamentoDebitoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.sBar.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.a1Panel2.SuspendLayout();
@@ -301,6 +301,28 @@
             this.BtSelectStatus.UseVisualStyleBackColor = true;
             this.BtSelectStatus.Click += new System.EventHandler(this.BtSelectStatus_Click);
             // 
+            // ConsultarCodigoButton
+            // 
+            this.ConsultarCodigoButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.ConsultarCodigoButton.Location = new System.Drawing.Point(134, 7);
+            this.ConsultarCodigoButton.Name = "ConsultarCodigoButton";
+            this.ConsultarCodigoButton.Size = new System.Drawing.Size(22, 22);
+            this.ConsultarCodigoButton.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.ConsultarCodigoButton, "Pesquisar código");
+            this.ConsultarCodigoButton.UseVisualStyleBackColor = true;
+            this.ConsultarCodigoButton.Click += new System.EventHandler(this.ConsultarCodigoButton_Click);
+            // 
+            // RefreshButton
+            // 
+            this.RefreshButton.Image = global::GTI_Desktop.Properties.Resources.refresh_16x16;
+            this.RefreshButton.Location = new System.Drawing.Point(158, 7);
+            this.RefreshButton.Name = "RefreshButton";
+            this.RefreshButton.Size = new System.Drawing.Size(22, 22);
+            this.RefreshButton.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.RefreshButton, "Atualizar o extrato");
+            this.RefreshButton.UseVisualStyleBackColor = true;
+            this.RefreshButton.Click += new System.EventHandler(this.BtRefresh_Click);
+            // 
             // mnuMain
             // 
             this.mnuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -344,7 +366,7 @@
             this.a1Panel2.BackColor = System.Drawing.Color.Linen;
             this.a1Panel2.BorderColor = System.Drawing.Color.Gray;
             this.a1Panel2.Controls.Add(this.Label1);
-            this.a1Panel2.Controls.Add(this.txtNome);
+            this.a1Panel2.Controls.Add(this.NomeText);
             this.a1Panel2.Controls.Add(this.ConsultarCodigoButton);
             this.a1Panel2.Controls.Add(this.RefreshButton);
             this.a1Panel2.Controls.Add(this.CodigoText);
@@ -369,16 +391,16 @@
             this.Label1.TabIndex = 46;
             this.Label1.Text = "Código....:";
             // 
-            // txtNome
+            // NomeText
             // 
-            this.txtNome.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.NomeText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNome.BackColor = System.Drawing.Color.Linen;
-            this.txtNome.Location = new System.Drawing.Point(186, 8);
-            this.txtNome.Name = "txtNome";
-            this.txtNome.ReadOnly = true;
-            this.txtNome.Size = new System.Drawing.Size(758, 20);
-            this.txtNome.TabIndex = 36;
+            this.NomeText.BackColor = System.Drawing.Color.Linen;
+            this.NomeText.Location = new System.Drawing.Point(186, 8);
+            this.NomeText.Name = "NomeText";
+            this.NomeText.ReadOnly = true;
+            this.NomeText.Size = new System.Drawing.Size(758, 20);
+            this.NomeText.TabIndex = 36;
             // 
             // MainMenu
             // 
@@ -524,6 +546,13 @@
             this.dividaAtivaToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.dividaAtivaToolStripMenuItem.Text = "Divida Ativa";
             // 
+            // CancelamentoDebitoMenu
+            // 
+            this.CancelamentoDebitoMenu.Name = "CancelamentoDebitoMenu";
+            this.CancelamentoDebitoMenu.Size = new System.Drawing.Size(204, 22);
+            this.CancelamentoDebitoMenu.Text = "Cancelamento de débito";
+            this.CancelamentoDebitoMenu.Click += new System.EventHandler(this.CancelamentoDebitoMenu_Click);
+            // 
             // FiltroPanel
             // 
             this.FiltroPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -548,6 +577,20 @@
             this.FiltroPanel.Name = "FiltroPanel";
             this.FiltroPanel.Size = new System.Drawing.Size(956, 74);
             this.FiltroPanel.TabIndex = 4;
+            // 
+            // OcultarButton
+            // 
+            this.OcultarButton.ForeColor = System.Drawing.Color.Navy;
+            this.OcultarButton.Image = global::GTI_Desktop.Properties.Resources.cancel2;
+            this.OcultarButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.OcultarButton.Location = new System.Drawing.Point(852, 36);
+            this.OcultarButton.Name = "OcultarButton";
+            this.OcultarButton.Size = new System.Drawing.Size(92, 24);
+            this.OcultarButton.TabIndex = 14;
+            this.OcultarButton.Text = "Ocultar Filtro";
+            this.OcultarButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.OcultarButton.UseVisualStyleBackColor = true;
+            this.OcultarButton.Click += new System.EventHandler(this.BTOcultar_Click);
             // 
             // label5
             // 
@@ -624,6 +667,20 @@
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lançamentos";
+            // 
+            // FiltroButton
+            // 
+            this.FiltroButton.ForeColor = System.Drawing.Color.Navy;
+            this.FiltroButton.Image = global::GTI_Desktop.Properties.Resources.funnel;
+            this.FiltroButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.FiltroButton.Location = new System.Drawing.Point(852, 9);
+            this.FiltroButton.Name = "FiltroButton";
+            this.FiltroButton.Size = new System.Drawing.Size(92, 24);
+            this.FiltroButton.TabIndex = 13;
+            this.FiltroButton.Text = "Aplicar Filtro";
+            this.FiltroButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.FiltroButton.UseVisualStyleBackColor = true;
+            this.FiltroButton.Click += new System.EventHandler(this.BtFiltro_Click);
             // 
             // groupBox1
             // 
@@ -910,6 +967,26 @@
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // PesquisarDocumentoButton
+            // 
+            this.PesquisarDocumentoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.PesquisarDocumentoButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
+            this.PesquisarDocumentoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.PesquisarDocumentoButton.Name = "PesquisarDocumentoButton";
+            this.PesquisarDocumentoButton.Size = new System.Drawing.Size(23, 22);
+            this.PesquisarDocumentoButton.Text = "toolStripButton1";
+            this.PesquisarDocumentoButton.Click += new System.EventHandler(this.PesquisarDocumentoButton_Click);
+            // 
+            // SairDocumentoButton
+            // 
+            this.SairDocumentoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SairDocumentoButton.Image = global::GTI_Desktop.Properties.Resources.Exit;
+            this.SairDocumentoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SairDocumentoButton.Name = "SairDocumentoButton";
+            this.SairDocumentoButton.Size = new System.Drawing.Size(23, 22);
+            this.SairDocumentoButton.Text = "Fechar";
+            this.SairDocumentoButton.Click += new System.EventHandler(this.SairDocumentoButton_Click);
+            // 
             // label6
             // 
             this.label6.BackColor = System.Drawing.Color.SkyBlue;
@@ -1014,82 +1091,6 @@
             this.tBar.TabIndex = 25;
             this.tBar.Text = "toolStrip1";
             // 
-            // ObservacaoText
-            // 
-            this.ObservacaoText.Location = new System.Drawing.Point(6, 192);
-            this.ObservacaoText.MaxLength = 2000;
-            this.ObservacaoText.Multiline = true;
-            this.ObservacaoText.Name = "ObservacaoText";
-            this.ObservacaoText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ObservacaoText.Size = new System.Drawing.Size(578, 84);
-            this.ObservacaoText.TabIndex = 1;
-            // 
-            // ObservacaoListView
-            // 
-            this.ObservacaoListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Seq,
-            this.Data,
-            this.User,
-            this.Obs});
-            this.ObservacaoListView.FullRowSelect = true;
-            this.ObservacaoListView.Location = new System.Drawing.Point(6, 23);
-            this.ObservacaoListView.Name = "ObservacaoListView";
-            this.ObservacaoListView.Size = new System.Drawing.Size(578, 164);
-            this.ObservacaoListView.TabIndex = 0;
-            this.ObservacaoListView.UseCompatibleStateImageBehavior = false;
-            this.ObservacaoListView.View = System.Windows.Forms.View.Details;
-            this.ObservacaoListView.SelectedIndexChanged += new System.EventHandler(this.ObservacaoListView_SelectedIndexChanged);
-            // 
-            // Seq
-            // 
-            this.Seq.Text = "Seq";
-            this.Seq.Width = 0;
-            // 
-            // Data
-            // 
-            this.Data.Text = "Data";
-            this.Data.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Data.Width = 70;
-            // 
-            // User
-            // 
-            this.User.Text = "Usuário";
-            this.User.Width = 180;
-            // 
-            // Obs
-            // 
-            this.Obs.Text = "Observação";
-            this.Obs.Width = 300;
-            // 
-            // GridPanel
-            // 
-            this.GridPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.GridPanel.BackColor = System.Drawing.Color.Linen;
-            this.GridPanel.BorderColor = System.Drawing.Color.Gray;
-            this.GridPanel.Controls.Add(this.ExtratoDataGrid);
-            this.GridPanel.Controls.Add(this.ObservacaoPanel);
-            this.GridPanel.Controls.Add(this.DocumentoPanel);
-            this.GridPanel.GradientEndColor = System.Drawing.SystemColors.Control;
-            this.GridPanel.GradientStartColor = System.Drawing.Color.White;
-            this.GridPanel.Image = null;
-            this.GridPanel.ImageLocation = new System.Drawing.Point(4, 4);
-            this.GridPanel.Location = new System.Drawing.Point(6, 70);
-            this.GridPanel.Name = "GridPanel";
-            this.GridPanel.ShadowOffSet = 3;
-            this.GridPanel.Size = new System.Drawing.Size(955, 498);
-            this.GridPanel.TabIndex = 120;
-            // 
-            // HeaderMenu
-            // 
-            this.HeaderMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ImovelMenuItem,
-            this.EmpresaMenuItem,
-            this.CidadaoMenuItem});
-            this.HeaderMenu.Name = "HeaderMenu";
-            this.HeaderMenu.Size = new System.Drawing.Size(120, 70);
-            // 
             // NovaObsButton
             // 
             this.NovaObsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -1166,75 +1167,81 @@
             this.ZoomButton.Text = "Zoom";
             this.ZoomButton.Click += new System.EventHandler(this.ZoomButton_Click);
             // 
-            // PesquisarDocumentoButton
+            // ObservacaoText
             // 
-            this.PesquisarDocumentoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.PesquisarDocumentoButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.PesquisarDocumentoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.PesquisarDocumentoButton.Name = "PesquisarDocumentoButton";
-            this.PesquisarDocumentoButton.Size = new System.Drawing.Size(23, 22);
-            this.PesquisarDocumentoButton.Text = "toolStripButton1";
-            this.PesquisarDocumentoButton.Click += new System.EventHandler(this.PesquisarDocumentoButton_Click);
+            this.ObservacaoText.Location = new System.Drawing.Point(6, 192);
+            this.ObservacaoText.MaxLength = 2000;
+            this.ObservacaoText.Multiline = true;
+            this.ObservacaoText.Name = "ObservacaoText";
+            this.ObservacaoText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.ObservacaoText.Size = new System.Drawing.Size(578, 84);
+            this.ObservacaoText.TabIndex = 1;
             // 
-            // SairDocumentoButton
+            // ObservacaoListView
             // 
-            this.SairDocumentoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SairDocumentoButton.Image = global::GTI_Desktop.Properties.Resources.Exit;
-            this.SairDocumentoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SairDocumentoButton.Name = "SairDocumentoButton";
-            this.SairDocumentoButton.Size = new System.Drawing.Size(23, 22);
-            this.SairDocumentoButton.Text = "Fechar";
-            this.SairDocumentoButton.Click += new System.EventHandler(this.SairDocumentoButton_Click);
+            this.ObservacaoListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Seq,
+            this.Data,
+            this.User,
+            this.Obs});
+            this.ObservacaoListView.FullRowSelect = true;
+            this.ObservacaoListView.Location = new System.Drawing.Point(6, 23);
+            this.ObservacaoListView.Name = "ObservacaoListView";
+            this.ObservacaoListView.Size = new System.Drawing.Size(578, 164);
+            this.ObservacaoListView.TabIndex = 0;
+            this.ObservacaoListView.UseCompatibleStateImageBehavior = false;
+            this.ObservacaoListView.View = System.Windows.Forms.View.Details;
+            this.ObservacaoListView.SelectedIndexChanged += new System.EventHandler(this.ObservacaoListView_SelectedIndexChanged);
             // 
-            // ConsultarCodigoButton
+            // Seq
             // 
-            this.ConsultarCodigoButton.Image = global::GTI_Desktop.Properties.Resources.Consultar;
-            this.ConsultarCodigoButton.Location = new System.Drawing.Point(134, 7);
-            this.ConsultarCodigoButton.Name = "ConsultarCodigoButton";
-            this.ConsultarCodigoButton.Size = new System.Drawing.Size(22, 22);
-            this.ConsultarCodigoButton.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.ConsultarCodigoButton, "Pesquisar código");
-            this.ConsultarCodigoButton.UseVisualStyleBackColor = true;
-            this.ConsultarCodigoButton.Click += new System.EventHandler(this.ConsultarCodigoButton_Click);
+            this.Seq.Text = "Seq";
+            this.Seq.Width = 0;
             // 
-            // RefreshButton
+            // Data
             // 
-            this.RefreshButton.Image = global::GTI_Desktop.Properties.Resources.refresh_16x16;
-            this.RefreshButton.Location = new System.Drawing.Point(158, 7);
-            this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.Size = new System.Drawing.Size(22, 22);
-            this.RefreshButton.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.RefreshButton, "Atualizar o extrato");
-            this.RefreshButton.UseVisualStyleBackColor = true;
-            this.RefreshButton.Click += new System.EventHandler(this.BtRefresh_Click);
+            this.Data.Text = "Data";
+            this.Data.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Data.Width = 70;
             // 
-            // OcultarButton
+            // User
             // 
-            this.OcultarButton.ForeColor = System.Drawing.Color.Navy;
-            this.OcultarButton.Image = global::GTI_Desktop.Properties.Resources.cancel2;
-            this.OcultarButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.OcultarButton.Location = new System.Drawing.Point(852, 36);
-            this.OcultarButton.Name = "OcultarButton";
-            this.OcultarButton.Size = new System.Drawing.Size(92, 24);
-            this.OcultarButton.TabIndex = 14;
-            this.OcultarButton.Text = "Ocultar Filtro";
-            this.OcultarButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.OcultarButton.UseVisualStyleBackColor = true;
-            this.OcultarButton.Click += new System.EventHandler(this.BTOcultar_Click);
+            this.User.Text = "Usuário";
+            this.User.Width = 180;
             // 
-            // FiltroButton
+            // Obs
             // 
-            this.FiltroButton.ForeColor = System.Drawing.Color.Navy;
-            this.FiltroButton.Image = global::GTI_Desktop.Properties.Resources.funnel;
-            this.FiltroButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.FiltroButton.Location = new System.Drawing.Point(852, 9);
-            this.FiltroButton.Name = "FiltroButton";
-            this.FiltroButton.Size = new System.Drawing.Size(92, 24);
-            this.FiltroButton.TabIndex = 13;
-            this.FiltroButton.Text = "Aplicar Filtro";
-            this.FiltroButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.FiltroButton.UseVisualStyleBackColor = true;
-            this.FiltroButton.Click += new System.EventHandler(this.BtFiltro_Click);
+            this.Obs.Text = "Observação";
+            this.Obs.Width = 300;
+            // 
+            // GridPanel
+            // 
+            this.GridPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.GridPanel.BackColor = System.Drawing.Color.Linen;
+            this.GridPanel.BorderColor = System.Drawing.Color.Gray;
+            this.GridPanel.Controls.Add(this.ExtratoDataGrid);
+            this.GridPanel.Controls.Add(this.ObservacaoPanel);
+            this.GridPanel.Controls.Add(this.DocumentoPanel);
+            this.GridPanel.GradientEndColor = System.Drawing.SystemColors.Control;
+            this.GridPanel.GradientStartColor = System.Drawing.Color.White;
+            this.GridPanel.Image = null;
+            this.GridPanel.ImageLocation = new System.Drawing.Point(4, 4);
+            this.GridPanel.Location = new System.Drawing.Point(6, 70);
+            this.GridPanel.Name = "GridPanel";
+            this.GridPanel.ShadowOffSet = 3;
+            this.GridPanel.Size = new System.Drawing.Size(955, 498);
+            this.GridPanel.TabIndex = 120;
+            // 
+            // HeaderMenu
+            // 
+            this.HeaderMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ImovelMenuItem,
+            this.EmpresaMenuItem,
+            this.CidadaoMenuItem});
+            this.HeaderMenu.Name = "HeaderMenu";
+            this.HeaderMenu.Size = new System.Drawing.Size(120, 70);
             // 
             // ImovelMenuItem
             // 
@@ -1259,12 +1266,6 @@
             this.CidadaoMenuItem.Size = new System.Drawing.Size(119, 22);
             this.CidadaoMenuItem.Text = "Cidadão";
             this.CidadaoMenuItem.Click += new System.EventHandler(this.CidadaoMenuItem_Click);
-            // 
-            // CancelamentoDebitoMenu
-            // 
-            this.CancelamentoDebitoMenu.Name = "CancelamentoDebitoMenu";
-            this.CancelamentoDebitoMenu.Size = new System.Drawing.Size(204, 22);
-            this.CancelamentoDebitoMenu.Text = "Cancelamento de débito";
             // 
             // Extrato
             // 
@@ -1334,7 +1335,7 @@
         private System.Windows.Forms.Button ConsultarCodigoButton;
         private System.Windows.Forms.CheckBox ChkAllExercicio;
         private Owf.Controls.A1Panel a1Panel2;
-        private System.Windows.Forms.TextBox txtNome;
+        private System.Windows.Forms.TextBox NomeText;
         private Owf.Controls.A1Panel FiltroPanel;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox CmbAnoInicial;
@@ -1366,7 +1367,6 @@
         private System.Windows.Forms.ToolStripMenuItem filtradoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem completoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dividaAtivaToolStripMenuItem;
-        internal System.Windows.Forms.DataGridView ExtratoDataGrid;
         private Owf.Controls.A1Panel DocumentoPanel;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton PesquisarDocumentoButton;
@@ -1422,5 +1422,6 @@
         private System.Windows.Forms.ToolStripMenuItem EmpresaMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CidadaoMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CancelamentoDebitoMenu;
+        internal System.Windows.Forms.DataGridView ExtratoDataGrid;
     }
 }
