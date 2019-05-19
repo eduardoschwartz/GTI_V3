@@ -25,6 +25,7 @@
         private void InitializeComponent() {
             this.tBar = new System.Windows.Forms.ToolStrip();
             this.CancelarButton = new System.Windows.Forms.ToolStripButton();
+            this.SairButton = new System.Windows.Forms.ToolStripButton();
             this.MainListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -42,7 +43,6 @@
             this.DataProcessoText = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.MotivoText = new System.Windows.Forms.TextBox();
-            this.SairButton = new System.Windows.Forms.ToolStripButton();
             this.tBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,6 +72,17 @@
             this.CancelarButton.Text = "toolStripButton2";
             this.CancelarButton.ToolTipText = "Cancelar os débitos selecionados";
             this.CancelarButton.Click += new System.EventHandler(this.CancelarButton_Click);
+            // 
+            // SairButton
+            // 
+            this.SairButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SairButton.Image = global::GTI_Desktop.Properties.Resources.cancel2;
+            this.SairButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SairButton.Name = "SairButton";
+            this.SairButton.Size = new System.Drawing.Size(23, 22);
+            this.SairButton.Text = "toolStripButton1";
+            this.SairButton.ToolTipText = "Fechar a tela sem cancelar";
+            this.SairButton.Click += new System.EventHandler(this.SairButton_Click);
             // 
             // MainListView
             // 
@@ -148,6 +159,7 @@
             this.TipoList.Name = "TipoList";
             this.TipoList.Size = new System.Drawing.Size(166, 21);
             this.TipoList.TabIndex = 81;
+            this.TipoList.SelectedIndexChanged += new System.EventHandler(this.TipoList_SelectedIndexChanged);
             // 
             // KeepCheckBox
             // 
@@ -177,6 +189,9 @@
             this.NumeroProcessoText.Name = "NumeroProcessoText";
             this.NumeroProcessoText.Size = new System.Drawing.Size(76, 20);
             this.NumeroProcessoText.TabIndex = 84;
+            this.NumeroProcessoText.TextChanged += new System.EventHandler(this.NumeroProcessoText_TextChanged);
+            this.NumeroProcessoText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NumeroProcessoText_KeyDown);
+            this.NumeroProcessoText.Leave += new System.EventHandler(this.NumeroProcessoText_Leave);
             // 
             // label3
             // 
@@ -213,17 +228,6 @@
             this.MotivoText.Name = "MotivoText";
             this.MotivoText.Size = new System.Drawing.Size(448, 64);
             this.MotivoText.TabIndex = 88;
-            // 
-            // SairButton
-            // 
-            this.SairButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SairButton.Image = global::GTI_Desktop.Properties.Resources.cancel2;
-            this.SairButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SairButton.Name = "SairButton";
-            this.SairButton.Size = new System.Drawing.Size(23, 22);
-            this.SairButton.Text = "toolStripButton1";
-            this.SairButton.ToolTipText = "Fechar a tela sem cancelar";
-            this.SairButton.Click += new System.EventHandler(this.SairButton_Click);
             // 
             // Extrato_Debito_Cancelar
             // 

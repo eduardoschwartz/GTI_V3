@@ -233,6 +233,8 @@ namespace GTI_Desktop.Forms {
             //******************************
             //Dados para a tabela Mobiliario
             //******************************
+            //TODO Verificar número de processo de abertura/encerramento
+
             Single? _area = Area.Text == "" ? (Single?)null : Convert.ToSingle(Area.Text);
             Single? _capital_social = CapitalSocial.Text == "" ? (Single?)null : Convert.ToSingle(CapitalSocial.Text);
             int? _codigo_atividade = Atividade_Principal.Tag.ToString() == "" ? (int?)null : Convert.ToInt32(Atividade_Principal.Tag.ToString());
@@ -262,7 +264,6 @@ namespace GTI_Desktop.Forms {
             bool _liberado_vre = LiberadoVRE_chk.Checked ? true : false;
             bool _sub_tributario = SubstitutoTrib_chk.Checked ? true : false;
             byte _vistoria = Vistoria_chk.Checked ? (byte)1 : (byte)0;
-            //short? _horario = HorarioFuncionamento.Tag.ToString() == "" ? (short?)null : Convert.ToInt16(HorarioFuncionamento.Tag.ToString());
             string _horarioext = HorarioExtenso.Text.Trim() == "" ? null : HorarioExtenso.Text.Trim();
             string _insc_estadual = InscEstadual.Text.Trim() == "" ? null : InscEstadual.Text.Trim();
             int? _codigo_imovel = Convert.ToInt32(CodigoImovel.Text) == 0 ? (int?)null : Convert.ToInt32(CodigoImovel.Text.ToString());
