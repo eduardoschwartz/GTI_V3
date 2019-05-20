@@ -31,7 +31,7 @@ namespace GTI_Models.Models {
         public int? Numcertidao { get; set; }
         public DateTime? Datainscricao { get; set; }
         public DateTime? Dataajuiza { get; set; }
-        public decimal Valorjuros { get; set; }
+        public decimal? Valorjuros { get; set; }
         public string Numprocesso { get; set; }
         public bool? Intacto { get; set; }
         public bool? Notificado { get; set; }
@@ -41,7 +41,7 @@ namespace GTI_Models.Models {
         public bool? Simplesnacional { get; set; }
         public int? Protesto_nro_titulo { get; set; }
         public short? Protesto_data_remessa { get; set; }
-        public int Userid { get; set; }
+        public int? Userid { get; set; }
     }
 
     public class DebitoStructure {

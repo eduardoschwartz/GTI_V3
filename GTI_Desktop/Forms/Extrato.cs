@@ -734,7 +734,7 @@ namespace GTI_Desktop.Forms {
                     reg.Userid = sistema_Class.Retorna_User_LoginId( Properties.Settings.Default.LastUser);
                     //Nova Observação Geral
                     if (bAddNew) {
-                        ex = clsTributario.Incluir_Observacao_Codigo(reg);
+                        ex = clsTributario.Insert_Observacao_Codigo(reg);
                         if (ex != null) {
                             ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
                             eBox.ShowDialog();
@@ -785,7 +785,7 @@ namespace GTI_Desktop.Forms {
                     reg.Userid = sistema_Class.Retorna_User_LoginId( Properties.Settings.Default.LastUser);
                     //Nova observação da parcela
                     if (bAddNew) {
-                        ex = clsTributario.Incluir_Observacao_Parcela(reg);
+                        ex = clsTributario.Insert_Observacao_Parcela(reg);
                         if (ex != null) {
                             ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
                             eBox.ShowDialog();
@@ -1129,14 +1129,16 @@ InicioObs:
                 List<SpExtrato> Lista = new List<SpExtrato>();
                 foreach (DataGridViewRow item in ExtratoDataGrid.Rows) {
                     if (item.Tag.ToString() == "1") {
-                        SpExtrato reg = new SpExtrato();
-                        reg.Anoexercicio = Convert.ToInt16(item.Cells["Ano"].Value);
-                        reg.Desclancamento = item.Cells["lancamento"].Value.ToString();
-                        reg.Seqlancamento = Convert.ToInt16(item.Cells["sequencia"].Value);
-                        reg.Numparcela = Convert.ToInt16(item.Cells["parcela"].Value);
-                        reg.Codcomplemento = Convert.ToByte(item.Cells["complemento"].Value);
-                        reg.Datavencimento = Convert.ToDateTime(item.Cells["data_vencimento"].Value);
-                        reg.Valortributo = Convert.ToDecimal(item.Cells["valor_lancado"].Value);
+                        SpExtrato reg = new SpExtrato {
+                            Codreduzido=Convert.ToInt32(CodigoText.Text),
+                            Anoexercicio = Convert.ToInt16(item.Cells["Ano"].Value),
+                            Desclancamento = item.Cells["lancamento"].Value.ToString(),
+                            Seqlancamento = Convert.ToInt16(item.Cells["sequencia"].Value),
+                            Numparcela = Convert.ToInt16(item.Cells["parcela"].Value),
+                            Codcomplemento = Convert.ToByte(item.Cells["complemento"].Value),
+                            Datavencimento = Convert.ToDateTime(item.Cells["data_vencimento"].Value),
+                            Valortributo = Convert.ToDecimal(item.Cells["valor_lancado"].Value)
+                        };
                         Lista.Add(reg);
                     }
                 }

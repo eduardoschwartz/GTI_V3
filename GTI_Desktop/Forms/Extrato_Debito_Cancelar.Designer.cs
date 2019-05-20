@@ -59,7 +59,7 @@
             this.tBar.Name = "tBar";
             this.tBar.Padding = new System.Windows.Forms.Padding(6, 0, 1, 0);
             this.tBar.Size = new System.Drawing.Size(526, 25);
-            this.tBar.TabIndex = 78;
+            this.tBar.TabIndex = 5;
             this.tBar.Text = "toolStrip1";
             // 
             // CancelarButton
@@ -99,7 +99,7 @@
             this.MainListView.Location = new System.Drawing.Point(6, 6);
             this.MainListView.Name = "MainListView";
             this.MainListView.Size = new System.Drawing.Size(508, 183);
-            this.MainListView.TabIndex = 79;
+            this.MainListView.TabIndex = 0;
             this.MainListView.UseCompatibleStateImageBehavior = false;
             this.MainListView.View = System.Windows.Forms.View.Details;
             // 
@@ -158,7 +158,7 @@
             this.TipoList.Location = new System.Drawing.Point(137, 199);
             this.TipoList.Name = "TipoList";
             this.TipoList.Size = new System.Drawing.Size(166, 21);
-            this.TipoList.TabIndex = 81;
+            this.TipoList.TabIndex = 1;
             this.TipoList.SelectedIndexChanged += new System.EventHandler(this.TipoList_SelectedIndexChanged);
             // 
             // KeepCheckBox
@@ -168,7 +168,7 @@
             this.KeepCheckBox.Location = new System.Drawing.Point(370, 228);
             this.KeepCheckBox.Name = "KeepCheckBox";
             this.KeepCheckBox.Size = new System.Drawing.Size(144, 17);
-            this.KeepCheckBox.TabIndex = 82;
+            this.KeepCheckBox.TabIndex = 3;
             this.KeepCheckBox.Text = "Manter na tela de extrato";
             this.KeepCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.KeepCheckBox.UseVisualStyleBackColor = true;
@@ -188,7 +188,7 @@
             this.NumeroProcessoText.MaxLength = 12;
             this.NumeroProcessoText.Name = "NumeroProcessoText";
             this.NumeroProcessoText.Size = new System.Drawing.Size(76, 20);
-            this.NumeroProcessoText.TabIndex = 84;
+            this.NumeroProcessoText.TabIndex = 2;
             this.NumeroProcessoText.TextChanged += new System.EventHandler(this.NumeroProcessoText_TextChanged);
             this.NumeroProcessoText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NumeroProcessoText_KeyDown);
             this.NumeroProcessoText.Leave += new System.EventHandler(this.NumeroProcessoText_Leave);
@@ -223,11 +223,11 @@
             // MotivoText
             // 
             this.MotivoText.Location = new System.Drawing.Point(66, 256);
-            this.MotivoText.MaxLength = 12;
+            this.MotivoText.MaxLength = 500;
             this.MotivoText.Multiline = true;
             this.MotivoText.Name = "MotivoText";
             this.MotivoText.Size = new System.Drawing.Size(448, 64);
-            this.MotivoText.TabIndex = 88;
+            this.MotivoText.TabIndex = 4;
             // 
             // Extrato_Debito_Cancelar
             // 

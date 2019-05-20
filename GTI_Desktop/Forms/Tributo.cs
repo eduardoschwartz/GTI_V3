@@ -112,7 +112,7 @@ namespace GTI_Desktop.Forms {
             Tributario_bll clsTributario = new Tributario_bll(_connection);
             Exception ex;
             if (bAddNew) {
-                ex = clsTributario.Incluir_Tributo(reg);
+                ex = clsTributario.Insert_Tributo(reg);
             } else {
                 reg.Codtributo = Convert.ToInt16(lstMain.SelectedValue);
                 ex = clsTributario.Alterar_Tributo(reg);

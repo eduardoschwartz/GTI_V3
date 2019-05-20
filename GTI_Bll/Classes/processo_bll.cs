@@ -259,10 +259,14 @@ namespace GTI_Bll.Classes {
         ///<summary> Retorna o número do processo sem o dígito verificador.
         ///</summary>
         public int ExtractNumeroProcessoNoDV(string NumProc) {
-            if (NumProc.Contains("-"))
-                return Convert.ToInt32(NumProc.Substring(0, NumProc.IndexOf("-")));
-            else
-                return Convert.ToInt32(NumProc.Substring(0, NumProc.IndexOf("/") - 1));
+            if (String.IsNullOrWhiteSpace(NumProc))
+                return 0;
+            else {
+                if (NumProc.Contains("-"))
+                    return Convert.ToInt32(NumProc.Substring(0, NumProc.IndexOf("-")));
+                else
+                    return Convert.ToInt32(NumProc.Substring(0, NumProc.IndexOf("/") - 1));
+            }
         }
 
         /// <summary>

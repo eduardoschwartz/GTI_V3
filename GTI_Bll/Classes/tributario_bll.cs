@@ -55,7 +55,7 @@ namespace GTI_Bll.Classes {
 
         ///<summary> Incluir lancamento na tela de cadastro de lançamentos.
         ///</summary>
-        public Exception Incluir_Lancamento(Lancamento reg) {
+        public Exception Insert_Lancamento(Lancamento reg) {
             Exception AppEx ;
             if (String.IsNullOrWhiteSpace(reg.Descfull)) {
                 AppEx = new Exception("Digite a descrição completa");
@@ -75,13 +75,13 @@ namespace GTI_Bll.Classes {
             }
 
             Tributario_Data obj = new Tributario_Data(_connection);
-            Exception ex = obj.Incluir_Lancamento(reg);
+            Exception ex = obj.Insert_Lancamento(reg);
             return ex;
         }
 
         ///<summary> Incluir tributo na tela de cadastro de tributos.
         ///</summary>
-        public Exception Incluir_Tributo(Tributo reg) {
+        public Exception Insert_Tributo(Tributo reg) {
             Exception AppEx;
             if (String.IsNullOrWhiteSpace(reg.Desctributo)) {
                 AppEx = new Exception("Digite a descrição completa");
@@ -97,7 +97,7 @@ namespace GTI_Bll.Classes {
             }
 
             Tributario_Data obj = new Tributario_Data(_connection);
-            Exception ex = obj.Incluir_Tributo(reg);
+            Exception ex = obj.Insert_Tributo(reg);
             return ex;
         }
 
@@ -273,9 +273,9 @@ namespace GTI_Bll.Classes {
 
         ///<summary> Incluir uma nova observação na parcela
         ///</summary>
-        public Exception Incluir_Observacao_Parcela(Obsparcela reg) {
+        public Exception Insert_Observacao_Parcela(Obsparcela reg) {
             Tributario_Data obj = new Tributario_Data(_connection);
-            Exception ex = obj.Incluir_Observacao_Parcela(reg);
+            Exception ex = obj.Insert_Observacao_Parcela(reg);
             return ex;
         }
 
@@ -311,9 +311,9 @@ namespace GTI_Bll.Classes {
 
         ///<summary> Incluir uma nova observação no código
         ///</summary>
-        public Exception Incluir_Observacao_Codigo(Debitoobservacao reg) {
+        public Exception Insert_Observacao_Codigo(Debitoobservacao reg) {
             Tributario_Data obj = new Tributario_Data(_connection);
-            Exception ex = obj.Incluir_Observacao_Codigo(reg);
+            Exception ex = obj.Insert_Observacao_Codigo(reg);
             return ex;
         }
 
@@ -1072,6 +1072,28 @@ namespace GTI_Bll.Classes {
         public Exception Alterar_Status_Lancamento(int _codigo, short _ano, short _lanc, short _seq, byte _parc, byte _compl, byte _status) {
             Tributario_Data obj = new Tributario_Data(_connection);
             Exception ex = obj.Alterar_Status_Lancamento(_codigo,_ano,_lanc,_seq,_parc,_compl,_status);
+            return ex;
+        }
+
+        /// <summary>
+        /// Excluir registro da tabela debitocancel
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Excluir_Debito_Cancel(Debitocancel reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Excluir_Debito_Cancel(reg);
+            return ex;
+        }
+
+        /// <summary>
+        /// Incluir um registro na tabela debitocancel
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Debito_Cancel(Debitocancel reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Debito_Cancel(reg);
             return ex;
         }
 

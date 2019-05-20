@@ -10,11 +10,14 @@ using static GTI_Desktop.Classes.GtiTypes;
 namespace GTI_Desktop.Forms {
     public partial class Extrato_Debito_Cancelar : Form {
         public int ReturnValue { get; set; }
-        int _codigo;
+        int _codigo,_UserId;
         string _connection = gtiCore.Connection_Name();
 
         public Extrato_Debito_Cancelar(List<SpExtrato> Lista) {
             InitializeComponent();
+            Sistema_bll sistema_Class = new Sistema_bll(_connection);
+            _UserId = sistema_Class.Retorna_User_LoginId(gtiCore.Retorna_Last_User());
+
             _codigo = Lista[0].Codreduzido;
             foreach (SpExtrato item in Lista) {
                 ListViewItem lv = new ListViewItem(item.Anoexercicio.ToString());
@@ -27,15 +30,16 @@ namespace GTI_Desktop.Forms {
                 MainListView.Items.Add(lv);
             }
 
-            List<CustomListBoxItem> myItems = new List<CustomListBoxItem>();
-            myItems.Add(new CustomListBoxItem("Cancelado pelo motivo abaixo" , 5));
-            myItems.Add(new CustomListBoxItem("Cancelado por duplicidade", 12));
-            myItems.Add(new CustomListBoxItem("Cancelado por recurso", 8));
-            myItems.Add(new CustomListBoxItem("Compensado por recurso", 6));
-            myItems.Add(new CustomListBoxItem("Compensação tributária", 32));
-            myItems.Add(new CustomListBoxItem("ISS variável sem movimento", 14));
-            myItems.Add(new CustomListBoxItem("Retido pelo tomador", 27));
-            myItems.Add(new CustomListBoxItem("Suspensão de débito/Trâmite", 19));
+            List<CustomListBoxItem> myItems = new List<CustomListBoxItem> {
+                new CustomListBoxItem("Cancelado pelo motivo abaixo", 5),
+                new CustomListBoxItem("Cancelado por duplicidade", 12),
+                new CustomListBoxItem("Cancelado por recurso", 8),
+                new CustomListBoxItem("Compensado por recurso", 6),
+                new CustomListBoxItem("Compensação tributária", 32),
+                new CustomListBoxItem("ISS variável sem movimento", 14),
+                new CustomListBoxItem("Retido pelo tomador", 27),
+                new CustomListBoxItem("Suspensão de débito/Trâmite", 19)
+            };
 
             TipoList.DisplayMember = "_name";
             TipoList.ValueMember = "_value";
@@ -107,19 +111,49 @@ namespace GTI_Desktop.Forms {
                     CustomListBoxItem _tipo_Cancel = (CustomListBoxItem)TipoList.SelectedItem;
                     byte _status = Convert.ToByte( _tipo_Cancel._value);
 
+                    
+
                     Exception ex = tributario_Class.Alterar_Status_Lancamento(_codigo, _ano, _lanc, _seq, _parc, _compl, _status);
                     if (ex == null) {
+                        if (NumeroProcessoText.Text != "") {
+                            Processo_bll processo_Class = new Processo_bll(_connection);
+                            int _numero_processo = processo_Class.ExtractNumeroProcessoNoDV(NumeroProcessoText.Text);
+                            int _ano_processo = processo_Class.ExtractAnoProcesso(NumeroProcessoText.Text);
+                            string _processo = "";
+                            _processo = _numero_processo.ToString() + "/" + _ano_processo.ToString();
 
+                            Debitocancel reg = new Debitocancel() {
+                                Numprocesso = _processo,
+                                Codreduzido = _codigo,
+                                Anoexercicio = _ano,
+                                Codlancamento = _lanc,
+                                Seqlancamento = _seq,
+                                Numparcela = _parc,
+                                Codcomplemento = _compl,
+                                Datacancel = DateTime.Now,
+                                Motivo = MotivoText.Text.Trim(),
+                                Userid = _UserId
+                            };
 
-
-
+                            ex = tributario_Class.Excluir_Debito_Cancel(reg);
+                            if (ex == null) {
+                                ex = tributario_Class.Insert_Debito_Cancel(reg);
+                                if (ex != null) {
+                                    ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                                    eBox.ShowDialog();
+                                }
+                            } else {
+                                ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                                eBox.ShowDialog();
+                            }
+                        }
                     } else {
                         ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
                         eBox.ShowDialog();
                     }
                 }
 
-                DialogResult = DialogResult.Cancel;
+                DialogResult = DialogResult.OK;
                 Close();
             }
         }
