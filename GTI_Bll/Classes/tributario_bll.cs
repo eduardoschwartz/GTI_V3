@@ -236,8 +236,6 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Extrato_Tributo_Carta(Codigo, Ano1, Ano2, Lancamento1, Lancamento2, Sequencia1, Sequencia2, Parcela1, Parcela2, Complemento1, Complemento2, Status1, Status2, Data_Atualizacao, Usuario);
         }
 
-
-
         ///<summary> Agrupa as linhas da spExtratoNew por parcela
         ///</summary>
         public List<SpExtrato> Lista_Extrato_Parcela(List<SpExtrato> Lista_Debito) {
@@ -251,8 +249,6 @@ namespace GTI_Bll.Classes {
             Tributario_Data obj = new Tributario_Data(_connection);
             return obj.Lista_Extrato_Parcela_Carta(Lista_Debito);
         }
-
-
 
         ///<summary> Retorna os tipos de status dos lançamentos
         ///</summary>
@@ -382,7 +378,6 @@ namespace GTI_Bll.Classes {
             Exception ex = obj.Insert_Numero_Segunda_Via(Reg);
             return ex;
         }
-
 
         /// <summary>
         /// Lista a tabela boletoguia
@@ -706,7 +701,6 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
-
         /// <summary>
         /// Retorna as infomações para a certidão de débitos
         /// </summary>
@@ -812,7 +806,6 @@ namespace GTI_Bll.Classes {
             Exception ex = obj.Insert_Alvara_Funcionamento(Reg);
             return ex;
         }
-
 
         /// <summary>
         /// Exclui uma remessa de Cartas de cobrança
@@ -1010,7 +1003,6 @@ namespace GTI_Bll.Classes {
             return obj.Parcela_Unica_IPTU_NaoPago(Codigo,Ano);
         }
 
-
         /// <summary>
         /// Inserir um documento para registro
         /// </summary>
@@ -1066,6 +1058,22 @@ namespace GTI_Bll.Classes {
             return obj.Retorna_Dados_Parcelamento(_ano, _numero);
         }
 
+        /// <summary>
+        /// Alterar o status de uma parcela
+        /// </summary>
+        /// <param name="_codigo"></param>
+        /// <param name="_ano"></param>
+        /// <param name="_lanc"></param>
+        /// <param name="_seq"></param>
+        /// <param name="_parc"></param>
+        /// <param name="_compl"></param>
+        /// <param name="_status"></param>
+        /// <returns></returns>
+        public Exception Alterar_Status_Lancamento(int _codigo, short _ano, short _lanc, short _seq, byte _parc, byte _compl, byte _status) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Alterar_Status_Lancamento(_codigo,_ano,_lanc,_seq,_parc,_compl,_status);
+            return ex;
+        }
 
     }//end class
 }

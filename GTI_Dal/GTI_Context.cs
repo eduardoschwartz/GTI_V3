@@ -143,5 +143,6 @@ namespace GTI_Dal {
         public DbSet<Periodomei> Periodomei { get; set; }
         public DbSet<Origemreparc> Origemreparc { get; set; }
         public DbSet<Destinoreparc> Destinoreparc { get; set; }
+        public DbSet<Debitocancel> Debitocancel { get; set; }
     }
 }
