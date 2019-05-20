@@ -10,10 +10,12 @@ using static GTI_Desktop.Classes.GtiTypes;
 namespace GTI_Desktop.Forms {
     public partial class Extrato_Debito_Cancelar : Form {
         public int ReturnValue { get; set; }
+        int _codigo;
         string _connection = gtiCore.Connection_Name();
 
         public Extrato_Debito_Cancelar(List<SpExtrato> Lista) {
             InitializeComponent();
+            _codigo = Lista[0].Codreduzido;
             foreach (SpExtrato item in Lista) {
                 ListViewItem lv = new ListViewItem(item.Anoexercicio.ToString());
                 lv.SubItems.Add(item.Desclancamento);
@@ -93,8 +95,29 @@ namespace GTI_Desktop.Forms {
                 return;
             }
 
-            if (MessageBox.Show("Confirmar operação?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes) {
+            Tributario_bll tributario_Class = new Tributario_bll(_connection);
 
+            if (MessageBox.Show("Confirmar operação?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes) {
+                foreach (ListViewItem  item in MainListView.Items) {
+                    short _ano = Convert.ToInt16(item.Text);
+                    short _lanc = Convert.ToInt16(item.SubItems[1].Text.Substring(0,2));
+                    short _seq = Convert.ToInt16(item.SubItems[2].Text);
+                    byte _parc = Convert.ToByte(item.SubItems[3].Text);
+                    byte _compl = Convert.ToByte(item.SubItems[4].Text);
+                    CustomListBoxItem _tipo_Cancel = (CustomListBoxItem)TipoList.SelectedItem;
+                    byte _status = Convert.ToByte( _tipo_Cancel._value);
+
+                    Exception ex = tributario_Class.Alterar_Status_Lancamento(_codigo, _ano, _lanc, _seq, _parc, _compl, _status);
+                    if (ex == null) {
+
+
+
+
+                    } else {
+                        ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                        eBox.ShowDialog();
+                    }
+                }
 
                 DialogResult = DialogResult.Cancel;
                 Close();

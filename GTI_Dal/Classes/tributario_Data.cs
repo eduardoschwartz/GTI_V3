@@ -2129,6 +2129,19 @@ Proximo:;
             }
         }
 
+        public Exception Alterar_Status_Lancamento(int _codigo,short _ano,short _lanc,short _seq, byte _parc, byte _compl,byte _status) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                Debitoparcela d = db.Debitoparcela.First(i => i.Codreduzido == _codigo && i.Anoexercicio==_ano && i.Codlancamento==_lanc && i.Seqlancamento==_seq && i.Numparcela==_parc && i.Codcomplemento==_compl);
+                d.Statuslanc = _status;
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
 
     }//end class
 }
