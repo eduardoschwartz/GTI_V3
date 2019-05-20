@@ -39,7 +39,7 @@ namespace GTI_Desktop.Forms {
                     break;
                 case 1:
                     Calculo_IssTLL();
-                    break;
+                    break; 
                 case 2:
                     Calculo_Vigilancia();
                     break;
