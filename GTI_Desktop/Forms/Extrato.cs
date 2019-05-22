@@ -1127,18 +1127,45 @@ InicioObs:
                 MessageBox.Show("Nenhum débito selecionado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
                 List<SpExtrato> Lista = new List<SpExtrato>();
+
                 foreach (DataGridViewRow item in ExtratoDataGrid.Rows) {
+                    short _ano = Convert.ToInt16(item.Cells["Ano"].Value);
+                    short _lanc = Convert.ToInt16(item.Cells["lancamento"].Value.ToString().Substring(0, 2));
+                    short _seq = Convert.ToInt16(item.Cells["sequencia"].Value);
+                    short _parc = Convert.ToInt16(item.Cells["parcela"].Value);
+                    byte _compl = Convert.ToByte(item.Cells["complemento"].Value);
+
                     if (item.Tag.ToString() == "1") {
                         SpExtrato reg = new SpExtrato {
                             Codreduzido=Convert.ToInt32(CodigoText.Text),
-                            Anoexercicio = Convert.ToInt16(item.Cells["Ano"].Value),
+                            Anoexercicio = _ano,
                             Desclancamento = item.Cells["lancamento"].Value.ToString(),
-                            Seqlancamento = Convert.ToInt16(item.Cells["sequencia"].Value),
-                            Numparcela = Convert.ToInt16(item.Cells["parcela"].Value),
-                            Codcomplemento = Convert.ToByte(item.Cells["complemento"].Value),
+                            Seqlancamento = _seq,
+                            Numparcela = _parc,
+                            Codcomplemento = _compl,
                             Datavencimento = Convert.ToDateTime(item.Cells["data_vencimento"].Value),
                             Valortributo = Convert.ToDecimal(item.Cells["valor_lancado"].Value)
                         };
+                        decimal _valor_juros = 0, _valor_multa = 0,_valor_correcao=0;
+                        decimal _valor_total = Convert.ToDecimal(item.Cells["valor_lancado"].Value);
+                        int _livro = 0, _pagina = 0;
+
+                        foreach (SpExtrato spitem in Lista_Extrato_Tributo) {
+                            if(spitem.Anoexercicio==_ano && spitem.Codlancamento==_lanc && spitem.Seqlancamento==_seq && spitem.Numparcela==_parc && spitem.Codcomplemento == _compl) {
+                                _valor_juros += spitem.Valorjuros;
+                                _valor_multa += spitem.Valormulta;
+                                _valor_correcao += spitem.Valorcorrecao;
+                                _livro = (int)spitem.Numlivro;
+                                _pagina = (int)spitem.Pagina;
+                            }
+                        }
+                        _valor_total += _valor_juros + _valor_multa+_valor_correcao;
+                        reg.Valorjuros = _valor_juros;
+                        reg.Valormulta = _valor_multa;
+                        reg.Valorcorrecao = _valor_correcao;
+                        reg.Valortotal = _valor_total;
+                        reg.Numlivro = _livro;
+                        reg.Pagina = _pagina;
                         Lista.Add(reg);
                     }
                 }

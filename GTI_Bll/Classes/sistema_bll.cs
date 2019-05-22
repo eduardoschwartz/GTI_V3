@@ -227,5 +227,17 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Codigos_Documento(Documento,_tipo);
         }
 
+        /// <summary>
+        /// Incluir um evento na tabela de logevento
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <returns></returns>
+        public Exception Incluir_LogEvento(Logevento reg) {
+            Sistema_Data obj = new Sistema_Data(_connection);
+            Exception ex = obj.Incluir_LogEvento(reg);
+            return ex;
+        }
+
+
     }
 }

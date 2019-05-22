@@ -61,8 +61,6 @@ namespace GTI_Dal.Classes {
             return _lista;
         }
 
-
-
         public Contribuinte_Header_Struct Contribuinte_Header(int Codigo, TipoCadastro Tipo) {
             Contribuinte_Header_Struct reg = new Contribuinte_Header_Struct {
                 Codigo = Codigo,
@@ -173,9 +171,6 @@ namespace GTI_Dal.Classes {
             }
         }
 
-
-
-
         #region Security
 
         public Exception Alterar_Senha(Usuario reg) {
@@ -212,7 +207,6 @@ namespace GTI_Dal.Classes {
                 return Sql;
             }
         }
-
 
         public string Retorna_User_LoginName(string fullName) {
             using (GTI_Context db = new GTI_Context(_connection)) {
@@ -394,6 +388,30 @@ namespace GTI_Dal.Classes {
         }
         #endregion
 
+        public Exception Incluir_LogEvento(Logevento reg) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                int nMax = (from c in db.Logevento select c.Seq).Max();
+                nMax += 1;
+
+                try {
+                    List<SqlParameter> parameters = new List<SqlParameter>();
+                    parameters.Add(new SqlParameter("@seq", nMax));
+                    parameters.Add(new SqlParameter("@datahoraevento", reg.Datahoraevento));
+                    parameters.Add(new SqlParameter("@computador", reg.Computador));
+                    parameters.Add(new SqlParameter("@form", reg.Form));
+                    parameters.Add(new SqlParameter("@evento", reg.Evento));
+                    parameters.Add(new SqlParameter("@secevento", reg.Secevento));
+                    parameters.Add(new SqlParameter("@logevento", reg.LogEvento));
+                    parameters.Add(new SqlParameter("@userid", reg.Userid));
+
+                    db.Database.ExecuteSqlCommand("INSERT INTO logevento(seq,datahoraevento,computador,form,evento,secevento,logevento,userid)" +
+                                                  " VALUES(@seq,@datahoraevento,@computador,@form,@evento,@secevento,@logevento,@userid)", parameters.ToArray());
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
 
     }
 }

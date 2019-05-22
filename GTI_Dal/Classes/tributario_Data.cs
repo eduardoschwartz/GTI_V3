@@ -2197,6 +2197,17 @@ Proximo:;
             }
         }
 
+        public Exception Insert_Integrativa_Cancelamento(Cancelamentos Reg) {
+            using (Integrativa_Context db = new Integrativa_Context(_connection)) {
+                try {
+                    db.Cancelamentos.Add(Reg);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
 
     }//end class
 }

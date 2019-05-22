@@ -1097,6 +1097,18 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        /// <summary>
+        /// Inserir um registro na tabela Cancelamentos da Integrativa
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public Exception Insert_Integrativa_Cancelamento(Cancelamentos Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Insert_Integrativa_Cancelamento(Reg);
+            return ex;
+        }
+
+
     }//end class
 }
 

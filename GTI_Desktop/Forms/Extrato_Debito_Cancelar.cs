@@ -12,6 +12,7 @@ namespace GTI_Desktop.Forms {
         public int ReturnValue { get; set; }
         int _codigo,_UserId;
         string _connection = gtiCore.Connection_Name();
+        string _connection_integrativa = gtiCore.Connection_Name("GTI_Integrativa");
 
         public Extrato_Debito_Cancelar(List<SpExtrato> Lista) {
             InitializeComponent();
@@ -27,6 +28,12 @@ namespace GTI_Desktop.Forms {
                 lv.SubItems.Add(item.Codcomplemento.ToString());
                 lv.SubItems.Add(item.Datavencimento.ToString("dd/MM/yyyy"));
                 lv.SubItems.Add(item.Valortributo.ToString("#0.00"));
+                lv.SubItems.Add(item.Valorjuros.ToString("#0.00"));
+                lv.SubItems.Add(item.Valormulta.ToString("#0.00"));
+                lv.SubItems.Add(item.Valorcorrecao.ToString("#0.00"));
+                lv.SubItems.Add(item.Valortotal.ToString("#0.00"));
+                lv.SubItems.Add(item.Numlivro.ToString());
+                lv.SubItems.Add(item.Pagina.ToString());
                 MainListView.Items.Add(lv);
             }
 
@@ -108,10 +115,16 @@ namespace GTI_Desktop.Forms {
                     short _seq = Convert.ToInt16(item.SubItems[2].Text);
                     byte _parc = Convert.ToByte(item.SubItems[3].Text);
                     byte _compl = Convert.ToByte(item.SubItems[4].Text);
+                    decimal _principal= Convert.ToDecimal(item.SubItems[6].Text);
+                    decimal _juros = Convert.ToDecimal(item.SubItems[7].Text);
+                    decimal _multa = Convert.ToDecimal(item.SubItems[8].Text);
+                    decimal _correcao = Convert.ToDecimal(item.SubItems[9].Text);
+                    decimal _total = Convert.ToDecimal(item.SubItems[10].Text);
+                    int _livro = Convert.ToInt32(item.SubItems[11].Text);
+                    int _pagina = Convert.ToInt32(item.SubItems[12].Text);
+
                     CustomListBoxItem _tipo_Cancel = (CustomListBoxItem)TipoList.SelectedItem;
                     byte _status = Convert.ToByte( _tipo_Cancel._value);
-
-                    
 
                     Exception ex = tributario_Class.Alterar_Status_Lancamento(_codigo, _ano, _lanc, _seq, _parc, _compl, _status);
                     if (ex == null) {
@@ -141,11 +154,56 @@ namespace GTI_Desktop.Forms {
                                 if (ex != null) {
                                     ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
                                     eBox.ShowDialog();
+                                } else {
+                                    //Gravar no log do sistema
+                                    string _obs = "Ano:" + _ano.ToString() + " Código:" + _codigo.ToString() + " Lançamento:" + _lanc.ToString();
+                                    _obs += " Seq:" + _seq.ToString() + " Parcela:" + _parc.ToString() + " Compl:" + _compl.ToString();
+                                    _obs += " Vencto:" + item.SubItems[5].Text + " Motivo: " + MotivoText.Text;
+                                    Sistema_bll sistema_Class = new Sistema_bll(_connection);
+                                    Logevento _log = new Logevento() {
+                                        Computador = Environment.MachineName,
+                                        Datahoraevento = DateTime.Now,
+                                        LogEvento = _obs,
+                                        Evento = 3,
+                                        Secevento = (short)gtiCore.EventoForm.Delete,
+                                        Form = Name,
+                                        Userid = _UserId
+                                    };
+                                    ex = sistema_Class.Incluir_LogEvento(_log);
+                                    if (ex != null) {
+                                        ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                                        eBox.ShowDialog();
+                                    } else {
+                                    }
                                 }
                             } else {
                                 ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
                                 eBox.ShowDialog();
                             }
+
+
+                        } //Cancelar na Integrativa
+                        Cancelamentos _creg = new Cancelamentos() {
+                            Dtcancelamento = DateTime.Now,
+                            Iddevedor = _codigo,
+                            Nrolivro = _livro,
+                            Nrofolha = _pagina,
+                            Seq = _seq,
+                            Lancamento = _lanc,
+                            Exercicio = _ano,
+                            Vlroriginal = _principal,
+                            Vlrjuros = _juros,
+                            Vlrmulta = _multa,
+                            Vlrtotal = _total,
+                            Nroparcela = _parc,
+                            Complparcela = _compl,
+                            Dtgeracao = DateTime.Now
+                        };
+                        Tributario_bll tributario_Class_Int = new Tributario_bll(_connection_integrativa);
+                        ex = tributario_Class_Int.Insert_Integrativa_Cancelamento(_creg);
+                        if (ex != null) {
+                            ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                            eBox.ShowDialog();
                         }
                     } else {
                         ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);

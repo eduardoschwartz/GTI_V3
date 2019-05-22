@@ -20,6 +20,7 @@ namespace GTI_Desktop.Classes {
         public enum eTweakMode { Normal, AllLetters, AllLettersAllCaps, AllLettersAllSmall, AlphaNumeric, AlphaNumericAllCaps, AlphaNumericAllSmall, IntegerPositive, DecimalPositive };
         public enum LocalEndereco { Imovel, Empresa, Cidadao }
         public enum TipoEndereco { Local, Proprietario, Entrega }
+        public enum EventoForm { Nenhum=0, Insert=1, Edit=2,Delete=3,Print=4 }
 
         private static byte[] key = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
         private static byte[] iv = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
@@ -216,6 +217,22 @@ namespace GTI_Desktop.Classes {
             try {
                 BaseDados = f1.DataBaseToolStripStatus.Text;
                 connString = CreateConnectionString(Properties.Settings.Default.ServerName, BaseDados, Ul, Up);
+            } catch (Exception) {
+            }
+            return connString;
+        }
+
+        /// <summary>Retorna a string de conexão de base alternativa.
+        /// </summary>
+        /// <returns>Nome da Conexão</returns>
+        public static string Connection_Name(string DataBase_Name) {
+            string connString = "";
+            Ul = "gtisys"; Up = "everest";
+            Main f1 = (Main)Application.OpenForms["Main"];
+            try {
+                BaseDados = DataBase_Name;
+                //connString = CreateConnectionString(Properties.Settings.Default.ServerName, BaseDados, Ul, Up);
+                connString = CreateConnectionString("SKYNET", BaseDados, Ul, Up); //Base de testes por enquanto
             } catch (Exception) {
             }
             return connString;
