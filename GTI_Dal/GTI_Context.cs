@@ -145,5 +145,6 @@ namespace GTI_Dal {
         public DbSet<Destinoreparc> Destinoreparc { get; set; }
         public DbSet<Debitocancel> Debitocancel { get; set; }
         public DbSet<Logevento> Logevento { get; set; }
+        public DbSet<Livro> Livro { get; set; }
     }
 }

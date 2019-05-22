@@ -18,7 +18,7 @@ namespace GTI_Web.Pages {
 
         }
 
-        protected void btPrint_Click(object sender, EventArgs e) {
+        protected void BtPrint_Click(object sender, EventArgs e) {
             if (txtIM.Text == "")
                 lblMsg.Text = "Digite o código do imóvel ou a inscrição municipal.";
             else {
@@ -167,26 +167,27 @@ namespace GTI_Web.Pages {
             int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Debito);
             int _ano_certidao = DateTime.Now.Year;
 
-            Certidao_debito cert = new Certidao_debito();
-            cert.Codigo = Codigo;
-            cert.Ano = (short)_ano_certidao;
-            cert.Ret = nRet;
-            cert.Numero = _numero_certidao;
-            cert.Datagravada = DateTime.Now;
-            cert.Inscricao = sInscricao;
-            cert.Nome = sNome;
-            cert.Logradouro = sEndereco;
-            cert.Numimovel = nNumeroImovel;
-            cert.Bairro = sBairro;
-            cert.Cidade = sCidade;
-            cert.UF = sUF;
-            cert.Processo = sNumProcesso;
-            cert.Dataprocesso = dDataProc;
-            cert.Atendente = sAtendente;
-            cert.Cpf = sCPF;
-            cert.Cnpj = sCNPJ;
-            cert.Atividade = sAtividade;
-            cert.Lancamento = dadosCertidao.Descricao_Lancamentos;
+            Certidao_debito cert = new Certidao_debito {
+                Codigo = Codigo,
+                Ano = (short)_ano_certidao,
+                Ret = nRet,
+                Numero = _numero_certidao,
+                Datagravada = DateTime.Now,
+                Inscricao = sInscricao,
+                Nome = sNome,
+                Logradouro = sEndereco,
+                Numimovel = nNumeroImovel,
+                Bairro = sBairro,
+                Cidade = sCidade,
+                UF = sUF,
+                Processo = sNumProcesso,
+                Dataprocesso = dDataProc,
+                Atendente = sAtendente,
+                Cpf = sCPF,
+                Cnpj = sCNPJ,
+                Atividade = sAtividade,
+                Lancamento = dadosCertidao.Descricao_Lancamentos
+            };
             Exception ex = tributario_Class.Insert_Certidao_Debito(cert);
             if (ex != null) {
                 throw ex;

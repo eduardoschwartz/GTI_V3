@@ -2209,5 +2209,16 @@ Proximo:;
             }
         }
 
+        public Tipolivro Retorna_Tipo_Livro_Divida_Ativa(int _lancamento) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                Tipolivro Sql = (from l in db.Lancamento
+                           join t in db.Tipolivro on l.Tipolivro equals t.Codtipo into lt from t in lt.DefaultIfEmpty()
+                           where l.Codlancamento==_lancamento
+                           select t).FirstOrDefault();
+                return Sql;
+            }
+        }
+
+
     }//end class
 }

@@ -418,7 +418,7 @@
             this.OutrosMenu});
             this.MainMenu.Location = new System.Drawing.Point(4, 32);
             this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(736, 24);
+            this.MainMenu.Size = new System.Drawing.Size(856, 24);
             this.MainMenu.TabIndex = 45;
             this.MainMenu.Text = "menuStrip1";
             // 
@@ -545,6 +545,7 @@
             this.dividaAtivaToolStripMenuItem.Name = "dividaAtivaToolStripMenuItem";
             this.dividaAtivaToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.dividaAtivaToolStripMenuItem.Text = "Divida Ativa";
+            this.dividaAtivaToolStripMenuItem.Click += new System.EventHandler(this.dividaAtivaToolStripMenuItem_Click);
             // 
             // CancelamentoDebitoMenu
             // 

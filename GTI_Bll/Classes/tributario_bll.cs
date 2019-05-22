@@ -1108,6 +1108,15 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        /// <summary>
+        /// Retorna o tipo de livro da divida ativa
+        /// </summary>
+        /// <param name="_lancamento"></param>
+        /// <returns></returns>
+        public Tipolivro Retorna_Tipo_Livro_Divida_Ativa(int _lancamento) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Retorna_Tipo_Livro_Divida_Ativa(_lancamento);
+        }
 
     }//end class
 }

@@ -118,6 +118,7 @@
     <Compile Include="Models\isencao.cs" />
     <Compile Include="Models\lancamento.cs" />
     <Compile Include="Models\laseriptu.cs" />
+    <Compile Include="Models\livro.cs" />
     <Compile Include="Models\logevento.cs" />
     <Compile Include="Models\mei.cs" />
     <Compile Include="Models\mobiliario.cs" />
