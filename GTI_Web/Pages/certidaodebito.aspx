@@ -57,7 +57,7 @@
                      <td class="auto-style1">&nbsp;Digite o conteúdo da imagem                                              
                          <br />
                          <asp:TextBox ID="txtimgcode" runat="server" OnClick="btConsultar_Click" ViewStateMode="Disabled" Width="147px" TabIndex="3" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px"></asp:TextBox>
-                         &nbsp; <asp:Button ID="Button1" class="button1" runat="server" Text="Imprimir" OnClick="btPrint_Click" />
+                         &nbsp; <asp:Button ID="Button1" class="button1" runat="server" Text="Imprimir" OnClick="BtPrint_Click" />
                      </td>
                  </tr>
                  <tr>

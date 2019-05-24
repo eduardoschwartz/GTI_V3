@@ -36,7 +36,7 @@ namespace UIWeb.Pages {
             Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
             List<Boletoguia> ListaBoleto = tributario_Class.Lista_Boleto_Guia(nSid);
             if (ListaBoleto.Count > 0) {
-                tributario_Class.Insert_Carne_Web(Convert.ToInt32(ListaBoleto[0].Codreduzido), 2018);
+                tributario_Class.Insert_Carne_Web(Convert.ToInt32(ListaBoleto[0].Codreduzido), 2019);
                 DataSet Ds = gtiCore.ToDataSet(ListaBoleto);
                 ReportDataSource rdsAct = new ReportDataSource("DataSet1", Ds.Tables[0]);
                 ReportViewer viewer = new ReportViewer();

@@ -33,7 +33,7 @@ namespace UIWeb.Pages {
                         return;
                     } else {
                         ImovelStruct reg = imovel_Class.Dados_Imovel(Num);
-                        if (gtiCore.RetornaNumero(  txtIC.Text) != reg.Inscricao) {
+                        if (gtiCore.RetornaNumero(  txtIC.Text) != gtiCore.RetornaNumero( reg.Inscricao)) {
                             lblmsg.Text = "Inscrição cadastral inválida!";
                             return;
                         }
@@ -51,7 +51,7 @@ namespace UIWeb.Pages {
             int nSid = gravaCarne();
             if (nSid > 0) {
                 Session["sid"] = nSid;
-                Response.Redirect("~/Pages/SegundaViaCIPFim.aspx");
+                Response.Redirect("~/Pages/SegundaViaCIPFim.aspx?d=gti");
             }
         }
 
@@ -61,7 +61,7 @@ namespace UIWeb.Pages {
             int nImovel = Convert.ToInt32(txtCod.Text);
             Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
             Imovel_bll imovel_Class = new Imovel_bll("GTIconnection");
-            List<DebitoStructure> Extrato_Lista = tributario_Class.Lista_Parcelas_CIP(nImovel, 2018);
+            List<DebitoStructure> Extrato_Lista = tributario_Class.Lista_Parcelas_CIP(nImovel, 2019);
             if (Extrato_Lista.Count == 0) {
                 lblmsg.Text = "Não é possível emitir segunda via para este código";
                 return 0;
@@ -85,8 +85,8 @@ namespace UIWeb.Pages {
                 reg.Bairro = dados_imovel.NomeBairro;
                 reg.Cidade = "JABOTICABAL";
                 reg.Uf = "SP";
-                reg.Desclanc = "CONTRIBUIÇÃO DE ILUMINAÇÃO PÚBLICA (CIP-2018)";
-                reg.Fulllanc = "CONTRIBUIÇÃO DE ILUMINAÇÃO PÚBLICA (CIP-2018)";
+                reg.Desclanc = "CONTRIBUIÇÃO DE ILUMINAÇÃO PÚBLICA (CIP-2019)";
+                reg.Fulllanc = "CONTRIBUIÇÃO DE ILUMINAÇÃO PÚBLICA (CIP-2019)";
                 reg.Numdoc = item.Numero_Documento.ToString();
                 reg.Numparcela = (short)item.Numero_Parcela;
                 reg.Datavencto = Convert.ToDateTime(item.Data_Vencimento);
