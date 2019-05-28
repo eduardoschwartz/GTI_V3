@@ -126,7 +126,7 @@ namespace GTI_Web.Pages {
                     crystalReport.SetParameterValue("PERC", nPerc);
                     crystalReport.SetParameterValue("DATAPROCESSO", ListaIsencao[0].dataprocesso);
                 } else {
-                    if (SomaArea < 65) {
+                    if (SomaArea <= 65) {
                         //Se tiver área < 65m² mas tiver mais de 1 imóvel, perde a isenção.
                         int nQtdeImovel = imovel_Class.Qtde_Imovel_Cidadao(Codigo);
                         if (nQtdeImovel > 1) {

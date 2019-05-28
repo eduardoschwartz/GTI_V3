@@ -24,9 +24,15 @@ namespace GTI_Desktop.Forms {
             _codigo = Lista[0].Codreduzido;
             int _lanc = Convert.ToInt32(Lista[0].Desclancamento.Substring(0, 2));
             Tipolivro _tipo_livro = tributario_Class.Retorna_Tipo_Livro_Divida_Ativa(_lanc);
-            LivroText.Text = _tipo_livro.Codtipo.ToString() + " - " + _tipo_livro.Desctipo;
+            if (_tipo_livro == null)
+                LivroText.Text = "0 - LIVRO NÃO CADASTRADO";
+            else
+                LivroText.Text = _tipo_livro.Codtipo.ToString() + " - " + _tipo_livro.Desctipo;
 
             foreach (SpExtrato item in Lista) {
+                _lanc = Convert.ToInt32(item.Desclancamento.Substring(0, 2));
+                _tipo_livro = tributario_Class.Retorna_Tipo_Livro_Divida_Ativa(_lanc);
+
                 ListViewItem lv = new ListViewItem(item.Anoexercicio.ToString());
                 lv.SubItems.Add(item.Desclancamento);
                 lv.SubItems.Add(item.Seqlancamento.ToString());
@@ -34,12 +40,9 @@ namespace GTI_Desktop.Forms {
                 lv.SubItems.Add(item.Codcomplemento.ToString());
                 lv.SubItems.Add(item.Datavencimento.ToString("dd/MM/yyyy"));
                 lv.SubItems.Add(item.Valortributo.ToString("#0.00"));
-                lv.SubItems.Add(_tipo_livro.Codtipo.ToString());
+                lv.SubItems.Add(_tipo_livro==null?"0":_tipo_livro.Codtipo.ToString());
                 MainListView.Items.Add(lv);
-                
             }
-
-
         }
 
         private void SairButton_Click(object sender, EventArgs e) {
@@ -48,11 +51,27 @@ namespace GTI_Desktop.Forms {
         }
 
         private void OKButton_Click(object sender, EventArgs e) {
-            DialogResult = DialogResult.OK;
-            Close();
+            List<int> _lista = new List<int>();
+            foreach (ListViewItem linha in MainListView.Items) {
+                int _tipo = Convert.ToInt32(linha.SubItems[7].Text);
+                if (_lista.Count == 0)
+                    _lista.Add(_tipo);
+                else {
+                    foreach (int item in _lista) {
+                        if (item != _tipo) {
+                            _lista.Add(item);
+                            break;
+                        }
+                    }
+                }
+            }
+            if (_lista.Count > 1)
+                MessageBox.Show("Não é possível escrever em dívida ativa lançamentos que pertencem a livros diferemtes.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else {
+                DialogResult = DialogResult.OK;
+                Close();
+            }
         }
-
-
 
     }
 }
