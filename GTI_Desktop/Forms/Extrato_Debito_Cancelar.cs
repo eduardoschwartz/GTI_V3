@@ -199,7 +199,7 @@ namespace GTI_Desktop.Forms {
                             Complparcela = _compl,
                             Dtgeracao = DateTime.Now
                         };
-                        Tributario_bll tributario_Class_Int = new Tributario_bll(_connection_integrativa);
+                        Integrativa_bll tributario_Class_Int = new Integrativa_bll(_connection_integrativa);
                         ex = tributario_Class_Int.Insert_Integrativa_Cancelamento(_creg);
                         if (ex != null) {
                             ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);

@@ -230,6 +230,5 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
-
     }
 }

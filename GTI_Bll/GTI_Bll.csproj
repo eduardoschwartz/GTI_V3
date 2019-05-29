@@ -52,10 +52,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\cidadao_bll.cs" />
+    <Compile Include="Classes\eicon_bll.cs" />
     <Compile Include="Classes\empresa_bll.cs" />
     <Compile Include="Classes\endereco_bll.cs" />
     <Compile Include="Classes\bllCore.cs" />
     <Compile Include="Classes\imovel_bll.cs" />
+    <Compile Include="Classes\integrativa_bll.cs" />
     <Compile Include="Classes\processo_bll.cs" />
     <Compile Include="Classes\sistema_bll.cs" />
     <Compile Include="Classes\tributario_bll.cs" />

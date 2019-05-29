@@ -90,6 +90,7 @@ namespace GTI_Desktop.Forms {
         private void Grava_Dados() {
             Sistema_bll sistema_Class = new Sistema_bll(_connection);
             Tributario_bll tributario_Class = new Tributario_bll(_connection);
+            
             Contribuinte_Header_Struct _header = sistema_Class.Contribuinte_Header(_codigo);
 
             string _tipo_divida = _codigo < 100000 ? "Imobiliário" : _codigo >= 500000 ? "Taxas Diversas" : "Mobiliário";
@@ -98,20 +99,24 @@ namespace GTI_Desktop.Forms {
 
             Cdas regCda = new Cdas() {
                 Iddevedor = _codigo.ToString(),
-                Setordevedor=_tipo_divida,
-                Dtinscricao=Convert.ToDateTime(DataInscricaoText.Text),
-                Nrocertidao=_certidao,
-                Nrolivro=_numero_livro,
-                Nrofolha= _pagina,
-                Dtgeracao=DateTime.Now
+                Setordevedor = _tipo_divida,
+                Dtinscricao = Convert.ToDateTime(DataInscricaoText.Text),
+                Nrocertidao = _certidao,
+                Nrolivro = _numero_livro,
+                Nrofolha = _pagina,
+                Dtgeracao = DateTime.Now
             };
-            int _idcda = tributario_Class.Insert_Integrativa_Cda(regCda);
-
+            
+            Integrativa_bll integrativa_Class = new Integrativa_bll(_connection_integrativa);
+            int _idCda = integrativa_Class.Insert_Integrativa_Cda(regCda);
 
 
             foreach (ListViewItem linha in MainListView.Items) {
 
             }
+
+
+
         }
 
     }

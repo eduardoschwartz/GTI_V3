@@ -722,15 +722,7 @@ namespace GTI_Bll.Classes {
             return obj.Calculo_IPTU(Codigo,Ano);
         }
 
-        /// <summary>
-        /// Retorna a lista das competências pagas de ISS
-        /// </summary>
-        /// <param name="Codigo"></param>
-        /// <returns></returns>
-        public List<CompetenciaISS> Resumo_CompetenciaISS(int Codigo) {
-            Tributario_Data obj = new Tributario_Data(_connection);
-            return obj.Resumo_CompetenciaISS(Codigo);
-        }
+      
 
         /// <summary>
         /// Retorna a qtde de meses nas quais a competência não foi encerrada
@@ -1097,16 +1089,6 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
-        /// <summary>
-        /// Inserir um registro na tabela Cancelamentos da Integrativa
-        /// </summary>
-        /// <param name="Reg"></param>
-        /// <returns></returns>
-        public Exception Insert_Integrativa_Cancelamento(Cancelamentos Reg) {
-            Tributario_Data obj = new Tributario_Data(_connection);
-            Exception ex = obj.Insert_Integrativa_Cancelamento(Reg);
-            return ex;
-        }
 
         /// <summary>
         /// Retorna o tipo de livro da divida ativa
@@ -1128,15 +1110,6 @@ namespace GTI_Bll.Classes {
             return obj.Retorna_Ultima_Certidao_Livro(_livro);
         }
 
-        /// <summary>
-        /// Insere um registro na tabela Cdas (Intgrativa)
-        /// </summary>
-        /// <param name="Reg"></param>
-        /// <returns></returns>
-        public int Insert_Integrativa_Cda(Cdas Reg) {
-            Tributario_Data obj = new Tributario_Data(_connection);
-            return obj.Insert_Integrativa_Cda(Reg);
-        }
 
     }//end class
 }

@@ -60,9 +60,11 @@
   <ItemGroup>
     <Compile Include="Classes\cidadao_Data.cs" />
     <Compile Include="Classes\dalCore.cs" />
+    <Compile Include="Classes\eicon_Data.cs" />
     <Compile Include="Classes\empresa_Data.cs" />
     <Compile Include="Classes\endereco_Data.cs" />
     <Compile Include="Classes\imovel_Data.cs" />
+    <Compile Include="Classes\integrativa_Data.cs" />
     <Compile Include="Integrativa_Context.cs" />
     <Compile Include="Classes\sistema_Data.cs" />
     <Compile Include="Classes\tributario_Data.cs" />
