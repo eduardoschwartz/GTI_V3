@@ -66,16 +66,8 @@ namespace GTI_Bll.Classes {
         /// <summary>Retorna os dados principais do contribuinte.
         /// </summary>
         public Contribuinte_Header_Struct Contribuinte_Header(int Codigo) {
-            TipoCadastro Tipo;
             Sistema_Data obj = new Sistema_Data(_connection);
-            if (Codigo < 100000)
-                Tipo = TipoCadastro.Imovel;
-            else if (Codigo >= 100000 && Codigo < 500000)
-                Tipo = TipoCadastro.Empresa;
-            else
-                Tipo = TipoCadastro.Cidadao;
-
-            return obj.Contribuinte_Header(Codigo, Tipo);
+            return obj.Contribuinte_Header(Codigo);
         }
 
         /// <summary>Verifica se o código fornacido esta cadastrado no sistema

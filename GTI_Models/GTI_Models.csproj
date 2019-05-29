@@ -78,6 +78,7 @@
     <Compile Include="Models\carta_cobranca_detalhe.cs" />
     <Compile Include="Models\carta_cobranca_exclusao.cs" />
     <Compile Include="Models\categconstr.cs" />
+    <Compile Include="Models\cdas.cs" />
     <Compile Include="Models\cep.cs" />
     <Compile Include="Models\certidao_debito.cs" />
     <Compile Include="Models\certidao_debito_doc.cs" />

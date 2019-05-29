@@ -19,7 +19,7 @@ namespace GTI_Desktop.Classes {
         
         public enum eTweakMode { Normal, AllLetters, AllLettersAllCaps, AllLettersAllSmall, AlphaNumeric, AlphaNumericAllCaps, AlphaNumericAllSmall, IntegerPositive, DecimalPositive };
         public enum LocalEndereco { Imovel, Empresa, Cidadao }
-        public enum TipoEndereco { Local, Proprietario, Entrega }
+   //     public enum TipoEndereco { Local, Proprietario, Entrega }
         public enum EventoForm { Nenhum=0, Insert=1, Edit=2,Delete=3,Print=4 }
 
         private static byte[] key = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };

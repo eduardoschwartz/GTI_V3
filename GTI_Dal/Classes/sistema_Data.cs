@@ -9,7 +9,7 @@ using static GTI_Models.modelCore;
 namespace GTI_Dal.Classes {
     public class Sistema_Data {
 
-        private string _connection;
+        private static string _connection;
         public Sistema_Data(string sConnection) {
             _connection = sConnection;
         }
@@ -61,75 +61,147 @@ namespace GTI_Dal.Classes {
             return _lista;
         }
 
-        public Contribuinte_Header_Struct Contribuinte_Header(int Codigo, TipoCadastro Tipo) {
-            Contribuinte_Header_Struct reg = new Contribuinte_Header_Struct {
-                Codigo = Codigo,
-                Tipo = Tipo
-            };
-            if (Tipo == TipoCadastro.Imovel) {
-                Imovel_Data imovel_Class = new Imovel_Data(_connection);
-                bool Existe = imovel_Class.Existe_Imovel(Codigo);
-                if (!Existe)
-                    return null;
-                List<ProprietarioStruct> ListaProp = imovel_Class.Lista_Proprietario(Codigo, true);
-                reg.Nome = ListaProp[0].Nome;
-                reg.Cpf_cnpj = ListaProp[0].CPF;
-                ImovelStruct RegImovel = imovel_Class.Dados_Imovel(Codigo);
-                reg.Inscricao = RegImovel.Inscricao;
-                reg.Endereco = RegImovel.NomeLogradouro;
-                reg.Numero = (short)RegImovel.Numero;
-                reg.Complemento = RegImovel.Complemento;
-                reg.Nome_bairro = RegImovel.NomeBairro;
-                reg.Nome_cidade = "JABOTICABAL";
-                reg.Nome_uf = "SP";
-                reg.Cep = RegImovel.Cep;
-                reg.Quadra_original = RegImovel.QuadraOriginal;
-                reg.Lote_original = RegImovel.LoteOriginal;
-                reg.Atividade = "";
-                reg.TipoEndereco = RegImovel.EE_TipoEndereco == 0 ? TipoEndereco.Local : RegImovel.EE_TipoEndereco == 1 ? TipoEndereco.Proprietario : TipoEndereco.Entrega;
-                reg.Ativo = (bool)RegImovel.Inativo  ? false : true;
-            } else if (Tipo == TipoCadastro.Empresa) {
-                Empresa_Data empresa_Class = new Empresa_Data(_connection);
-                bool Existe = empresa_Class.Existe_Empresa(Codigo);
-                if (!Existe)
-                    return null;
+        public Contribuinte_Header_Struct Contribuinte_Header(int _codigo) {
+            string _nome = "", _inscricao = "", _endereco = "", _complemento = "", _bairro = "", _cidade = "", _uf = "", _cep = "", _quadra = "", _lote = "";
+            string _endereco_entrega = "", _complemento_entrega = "", _bairro_entrega = "", _cidade_entrega = "", _uf_entrega = "", _cep_entrega = "";
+            string _cpf_cnpj = "",_atividade="";
+            int _numero = 0, _numero_entrega = 0;
+            bool _ativo = false;
+            TipoCadastro _tipo_cadastro;
+            _tipo_cadastro = _codigo < 100000 ? TipoCadastro.Imovel : (_codigo >= 100000 && _codigo < 500000) ? TipoCadastro.Empresa : TipoCadastro.Cidadao;
 
-                EmpresaStruct regEmpresa = empresa_Class.Retorna_Empresa(Codigo);
-                reg.Nome = regEmpresa.Razao_social;
-                reg.Inscricao = "";
-                reg.Cpf_cnpj = regEmpresa.Cpf_cnpj;
-                reg.Endereco = regEmpresa.Endereco_nome;
-                reg.Numero = (short)regEmpresa.Numero;
-                reg.Complemento = regEmpresa.Complemento;
-                reg.Nome_bairro = regEmpresa.Bairro_nome;
-                reg.Nome_cidade = regEmpresa.Cidade_nome;
-                reg.Nome_uf = regEmpresa.UF;
-                reg.Cep = regEmpresa.Cep;
-                reg.Quadra_original = "";
-                reg.Lote_original = "";
-                reg.Atividade = regEmpresa.Atividade_extenso;
-                reg.Ativo = regEmpresa.Data_Encerramento == null ? true : false;
+            if (_tipo_cadastro == TipoCadastro.Imovel) {
+                Imovel_Data imovel_Class = new Imovel_Data(_connection);
+                ImovelStruct _imovel = imovel_Class.Dados_Imovel(_codigo);
+                List<ProprietarioStruct> _proprietario = imovel_Class.Lista_Proprietario(_codigo, true);
+                _nome = _proprietario[0].Nome;
+                _cpf_cnpj = _proprietario[0].CPF;
+                _inscricao = _imovel.Inscricao;
+                _endereco = _imovel.NomeLogradouro;
+                _numero = (int)_imovel.Numero;
+                _complemento = _imovel.Complemento;
+                _bairro = _imovel.NomeBairro;
+                _cidade = "JABOTICABAL";
+                _uf = "SP";
+                _ativo = (bool)_imovel.Inativo ? false : true;
+                _lote = _imovel.LoteOriginal;
+                _quadra = _imovel.QuadraOriginal;
+
+                //Carrega Endereço de Entrega do imóvel
+                GTI_Models.modelCore.TipoEndereco Tipoend = _imovel.EE_TipoEndereco == 0 ? GTI_Models.modelCore.TipoEndereco.Local : _imovel.EE_TipoEndereco == 1 ? GTI_Models.modelCore.TipoEndereco.Proprietario : GTI_Models.modelCore.TipoEndereco.Entrega;
+                EnderecoStruct regEntrega = imovel_Class.Dados_Endereco(_codigo, Tipoend);
+                if (regEntrega != null) {
+                    _endereco_entrega = regEntrega.Endereco.ToString();
+                    _numero_entrega = (int)regEntrega.Numero;
+                    _complemento_entrega = regEntrega.Complemento.ToString();
+                    _uf_entrega = regEntrega.UF.ToString();
+                    _cidade_entrega = regEntrega.NomeCidade.ToString();
+                    _bairro_entrega = regEntrega.NomeBairro.ToString();
+                    _cep_entrega = regEntrega.Cep == null ? "00000-000" : Convert.ToInt32(regEntrega.Cep.ToString()).ToString("00000-000");
+                }
             } else {
-                Cidadao_Data cidadao_Class = new Cidadao_Data(_connection);
-                bool Existe = cidadao_Class.ExisteCidadao(Codigo);
-                if (!Existe)
-                    return null;
-                Cidadao regCidadao = cidadao_Class.Retorna_Cidadao(Codigo);
-                reg.Nome = regCidadao.Nomecidadao;
-                reg.Inscricao = "";
-                reg.Cpf_cnpj = regCidadao.Cpf;
-                reg.Endereco = regCidadao.Nomelogradouro;
-                reg.Numero =regCidadao.Numimovel==null?(short)0:  (short)regCidadao.Numimovel;
-                reg.Complemento = regCidadao.Complemento;
-                reg.Nome_bairro = regCidadao.Nomebairro;
-                reg.Nome_cidade = regCidadao.Nomecidade;
-                reg.Nome_uf = regCidadao.Siglauf;
-                reg.Cep = regCidadao.Cep.ToString();
-                reg.Quadra_original = "";
-                reg.Lote_original = "";
-                reg.Atividade = "";
-                reg.Ativo = true;
+                if (_tipo_cadastro == TipoCadastro.Empresa) {
+                    Empresa_Data empresa_Class = new Empresa_Data(_connection);
+                    EmpresaStruct _empresa = empresa_Class.Retorna_Empresa(_codigo);
+                    _nome = _empresa.Razao_social;
+                    _inscricao = _empresa.Inscricao_estadual;
+                    _cpf_cnpj = _empresa.Cpf_cnpj;
+                    _endereco = _empresa.Endereco_nome;
+                    _numero = (int)_empresa.Numero;
+                    _complemento = _empresa.Complemento;
+                    _bairro = _empresa.Bairro_nome;
+                    _cidade = _empresa.Cidade_nome;
+                    _uf = _empresa.UF;
+                    _cep = _empresa.Cep;
+                    _ativo = _empresa.Data_Encerramento == null ? true : false;
+                    _atividade = _empresa.Atividade_extenso;
+
+                    //Carrega Endereço de Entrega da Empresa
+                    mobiliarioendentrega regEntrega = empresa_Class.Empresa_Endereco_entrega(_codigo);
+                    _endereco_entrega = regEntrega.Nomelogradouro.ToString();
+                    _numero_entrega = (int)regEntrega.Numimovel;
+                    _complemento_entrega = regEntrega.Complemento.ToString();
+                    _uf_entrega = regEntrega.Uf.ToString();
+                    _cidade_entrega = regEntrega.Desccidade;
+                    _bairro_entrega = regEntrega.Descbairro;
+                    _cep_entrega = regEntrega.Cep == null ? "00000-000" : Convert.ToInt32(regEntrega.Cep.ToString()).ToString("00000-000");
+                } else {
+                    Cidadao_Data cidadao_Class = new Cidadao_Data(_connection);
+                    CidadaoStruct _cidadao = cidadao_Class.Dados_Cidadao(_codigo);
+                    _nome = _cidadao.Nome;
+                    _inscricao = _codigo.ToString();
+                    _cpf_cnpj = _cidadao.Cpf;
+                    _ativo = true;
+                    if (_cidadao.EtiquetaC == "S") {
+                        if (_cidadao.CodigoCidadeC == 413) {
+                            _endereco = _cidadao.EnderecoC.ToString();
+                            Endereco_Data endereco_Class = new Endereco_Data(_connection);
+                            if (_cidadao.NumeroC == null || _cidadao.NumeroC == 0 || _cidadao.CodigoLogradouroC == null || _cidadao.CodigoLogradouroC == 0)
+                                _cep = "14870000";
+                            else
+                                _cep = endereco_Class.RetornaCep((int)_cidadao.CodigoLogradouroC, Convert.ToInt16(_cidadao.NumeroC)).ToString("00000000");
+                        } else {
+                            _endereco = _cidadao.CodigoCidadeC.ToString();
+                            _cep = _cidadao.CepC.ToString();
+                        }
+                        _numero = (int)_cidadao.NumeroC;
+                        _complemento = _cidadao.ComplementoC;
+                        _bairro = _cidadao.NomeBairroC;
+                        _cidade = _cidadao.NomeCidadeC;
+                        _uf = _cidadao.UfC;
+                    } else {
+                        if (_cidadao.CodigoCidadeR == 413) {
+                            _endereco = _cidadao.EnderecoR.ToString();
+                            Endereco_Data endereco_Class = new Endereco_Data(_connection);
+                            if (_cidadao.NumeroR == null || _cidadao.NumeroR == 0 || _cidadao.CodigoLogradouroR == null || _cidadao.CodigoLogradouroR == 0)
+                                _cep = "14870000";
+                            else
+                                _cep = endereco_Class.RetornaCep((int)_cidadao.CodigoLogradouroR, Convert.ToInt16(_cidadao.NumeroR)).ToString("00000000");
+                        } else {
+                            _endereco = _cidadao.CodigoCidadeR.ToString();
+                            _cep = _cidadao.CepR.ToString();
+                        }
+                        _numero = (int)_cidadao.NumeroR;
+                        _complemento = _cidadao.ComplementoR;
+                        _bairro = _cidadao.NomeBairroR;
+                        _cidade = _cidadao.NomeCidadeR;
+                        _uf = _cidadao.UfR;
+                    }
+                    _endereco_entrega = _endereco;
+                    _numero_entrega = _numero;
+                    _complemento_entrega = _complemento;
+                    _uf_entrega = _uf;
+                    _cidade_entrega = _cidade;
+                    _bairro_entrega = _bairro;
+                    _cep_entrega = _cep;
+                }
             }
+
+            Contribuinte_Header_Struct reg = new Contribuinte_Header_Struct {
+                Codigo = _codigo,
+                Tipo = _tipo_cadastro,
+                Nome=_nome,
+                Inscricao=_inscricao,
+                Cpf_cnpj=_cpf_cnpj,
+                Endereco=_endereco,
+                Endereco_entrega=_endereco_entrega,
+                Numero=(short)_numero,
+                Numero_entrega=(short)_numero_entrega,
+                Complemento=_complemento,
+                Complemento_entrega=_complemento_entrega,
+                Nome_bairro=_bairro,
+                Nome_bairro_entrega=_bairro_entrega,
+                Nome_cidade=_cidade,
+                Nome_cidade_entrega=_cidade_entrega,
+                Nome_uf=_uf,
+                Nome_uf_entrega=_uf_entrega,
+                Cep=_cep,
+                Cep_entrega=_cep_entrega,
+                Ativo=_ativo,
+                Lote_original=_lote,
+                Quadra_original=_quadra,
+                Atividade=_atividade
+            };
 
             return reg;
         }
@@ -296,11 +368,12 @@ namespace GTI_Dal.Classes {
         public Exception Incluir_Usuario(Usuario reg) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
-                    List<SqlParameter> parameters = new List<SqlParameter>();
-                    parameters.Add(new SqlParameter("@id", reg.Id));
-                    parameters.Add(new SqlParameter("@nomelogin", reg.Nomelogin));
-                    parameters.Add(new SqlParameter("@nomecompleto", reg.Nomecompleto));
-                    parameters.Add(new SqlParameter("@setor_atual", reg.Setor_atual));
+                    List<SqlParameter> parameters = new List<SqlParameter> {
+                        new SqlParameter("@id", reg.Id),
+                        new SqlParameter("@nomelogin", reg.Nomelogin),
+                        new SqlParameter("@nomecompleto", reg.Nomecompleto),
+                        new SqlParameter("@setor_atual", reg.Setor_atual)
+                    };
 
                     db.Database.ExecuteSqlCommand("INSERT INTO usuario2(id,nomelogin,nomecompleto,ativo,setor_atual)" +
                                                   " VALUES(@id,@nomelogin,@nomecompleto,@ativo,@setor_atual)",parameters.ToArray());
@@ -354,14 +427,15 @@ namespace GTI_Dal.Classes {
                            where t.Id==Id
                            orderby t.Nomelogin select new usuarioStruct {Nome_login= t.Nomelogin,  Nome_completo=t.Nomecompleto,Ativo= t.Ativo,
                                Id=  t.Id, Senha= t.Senha, Setor_atual= t.Setor_atual, Nome_setor= cc.Descricao }).FirstOrDefault();
-                usuarioStruct Sql = new usuarioStruct();
-                Sql.Id = reg.Id;
-                Sql.Nome_completo = reg.Nome_completo;
-                Sql.Nome_login = reg.Nome_login;
-                Sql.Senha = reg.Senha;
-                Sql.Setor_atual = reg.Setor_atual;
-                Sql.Nome_setor = reg.Nome_setor;
-                Sql.Ativo = reg.Ativo;
+                usuarioStruct Sql = new usuarioStruct {
+                    Id = reg.Id,
+                    Nome_completo = reg.Nome_completo,
+                    Nome_login = reg.Nome_login,
+                    Senha = reg.Senha,
+                    Setor_atual = reg.Setor_atual,
+                    Nome_setor = reg.Nome_setor,
+                    Ativo = reg.Ativo
+                };
                 return Sql;
             }
         }
@@ -394,15 +468,16 @@ namespace GTI_Dal.Classes {
                 nMax += 1;
 
                 try {
-                    List<SqlParameter> parameters = new List<SqlParameter>();
-                    parameters.Add(new SqlParameter("@seq", nMax));
-                    parameters.Add(new SqlParameter("@datahoraevento", reg.Datahoraevento));
-                    parameters.Add(new SqlParameter("@computador", reg.Computador));
-                    parameters.Add(new SqlParameter("@form", reg.Form));
-                    parameters.Add(new SqlParameter("@evento", reg.Evento));
-                    parameters.Add(new SqlParameter("@secevento", reg.Secevento));
-                    parameters.Add(new SqlParameter("@logevento", reg.LogEvento));
-                    parameters.Add(new SqlParameter("@userid", reg.Userid));
+                    List<SqlParameter> parameters = new List<SqlParameter> {
+                        new SqlParameter("@seq", nMax),
+                        new SqlParameter("@datahoraevento", reg.Datahoraevento),
+                        new SqlParameter("@computador", reg.Computador),
+                        new SqlParameter("@form", reg.Form),
+                        new SqlParameter("@evento", reg.Evento),
+                        new SqlParameter("@secevento", reg.Secevento),
+                        new SqlParameter("@logevento", reg.LogEvento),
+                        new SqlParameter("@userid", reg.Userid)
+                    };
 
                     db.Database.ExecuteSqlCommand("INSERT INTO logevento(seq,datahoraevento,computador,form,evento,secevento,logevento,userid)" +
                                                   " VALUES(@seq,@datahoraevento,@computador,@form,@evento,@secevento,@logevento,@userid)", parameters.ToArray());

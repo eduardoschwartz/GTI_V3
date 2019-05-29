@@ -9,7 +9,7 @@ using System.Data;
 namespace GTI_Dal.Classes {
     public class Processo_Data {
 
-        private string _connection;
+        private static string  _connection;
         public Processo_Data(string sConnection) {
             _connection = sConnection;
         }

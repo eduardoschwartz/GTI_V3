@@ -988,7 +988,7 @@ namespace GTI_Dal.Classes {
 
 
             Sistema_Data sistema_Class = new Sistema_Data("GTIconnection");
-            Contribuinte_Header_Struct regDados = sistema_Class.Contribuinte_Header(nCodigo,Local);
+            Contribuinte_Header_Struct regDados = sistema_Class.Contribuinte_Header(nCodigo);
             sNome = regDados.Nome;
             sCPF = regDados.Cpf_cnpj;
             sInscricao = regDados.Inscricao;
@@ -2219,6 +2219,28 @@ Proximo:;
             }
         }
 
+        public int Retorna_Ultima_Certidao_Livro(int _livro) {
+            int maxCod = 0;
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var Sql = (from p in db.Debitoparcela where p.Numerolivro == _livro select p.Numcertidao).Max();
+                maxCod = Convert.ToInt32(Sql) + 1;
+            }
+            return maxCod;
+        }
+
+        public int Insert_Integrativa_Cda(Cdas Reg) {
+            int _ret = 0;
+            using (Integrativa_Context db = new Integrativa_Context(_connection)) {
+                try {
+                    db.Cdas.Add(Reg);
+                    db.SaveChanges();
+                    _ret = Reg.Idcda;
+                } catch  {
+
+                }
+                return _ret;
+            }
+        }
 
     }//end class
 }

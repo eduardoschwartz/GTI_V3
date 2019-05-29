@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace GTI_Bll.Classes {
     public class Tributario_bll {
 
-        private string _connection;
+        private static string _connection;
 
         public Tributario_bll(string sConnection) {
             _connection = sConnection;
@@ -1116,6 +1116,26 @@ namespace GTI_Bll.Classes {
         public Tipolivro Retorna_Tipo_Livro_Divida_Ativa(int _lancamento) {
             Tributario_Data obj = new Tributario_Data(_connection);
             return obj.Retorna_Tipo_Livro_Divida_Ativa(_lancamento);
+        }
+
+        /// <summary>
+        /// Retorna a próxima certidão disponível de divida ativa de um livro.
+        /// </summary>
+        /// <param name="_livro"></param>
+        /// <returns></returns>
+        public int Retorna_Ultima_Certidao_Livro(int _livro) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Retorna_Ultima_Certidao_Livro(_livro);
+        }
+
+        /// <summary>
+        /// Insere um registro na tabela Cdas (Intgrativa)
+        /// </summary>
+        /// <param name="Reg"></param>
+        /// <returns></returns>
+        public int Insert_Integrativa_Cda(Cdas Reg) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Insert_Integrativa_Cda(Reg);
         }
 
     }//end class
