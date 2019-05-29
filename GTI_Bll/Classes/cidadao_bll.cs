@@ -154,5 +154,11 @@ namespace GTI_Bll.Classes {
             Exception ex = obj.Incluir_observacao_cidadao(reg);
             return ex;
         }
+
+        public CidadaoStruct Dados_Cidadao(int _codigo) {
+            Cidadao_Data obj = new Cidadao_Data(_connection);
+            return obj.Dados_Cidadao(_codigo);
+        }
+
     }
 }

@@ -4,8 +4,10 @@ using GTI_Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 using static GTI_Desktop.Classes.GtiTypes;
+using static GTI_Desktop.Classes.gtiCore;
 
 namespace GTI_Desktop.Forms {
     public partial class Divida_Ativa_Manual : Form {
@@ -42,6 +44,8 @@ namespace GTI_Desktop.Forms {
                 lv.SubItems.Add(item.Valortributo.ToString("#0.00"));
                 lv.SubItems.Add(_tipo_livro==null?"0":_tipo_livro.Codtipo.ToString());
                 MainListView.Items.Add(lv);
+
+                DataInscricaoText.Text = DateTime.Now.ToString("dd/MM/yyyy");
             }
         }
 
@@ -65,11 +69,105 @@ namespace GTI_Desktop.Forms {
                     }
                 }
             }
+
             if (_lista.Count > 1)
-                MessageBox.Show("Não é possível escrever em dívida ativa lançamentos que pertencem a livros diferemtes.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Não é possível escrever em dívida ativa lançamentos que pertencem a livros diferentes.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
-                DialogResult = DialogResult.OK;
-                Close();
+                if (Convert.ToInt32(LivroText.Text.Substring(0, 1)) == 0)
+                    MessageBox.Show("Nenhum livro selecionado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else {
+                    DateTime _data;
+                    if (!DateTime.TryParseExact(DataInscricaoText.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out _data)) {
+                        MessageBox.Show("Data de Inscrição inválida.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    } else {
+                        Grava_Dados();
+                        DialogResult = DialogResult.OK;
+                        Close();
+                    }
+                }
+            }
+        }
+
+        private void Grava_Dados() {
+            string _nome = "", _inscricao = "", _endereco = "", _complemento = "", _bairro = "", _cidade = "", _uf = "", _cep = "",_quadra="",_lote="";
+            string _endereco_entrega = "", _complemento_entrega = "", _bairro_entrega = "", _cidade_entrega = "", _uf_entrega = "",_tipo_divida;
+            int _numero = 0,_numero_entrega=0;
+            LocalEndereco _tipo_cadastro;
+
+            _tipo_cadastro = _codigo < 100000 ? LocalEndereco.Imovel : (_codigo >= 100000 && _codigo < 500000) ? LocalEndereco.Empresa : LocalEndereco.Cidadao;
+
+            if (_tipo_cadastro == LocalEndereco.Imovel) {
+                Imovel_bll imovel_Class = new Imovel_bll(_connection);
+                ImovelStruct _imovel = imovel_Class.Dados_Imovel(_codigo);
+                _nome = _imovel.Proprietario_Nome;
+                _inscricao = _imovel.Inscricao;
+                _endereco = _imovel.NomeLogradouro;
+                _numero = (int)_imovel.Numero;
+                _complemento = _imovel.Complemento;
+                _bairro = _imovel.NomeBairro;
+                _cidade = "JABOTICABAL";
+                _uf = "SP";
+            } else {
+                if (_tipo_cadastro == LocalEndereco.Empresa) {
+                    Empresa_bll empresa_Class = new Empresa_bll(_connection);
+                    EmpresaStruct _empresa = empresa_Class.Retorna_Empresa(_codigo);
+                    _nome = _empresa.Razao_social;
+                    _inscricao = _empresa.Inscricao_estadual;
+                    _endereco = _empresa.Endereco_nome;
+                    _numero = (int)_empresa.Numero;
+                    _complemento = _empresa.Complemento;
+                    _bairro = _empresa.Bairro_nome;
+                    _cidade = _empresa.Cidade_nome;
+                    _uf = _empresa.UF;
+                } else {
+                    Cidadao_bll cidadao_Class = new Cidadao_bll(_connection);
+                    CidadaoStruct _cidadao = cidadao_Class.Dados_Cidadao(_codigo);
+                    _nome = _cidadao.Nome;
+                    _inscricao = _codigo.ToString();
+                    if (_cidadao.EtiquetaC == "S") {
+                        if (_cidadao.CodigoCidadeC == 413) {
+                            _endereco = _cidadao.EnderecoC.ToString();
+                            Endereco_bll endereco_Class = new Endereco_bll(_connection);
+                            if (_cidadao.NumeroC == null || _cidadao.NumeroC == 0 || _cidadao.CodigoLogradouroC == null || _cidadao.CodigoLogradouroC==0)
+                                _cep = "14870000";
+                            else 
+                            _cep = endereco_Class.RetornaCep((int)_cidadao.CodigoLogradouroC,  Convert.ToInt16(_cidadao.NumeroC)).ToString("00000000");
+                        } else {
+                            _endereco = _cidadao.CodigoCidadeC.ToString();
+                            _cep =  _cidadao.CepC.ToString();
+                        }
+                        _numero =(int)_cidadao.NumeroC;
+                        _complemento = _cidadao.ComplementoC;
+                        _bairro = _cidadao.NomeBairroC;
+                        _cidade = _cidadao.NomeCidadeC;
+                        _uf = _cidadao.UfC;
+                    } else {
+                        if (_cidadao.CodigoCidadeR == 413) {
+                            _endereco = _cidadao.EnderecoR.ToString();
+                            Endereco_bll endereco_Class = new Endereco_bll(_connection);
+                            if (_cidadao.NumeroR == null || _cidadao.NumeroR == 0 || _cidadao.CodigoLogradouroR == null || _cidadao.CodigoLogradouroR == 0)
+                                _cep = "14870000";
+                            else
+                                _cep = endereco_Class.RetornaCep((int)_cidadao.CodigoLogradouroR, Convert.ToInt16(_cidadao.NumeroR)).ToString("00000000");
+                        } else {
+                            _endereco = _cidadao.CodigoCidadeR.ToString();
+                            _cep = _cidadao.CepR.ToString();
+                        }
+                        _numero = (int)_cidadao.NumeroR;
+                        _complemento = _cidadao.ComplementoR;
+                        _bairro = _cidadao.NomeBairroR;
+                        _cidade = _cidadao.NomeCidadeR;
+                        _uf = _cidadao.UfR;
+                    }
+                }
+            }
+
+
+
+
+
+            foreach (ListViewItem linha in MainListView.Items) {
+
             }
         }
 

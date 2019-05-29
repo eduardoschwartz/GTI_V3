@@ -1203,8 +1203,8 @@ InicioObs:
                                 _valor_juros += spitem.Valorjuros;
                                 _valor_multa += spitem.Valormulta;
                                 _valor_correcao += spitem.Valorcorrecao;
-                                _livro = (int)spitem.Numlivro;
-                                _pagina = (int)spitem.Pagina;
+                                _livro = spitem.Numlivro==null?0:(int)spitem.Numlivro;
+                                _pagina = spitem.Pagina==null?0:(int)spitem.Pagina;
                             }
                         }
                         _valor_total += _valor_juros + _valor_multa+_valor_correcao;
