@@ -16,6 +16,8 @@ namespace GTI_Dal.Classes {
 
         public DbSet<Cancelamentos> Cancelamentos { get; set; }
         public DbSet<Cdas> Cdas { get; set; }
-
+        public DbSet<Cdadebitos> Cdadebitos { get; set; }
+        public DbSet<Cadastro> Cadastro { get; set; }
+        public DbSet<Partes> Partes { get; set; }
     }
 }

@@ -64,7 +64,7 @@ namespace GTI_Desktop.Forms {
 
         private void Gera_Matriz(int _codigo_ini, int _codigo_fim, DateTime _data_vencto) {
             int _total = _codigo_fim - _codigo_ini + 1, _pos = 1, _numero_documento = 5136342; //5.100.001 até 5.400.000
-            DateTime _data_vencimento = Convert.ToDateTime("10/06/2019");
+            DateTime _data_vencimento = Convert.ToDateTime("10/07/2019");
 
             Exception ex = null;
             List<SpExtrato_carta> Lista_Resumo = new List<SpExtrato_carta>();

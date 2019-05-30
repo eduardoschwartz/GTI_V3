@@ -71,6 +71,7 @@
     <Compile Include="Models\banco.cs" />
     <Compile Include="Models\boleto.cs" />
     <Compile Include="Models\boletoguia.cs" />
+    <Compile Include="Models\cadastro.cs" />
     <Compile Include="Models\cadimob.cs" />
     <Compile Include="Models\calculo_resumo.cs" />
     <Compile Include="Models\cancelamentos.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Models\carta_cobranca_detalhe.cs" />
     <Compile Include="Models\carta_cobranca_exclusao.cs" />
     <Compile Include="Models\categconstr.cs" />
+    <Compile Include="Models\cdadebitos.cs" />
     <Compile Include="Models\cdas.cs" />
     <Compile Include="Models\cep.cs" />
     <Compile Include="Models\certidao_debito.cs" />
@@ -138,6 +140,7 @@
     <Compile Include="Models\parametros.cs" />
     <Compile Include="Models\paramparcela.cs" />
     <Compile Include="Models\parceladocumento.cs" />
+    <Compile Include="Models\partes.cs" />
     <Compile Include="Models\pedologia.cs" />
     <Compile Include="Models\periodomei.cs" />
     <Compile Include="Models\processocidadao.cs" />
