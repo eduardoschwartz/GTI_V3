@@ -10,7 +10,9 @@ namespace GTI_Models.Models {
         public int Codigo { get; set; }
         public string Nome { get; set; }
         public string Cpf_cnpj { get; set; }
+        public string Rg { get; set; }
         public string Inscricao { get; set; }
+        public string Inscricao_Estadual { get; set; }
         public string Endereco { get; set; }
         public short Numero { get; set; }
         public string Complemento { get; set; }

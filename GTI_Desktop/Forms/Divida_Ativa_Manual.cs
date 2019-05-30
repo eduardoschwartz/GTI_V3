@@ -90,10 +90,12 @@ namespace GTI_Desktop.Forms {
         private void Grava_Dados() {
             Sistema_bll sistema_Class = new Sistema_bll(_connection);
             Tributario_bll tributario_Class = new Tributario_bll(_connection);
-            
+            GTI_Models.modelCore.TipoCadastro _tipo_cadastro = sistema_Class.Tipo_Cadastro(_codigo);
+
             Contribuinte_Header_Struct _header = sistema_Class.Contribuinte_Header(_codigo);
 
-            string _tipo_divida = _codigo < 100000 ? "Imobiliário" : _codigo >= 500000 ? "Taxas Diversas" : "Mobiliário";
+            string _tipo_divida = _tipo_cadastro == GTI_Models.modelCore.TipoCadastro.Imovel ? "Imobiliário" :
+                                  _tipo_cadastro == GTI_Models.modelCore.TipoCadastro.Cidadao ? "Taxas Diversas" : "Mobiliário";
             int _certidao = tributario_Class.Retorna_Ultima_Certidao_Livro(_numero_livro);
             int _pagina = _certidao;
 
@@ -106,10 +108,93 @@ namespace GTI_Desktop.Forms {
                 Nrofolha = _pagina,
                 Dtgeracao = DateTime.Now
             };
-            
             Integrativa_bll integrativa_Class = new Integrativa_bll(_connection_integrativa);
             int _idCda = integrativa_Class.Insert_Integrativa_Cda(regCda);
 
+            if(_tipo_cadastro != GTI_Models.modelCore.TipoCadastro.Cidadao) {
+                Cadastro regCadastro = new Cadastro() {
+                    Idcda=_idCda,
+                    Setordevedor=_tipo_divida,
+                    Crc=_codigo,
+                    Nome=_header.Nome,
+                    Inscricao=_header.Inscricao,
+                    Cpfcnpj=_header.Cpf_cnpj,
+                    Rginscrestadual=_header.Rg,
+                    Localcep=_header.Cep,
+                    Localendereco=_header.Endereco,
+                    Localnumero=_header.Numero,
+                    Localcomplemento=_header.Complemento,
+                    Localbairro=_header.Nome_bairro,
+                    Localcidade=_header.Nome_cidade,
+                    LocalEstado=_header.Nome_uf,
+                    Quadra=_header.Quadra_original,
+                    Lote=_header.Lote_original,
+                    Entregacep=_header.Cep_entrega,
+                    Entregaendereco=_header.Endereco_entrega,
+                    Entreganumero=_header.Numero_entrega,
+                    Entregabairro=_header.Nome_bairro_entrega,
+                    Entregacomplemento=_header.Complemento_entrega,
+                    Entregacidade=_header.Nome_cidade_entrega,
+                    Entregaestado=_header.Nome_uf_entrega,
+                    Dtgeracao=DateTime.Now
+                };
+                integrativa_Class = new Integrativa_bll(_connection_integrativa);
+                int _idCadastro = integrativa_Class.Insert_Integrativa_Cadastro(regCadastro);
+
+            } else {
+                Partes regPartes = new Partes() {
+                    Idcda = _idCda,
+                    Tipo = "Principal",
+                    Crc = _codigo,
+                    Nome = _header.Nome,
+                    Cpfcnpj = _header.Cpf_cnpj,
+                    Rginscrestadual = _header.Rg,
+                    Cep = _header.Cep,
+                    Endereco = _header.Endereco,
+                    Numero = _header.Numero,
+                    Complemento = _header.Complemento,
+                    Bairro = _header.Nome_bairro,
+                    Cidade = _header.Nome_cidade,
+                    Estado = _header.Nome_uf,
+                    Dtgeracao = DateTime.Now
+                };
+                integrativa_Class = new Integrativa_bll(_connection_integrativa);
+                int _idPartes = integrativa_Class.Insert_Integrativa_Partes(regPartes);
+            }
+            Imovel_bll imovel_Class = new Imovel_bll(_connection);
+            Cidadao_bll cidadao_Class = new Cidadao_bll(_connection);
+            List<ProprietarioStruct> ListaPropImovel = imovel_Class.Lista_Proprietario(_codigo);
+            foreach (ProprietarioStruct item in ListaPropImovel) {
+                CidadaoStruct _cidadao = cidadao_Class.Dados_Cidadao(item.Codigo);
+                Partes regPartes = new Partes() {
+                    Idcda = _idCda,
+                    Tipo = item.Principal?"Principal":"Compromissário",
+                    Crc = _codigo,
+                    Nome = _cidadao.Nome,
+                    Cpfcnpj = string.IsNullOrWhiteSpace(_cidadao.Cnpj)? _cidadao.Cpf:_cidadao.Cnpj,
+                    Rginscrestadual = _cidadao.Rg,
+                    Dtgeracao = DateTime.Now
+                };
+                if (_cidadao.EtiquetaR == "C") {
+                    regPartes.Cep = _cidadao.CepC.ToString();
+                    regPartes.Endereco = _cidadao.EnderecoC;
+                    regPartes.Numero = _cidadao.NumeroC;
+                    regPartes.Complemento = _cidadao.ComplementoC;
+                    regPartes.Bairro = _cidadao.NomeBairroC;
+                    regPartes.Cidade = _cidadao.NomeCidadeC;
+                    regPartes.Estado = _cidadao.UfC;
+                } else {
+                    regPartes.Cep = _cidadao.CepR.ToString();
+                    regPartes.Endereco = _cidadao.EnderecoR;
+                    regPartes.Numero = _cidadao.NumeroR;
+                    regPartes.Complemento = _cidadao.ComplementoR;
+                    regPartes.Bairro = _cidadao.NomeBairroR;
+                    regPartes.Cidade = _cidadao.NomeCidadeR;
+                    regPartes.Estado = _cidadao.UfR;
+                }
+                integrativa_Class = new Integrativa_bll(_connection_integrativa);
+                int _idPartes = integrativa_Class.Insert_Integrativa_Partes(regPartes);
+            }
 
             foreach (ListViewItem linha in MainListView.Items) {
 

@@ -64,7 +64,7 @@ namespace GTI_Dal.Classes {
         public Contribuinte_Header_Struct Contribuinte_Header(int _codigo) {
             string _nome = "", _inscricao = "", _endereco = "", _complemento = "", _bairro = "", _cidade = "", _uf = "", _cep = "", _quadra = "", _lote = "";
             string _endereco_entrega = "", _complemento_entrega = "", _bairro_entrega = "", _cidade_entrega = "", _uf_entrega = "", _cep_entrega = "";
-            string _cpf_cnpj = "",_atividade="";
+            string _cpf_cnpj = "",_atividade="",_inscricao_estadual="",_rg="";
             int _numero = 0, _numero_entrega = 0;
             bool _ativo = false;
             TipoCadastro _tipo_cadastro;
@@ -76,6 +76,7 @@ namespace GTI_Dal.Classes {
                 List<ProprietarioStruct> _proprietario = imovel_Class.Lista_Proprietario(_codigo, true);
                 _nome = _proprietario[0].Nome;
                 _cpf_cnpj = _proprietario[0].CPF;
+                _rg = _proprietario[0].RG;
                 _inscricao = _imovel.Inscricao;
                 _endereco = _imovel.NomeLogradouro;
                 _numero = (int)_imovel.Numero;
@@ -104,7 +105,8 @@ namespace GTI_Dal.Classes {
                     Empresa_Data empresa_Class = new Empresa_Data(_connection);
                     EmpresaStruct _empresa = empresa_Class.Retorna_Empresa(_codigo);
                     _nome = _empresa.Razao_social;
-                    _inscricao = _empresa.Inscricao_estadual;
+                    _inscricao = _codigo.ToString();
+                    _rg = string.IsNullOrWhiteSpace( _empresa.Inscricao_estadual)?_empresa.Rg:_empresa.Inscricao_estadual;
                     _cpf_cnpj = _empresa.Cpf_cnpj;
                     _endereco = _empresa.Endereco_nome;
                     _numero = (int)_empresa.Numero;
@@ -131,6 +133,7 @@ namespace GTI_Dal.Classes {
                     _nome = _cidadao.Nome;
                     _inscricao = _codigo.ToString();
                     _cpf_cnpj = _cidadao.Cpf;
+                    _rg = _cidadao.Rg;
                     _ativo = true;
                     if (_cidadao.EtiquetaC == "S") {
                         if (_cidadao.CodigoCidadeC == 413) {
@@ -182,6 +185,7 @@ namespace GTI_Dal.Classes {
                 Tipo = _tipo_cadastro,
                 Nome=_nome,
                 Inscricao=_inscricao,
+                Inscricao_Estadual=_inscricao,
                 Cpf_cnpj=_cpf_cnpj,
                 Endereco=_endereco,
                 Endereco_entrega=_endereco_entrega,

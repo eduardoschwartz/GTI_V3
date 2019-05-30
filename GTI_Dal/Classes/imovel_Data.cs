@@ -107,7 +107,7 @@ namespace GTI_Dal.Classes {
                 var reg = (from p in db.Proprietario
                            join c in db.Cidadao on p.Codcidadao equals c.Codcidadao
                            where p.Codreduzido == CodigoImovel
-                           select new { p.Codcidadao, c.Nomecidadao, p.Tipoprop, p.Principal,c.Cpf,c.Cnpj });
+                           select new { p.Codcidadao, c.Nomecidadao, p.Tipoprop, p.Principal,c.Cpf,c.Cnpj,c.Rg });
 
                 if (Principal)
                     reg = reg.Where(u => u.Tipoprop == "P" && u.Principal == true);
@@ -129,7 +129,8 @@ namespace GTI_Dal.Classes {
                         Nome = query.Nomecidadao,
                         Tipo = query.Tipoprop,
                         Principal = Convert.ToBoolean(query.Principal),
-                        CPF= sDoc
+                        CPF= sDoc,
+                        RG=query.Rg
                     };
                     Lista.Add(Linha);
                 }

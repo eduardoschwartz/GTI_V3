@@ -20,7 +20,8 @@ namespace GTI_Models.Models {
         public string Quadra { get; set; }
         public string Lote { get; set; }
         public string Entregacep { get; set; }
-        public string Entreganumero { get; set; }
+        public string Entregaendereco { get; set; }
+        public int? Entreganumero { get; set; }
         public string Entregacomplemento { get; set; }
         public string Entregabairro { get; set; }
         public string Entregacidade { get; set; }
