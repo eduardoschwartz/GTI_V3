@@ -1089,7 +1089,6 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
-
         /// <summary>
         /// Retorna o tipo de livro da divida ativa
         /// </summary>
@@ -1110,6 +1109,25 @@ namespace GTI_Bll.Classes {
             return obj.Retorna_Ultima_Certidao_Livro(_livro);
         }
 
+        /// <summary>
+        /// Inscrever um débito em divida ativa
+        /// </summary>
+        /// <param name="_codigo"></param>
+        /// <param name="_ano"></param>
+        /// <param name="_lanc"></param>
+        /// <param name="_seq"></param>
+        /// <param name="_parc"></param>
+        /// <param name="_compl"></param>
+        /// <param name="_livro"></param>
+        /// <param name="_pagina"></param>
+        /// <param name="_certidao"></param>
+        /// <param name="_data"></param>
+        /// <returns></returns>
+        public Exception Inscrever_Divida_Ativa(int _codigo, short _ano, short _lanc, short _seq, byte _parc, byte _compl, int _livro, int _pagina, int _certidao, DateTime _data) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Inscrever_Divida_Ativa(_codigo,_ano,_lanc,_seq,_parc,_compl,_livro,_pagina,_certidao,_data);
+            return ex;
+        }
 
     }//end class
 }

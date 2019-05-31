@@ -1,7 +1,9 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace GTI_Models.Models {
     public class Partes {
+        [Key]
         public int Idparte { get; set; }
         public int Idcda { get; set; }
         public string Tipo { get; set; }

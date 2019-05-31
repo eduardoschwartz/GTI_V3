@@ -1130,13 +1130,16 @@ InicioObs:
                             Numparcela = _parc,
                             Codcomplemento = _compl,
                             Datavencimento = Convert.ToDateTime(item.Cells["data_vencimento"].Value),
-                            Valortributo = Convert.ToDecimal(item.Cells["valor_lancado"].Value)
+                            Valortributo = Convert.ToDecimal(item.Cells["valor_lancado"].Value),
+                            
                         };
+                        if (item.Cells["DA"].Value.ToString() == "S")
+                            reg.Datainscricao = DateTime.Now;
                         Lista.Add(reg);
                     }
                 }
                 string _codigo = CodigoText.Text;
-                using (var form = new Divida_Ativa_Manual(Lista)) {
+                using (var form = new Divida_Ativa_Manual(Lista,Lista_Extrato_Tributo)) {
                     var result = form.ShowDialog(this);
                     if (result == DialogResult.OK) {
                         int val = form.ReturnValue;

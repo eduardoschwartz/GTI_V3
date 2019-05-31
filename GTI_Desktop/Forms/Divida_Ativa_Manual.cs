@@ -13,12 +13,13 @@ namespace GTI_Desktop.Forms {
         int _codigo, _UserId,_numero_livro=0;
         string _connection = gtiCore.Connection_Name();
         string _connection_integrativa = gtiCore.Connection_Name("GTI_Integrativa");
+        List<SpExtrato> _listaTributo=new List<SpExtrato>();
 
-        public Divida_Ativa_Manual(List<SpExtrato> Lista) {
+        public Divida_Ativa_Manual(List<SpExtrato> Lista,List<SpExtrato>Lista_Tributo) {
             InitializeComponent();
             Sistema_bll sistema_Class = new Sistema_bll(_connection);
             Tributario_bll tributario_Class = new Tributario_bll(_connection);
-
+            _listaTributo = Lista_Tributo;
             _UserId = sistema_Class.Retorna_User_LoginId(gtiCore.Retorna_Last_User());
 
             _codigo = Lista[0].Codreduzido;
@@ -41,6 +42,7 @@ namespace GTI_Desktop.Forms {
                 lv.SubItems.Add(item.Codcomplemento.ToString());
                 lv.SubItems.Add(item.Datavencimento.ToString("dd/MM/yyyy"));
                 lv.SubItems.Add(item.Valortributo.ToString("#0.00"));
+                lv.SubItems.Add(item.Datainscricao==null?"N":"S");
                 lv.SubItems.Add(_tipo_livro==null?"0":_tipo_livro.Codtipo.ToString());
                 MainListView.Items.Add(lv);
 
@@ -54,9 +56,16 @@ namespace GTI_Desktop.Forms {
         }
 
         private void OKButton_Click(object sender, EventArgs e) {
+            foreach (ListViewItem linha in MainListView.Items) {
+                if (linha.SubItems[7].Text == "S") {
+                    MessageBox.Show("Apenas lançamentos não inscritos em divida ativa podem ser inscritos.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
             List<int> _lista = new List<int>();
             foreach (ListViewItem linha in MainListView.Items) {
-                int _tipo = Convert.ToInt32(linha.SubItems[7].Text);
+                int _tipo = Convert.ToInt32(linha.SubItems[8].Text);
                 if (_lista.Count == 0)
                     _lista.Add(_tipo);
                 else {
@@ -163,44 +172,108 @@ namespace GTI_Desktop.Forms {
             }
             Imovel_bll imovel_Class = new Imovel_bll(_connection);
             Cidadao_bll cidadao_Class = new Cidadao_bll(_connection);
-            List<ProprietarioStruct> ListaPropImovel = imovel_Class.Lista_Proprietario(_codigo);
-            foreach (ProprietarioStruct item in ListaPropImovel) {
-                CidadaoStruct _cidadao = cidadao_Class.Dados_Cidadao(item.Codigo);
-                Partes regPartes = new Partes() {
-                    Idcda = _idCda,
-                    Tipo = item.Principal?"Principal":"Compromissário",
-                    Crc = _codigo,
-                    Nome = _cidadao.Nome,
-                    Cpfcnpj = string.IsNullOrWhiteSpace(_cidadao.Cnpj)? _cidadao.Cpf:_cidadao.Cnpj,
-                    Rginscrestadual = _cidadao.Rg,
-                    Dtgeracao = DateTime.Now
-                };
-                if (_cidadao.EtiquetaR == "C") {
-                    regPartes.Cep = _cidadao.CepC.ToString();
-                    regPartes.Endereco = _cidadao.EnderecoC;
-                    regPartes.Numero = _cidadao.NumeroC;
-                    regPartes.Complemento = _cidadao.ComplementoC;
-                    regPartes.Bairro = _cidadao.NomeBairroC;
-                    regPartes.Cidade = _cidadao.NomeCidadeC;
-                    regPartes.Estado = _cidadao.UfC;
-                } else {
-                    regPartes.Cep = _cidadao.CepR.ToString();
-                    regPartes.Endereco = _cidadao.EnderecoR;
-                    regPartes.Numero = _cidadao.NumeroR;
-                    regPartes.Complemento = _cidadao.ComplementoR;
-                    regPartes.Bairro = _cidadao.NomeBairroR;
-                    regPartes.Cidade = _cidadao.NomeCidadeR;
-                    regPartes.Estado = _cidadao.UfR;
+            Empresa_bll empresa_class = new Empresa_bll(_connection);
+            if (_tipo_cadastro == GTI_Models.modelCore.TipoCadastro.Imovel) {
+                List<ProprietarioStruct> ListaPropImovel = imovel_Class.Lista_Proprietario(_codigo);
+                foreach (ProprietarioStruct item in ListaPropImovel) {
+                    CidadaoStruct _cidadao = cidadao_Class.Dados_Cidadao(item.Codigo);
+                    Partes regPartes = new Partes() {
+                        Idcda = _idCda,
+                        Tipo = item.Principal ? "Principal" : "Compromissário",
+                        Crc = _codigo,
+                        Nome = _cidadao.Nome,
+                        Cpfcnpj = string.IsNullOrWhiteSpace(_cidadao.Cnpj) ? _cidadao.Cpf : _cidadao.Cnpj,
+                        Rginscrestadual = _cidadao.Rg,
+                        Dtgeracao = DateTime.Now
+                    };
+                    if (_cidadao.EtiquetaR == "C") {
+                        regPartes.Cep = _cidadao.CepC.ToString();
+                        regPartes.Endereco = _cidadao.EnderecoC;
+                        regPartes.Numero = _cidadao.NumeroC;
+                        regPartes.Complemento = _cidadao.ComplementoC;
+                        regPartes.Bairro = _cidadao.NomeBairroC;
+                        regPartes.Cidade = _cidadao.NomeCidadeC;
+                        regPartes.Estado = _cidadao.UfC;
+                    } else {
+                        regPartes.Cep = _cidadao.CepR.ToString();
+                        regPartes.Endereco = _cidadao.EnderecoR;
+                        regPartes.Numero = _cidadao.NumeroR;
+                        regPartes.Complemento = _cidadao.ComplementoR;
+                        regPartes.Bairro = _cidadao.NomeBairroR;
+                        regPartes.Cidade = _cidadao.NomeCidadeR;
+                        regPartes.Estado = _cidadao.UfR;
+                    }
+                    integrativa_Class = new Integrativa_bll(_connection_integrativa);
+                    int _idPartes = integrativa_Class.Insert_Integrativa_Partes(regPartes);
                 }
-                integrativa_Class = new Integrativa_bll(_connection_integrativa);
-                int _idPartes = integrativa_Class.Insert_Integrativa_Partes(regPartes);
+            } else {
+                if (_tipo_cadastro == GTI_Models.modelCore.TipoCadastro.Empresa) {
+                    List<CidadaoStruct> ListaSocio = empresa_class.ListaSocio(_codigo);
+                    foreach (CidadaoStruct item in ListaSocio) {
+                        CidadaoStruct _cidadao = cidadao_Class.Dados_Cidadao(item.Codigo);
+                        Partes regPartes = new Partes() {
+                            Idcda = _idCda,
+                            Tipo = "Sócio",
+                            Crc = _codigo,
+                            Nome = _cidadao.Nome,
+                            Cpfcnpj = string.IsNullOrWhiteSpace(_cidadao.Cnpj) ? _cidadao.Cpf : _cidadao.Cnpj,
+                            Rginscrestadual = _cidadao.Rg,
+                            Dtgeracao = DateTime.Now
+                        };
+                        if (_cidadao.EtiquetaR == "C") {
+                            regPartes.Cep = _cidadao.CepC.ToString();
+                            regPartes.Endereco = _cidadao.EnderecoC;
+                            regPartes.Numero = _cidadao.NumeroC;
+                            regPartes.Complemento = _cidadao.ComplementoC;
+                            regPartes.Bairro = _cidadao.NomeBairroC;
+                            regPartes.Cidade = _cidadao.NomeCidadeC;
+                            regPartes.Estado = _cidadao.UfC;
+                        } else {
+                            regPartes.Cep = _cidadao.CepR.ToString();
+                            regPartes.Endereco = _cidadao.EnderecoR;
+                            regPartes.Numero = _cidadao.NumeroR;
+                            regPartes.Complemento = _cidadao.ComplementoR;
+                            regPartes.Bairro = _cidadao.NomeBairroR;
+                            regPartes.Cidade = _cidadao.NomeCidadeR;
+                            regPartes.Estado = _cidadao.UfR;
+                        }
+                        integrativa_Class = new Integrativa_bll(_connection_integrativa);
+                        int _idPartes = integrativa_Class.Insert_Integrativa_Partes(regPartes);
+                    }
+                }
             }
 
             foreach (ListViewItem linha in MainListView.Items) {
+                short _ano = Convert.ToInt16(linha.Text);
+                short _lanc = Convert.ToInt16(linha.SubItems[1].Text.Substring(0,2));
+                short _seq = Convert.ToInt16(linha.SubItems[2].Text);
+                byte _parc = Convert.ToByte(linha.SubItems[3].Text);
+                byte _compl = Convert.ToByte(linha.SubItems[4].Text);
 
+                Exception ex = tributario_Class.Inscrever_Divida_Ativa(_codigo, _ano, _lanc, _seq, _parc, _compl, _numero_livro, _pagina, _certidao, Convert.ToDateTime(DataInscricaoText.Text));
+
+                foreach (SpExtrato item in _listaTributo) {
+                    if(item.Anoexercicio==_ano && item.Codlancamento==_lanc && item.Seqlancamento==_seq && item.Numparcela==_parc && item.Codcomplemento == _compl) {
+                        Cdadebitos regCdaDebito = new Cdadebitos() {
+                            Idcda = _idCda,
+                            Codtributo=item.Codtributo,
+                            Tributo=item.Abrevtributo,
+                            Exercicio=_ano,
+                            Lancamento=_lanc,
+                            Seq=_seq,
+                            Nroparcela=_parc,
+                            Complparcela=_compl,
+                            Dtvencimento=item.Datavencimento,
+                            Vlroriginal=item.Valortributo,
+                            Vlrmultas=item.Valormulta,
+                            Vlrjuros=item.Valorjuros,
+                            Vlrcorrecao=item.Valorcorrecao,
+                            Dtgeracao=DateTime.Now
+                        };
+                        int _IdCdaDebito = integrativa_Class.Insert_Integrativa_CdaDebito(regCdaDebito);
+                    }
+                }
             }
-
-
 
         }
 

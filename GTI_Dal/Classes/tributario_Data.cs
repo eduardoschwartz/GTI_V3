@@ -1536,7 +1536,6 @@ namespace GTI_Dal.Classes {
             }
         }
 
-
         public int Competencias_Nao_Encerradas(List<CompetenciaISS>Lista) {
             int nCount = 0, nFill = 0;
             if (Lista == null)
@@ -2123,7 +2122,6 @@ Proximo:;
             }
         }
 
-
         public Tipolivro Retorna_Tipo_Livro_Divida_Ativa(int _lancamento) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 Tipolivro Sql = (from l in db.Lancamento
@@ -2143,6 +2141,21 @@ Proximo:;
             return maxCod;
         }
 
+        public Exception Inscrever_Divida_Ativa(int _codigo, short _ano, short _lanc, short _seq, byte _parc, byte _compl, int _livro, int _pagina,int _certidao,DateTime _data) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                Debitoparcela d = db.Debitoparcela.First(i => i.Codreduzido == _codigo && i.Anoexercicio == _ano && i.Codlancamento == _lanc && i.Seqlancamento == _seq && i.Numparcela == _parc && i.Codcomplemento == _compl);
+                d.Numerolivro = _livro;
+                d.Paginalivro = _pagina;
+                d.Numcertidao = _certidao;
+                d.Datainscricao = _data;
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
 
     }//end class
 }

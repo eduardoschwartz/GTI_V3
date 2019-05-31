@@ -34,13 +34,14 @@
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label3 = new System.Windows.Forms.Label();
             this.DataInscricaoText = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.PaginaText = new System.Windows.Forms.Label();
             this.LivroText = new System.Windows.Forms.Label();
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,7 +57,7 @@
             this.tBar.Location = new System.Drawing.Point(0, 230);
             this.tBar.Name = "tBar";
             this.tBar.Padding = new System.Windows.Forms.Padding(6, 0, 1, 0);
-            this.tBar.Size = new System.Drawing.Size(560, 25);
+            this.tBar.Size = new System.Drawing.Size(589, 25);
             this.tBar.TabIndex = 2;
             this.tBar.Text = "toolStrip1";
             // 
@@ -92,12 +93,13 @@
             this.columnHeader5,
             this.columnHeader6,
             this.columnHeader7,
+            this.columnHeader9,
             this.columnHeader8});
             this.MainListView.FullRowSelect = true;
             this.MainListView.GridLines = true;
             this.MainListView.Location = new System.Drawing.Point(6, 6);
             this.MainListView.Name = "MainListView";
-            this.MainListView.Size = new System.Drawing.Size(548, 183);
+            this.MainListView.Size = new System.Drawing.Size(577, 183);
             this.MainListView.TabIndex = 0;
             this.MainListView.UseCompatibleStateImageBehavior = false;
             this.MainListView.View = System.Windows.Forms.View.Details;
@@ -140,6 +142,12 @@
             // 
             this.columnHeader7.Text = "Principal";
             this.columnHeader7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Livro";
+            this.columnHeader8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader8.Width = 40;
             // 
             // label3
             // 
@@ -196,18 +204,18 @@
             this.LivroText.Size = new System.Drawing.Size(0, 13);
             this.LivroText.TabIndex = 90;
             // 
-            // columnHeader8
+            // columnHeader9
             // 
-            this.columnHeader8.Text = "Livro";
-            this.columnHeader8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.columnHeader8.Width = 40;
+            this.columnHeader9.Text = "DA";
+            this.columnHeader9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader9.Width = 30;
             // 
             // Divida_Ativa_Manual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LemonChiffon;
-            this.ClientSize = new System.Drawing.Size(560, 255);
+            this.ClientSize = new System.Drawing.Size(589, 255);
             this.Controls.Add(this.LivroText);
             this.Controls.Add(this.PaginaText);
             this.Controls.Add(this.label2);
@@ -249,5 +257,6 @@
         private System.Windows.Forms.Label PaginaText;
         private System.Windows.Forms.Label LivroText;
         private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ColumnHeader columnHeader9;
     }
 }

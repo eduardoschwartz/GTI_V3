@@ -94,7 +94,7 @@ namespace GTI_Dal.Classes {
                 if (regEntrega != null) {
                     _endereco_entrega = regEntrega.Endereco.ToString();
                     _numero_entrega = (int)regEntrega.Numero;
-                    _complemento_entrega = regEntrega.Complemento.ToString();
+                    _complemento_entrega = regEntrega.Complemento??"";
                     _uf_entrega = regEntrega.UF.ToString();
                     _cidade_entrega = regEntrega.NomeCidade.ToString();
                     _bairro_entrega = regEntrega.NomeBairro.ToString();
@@ -120,13 +120,13 @@ namespace GTI_Dal.Classes {
 
                     //Carrega Endereço de Entrega da Empresa
                     mobiliarioendentrega regEntrega = empresa_Class.Empresa_Endereco_entrega(_codigo);
-                    _endereco_entrega = regEntrega.Nomelogradouro.ToString();
+                    _endereco_entrega = regEntrega.Nomelogradouro??"";
                     _numero_entrega = (int)regEntrega.Numimovel;
-                    _complemento_entrega = regEntrega.Complemento.ToString();
-                    _uf_entrega = regEntrega.Uf.ToString();
+                    _complemento_entrega = regEntrega.Complemento??"";
+                    _uf_entrega = regEntrega.Uf??"";
                     _cidade_entrega = regEntrega.Desccidade;
                     _bairro_entrega = regEntrega.Descbairro;
-                    _cep_entrega = regEntrega.Cep == null ? "00000-000" : Convert.ToInt32(regEntrega.Cep.ToString()).ToString("00000-000");
+                    _cep_entrega = regEntrega.Cep == null ? "00000-000" : Convert.ToInt32(dalCore.RetornaNumero(regEntrega.Cep).ToString()).ToString("00000-000");
                 } else {
                     Cidadao_Data cidadao_Class = new Cidadao_Data(_connection);
                     CidadaoStruct _cidadao = cidadao_Class.Dados_Cidadao(_codigo);

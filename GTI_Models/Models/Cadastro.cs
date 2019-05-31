@@ -1,7 +1,9 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace GTI_Models.Models {
     public class Cadastro {
+        [Key]
         public int Idcadastro { get; set; }
         public int Idcda { get; set; }
         public string Setordevedor { get; set; }

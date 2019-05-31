@@ -18,7 +18,7 @@ namespace GTI_Dal.Classes {
                     db.Cdas.Add(Reg);
                     db.SaveChanges();
                     _id = Reg.Idcda;
-                } catch {
+                } catch (Exception ex) {
 
                 }
                 return _id;
@@ -28,11 +28,28 @@ namespace GTI_Dal.Classes {
         public int Insert_Integrativa_CdaDebito(Cdadebitos Reg) {
             int _id = 0;
             using (Integrativa_Context db = new Integrativa_Context(_connection)) {
+                object[] Parametros = new object[14];
+                Parametros[0] = new SqlParameter { ParameterName = "@idcda", SqlDbType = SqlDbType.Int, SqlValue = Reg.Idcda };
+                Parametros[1] = new SqlParameter { ParameterName = "@codtributo", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codtributo };
+                Parametros[2] = new SqlParameter { ParameterName = "@tributo", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Tributo };
+                Parametros[3] = new SqlParameter { ParameterName = "@exercicio", SqlDbType = SqlDbType.Int, SqlValue = Reg.Exercicio };
+                Parametros[4] = new SqlParameter { ParameterName = "@lancamento", SqlDbType = SqlDbType.Int, SqlValue = Reg.Lancamento };
+                Parametros[5] = new SqlParameter { ParameterName = "@seq", SqlDbType = SqlDbType.Int, SqlValue = Reg.Seq };
+                Parametros[6] = new SqlParameter { ParameterName = "@nroparcela", SqlDbType = SqlDbType.Int, SqlValue = Reg.Nroparcela };
+                Parametros[7] = new SqlParameter { ParameterName = "@complparcela", SqlDbType = SqlDbType.Int, SqlValue = Reg.Complparcela };
+                Parametros[8] = new SqlParameter { ParameterName = "@dtvencimento", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Dtvencimento };
+                Parametros[9] = new SqlParameter { ParameterName = "@vlroriginal", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Vlroriginal };
+                Parametros[10] = new SqlParameter { ParameterName = "@vlrmultas", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Vlrmultas };
+                Parametros[11] = new SqlParameter { ParameterName = "@vlrjuros", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Vlrjuros };
+                Parametros[12] = new SqlParameter { ParameterName = "@vlrcorrecao", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Vlrcorrecao };
+                Parametros[13] = new SqlParameter { ParameterName = "@dtgeracao", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Dtgeracao };
+
                 try {
-                    db.Cdadebitos.Add(Reg);
-                    db.SaveChanges();
+                    db.Database.ExecuteSqlCommand("INSERT INTO cdadebitos(idcda,codtributo,tributo,exercicio,lancamento,seq,nroparcela,complparcela,dtvencimento," +
+                        "vlroriginal,vlrmultas,vlrjuros,vlrcorrecao,dtgeracao) VALUES(@idcda,@codtributo,@tributo,@exercicio,@lancamento,@seq,@nroparcela," +
+                        "@complparcela,@dtvencimento,@vlroriginal,@vlrmultas,@vlrjuros,@vlrcorrecao,@dtgeracao)", Parametros);
                     _id = Reg.Idcdadebitos;
-                } catch {
+                } catch (Exception ex) {
 
                 }
                 return _id;
