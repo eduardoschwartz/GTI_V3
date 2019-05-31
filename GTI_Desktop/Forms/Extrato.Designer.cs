@@ -517,6 +517,7 @@
             this.DamMenu.Name = "DamMenu";
             this.DamMenu.Size = new System.Drawing.Size(55, 20);
             this.DamMenu.Text = "D.A.M.";
+            this.DamMenu.Click += new System.EventHandler(this.DamMenu_Click);
             // 
             // ExecFiscalMenu
             // 
