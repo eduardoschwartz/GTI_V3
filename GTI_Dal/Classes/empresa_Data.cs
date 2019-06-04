@@ -315,7 +315,7 @@ namespace GTI_Dal.Classes {
                                                     Dispensa_ie_processo=m.Dispensaieproc,Data_alvara_provisorio=m.Dtalvaraprovisorio,Senha_iss=m.Senhaiss,Inscricao_temporaria=m.Insctemp,Horas_24=m.Horas24,Isento_iss=m.Isentoiss,
                                                     Bombonieri=m.Bombonieri,Emite_nf=m.Emitenf,Danfe=m.Danfe,Imovel=m.Imovel,Sil=m.Sil,Substituto_tributario_issqn=m.Substituto_tributario_issqn,Individual=m.Individual,
                                                     Ponto_agencia=m.Ponto_agencia,Cadastro_vre=m.Cadastro_vre,Liberado_vre=m.Liberado_vre,Cpf=m.Cpf,Cnpj=m.Cnpj,Prof_responsavel_registro=m.Numregistroresp,
-                                                    Prof_responsavel_conselho=m.Nomeorgao,prof_responsavel_nome=p.Nomecidadao,Horario_Nome=h.descricao,Atividade_nome=a.Descatividade
+                                                    Prof_responsavel_conselho=m.Nomeorgao,prof_responsavel_nome=p.Nomecidadao,Horario_Nome=h.descricao,Atividade_nome=a.Descatividade,Endereco_nome_abreviado=l.Endereco_resumido
                            }).FirstOrDefault();
 
 
@@ -346,6 +346,7 @@ namespace GTI_Dal.Classes {
                 row.UF = reg.UF;
                 row.Endereco_codigo = reg.Endereco_codigo;
                 row.Endereco_nome = reg.Endereco_nome ?? reg.Nome_logradouro;
+                row.Endereco_nome_abreviado = reg.Endereco_nome_abreviado ?? reg.Nome_logradouro;
                 row.Numero = reg.Numero;
                 row.Complemento = reg.Complemento;
 

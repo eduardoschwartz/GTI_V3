@@ -64,7 +64,7 @@ namespace GTI_Dal.Classes {
         public Contribuinte_Header_Struct Contribuinte_Header(int _codigo) {
             string _nome = "", _inscricao = "", _endereco = "", _complemento = "", _bairro = "", _cidade = "", _uf = "", _cep = "", _quadra = "", _lote = "";
             string _endereco_entrega = "", _complemento_entrega = "", _bairro_entrega = "", _cidade_entrega = "", _uf_entrega = "", _cep_entrega = "";
-            string _cpf_cnpj = "",_atividade="",_inscricao_estadual="",_rg="";
+            string _cpf_cnpj = "",_atividade="",_rg="",_endereco_abreviado="",_endereco_entrega_abreviado="";
             int _numero = 0, _numero_entrega = 0;
             bool _ativo = false;
             TipoCadastro _tipo_cadastro;
@@ -79,6 +79,7 @@ namespace GTI_Dal.Classes {
                 _rg = _proprietario[0].RG;
                 _inscricao = _imovel.Inscricao;
                 _endereco = _imovel.NomeLogradouro;
+                _endereco_abreviado = _imovel.NomeLogradouroAbreviado;
                 _numero = (int)_imovel.Numero;
                 _complemento = _imovel.Complemento;
                 _bairro = _imovel.NomeBairro;
@@ -87,12 +88,14 @@ namespace GTI_Dal.Classes {
                 _ativo = (bool)_imovel.Inativo ? false : true;
                 _lote = _imovel.LoteOriginal;
                 _quadra = _imovel.QuadraOriginal;
-
+                Endereco_Data endereco_Class = new Endereco_Data(_connection);
+                _cep = endereco_Class.RetornaCep((int)_imovel.CodigoLogradouro,(short) _imovel.Numero).ToString();
                 //Carrega Endereço de Entrega do imóvel
                 GTI_Models.modelCore.TipoEndereco Tipoend = _imovel.EE_TipoEndereco == 0 ? GTI_Models.modelCore.TipoEndereco.Local : _imovel.EE_TipoEndereco == 1 ? GTI_Models.modelCore.TipoEndereco.Proprietario : GTI_Models.modelCore.TipoEndereco.Entrega;
                 EnderecoStruct regEntrega = imovel_Class.Dados_Endereco(_codigo, Tipoend);
                 if (regEntrega != null) {
                     _endereco_entrega = regEntrega.Endereco.ToString();
+                    _endereco_entrega_abreviado = regEntrega.Endereco_Abreviado.ToString();
                     _numero_entrega = (int)regEntrega.Numero;
                     _complemento_entrega = regEntrega.Complemento??"";
                     _uf_entrega = regEntrega.UF.ToString();
@@ -109,6 +112,7 @@ namespace GTI_Dal.Classes {
                     _rg = string.IsNullOrWhiteSpace( _empresa.Inscricao_estadual)?_empresa.Rg:_empresa.Inscricao_estadual;
                     _cpf_cnpj = _empresa.Cpf_cnpj;
                     _endereco = _empresa.Endereco_nome;
+                    _endereco_abreviado = _empresa.Endereco_nome_abreviado;
                     _numero = (int)_empresa.Numero;
                     _complemento = _empresa.Complemento;
                     _bairro = _empresa.Bairro_nome;
@@ -170,6 +174,7 @@ namespace GTI_Dal.Classes {
                         _cidade = _cidadao.NomeCidadeR;
                         _uf = _cidadao.UfR;
                     }
+                    _endereco_abreviado = _endereco;
                     _endereco_entrega = _endereco;
                     _numero_entrega = _numero;
                     _complemento_entrega = _complemento;
@@ -188,7 +193,9 @@ namespace GTI_Dal.Classes {
                 Inscricao_Estadual=_inscricao,
                 Cpf_cnpj=_cpf_cnpj,
                 Endereco=_endereco,
+                Endereco_abreviado=_endereco_abreviado,
                 Endereco_entrega=_endereco_entrega,
+                Endereco_entrega_abreviado=_endereco_entrega_abreviado,
                 Numero=(short)_numero,
                 Numero_entrega=(short)_numero_entrega,
                 Complemento=_complemento,

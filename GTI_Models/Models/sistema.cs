@@ -14,6 +14,7 @@ namespace GTI_Models.Models {
         public string Inscricao { get; set; }
         public string Inscricao_Estadual { get; set; }
         public string Endereco { get; set; }
+        public string Endereco_abreviado { get; set; }
         public short Numero { get; set; }
         public string Complemento { get; set; }
         public string Cep { get; set; }
@@ -21,6 +22,7 @@ namespace GTI_Models.Models {
         public string Nome_cidade { get; set; }
         public string Nome_uf { get; set; }
         public string Endereco_entrega { get; set; }
+        public string Endereco_entrega_abreviado { get; set; }
         public short Numero_entrega { get; set; }
         public string Complemento_entrega { get; set; }
         public string Cep_entrega { get; set; }

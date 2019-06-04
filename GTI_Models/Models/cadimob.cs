@@ -63,6 +63,7 @@ namespace GTI_Models.Models {
         public long? NumMatricula { get; set; }
         public int? CodigoLogradouro { get; set; }
         public string NomeLogradouro { get; set; }
+        public string NomeLogradouroAbreviado { get; set; }
         public short? Numero { get; set; }
         public string Complemento { get; set; }
         public short? CodigoBairro { get; set; }
@@ -101,6 +102,7 @@ namespace GTI_Models.Models {
     public class EnderecoStruct {
         public int? CodLogradouro { get; set; }
         public string Endereco { get; set; }
+        public string Endereco_Abreviado { get; set; }
         public short? Numero { get; set; }
         public string Complemento { get; set; }
         public string UF { get; set; }

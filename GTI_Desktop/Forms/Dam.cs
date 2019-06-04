@@ -19,6 +19,8 @@ namespace GTI_Desktop.Forms {
             tBar.Renderer = new MySR();
             _lista_selecionados = _ListaSelecionados;
             _extrato = _ListaTributos;
+            DataVencimentoText.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            Header();
             Carrega_Lista();
             MainListView.Items[0].Selected = true;
             MainListView.Focus ();
@@ -39,10 +41,24 @@ namespace GTI_Desktop.Forms {
         private void DataVenctoDateTimePicker_ValueChanged(object sender, EventArgs e) {
             MainListView.Items.Clear();
             Atualiza_Lista_Debitos();
+        }
 
+        private void DataVencimentoRefreshButton_Click(object sender, EventArgs e) {
+            if (gtiCore.IsDate(DataVencimentoText.Text)) {
+                Atualiza_Lista_Debitos();
+                Carrega_Lista();
+            } else {
+                MessageBox.Show("Data de vencimento inválida.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void CalculoDataRefreshData_Click(object sender, EventArgs e) {
+            Atualiza_Lista_Debitos();
+            Carrega_Lista();
         }
 
         private void Carrega_Lista() {
+            gtiCore.Ocupado(this);
             MainListView.Items.Clear();
             List<SpExtrato> _listaTmp = new List<SpExtrato>();
             decimal _perc_multa = MultaUpDown.Value;
@@ -59,7 +75,6 @@ namespace GTI_Desktop.Forms {
                         decimal _valor_multa = _perc_multa > 0 ? itemTributo.Valormulta - (itemTributo.Valormulta * _perc_multa / 100) : itemTributo.Valormulta;
                         decimal _valor_juros = _perc_juros > 0 ? itemTributo.Valorjuros - (itemTributo.Valorjuros * _perc_juros / 100) : itemTributo.Valorjuros;
                         decimal _valor_correcao = _perc_correcao > 0 ? itemTributo.Valorcorrecao - (itemTributo.Valorcorrecao * _perc_correcao / 100) : itemTributo.Valorcorrecao;
-
                         foreach (SpExtrato itemTmp in _listaTmp) {
                             if (itemSelected.Anoexercicio == itemTmp.Anoexercicio && itemSelected.Codlancamento == itemTmp.Codlancamento && itemSelected.Seqlancamento == itemTmp.Seqlancamento &&
                                 itemSelected.Numparcela == itemTmp.Numparcela && itemSelected.Codcomplemento == itemTmp.Codcomplemento) {
@@ -132,20 +147,50 @@ namespace GTI_Desktop.Forms {
             lvItem.SubItems.Add(_correcao.ToString("#0.00"), _foreColor, _backColor, _font);
             lvItem.SubItems.Add(_total.ToString("#0.00"), _foreColor, _backColor, _font);
             MainListView.Items.Add(lvItem);
-        }
-
-        private void DataVencimentoRefreshButton_Click(object sender, EventArgs e) {
-            if (gtiCore.IsDate(DataVencimentoText.Text)) {
-                Atualiza_Lista_Debitos();
-                Carrega_Lista();
-            } else {
-                    MessageBox.Show("Data de vencimento inválida.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            gtiCore.Liberado(this);
         }
 
         private void Atualiza_Lista_Debitos() {
+            gtiCore.Ocupado(this);
             Tributario_bll clsTributario = new Tributario_bll(_connection);
-            _extrato = clsTributario.Lista_Extrato_Tributo(Codigo: _lista_selecionados[0].Codreduzido,Data_Atualizacao:Convert.ToDateTime(DataVencimentoText.Text));
+            DateTime _data_Atualiza;
+            if (gtiCore.IsDate(DataCalculoText.Text))
+                _data_Atualiza = Convert.ToDateTime(DataCalculoText.Text);
+            else {
+                if(gtiCore.IsDate(DataVencimentoText.Text))
+                    _data_Atualiza = Convert.ToDateTime(DataVencimentoText.Text);
+                else {
+                    MessageBox.Show("Data de vencimento inválida.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DataVencimentoText.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                    _data_Atualiza = DateTime.Now;
+                }
+            }
+            _extrato = clsTributario.Lista_Extrato_Tributo(Codigo: _lista_selecionados[0].Codreduzido,Data_Atualizacao:_data_Atualiza);
+            gtiCore.Liberado(this);
+        }
+
+        private void OKButton_Click(object sender, EventArgs e) {
+            if (CPFText.Text == "") 
+                MessageBox.Show("CPF/CNPJ obrigatório.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else {
+                
+            }
+        }
+
+        private void Header() {
+            Sistema_bll sistema_Class = new Sistema_bll(_connection);
+
+            Contribuinte_Header_Struct _dados = sistema_Class.Contribuinte_Header(_lista_selecionados[0].Codreduzido);
+            NomeText.Text = _dados.Nome;
+            CPFText.Text = _dados.Cpf_cnpj;
+            EnderecoText.Text = _dados.Endereco_abreviado + ", " + _dados.Numero.ToString() + " " + _dados.Complemento + " " + _dados.Nome_bairro;
+            CidadeText.Text = _dados.Nome_cidade;
+            UFText.Text = _dados.Nome_uf;
+            CepText.Text = _dados.Cep;
+        }
+
+        private void Emite_Boleto() {
+
         }
 
     }

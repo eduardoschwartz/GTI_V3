@@ -78,6 +78,7 @@ namespace GTI_Dal.Classes {
                 EnderecoStruct regEnd = Dados_Endereco(nCodigo, TipoEndereco.Local);
                 row.CodigoLogradouro = regEnd.CodLogradouro;
                 row.NomeLogradouro = regEnd.Endereco;
+                row.NomeLogradouroAbreviado = regEnd.Endereco_Abreviado;
                 row.Numero = regEnd.Numero;
                 row.Complemento = regEnd.Complemento;
                 row.Cep = regEnd.Cep;
@@ -214,7 +215,7 @@ namespace GTI_Dal.Classes {
                                join l in db.Logradouro on fq.Codlogr equals l.Codlogradouro into lfq from l in lfq.DefaultIfEmpty()
                                where i.Codreduzido == Codigo && b.Siglauf == "SP" && b.Codcidade == 413
                                select new {
-                                   i.Li_num, i.Li_codbairro, b.Descbairro, fq.Codlogr, l.Endereco, i.Li_compl
+                                   i.Li_num, i.Li_codbairro, b.Descbairro, fq.Codlogr, l.Endereco, i.Li_compl,l.Endereco_resumido
                                }).FirstOrDefault();
                     if (reg == null)
                         return regEnd;
@@ -225,7 +226,8 @@ namespace GTI_Dal.Classes {
                         regEnd.NomeCidade = "JABOTICABAL";
                         regEnd.UF = "SP";
                         regEnd.CodLogradouro = reg.Codlogr;
-                        regEnd.Endereco = reg.Endereco.ToString();
+                        regEnd.Endereco = reg.Endereco ?? "";
+                        regEnd.Endereco_Abreviado = reg.Endereco_resumido ?? "";
                         regEnd.Numero = reg.Li_num;
                         regEnd.Complemento = reg.Li_compl ?? "";
                         regEnd.CodigoBairro = reg.Li_codbairro;
@@ -240,7 +242,7 @@ namespace GTI_Dal.Classes {
                                join l in db.Logradouro on ee.Ee_codlog equals l.Codlogradouro into lee from l in lee.DefaultIfEmpty()
                                where ee.Codreduzido == Codigo
                                select new {
-                                   ee.Ee_numimovel, ee.Ee_bairro, b.Descbairro, c.Desccidade, ee.Ee_uf, ee.Ee_cidade, ee.Ee_codlog, ee.Ee_nomelog, l.Endereco, ee.Ee_complemento
+                                   ee.Ee_numimovel, ee.Ee_bairro, b.Descbairro, c.Desccidade, ee.Ee_uf, ee.Ee_cidade, ee.Ee_codlog, ee.Ee_nomelog, l.Endereco, ee.Ee_complemento,l.Endereco_resumido
                                }).FirstOrDefault();
                     if (reg == null)
                         return regEnd;
@@ -251,7 +253,8 @@ namespace GTI_Dal.Classes {
                         regEnd.NomeCidade = reg.Descbairro==null?"": reg.Desccidade;
                         regEnd.UF = "SP";
                         regEnd.CodLogradouro = reg.Ee_codlog;
-                        regEnd.Endereco = reg.Ee_nomelog.ToString();
+                        regEnd.Endereco = reg.Ee_nomelog??"";
+                        regEnd.Endereco_Abreviado = reg.Endereco_resumido ?? "";
                         if (!String.IsNullOrEmpty(reg.Endereco))
                             regEnd.Endereco = reg.Endereco.ToString();
                         regEnd.Numero = reg.Ee_numimovel;
@@ -268,6 +271,7 @@ namespace GTI_Dal.Classes {
                     CidadaoStruct _cidadao = clsCidadao.LoadReg(_codigo_proprietario);
                     if (_cidadao.EtiquetaC == "S" ) {
                         regEnd.Endereco = _cidadao.EnderecoC;
+                        regEnd.Endereco_Abreviado = _cidadao.EnderecoC;
                         regEnd.Numero = _cidadao.NumeroC;
                         regEnd.Complemento = _cidadao.ComplementoC;
                         regEnd.CodigoBairro = _cidadao.CodigoBairroC;
@@ -278,6 +282,7 @@ namespace GTI_Dal.Classes {
                         regEnd.Cep = _cidadao.CepC.ToString();
                     } else {
                         regEnd.Endereco = _cidadao.EnderecoR;
+                        regEnd.Endereco_Abreviado = _cidadao.EnderecoR;
                         regEnd.Numero = _cidadao.NumeroR;
                         regEnd.Complemento = _cidadao.ComplementoR;
                         regEnd.CodigoBairro = _cidadao.CodigoBairroR;

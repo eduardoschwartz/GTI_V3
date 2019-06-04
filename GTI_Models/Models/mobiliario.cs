@@ -87,6 +87,7 @@ namespace GTI_Models.Models {
         public string Nome_fantasia { get; set; }
         public int? Endereco_codigo { get; set; }
         public string Endereco_nome { get; set; }
+        public string Endereco_nome_abreviado { get; set; }
         public short? Numero { get; set; }
         public string Complemento { get; set; }
         public short? Bairro_codigo { get; set; }
