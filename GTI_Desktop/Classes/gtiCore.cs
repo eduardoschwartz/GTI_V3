@@ -636,6 +636,15 @@ namespace GTI_Desktop.Classes {
             return _path;
         }
 
+        //Function to get random number
+        private static readonly Random getrandom = new Random();
+        private static readonly object syncLock = new object();
+        public static int GetRandomNumber() {
+            lock (syncLock) { // synchronize
+                return getrandom.Next(1, 2000000);
+            }
+        }
+
     }
 
     public class MySR : ToolStripSystemRenderer {

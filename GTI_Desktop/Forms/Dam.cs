@@ -13,6 +13,9 @@ namespace GTI_Desktop.Forms {
         List<SpExtrato> _extrato = new List<SpExtrato>();
         Color _backColor = Color.White, _foreColor = Color.Brown;
         Font _font = new Font("Microsoft Sans Serif", 8, FontStyle.Regular);
+        DateTime _data_refis_inicio,_data_refis_final,_data_refisdi_inicio,_data_refisdi_final;
+        bool _refis_ativo = false,_refisdi_ativo=false;
+        int _plano = 0;
 
         public Dam(List<SpExtrato>_ListaSelecionados,List<SpExtrato>_ListaTributos) {
             InitializeComponent();
@@ -173,13 +176,16 @@ namespace GTI_Desktop.Forms {
             if (CPFText.Text == "") 
                 MessageBox.Show("CPF/CNPJ obrigatório.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
-                
+                Emite_Boleto();
             }
+        }
+
+        private void SairButton_Click(object sender, EventArgs e) {
+            Close();
         }
 
         private void Header() {
             Sistema_bll sistema_Class = new Sistema_bll(_connection);
-
             Contribuinte_Header_Struct _dados = sistema_Class.Contribuinte_Header(_lista_selecionados[0].Codreduzido);
             NomeText.Text = _dados.Nome;
             CPFText.Text = _dados.Cpf_cnpj;
@@ -187,10 +193,46 @@ namespace GTI_Desktop.Forms {
             CidadeText.Text = _dados.Nome_cidade;
             UFText.Text = _dados.Nome_uf;
             CepText.Text = _dados.Cep;
+
+            _data_refis_inicio = Convert.ToDateTime(sistema_Class.Retorna_Valor_Parametro("REFIS_INICIO"));
+            _data_refis_final = Convert.ToDateTime(sistema_Class.Retorna_Valor_Parametro("REFIS_FIM"));
+            _data_refisdi_inicio = Convert.ToDateTime(sistema_Class.Retorna_Valor_Parametro("REFISDI_INICIO"));
+            _data_refisdi_final = Convert.ToDateTime(sistema_Class.Retorna_Valor_Parametro("REFISI_FIM"));
+
+            DateTime _data_now = DateTime.Now;
+            if (_data_now >= _data_refis_inicio && _data_now <= _data_refis_final)
+                _refis_ativo = true;
+
+            if (_data_now >= _data_refisdi_inicio && _data_now <= _data_refisdi_final)
+                _refisdi_ativo = true;
+
+
         }
 
         private void Emite_Boleto() {
+            int nSid = gtiCore.GetRandomNumber();
+            int _numero_documento = 0;
+            string _valor_guia = MainListView.Items[MainListView.Items.Count - 1].SubItems[10].Text;
+            string _nome = NomeText.Text;
+            string _endereco = EnderecoText.Text.Length > 60 ? EnderecoText.Text.Substring(0, 60) : EnderecoText.Text;
+            string _dataVencto = DataVencimentoText.Text;
+            string _nosso_numero = "287353200" + _numero_documento.ToString("00000000");
+            string _cidade = CidadeText.Text.Length > 18 ? CidadeText.Text.Substring(0, 18) : CidadeText.Text;
+            string _uf = UFText.Text;
+            string _cep = gtiCore.RetornaNumero(CepText.Text);
+            string _user = "GTI-Dam";
+            if (_cep.Trim() == "" || _cep.Trim() == "-")
+                _cep = "14870000";
+            string _cpfcnpj = gtiCore.RetornaNumero( CPFText.Text);
+            string _tipo_doc = _cpfcnpj.Length == 1 ? "1" : "2";
+            string _path = "http://sistemas.jaboticabal.sp.gov.br/gti/Pages/boletoBB.aspx?f1=" + _nome + "&f2=" + _endereco +
+                "&f3=" + _dataVencto + "&f4=" + _cpfcnpj + "&f5=" + _nosso_numero + "&f6=" + _valor_guia + "&f7=" + _cidade + 
+                "&f8=" + _uf + "&f9=" + _cep + "&f10=" + _user;
 
+            WebBrowserForm frm = new WebBrowserForm(_path);
+            frm.ShowDialog();
+
+            
         }
 
     }

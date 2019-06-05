@@ -1068,6 +1068,126 @@ namespace GTI_Bll.Classes {
         }
 
         /// <summary>
+        /// Alterar a data de vencimento de um lançamnto
+        /// </summary>
+        /// <param name="_codigo"></param>
+        /// <param name="_ano"></param>
+        /// <param name="_lanc"></param>
+        /// <param name="_seq"></param>
+        /// <param name="_parc"></param>
+        /// <param name="_compl"></param>
+        /// <param name="_vencto"></param>
+        /// <returns></returns>
+        public Exception Alterar_Data_Vencimento(int _codigo, short _ano, short _lanc, short _seq, byte _parc, byte _compl, DateTime _vencto) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Alterar_Data_Vencimento(_codigo, _ano, _lanc, _seq, _parc, _compl, _vencto);
+            return ex;
+        }
+
+        /// <summary>
+        /// Alterar a data base de um lançamento
+        /// </summary>
+        /// <param name="_codigo"></param>
+        /// <param name="_ano"></param>
+        /// <param name="_lanc"></param>
+        /// <param name="_seq"></param>
+        /// <param name="_parc"></param>
+        /// <param name="_compl"></param>
+        /// <param name="_data_base"></param>
+        /// <returns></returns>
+        public Exception Alterar_Data_Base(int _codigo, short _ano, short _lanc, short _seq, byte _parc, byte _compl, DateTime _data_base) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Alterar_Data_Base(_codigo, _ano, _lanc, _seq, _parc, _compl, _data_base);
+            return ex;
+        }
+
+        /// <summary>
+        /// Alterar o livro de um lançamento
+        /// </summary>
+        /// <param name="_codigo"></param>
+        /// <param name="_ano"></param>
+        /// <param name="_lanc"></param>
+        /// <param name="_seq"></param>
+        /// <param name="_parc"></param>
+        /// <param name="_compl"></param>
+        /// <param name="_livro"></param>
+        /// <returns></returns>
+        public Exception Alterar_Numero_Livro(int _codigo, short _ano, short _lanc, short _seq, byte _parc, byte _compl, int _livro) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Alterar_Numero_Livro(_codigo, _ano, _lanc, _seq, _parc, _compl, _livro);
+            return ex;
+
+        }
+
+        /// <summary>
+        /// Alterar a certidão de um livro
+        /// </summary>
+        /// <param name="_codigo"></param>
+        /// <param name="_ano"></param>
+        /// <param name="_lanc"></param>
+        /// <param name="_seq"></param>
+        /// <param name="_parc"></param>
+        /// <param name="_compl"></param>
+        /// <param name="_certidao"></param>
+        /// <returns></returns>
+        public Exception Alterar_Numero_Certidao(int _codigo, short _ano, short _lanc, short _seq, byte _parc, byte _compl, int _certidao) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Alterar_Numero_Certidao(_codigo, _ano, _lanc, _seq, _parc, _compl, _certidao);
+            return ex;
+        }
+
+        /// <summary>
+        /// Alterar a data de inscrição de um lançamento
+        /// </summary>
+        /// <param name="_codigo"></param>
+        /// <param name="_ano"></param>
+        /// <param name="_lanc"></param>
+        /// <param name="_seq"></param>
+        /// <param name="_parc"></param>
+        /// <param name="_compl"></param>
+        /// <param name="_data"></param>
+        /// <returns></returns>
+        public Exception Alterar_Data_Inscricao(int _codigo, short _ano, short _lanc, short _seq, byte _parc, byte _compl, DateTime _data) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Alterar_Data_Inscricao(_codigo, _ano, _lanc, _seq, _parc, _compl, _data);
+            return ex;
+        }
+
+        /// <summary>
+        /// Alterar a data de ajuizamento de um lançamento
+        /// </summary>
+        /// <param name="_codigo"></param>
+        /// <param name="_ano"></param>
+        /// <param name="_lanc"></param>
+        /// <param name="_seq"></param>
+        /// <param name="_parc"></param>
+        /// <param name="_compl"></param>
+        /// <param name="_data"></param>
+        /// <returns></returns>
+        public Exception Alterar_Data_Ajuizamento(int _codigo, short _ano, short _lanc, short _seq, byte _parc, byte _compl, DateTime _data) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Alterar_Data_Ajuizamento(_codigo, _ano, _lanc, _seq, _parc, _compl, _data);
+            return ex;
+        }
+
+        /// <summary>
+        /// Alterar a pagina do livro de um lançamento
+        /// </summary>
+        /// <param name="_codigo"></param>
+        /// <param name="_ano"></param>
+        /// <param name="_lanc"></param>
+        /// <param name="_seq"></param>
+        /// <param name="_parc"></param>
+        /// <param name="_compl"></param>
+        /// <param name="_pagina"></param>
+        /// <returns></returns>
+        public Exception Alterar_Pagina_Livro(int _codigo, short _ano, short _lanc, short _seq, byte _parc, byte _compl, int _pagina) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Exception ex = obj.Alterar_Pagina_Livro(_codigo, _ano, _lanc, _seq, _parc, _compl, _pagina);
+            return ex;
+        }
+
+        /// <summary>
         /// Excluir registro da tabela debitocancel
         /// </summary>
         /// <param name="reg"></param>

@@ -499,6 +499,12 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public string Retorna_Valor_Parametro(string ParameterName) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                string Sql = (from p in db.Parametros where p.Nomeparam == ParameterName select p.Valparam).FirstOrDefault();
+                return Sql;
+            }
+        }
 
     }
 }

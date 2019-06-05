@@ -2076,6 +2076,97 @@ Proximo:;
             }
         }
 
+        public Exception Alterar_Data_Vencimento(int _codigo, short _ano, short _lanc, short _seq, byte _parc, byte _compl, DateTime _vencto) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                Debitoparcela d = db.Debitoparcela.First(i => i.Codreduzido == _codigo && i.Anoexercicio == _ano && i.Codlancamento == _lanc && i.Seqlancamento == _seq && i.Numparcela == _parc && i.Codcomplemento == _compl);
+                d.Datavencimento = _vencto;
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Exception Alterar_Data_Base(int _codigo, short _ano, short _lanc, short _seq, byte _parc, byte _compl, DateTime _data_base) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                Debitoparcela d = db.Debitoparcela.First(i => i.Codreduzido == _codigo && i.Anoexercicio == _ano && i.Codlancamento == _lanc && i.Seqlancamento == _seq && i.Numparcela == _parc && i.Codcomplemento == _compl);
+                d.Datadebase = _data_base;
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Exception Alterar_Data_Inscricao(int _codigo, short _ano, short _lanc, short _seq, byte _parc, byte _compl, DateTime _data) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                Debitoparcela d = db.Debitoparcela.First(i => i.Codreduzido == _codigo && i.Anoexercicio == _ano && i.Codlancamento == _lanc && i.Seqlancamento == _seq && i.Numparcela == _parc && i.Codcomplemento == _compl);
+                d.Datainscricao = _data;
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Exception Alterar_Data_Ajuizamento(int _codigo, short _ano, short _lanc, short _seq, byte _parc, byte _compl, DateTime _data) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                Debitoparcela d = db.Debitoparcela.First(i => i.Codreduzido == _codigo && i.Anoexercicio == _ano && i.Codlancamento == _lanc && i.Seqlancamento == _seq && i.Numparcela == _parc && i.Codcomplemento == _compl);
+                d.Dataajuiza = _data;
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Exception Alterar_Numero_Livro(int _codigo, short _ano, short _lanc, short _seq, byte _parc, byte _compl, int _livro) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                Debitoparcela d = db.Debitoparcela.First(i => i.Codreduzido == _codigo && i.Anoexercicio == _ano && i.Codlancamento == _lanc && i.Seqlancamento == _seq && i.Numparcela == _parc && i.Codcomplemento == _compl);
+                d.Numerolivro = _livro;
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Exception Alterar_Numero_Certidao(int _codigo, short _ano, short _lanc, short _seq, byte _parc, byte _compl, int _certidao) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                Debitoparcela d = db.Debitoparcela.First(i => i.Codreduzido == _codigo && i.Anoexercicio == _ano && i.Codlancamento == _lanc && i.Seqlancamento == _seq && i.Numparcela == _parc && i.Codcomplemento == _compl);
+                d.Numcertidao = _certidao;
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Exception Alterar_Pagina_Livro(int _codigo, short _ano, short _lanc, short _seq, byte _parc, byte _compl, int _pagina) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                Debitoparcela d = db.Debitoparcela.First(i => i.Codreduzido == _codigo && i.Anoexercicio == _ano && i.Codlancamento == _lanc && i.Seqlancamento == _seq && i.Numparcela == _parc && i.Codcomplemento == _compl);
+                d.Paginalivro = _pagina;
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
         public Exception Excluir_Debito_Cancel(Debitocancel reg) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 int _codigo = reg.Codreduzido;

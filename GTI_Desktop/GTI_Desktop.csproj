@@ -508,6 +508,12 @@
     <Compile Include="Forms\Usuario_Setor.Designer.cs">
       <DependentUpon>Usuario_Setor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\WebBrowserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\WebBrowserForm.Designer.cs">
+      <DependentUpon>WebBrowserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ZoomBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -773,6 +779,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Usuario_Setor.resx">
       <DependentUpon>Usuario_Setor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\WebBrowserForm.resx">
+      <DependentUpon>WebBrowserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ZoomBox.resx">
       <DependentUpon>ZoomBox.cs</DependentUpon>

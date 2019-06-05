@@ -6,14 +6,27 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace GTI_Desktop.Forms {
     public partial class Parcela_Edit : Form {
         public static List<SpExtrato> _lista_tributo;
+        int _codigo;
+        short _ano, _lanc, _seq;
+        byte _parc,_compl;
+        string _connection = gtiCore.Connection_Name();
+
         public Parcela_Edit(List<SpExtrato> ListaTributo) {
             InitializeComponent();
             _lista_tributo = ListaTributo;
+            _codigo = _lista_tributo[0].Codreduzido;
+            _ano = _lista_tributo[0].Anoexercicio;
+            _lanc = _lista_tributo[0].Codlancamento;
+            _seq = _lista_tributo[0].Seqlancamento;
+            _parc =(byte) _lista_tributo[0].Numparcela;
+            _compl = _lista_tributo[0].Codcomplemento;
+
             LoadProperty clsProperty = new LoadProperty {
                 Exercicio = ListaTributo[0].Anoexercicio,
                 Lancamento = ListaTributo[0].Codlancamento.ToString("00") + "-" + ListaTributo[0].Desclancamento,
@@ -30,59 +43,113 @@ namespace GTI_Desktop.Forms {
                 Tributos = "(...) ==>"
             };
 
+            
             pGrid.SelectedObject = clsProperty;
             pGrid.ExpandAllGridItems();
+            EnableGrid();
 
         }
 
-
         private void PGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e) {
-            //TODO: Gravar as alterações nas propriedades 
+            Tributario_bll tributario_Class = new Tributario_bll(_connection);
+            Exception ex = null;
+            string _valor = e.ChangedItem.Value.ToString();
+            switch (e.ChangedItem.Label) {
+                case "Situação do lançamento":
+                    byte _status = Convert.ToByte(_valor.Substring(0, _valor.ToString().IndexOf("-")));
+                    ex = tributario_Class.Alterar_Status_Lancamento(_codigo,_ano,_lanc,_seq,_parc,_compl,_status);
+                    break;
+                case "Data de vencimento":
+                    DateTime _vencto = Convert.ToDateTime(_valor);
+                    ex = tributario_Class.Alterar_Data_Vencimento(_codigo, _ano, _lanc, _seq, _parc, _compl, _vencto);
+                    break;
+                case "Data base":
+                    DateTime _data_base = Convert.ToDateTime(_valor);
+                    ex = tributario_Class.Alterar_Data_Base(_codigo, _ano, _lanc, _seq, _parc, _compl, _data_base);
+                    break;
+                case "N° do livro":
+                    int _livro = Convert.ToInt32(_valor);
+                    ex = tributario_Class.Alterar_Numero_Livro(_codigo, _ano, _lanc, _seq, _parc, _compl, _livro);
+                    break;
+                case "N° da certidão":
+                    int _certidao = Convert.ToInt32(_valor);
+                    ex = tributario_Class.Alterar_Numero_Certidao(_codigo, _ano, _lanc, _seq, _parc, _compl, _certidao);
+                    break;
+                case "N° da página":
+                    int _pagina = Convert.ToInt32(_valor);
+                    ex = tributario_Class.Alterar_Pagina_Livro(_codigo, _ano, _lanc, _seq, _parc, _compl, _pagina);
+                    break;
+                case "Data de inscrição":
+                    DateTime _data_insc = Convert.ToDateTime(_valor);
+                    ex = tributario_Class.Alterar_Data_Inscricao(_codigo, _ano, _lanc, _seq, _parc, _compl, _data_insc);
+                    break;
+                case "Data de ajuizamento":
+                    DateTime _data_ajuiza = Convert.ToDateTime(_valor);
+                    ex = tributario_Class.Alterar_Data_Ajuizamento(_codigo, _ano, _lanc, _seq, _parc, _compl, _data_ajuiza);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void EnableGrid() {
+
+
+            PropertyDescriptor descriptor = TypeDescriptor.GetProperties(pGrid.SelectedObject.GetType())["Exercicio"];
+            ReadOnlyAttribute attrib = (ReadOnlyAttribute)descriptor.Attributes[typeof(ReadOnlyAttribute)];
+            FieldInfo isReadOnly = attrib.GetType().GetField("isReadOnly", BindingFlags.NonPublic | BindingFlags.Instance);
+            isReadOnly.SetValue(attrib, false);
+
+            descriptor = TypeDescriptor.GetProperties(pGrid.SelectedObject.GetType())["Lancamento"];
+            attrib = (ReadOnlyAttribute)descriptor.Attributes[typeof(ReadOnlyAttribute)];
+            isReadOnly = attrib.GetType().GetField("isReadOnly", BindingFlags.NonPublic | BindingFlags.Instance);
+            isReadOnly.SetValue(attrib, true);
+
+            descriptor = TypeDescriptor.GetProperties(pGrid.SelectedObject.GetType())["Sequencia"];
+            attrib = (ReadOnlyAttribute)descriptor.Attributes[typeof(ReadOnlyAttribute)];
+            isReadOnly = attrib.GetType().GetField("isReadOnly", BindingFlags.NonPublic | BindingFlags.Instance);
+            isReadOnly.SetValue(attrib, false);
+
+            pGrid.SelectedObject = pGrid.SelectedObject;
+
         }
     }
 
     class LoadProperty {
         private int _exercicio, _sequencia, _parcela, _complemento, _numero_certidao, _numero_livro, _pagina_livro;
         private string _lancamento, _data_vencto, _data_base, _status, _data_inscricao, _data_ajuiza, _tributo ;
-        
-        [Category("Atributos")]
-        [DisplayName("Ano de exercício")]
+
+        [CategoryAttribute("Atributos"), DescriptionAttribute("Ano de exercício"), ReadOnly(true), DisplayName("Ano de exercício")]
         public int Exercicio {
             get {return _exercicio;}
             set { _exercicio = value; }
         }
 
-        [Category("Atributos")]
-        [DisplayName("Lançamento")]
+        [CategoryAttribute("Atributos"), DescriptionAttribute("Lançamento"), ReadOnly(true), DisplayName("Lançamento")]
         public string Lancamento {
             get {return _lancamento;}
             set { _lancamento = value; }
         }
 
-        [Category("Atributos")]
-        [DisplayName("Nº da sequencia")]
+        [CategoryAttribute("Atributos"), DescriptionAttribute("Nº da sequencia"), ReadOnly(true), DisplayName("Nº da sequencia")]
         public int Sequencia {
             get {return _sequencia;}
             set { _sequencia = value; }
         }
 
-        [Category("Atributos")]
-        [DisplayName("Nº da parcela")]
+        [CategoryAttribute("Atributos"), DescriptionAttribute("Nº da parcela"), ReadOnly(true), DisplayName("Nº da parcela")]
         public int Parcela {
             get {return _parcela;}
             set { _parcela = value; }
         }
 
-        [Category("Atributos")]
-        [DisplayName("N° do complemento")]
+        [CategoryAttribute("Atributos"), DescriptionAttribute("N° do complemento"), ReadOnly(true), DisplayName("N° do complemento")]
         public int Complemento {
             get {return _complemento;}
             set { _complemento = value; }
         }
 
-
-        [Category("Dados do Lançamento")]
-        [DisplayName("Data de vencimento")]
+        [CategoryAttribute("Dados do Lançamento"), DescriptionAttribute("Data de vencimento"), ReadOnly(true), DisplayName("Data de vencimento")]
         [EditorAttribute(typeof(Data_Editor), typeof(System.Drawing.Design.UITypeEditor))]
         public string Data_Vencimento {
             get {return _data_vencto;}
@@ -94,8 +161,7 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        [Category("Dados do Lançamento")]
-        [DisplayName("Data base")]
+        [CategoryAttribute("Dados do Lançamento"), DescriptionAttribute("Data base"), ReadOnly(true), DisplayName("Data base")]
         [EditorAttribute(typeof(Data_Editor), typeof(System.Drawing.Design.UITypeEditor))]
         public string Data_Base {
             get {return _data_base;}
@@ -107,9 +173,7 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-
-        [Category("Divida Ativa")]
-        [DisplayName("Data de inscrição")]
+        [CategoryAttribute("Divida Ativa"), DescriptionAttribute("Data de inscrição"), ReadOnly(true), DisplayName("Data de inscrição")]
         [EditorAttribute(typeof(Data_Editor), typeof(System.Drawing.Design.UITypeEditor))]
         public string Data_Inscricao {
             get {return _data_inscricao;}
@@ -125,29 +189,25 @@ namespace GTI_Desktop.Forms {
             }
         }
 
-        [Category("Divida Ativa")]
-        [DisplayName("N° da certidão")]
+        [CategoryAttribute("Divida Ativa"), DescriptionAttribute("N° da certidão"), ReadOnly(true), DisplayName("N° da certidão")]
         public int Numero_Certidao {
             get {return _numero_certidao;}
             set { _numero_certidao = value; }
         }
 
-        [Category("Divida Ativa")]
-        [DisplayName("N° do livro")]
+        [CategoryAttribute("Divida Ativa"), DescriptionAttribute("N° do livro"), ReadOnly(true), DisplayName("N° do livro")]
         public int Numero_Livro {
             get {return _numero_livro;}
             set { _numero_livro = value; }
         }
 
-        [Category("Divida Ativa")]
-        [DisplayName("N° da página")]
+        [CategoryAttribute("Divida Ativa"), DescriptionAttribute("N° da página"), ReadOnly(true), DisplayName("N° da página")]
         public int Pagina_Livro {
             get {return _pagina_livro;}
             set { _pagina_livro = value; }
         }
 
-        [Category("Divida Ativa")]
-        [DisplayName("Data de ajuizamento")]
+        [CategoryAttribute("Divida Ativa"), DescriptionAttribute("Data de ajuizamento"), ReadOnly(true), DisplayName("Data de ajuizamento")]
         [EditorAttribute(typeof(Data_Editor), typeof(System.Drawing.Design.UITypeEditor))]
         public string Data_Ajuizamento {
             get {return _data_ajuiza;}
@@ -163,16 +223,14 @@ namespace GTI_Desktop.Forms {
             }
         }
 
+        [CategoryAttribute("Dados do Lançamento"), DescriptionAttribute("Situação do lançamento"), ReadOnly(true), DisplayName("Situação do lançamento")]
         [TypeConverter(typeof(StatusConverter))]
-        [Category("Dados do Lançamento")]
-        [DisplayName("Situação do lançamento")]
         public string StatusLancamento {
             get { return _status;}
             set { _status = value;}
         }
 
-        [Category("Dados dos Tributos")]
-        [DisplayName("Lista de tributos")]
+        [CategoryAttribute("Dados dos Tributos"), DescriptionAttribute("Lista de tributos"), ReadOnly(true), DisplayName("Lista de tributos")]
         [EditorAttribute(typeof(Tributo_Editor), typeof(System.Drawing.Design.UITypeEditor))]
         public string Tributos {
             get { return _tributo; }
@@ -182,8 +240,6 @@ namespace GTI_Desktop.Forms {
         }
 
     }
-
-
 
     public class StatusConverter : StringConverter {
 
@@ -207,11 +263,6 @@ namespace GTI_Desktop.Forms {
         }
 
     }
-
-
-
-
-
 
 
 }

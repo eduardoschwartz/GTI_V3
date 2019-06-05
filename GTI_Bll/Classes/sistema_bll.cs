@@ -230,5 +230,10 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        public string Retorna_Valor_Parametro(string ParameterName) {
+            Sistema_Data obj = new Sistema_Data(_connection);
+            return obj.Retorna_Valor_Parametro(ParameterName);
+        }
+
     }
 }
