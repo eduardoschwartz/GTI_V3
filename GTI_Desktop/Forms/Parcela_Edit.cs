@@ -40,6 +40,7 @@ namespace GTI_Desktop.Forms {
                 Numero_Certidao = ListaTributo[0].Certidao == null ? 0 : (int)ListaTributo[0].Certidao,
                 Pagina_Livro = ListaTributo[0].Pagina == null ? 0 : (int)ListaTributo[0].Pagina,
                 Numero_Livro = ListaTributo[0].Numlivro == null ? 0 : (int)ListaTributo[0].Numlivro,
+                Data_Ajuizamento = ListaTributo[0].Dataajuiza == null ? "" : Convert.ToDateTime(ListaTributo[0].Dataajuiza).ToString("dd/MM/yyyy"),
                 Tributos = "(...) ==>"
             };
 
@@ -94,21 +95,54 @@ namespace GTI_Desktop.Forms {
 
         private void EnableGrid() {
 
+            bool bAllow = !gtiCore.GetBinaryAccess((int)TAcesso.Editar_Parcela_Lancamentos);
 
-            PropertyDescriptor descriptor = TypeDescriptor.GetProperties(pGrid.SelectedObject.GetType())["Exercicio"];
+            PropertyDescriptor descriptor = TypeDescriptor.GetProperties(pGrid.SelectedObject.GetType())["Data_Vencimento"];
             ReadOnlyAttribute attrib = (ReadOnlyAttribute)descriptor.Attributes[typeof(ReadOnlyAttribute)];
             FieldInfo isReadOnly = attrib.GetType().GetField("isReadOnly", BindingFlags.NonPublic | BindingFlags.Instance);
-            isReadOnly.SetValue(attrib, false);
+            isReadOnly.SetValue(attrib, bAllow);
 
-            descriptor = TypeDescriptor.GetProperties(pGrid.SelectedObject.GetType())["Lancamento"];
+            descriptor = TypeDescriptor.GetProperties(pGrid.SelectedObject.GetType())["Data_Base"];
             attrib = (ReadOnlyAttribute)descriptor.Attributes[typeof(ReadOnlyAttribute)];
             isReadOnly = attrib.GetType().GetField("isReadOnly", BindingFlags.NonPublic | BindingFlags.Instance);
-            isReadOnly.SetValue(attrib, true);
+            isReadOnly.SetValue(attrib, bAllow);
 
-            descriptor = TypeDescriptor.GetProperties(pGrid.SelectedObject.GetType())["Sequencia"];
+            descriptor = TypeDescriptor.GetProperties(pGrid.SelectedObject.GetType())["StatusLancamento"];
             attrib = (ReadOnlyAttribute)descriptor.Attributes[typeof(ReadOnlyAttribute)];
             isReadOnly = attrib.GetType().GetField("isReadOnly", BindingFlags.NonPublic | BindingFlags.Instance);
-            isReadOnly.SetValue(attrib, false);
+            isReadOnly.SetValue(attrib, bAllow);
+
+            descriptor = TypeDescriptor.GetProperties(pGrid.SelectedObject.GetType())["Tributos"];
+            attrib = (ReadOnlyAttribute)descriptor.Attributes[typeof(ReadOnlyAttribute)];
+            isReadOnly = attrib.GetType().GetField("isReadOnly", BindingFlags.NonPublic | BindingFlags.Instance);
+            isReadOnly.SetValue(attrib, bAllow);
+
+            bAllow = !gtiCore.GetBinaryAccess((int)TAcesso.Editar_Parcela_Divida_Ativa);
+
+            descriptor = TypeDescriptor.GetProperties(pGrid.SelectedObject.GetType())["Data_Inscricao"];
+            attrib = (ReadOnlyAttribute)descriptor.Attributes[typeof(ReadOnlyAttribute)];
+            isReadOnly = attrib.GetType().GetField("isReadOnly", BindingFlags.NonPublic | BindingFlags.Instance);
+            isReadOnly.SetValue(attrib, bAllow);
+
+            descriptor = TypeDescriptor.GetProperties(pGrid.SelectedObject.GetType())["Numero_Certidao"];
+            attrib = (ReadOnlyAttribute)descriptor.Attributes[typeof(ReadOnlyAttribute)];
+            isReadOnly = attrib.GetType().GetField("isReadOnly", BindingFlags.NonPublic | BindingFlags.Instance);
+            isReadOnly.SetValue(attrib, bAllow);
+
+            descriptor = TypeDescriptor.GetProperties(pGrid.SelectedObject.GetType())["Numero_Livro"];
+            attrib = (ReadOnlyAttribute)descriptor.Attributes[typeof(ReadOnlyAttribute)];
+            isReadOnly = attrib.GetType().GetField("isReadOnly", BindingFlags.NonPublic | BindingFlags.Instance);
+            isReadOnly.SetValue(attrib, bAllow);
+
+            descriptor = TypeDescriptor.GetProperties(pGrid.SelectedObject.GetType())["Pagina_Livro"];
+            attrib = (ReadOnlyAttribute)descriptor.Attributes[typeof(ReadOnlyAttribute)];
+            isReadOnly = attrib.GetType().GetField("isReadOnly", BindingFlags.NonPublic | BindingFlags.Instance);
+            isReadOnly.SetValue(attrib, bAllow);
+
+            descriptor = TypeDescriptor.GetProperties(pGrid.SelectedObject.GetType())["Data_Ajuizamento"];
+            attrib = (ReadOnlyAttribute)descriptor.Attributes[typeof(ReadOnlyAttribute)];
+            isReadOnly = attrib.GetType().GetField("isReadOnly", BindingFlags.NonPublic | BindingFlags.Instance);
+            isReadOnly.SetValue(attrib, bAllow);
 
             pGrid.SelectedObject = pGrid.SelectedObject;
 

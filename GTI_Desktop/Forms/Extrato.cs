@@ -1163,31 +1163,34 @@ InicioObs:
             if (!_find)
                 MessageBox.Show("Nenhum débito selecionado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
-                List<SpExtrato> Lista = new List<SpExtrato>();
+                bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.DAM_Imprimir);
+                if (bAllow) {
+                    List<SpExtrato> Lista = new List<SpExtrato>();
 
-                foreach (DataGridViewRow item in ExtratoDataGrid.Rows) {
-                    short _ano = Convert.ToInt16(item.Cells["Ano"].Value);
-                    short _lanc = Convert.ToInt16(item.Cells["lancamento"].Value.ToString().Substring(0, 2));
-                    short _seq = Convert.ToInt16(item.Cells["sequencia"].Value);
-                    short _parc = Convert.ToInt16(item.Cells["parcela"].Value);
-                    byte _compl = Convert.ToByte(item.Cells["complemento"].Value);
+                    foreach (DataGridViewRow item in ExtratoDataGrid.Rows) {
+                        short _ano = Convert.ToInt16(item.Cells["Ano"].Value);
+                        short _lanc = Convert.ToInt16(item.Cells["lancamento"].Value.ToString().Substring(0, 2));
+                        short _seq = Convert.ToInt16(item.Cells["sequencia"].Value);
+                        short _parc = Convert.ToInt16(item.Cells["parcela"].Value);
+                        byte _compl = Convert.ToByte(item.Cells["complemento"].Value);
 
-                    if (item.Tag.ToString() == "1") {
-                        SpExtrato reg = new SpExtrato {
-                            Codreduzido = Convert.ToInt32(CodigoText.Text),
-                            Anoexercicio = _ano,
-                            Codlancamento = _lanc,
-                            Seqlancamento = _seq,
-                            Numparcela = _parc,
-                            Codcomplemento = _compl
-                        };
-                        Lista.Add(reg);
+                        if (item.Tag.ToString() == "1") {
+                            SpExtrato reg = new SpExtrato {
+                                Codreduzido = Convert.ToInt32(CodigoText.Text),
+                                Anoexercicio = _ano,
+                                Codlancamento = _lanc,
+                                Seqlancamento = _seq,
+                                Numparcela = _parc,
+                                Codcomplemento = _compl
+                            };
+                            Lista.Add(reg);
+                        }
                     }
-                }
-                Dam frm = new Dam(Lista,Lista_Extrato_Tributo);
-                frm.ShowDialog();
+                    Dam frm = new Dam(Lista, Lista_Extrato_Tributo);
+                    frm.ShowDialog();
+                } else
+                    MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void PesquisarDocumentoButton_Click(object sender, EventArgs e) {
@@ -1205,6 +1208,12 @@ InicioObs:
         }
 
         private void CancelamentoDebitoMenu_Click(object sender, EventArgs e) {
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.Cancelamento_debito);
+            if (!bAllow) {
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             bool _find = false;
             foreach (DataGridViewRow item in ExtratoDataGrid.Rows) {
                 if (item.Tag.ToString() == "1") {

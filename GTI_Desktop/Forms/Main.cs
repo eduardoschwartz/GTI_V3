@@ -537,7 +537,11 @@ namespace GTI_Desktop.Forms
 
         private void BtExtrato_Click(object sender, EventArgs e)
         {
-            MnuExtrato_Click(null, null);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.ExtratoContribuinte);
+            if (bAllow) 
+                MnuExtrato_Click(null, null);
+             else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void MnuEmpresa_Click(object sender, EventArgs e)

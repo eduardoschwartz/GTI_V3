@@ -34,6 +34,15 @@
         CadastroEmpresa_Alterar_Total=32,
         CadastroEmpresa_Alterar_Historico=33,
         CadastroEmpresa_Exclusao=34,
-        Consulta_documento=35
+        Consulta_documento=35,
+        DAM_Desativar_Refis = 36,
+        DAM_Imprimir=37,
+        Editar_Parcela=38,
+        Editar_Parcela_Lancamentos=39,
+        Editar_Parcela_Divida_Ativa=40,
+        DAM_Honorario=41,
+        DAM_Desconto=42,
+        Cancelamento_debito=43
+
     }
 }
