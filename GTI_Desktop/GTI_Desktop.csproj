@@ -244,6 +244,18 @@
     <Compile Include="Forms\Dam.Designer.cs">
       <DependentUpon>Dam.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Emissao_Guia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Emissao_Guia.Designer.cs">
+      <DependentUpon>Emissao_Guia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Emissao_Guia2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Emissao_Guia2.Designer.cs">
+      <DependentUpon>Emissao_Guia2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Empresa.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -647,6 +659,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dam.resx">
       <DependentUpon>Dam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Emissao_Guia.resx">
+      <DependentUpon>Emissao_Guia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Emissao_Guia2.resx">
+      <DependentUpon>Emissao_Guia2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Empresa.resx">
       <DependentUpon>Empresa.cs</DependentUpon>

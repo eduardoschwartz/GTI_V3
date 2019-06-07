@@ -952,7 +952,30 @@ namespace GTI_Desktop.Forms
         }
 
         private void EmissaoGuiaButton_Click(object sender, EventArgs e) {
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.ExtratoContribuinte);
+            if (bAllow)
+                EmissaoGuiaMenu_Click(null, null);
+            else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
+        private void EmissaoGuiaMenu_Click(object sender, EventArgs e) {
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.ExtratoContribuinte);
+            if (bAllow) {
+                gtiCore.Ocupado(this);
+                var formToShow = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Emissao_Guia);
+                if (formToShow != null) {
+                    formToShow.Show();
+                } else {
+                    Emissao_Guia f1 = new Emissao_Guia {
+                        Tag = "Menu",
+                        MdiParent = this
+                    };
+                    f1.Show();
+                }
+                gtiCore.Liberado(this);
+            } else
+                MessageBox.Show("Acesso não permitido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }//end class
 }

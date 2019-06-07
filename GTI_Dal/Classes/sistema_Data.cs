@@ -124,13 +124,23 @@ namespace GTI_Dal.Classes {
 
                     //Carrega Endereço de Entrega da Empresa
                     mobiliarioendentrega regEntrega = empresa_Class.Empresa_Endereco_entrega(_codigo);
-                    _endereco_entrega = regEntrega.Nomelogradouro??"";
-                    _numero_entrega = (int)regEntrega.Numimovel;
-                    _complemento_entrega = regEntrega.Complemento??"";
-                    _uf_entrega = regEntrega.Uf??"";
-                    _cidade_entrega = regEntrega.Desccidade;
-                    _bairro_entrega = regEntrega.Descbairro;
-                    _cep_entrega = regEntrega.Cep == null ? "00000-000" : Convert.ToInt32(dalCore.RetornaNumero(regEntrega.Cep).ToString()).ToString("00000-000");
+                    if (regEntrega.Nomelogradouro == null) {
+                        _endereco_entrega = _endereco;
+                        _numero_entrega = _numero;
+                        _complemento_entrega = _complemento;
+                        _uf_entrega = _uf;
+                        _cidade_entrega = _cidade;
+                        _bairro_entrega = _bairro;
+                        _cep_entrega = _cep;
+                    } else {
+                        _endereco_entrega = regEntrega.Nomelogradouro ?? "";
+                        _numero_entrega = (int)regEntrega.Numimovel;
+                        _complemento_entrega = regEntrega.Complemento ?? "";
+                        _uf_entrega = regEntrega.Uf ?? "";
+                        _cidade_entrega = regEntrega.Desccidade;
+                        _bairro_entrega = regEntrega.Descbairro;
+                        _cep_entrega = regEntrega.Cep == null ? "00000-000" : Convert.ToInt32(dalCore.RetornaNumero(regEntrega.Cep).ToString()).ToString("00000-000");
+                    }
                 } else {
                     Cidadao_Data cidadao_Class = new Cidadao_Data(_connection);
                     CidadaoStruct _cidadao = cidadao_Class.Dados_Cidadao(_codigo);

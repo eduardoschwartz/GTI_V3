@@ -133,6 +133,7 @@
             this.Dv2Option = new System.Windows.Forms.RadioButton();
             this.Dv1Option = new System.Windows.Forms.RadioButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.EmissaoGuiaMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.BarStatus.SuspendLayout();
             this.MenuBarStrip.SuspendLayout();
             this.TopBarToolStrip.SuspendLayout();
@@ -513,7 +514,8 @@
             // 
             this.AtendimentoMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CadastroCidadaoMenu,
-            this.ExtratoMenu});
+            this.ExtratoMenu,
+            this.EmissaoGuiaMenu});
             this.AtendimentoMenu.Name = "AtendimentoMenu";
             this.AtendimentoMenu.Size = new System.Drawing.Size(89, 20);
             this.AtendimentoMenu.Text = "Atendimento";
@@ -1073,6 +1075,13 @@
             this.Dv1Option.UseVisualStyleBackColor = false;
             this.Dv1Option.CheckedChanged += new System.EventHandler(this.OptDv1_CheckedChanged);
             // 
+            // EmissaoGuiaMenu
+            // 
+            this.EmissaoGuiaMenu.Name = "EmissaoGuiaMenu";
+            this.EmissaoGuiaMenu.Size = new System.Drawing.Size(195, 22);
+            this.EmissaoGuiaMenu.Text = "Emissão de guia";
+            this.EmissaoGuiaMenu.Click += new System.EventHandler(this.EmissaoGuiaMenu_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1210,6 +1219,7 @@
         private System.Windows.Forms.ToolStripMenuItem RelatorioImobMenu;
         private System.Windows.Forms.ToolStripMenuItem ComunicadoIsencaoMenu;
         private System.Windows.Forms.ToolStripMenuItem TabelaCnaeMenu;
+        private System.Windows.Forms.ToolStripMenuItem EmissaoGuiaMenu;
     }
 }
 

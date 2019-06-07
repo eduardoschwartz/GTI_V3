@@ -23,6 +23,20 @@ namespace GTI_Desktop.Forms {
             _lista_selecionados = _ListaSelecionados;
             _extrato = _ListaTributos;
             DataVencimentoText.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            HonoraioCheckBox.Enabled = gtiCore.GetBinaryAccess((int)TAcesso.DAM_Honorario);
+            DesativarRefisCheckBox.Enabled = gtiCore.GetBinaryAccess((int)TAcesso.DAM_Desativar_Refis);
+            bool bAllow = gtiCore.GetBinaryAccess((int)TAcesso.DAM_Desconto);
+            if (!bAllow){
+                MultaUpDown.Enabled = false;
+                CorrecaoUpDown.Enabled = false;
+                JurosUpDown.Enabled = false;
+                MultaRefreshButton.Enabled = false;
+                JurosRefreshButton.Enabled = false;
+                CorrecaoRefreshButton.Enabled = false;
+                MultaUpDown.BackColor = BackColor;
+                JurosUpDown.BackColor = BackColor;
+                CorrecaoUpDown.BackColor = BackColor;
+            }
             Header();
             Carrega_Lista();
             MainListView.Items[0].Selected = true;
@@ -61,6 +75,9 @@ namespace GTI_Desktop.Forms {
         }
 
         private void Carrega_Lista() {
+            //TODO Honorários
+            //TODO Refis
+
             gtiCore.Ocupado(this);
             MainListView.Items.Clear();
             List<SpExtrato> _listaTmp = new List<SpExtrato>();

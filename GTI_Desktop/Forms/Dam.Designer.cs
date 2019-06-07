@@ -35,12 +35,16 @@
             this.MultaUpDown = new System.Windows.Forms.NumericUpDown();
             this.JurosRefreshButton = new System.Windows.Forms.Button();
             this.MultaRefreshButton = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.HonoraioCheckBox = new System.Windows.Forms.CheckBox();
             this.CalculoDataRefreshData = new System.Windows.Forms.Button();
             this.DataCalculoText = new System.Windows.Forms.MaskedTextBox();
             this.DataVencimentoRefreshButton = new System.Windows.Forms.Button();
             this.DataVencimentoText = new System.Windows.Forms.MaskedTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.DescontoText = new System.Windows.Forms.Label();
             this.SituacaoText = new System.Windows.Forms.Label();
             this.DesativarRefisCheckBox = new System.Windows.Forms.CheckBox();
@@ -79,10 +83,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.NomeText = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
             this.a1Panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CorrecaoUpDown)).BeginInit();
@@ -98,7 +98,7 @@
             // 
             this.a1Panel1.BorderColor = System.Drawing.Color.Gray;
             this.a1Panel1.Controls.Add(this.groupBox2);
-            this.a1Panel1.Controls.Add(this.checkBox1);
+            this.a1Panel1.Controls.Add(this.HonoraioCheckBox);
             this.a1Panel1.Controls.Add(this.CalculoDataRefreshData);
             this.a1Panel1.Controls.Add(this.DataCalculoText);
             this.a1Panel1.Controls.Add(this.DataVencimentoRefreshButton);
@@ -231,15 +231,15 @@
             this.MultaRefreshButton.UseVisualStyleBackColor = false;
             this.MultaRefreshButton.Click += new System.EventHandler(this.MultaRefreshButton_Click);
             // 
-            // checkBox1
+            // HonoraioCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(15, 201);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(77, 17);
-            this.checkBox1.TabIndex = 31;
-            this.checkBox1.Text = "Honorários";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.HonoraioCheckBox.AutoSize = true;
+            this.HonoraioCheckBox.Location = new System.Drawing.Point(15, 201);
+            this.HonoraioCheckBox.Name = "HonoraioCheckBox";
+            this.HonoraioCheckBox.Size = new System.Drawing.Size(77, 17);
+            this.HonoraioCheckBox.TabIndex = 31;
+            this.HonoraioCheckBox.Text = "Honorários";
+            this.HonoraioCheckBox.UseVisualStyleBackColor = true;
             // 
             // CalculoDataRefreshData
             // 
@@ -301,6 +301,48 @@
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Refis";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.ForeColor = System.Drawing.Color.Navy;
+            this.label19.Location = new System.Drawing.Point(76, 80);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(21, 13);
+            this.label19.TabIndex = 41;
+            this.label19.Text = "0%";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.BackColor = System.Drawing.Color.Transparent;
+            this.label21.ForeColor = System.Drawing.Color.Black;
+            this.label21.Location = new System.Drawing.Point(6, 80);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(70, 13);
+            this.label21.TabIndex = 40;
+            this.label21.Text = "Desconto DI:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.Red;
+            this.label10.Location = new System.Drawing.Point(72, 40);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(39, 13);
+            this.label10.TabIndex = 37;
+            this.label10.Text = "Inativo";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Transparent;
+            this.label13.ForeColor = System.Drawing.Color.Black;
+            this.label13.Location = new System.Drawing.Point(6, 40);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(66, 13);
+            this.label13.TabIndex = 36;
+            this.label13.Text = "Situação DI:";
             // 
             // DescontoText
             // 
@@ -655,48 +697,6 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "Nome......:";
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.ForeColor = System.Drawing.Color.Red;
-            this.label10.Location = new System.Drawing.Point(72, 40);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(39, 13);
-            this.label10.TabIndex = 37;
-            this.label10.Text = "Inativo";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.Color.Transparent;
-            this.label13.ForeColor = System.Drawing.Color.Black;
-            this.label13.Location = new System.Drawing.Point(6, 40);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(66, 13);
-            this.label13.TabIndex = 36;
-            this.label13.Text = "Situação DI:";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.ForeColor = System.Drawing.Color.Navy;
-            this.label19.Location = new System.Drawing.Point(76, 80);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(21, 13);
-            this.label19.TabIndex = 41;
-            this.label19.Text = "0%";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.BackColor = System.Drawing.Color.Transparent;
-            this.label21.ForeColor = System.Drawing.Color.Black;
-            this.label21.Location = new System.Drawing.Point(6, 80);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(70, 13);
-            this.label21.TabIndex = 40;
-            this.label21.Text = "Desconto DI:";
-            // 
             // Dam
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -709,6 +709,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Dam";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Documento de Arrecadação Municipal (D.A.M.)";
             this.a1Panel1.ResumeLayout(false);
@@ -784,7 +785,7 @@
         private System.Windows.Forms.Label NomeText;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox HonoraioCheckBox;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label10;
