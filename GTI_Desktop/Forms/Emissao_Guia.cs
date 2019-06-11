@@ -56,7 +56,6 @@ namespace GTI_Desktop.Forms {
             var formToHide = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Emissao_Guia2);
             if (formToHide != null)
                 formToHide.Close();
-
         }
 
         private void Carrega_Dados(int _codigo) {
@@ -85,8 +84,8 @@ namespace GTI_Desktop.Forms {
             else {
                 Form mdiForm = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Main);
                 Emissao_Guia2 f1 = new Emissao_Guia2 { Tag = "Menu", MdiParent = mdiForm };
+                f1.TopMost = true;
                 f1.Show();
-                f1.Location = new Point(Location.X + 40, Location.Y + 40);
             }
         }
 
