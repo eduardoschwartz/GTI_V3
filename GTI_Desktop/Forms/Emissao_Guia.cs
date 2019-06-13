@@ -83,7 +83,7 @@ namespace GTI_Desktop.Forms {
                 MessageBox.Show("CPF/CNPJ obrigatório.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else {
                 Form mdiForm = Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is Forms.Main);
-                Emissao_Guia2 f1 = new Emissao_Guia2 { Tag = "Menu", MdiParent = mdiForm };
+                Emissao_Guia2 f1 = new Emissao_Guia2(Convert.ToInt32(CodigoText.Text)) { Tag = "Menu", MdiParent = mdiForm };
                 f1.TopMost = true;
                 f1.Show();
             }

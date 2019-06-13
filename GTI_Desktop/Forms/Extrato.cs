@@ -1101,7 +1101,7 @@ InicioObs:
                 MessageBox.Show("Selecione uma parcela.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
-        private void dividaAtivaToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void DividaAtivaToolStripMenuItem_Click(object sender, EventArgs e) {
             bool _find = false;
             foreach (DataGridViewRow item in ExtratoDataGrid.Rows) {
                 if (item.Tag.ToString() == "1") {

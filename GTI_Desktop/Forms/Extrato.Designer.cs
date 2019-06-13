@@ -546,7 +546,7 @@
             this.dividaAtivaToolStripMenuItem.Name = "dividaAtivaToolStripMenuItem";
             this.dividaAtivaToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.dividaAtivaToolStripMenuItem.Text = "Divida Ativa";
-            this.dividaAtivaToolStripMenuItem.Click += new System.EventHandler(this.dividaAtivaToolStripMenuItem_Click);
+            this.dividaAtivaToolStripMenuItem.Click += new System.EventHandler(this.DividaAtivaToolStripMenuItem_Click);
             // 
             // CancelamentoDebitoMenu
             // 

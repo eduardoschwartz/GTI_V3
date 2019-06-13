@@ -14,7 +14,7 @@ namespace GTI_Desktop.Forms {
         Color _backColor = Color.White, _foreColor = Color.Brown;
         Font _font = new Font("Microsoft Sans Serif", 8, FontStyle.Regular);
         DateTime _data_refis_inicio,_data_refis_final,_data_refisdi_inicio,_data_refisdi_final;
-        bool _refis_ativo = false,_refisdi_ativo=false;
+        bool _refis_ativo = false, _refisdi_ativo = false;
         int _plano = 0;
 
         public Dam(List<SpExtrato>_ListaSelecionados,List<SpExtrato>_ListaTributos) {
