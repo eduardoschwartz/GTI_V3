@@ -100,14 +100,45 @@ namespace UIWeb.Pages {
 
                 //*** CÓDIGO DE BARRAS ***
 
-                decimal nValorguia = Math.Truncate(Convert.ToDecimal(reg.Valorguia * 100));
-                string NumBarra = gtiCore.Gera2of5Cod((nValorguia).ToString(), Convert.ToDateTime(item.Data_Vencimento), Convert.ToInt32(reg.Numdoc), Convert.ToInt32(reg.Codreduzido));
-                reg.Numbarra2a = NumBarra.Substring(0, 13);
-                reg.Numbarra2b = NumBarra.Substring(13, 13);
-                reg.Numbarra2c = NumBarra.Substring(26, 13);
-                reg.Numbarra2d = NumBarra.Substring(39, 13);
-                string strBarra = gtiCore.Gera2of5Str(reg.Numbarra2a.Substring(0, 11) + reg.Numbarra2b.Substring(0, 11) + reg.Numbarra2c.Substring(0, 11) + reg.Numbarra2d.Substring(0, 11));
-                reg.Codbarra = gtiCore.Mask(strBarra);
+                //decimal nValorguia = Math.Truncate(Convert.ToDecimal(reg.Valorguia * 100));
+                //string NumBarra = gtiCore.Gera2of5Cod((nValorguia).ToString(), Convert.ToDateTime(item.Data_Vencimento), Convert.ToInt32(reg.Numdoc), Convert.ToInt32(reg.Codreduzido));
+                //reg.Numbarra2a = NumBarra.Substring(0, 13);
+                //reg.Numbarra2b = NumBarra.Substring(13, 13);
+                //reg.Numbarra2c = NumBarra.Substring(26, 13);
+                //reg.Numbarra2d = NumBarra.Substring(39, 13);
+                //string strBarra = gtiCore.Gera2of5Str(reg.Numbarra2a.Substring(0, 11) + reg.Numbarra2b.Substring(0, 11) + reg.Numbarra2c.Substring(0, 11) + reg.Numbarra2d.Substring(0, 11));
+                //reg.Codbarra = gtiCore.Mask(strBarra);
+
+                string _convenio = "2950230";
+
+                //***** GERA CÓDIGO DE BARRAS BOLETO REGISTRADO*****
+                DateTime _data_base = Convert.ToDateTime("07/10/1997");
+                TimeSpan ts = Convert.ToDateTime(item.Data_Vencimento) - _data_base;
+                int _fator_vencto = ts.Days;
+                string _quinto_grupo = String.Format("{0:D4}", _fator_vencto);
+                string _valor_boleto_str = string.Format("{0:0.00}", reg.Valorguia);
+                _quinto_grupo += string.Format("{0:D10}", Convert.ToInt64(gtiCore.RetornaNumero(_valor_boleto_str)));
+                string _barra = "0019" + _quinto_grupo + String.Format("{0:D13}", Convert.ToInt32(_convenio));
+                _barra += String.Format("{0:D10}", Convert.ToInt64(reg.Numdoc)) + "17";
+                string _campo1 = "0019" + _barra.Substring(19, 5);
+                string _digitavel = _campo1 + gtiCore.Calculo_DV10(_campo1).ToString();
+                string _campo2 = _barra.Substring(23, 10);
+                _digitavel += _campo2 + gtiCore.Calculo_DV10(_campo2).ToString();
+                string _campo3 = _barra.Substring(33, 10);
+                _digitavel += _campo3 + gtiCore.Calculo_DV10(_campo3).ToString();
+                string _campo5 = _quinto_grupo;
+                string _campo4 = gtiCore.Calculo_DV11(_barra).ToString();
+                _digitavel += _campo4 + _campo5;
+                _barra = _barra.Substring(0, 4) + _campo4 + _barra.Substring(4, _barra.Length - 4);
+                //**Resultado final**
+                string _linha_digitavel = _digitavel.Substring(0, 5) + "." + _digitavel.Substring(5, 5) + " " + _digitavel.Substring(10, 5) + "." + _digitavel.Substring(15, 6) + " ";
+                _linha_digitavel += _digitavel.Substring(21, 5) + "." + _digitavel.Substring(26, 6) + " " + _digitavel.Substring(32, 1) + " " + gtiCore.StringRight(_digitavel, 14);
+                string _codigo_barra = gtiCore.Gera2of5Str(_barra);
+                //**************************************************
+
+                reg.Digitavel = _linha_digitavel;
+                reg.Codbarra = _codigo_barra;
+                reg.Nossonumero = _convenio + String.Format("{0:D10}", Convert.ToInt64(reg.Numdoc));
 
                 tributario_Class.Insert_Boleto_Guia(reg);
 

@@ -38,11 +38,40 @@ namespace UIWeb.Pages {
             if (ListaBoleto.Count > 0) {
                 tributario_Class.Insert_Carne_Web(Convert.ToInt32(ListaBoleto[0].Codreduzido), 2019);
                 DataSet Ds = gtiCore.ToDataSet(ListaBoleto);
-                ReportDataSource rdsAct = new ReportDataSource("DataSet1", Ds.Tables[0]);
+                ReportDataSource rdsAct = new ReportDataSource("dsBoletoGuia", Ds.Tables[0]);
                 ReportViewer viewer = new ReportViewer();
                 viewer.LocalReport.Refresh();
-                viewer.LocalReport.ReportPath = "Report/rptDamParceladoCIP.rdlc";
+                //viewer.LocalReport.ReportPath = "Report/rptDamParceladoCIP.rdlc";
+                viewer.LocalReport.ReportPath = "Report/Carne_CIP.rdlc";
                 viewer.LocalReport.DataSources.Add(rdsAct); // Add  datasource here         
+
+                List<ReportParameter> parameters = new List<ReportParameter>();
+                parameters.Add(new ReportParameter("QUADRA", "Quadra: " + ListaBoleto[0].Quadra + " Lote: " + ListaBoleto[0].Lote));
+                parameters.Add(new ReportParameter("DATADOC", Convert.ToDateTime(ListaBoleto[0].Datadoc).ToString("dd/MM/yyyy")));
+                parameters.Add(new ReportParameter("NOME", ListaBoleto[0].Nome));
+                parameters.Add(new ReportParameter("ENDERECO", ListaBoleto[0].Endereco + " " + ListaBoleto[0].Complemento));
+                parameters.Add(new ReportParameter("BAIRRO", ListaBoleto[0].Bairro??""));
+                parameters.Add(new ReportParameter("CIDADE", ListaBoleto[0].Cidade + "/" + ListaBoleto[0].Uf));
+                parameters.Add(new ReportParameter("QUADRAO", ListaBoleto[0].Quadra??""));
+                parameters.Add(new ReportParameter("LOTEO", ListaBoleto[0].Lote??""));
+                parameters.Add(new ReportParameter("CODIGO", ListaBoleto[0].Codreduzido));
+                parameters.Add(new ReportParameter("INSC", ListaBoleto[0].Inscricao_cadastral??""));
+                parameters.Add(new ReportParameter("FRACAO", "a"));
+                parameters.Add(new ReportParameter("NATUREZA", "a"));
+                parameters.Add(new ReportParameter("TESTADA", "a"));
+                parameters.Add(new ReportParameter("AREAT", "a"));
+                parameters.Add(new ReportParameter("AREAC", "a"));
+                parameters.Add(new ReportParameter("VVT", "a"));
+                parameters.Add(new ReportParameter("VVC", "a"));
+                parameters.Add(new ReportParameter("VVI", "a"));
+                parameters.Add(new ReportParameter("IPTU", "a"));
+                parameters.Add(new ReportParameter("ITU", "a"));
+                parameters.Add(new ReportParameter("TOTALPARC", "a"));
+                parameters.Add(new ReportParameter("UNICA1", "a"));
+                parameters.Add(new ReportParameter("UNICA2", "a"));
+                parameters.Add(new ReportParameter("UNICA3", "a"));
+                viewer.LocalReport.SetParameters(parameters);
+
                 byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
                 tributario_Class.Excluir_Carne(nSid);
                 Response.Buffer = true;
