@@ -66,6 +66,7 @@ namespace GTI_Dal.Classes {
             string _endereco_entrega = "", _complemento_entrega = "", _bairro_entrega = "", _cidade_entrega = "", _uf_entrega = "", _cep_entrega = "";
             string _cpf_cnpj = "",_atividade="",_rg="",_endereco_abreviado="",_endereco_entrega_abreviado="";
             int _numero = 0, _numero_entrega = 0;
+            GTI_Models.modelCore.TipoEndereco _tipo_end = GTI_Models.modelCore.TipoEndereco.Local;
             bool _ativo = false;
             TipoCadastro _tipo_cadastro;
             _tipo_cadastro = _codigo < 100000 ? TipoCadastro.Imovel : (_codigo >= 100000 && _codigo < 500000) ? TipoCadastro.Empresa : TipoCadastro.Cidadao;
@@ -91,8 +92,8 @@ namespace GTI_Dal.Classes {
                 Endereco_Data endereco_Class = new Endereco_Data(_connection);
                 _cep = endereco_Class.RetornaCep((int)_imovel.CodigoLogradouro,(short) _imovel.Numero).ToString();
                 //Carrega Endereço de Entrega do imóvel
-                GTI_Models.modelCore.TipoEndereco Tipoend = _imovel.EE_TipoEndereco == 0 ? GTI_Models.modelCore.TipoEndereco.Local : _imovel.EE_TipoEndereco == 1 ? GTI_Models.modelCore.TipoEndereco.Proprietario : GTI_Models.modelCore.TipoEndereco.Entrega;
-                EnderecoStruct regEntrega = imovel_Class.Dados_Endereco(_codigo, Tipoend);
+                _tipo_end = _imovel.EE_TipoEndereco == 0 ? GTI_Models.modelCore.TipoEndereco.Local : _imovel.EE_TipoEndereco == 1 ? GTI_Models.modelCore.TipoEndereco.Proprietario : GTI_Models.modelCore.TipoEndereco.Entrega;
+                EnderecoStruct regEntrega = imovel_Class.Dados_Endereco(_codigo, _tipo_end);
                 if (regEntrega != null) {
                     _endereco_entrega = regEntrega.Endereco.ToString();
                     _endereco_entrega_abreviado = regEntrega.Endereco_Abreviado.ToString();
@@ -198,6 +199,7 @@ namespace GTI_Dal.Classes {
             Contribuinte_Header_Struct reg = new Contribuinte_Header_Struct {
                 Codigo = _codigo,
                 Tipo = _tipo_cadastro,
+                TipoEndereco=_tipo_end,
                 Nome=_nome,
                 Inscricao=_inscricao,
                 Inscricao_Estadual=_inscricao,

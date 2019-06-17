@@ -1146,7 +1146,7 @@ namespace GTI_Desktop.Forms {
                     Logradouro_EE.Text = regEntrega.Endereco.ToString();
                     Logradouro_EE.Tag = regEntrega.CodLogradouro.ToString();
                     Numero_EE.Text = regEntrega.Numero.ToString();
-                    Complemento_EE.Text = regEntrega.Complemento.ToString();
+                    Complemento_EE.Text = regEntrega.Complemento??"";
                     UF_EE.Text = regEntrega.UF.ToString();
                     Cidade_EE.Text = regEntrega.NomeCidade.ToString();
                     Cidade_EE.Tag = regEntrega.CodigoCidade.ToString();
