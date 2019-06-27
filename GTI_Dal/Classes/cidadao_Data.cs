@@ -57,7 +57,7 @@ namespace GTI_Dal.Classes {
                     DataNascto=Sql.Data_nascimento,
                     EtiquetaR=Sql.Etiqueta,
                     EtiquetaC=Sql.Etiqueta2,
-                    Juridica=(bool)Sql.Juridica,
+                    Juridica= Sql.Juridica==null?false: (bool)Sql.Juridica,
                     Profissao=Sql.Profissao,
                     TelefoneR=Sql.Telefone,
                     TelefoneC=Sql.Telefone2,

@@ -114,7 +114,7 @@ namespace GTI_Dal.Classes {
                     _cpf_cnpj = _empresa.Cpf_cnpj;
                     _endereco = _empresa.Endereco_nome;
                     _endereco_abreviado = _empresa.Endereco_nome_abreviado;
-                    _numero = (int)_empresa.Numero;
+                    _numero = _empresa.Numero==null?0:(int)_empresa.Numero;
                     _complemento = _empresa.Complemento;
                     _bairro = _empresa.Bairro_nome;
                     _cidade = _empresa.Cidade_nome;

@@ -145,7 +145,7 @@ namespace GTI_Web.Pages {
                 reg._Codigo = _codigo;
                 reg._Ret = nRet;
                 reg._Tributo = sTributo;
-                reg._Nome = sNome.Trim();
+                reg._Nome = sNome==null?"": sNome.Trim();
                 _lista_certidao.Add(reg);
             }
 
