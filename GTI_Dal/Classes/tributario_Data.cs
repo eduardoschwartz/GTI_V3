@@ -1421,7 +1421,7 @@ namespace GTI_Dal.Classes {
                     //*** não pagos
                     TimeSpan difference =DateTime.Now- item.Datavencimento ;
                     var days = difference.TotalDays;
-                    if ((item.Statuslanc == 3 | item.Statuslanc== 18 | item.Statuslanc == 42 | item.Statuslanc == 43) && days>1) {
+                    if ((item.Statuslanc == 3 | item.Statuslanc== 18 | item.Statuslanc == 42 | item.Statuslanc == 43 | item.Statuslanc == 38 | item.Statuslanc == 39) && days>1) {
                         bNaoPagoVencido = true;
                         for (int i = 0; i < alArrayNaoPagoVencido.Count; i++) {
                             if (item.Codtributo == 26 || item.Codtributo == 90 || item.Codtributo == 112 || item.Codtributo == 113 || item.Codtributo == 585 || item.Codtributo == 587 || item.Codtributo == 24 || item.Codtributo == 28) {
