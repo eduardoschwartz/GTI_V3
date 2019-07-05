@@ -136,6 +136,9 @@ namespace GTI_Web.Pages {
                         crystalReport.Load(Server.MapPath("~/Report/CertidaoIsencao65.rpt"));
                         crystalReport.SetParameterValue("PERC", nPerc.ToString() + "%");
                         crystalReport.SetParameterValue("DATAPROCESSO", sDataProcesso);
+                    } else {
+                        lblMsg.Text = "Este imóvel não esta isento da cobrança de IPTU no ano atual.";
+                        return;
                     }
                 }
             }
