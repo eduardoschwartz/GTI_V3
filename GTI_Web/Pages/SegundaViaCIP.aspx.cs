@@ -17,6 +17,26 @@ namespace UIWeb.Pages {
             int Num = 0;
             String sTextoImagem = txtimgcode.Text;
             txtimgcode.Text = "";
+
+            string sCPF = txtCPF.Text, sCNPJ = txtCNPJ.Text;
+            if (sCPF == "" && sCNPJ == "")
+                lblmsg.Text = "Digite o CPF/CNPJ da empresa.";
+            else {
+                if (sCPF != "") {
+                    bool _validacpf = gtiCore.ValidaCpf(txtCPF.Text);
+                    if (!_validacpf) {
+                        lblmsg.Text = "CPF inválido.";
+                        return;
+                    }
+                } else {
+                    bool _validacnpj = gtiCore.ValidaCNPJ(txtCNPJ.Text);
+                    if (!_validacnpj) {
+                        lblmsg.Text = "CNPJ inválido.";
+                        return;
+                    }
+                }
+            }
+
             Imovel_bll imovel_Class = new Imovel_bll("GTIconnection");
             bool isNum = Int32.TryParse(txtCod.Text, out Num);
             if (!isNum) {
@@ -24,17 +44,19 @@ namespace UIWeb.Pages {
                 return;
             } else {
                 bool bExiste = imovel_Class.Existe_Imovel(Num);
+                List<ProprietarioStruct> ListaProprietario = imovel_Class.Lista_Proprietario(Num, true);
                 if (!bExiste) {
                     lblmsg.Text = "Código do imóvel inválido!";
                     return;
                 } else {
-                    if (String.IsNullOrWhiteSpace(txtIC.Text)) {
-                        lblmsg.Text = "Inscrição cadastral obrigatória!";
-                        return;
+                    if (sCPF != "") {
+                        if (gtiCore.RetornaNumero( ListaProprietario[0].CPF) !=gtiCore.RetornaNumero( sCPF)) {
+                            lblmsg.Text = "O CPF informado não pertence ao proprietário principal deste imóve!";
+                            return;
+                        }
                     } else {
-                        ImovelStruct reg = imovel_Class.Dados_Imovel(Num);
-                        if (gtiCore.RetornaNumero(  txtIC.Text) != gtiCore.RetornaNumero( reg.Inscricao)) {
-                            lblmsg.Text = "Inscrição cadastral inválida!";
+                        if (gtiCore.RetornaNumero( ListaProprietario[0].CPF) != gtiCore.RetornaNumero( sCNPJ)) {
+                            lblmsg.Text = "O CNPJ informado não pertence ao proprietário principal deste imóve!";
                             return;
                         }
                     }
@@ -98,16 +120,6 @@ namespace UIWeb.Pages {
                 reg.Numproc = "Q:" + dados_imovel.QuadraOriginal.ToString().Trim() + " L:" + dados_imovel.LoteOriginal.ToString().Trim();
                 reg.Cep = dados_imovel.Cep;
 
-                //*** CÓDIGO DE BARRAS ***
-
-                //decimal nValorguia = Math.Truncate(Convert.ToDecimal(reg.Valorguia * 100));
-                //string NumBarra = gtiCore.Gera2of5Cod((nValorguia).ToString(), Convert.ToDateTime(item.Data_Vencimento), Convert.ToInt32(reg.Numdoc), Convert.ToInt32(reg.Codreduzido));
-                //reg.Numbarra2a = NumBarra.Substring(0, 13);
-                //reg.Numbarra2b = NumBarra.Substring(13, 13);
-                //reg.Numbarra2c = NumBarra.Substring(26, 13);
-                //reg.Numbarra2d = NumBarra.Substring(39, 13);
-                //string strBarra = gtiCore.Gera2of5Str(reg.Numbarra2a.Substring(0, 11) + reg.Numbarra2b.Substring(0, 11) + reg.Numbarra2c.Substring(0, 11) + reg.Numbarra2d.Substring(0, 11));
-                //reg.Codbarra = gtiCore.Mask(strBarra);
 
                 string _convenio = "2950230";
 
@@ -153,8 +165,22 @@ namespace UIWeb.Pages {
             return nSid;
         }
 
+        protected void optCPF_CheckedChanged(object sender, EventArgs e) {
+            if (optCPF.Checked) {
+                txtCPF.Visible = true;
+                txtCNPJ.Visible = false;
+                txtCPF.Text = "";
+                txtCNPJ.Text = "";
+            }
+        }
 
-
-
+        protected void optCNPJ_CheckedChanged(object sender, EventArgs e) {
+            if (optCNPJ.Checked) {
+                txtCPF.Visible = false;
+                txtCNPJ.Visible = true;
+                txtCPF.Text = "";
+                txtCNPJ.Text = "";
+            }
+        }
     }
 }

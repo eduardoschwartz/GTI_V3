@@ -468,6 +468,14 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public string Retorna_Descricao_Cnae(string cnae) {
+            string _cnae = dalCore.RetornaNumero(cnae);
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var Sql = (from h in db.Cnae where h.cnae == _cnae select h.Descricao).FirstOrDefault();
+                return Sql;
+            }
+        }
+        
         public List<string> Lista_Placas(int Codigo) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Mobiliarioplaca where p.Codigo==Codigo orderby p.placa select  p.placa).Distinct().ToList();
@@ -812,15 +820,12 @@ namespace GTI_Dal.Classes {
         public List<CnaeStruct> Lista_Cnae_Empresa(int nCodigo) {
             List<CnaeStruct> Lista = new List<CnaeStruct>();
             using (GTI_Context db = new GTI_Context(_connection)) {
-                var rows = (from m in db.Mobiliariocnae join c in db.Cnaesubclasse on
-                            new { p1 = m.Divisao, p2 = m.Grupo, p3 = m.Classe, p4 = m.Subclasse } equals
-                            new { p1 = c.Divisao, p2 = c.Grupo, p3 = c.Classe, p4 = c.Subclasse }
-                            where m.Codmobiliario == nCodigo
-                            select new { m.Cnae, c.Descricao,m.Principal });
+                var rows = (from m in db.Mobiliariocnae where m.Codmobiliario == nCodigo
+                            select new { m.Cnae, m.Principal });
                 foreach (var reg in rows) {
                     CnaeStruct Linha = new CnaeStruct {
                         CNAE = reg.Cnae,
-                        Descricao = reg.Descricao,
+                        Descricao = Retorna_Descricao_Cnae(reg.Cnae),
                         Principal = reg.Principal == 1 ? true : false
                     };
                     Lista.Add(Linha);

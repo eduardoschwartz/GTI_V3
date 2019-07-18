@@ -57,7 +57,8 @@
                             <asp:TextBox ID="txtCNPJ" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="18" onKeyPress="return formata(this, '§§.§§§.§§§/§§§§-§§', event)" TabIndex="1" Visible="False" Width="166px"></asp:TextBox>
                         &nbsp;&nbsp;&nbsp;<br />
              <br />
-&nbsp;</td></tr><tr><td style="width: 134px; vertical-align: bottom"><img height="30" alt="" src="Turing.aspx" width="80" />&nbsp;</td>
+&nbsp;</td></tr>
+             <tr><td style="width: 134px; vertical-align: bottom"><img height="30" alt="" src="Turing.aspx" width="80" />&nbsp;</td>
 
                      <td class="panel">&nbsp;Digite o conteúdo da imagem                                              
                          <asp:TextBox ID="txtimgcode" runat="server" OnClick="btConsultar_Click" ViewStateMode="Disabled" Width="147px" TabIndex="3" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px"></asp:TextBox>

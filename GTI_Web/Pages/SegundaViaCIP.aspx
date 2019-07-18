@@ -59,24 +59,34 @@
                     <tr>
                         <td class="panel">&nbsp;&nbsp;
                             <asp:Label ID="lblCod" runat="server" Text="Código do imóvel..:" Font-Size="X-Small"></asp:Label>
+                            <br />
                             &nbsp;
                             <asp:TextBox ID="txtCod" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="6" Width="70px"  onKeyPress="return formata(this, '§§§§§§', event)"></asp:TextBox>
                             &nbsp; <span class="auto-style6">(Sem dígito)</span></td>
 
                     </tr>
-                    <tr>
-                        <td class="panel">&nbsp;&nbsp;
-                            <asp:Label ID="Label1" runat="server" Text="Inscrição Cadastral..:" Font-Size="X-Small"></asp:Label>
-                            &nbsp;<asp:TextBox ID="txtIC" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="25" Width="197px" onKeyPress="return formata(this, '§.§§.§§§§.§§§§§.§§.§§.§§§', event)"></asp:TextBox>
-                        </td>
 
-                    </tr>
+
+                                     <tr><td class="panel" style="height: 51px">&nbsp;
+                        <asp:RadioButton ID="optCPF" runat="server" AutoPostBack="True" Checked="True" GroupName="optDoc" OnCheckedChanged="optCPF_CheckedChanged" Text="CPF" />
+                        &nbsp;&nbsp;
+                        <asp:RadioButton ID="optCNPJ" runat="server" AutoPostBack="True" GroupName="optDoc" OnCheckedChanged="optCNPJ_CheckedChanged" Text="CNPJ" />
+                       
+                         <asp:Label ID="Label3" runat="server" Text="CPF/CNPJ:"></asp:Label>
+                            &nbsp;
+                        &nbsp;
+                            <asp:TextBox ID="txtCPF" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="14" Width="166px" TabIndex="1"  onKeyPress="return formata(this, '§§§.§§§.§§§-§§', event)"></asp:TextBox>
+                            
+                            <asp:TextBox ID="txtCNPJ" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="18" onKeyPress="return formata(this, '§§.§§§.§§§/§§§§-§§', event)" TabIndex="1" Visible="False" Width="166px"></asp:TextBox>
+                        &nbsp;&nbsp;&nbsp;<br />
+             
+&nbsp;</td></tr>
 
 
                 </table>
                 <asp:Label ID="lblmsg" runat="server" Font-Bold="True" ForeColor="Red" Text=""></asp:Label>
                 <br />
-                <br />
+
                 <table border="0">
                     <tr>
                         <td >
