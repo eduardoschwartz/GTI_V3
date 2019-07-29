@@ -340,6 +340,14 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        ///<summary> Retorna a última sequência de uma observação de um contribuinte
+        ///</summary>
+        public short Retorna_Ultima_Seq_Honorario(int Codigo,int Ano) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            return obj.Retorna_Ultima_Seq_Honorario(Codigo,Ano);
+        }
+
+
         ///<summary> Retorna a lista de documentos de uma parcela
         ///</summary>
         public List<Numdocumento> Lista_Parcela_Documentos(Parceladocumento reg) {

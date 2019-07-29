@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29025.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTI_Dal", "GTI_Dal\GTI_Dal.csproj", "{4405EA88-83F9-4D7A-8D77-CBC8CF85E205}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTI_Desktop", "GTI_Desktop\GTI_Desktop.csproj", "{9F2D568A-06F6-4E5D-BAA7-87801E152741}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTI_Web", "GTI_Web\GTI_Web.csproj", "{00AD477E-4D58-4CA4-89B4-CC6F9194AD52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTI_Web_v3", "GTI_Web_v3\GTI_Web_v3.csproj", "{8D49A32E-0F67-4CD6-94EB-A07BD8D78E63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{00AD477E-4D58-4CA4-89B4-CC6F9194AD52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00AD477E-4D58-4CA4-89B4-CC6F9194AD52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00AD477E-4D58-4CA4-89B4-CC6F9194AD52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D49A32E-0F67-4CD6-94EB-A07BD8D78E63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D49A32E-0F67-4CD6-94EB-A07BD8D78E63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D49A32E-0F67-4CD6-94EB-A07BD8D78E63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D49A32E-0F67-4CD6-94EB-A07BD8D78E63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

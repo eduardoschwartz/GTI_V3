@@ -12,7 +12,8 @@ namespace GTI_Desktop.Forms {
     public partial class Carta_Cobranca : Form {
         private string _connection = gtiCore.Connection_Name();
         private bool _stop = false;
-        short _remessa = 3; //29/04/2019
+        //short _remessa = 3; //29/04/2019
+        short _remessa = 4; //29/07/2019
 
         public Carta_Cobranca() {
             InitializeComponent();
@@ -65,6 +66,7 @@ namespace GTI_Desktop.Forms {
         private void Gera_Matriz(int _codigo_ini, int _codigo_fim, DateTime _data_vencto) {
             int _total = _codigo_fim - _codigo_ini + 1, _pos = 1, _numero_documento = 5125920; //5.100.001 até 5.400.000
             DateTime _data_vencimento = Convert.ToDateTime("10/07/2019");
+            decimal _valor_honorario = 0;
 
             Exception ex = null;
             List<SpExtrato_carta> Lista_Resumo = new List<SpExtrato_carta>();
@@ -80,11 +82,11 @@ namespace GTI_Desktop.Forms {
             List<int> _lista_codigos = tributario_Class.Lista_Codigo_Carta(_codigo_ini, _codigo_fim, _data_vencto);
 
             PBar.Value = 0;
-            //ex = tributario_Class.Excluir_Carta_Cobranca(_remessa);
-            //if (ex != null) {
-            //    ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
-            //    eBox.ShowDialog();
-            //}
+            ex = tributario_Class.Excluir_Carta_Cobranca(_remessa);
+            if (ex != null) {
+                ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+                eBox.ShowDialog();
+            }
 
             for (int _codigo_atual = _codigo_ini; _codigo_atual < _codigo_fim+1; _codigo_atual++) {
 
@@ -161,7 +163,6 @@ namespace GTI_Desktop.Forms {
                         Lista_Final[_index].Valorjuros += _valor_juros;
                         Lista_Final[_index].Valormulta += _valor_multa;
                         Lista_Final[_index].Valorcorrecao += item.Valorcorrecao;
-                        //Lista_Final[_index].Valortotal += item.Valortotal;
                         Lista_Final[_index].Valortotal += item.Valortributo+_valor_juros+_valor_multa+item.Valorcorrecao;
                     } else {
                         SpExtrato_carta reg = new SpExtrato_carta();
@@ -171,8 +172,8 @@ namespace GTI_Desktop.Forms {
                         reg.Valorjuros = _valor_juros;
                         reg.Valormulta = _valor_multa;
                         reg.Valorcorrecao = item.Valorcorrecao;
-                        //reg.Valortotal = item.Valortotal;
                         reg.Valortotal = item.Valortributo + _valor_juros + _valor_multa + item.Valorcorrecao;
+                        reg.Dataajuiza = item.Dataajuiza;
                         Lista_Final.Add(reg);
                     }
                 }
@@ -183,8 +184,17 @@ namespace GTI_Desktop.Forms {
                 decimal _valor_boleto = 0;
                 foreach (SpExtrato_carta item in Lista_Final) {
                     //_valor_boleto +=  Convert.ToDecimal( string.Format("{0:0.00}",item.Valortotal));
-                    _valor_boleto += Convert.ToDecimal(string.Format("{0:0.00}", item.Valortributo + item.Valormulta + item.Valorjuros + item.Valorcorrecao));
+                    _valor_boleto +=  item.Valortributo + item.Valormulta + item.Valorjuros + item.Valorcorrecao;
                 }
+
+                //Honorários
+                _valor_honorario = 0;
+                foreach (SpExtrato_carta item in Lista_Final) {
+                    if (item.Dataajuiza != null) {
+                        _valor_honorario += (item.Valortotal * 10) / 100;
+                    }
+                }
+                _valor_boleto = Convert.ToDecimal(string.Format("{0:0.00}", _valor_boleto + _valor_honorario));
 
                 //Dados contribuinte
                 string _nome = "", _cpfcnpj = "", _endereco = "", _bairro = "", _cidade = "", _cep = "", _inscricao = "", _lote = "", _quadra = "", _atividade = "";
@@ -388,10 +398,20 @@ namespace GTI_Desktop.Forms {
                 }
 
                 _numero_documento++;
-                //***************************************
-                Proximo:;
+
+                //********* GRAVA HONORÁRIO ***********
+                if (_valor_honorario > 0) {
+                    short _maxSeq = tributario_Class.Retorna_Ultima_Seq_Honorario(_codigo_atual, DateTime.Now.Year);
+                    
+
+                }
+                //*************************************
+
+            Proximo:;
                 _pos++;
             }
+
+
 
             PBar.Value = 100;
             return;
