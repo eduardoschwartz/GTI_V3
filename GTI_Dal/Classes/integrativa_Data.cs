@@ -18,7 +18,7 @@ namespace GTI_Dal.Classes {
                     db.Cdas.Add(Reg);
                     db.SaveChanges();
                     _id = Reg.Idcda;
-                } catch (Exception ex) {
+                } catch  {
 
                 }
                 return _id;
@@ -49,7 +49,7 @@ namespace GTI_Dal.Classes {
                         "vlroriginal,vlrmultas,vlrjuros,vlrcorrecao,dtgeracao) VALUES(@idcda,@codtributo,@tributo,@exercicio,@lancamento,@seq,@nroparcela," +
                         "@complparcela,@dtvencimento,@vlroriginal,@vlrmultas,@vlrjuros,@vlrcorrecao,@dtgeracao)", Parametros);
                     _id = Reg.Idcdadebitos;
-                } catch (Exception ex) {
+                } catch  {
 
                 }
                 return _id;
