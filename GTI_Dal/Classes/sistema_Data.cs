@@ -101,7 +101,7 @@ namespace GTI_Dal.Classes {
                     _complemento_entrega = regEntrega.Complemento??"";
                     _uf_entrega = regEntrega.UF.ToString();
                     _cidade_entrega = regEntrega.NomeCidade.ToString();
-                    _bairro_entrega = regEntrega.NomeBairro.ToString();
+                    _bairro_entrega = regEntrega.NomeBairro??"";
                     _cep_entrega = regEntrega.Cep == null ? "00000-000" : Convert.ToInt32(regEntrega.Cep.ToString()).ToString("00000-000");
                 }
             } else {
