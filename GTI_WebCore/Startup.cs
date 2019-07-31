@@ -6,6 +6,7 @@ using GTI_WebCore.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,6 +19,9 @@ namespace GTI_WebCore {
         }
 
         public void ConfigureServices(IServiceCollection services) {
+
+            services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(_Config.GetConnectionString("GTIconnectionLocal")));
+
             services.AddMvc().AddXmlSerializerFormatters();
             services.AddSingleton<IEmpresaRepository, MockEmpresaRepository>();
         }
