@@ -9,9 +9,9 @@ namespace GTI_Web_v3.Models
     public class HomeController : Controller
     {
         // GET: Home
-        public string Index()
+        public ActionResult Index()
         {
-            return "GTI Web v3.0";
+            return View();
         }
     }
 }

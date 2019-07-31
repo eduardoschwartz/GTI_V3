@@ -621,7 +621,7 @@ namespace GTI_Dal.Classes {
 
         public short Retorna_Ultima_Seq_Honorario(int Codigo,int Ano) {
             using (GTI_Context db = new GTI_Context(_connection)) {
-                var cntCod = (from c in db.Debitoparcela where c.Codreduzido == Codigo && c.Anoexercicio==Ano && c.Codlancamento==90 orderby c.Seqlancamento descending  select c.Seqlancamento).FirstOrDefault();
+                var cntCod = (from c in db.Debitoparcela where c.Codreduzido == Codigo && c.Anoexercicio==Ano && c.Codlancamento==41 orderby c.Seqlancamento descending  select c.Seqlancamento).FirstOrDefault();
                 return Convert.ToInt16(cntCod);
             }
         }
@@ -2254,6 +2254,58 @@ Proximo:;
                 return null;
             }
         }
+
+        public Exception Insert_Debito_Parcela(Debitoparcela Reg) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                object[] Parametros = new object[10];
+                Parametros[0] = new SqlParameter { ParameterName = "@codreduzido", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codreduzido };
+                Parametros[1] = new SqlParameter { ParameterName = "@anoexercicio", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Anoexercicio };
+                Parametros[2] = new SqlParameter { ParameterName = "@codlancamento", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Codlancamento };
+                Parametros[3] = new SqlParameter { ParameterName = "@seqlancamento", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Seqlancamento };
+                Parametros[4] = new SqlParameter { ParameterName = "@numparcela", SqlDbType = SqlDbType.TinyInt, SqlValue = Reg.Numparcela };
+                Parametros[5] = new SqlParameter { ParameterName = "@codcomplemento", SqlDbType = SqlDbType.TinyInt, SqlValue = Reg.Codcomplemento };
+                Parametros[6] = new SqlParameter { ParameterName = "@statuslanc", SqlDbType = SqlDbType.TinyInt, SqlValue = Reg.Statuslanc };
+                Parametros[7] = new SqlParameter { ParameterName = "@datavencimento", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Datavencimento };
+                Parametros[8] = new SqlParameter { ParameterName = "@datadebase", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Datavencimento };
+                Parametros[9] = new SqlParameter { ParameterName = "@userid", SqlDbType = SqlDbType.Int, SqlValue = Reg.Userid };
+
+                db.Database.ExecuteSqlCommand("INSERT INTO debitoparcela(codreduzido,anoexercicio,codlancamento,seqlancamento,numparcela,codcomplemento,statuslanc,datavencimento,datadebase,userid) " +
+                    "VALUES(@codreduzido,@anoexercicio,@codlancamento,@seqlancamento,@numparcela,@codcomplemento,@statuslanc,@datavencimento,@datadebase,@userid)", Parametros);
+
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+        public Exception Insert_Debito_Tributo(Debitotributo Reg) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                object[] Parametros = new object[8];
+                Parametros[0] = new SqlParameter { ParameterName = "@codreduzido", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codreduzido };
+                Parametros[1] = new SqlParameter { ParameterName = "@anoexercicio", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Anoexercicio };
+                Parametros[2] = new SqlParameter { ParameterName = "@codlancamento", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Codlancamento };
+                Parametros[3] = new SqlParameter { ParameterName = "@seqlancamento", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Seqlancamento };
+                Parametros[4] = new SqlParameter { ParameterName = "@numparcela", SqlDbType = SqlDbType.TinyInt, SqlValue = Reg.Numparcela };
+                Parametros[5] = new SqlParameter { ParameterName = "@codcomplemento", SqlDbType = SqlDbType.TinyInt, SqlValue = Reg.Codcomplemento };
+                Parametros[6] = new SqlParameter { ParameterName = "@Codtributo", SqlDbType = SqlDbType.TinyInt, SqlValue = Reg.Codtributo };
+                Parametros[7] = new SqlParameter { ParameterName = "@Valortributo", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Valortributo };
+
+                db.Database.ExecuteSqlCommand("INSERT INTO debitotributo(codreduzido,anoexercicio,codlancamento,seqlancamento,numparcela,codcomplemento,Codtributo,Valortributo) " +
+                    "VALUES(@codreduzido,@anoexercicio,@codlancamento,@seqlancamento,@numparcela,@codcomplemento,@Codtributo,@Valortributo)", Parametros);
+
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+            }
+        }
+
+
 
     }//end class
 }
