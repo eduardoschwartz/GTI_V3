@@ -19,11 +19,10 @@ namespace GTI_WebCore {
         }
 
         public void ConfigureServices(IServiceCollection services) {
-
-            services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(_Config.GetConnectionString("GTIconnectionLocal")));
+            services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(_Config.GetConnectionString("GTI_Connection")));
 
             services.AddMvc().AddXmlSerializerFormatters();
-            services.AddSingleton<IEmpresaRepository, MockEmpresaRepository>();
+            services.AddScoped<IEmpresaRepository, SQLEmpresaRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -32,10 +31,11 @@ namespace GTI_WebCore {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseDefaultFiles();
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
-           
+            app.UseMvc(routes => {
+                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
+
         }
     }
 }

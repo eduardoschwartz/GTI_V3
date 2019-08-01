@@ -9,7 +9,7 @@ namespace GTI_WebCore.Models {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {
 
         }
-        public DbSet<Empresa> Empresas { get; set; }
+        public DbSet<Mobiliario> Mobiliario { get; set; }
 
     }
 }

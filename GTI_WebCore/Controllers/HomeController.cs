@@ -18,16 +18,15 @@ namespace GTI_WebCore.Controllers
 
         public string Index()
         {
-           return _empresaRepository.GetEmpresaDetail(2).Razao_Social;
+           return _empresaRepository.GetEmpresaDetail(100090).Razaosocial;
         }
 
-        public ViewResult Details() {
+        public ViewResult Details(int? id) {
             EmpresaDetailsViewModel empresaDetailsViewModel = new EmpresaDetailsViewModel() {
-                Empresa = _empresaRepository.GetEmpresaDetail(2),
+                Mobiliario = _empresaRepository.GetEmpresaDetail(id ??1),
                 PageTitle = "Detalhe da Empresa"
             };
-            Empresa model = _empresaRepository.GetEmpresaDetail(1);
-            ViewData["PageTitle"] = "Dados da Empresa";
+
             return View(empresaDetailsViewModel);
         }
 

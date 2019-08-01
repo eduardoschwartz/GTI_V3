@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GTI_WebCore.ViewModels {
     public class EmpresaDetailsViewModel {
-        public Empresa Empresa { get; set; }
+        public Mobiliario Mobiliario { get; set; }
         public string PageTitle { get; set; }
     }
 }
