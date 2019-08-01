@@ -1,0 +1,54 @@
+﻿<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+  
+   
+    <title>@ViewBag.Title</title>
+
+    <style type="text/css">
+        .auto-style3 {
+            left: 0px;
+            top: 0px;
+            width: 434px;
+        }
+
+        #header {
+            position: relative;
+            width: 100%;
+            height: 4.0em;
+            background: #2B2B2B url('../images/topbg.gif') repeat-x;
+            margin-bottom: 14px;
+        }
+
+        #outer {
+            z-index: 2;
+            position: relative;
+            width: 82%;
+            border: solid 7px #fff;
+            background-color: #fff;
+            margin: 0 auto;
+        }
+    </style>
+
+
+</head>
+<body>
+    <div id="outer">
+        <div id="header">
+           
+            <table style="margin-left: 10px;">
+                <tr>
+                    <td>
+                        &nbsp;<img id="header2" src="../Images/brasaotitulo.png" class="auto-style3" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="outer">
+        @RenderBody()
+    </div>
+
+</body>
+</html>

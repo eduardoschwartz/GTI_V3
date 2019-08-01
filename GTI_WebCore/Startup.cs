@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using GTI_WebCore.Interfaces;
 using GTI_WebCore.Models;
+using GTI_WebCore.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,7 +19,7 @@ namespace GTI_WebCore {
             services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(_Config.GetConnectionString("GTI_Connection")));
 
             services.AddMvc().AddXmlSerializerFormatters();
-            services.AddScoped<IEmpresaRepository, SQLEmpresaRepository>();
+            services.AddScoped<IEmpresaRepository, EmpresaRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -32,8 +29,9 @@ namespace GTI_WebCore {
             }
 
             app.UseStaticFiles();
+
             app.UseMvc(routes => {
-                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute("default", "{controller=Home}/{action=Index}");
             });
 
         }
