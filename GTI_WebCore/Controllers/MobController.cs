@@ -24,7 +24,7 @@ namespace GTI_WebCore.Controllers{
         [HttpPost]
         public ViewResult Details(int? id) {
             EmpresaDetailsViewModel empresaDetailsViewModel = new EmpresaDetailsViewModel() {
-                Mobiliario = _empresaRepository.GetEmpresaDetail((int)id)
+//                Mobiliario = _empresaRepository.GetEmpresaDetail((int)id)
             };
 
             return View(empresaDetailsViewModel);
