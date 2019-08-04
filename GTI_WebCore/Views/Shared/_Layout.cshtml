@@ -7,49 +7,29 @@
 
     <title>@ViewBag.Title</title>
 
-    <style type="text/css">
-        .auto-style3 {
-            left: 0px;
-            top: 0px;
-            width: auto;
-        }
-
-        #header {
-            position: relative;
-            width: auto;
-            height: 4.0em;
-            background: #2B2B2B url('../images/topbg.gif') repeat-x;
-            margin-bottom: 14px;
-        }
-
-        #outer {
-            z-index: 2;
-            position: relative;
-            width: auto;
-            border: solid 7px #fff;
-            background-color: #fff;
-            margin: 0 auto;
-        }
-    </style>
 
 
 </head>
 <body>
-    <div id="outer">
-        <div id="header">
-            <table style="margin-left: 10px;">
-                <tr>
-                    <td>
-                        &nbsp;<img id="header2" src="../Images/brasaotitulo.png" class="auto-style3" />
-                    </td>
-                </tr>
-            </table>
+
+
+    <div class='container2'>
+        <div>
+            <img src="~/images/brasaocor.png" class='iconDetails'>
+        </div>
+        <div style='margin-left:60px;'>
+            <h4>&nbsp;</h4>
+            <h4 style=" font-family: 'Times New Roman', 'Arial', 'Helvetica', 'sans-serif';font-size: 25px;font-weight: bold;">&nbsp;&nbsp; PREFEITURA MUNICIPAL DE JABOTICABAL</h4>
+
         </div>
     </div>
 
-    <div id="outer" class="container">
-            @RenderBody()
-        </div>
 
+    <div style="margin: 30px; width: auto">
+        @RenderBody()
+    </div>
+
+    <br />
+    <div style=" margin-left:30px; font-family: Arial, Helvetica, sans-serif;font-size: 12px;font-weight: bold;">&copy;2019 - Gestão Tributária Integrada (G.T.I.)</div>
 </body>
 </html>

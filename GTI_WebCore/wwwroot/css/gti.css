@@ -1,31 +1,21 @@
 ﻿@import "compass/css3";
 
 body {
-    background-image: url('../images/nave-textura.jpg');
+    
 }
 
-content {
-    width: auto;
-    height: 800px;
-    margin: 30px;
+.iconDetails {
+    margin-left: 20px;
+    float: left;
+    height: 80px;
+    width: 80px;
 }
 
-
-h2 {
-    font: 400 15px/1.5 Helvetica, Verdana, sans-serif;
-    color: rgb(82, 115, 176);
-    margin: 0;
-    padding: 0;
+.container2 {
+    width: 100%;
+    height: auto;
+    padding: 1%;
 }
-
-h3 {
-    font: 400 20px/1.5 Helvetica, Verdana, sans-serif;
-    color: rgb(82, 115, 176);
-    margin: 0;
-    padding: 0;
-}
-
-
 
 ul {
     list-style-type: none;

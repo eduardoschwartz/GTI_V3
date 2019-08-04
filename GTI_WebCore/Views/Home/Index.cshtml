@@ -4,10 +4,12 @@
     ViewData["Title"] = "Menu de Opções";
 }
 <link href="~/css/gti.css" rel="stylesheet" />
+
+
+<label style="color:brown;font-size:16px;font-style:italic">Serviços disponíveis</label>
 <br />
-<h2>Serviços disponíveis</h2>
-<br />
-<div id="content" style="width: auto">
+
+<div style="width:650px">
     <ul>
         <li>@Html.ActionLink("Consulta e atualização de boletos vencidos para pagamento", "Details", "Mob")</li>
         <li>@Html.ActionLink("Emissão de 2ª via do carnê de IPTU (2019)", "Details", "Mob")</li>
