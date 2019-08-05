@@ -13,10 +13,18 @@ namespace GTI_WebCore.Repository {
             this.context = context;
         }
 
-
         public Mobiliario GetEmpresaDetail(int Codigo) {
             return context.Mobiliario.Find(Codigo);
-           
         }
+
+        public bool Existe_Empresa_Codigo(int nCodigo) {
+            bool bRet = false;
+            var existingReg = context.Mobiliario.Count(a => a.Codigomob == nCodigo);
+            if (existingReg != 0) 
+                bRet = true;
+            return bRet;
+        }
+
+
     }
 }

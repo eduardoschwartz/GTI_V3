@@ -24,13 +24,12 @@
             }
         }
 
-
         function ValidateForm() {
             var _cod = document.getElementById('codigo').value;
             var _cpf = document.getElementById('cpfTxt').value;
             var _cnpj = document.getElementById('cnpjTxt').value;
 
-            if (_cod == "" && _cpf == "" && _cnpj == "") {
+            if ((_cod == "" || parseInt(_cod) == 0) && _cpf == "" && _cnpj == "") {
                 document.getElementById('errorLabel').innerHTML = "Digite a inscrição municipal ou o Cpf ou o CNPJ";
                 return false;
             }
@@ -43,9 +42,9 @@
             document.getElementById('errorLabel').innerHTML = "";
         }
 
-/**/</script>
-}
 
+</script>
+}
 
 
 <label style="color:brown;font-size:16px;font-style:italic">Detalhes de uma empresa</label>
@@ -56,7 +55,7 @@
     <div class="form-group row">
         <label asp-for="Inscricao"> </label>
         <div class="col-sm-10">
-            <input asp-for="Inscricao" requ id="codigo" class="form-control" style="max-width:100px;max-height:25px;overflow:auto;" onKeyPress="return formata(this, '§§§§§§', event)" onchange="ClearError()">
+            <input asp-for="Inscricao" id="codigo" class="form-control" style="max-width:100px;max-height:25px;overflow:auto;" onKeyPress="return formata(this, '§§§§§§', event)" onchange="ClearError()">
         </div>
     </div>
 
@@ -75,9 +74,21 @@
     <div class="form-group row">
         <label class="text-danger" id="errorLabel"></label>
     </div>
-
 </form>
 
+@if (Model != null) {
+    if (Model.Mobiliario == null) {
+        <div class="form-group row">
+            <label class="text-danger" id="errorLabel">Empresa não cadstrada.</label>
+        </div>
+    } else {
+        <tr>
+            <td>
+                @Model.Mobiliario.Razaosocial
+            </td>
+        </tr>
+    }
+}
 
 
 

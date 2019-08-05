@@ -7,5 +7,6 @@ using System.Threading.Tasks;
 namespace GTI_WebCore.Interfaces {
     public interface IEmpresaRepository {
         Mobiliario GetEmpresaDetail(int Codigo);
+        bool Existe_Empresa_Codigo(int Codigo);
     }
 }

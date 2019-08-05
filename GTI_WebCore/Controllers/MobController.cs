@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GTI_WebCore.Interfaces;
+﻿using GTI_WebCore.Interfaces;
+using GTI_WebCore.Models;
 using GTI_WebCore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
-namespace GTI_WebCore.Controllers{
+namespace GTI_WebCore.Controllers {
 
     [Route("Mob/Details")]
     public class MobController : Controller {
@@ -22,14 +20,20 @@ namespace GTI_WebCore.Controllers{
         }
 
         [HttpPost]
-        public ViewResult Details(int? id) {
-            EmpresaDetailsViewModel empresaDetailsViewModel = new EmpresaDetailsViewModel() {
-                //                Mobiliario = _empresaRepository.GetEmpresaDetail((int)id)
-            };
+        public ViewResult Details(EmpresaDetailsViewModel model) {
+            EmpresaDetailsViewModel empresaDetailsViewModel = new EmpresaDetailsViewModel();
+            bool _existeCod = _empresaRepository.Existe_Empresa_Codigo(Convert.ToInt32(model.Inscricao));
 
+            if (_existeCod) {
+                Mobiliario mobiliario = _empresaRepository.GetEmpresaDetail(Convert.ToInt32(model.Inscricao));
+                empresaDetailsViewModel.Mobiliario = mobiliario;
+                empresaDetailsViewModel.ErrorMessage = "";
+            } else {
+                empresaDetailsViewModel.ErrorMessage = "Empresa não cadastrada.";
+            }
             return View(empresaDetailsViewModel);
         }
 
-     
+
     }
 }
