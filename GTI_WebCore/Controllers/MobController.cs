@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GTI_WebCore.Controllers{
 
     [Route("Mob/Details")]
-    public class MobController : Controller{
+    public class MobController : Controller {
         private readonly IEmpresaRepository _empresaRepository;
 
         public MobController(IEmpresaRepository empresaRepository) {
@@ -24,11 +24,12 @@ namespace GTI_WebCore.Controllers{
         [HttpPost]
         public ViewResult Details(int? id) {
             EmpresaDetailsViewModel empresaDetailsViewModel = new EmpresaDetailsViewModel() {
-//                Mobiliario = _empresaRepository.GetEmpresaDetail((int)id)
+                //                Mobiliario = _empresaRepository.GetEmpresaDetail((int)id)
             };
 
             return View(empresaDetailsViewModel);
         }
 
+     
     }
 }
