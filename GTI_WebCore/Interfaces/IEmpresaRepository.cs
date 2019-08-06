@@ -8,5 +8,7 @@ namespace GTI_WebCore.Interfaces {
     public interface IEmpresaRepository {
         Mobiliario GetEmpresaDetail(int Codigo);
         bool Existe_Empresa_Codigo(int Codigo);
+        int Existe_Empresa_Cnpj(string Cnpj);
+        int Existe_Empresa_Cpf(string Cpf);
     }
 }
