@@ -37,7 +37,7 @@ namespace GTI_WebCore {
             }
 
             digito = resto.ToString();
-            tempCpf = tempCpf + digito;
+            tempCpf += digito;
             int soma2 = 0;
 
             for (int i = 0; i < 10; i++) {
@@ -52,7 +52,7 @@ namespace GTI_WebCore {
                 resto = 11 - resto;
             }
 
-            digito = digito + resto.ToString();
+            digito += resto.ToString();
             return cpf.EndsWith(digito);
         }
 
@@ -103,5 +103,17 @@ namespace GTI_WebCore {
                 return false;
             }
         }
+
+        public static bool IsDate(Object date) {
+            try {
+                DateTime dt = DateTime.Parse(date.ToString());
+                return true;
+            } catch {
+                return false;
+            }
+        }
+
+
     }
+
 }

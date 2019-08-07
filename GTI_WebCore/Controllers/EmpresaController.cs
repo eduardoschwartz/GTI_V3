@@ -6,11 +6,11 @@ using System;
 
 namespace GTI_WebCore.Controllers {
 
-    [Route("Mob/Details")]
-    public class MobController : Controller {
+    [Route("Empresa/Details")]
+    public class EmpresaController : Controller {
         private readonly IEmpresaRepository _empresaRepository;
 
-        public MobController(IEmpresaRepository empresaRepository) {
+        public EmpresaController(IEmpresaRepository empresaRepository) {
             _empresaRepository = empresaRepository;
         }
 
@@ -59,13 +59,15 @@ namespace GTI_WebCore.Controllers {
             }
 
             if (_existeCod) {
-                Mobiliario mobiliario = _empresaRepository.GetEmpresaDetail(_codigo);
-                empresaDetailsViewModel.Mobiliario = mobiliario;
+                EmpresaStruct empresa = _empresaRepository.Dados_Empresa(_codigo);
+                empresaDetailsViewModel.EmpresaStruct = empresa;
                 empresaDetailsViewModel.ErrorMessage = "";
+                return View("DetailsTable",empresaDetailsViewModel);
             } else {
                 empresaDetailsViewModel.ErrorMessage = "Empresa não cadastrada.";
+                return View(empresaDetailsViewModel);
             }
-            return View(empresaDetailsViewModel);
+            
         }
 
 

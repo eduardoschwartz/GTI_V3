@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GTI_WebCore.ViewModels {
     public class EmpresaDetailsViewModel {
-        public Mobiliario Mobiliario { get; set; }
+        public EmpresaStruct EmpresaStruct { get; set; }
         [Display(Name = "Inscrição Municipal")]
         public string Inscricao { get; set; }
         public string CpfCnpjLabel { get; set; }
