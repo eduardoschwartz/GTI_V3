@@ -179,4 +179,5 @@ namespace GTI_WebCore.Models {
         public List<MobiliarioproprietarioStruct> Socios { get; set; }
     }
 
+
 }

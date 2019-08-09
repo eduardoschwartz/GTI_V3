@@ -48,3 +48,21 @@ li {
             font-size: 18px;
             background: #f6f6f6;
         }
+.green_button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    width: 120px;
+    height: 28px;
+    padding: 2px 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+

@@ -14,5 +14,8 @@ namespace GTI_WebCore.ViewModels {
         public string CpfValue { get; set; }
         public string CnpjValue { get; set; }
         public string ErrorMessage { get; set; }
+        [Required]
+        [StringLength(4)]
+        public string CaptchaCode { get; set; }
     }
 }

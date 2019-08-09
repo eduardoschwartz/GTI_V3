@@ -13,139 +13,154 @@
 <br />
 
 
-<table class="table table-sm" style="width:700px; border:double; border-color:#3a8dcc; ">
-    <thead>
-        <tr >
-            <th>
-                Descrição
-            </th>
-            <th>
-                Valor
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr style="width:550px">
-            <td style="width:25%">
-                Inscrição Municipal
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => Model.EmpresaStruct.Codigo)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Razão Social
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => Model.EmpresaStruct.Razao_social)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                CPF/CNPJ
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => Model.EmpresaStruct.Cpf_cnpj)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Inscrição Estadual
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => Model.EmpresaStruct.Inscricao_estadual)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Endereço
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => Model.EmpresaStruct.Endereco_nome),&nbsp;@Html.DisplayFor(modelItem => Model.EmpresaStruct.Numero)&nbsp;@Html.DisplayFor(modelItem => Model.EmpresaStruct.Complemento)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Bairro/Cidade/UF/Cep
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => Model.EmpresaStruct.Bairro_nome)-@Html.DisplayFor(modelItem => Model.EmpresaStruct.Cidade_nome)-@Html.DisplayFor(modelItem => Model.EmpresaStruct.UF)-@Html.DisplayFor(modelItem => Model.EmpresaStruct.Cep)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Data de Abertura
-            </td>
-            <td>
-                @Convert.ToDateTime(Model.EmpresaStruct.Data_abertura).ToString("dd/MM/yyyy")
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Data de Encerramento
-            </td>
-            <td>
-                @if (Model.EmpresaStruct.Data_Encerramento.HasValue) {
-                @Convert.ToDateTime(Model.EmpresaStruct.Data_Encerramento).ToString("dd/MM/yyyy");
-                }
-            </td>
-        </tr>
-    </tbody>
-</table>
+<form asp-controller="Empresa" asp-action="" class="mt-3" style="margin-left:18px">
+    <table class="table table-sm" style="width:700px; border:double; border-color:#3a8dcc; ">
+        <thead>
+            <tr>
+                <th>
+                    Descrição
+                </th>
+                <th>
+                    Valor
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="width:550px">
+                <td style="width:25%">
+                    Inscrição Municipal
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.EmpresaStruct.Codigo)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Razão Social
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.EmpresaStruct.Razao_social)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    CPF/CNPJ
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.EmpresaStruct.Cpf_cnpj)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Inscrição Estadual
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.EmpresaStruct.Inscricao_estadual)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Endereço
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.EmpresaStruct.Endereco_nome),&nbsp;@Html.DisplayFor(modelItem => Model.EmpresaStruct.Numero)&nbsp;@Html.DisplayFor(modelItem => Model.EmpresaStruct.Complemento)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Bairro/Cidade/UF/Cep
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.EmpresaStruct.Bairro_nome)-@Html.DisplayFor(modelItem => Model.EmpresaStruct.Cidade_nome)-@Html.DisplayFor(modelItem => Model.EmpresaStruct.UF)-@Html.DisplayFor(modelItem => Model.EmpresaStruct.Cep)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Data de Abertura
+                </td>
+                <td>
+                    @Convert.ToDateTime(Model.EmpresaStruct.Data_abertura).ToString("dd/MM/yyyy")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Data de Encerramento
+                </td>
+                <td>
+                    @if (Model.EmpresaStruct.Data_Encerramento.HasValue) {
+                        @Convert.ToDateTime(Model.EmpresaStruct.Data_Encerramento).ToString("dd/MM/yyyy");
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Situação
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.EmpresaStruct.Situacao)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Email
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.EmpresaStruct.Email_contato)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Telefone
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.EmpresaStruct.Fone_contato)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <div class="col-sm-10">
+        &nbsp;&nbsp;<button type="button" class="green_button" onclick="location.href='@Url.Action("Empresa_Details_Report","Report",new { Id=Model.EmpresaStruct.Codigo})'"> Imprimir</button>
+    </div>
 
 
-@*<asp:Table ID="Tbl" runat="server" Width="610px" BorderStyle="Double" Height="19px" BorderColor="#3a8dcc" CaptionAlign="Left" Font-Bold="False">
-    <asp:TableRow Width="550px" BorderStyle="Solid" BorderWidth="1px">
-        <asp:TableCell Width="30%">Inscrição Municipal</asp:TableCell>
-        <asp:TableCell runat="server" ID="IM" Width="70%" ForeColor="#3a8dcc"></asp:TableCell>
-    </asp:TableRow>
-    <asp:TableRow runat="server">
-        <asp:TableCell runat="server">Data de Abertura</asp:TableCell>
-        <asp:TableCell ID="DATAABERTURA" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
-    </asp:TableRow>
-    <asp:TableRow runat="server">
-        <asp:TableCell runat="server">Data de Encerramento</asp:TableCell>
-        <asp:TableCell ID="DATAENCERRAMENTO" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
-    </asp:TableRow>
-    <asp:TableRow runat="server">
-        <asp:TableCell runat="server">Situação</asp:TableCell>
-        <asp:TableCell ID="SITUACAO" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
-    </asp:TableRow>
-    <asp:TableRow runat="server">
-        <asp:TableCell runat="server">Email</asp:TableCell>
-        <asp:TableCell ID="EMAIL" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
-    </asp:TableRow>
-    <asp:TableRow runat="server">
-        <asp:TableCell runat="server">Telefone</asp:TableCell>
-        <asp:TableCell ID="TELEFONE" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
-    </asp:TableRow>
-    <asp:TableRow runat="server">
-        <asp:TableCell runat="server">Regime de ISS</asp:TableCell>
-        <asp:TableCell ID="REGIMEISS" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
-    </asp:TableRow>
-    <asp:TableRow runat="server">
-        <asp:TableCell runat="server">Vigilância Sanitária</asp:TableCell>
-        <asp:TableCell ID="VIGSANIT" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
-    </asp:TableRow>
-    <asp:TableRow runat="server">
-        <asp:TableCell runat="server">Taxa de Licença</asp:TableCell>
-        <asp:TableCell ID="TAXALICENCA" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
-    </asp:TableRow>
-    <asp:TableRow runat="server">
-        <asp:TableCell runat="server">Micro Emp.Individual</asp:TableCell>
-        <asp:TableCell ID="MEI" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
-    </asp:TableRow>
-    <asp:TableRow runat="server">
-        <asp:TableCell runat="server">Área</asp:TableCell>
-        <asp:TableCell ID="AREA" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
-    </asp:TableRow>
-    <asp:TableRow runat="server">
-        <asp:TableCell runat="server">Proprietário(s)</asp:TableCell>
-        <asp:TableCell ID="PROPRIETARIO" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
-    </asp:TableRow>
-    <asp:TableRow runat="server">
-        <asp:TableCell runat="server">Atividade(s)</asp:TableCell>
-        <asp:TableCell ID="CNAE" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
-    </asp:TableRow>
-</asp:Table>*@
+</form>
+
+
+
+    @*<asp:Table ID="Tbl" runat="server" Width="610px" BorderStyle="Double" Height="19px" BorderColor="#3a8dcc" CaptionAlign="Left" Font-Bold="False">
+            <asp:TableRow Width="550px" BorderStyle="Solid" BorderWidth="1px">
+                <asp:TableCell Width="30%">Inscrição Municipal</asp:TableCell>
+                <asp:TableCell runat="server" ID="IM" Width="70%" ForeColor="#3a8dcc"></asp:TableCell>
+            </asp:TableRow>
+
+
+            <asp:TableRow runat="server">
+                <asp:TableCell runat="server">Regime de ISS</asp:TableCell>
+                <asp:TableCell ID="REGIMEISS" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow runat="server">
+                <asp:TableCell runat="server">Vigilância Sanitária</asp:TableCell>
+                <asp:TableCell ID="VIGSANIT" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow runat="server">
+                <asp:TableCell runat="server">Taxa de Licença</asp:TableCell>
+                <asp:TableCell ID="TAXALICENCA" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow runat="server">
+                <asp:TableCell runat="server">Micro Emp.Individual</asp:TableCell>
+                <asp:TableCell ID="MEI" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow runat="server">
+                <asp:TableCell runat="server">Área</asp:TableCell>
+                <asp:TableCell ID="AREA" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow runat="server">
+                <asp:TableCell runat="server">Proprietário(s)</asp:TableCell>
+                <asp:TableCell ID="PROPRIETARIO" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow runat="server">
+                <asp:TableCell runat="server">Atividade(s)</asp:TableCell>
+                <asp:TableCell ID="CNAE" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
+            </asp:TableRow>
+        </asp:Table>*@

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace GTI_WebCore {
     public class Startup {
@@ -18,6 +19,12 @@ namespace GTI_WebCore {
         public void ConfigureServices(IServiceCollection services) {
             services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(_Config.GetConnectionString("GTI_Connection")));
 
+            // add session support
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.Cookie.HttpOnly = true;
+            });
+
             services.AddMvc().AddXmlSerializerFormatters();
             services.AddScoped<IEmpresaRepository, EmpresaRepository>();
         }
@@ -28,6 +35,7 @@ namespace GTI_WebCore {
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSession();
             app.UseStaticFiles();
 
             app.UseMvc(routes => {

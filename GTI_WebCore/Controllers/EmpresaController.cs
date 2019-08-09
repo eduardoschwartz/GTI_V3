@@ -1,12 +1,15 @@
 ﻿using GTI_WebCore.Interfaces;
 using GTI_WebCore.Models;
 using GTI_WebCore.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.IO;
 
 namespace GTI_WebCore.Controllers {
 
     [Route("Empresa/Details")]
+    [Route("Empresa/exportReport")]
     public class EmpresaController : Controller {
         private readonly IEmpresaRepository _empresaRepository;
 
@@ -58,6 +61,13 @@ namespace GTI_WebCore.Controllers {
                 }
             }
 
+
+            if (!Captcha.ValidateCaptchaCode(model.CaptchaCode, HttpContext)) {
+                empresaDetailsViewModel.ErrorMessage = "Código de verificação inválido.";
+                return View(empresaDetailsViewModel);
+            }
+
+
             if (_existeCod) {
                 EmpresaStruct empresa = _empresaRepository.Dados_Empresa(_codigo);
                 empresaDetailsViewModel.EmpresaStruct = empresa;
@@ -70,6 +80,23 @@ namespace GTI_WebCore.Controllers {
             
         }
 
+        [Route("get-captcha-image")]
+        public IActionResult GetCaptchaImage() {
+            int width = 100;
+            int height = 36;
+            var captchaCode = Captcha.GenerateCaptchaCode();
+            var result = Captcha.GenerateCaptchaImage(width, height, captchaCode);
+            HttpContext.Session.SetString("CaptchaCode", result.CaptchaCode);
+            Stream s = new MemoryStream(result.CaptchaByteData);
+            return new FileStreamResult(s, "image/png");
+        }
+
+
 
     }
 }
+
+
+
+
+
