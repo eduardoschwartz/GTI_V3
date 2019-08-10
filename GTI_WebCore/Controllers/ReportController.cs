@@ -24,12 +24,17 @@ namespace GTI_WebCore.Controllers
 
         public ActionResult Empresa_Details_Report(int Id) {
             ReportDocument rd = new ReportDocument();
-            rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Teste.rpt");
+            rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Empresa_Detalhe.rpt");
             List<Empresa_Detalhe> empresa = new List<Empresa_Detalhe>();
             EmpresaStruct _dados = _empresaRepository.Dados_Empresa(Id);
             Empresa_Detalhe reg = new Empresa_Detalhe() {
                 Codigo = _dados.Codigo,
-                Razao_Social = _dados.Razao_social
+                Razao_Social = _dados.Razao_social,
+                Cpf_Cnpj = _dados.Cpf_cnpj,
+                Inscricao_Estadual = _dados.Inscricao_estadual,
+                Endereco = _dados.Endereco_nome + ", " + _dados.Numero + " " + _dados.Complemento,
+                Data_Abertura=Convert.ToDateTime(_dados.Data_abertura).ToString("dd/MM/yyyy"),
+                Data_Encerramento=_dados.Data_Encerramento==null?"":Convert.ToDateTime(_dados.Data_Encerramento).ToString("dd/MM/yyyy")
             };
             empresa.Add(reg);
             try {

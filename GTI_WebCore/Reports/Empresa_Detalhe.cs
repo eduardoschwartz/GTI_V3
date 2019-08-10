@@ -16,14 +16,14 @@ namespace GTI_WebCore.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class Teste : ReportClass {
+    public class Empresa_Detalhe : ReportClass {
         
-        public Teste() {
+        public Empresa_Detalhe() {
         }
         
         public override string ResourceName {
             get {
-                return "Teste.rpt";
+                return "Empresa_Detalhe.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace GTI_WebCore.Reports {
         
         public override string FullResourceName {
             get {
-                return "GTI_WebCore.Reports.Teste.rpt";
+                return "GTI_WebCore.Reports.Empresa_Detalhe.rpt";
             }
             set {
                 // Do nothing
@@ -98,9 +98,9 @@ namespace GTI_WebCore.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedTeste : Component, ICachedReport {
+    public class CachedEmpresa_Detalhe : Component, ICachedReport {
         
-        public CachedTeste() {
+        public CachedEmpresa_Detalhe() {
         }
         
         [Browsable(false)]
@@ -137,7 +137,7 @@ namespace GTI_WebCore.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            Teste rpt = new Teste();
+            Empresa_Detalhe rpt = new Empresa_Detalhe();
             rpt.Site = this.Site;
             return rpt;
         }

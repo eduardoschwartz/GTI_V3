@@ -10,24 +10,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Reports\Teste.rpt" />
+    <None Remove="Reports\Empresa_Detalhe.rpt" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Reports\Teste.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Teste.rpt</DependentUpon>
-    </Content>
-    <Content Include="Reports\Teste.rpt">
+    <Content Include="Reports\Empresa_Detalhe.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>Teste.cs</LastGenOutput>
+      <LastGenOutput>Empresa_Detalhe.cs</LastGenOutput>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Reports\Teste.rpt">
-      <LastGenOutput>Teste.cs</LastGenOutput>
+    <EmbeddedResource Include="Reports\Empresa_Detalhe.rpt">
+      <LastGenOutput>Empresa_Detalhe.cs</LastGenOutput>
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -69,9 +64,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Reports\Teste.cs">
+    <Compile Update="Reports\Empresa_Detalhe.cs">
       <SubType>Component</SubType>
-      <DependentUpon>Teste.rpt</DependentUpon>
+      <DependentUpon>Empresa_Detalhe.rpt</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
