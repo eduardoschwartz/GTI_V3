@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using CrystalDecisions.CrystalReports.Engine;
+﻿using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
 using GTI_WebCore.Interfaces;
 using GTI_WebCore.Models;
 using GTI_WebCore.Models.ReportModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
-namespace GTI_WebCore.Controllers
-{
+namespace GTI_WebCore.Controllers {
     public class ReportController : Controller {
         private readonly IEmpresaRepository _empresaRepository;
         private readonly IHostingEnvironment hostingEnvironment;
@@ -33,6 +30,9 @@ namespace GTI_WebCore.Controllers
                 Cpf_Cnpj = _dados.Cpf_cnpj,
                 Inscricao_Estadual = _dados.Inscricao_estadual,
                 Endereco = _dados.Endereco_nome + ", " + _dados.Numero + " " + _dados.Complemento,
+                Bairro=_dados.Bairro_nome??"",
+                Cidade=_dados.Cidade_nome??"",
+                Uf=_dados.UF??"",
                 Data_Abertura=Convert.ToDateTime(_dados.Data_abertura).ToString("dd/MM/yyyy"),
                 Data_Encerramento=_dados.Data_Encerramento==null?"":Convert.ToDateTime(_dados.Data_Encerramento).ToString("dd/MM/yyyy")
             };

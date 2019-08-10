@@ -10,8 +10,14 @@ namespace GTI_WebCore.Models.ReportModels {
         public string Cpf_Cnpj { get; set; }
         public string Inscricao_Estadual { get; set; }
         public string Endereco { get; set; }
+        public string Bairro { get; set; }
+        public string Cidade { get; set; }
+        public string Uf { get; set; }
+        public string Cep { get; set; }
         public string Data_Abertura { get; set; }
         public string Data_Encerramento { get; set; }
         public string Atividade { get; set; }
+        public string Situacao { get; set; }
+
     }
 }

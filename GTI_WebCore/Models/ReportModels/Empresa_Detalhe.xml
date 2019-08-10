@@ -1,0 +1,15 @@
+﻿<Empresa_Detalhe>
+  <Codigo>0001</Codigo>
+  <Razao_Social>John</Razao_Social>
+  <Cpf_Cnpj>Peter</Cpf_Cnpj>
+  <Inscricao_Estadual>12121</Inscricao_Estadual>
+  <Endereco>Rua</Endereco>
+  <Bairro>Nova Cidade</Bairro>
+  <Cidade>Jab</Cidade>
+  <UF>SP</UF>
+  <Cep>15990450</Cep>
+  <Data_Abertura>01/01/200</Data_Abertura>
+  <Data_Encerramento>01/01/200</Data_Encerramento>
+  <Atividade>Mecânico</Atividade>
+  <Situacao>Nula</Situacao>
+</Empresa_Detalhe>
