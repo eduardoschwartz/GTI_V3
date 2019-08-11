@@ -34,7 +34,14 @@ namespace GTI_WebCore.Controllers {
                 Cidade=_dados.Cidade_nome??"",
                 Uf=_dados.UF??"",
                 Data_Abertura=Convert.ToDateTime(_dados.Data_abertura).ToString("dd/MM/yyyy"),
-                Data_Encerramento=_dados.Data_Encerramento==null?"":Convert.ToDateTime(_dados.Data_Encerramento).ToString("dd/MM/yyyy")
+                Data_Encerramento=_dados.Data_Encerramento==null?"":Convert.ToDateTime(_dados.Data_Encerramento).ToString("dd/MM/yyyy"),
+                Atividade=_dados.Atividade_extenso,
+                Situacao=_dados.Situacao,
+                Cep=_dados.Cep??"",
+                Area=_dados.Area==null?0:Convert.ToDecimal(_dados.Area),
+                Email=_dados.Email_contato??"",
+                Telefone=_dados.Fone_contato??"",
+                Proprietario=_dados.prof_responsavel_nome
             };
             empresa.Add(reg);
             try {

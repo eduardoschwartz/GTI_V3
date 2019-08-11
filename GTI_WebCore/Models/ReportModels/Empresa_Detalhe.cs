@@ -18,6 +18,14 @@ namespace GTI_WebCore.Models.ReportModels {
         public string Data_Encerramento { get; set; }
         public string Atividade { get; set; }
         public string Situacao { get; set; }
-
+        public string Email { get; set; }
+        public string Telefone { get; set; }
+        public string RegimeISS { get; set; }
+        public string Taxa_Licenca { get; set; }
+        public string Vigilancia_Santitaria { get; set; }
+        public string Cnae { get; set; }
+        public string Mei { get; set; }
+        public decimal Area { get; set; }
+        public string Proprietario { get; set; }
     }
 }

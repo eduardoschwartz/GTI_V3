@@ -1,15 +1,24 @@
 ﻿<Empresa_Detalhe>
-  <Codigo>0001</Codigo>
-  <Razao_Social>John</Razao_Social>
-  <Cpf_Cnpj>Peter</Cpf_Cnpj>
+  <Codigo>123456</Codigo>
+  <Razao_Social>Empresa de Teste</Razao_Social>
+  <Cpf_Cnpj>50.387.655/0002-23</Cpf_Cnpj>
   <Inscricao_Estadual>12121</Inscricao_Estadual>
-  <Endereco>Rua</Endereco>
+  <Endereco>Rua de Teste, 345 - 2ª Andar</Endereco>
   <Bairro>Nova Cidade</Bairro>
-  <Cidade>Jab</Cidade>
+  <Cidade>Jaboticabal</Cidade>
   <UF>SP</UF>
   <Cep>15990450</Cep>
   <Data_Abertura>01/01/200</Data_Abertura>
   <Data_Encerramento>01/01/200</Data_Encerramento>
   <Atividade>Mecânico</Atividade>
-  <Situacao>Nula</Situacao>
+  <Situacao>Ativa</Situacao>
+  <Email>email@gti.com</Email>
+  <Telefone>(16) 3333-2222</Telefone>
+  <RegimeISS>Variavel</RegimeISS>
+  <Taxa_Licenca>Sim</Taxa_Licenca>
+  <Vigilancia_Sanitaria>Não</Vigilancia_Sanitaria>
+  <Cnae>12345-6/34</Cnae>
+  <Mei>Sim</Mei>
+  <Area>1234,56 m²</Area>
+  <Proprietario>Eduardo Schwartz</Proprietario>
 </Empresa_Detalhe>

@@ -22,6 +22,6 @@ namespace GTI_WebCore.Models {
         public DbSet<Cidadao> Cidadao { get; set; }
         public DbSet<Horario_funcionamento> Horario_funcionamento { get; set; }
         public DbSet<Logradouro> Logradouro { get; set; }
-
+        public DbSet<Cep> Cep { get; set; }
     }
 }
