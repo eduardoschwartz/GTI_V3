@@ -13,6 +13,11 @@ namespace GTI_WebCore.ViewModels {
         public string CpfCnpjLabel { get; set; }
         public string CpfValue { get; set; }
         public string CnpjValue { get; set; }
+        public string TaxaLicenca { get; set; }
+        public string Vigilancia_Sanitaria { get; set; }
+        public string Regime_Iss { get; set; }
+        public string Mei { get; set; }
+        public string Cnae { get; set; }
         public string ErrorMessage { get; set; }
         [Required]
         [StringLength(4)]

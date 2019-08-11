@@ -2,6 +2,7 @@
 using GTI_WebCore.Interfaces;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace GTI_WebCore.Repository {
     public class EmpresaRepository : IEmpresaRepository {
@@ -50,6 +51,22 @@ namespace GTI_WebCore.Repository {
             return bRet;
         }
 
+        public bool Empresa_tem_VS(int nCodigo) {
+            bool bRet = false;
+                var existingReg = context.Mobiliariovs.Count(a => a.Codigo == nCodigo);
+                if (existingReg != 0) {
+                    bRet = true;
+                }
+            return bRet;
+        }
+
+        public bool Empresa_tem_TL(int nCodigo) {
+            bool ret = true;
+                byte? isento = (from m in context.Mobiliario where m.Codigomob == nCodigo && m.Isentotaxa == 1 select m.Isentotaxa).FirstOrDefault();
+                if (Convert.ToBoolean(isento))
+                    return false;
+            return ret;
+        }
 
         public EmpresaStruct Dados_Empresa(int Codigo) {
             var reg = (from m in context.Mobiliario
@@ -190,22 +207,42 @@ namespace GTI_WebCore.Repository {
             return row;
         }
 
-        //public List<CnaeStruct> Lista_Cnae_Empresa(int nCodigo) {
-        //    List<CnaeStruct> Lista = new List<CnaeStruct>();
-        //    using (GTI_Context db = new GTI_Context(_connection)) {
-        //        var rows = (from m in db.Mobiliariocnae where m.Codmobiliario == nCodigo
-        //                    select new { m.Cnae, m.Principal });
-        //        foreach (var reg in rows) {
-        //            CnaeStruct Linha = new CnaeStruct {
-        //                CNAE = reg.Cnae,
-        //                Descricao = Retorna_Descricao_Cnae(reg.Cnae),
-        //                Principal = reg.Principal == 1 ? true : false
-        //            };
-        //            Lista.Add(Linha);
-        //        }
-        //        return Lista;
-        //    }
-        //}
+        public List<CnaeStruct> Lista_Cnae_Empresa(int nCodigo) {
+            List<CnaeStruct> Lista = new List<CnaeStruct>();
+                var rows = (from m in context.Mobiliariocnae where m.Codmobiliario == nCodigo
+                            select new { m.Cnae, m.Principal });
+                foreach (var reg in rows) {
+                    CnaeStruct Linha = new CnaeStruct {
+                        CNAE = reg.Cnae,
+                        Descricao = Retorna_Descricao_Cnae(reg.Cnae),
+                        Principal = reg.Principal == 1 ? true : false
+                    };
+                    Lista.Add(Linha);
+                }
+                return Lista;
+        }
+        
+        public string Retorna_Descricao_Cnae(string cnae) {
+            string _cnae = Functions.RetornaNumero(cnae);
+                var Sql = (from h in context.Cnae where h.cnae == _cnae select h.Descricao).FirstOrDefault();
+                return Sql;
+        }
+
+        public string Regime_Empresa(int Codigo) {
+                int tributo = (from m in context.Mobiliarioatividadeiss where m.Codmobiliario == Codigo select m.Codtributo).FirstOrDefault();
+                if (tributo == 11)
+                    return "F";
+                else {
+                    if (tributo == 12)
+                        return "E";
+                    else {
+                        if (tributo == 13)
+                            return "V";
+                        else
+                            return "N";
+                    }
+                }
+        }
 
     }
 }

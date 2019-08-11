@@ -22,7 +22,7 @@ namespace GTI_WebCore.Models.ReportModels {
         public string Telefone { get; set; }
         public string RegimeISS { get; set; }
         public string Taxa_Licenca { get; set; }
-        public string Vigilancia_Santitaria { get; set; }
+        public string Vigilancia_Sanitaria { get; set; }
         public string Cnae { get; set; }
         public string Mei { get; set; }
         public decimal Area { get; set; }

@@ -19,7 +19,6 @@ namespace GTI_WebCore {
         public void ConfigureServices(IServiceCollection services) {
             services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(_Config.GetConnectionString("GTI_Connection")));
 
-            // add session support
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromMinutes(20);
                 options.Cookie.HttpOnly = true;
@@ -27,9 +26,9 @@ namespace GTI_WebCore {
 
             services.AddMvc().AddXmlSerializerFormatters();
             services.AddScoped<IEmpresaRepository, EmpresaRepository>();
+            services.AddScoped<IEnderecoRepository, EnderecoRepository>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
@@ -37,7 +36,6 @@ namespace GTI_WebCore {
 
             app.UseSession();
             app.UseStaticFiles();
-
             app.UseMvc(routes => {
                 routes.MapRoute("default", "{controller=Home}/{action=Index}");
             });

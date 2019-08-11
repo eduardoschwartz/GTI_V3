@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace GTI_WebCore {
@@ -113,7 +114,12 @@ namespace GTI_WebCore {
             }
         }
 
-
+        public static String RetornaNumero(String Numero) {
+            if (String.IsNullOrEmpty(Numero))
+                return "0";
+            else
+                return Regex.Replace(Numero, @"[^\d]", "");
+        }
     }
 
 }

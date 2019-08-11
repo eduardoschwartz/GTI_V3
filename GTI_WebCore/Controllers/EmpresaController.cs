@@ -4,6 +4,7 @@ using GTI_WebCore.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace GTI_WebCore.Controllers {
@@ -71,6 +72,28 @@ namespace GTI_WebCore.Controllers {
             if (_existeCod) {
                 EmpresaStruct empresa = _empresaRepository.Dados_Empresa(_codigo);
                 empresaDetailsViewModel.EmpresaStruct = empresa;
+                empresaDetailsViewModel.TaxaLicenca = _empresaRepository.Empresa_tem_TL(_codigo)?"Sim":"Não";
+                empresaDetailsViewModel.Vigilancia_Sanitaria = _empresaRepository.Empresa_tem_VS(_codigo) ? "Sim" : "Não";
+                List<CnaeStruct> ListaCnae = _empresaRepository.Lista_Cnae_Empresa(_codigo);
+                string sCnae = "";
+                foreach (CnaeStruct cnae in ListaCnae) {
+                    sCnae += cnae.CNAE + "-" + cnae.Descricao + System.Environment.NewLine;
+                }
+                empresaDetailsViewModel.Cnae = sCnae;
+                string sRegime = _empresaRepository.Regime_Empresa(_codigo);
+                if (sRegime == "F")
+                    sRegime = "ISS FIXO";
+                else {
+                    if (sRegime == "V")
+                        sRegime = "ISS VARIÁVEL";
+                    else {
+                        if (sRegime == "E")
+                            sRegime = "ISS ESTIMADO";
+                        else
+                            sRegime = "NENHUM";
+                    }
+                }
+                empresaDetailsViewModel.Regime_Iss = sRegime;
                 empresaDetailsViewModel.ErrorMessage = "";
                 return View("DetailsTable",empresaDetailsViewModel);
             } else {
