@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 
 namespace GTI_WebCore {
     public static class Functions {
+
+        public enum TipoCertidao { Endereco, ValorVenal, Isencao, Debito, Comprovante_Pagamento, Alvara, Debito_Doc }
+        public enum TipoCadastro { Imovel, Empresa, Cidadao }
+        public enum RetornoCertidaoDebito { Negativa, Positiva, NegativaPositiva }
+        public enum TipoEndereco { Local, Proprietario, Entrega }
+        public enum TipoDocumento { Cpf, Cnpj }
+        public enum TipoCarne { Iptu = 1, Iss_Taxa = 2, Iss_Estimado_Variavel = 3, Taxa = 4, Vigilancia = 5, Cip = 6 }
+
         public static bool ValidaCpf(string cpf) {
 
             int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };

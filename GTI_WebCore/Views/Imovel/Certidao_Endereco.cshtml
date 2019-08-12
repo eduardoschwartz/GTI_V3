@@ -1,4 +1,4 @@
-﻿@model GTI_WebCore.ViewModels.EmpresaDetailsViewModel
+﻿@model GTI_WebCore.ViewModels.CertidaoViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,12 +7,12 @@
 
 
 
-    <label style="color:brown;font-size:16px;font-style:italic">Certidão de Endereço</label>
+<label style="color:brown;font-size:16px;font-style:italic">Certidão de Endereço</label>
 <br />
 
 
 
-<form asp-controller="Empresa" enctype="multipart/form-data" method="post" onsubmit="return ValidateForm()" asp-action="Details" class="mt-3" style="margin-left:18px">
+<form asp-controller="Imovel" enctype="multipart/form-data" method="post" onsubmit="return ValidateForm()" asp-action="Details" class="mt-3" style="margin-left:18px">
     <div class="form-group row">
         <label asp-for="Inscricao"> </label>
         <div class="col-sm-10">
@@ -20,17 +20,11 @@
         </div>
     </div>
 
-    <div class="form-group row align-items-lg-baseline">
-        CPF:&nbsp; <input type="radio" required asp-for="CpfCnpjLabel" id="cpfCheck" value="cpf" name="doc" checked="checked" onclick="radioCheck()" />
-        &nbsp;CNPJ:&nbsp;  <input type="radio" required asp-for="CpfCnpjLabel" id="cnpjCheck" value="cnpj" name="doc" onclick="radioCheck()" />
-        &nbsp;<input asp-for="CpfValue" id="cpfTxt" class="form-control" style="max-width:200px;max-height:25px;" onKeyPress="return formata(this, '§§§.§§§.§§§-§§', event)" onchange="ClearError()" placeholder="Digite o nº do CPF">
-        &nbsp;<input asp-for="CnpjValue" id="cnpjTxt" class="form-control" style="max-width:200px;max-height:25px;display:none" onKeyPress="return formata(this, '§§.§§§.§§§/§§§§-§§', event)" onchange="ClearError()" placeholder="Digite o nº do CNPJ">
-    </div>
     <br />
     <div class="form-group row">
         <div class="input-group">
             <div class="input-group-prepend">
-                <img id="img-captcha" src="~/Empresa/Details/get-captcha-image" title="Clique para atualizar" />
+                <img id="img-captcha" src="~/Imovel/Certidao_Endereco/get-captcha-image" title="Clique para atualizar" />
             </div>
             &nbsp;<input type="text" class="form-control" asp-for="CaptchaCode" maxlength="4" id="captchaTxt" />
             &nbsp;<span asp-validation-for="CaptchaCode" class="text-danger"></span>
@@ -51,7 +45,7 @@
 
 
 @if (Model != null) {
-    if (Model.EmpresaStruct == null) {
+    @*if (Model.EmpresaStruct == null) {
         <div class="form-group row">
             <label class="text-danger" id="errorLabel">@Model.ErrorMessage</label>
         </div>
@@ -61,5 +55,43 @@
                 @Model.EmpresaStruct.Razao_social
             </td>
         </tr>
-    }
+    }*@
 }
+
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        function ValidateForm() {
+            var _cod = document.getElementById('codigo').value;
+            var _captcha = document.getElementById('captchaTxt').value;
+
+            if (_cod == "" || parseInt(_cod) == 0) {
+                document.getElementById('errorLabel').innerHTML = "Digite o código do imóvel!";
+                return false;
+            }
+            else {
+                if (_captcha == "") {
+                    document.getElementById('errorLabel').innerHTML = "Digite o código de validação!";
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+
+        function ClearError() {
+            document.getElementById('errorLabel').innerHTML = "";
+        }
+
+        $("#img-captcha").click(function () {
+            resetCaptchaImage();
+        });
+
+        function resetCaptchaImage() {
+            d = new Date();
+            $("#img-captcha").attr("src", "/Empresa/Details/get-captcha-image?" + d.getTime());
+        }
+
+    </script>}
