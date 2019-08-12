@@ -9,7 +9,9 @@ namespace GTI_WebCore.Controllers {
             return View();
         }
 
-     
+       public ActionResult Certidao() {
+            return View();
+        }
 
     }
 }

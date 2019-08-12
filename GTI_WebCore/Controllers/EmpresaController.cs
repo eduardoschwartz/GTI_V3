@@ -10,7 +10,6 @@ using System.IO;
 namespace GTI_WebCore.Controllers {
 
     [Route("Empresa/Details")]
-    [Route("Empresa/exportReport")]
     public class EmpresaController : Controller {
         private readonly IEmpresaRepository _empresaRepository;
 

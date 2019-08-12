@@ -27,6 +27,7 @@ namespace GTI_WebCore {
             services.AddMvc().AddXmlSerializerFormatters();
             services.AddScoped<IEmpresaRepository, EmpresaRepository>();
             services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+            services.AddScoped<IImovelRepository, ImovelRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
