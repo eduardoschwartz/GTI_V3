@@ -244,5 +244,18 @@ namespace GTI_WebCore.Repository {
                 }
         }
 
+        public bool Empresa_Mei(int nCodigo) {
+            bool ret = true;
+                var existingReg = context.Periodomei.Count(a => a.Codigo == nCodigo);
+                if (existingReg == 0) {
+                    ret = false;
+                } else {
+                    DateTime? datafim = (from m in context.Periodomei orderby m.Datainicio descending where m.Codigo == nCodigo select m.Datafim).FirstOrDefault();
+                    if (Functions.IsDate(datafim))
+                        return false;
+                }
+            return ret;
+        }
+
     }
 }

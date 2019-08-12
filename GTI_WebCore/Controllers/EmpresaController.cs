@@ -74,6 +74,7 @@ namespace GTI_WebCore.Controllers {
                 empresaDetailsViewModel.EmpresaStruct = empresa;
                 empresaDetailsViewModel.TaxaLicenca = _empresaRepository.Empresa_tem_TL(_codigo)?"Sim":"Não";
                 empresaDetailsViewModel.Vigilancia_Sanitaria = _empresaRepository.Empresa_tem_VS(_codigo) ? "Sim" : "Não";
+                empresaDetailsViewModel.Mei = _empresaRepository.Empresa_Mei(_codigo) ? "Sim" : "Não";
                 List<CnaeStruct> ListaCnae = _empresaRepository.Lista_Cnae_Empresa(_codigo);
                 string sCnae = "";
                 foreach (CnaeStruct cnae in ListaCnae) {

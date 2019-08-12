@@ -126,6 +126,14 @@
             </tr>
             <tr>
                 <td>
+                    Optante do Mei
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Mei)
+                </td>
+            </tr>
+            <tr>
+                <td>
                     Taxa de Licença
                 </td>
                 <td>
@@ -154,45 +162,12 @@
     <div class="col-sm-10">
         &nbsp;&nbsp;<button type="button" class="green_button" onclick="location.href='@Url.Action("Empresa_Details_Report","Report",new { Id=Model.EmpresaStruct.Codigo})'"> Imprimir</button>
     </div>
+    <br />
+    @Html.ActionLink("Consultar outra empresa", "Details", "Empresa")<br />
+    @Html.ActionLink("Retornar ao menu principal", "Index", "Home")
 
 
 </form>
 
 
 
-    @*<asp:Table ID="Tbl" runat="server" Width="610px" BorderStyle="Double" Height="19px" BorderColor="#3a8dcc" CaptionAlign="Left" Font-Bold="False">
-            <asp:TableRow Width="550px" BorderStyle="Solid" BorderWidth="1px">
-                <asp:TableCell Width="30%">Inscrição Municipal</asp:TableCell>
-                <asp:TableCell runat="server" ID="IM" Width="70%" ForeColor="#3a8dcc"></asp:TableCell>
-            </asp:TableRow>
-
-
-            <asp:TableRow runat="server">
-                <asp:TableCell runat="server">Regime de ISS</asp:TableCell>
-                <asp:TableCell ID="REGIMEISS" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow runat="server">
-                <asp:TableCell runat="server">Vigilância Sanitária</asp:TableCell>
-                <asp:TableCell ID="VIGSANIT" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow runat="server">
-                <asp:TableCell runat="server">Taxa de Licença</asp:TableCell>
-                <asp:TableCell ID="TAXALICENCA" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow runat="server">
-                <asp:TableCell runat="server">Micro Emp.Individual</asp:TableCell>
-                <asp:TableCell ID="MEI" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow runat="server">
-                <asp:TableCell runat="server">Área</asp:TableCell>
-                <asp:TableCell ID="AREA" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow runat="server">
-                <asp:TableCell runat="server">Proprietário(s)</asp:TableCell>
-                <asp:TableCell ID="PROPRIETARIO" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow runat="server">
-                <asp:TableCell runat="server">Atividade(s)</asp:TableCell>
-                <asp:TableCell ID="CNAE" runat="server" ForeColor="#3a8dcc"></asp:TableCell>
-            </asp:TableRow>
-        </asp:Table>*@

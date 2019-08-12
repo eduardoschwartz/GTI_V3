@@ -33,5 +33,6 @@ namespace GTI_WebCore.Models {
         public DbSet<Cep> Cep { get; set; }
         public DbSet<Cnae> Cnae { get; set; }
         public DbSet<Cnaesubclasse> Cnaesubclasse { get; set; }
+        public DbSet<Periodomei> Periodomei { get; set; }
     }
 }

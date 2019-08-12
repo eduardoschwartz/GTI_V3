@@ -67,8 +67,9 @@ namespace GTI_WebCore.Controllers {
                 Taxa_Licenca = _empresaRepository.Empresa_tem_TL(_dados.Codigo) ? "Sim" : "Não",
                 Vigilancia_Sanitaria = _empresaRepository.Empresa_tem_VS(_dados.Codigo) ? "Sim" : "Não",
                 Cnae = sCnae,
-                RegimeISS=sRegime
-            };
+                RegimeISS=sRegime,
+                Mei= _empresaRepository.Empresa_Mei(Id) ? "Sim" : "Não"
+        };
             empresa.Add(reg);
             try {
                 rd.SetDataSource(empresa);
