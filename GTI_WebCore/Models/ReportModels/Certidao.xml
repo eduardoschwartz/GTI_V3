@@ -1,0 +1,14 @@
+﻿<Certidao>
+  <Codigo>123456</Codigo>
+  <Ano>2000</Ano>
+  <Numero>35</Numero>
+  <Numero_Ano>35/2000</Numero_Ano>
+  <Inscricao>1.03.0005.01234.45</Inscricao>
+  <Nome_Requerente>Eduardo Schwartz</Nome_Requerente>
+  <Endereco>Rua 1</Endereco>
+  <Bairro>Centro</Bairro>
+  <Quadra_Original>2A</Quadra_Original>
+  <Lote_Original>3B</Lote_Original>
+  <Controle>ABC123</Controle>
+</Certidao>
+

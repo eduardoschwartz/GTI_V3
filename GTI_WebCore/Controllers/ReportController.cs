@@ -74,7 +74,7 @@ namespace GTI_WebCore.Controllers {
             try {
                 rd.SetDataSource(empresa);
                 Stream stream = rd.ExportToStream(ExportFormatType.PortableDocFormat);
-                return File(stream, "application/pdf", "Relatorioteste.pdf");
+                return File(stream, "application/pdf", "EmpresaDetails.pdf");
             } catch {
 
                 throw;

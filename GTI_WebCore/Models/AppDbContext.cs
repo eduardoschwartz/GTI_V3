@@ -17,6 +17,7 @@ namespace GTI_WebCore.Models {
             modelBuilder.Entity<Mobiliarioatividadeiss>().HasKey(c => new { c.Codmobiliario, c.Codtributo, c.Codatividade, c.Seq });
             modelBuilder.Entity<Mobiliarioproprietario>().HasKey(c => new { c.Codmobiliario, c.Codcidadao });
             modelBuilder.Entity<Mobiliariovs>().HasKey(c => new { c.Codigo, c.Cnae, c.Criterio });
+            modelBuilder.Entity<Proprietario>().HasKey(c => new { c.Codreduzido, c.Codcidadao });
         }
 
 
@@ -41,6 +42,7 @@ namespace GTI_WebCore.Models {
         public DbSet<Mobiliarioevento> Mobiliarioevento { get; set; }
         public DbSet<Mobiliarioproprietario> Mobiliarioproprietario { get; set; }
         public DbSet<Mobiliariovs> Mobiliariovs { get; set; }
+        public DbSet<Parametros> Parametros { get; set; }
         public DbSet<Pedologia> Pedologia { get; set; }
         public DbSet<Periodomei> Periodomei { get; set; }
         public DbSet<Proprietario> Proprietario { get; set; }
