@@ -9,6 +9,7 @@ namespace GTI_WebCore.Models {
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.Entity<Bairro>().HasKey(c =>new { c.Siglauf, c.Codcidade,c.Codbairro });
             modelBuilder.Entity<Cep>().HasKey(c => new { c.Codlogr, c.cep, c.Valor1 });
+            modelBuilder.Entity<Certidao_endereco>().HasKey(c => new { c.Numero, c.Ano });
             modelBuilder.Entity<Cidade>().HasKey(c => new { c.Siglauf, c.Codcidade });
             modelBuilder.Entity<Cnaesubclasse>().HasKey(c => new { c.Secao, c.Divisao, c.Grupo, c.Classe, c.Subclasse });
             modelBuilder.Entity<Facequadra>().HasKey(c => new { c.Coddistrito, c.Codsetor, c.Codquadra, c.Codface });
@@ -27,6 +28,7 @@ namespace GTI_WebCore.Models {
         public DbSet<Cadimob> Cadimob { get; set; }
         public DbSet<Categprop> Categprop { get; set; }
         public DbSet<Cep> Cep { get; set; }
+        public DbSet<Certidao_endereco> Certidao_Endereco { get; set; }
         public DbSet<Cidadao> Cidadao { get; set; }
         public DbSet<Cidade> Cidade { get; set; }
         public DbSet<Cnae> Cnae { get; set; }

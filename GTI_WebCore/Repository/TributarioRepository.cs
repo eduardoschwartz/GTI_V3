@@ -58,7 +58,7 @@ namespace GTI_WebCore.Repository {
                 return 0;
         }
 
-        private Exception Atualiza_Codigo_Certidao(Functions.TipoCertidao tipo_certidao, int Valor) {
+        public Exception Atualiza_Codigo_Certidao(Functions.TipoCertidao tipo_certidao, int Valor) {
             Parametros p = null;
                 if (tipo_certidao == Functions.TipoCertidao.Endereco)
                     p = context.Parametros.First(i => i.Nomeparam == "CETEND");
@@ -95,6 +95,10 @@ namespace GTI_WebCore.Repository {
                 return null;
         }
 
+        public Certidao_endereco Retorna_Certidao_Endereco(int Ano, int Numero, int Codigo) {
+            var Sql = (from p in context.Certidao_Endereco where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
+            return Sql;
+        }
 
 
 

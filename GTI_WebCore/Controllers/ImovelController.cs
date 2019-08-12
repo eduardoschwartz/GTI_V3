@@ -38,9 +38,17 @@ namespace GTI_WebCore.Controllers {
             bool _existeCod = false;
             CertidaoViewModel certidaoViewModel = new CertidaoViewModel();
             ViewBag.Result = "";
+
+            if (!string.IsNullOrWhiteSpace(model.Chave)) {
+                if (!Valida_Certidao(model.Chave)) {
+                    ViewBag.Result = "Chave de autenticação da certidão inválida.";
+                    return View(certidaoViewModel);
+                }
+            }
+
             if (model.Inscricao != null) {
                 _codigo = Convert.ToInt32(model.Inscricao);
-                if (_codigo < 100000) //Se estiver fora deste intervalo nem precisa checar se o imóvel existe
+                if (_codigo < 100000) 
                     _existeCod = _imovelRepository.Existe_Imovel(_codigo);
             }
 
@@ -94,6 +102,44 @@ namespace GTI_WebCore.Controllers {
             Stream s = new MemoryStream(result.CaptchaByteData);
             return new FileStreamResult(s, "image/png");
         }
+
+        public bool Valida_Certidao(string Chave) {
+            string sTipo = "";
+            int nPos = 0, nPos2 = 0, nCodigo = 0, nAno = 0, nNumero = 0;
+            if (Chave.Trim().Length < 8)
+                return false;
+            else {
+                nPos = Chave.IndexOf("-");
+                if (nPos < 6)
+                    return false;
+                else {
+                    nPos2 = Chave.IndexOf("/");
+                    if (nPos2 < 5 || nPos - nPos2 < 2)
+                        return false;
+                    else {
+                        nCodigo = Convert.ToInt32(Chave.Substring(nPos2 + 1, nPos - nPos2 - 1));
+                        nAno = Convert.ToInt32(Chave.Substring(nPos2 - 4, 4));
+                        nNumero = Convert.ToInt32(Chave.Substring(0, 5));
+                        if (nAno < 2010 || nAno > DateTime.Now.Year + 1)
+                            return false;
+                        else {
+                            sTipo = Chave.Substring(Chave.Length - 2, 2);
+                            if (sTipo == "EA") {
+                                Certidao_endereco dados = tributarioRepository.Retorna_Certidao_Endereco(nNumero, nAno, nCodigo);
+                                if (dados != null)
+                                    return true;
+                                else
+                                    return false;
+                            } else {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
 
     }
 }

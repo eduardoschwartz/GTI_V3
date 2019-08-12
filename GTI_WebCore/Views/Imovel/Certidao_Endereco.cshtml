@@ -17,9 +17,10 @@
         <label asp-for="Inscricao"> </label>
         <div class="col-sm-10">
             <input asp-for="Inscricao" id="codigo" class="form-control" style="max-width:100px;max-height:25px;overflow:auto;" onKeyPress="return formata(this, '§§§§§§', event)" onchange="ClearError()">
-            <br />
-            <input asp-for="Chave" id="chave" class="form-control" style="max-width:200px;max-height:25px;overflow:auto;" placeholder="Chave de validação">
         </div>
+        <br />
+        <label>Chave de autenticação</label>
+        <input asp-for="Chave" id="chave" class="form-control" style="max-width:200px;max-height:25px;overflow:auto;"  onchange="ClearError()">
     </div>
 
     <br />
@@ -44,7 +45,7 @@
 
 <br />
 <div class="form-group row">
-    <label class="text-danger" id="errorLabel">@ViewBag.Result</label>
+    &nbsp;&nbsp;<label class="text-danger" id="errorLabel">@ViewBag.Result</label>
 </div>
 
 <br />
@@ -60,19 +61,20 @@
         function ValidateForm() {
             var _cod = document.getElementById('codigo').value;
             var _captcha = document.getElementById('captchaTxt').value;
+            var _chave = document.getElementById('chave').value;
 
-            if (_cod == "" || parseInt(_cod) == 0) {
-                document.getElementById('errorLabel').innerHTML = "Digite o código do imóvel!";
+            if ((_cod == "" || parseInt(_cod) == 0) && _chave == "") {
+                document.getElementById('errorLabel').innerHTML = "Digite a inscrição municipal ou a chave de autenticação da certidão";
                 return false;
             }
-            else {
-                if (_captcha == "") {
-                    document.getElementById('errorLabel').innerHTML = "Digite o código de validação!";
-                    return false;
-                } else {
-                    return true;
-                }
+           
+            if (_captcha == "") {
+                document.getElementById('errorLabel').innerHTML = "Digite o código de validação!";
+                return false;
+            } else {
+                return true;
             }
+           
         }
 
         function ClearError() {
