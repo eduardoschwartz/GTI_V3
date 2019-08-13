@@ -100,7 +100,49 @@ namespace GTI_WebCore.Repository {
             return Sql;
         }
 
+        public bool Valida_Certidao(string Chave) {
+            if (Chave.Trim().Length < 8)
+                return false;
+            else {
+                int nPos = Chave.IndexOf("-");
+                if (nPos < 6)
+                    return false;
+                else {
+                    int nPos2 = Chave.IndexOf("/");
+                    if (nPos2 < 5 || nPos - nPos2 < 2)
+                        return false;
+                    else {
+                        int nCodigo = Convert.ToInt32(Chave.Substring(nPos2 + 1, nPos - nPos2 - 1));
+                        int nAno = Convert.ToInt32(Chave.Substring(nPos2 - 4, 4));
+                        int nNumero = Convert.ToInt32(Chave.Substring(0, 5));
+                        if (nAno < 2010 || nAno > DateTime.Now.Year + 1)
+                            return false;
+                        else {
+                            string sTipo = Chave.Substring(Chave.Length - 2, 2);
+                            if (sTipo == "EA") {
+                                Certidao_endereco dados = Retorna_Certidao_Endereco(nNumero, nAno, nCodigo);
+                                if (dados != null)
+                                    return true;
+                                else
+                                    return false;
+                            } else {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-
+        public Exception Insert_Certidao_Endereco(Certidao_endereco Reg) {
+            try {
+                context.Certidao_Endereco.Add(Reg);
+                context.SaveChanges();
+            } catch (Exception ex) {
+                return ex;
+            }
+            return null;
+        }
+        
     }
 }

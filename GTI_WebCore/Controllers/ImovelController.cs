@@ -3,7 +3,6 @@ using CrystalDecisions.Shared;
 using GTI_WebCore.Interfaces;
 using GTI_WebCore.Models;
 using GTI_WebCore.Models.ReportModels;
-using GTI_WebCore.Repository;
 using GTI_WebCore.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -33,17 +32,19 @@ namespace GTI_WebCore.Controllers {
 
         [HttpPost]
         public IActionResult Certidao_Endereco(CertidaoViewModel model) {
-            int _codigo = 0;
+            int _codigo = 0,nPos=0,nPos2=0;
             int _numero = tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Endereco);
-            bool _existeCod = false;
+            bool _existeCod = false,_Valida=false;
+            string _chave = model.Chave;
             CertidaoViewModel certidaoViewModel = new CertidaoViewModel();
             ViewBag.Result = "";
 
-            if (!string.IsNullOrWhiteSpace(model.Chave)) {
-                if (!Valida_Certidao(model.Chave)) {
+            if (!string.IsNullOrWhiteSpace(_chave)) {
+                if (!tributarioRepository.Valida_Certidao(_chave)) {
                     ViewBag.Result = "Chave de autenticação da certidão inválida.";
                     return View(certidaoViewModel);
-                }
+                } else
+                    _Valida = true;
             }
 
             if (model.Inscricao != null) {
@@ -61,9 +62,7 @@ namespace GTI_WebCore.Controllers {
                 ViewBag.Result = "Imóvel não cadastrado.";
                 return View(certidaoViewModel);
             }
-
-            ReportDocument rd = new ReportDocument();
-            rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Certidao_Endereco.rpt");
+            
             List<Certidao> certidao = new List<Certidao>();
             List<ProprietarioStruct> listaProp = _imovelRepository.Lista_Proprietario(_codigo, true);
             ImovelStruct _dados = _imovelRepository.Dados_Imovel(_codigo);
@@ -75,12 +74,47 @@ namespace GTI_WebCore.Controllers {
                 Nome_Requerente = listaProp[0].Nome,
                 Ano = DateTime.Now.Year,
                 Numero = _numero,
-                Numero_Ano=_numero.ToString("00000")+"/"+ DateTime.Now.Year.ToString(),
                 Quadra_Original = _dados.QuadraOriginal ?? "",
                 Lote_Original = _dados.LoteOriginal ?? "",
                 Controle = _numero.ToString("00000") + DateTime.Now.Year.ToString("0000") + "/" + _codigo.ToString() + "-EA"
             };
+
+            if (_Valida) {
+                reg.Codigo = Convert.ToInt32(_chave.Substring(nPos2 + 1, nPos - nPos2 - 1));
+                reg.Ano = Convert.ToInt32(_chave.Substring(nPos2 - 4, 4));
+                reg.Numero = Convert.ToInt32(_chave.Substring(0, 5));
+            }
+            reg.Numero_Ano = reg.Numero.ToString("00000") + "/" + reg.Ano;
             certidao.Add(reg);
+
+            if (!_Valida) {
+                Models.Certidao_endereco regCert = new Certidao_endereco() {
+                    Ano=reg.Ano,
+                    Codigo=reg.Codigo,
+                    Data=Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")),
+                    descbairro=reg.Bairro,
+                    Inscricao=reg.Inscricao,
+                    Logradouro=reg.Endereco,
+                    Nomecidadao=reg.Nome_Requerente,
+                    Li_lotes=reg.Lote_Original,
+                    Li_compl="",
+                    Li_num=0,
+                    Li_quadras=reg.Quadra_Original,
+                    Numero=reg.Numero
+                };
+                Exception ex = tributarioRepository.Insert_Certidao_Endereco(regCert);
+                if (ex == null) {
+                    ViewBag.Result = "Ocorreu um erro no processamento das informações.";
+                    return View(certidaoViewModel);
+                }
+            }
+
+            ReportDocument rd = new ReportDocument();
+            if(_Valida)
+                rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Certidao_Endereco_Valida.rpt");
+            else
+                rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Certidao_Endereco.rpt");
+
             try {
                 rd.SetDataSource(certidao);
                 Stream stream = rd.ExportToStream(ExportFormatType.PortableDocFormat);
@@ -103,41 +137,6 @@ namespace GTI_WebCore.Controllers {
             return new FileStreamResult(s, "image/png");
         }
 
-        public bool Valida_Certidao(string Chave) {
-            string sTipo = "";
-            int nPos = 0, nPos2 = 0, nCodigo = 0, nAno = 0, nNumero = 0;
-            if (Chave.Trim().Length < 8)
-                return false;
-            else {
-                nPos = Chave.IndexOf("-");
-                if (nPos < 6)
-                    return false;
-                else {
-                    nPos2 = Chave.IndexOf("/");
-                    if (nPos2 < 5 || nPos - nPos2 < 2)
-                        return false;
-                    else {
-                        nCodigo = Convert.ToInt32(Chave.Substring(nPos2 + 1, nPos - nPos2 - 1));
-                        nAno = Convert.ToInt32(Chave.Substring(nPos2 - 4, 4));
-                        nNumero = Convert.ToInt32(Chave.Substring(0, 5));
-                        if (nAno < 2010 || nAno > DateTime.Now.Year + 1)
-                            return false;
-                        else {
-                            sTipo = Chave.Substring(Chave.Length - 2, 2);
-                            if (sTipo == "EA") {
-                                Certidao_endereco dados = tributarioRepository.Retorna_Certidao_Endereco(nNumero, nAno, nCodigo);
-                                if (dados != null)
-                                    return true;
-                                else
-                                    return false;
-                            } else {
-                                return false;
-                            }
-                        }
-                    }
-                }
-            }
-        }
 
 
 

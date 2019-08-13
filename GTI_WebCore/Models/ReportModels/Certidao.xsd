@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" >
+  <!-- XML Schema Generated from XML Document on Tue Aug 13 2019 14:13:53 GMT-0300 (Horário Padrão de Brasília) -->
+  <!-- with XmlGrid.net Free Online Service http://xmlgrid.net -->
+  <xsd:element name="Certidao">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Codigo" type="xsd:int"></xsd:element>
+        <xsd:element name="Ano" type="xsd:int"></xsd:element>
+        <xsd:element name="Numero" type="xsd:int"></xsd:element>
+        <xsd:element name="Numero_Ano" type="xsd:string"></xsd:element>
+        <xsd:element name="Inscricao" type="xsd:string"></xsd:element>
+        <xsd:element name="Nome_Requerente" type="xsd:string"></xsd:element>
+        <xsd:element name="Endereco" type="xsd:string"></xsd:element>
+        <xsd:element name="Bairro" type="xsd:string"></xsd:element>
+        <xsd:element name="Quadra_Original" type="xsd:string"></xsd:element>
+        <xsd:element name="Lote_Original" type="xsd:string"></xsd:element>
+        <xsd:element name="Controle" type="xsd:string"></xsd:element>
+        <xsd:element name="Data_Geracao" type="xsd:date"></xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

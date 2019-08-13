@@ -11,10 +11,15 @@
 
   <ItemGroup>
     <None Remove="Reports\Certidao_Endereco.rpt" />
+    <None Remove="Reports\Certidao_Endereco_Valida.rpt" />
     <None Remove="Reports\Empresa_Detalhe.rpt" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Reports\Certidao_Endereco_Valida.rpt">
+      <LastGenOutput>Certidao_Endereco_Valida.cs</LastGenOutput>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Certidao_Endereco.rpt">
       <LastGenOutput>Certidao_Endereco.cs</LastGenOutput>
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -62,6 +67,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Reports\Certidao_Endereco_Valida.cs">
+      <SubType>Component</SubType>
+      <DependentUpon>Certidao_Endereco_Valida.rpt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Reports\Certidao_Endereco.cs">
       <SubType>Component</SubType>
       <DependentUpon>Certidao_Endereco.rpt</DependentUpon>

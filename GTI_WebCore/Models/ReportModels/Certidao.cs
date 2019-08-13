@@ -16,5 +16,6 @@ namespace GTI_WebCore.Models.ReportModels {
         public string Quadra_Original { get; set; }
         public string Lote_Original { get; set; }
         public string Controle { get; set; }
+        public DateTime Data_Geracao { get; set; }
     }
 }
