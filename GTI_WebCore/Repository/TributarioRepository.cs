@@ -1,7 +1,10 @@
 ﻿using GTI_WebCore.Interfaces;
 using GTI_WebCore.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -100,43 +103,73 @@ namespace GTI_WebCore.Repository {
             return Sql;
         }
 
-        public bool Valida_Certidao(string Chave) {
+        public chaveStruct Valida_Certidao(string Chave) {
+            bool _valido = false;
             if (Chave.Trim().Length < 8)
-                return false;
+                goto fim;
             else {
                 int nPos = Chave.IndexOf("-");
                 if (nPos < 6)
-                    return false;
+                    goto fim;
                 else {
                     int nPos2 = Chave.IndexOf("/");
                     if (nPos2 < 5 || nPos - nPos2 < 2)
-                        return false;
+                        goto fim;
                     else {
                         int nCodigo = Convert.ToInt32(Chave.Substring(nPos2 + 1, nPos - nPos2 - 1));
                         int nAno = Convert.ToInt32(Chave.Substring(nPos2 - 4, 4));
                         int nNumero = Convert.ToInt32(Chave.Substring(0, 5));
                         if (nAno < 2010 || nAno > DateTime.Now.Year + 1)
-                            return false;
+                            goto fim;
                         else {
                             string sTipo = Chave.Substring(Chave.Length - 2, 2);
                             if (sTipo == "EA") {
-                                Certidao_endereco dados = Retorna_Certidao_Endereco(nNumero, nAno, nCodigo);
-                                if (dados != null)
-                                    return true;
-                                else
-                                    return false;
+                                Certidao_endereco dados = Retorna_Certidao_Endereco(nAno, nNumero, nCodigo);
+                                if (dados != null) {
+                                    chaveStruct reg = new chaveStruct {
+                                        Codigo = nCodigo,
+                                        Ano = nAno,
+                                        Numero=nNumero,
+                                        Tipo=sTipo,
+                                        Valido = true
+                                    };
+                                    return reg;
+                                } else
+                                    goto fim;
                             } else {
-                                return false;
+                                goto fim;
                             }
                         }
                     }
                 }
             }
+        fim:;
+            chaveStruct _reg = new chaveStruct();
+            _reg.Valido = _valido;
+            return _reg;
         }
 
         public Exception Insert_Certidao_Endereco(Certidao_endereco Reg) {
+
+            object[] Parametros = new object[12];
+            Parametros[0] = new SqlParameter { ParameterName = "@numero", SqlDbType = SqlDbType.Int, SqlValue = Reg.Numero };
+            Parametros[1] = new SqlParameter { ParameterName = "@ano", SqlDbType = SqlDbType.Int, SqlValue = Reg.Ano };
+            Parametros[2] = new SqlParameter { ParameterName = "@data", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Data };
+            Parametros[3] = new SqlParameter { ParameterName = "@codigo", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codigo };
+            Parametros[4] = new SqlParameter { ParameterName = "@nomecidadao", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Nomecidadao };
+            Parametros[5] = new SqlParameter { ParameterName = "@inscricao", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Inscricao };
+            Parametros[6] = new SqlParameter { ParameterName = "@logradouro", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Logradouro };
+            Parametros[7] = new SqlParameter { ParameterName = "@li_num", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Li_num };
+            Parametros[8] = new SqlParameter { ParameterName = "@li_compl", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Li_compl };
+            Parametros[9] = new SqlParameter { ParameterName = "@li_quadras", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Li_quadras };
+            Parametros[10] = new SqlParameter { ParameterName = "@li_lotes", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Li_lotes };
+            Parametros[11] = new SqlParameter { ParameterName = "@descbairro", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.descbairro };
+
+            context.Database.ExecuteSqlCommand("INSERT INTO certidao_endereco(numero,ano,data,codigo,nomecidadao,inscricao,logradouro,li_num,li_compl,li_quadras,li_lotes,descbairro)" +
+                " VALUES(@numero,@ano,@data,@codigo,@nomecidadao,@inscricao,@logradouro,@li_num,@li_compl,@li_quadras,@li_lotes,@descbairro)", Parametros);
+
             try {
-                context.Certidao_Endereco.Add(Reg);
+//                context.Certidao_Endereco.Add(Reg);
                 context.SaveChanges();
             } catch (Exception ex) {
                 return ex;

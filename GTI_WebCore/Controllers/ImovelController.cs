@@ -32,7 +32,7 @@ namespace GTI_WebCore.Controllers {
 
         [HttpPost]
         public IActionResult Certidao_Endereco(CertidaoViewModel model) {
-            int _codigo = 0,nPos=0,nPos2=0;
+            int _codigo = 0,_ano=0;
             int _numero = tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Endereco);
             bool _existeCod = false,_Valida=false;
             string _chave = model.Chave;
@@ -40,17 +40,22 @@ namespace GTI_WebCore.Controllers {
             ViewBag.Result = "";
 
             if (!string.IsNullOrWhiteSpace(_chave)) {
-                if (!tributarioRepository.Valida_Certidao(_chave)) {
+                chaveStruct _chaveStruct = tributarioRepository.Valida_Certidao(_chave);
+                if (!_chaveStruct.Valido) {
                     ViewBag.Result = "Chave de autenticação da certidão inválida.";
                     return View(certidaoViewModel);
-                } else
+                } else {
+                    _codigo = _chaveStruct.Codigo;
+                    _numero = _chaveStruct.Numero;
+                    _ano = _chaveStruct.Ano;
                     _Valida = true;
-            }
-
-            if (model.Inscricao != null) {
-                _codigo = Convert.ToInt32(model.Inscricao);
-                if (_codigo < 100000) 
-                    _existeCod = _imovelRepository.Existe_Imovel(_codigo);
+                }
+            } else {
+                if (model.Inscricao != null) {
+                    _codigo = Convert.ToInt32(model.Inscricao);
+                    if (_codigo < 100000)
+                        _existeCod = _imovelRepository.Existe_Imovel(_codigo);
+                }
             }
 
             if (!Captcha.ValidateCaptchaCode(model.CaptchaCode, HttpContext)) {
@@ -58,7 +63,7 @@ namespace GTI_WebCore.Controllers {
                 return View(certidaoViewModel);
             }
 
-            if (!_existeCod) {
+            if (!_existeCod && !_Valida) {
                 ViewBag.Result = "Imóvel não cadastrado.";
                 return View(certidaoViewModel);
             }
@@ -80,9 +85,9 @@ namespace GTI_WebCore.Controllers {
             };
 
             if (_Valida) {
-                reg.Codigo = Convert.ToInt32(_chave.Substring(nPos2 + 1, nPos - nPos2 - 1));
-                reg.Ano = Convert.ToInt32(_chave.Substring(nPos2 - 4, 4));
-                reg.Numero = Convert.ToInt32(_chave.Substring(0, 5));
+                reg.Codigo = _codigo;
+                reg.Ano = _ano;
+                reg.Numero = _numero;
             }
             reg.Numero_Ano = reg.Numero.ToString("00000") + "/" + reg.Ano;
             certidao.Add(reg);
@@ -91,7 +96,7 @@ namespace GTI_WebCore.Controllers {
                 Models.Certidao_endereco regCert = new Certidao_endereco() {
                     Ano=reg.Ano,
                     Codigo=reg.Codigo,
-                    Data=Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")),
+                    Data=DateTime.Now,
                     descbairro=reg.Bairro,
                     Inscricao=reg.Inscricao,
                     Logradouro=reg.Endereco,
@@ -103,7 +108,7 @@ namespace GTI_WebCore.Controllers {
                     Numero=reg.Numero
                 };
                 Exception ex = tributarioRepository.Insert_Certidao_Endereco(regCert);
-                if (ex == null) {
+                if (ex != null) {
                     ViewBag.Result = "Ocorreu um erro no processamento das informações.";
                     return View(certidaoViewModel);
                 }
