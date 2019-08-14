@@ -12,11 +12,13 @@
         <xsd:element name="Inscricao" type="xsd:string"></xsd:element>
         <xsd:element name="Nome_Requerente" type="xsd:string"></xsd:element>
         <xsd:element name="Endereco" type="xsd:string"></xsd:element>
+        <xsd:element name="Endereco_Numero" type="xsd:int"></xsd:element>
+        <xsd:element name="Endereco_Complemento" type="xsd:string"></xsd:element>
         <xsd:element name="Bairro" type="xsd:string"></xsd:element>
         <xsd:element name="Quadra_Original" type="xsd:string"></xsd:element>
         <xsd:element name="Lote_Original" type="xsd:string"></xsd:element>
         <xsd:element name="Controle" type="xsd:string"></xsd:element>
-        <xsd:element name="Data_Geracao" type="xsd:date"></xsd:element>
+        <xsd:element name="Data_Geracao" type="xsd:dateTime"></xsd:element>
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>

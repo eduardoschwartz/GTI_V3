@@ -1,6 +1,10 @@
-﻿using GTI_WebCore.Interfaces;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
+using GTI_WebCore.Interfaces;
 using GTI_WebCore.Models;
+using GTI_WebCore.Models.ReportModels;
 using GTI_WebCore.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -103,6 +107,7 @@ namespace GTI_WebCore.Controllers {
             
         }
 
+
         [Route("get-captcha-image")]
         public IActionResult GetCaptchaImage() {
             int width = 100;
@@ -113,8 +118,6 @@ namespace GTI_WebCore.Controllers {
             Stream s = new MemoryStream(result.CaptchaByteData);
             return new FileStreamResult(s, "image/png");
         }
-
-
 
     }
 }

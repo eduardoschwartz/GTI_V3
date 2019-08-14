@@ -13,7 +13,7 @@ using System.IO;
 
 namespace GTI_WebCore.Controllers {
 
-    [Route("Imovel/Certidao_Endereco")]
+    [Route("Imovel/Certidao")]
     public class ImovelController : Controller{
         private readonly IImovelRepository _imovelRepository;
         private readonly IHostingEnvironment hostingEnvironment;
@@ -25,11 +25,13 @@ namespace GTI_WebCore.Controllers {
             this.tributarioRepository = tributarioRepository;
         }
 
+        [Route("Certidao_Endereco")]
         [HttpGet]
         public ViewResult Certidao_Endereco() {
             return View();
         }
 
+        [Route("Certidao_Endereco")]
         [HttpPost]
         public IActionResult Certidao_Endereco(CertidaoViewModel model) {
             int _codigo = 0,_ano=0;
@@ -48,6 +50,8 @@ namespace GTI_WebCore.Controllers {
                     _codigo = _chaveStruct.Codigo;
                     _numero = _chaveStruct.Numero;
                     _ano = _chaveStruct.Ano;
+                    
+
                     _Valida = true;
                 }
             } else {
@@ -74,7 +78,9 @@ namespace GTI_WebCore.Controllers {
             Certidao reg = new Certidao() {
                 Codigo = _dados.Codigo,
                 Inscricao = _dados.Inscricao,
-                Endereco = _dados.NomeLogradouro + ", " + _dados.Numero + " " + _dados.Complemento,
+                Endereco = _dados.NomeLogradouro,
+                Endereco_Numero= (int)_dados.Numero,
+                Endereco_Complemento=_dados.Complemento,
                 Bairro = _dados.NomeBairro ?? "",
                 Nome_Requerente = listaProp[0].Nome,
                 Ano = DateTime.Now.Year,
@@ -88,6 +94,14 @@ namespace GTI_WebCore.Controllers {
                 reg.Codigo = _codigo;
                 reg.Ano = _ano;
                 reg.Numero = _numero;
+                Certidao_endereco certidaoGerada = tributarioRepository.Retorna_Certidao_Endereco(_ano, _numero, _codigo);
+                reg.Endereco = certidaoGerada.Logradouro;
+                reg.Endereco_Numero = certidaoGerada.Li_num;
+                reg.Endereco_Complemento = certidaoGerada.Li_compl??"";
+                reg.Bairro = certidaoGerada.descbairro;
+                reg.Nome_Requerente = certidaoGerada.Nomecidadao;
+                reg.Data_Geracao = certidaoGerada.Data;
+                reg.Inscricao = certidaoGerada.Inscricao;
             }
             reg.Numero_Ano = reg.Numero.ToString("00000") + "/" + reg.Ano;
             certidao.Add(reg);
@@ -102,8 +116,8 @@ namespace GTI_WebCore.Controllers {
                     Logradouro=reg.Endereco,
                     Nomecidadao=reg.Nome_Requerente,
                     Li_lotes=reg.Lote_Original,
-                    Li_compl="",
-                    Li_num=0,
+                    Li_compl=reg.Endereco_Complemento,
+                    Li_num=reg.Endereco_Numero,
                     Li_quadras=reg.Quadra_Original,
                     Numero=reg.Numero
                 };
@@ -131,6 +145,13 @@ namespace GTI_WebCore.Controllers {
 
         }
 
+       
+        [Route("Certidao_Valor_Venal")]
+        [HttpGet]
+        public ViewResult Certidao_Valor_Venal() {
+            return View();
+        }
+
         [Route("get-captcha-image")]
         public IActionResult GetCaptchaImage() {
             int width = 100;
@@ -141,7 +162,6 @@ namespace GTI_WebCore.Controllers {
             Stream s = new MemoryStream(result.CaptchaByteData);
             return new FileStreamResult(s, "image/png");
         }
-
 
 
 

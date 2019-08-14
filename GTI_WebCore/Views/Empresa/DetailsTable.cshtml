@@ -160,7 +160,7 @@
     </table>
     <br />
     <div class="col-sm-10">
-        &nbsp;&nbsp;<button type="button" class="green_button" onclick="location.href='@Url.Action("Empresa_Details_Report","Report",new { Id=Model.EmpresaStruct.Codigo})'"> Imprimir</button>
+        &nbsp;&nbsp;<button type="button" class="green_button" onclick="location.href='@Url.Action("Empresa_Details_Report", "EmpresaDetails",new { Id=Model.EmpresaStruct.Codigo})'"> Imprimir</button>
     </div>
     <br />
     @Html.ActionLink("Consultar outra empresa", "Details", "Empresa")<br />

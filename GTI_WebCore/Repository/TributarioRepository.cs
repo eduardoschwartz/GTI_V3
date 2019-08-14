@@ -144,8 +144,9 @@ namespace GTI_WebCore.Repository {
                 }
             }
         fim:;
-            chaveStruct _reg = new chaveStruct();
-            _reg.Valido = _valido;
+            chaveStruct _reg = new chaveStruct {
+                Valido = _valido
+            };
             return _reg;
         }
 

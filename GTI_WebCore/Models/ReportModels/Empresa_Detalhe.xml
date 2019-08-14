@@ -1,4 +1,5 @@
-﻿<Empresa_Detalhe>
+﻿<Empresa_Detalhe xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="Empresa_Detalhe.xsd">
   <Codigo>123456</Codigo>
   <Razao_Social>Empresa de Teste</Razao_Social>
   <Cpf_Cnpj>50.387.655/0002-23</Cpf_Cnpj>
@@ -8,8 +9,8 @@
   <Cidade>Jaboticabal</Cidade>
   <UF>SP</UF>
   <Cep>15990450</Cep>
-  <Data_Abertura>01/01/200</Data_Abertura>
-  <Data_Encerramento>01/01/200</Data_Encerramento>
+  <Data_Abertura>1980-03-23T10:20:15</Data_Abertura>
+  <Data_Encerramento>1980-03-23T10:20:15</Data_Encerramento>
   <Atividade>Mecânico</Atividade>
   <Situacao>Ativa</Situacao>
   <Email>email@gti.com</Email>

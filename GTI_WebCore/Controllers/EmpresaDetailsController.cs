@@ -10,11 +10,11 @@ using System.Collections.Generic;
 using System.IO;
 
 namespace GTI_WebCore.Controllers {
-    public class ReportController : Controller {
+    public class EmpresaDetailsController : Controller {
         private readonly IEmpresaRepository _empresaRepository;
         private readonly IHostingEnvironment hostingEnvironment;
 
-        public ReportController(IEmpresaRepository empresaRepository, IHostingEnvironment hostingEnvironment) {
+        public EmpresaDetailsController(IEmpresaRepository empresaRepository, IHostingEnvironment hostingEnvironment) {
             _empresaRepository = empresaRepository;
             this.hostingEnvironment = hostingEnvironment;
         }
@@ -67,9 +67,9 @@ namespace GTI_WebCore.Controllers {
                 Taxa_Licenca = _empresaRepository.Empresa_tem_TL(_dados.Codigo) ? "Sim" : "Não",
                 Vigilancia_Sanitaria = _empresaRepository.Empresa_tem_VS(_dados.Codigo) ? "Sim" : "Não",
                 Cnae = sCnae,
-                RegimeISS=sRegime,
-                Mei= _empresaRepository.Empresa_Mei(Id) ? "Sim" : "Não"
-        };
+                RegimeISS = sRegime,
+                Mei = _empresaRepository.Empresa_Mei(Id) ? "Sim" : "Não"
+            };
             empresa.Add(reg);
             try {
                 rd.SetDataSource(empresa);
