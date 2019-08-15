@@ -240,7 +240,10 @@ namespace GTI_WebCore.Repository {
             return result;
         }
 
-
+        public decimal Soma_Area(int Codigo) {
+                var sum = context.Areas.Where(x => x.Codreduzido == Codigo).Sum(x => x.Areaconstr);
+                return Convert.ToDecimal(sum);
+        }
 
 
     }

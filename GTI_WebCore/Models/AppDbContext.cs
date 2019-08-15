@@ -7,9 +7,11 @@ namespace GTI_WebCore.Models {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<Areas>().HasKey(c => new { c.Codreduzido, c.Seqarea });
             modelBuilder.Entity<Bairro>().HasKey(c =>new { c.Siglauf, c.Codcidade,c.Codbairro });
             modelBuilder.Entity<Cep>().HasKey(c => new { c.Codlogr, c.cep, c.Valor1 });
             modelBuilder.Entity<Certidao_endereco>().HasKey(c => new { c.Numero, c.Ano });
+            modelBuilder.Entity<Certidao_isencao>().HasKey(c => new { c.Numero, c.Ano });
             modelBuilder.Entity<Certidao_valor_venal>().HasKey(c => new { c.Numero, c.Ano });
             modelBuilder.Entity<Cidade>().HasKey(c => new { c.Siglauf, c.Codcidade });
             modelBuilder.Entity<Cnaesubclasse>().HasKey(c => new { c.Secao, c.Divisao, c.Grupo, c.Classe, c.Subclasse });
@@ -25,6 +27,7 @@ namespace GTI_WebCore.Models {
         }
 
 
+        public DbSet<Areas> Areas { get; set; }
         public DbSet<Atividade> Atividade { get; set; }
         public DbSet<Bairro> Bairro { get; set; }
         public DbSet<Benfeitoria> Benfeitoria { get; set; }
@@ -32,6 +35,7 @@ namespace GTI_WebCore.Models {
         public DbSet<Categprop> Categprop { get; set; }
         public DbSet<Cep> Cep { get; set; }
         public DbSet<Certidao_endereco> Certidao_Endereco { get; set; }
+        public DbSet<Certidao_isencao> Certidao_Isencao { get; set; }
         public DbSet<Certidao_valor_venal> Certidao_Valor_Venal { get; set; }
         public DbSet<Cidadao> Cidadao { get; set; }
         public DbSet<Cidade> Cidade { get; set; }

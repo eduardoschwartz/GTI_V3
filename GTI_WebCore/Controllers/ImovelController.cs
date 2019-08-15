@@ -231,7 +231,7 @@ namespace GTI_WebCore.Controllers {
                 reg.VVI = RegCalculo.Vvi;
             }
 
-
+            List<Certidao> certidao = new List<Certidao>();
             if (_Valida) {
                 reg.Codigo = _codigo;
                 reg.Ano = _ano;
@@ -250,8 +250,7 @@ namespace GTI_WebCore.Controllers {
                 reg.VVI = certidaoGerada.Vvi;
             }
             reg.Numero_Ano = reg.Numero.ToString("00000") + "/" + reg.Ano;
-
-            List<Certidao> certidao = new List<Certidao>();
+            
             certidao.Add(reg);
 
             if (!_Valida) {
@@ -291,14 +290,137 @@ namespace GTI_WebCore.Controllers {
                 Stream stream = rd.ExportToStream(ExportFormatType.PortableDocFormat);
                 return File(stream, "application/pdf", "Certidao_VVenal.pdf");
             } catch {
-
                 throw;
             }
-
         }
 
+        [Route("Certidao_Isencao")]
+        [HttpGet]
+        public ViewResult Certidao_Isencao() {
+            return View();
+        }
 
+        [Route("Certidao_Isencao")]
+        [HttpPost]
+        public IActionResult Certidao_Isenco(CertidaoViewModel model) {
+            int _codigo = 0, _ano = 0;
+            int _numero = tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Isencao);
+            bool _existeCod = false, _Valida = false;
+            string _chave = model.Chave;
+            CertidaoViewModel certidaoViewModel = new CertidaoViewModel();
+            ViewBag.Result = "";
 
+            if (!string.IsNullOrWhiteSpace(_chave)) {
+                chaveStruct _chaveStruct = tributarioRepository.Valida_Certidao(_chave);
+                if (!_chaveStruct.Valido) {
+                    ViewBag.Result = "Chave de autenticação da certidão inválida.";
+                    return View(certidaoViewModel);
+                } else {
+                    _codigo = _chaveStruct.Codigo;
+                    _numero = _chaveStruct.Numero;
+                    _ano = _chaveStruct.Ano;
+                    _Valida = true;
+                }
+            } else {
+                if (model.Inscricao != null) {
+                    _codigo = Convert.ToInt32(model.Inscricao);
+                    if (_codigo < 100000)
+                        _existeCod = _imovelRepository.Existe_Imovel(_codigo);
+                }
+            }
+
+            if (!Captcha.ValidateCaptchaCode(model.CaptchaCode, HttpContext)) {
+                ViewBag.Result = "Código de verificação inválido.";
+                return View(certidaoViewModel);
+            }
+
+            if (!_existeCod && !_Valida) {
+                ViewBag.Result = "Imóvel não cadastrado.";
+                return View(certidaoViewModel);
+            }
+
+            List<ProprietarioStruct> listaProp = _imovelRepository.Lista_Proprietario(_codigo, true);
+            ImovelStruct _dados = _imovelRepository.Dados_Imovel(_codigo);
+            Certidao reg = new Certidao() {
+                Codigo = _dados.Codigo,
+                Inscricao = _dados.Inscricao,
+                Endereco = _dados.NomeLogradouro,
+                Endereco_Numero = (int)_dados.Numero,
+                Endereco_Complemento = _dados.Complemento,
+                Bairro = _dados.NomeBairro ?? "",
+                Nome_Requerente = listaProp[0].Nome,
+                Ano = DateTime.Now.Year,
+                Numero = _numero,
+                Quadra_Original = _dados.QuadraOriginal ?? "",
+                Lote_Original = _dados.LoteOriginal ?? "",
+                Controle = _numero.ToString("00000") + DateTime.Now.Year.ToString("0000") + "/" + _codigo.ToString() + "-VV"
+            };
+
+            decimal SomaArea = _imovelRepository.Soma_Area(_codigo);
+            reg.Area = SomaArea; //<-----------------PAREI AQUI
+
+            List<Certidao> certidao = new List<Certidao>();
+            if (_Valida) {
+                reg.Codigo = _codigo;
+                reg.Ano = _ano;
+                reg.Numero = _numero;
+                Certidao_valor_venal certidaoGerada = tributarioRepository.Retorna_Certidao_Valor_Venal(_ano, _numero, _codigo);
+                reg.Endereco = certidaoGerada.Logradouro;
+                reg.Endereco_Numero = certidaoGerada.Li_num;
+                reg.Endereco_Complemento = certidaoGerada.Li_compl ?? "";
+                reg.Bairro = certidaoGerada.Descbairro;
+                reg.Nome_Requerente = certidaoGerada.Nomecidadao;
+                reg.Data_Geracao = certidaoGerada.Data;
+                reg.Inscricao = certidaoGerada.Inscricao;
+                reg.Area = certidaoGerada.Areaterreno;
+                reg.VVT = certidaoGerada.Vvt;
+                reg.VVP = certidaoGerada.Vvp;
+                reg.VVI = certidaoGerada.Vvi;
+            }
+            reg.Numero_Ano = reg.Numero.ToString("00000") + "/" + reg.Ano;
+
+            certidao.Add(reg);
+
+            if (!_Valida) {
+                Models.Certidao_valor_venal regCert = new Certidao_valor_venal() {
+                    Ano = reg.Ano,
+                    Codigo = reg.Codigo,
+                    Data = DateTime.Now,
+                    Descbairro = reg.Bairro,
+                    Inscricao = reg.Inscricao,
+                    Logradouro = reg.Endereco,
+                    Nomecidadao = reg.Nome_Requerente,
+                    Li_lotes = reg.Lote_Original,
+                    Li_compl = reg.Endereco_Complemento,
+                    Li_num = reg.Endereco_Numero,
+                    Li_quadras = reg.Quadra_Original,
+                    Numero = reg.Numero,
+                    Areaterreno = RegCalculo.Areaterreno,
+                    Vvt = RegCalculo.Vvt,
+                    Vvp = RegCalculo.Vvp,
+                    Vvi = RegCalculo.Vvi
+                };
+                Exception ex = tributarioRepository.Insert_Certidao_Valor_Venal(regCert);
+                if (ex != null) {
+                    ViewBag.Result = "Ocorreu um erro no processamento das informações.";
+                    return View(certidaoViewModel);
+                }
+            }
+
+            ReportDocument rd = new ReportDocument();
+            if (_Valida)
+                rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Certidao_Valor_venal_Valida.rpt");
+            else
+                rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Certidao_Valor_Venal.rpt");
+
+            try {
+                rd.SetDataSource(certidao);
+                Stream stream = rd.ExportToStream(ExportFormatType.PortableDocFormat);
+                return File(stream, "application/pdf", "Certidao_VVenal.pdf");
+            } catch {
+                throw;
+            }
+        }
 
     }
 }

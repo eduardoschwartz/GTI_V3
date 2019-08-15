@@ -12,12 +12,27 @@
   <ItemGroup>
     <None Remove="Reports\Certidao_Endereco.rpt" />
     <None Remove="Reports\Certidao_Endereco_Valida.rpt" />
+    <None Remove="Reports\Certidao_Isencao_65metros.rpt" />
+    <None Remove="Reports\Certidao_Isencao_Processo.rpt" />
+    <None Remove="Reports\Certidao_Isencao_Valida.rpt" />
     <None Remove="Reports\Certidao_Valor_Venal.rpt" />
     <None Remove="Reports\Certidao_Valor_Venal_Valida.rpt" />
     <None Remove="Reports\Empresa_Detalhe.rpt" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Reports\Certidao_Isencao_Valida.rpt">
+      <LastGenOutput>Certidao_Isencao_Valida.cs</LastGenOutput>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Certidao_Isencao_65metros.rpt">
+      <LastGenOutput>Certidao_Isencao_65metros.cs</LastGenOutput>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Certidao_Isencao_Processo.rpt">
+      <LastGenOutput>Certidao_Isencao_Processo.cs</LastGenOutput>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Certidao_Valor_Venal_Valida.rpt">
       <LastGenOutput>Certidao_Valor_Venal_Valida.cs</LastGenOutput>
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -77,6 +92,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Reports\Certidao_Isencao_Valida.cs">
+      <SubType>Component</SubType>
+      <DependentUpon>Certidao_Isencao_Valida.rpt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Reports\Certidao_Isencao_65metros.cs">
+      <SubType>Component</SubType>
+      <DependentUpon>Certidao_Isencao_65metros.rpt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Reports\Certidao_Isencao_Processo.cs">
+      <SubType>Component</SubType>
+      <DependentUpon>Certidao_Isencao_Processo.rpt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Reports\Certidao_Valor_Venal_Valida.cs">
       <SubType>Component</SubType>
       <DependentUpon>Certidao_Valor_Venal_Valida.rpt</DependentUpon>

@@ -98,11 +98,6 @@ namespace GTI_WebCore.Repository {
                 return null;
         }
 
-        public Certidao_endereco Retorna_Certidao_Endereco(int Ano, int Numero, int Codigo) {
-            var Sql = (from p in context.Certidao_Endereco where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
-            return Sql;
-        }
-
         public chaveStruct Valida_Certidao(string Chave) {
             bool _valido = false;
             if (Chave.Trim().Length < 8)
@@ -147,10 +142,22 @@ namespace GTI_WebCore.Repository {
                                         Valido = true
                                     };
                                     return reg;
-                                } else
+                                }else
                                     goto fim;
-                            } else {
-                                goto fim;
+                            } else if (sTipo == "CI") {
+                                Certidao_isencao dados = Retorna_Certidao_Isencao(nAno, nNumero, nCodigo);
+                                if (dados != null) {
+                                    chaveStruct reg = new chaveStruct {
+                                        Codigo = nCodigo,
+                                        Ano = nAno,
+                                        Numero = nNumero,
+                                        Tipo = sTipo,
+                                        Valido = true
+                                    };
+                                    return reg;
+                                } else {
+                                    goto fim;
+                                }
                             }
                         }
                     }
@@ -227,5 +234,14 @@ namespace GTI_WebCore.Repository {
             return Sql;
         }
 
+        public Certidao_isencao Retorna_Certidao_Isencao(int Ano, int Numero, int Codigo) {
+                var Sql = (from p in context.Certidao_Isencao where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
+                return Sql;
+        }
+
+        public Certidao_endereco Retorna_Certidao_Endereco(int Ano, int Numero, int Codigo) {
+            var Sql = (from p in context.Certidao_Endereco where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
+            return Sql;
+        }
     }
 }

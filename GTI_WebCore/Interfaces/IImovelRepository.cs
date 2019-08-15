@@ -10,5 +10,6 @@ namespace GTI_WebCore.Interfaces {
         Laseriptu Dados_IPTU(int Codigo, int Ano);
         List<Laseriptu> Dados_IPTU(int Codigo);
         SpCalculo Calculo_IPTU(int Codigo, int Ano);
+        decimal Soma_Area(int Codigo);
     }
 }
