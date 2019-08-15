@@ -13,10 +13,15 @@
     <None Remove="Reports\Certidao_Endereco.rpt" />
     <None Remove="Reports\Certidao_Endereco_Valida.rpt" />
     <None Remove="Reports\Certidao_Valor_Venal.rpt" />
+    <None Remove="Reports\Certidao_Valor_Venal_Valida.rpt" />
     <None Remove="Reports\Empresa_Detalhe.rpt" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Reports\Certidao_Valor_Venal_Valida.rpt">
+      <LastGenOutput>Certidao_Valor_Venal_Valida.cs</LastGenOutput>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Certidao_Valor_Venal.rpt">
       <LastGenOutput>Certidao_Valor_Venal.cs</LastGenOutput>
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -72,6 +77,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Reports\Certidao_Valor_Venal_Valida.cs">
+      <SubType>Component</SubType>
+      <DependentUpon>Certidao_Valor_Venal_Valida.rpt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Reports\Certidao_Valor_Venal.cs">
       <SubType>Component</SubType>
       <DependentUpon>Certidao_Valor_Venal.rpt</DependentUpon>

@@ -1,7 +1,10 @@
 ﻿using GTI_WebCore.Interfaces;
 using GTI_WebCore.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -220,9 +223,23 @@ namespace GTI_WebCore.Repository {
             return Lista;
         }
 
-        
+        public Laseriptu Dados_IPTU(int Codigo, int Ano) {
+                var Sql = (from i in context.LaserIPTU where i.Ano == Ano && i.Codreduzido == Codigo select i).FirstOrDefault();
+                return Sql;
+        }
 
-        
+        public List<Laseriptu> Dados_IPTU(int Codigo) {
+                var Sql = (from i in context.LaserIPTU where i.Codreduzido == Codigo orderby i.Ano select i).ToList();
+                return Sql;
+        }
+
+        public SpCalculo Calculo_IPTU(int Codigo, int Ano) {
+            var prmCodigo = new SqlParameter { ParameterName = "@Codigo", SqlDbType = SqlDbType.Int, SqlValue = Codigo };
+            var prmAno = new SqlParameter { ParameterName = "@Ano", SqlDbType = SqlDbType.Int, SqlValue = Ano };
+            SpCalculo result = context.SpCalculo.FromSql("EXEC spCalculo @Codigo,@Ano", prmCodigo, prmAno).FirstOrDefault();
+            return result;
+        }
+
 
 
 

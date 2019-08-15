@@ -19,5 +19,9 @@ namespace GTI_WebCore.Models.ReportModels {
         public string Lote_Original { get; set; }
         public string Controle { get; set; }
         public DateTime Data_Geracao { get; set; }
+        public decimal Area { get; set; }
+        public decimal VVT { get; set; }
+        public decimal VVP { get; set; }
+        public decimal VVI { get; set; }
     }
 }

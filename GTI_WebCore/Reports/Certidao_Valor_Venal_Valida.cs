@@ -16,14 +16,14 @@ namespace GTI_WebCore.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class Certidao_Valor_Venal : ReportClass {
+    public class Certidao_Valor_Venal_Valida : ReportClass {
         
-        public Certidao_Valor_Venal() {
+        public Certidao_Valor_Venal_Valida() {
         }
         
         public override string ResourceName {
             get {
-                return "Certidao_Valor_Venal.rpt";
+                return "Certidao_Valor_Venal_Valida.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace GTI_WebCore.Reports {
         
         public override string FullResourceName {
             get {
-                return "GTI_WebCore.Reports.Certidao_Valor_Venal.rpt";
+                return "GTI_WebCore.Reports.Certidao_Valor_Venal_Valida.rpt";
             }
             set {
                 // Do nothing
@@ -98,9 +98,9 @@ namespace GTI_WebCore.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedCertidao_Valor_Venal : Component, ICachedReport {
+    public class CachedCertidao_Valor_Venal_Valida : Component, ICachedReport {
         
-        public CachedCertidao_Valor_Venal() {
+        public CachedCertidao_Valor_Venal_Valida() {
         }
         
         [Browsable(false)]
@@ -137,7 +137,7 @@ namespace GTI_WebCore.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            Certidao_Valor_Venal rpt = new Certidao_Valor_Venal();
+            Certidao_Valor_Venal_Valida rpt = new Certidao_Valor_Venal_Valida();
             rpt.Site = this.Site;
             return rpt;
         }

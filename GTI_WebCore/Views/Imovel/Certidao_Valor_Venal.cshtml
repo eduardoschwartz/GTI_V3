@@ -5,12 +5,8 @@
     ViewBag.Title = "Certidão de Valor Venal";
 }
 
-
-
 <label style="color:brown;font-size:16px;font-style:italic">Certidão de Valor Venal</label>
 <br />
-
-
 
 <form asp-controller="Imovel" enctype="multipart/form-data" method="post" onsubmit="return ValidateForm()" asp-action="Certidao_Valor_Venal" class="mt-3" style="margin-left:18px">
     <div class="form-group row">
@@ -39,7 +35,7 @@
             &nbsp;<span asp-validation-for="CaptchaCode" class="text-danger"></span>
 
             <div class="col-sm-10">
-                &nbsp;&nbsp;<button type="submit" class="green_button" formaction="Certidao_Endereco"> Imprimir</button>
+                &nbsp;&nbsp;<button type="submit" class="green_button" formaction="Certidao_Valor_Venal"> Imprimir</button>
             </div>
         </div>
 
@@ -57,7 +53,6 @@
 <br />
 @Html.ActionLink("Consultar outro tipo de certidão", "Certidao", "Home")<br />
 @Html.ActionLink("Retornar ao menu principal", "Index", "Home")
-
 
 
 @section scripts{

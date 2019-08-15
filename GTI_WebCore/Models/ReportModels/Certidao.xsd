@@ -19,6 +19,10 @@
         <xsd:element name="Lote_Original" type="xsd:string"></xsd:element>
         <xsd:element name="Controle" type="xsd:string"></xsd:element>
         <xsd:element name="Data_Geracao" type="xsd:dateTime"></xsd:element>
+        <xsd:element name="Area" type="xsd:decimal"></xsd:element>
+        <xsd:element name="VVT" type="xsd:decimal"></xsd:element>
+        <xsd:element name="VVP" type="xsd:decimal"></xsd:element>
+        <xsd:element name="VVI" type="xsd:decimal"></xsd:element>
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>

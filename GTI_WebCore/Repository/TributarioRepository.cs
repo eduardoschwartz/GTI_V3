@@ -129,8 +129,21 @@ namespace GTI_WebCore.Repository {
                                     chaveStruct reg = new chaveStruct {
                                         Codigo = nCodigo,
                                         Ano = nAno,
-                                        Numero=nNumero,
-                                        Tipo=sTipo,
+                                        Numero = nNumero,
+                                        Tipo = sTipo,
+                                        Valido = true
+                                    };
+                                    return reg;
+                                } else
+                                    goto fim;
+                            } else if (sTipo == "VV") {
+                                Certidao_valor_venal dados = Retorna_Certidao_Valor_Venal(nAno, nNumero, nCodigo);
+                                if (dados != null) {
+                                    chaveStruct reg = new chaveStruct {
+                                        Codigo = nCodigo,
+                                        Ano = nAno,
+                                        Numero = nNumero,
+                                        Tipo = sTipo,
                                         Valido = true
                                     };
                                     return reg;
@@ -170,13 +183,49 @@ namespace GTI_WebCore.Repository {
                 " VALUES(@numero,@ano,@data,@codigo,@nomecidadao,@inscricao,@logradouro,@li_num,@li_compl,@li_quadras,@li_lotes,@descbairro)", Parametros);
 
             try {
-//                context.Certidao_Endereco.Add(Reg);
                 context.SaveChanges();
             } catch (Exception ex) {
                 return ex;
             }
             return null;
         }
-        
+
+        public Exception Insert_Certidao_Valor_Venal(Certidao_valor_venal Reg) {
+
+            object[] Parametros = new object[16];
+            Parametros[0] = new SqlParameter { ParameterName = "@numero", SqlDbType = SqlDbType.Int, SqlValue = Reg.Numero };
+            Parametros[1] = new SqlParameter { ParameterName = "@ano", SqlDbType = SqlDbType.Int, SqlValue = Reg.Ano };
+            Parametros[2] = new SqlParameter { ParameterName = "@data", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Data };
+            Parametros[3] = new SqlParameter { ParameterName = "@codigo", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codigo };
+            Parametros[4] = new SqlParameter { ParameterName = "@nomecidadao", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Nomecidadao };
+            Parametros[5] = new SqlParameter { ParameterName = "@inscricao", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Inscricao };
+            Parametros[6] = new SqlParameter { ParameterName = "@logradouro", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Logradouro };
+            Parametros[7] = new SqlParameter { ParameterName = "@li_num", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Li_num };
+            Parametros[8] = new SqlParameter { ParameterName = "@li_compl", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Li_compl };
+            Parametros[9] = new SqlParameter { ParameterName = "@li_quadras", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Li_quadras };
+            Parametros[10] = new SqlParameter { ParameterName = "@li_lotes", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Li_lotes };
+            Parametros[11] = new SqlParameter { ParameterName = "@descbairro", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Descbairro };
+            Parametros[12] = new SqlParameter { ParameterName = "@areaterreno", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Areaterreno };
+            Parametros[13] = new SqlParameter { ParameterName = "@vvt", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Vvt };
+            Parametros[14] = new SqlParameter { ParameterName = "@vvp", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Vvp };
+            Parametros[15] = new SqlParameter { ParameterName = "@vvi", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Vvi };
+
+            context.Database.ExecuteSqlCommand("INSERT INTO certidao_valor_venal(numero,ano,data,codigo,nomecidadao,inscricao,logradouro,li_num,li_compl,li_quadras,li_lotes," +
+                "descbairro,areaterreno,vvt,vvp,vvi) VALUES(@numero,@ano,@data,@codigo,@nomecidadao,@inscricao,@logradouro,@li_num,@li_compl,@li_quadras,@li_lotes," +
+                "@descbairro,@areaterreno,@vvt,@vvp,@vvi)", Parametros);
+
+            try {
+                context.SaveChanges();
+            } catch (Exception ex) {
+                return ex;
+            }
+            return null;
+        }
+
+        public Certidao_valor_venal Retorna_Certidao_Valor_Venal(int Ano, int Numero, int Codigo) {
+            var Sql = (from p in context.Certidao_Valor_Venal where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
+            return Sql;
+        }
+
     }
 }
