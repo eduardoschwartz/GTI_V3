@@ -21,7 +21,7 @@ namespace GTI_Desktop.Forms {
             this.Size = new System.Drawing.Size(Properties.Settings.Default.Form_Report_width, Properties.Settings.Default.Form_Report_height);
 
             crConnectionInfo.ServerName = Properties.Settings.Default.ServerName;
-            crConnectionInfo.DatabaseName = "Tributacao";
+            crConnectionInfo.DatabaseName = "TributacaoTeste";
             crConnectionInfo.UserID = gtiCore.Ul;
             crConnectionInfo.Password = gtiCore.Up;
 

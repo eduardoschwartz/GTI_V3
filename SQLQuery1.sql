@@ -1,1 +1,1 @@
-﻿select * from certidao_endereco where codigo=987
+﻿select * from c001 order by datachat,seq

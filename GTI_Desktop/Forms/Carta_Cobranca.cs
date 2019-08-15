@@ -64,8 +64,8 @@ namespace GTI_Desktop.Forms {
         }
 
         private void Gera_Matriz(int _codigo_ini, int _codigo_fim, DateTime _data_vencto) {
-            int _total = _codigo_fim - _codigo_ini + 1, _pos = 1, _numero_documento = 5125920; //5.100.001 até 5.400.000
-            DateTime _data_vencimento = Convert.ToDateTime("10/07/2019");
+            int _total = 0, _pos = 1, _numero_documento = 0; //5.100.001 até 5.400.000
+            DateTime _data_vencimento = Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy"));
             decimal _valor_honorario = 0;
 
             Exception ex = null;
@@ -87,26 +87,16 @@ namespace GTI_Desktop.Forms {
                 ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
                 eBox.ShowDialog();
             }
-
-            for (int _codigo_atual = _codigo_ini; _codigo_atual < _codigo_fim+1; _codigo_atual++) {
-//                _numero_documento= tributario_Class.Insert_Boleto_DAM
+            _total = _lista_codigos.Count;
+            foreach (int _codigo_atual in _lista_codigos) {
                 if (_stop) break;
-                if (_pos % 10 == 0) {
+                if (_pos % 2 == 0) {
                     PBar.Value = _pos * 100 / _total;
                     PBar.Update();
                     Refresh();
                     Application.DoEvents();
                 }
 
-                bool bFind = false;
-                for (int i = 0; i < _lista_codigos.Count; i++) {
-                    if (_codigo_atual == _lista_codigos[i]) {
-                        bFind = true;
-                        break;
-                    }
-                }
-                if (!bFind) goto Proximo;
-                
                 if (_codigo_atual > 100000 && _codigo_atual < 300000) {
                     if (empresa_Class.EmpresaSuspensa(_codigo_atual))
                         goto Proximo;
@@ -122,8 +112,9 @@ namespace GTI_Desktop.Forms {
                 string _descricao_lancamento = "";
                 bool _find = false;
                 foreach (SpExtrato_carta item in Lista_Extrato_Parcela) {
-                    if ( item.Codlancamento!=5 && item.Codlancamento!=11 && item.Datavencimento <= _data_vencto) {
-                        Lista_Resumo.Add(item);
+                    //if ( item.Codlancamento!=5 && item.Codlancamento!=11 && item.Datavencimento <= _data_vencto) {
+                    if ( item.Codlancamento != 11 && item.Datavencimento <= _data_vencto) {
+                            Lista_Resumo.Add(item);
                         _find = false;
                         foreach (string lanc in _lista_lancamento) {
                             if (lanc == item.Desclancamento) {
@@ -183,13 +174,12 @@ namespace GTI_Desktop.Forms {
                 //Soma o boleto
                 decimal _valor_boleto = 0;
                 foreach (SpExtrato_carta item in Lista_Final) {
-                    //_valor_boleto +=  Convert.ToDecimal( string.Format("{0:0.00}",item.Valortotal));
                     _valor_boleto +=  item.Valortributo + item.Valormulta + item.Valorjuros + item.Valorcorrecao;
                 }
 
                 //Honorários
                 _valor_honorario = 0;
-                foreach (SpExtrato_carta item in Lista_Final) {
+                foreach (SpExtrato_carta item in Lista_Resumo) {
                     if (item.Dataajuiza != null) {
                         _valor_honorario += (item.Valortotal * 10) / 100;
                     }
@@ -220,7 +210,7 @@ namespace GTI_Desktop.Forms {
 
                 //Endereço de Entrega
                 if (_tipo == TipoCadastro.Imovel) {
-                    EnderecoStruct endImovel = imovel_Class.Dados_Endereco(_codigo_atual, dados.TipoEndereco);
+                    EnderecoStruct endImovel = imovel_Class.Dados_Endereco(_codigo_atual, TipoEndereco.Entrega);
                     _complemento_entrega = endImovel.Complemento == "" ? "" : " " + endImovel.Complemento;
                     _endereco_entrega = endImovel.Endereco + ", " + endImovel.Numero.ToString() + _complemento_entrega;
                     _bairro_entrega = endImovel.NomeBairro;
@@ -309,7 +299,17 @@ namespace GTI_Desktop.Forms {
                 if (_valor_honorario > 0)
                     _descricao_lancamento += ", DESPESAS JUDICIAIS";
 
-                
+                //****** GRAVA DOCUMENTO ****************
+                Numdocumento RegDoc = new Numdocumento {
+                    numdocumento = _numero_documento,
+                    Datadocumento = DateTime.Now,
+                    Valorguia = _valor_boleto,
+                    Emissor = "GTI",
+                    Registrado = true,
+                    Percisencao = 0
+                };
+                _numero_documento = tributario_Class.Insert_Documento(RegDoc);
+
                 //****** GRAVA HEADER **************
                 Carta_cobranca Reg = new Carta_cobranca();
                 Reg.Remessa = _remessa;
@@ -368,16 +368,6 @@ namespace GTI_Desktop.Forms {
                     }
                 }
 
-                //****** GRAVA DOCUMENTO ****************
-                Numdocumento RegDoc = new Numdocumento {
-                    numdocumento = _numero_documento,
-                    Datadocumento = DateTime.Now,
-                    Valorguia = _valor_boleto,
-                    Emissor = "GTI",
-                    Registrado = true,
-                    Percisencao = 0
-                };
-                _numero_documento = tributario_Class.Insert_Documento(RegDoc);
 
                 //****** GRAVA PARCELA x DOCUMENTO*******
 
@@ -399,8 +389,6 @@ namespace GTI_Desktop.Forms {
                         eBox.ShowDialog();
                     }
                 }
-
-//                _numero_documento++;
 
                 //********* GRAVA HONORÁRIO ***********
                 if (_valor_honorario > 0) {

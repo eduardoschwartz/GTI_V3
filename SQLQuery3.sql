@@ -1,0 +1,1 @@
+﻿update debitoparcela set statuslanc=5 where codreduzido<300 and anoexercicio=2019 and codlancamento=41
