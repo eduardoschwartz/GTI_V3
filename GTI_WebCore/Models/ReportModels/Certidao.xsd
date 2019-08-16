@@ -23,7 +23,7 @@
         <xsd:element name="VVT" type="xsd:decimal"></xsd:element>
         <xsd:element name="VVP" type="xsd:decimal"></xsd:element>
         <xsd:element name="VVI" type="xsd:decimal"></xsd:element>
-        <xsd:element name="Numero_Processo" type="xsd:int"></xsd:element>
+        <xsd:element name="Numero_Processo" type="xsd:string"></xsd:element>
         <xsd:element name="Data_Processo" type="xsd:dateTime"></xsd:element>
         <xsd:element name="Percentual_Isencao" type="xsd:decimal"></xsd:element>
       </xsd:sequence>

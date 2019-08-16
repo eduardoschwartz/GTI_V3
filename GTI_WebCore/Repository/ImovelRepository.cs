@@ -281,7 +281,10 @@ namespace GTI_WebCore.Repository {
                 return Lista;
         }
 
-
+        public int Qtde_Imovel_Cidadao(int CodigoImovel) {
+            int Sql = (from v in context.Vwproprietarioduplicado join p in context.Proprietario on v.Codproprietario equals p.Codcidadao where p.Codreduzido == CodigoImovel && p.Tipoprop == "P" select v.Qtdeimovel).FirstOrDefault();
+            return Sql;
+        }
 
     }
 }

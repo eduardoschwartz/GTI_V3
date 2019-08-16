@@ -20,7 +20,7 @@ namespace GTI_WebCore.Models.ReportModels {
         public decimal VVT { get; set; }
         public decimal VVP { get; set; }
         public decimal VVI { get; set; }
-        public int Numero_Processo { get; set; }
+        public string Numero_Processo { get; set; }
         public DateTime Data_Processo { get; set; }
         public decimal Percentual_Isencao { get; set; }
     }

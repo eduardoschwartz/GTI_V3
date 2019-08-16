@@ -302,7 +302,7 @@ namespace GTI_WebCore.Controllers {
 
         [Route("Certidao_Isencao")]
         [HttpPost]
-        public IActionResult Certidao_Isenco(CertidaoViewModel model) {
+        public IActionResult Certidao_Isencao(CertidaoViewModel model) {
             int _codigo = 0, _ano = 0;
             int _numero = tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Isencao);
             bool _existeCod = false, _Valida = false;
@@ -357,14 +357,48 @@ namespace GTI_WebCore.Controllers {
             };
 
             decimal SomaArea = _imovelRepository.Soma_Area(_codigo);
-            reg.Area = SomaArea; //<-----------------PAREI AQUI
+            reg.Area = SomaArea; 
+
+            bool bImune = _imovelRepository.Verifica_Imunidade(_codigo);
+            bool bIsentoProcesso = false;
+            List<IsencaoStruct> ListaIsencao = null;
+            if (!bImune) {
+                ListaIsencao = _imovelRepository.Lista_Imovel_Isencao(_codigo, DateTime.Now.Year);
+                if (ListaIsencao.Count > 0)
+                    bIsentoProcesso = true;
+            }
+
+            decimal nPerc = 0;
+            string reportName = "";
+            if (bImune) {
+                reportName = "Certidao_Imunidade.rpt";  
+                nPerc = 100;
+            } else {
+                if (bIsentoProcesso) {
+                    reportName = "Certidao_Isencao_Processo.rpt";
+                    nPerc = (decimal)ListaIsencao[0].Percisencao;
+                } else {
+                    if (SomaArea <= 65) {
+                        //Se tiver área < 65m² mas tiver mais de 1 imóvel, perde a isenção.
+                        int nQtdeImovel = _imovelRepository.Qtde_Imovel_Cidadao(_codigo);
+                        if (nQtdeImovel > 1) {
+                            ViewBag.Result = "Este imóvel não esta isento da cobrança de IPTU no ano atual.";
+                            return View(certidaoViewModel);
+                        }
+                        reportName = "Certidao_Isencao_65metros.rpt";
+                    } else {
+                        ViewBag.Result = "Este imóvel não esta isento da cobrança de IPTU no ano atual.";
+                        return View(certidaoViewModel);
+                    }
+                }
+            }
 
             List<Certidao> certidao = new List<Certidao>();
             if (_Valida) {
                 reg.Codigo = _codigo;
                 reg.Ano = _ano;
                 reg.Numero = _numero;
-                Certidao_valor_venal certidaoGerada = tributarioRepository.Retorna_Certidao_Valor_Venal(_ano, _numero, _codigo);
+                Certidao_isencao certidaoGerada = tributarioRepository.Retorna_Certidao_Isencao(_ano, _numero, _codigo);
                 reg.Endereco = certidaoGerada.Logradouro;
                 reg.Endereco_Numero = certidaoGerada.Li_num;
                 reg.Endereco_Complemento = certidaoGerada.Li_compl ?? "";
@@ -372,17 +406,16 @@ namespace GTI_WebCore.Controllers {
                 reg.Nome_Requerente = certidaoGerada.Nomecidadao;
                 reg.Data_Geracao = certidaoGerada.Data;
                 reg.Inscricao = certidaoGerada.Inscricao;
-                reg.Area = certidaoGerada.Areaterreno;
-                reg.VVT = certidaoGerada.Vvt;
-                reg.VVP = certidaoGerada.Vvp;
-                reg.VVI = certidaoGerada.Vvi;
+                reg.Percentual_Isencao = (decimal)certidaoGerada.Percisencao;
+                reg.Numero_Processo = certidaoGerada.Numprocesso;
+                reg.Area = (decimal)certidaoGerada.Area;
             }
             reg.Numero_Ano = reg.Numero.ToString("00000") + "/" + reg.Ano;
 
             certidao.Add(reg);
 
             if (!_Valida) {
-                Models.Certidao_valor_venal regCert = new Certidao_valor_venal() {
+                Models.Certidao_isencao regCert = new Certidao_isencao() {
                     Ano = reg.Ano,
                     Codigo = reg.Codigo,
                     Data = DateTime.Now,
@@ -395,12 +428,12 @@ namespace GTI_WebCore.Controllers {
                     Li_num = reg.Endereco_Numero,
                     Li_quadras = reg.Quadra_Original,
                     Numero = reg.Numero,
-                    Areaterreno = RegCalculo.Areaterreno,
-                    Vvt = RegCalculo.Vvt,
-                    Vvp = RegCalculo.Vvp,
-                    Vvi = RegCalculo.Vvi
+                    Area=SomaArea,
+                    Numprocesso=reg.Numero_Processo,
+                    Dataprocesso=reg.Data_Processo,
+                    Percisencao=nPerc
                 };
-                Exception ex = tributarioRepository.Insert_Certidao_Valor_Venal(regCert);
+                Exception ex = tributarioRepository.Insert_Certidao_Isencao(regCert);
                 if (ex != null) {
                     ViewBag.Result = "Ocorreu um erro no processamento das informações.";
                     return View(certidaoViewModel);
@@ -411,7 +444,7 @@ namespace GTI_WebCore.Controllers {
             if (_Valida)
                 rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Certidao_Valor_venal_Valida.rpt");
             else
-                rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Certidao_Valor_Venal.rpt");
+                rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\" + reportName);
 
             try {
                 rd.SetDataSource(certidao);

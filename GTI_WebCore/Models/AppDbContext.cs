@@ -76,5 +76,6 @@ namespace GTI_WebCore.Models {
         public DbSet<Topografia> Topografia { get; set; }
         public DbSet<Usoterreno> Usoterreno { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Vwproprietarioduplicado> Vwproprietarioduplicado { get; set; }
     }
 }

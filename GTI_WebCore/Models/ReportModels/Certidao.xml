@@ -18,7 +18,7 @@
   <VVT>132.58</VVT>
   <VVP>146.96</VVP>
   <VVI>321.56</VVI>
-  <Numero_Processo>35</Numero_Processo>
+  <Numero_Processo>'35'</Numero_Processo>
   <Data_Processo>1980-03-23T10:20:15</Data_Processo>
   <Percentual_Isencao>32.1</Percentual_Isencao>
 </Certidao>
