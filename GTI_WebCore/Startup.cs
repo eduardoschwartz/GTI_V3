@@ -30,6 +30,7 @@ namespace GTI_WebCore {
             services.AddScoped<IImovelRepository, ImovelRepository>();
             services.AddScoped<IRequerenteRepository, RequerenteRepository>();
             services.AddScoped<ITributarioRepository, TributarioRepository>();
+            services.AddScoped<IProcessoRepository, ProcessoRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env) {

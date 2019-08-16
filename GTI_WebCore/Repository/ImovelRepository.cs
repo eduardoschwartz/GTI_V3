@@ -245,6 +245,43 @@ namespace GTI_WebCore.Repository {
                 return Convert.ToDecimal(sum);
         }
 
+        public bool Verifica_Imunidade(int Codigo) {
+            Cadimob Sql = (from c in context.Cadimob where c.Codreduzido == Codigo select c).FirstOrDefault();
+            if (Sql.Imune == null)
+                return false;
+            else
+                return Convert.ToBoolean(Sql.Imune);
+        }
+
+        public List<IsencaoStruct> Lista_Imovel_Isencao(int Codigo, int Ano = 0) {
+                var reg = (from t in context.Isencao where t.Codreduzido == Codigo orderby t.Anoisencao select t).ToList();
+                if (Ano > 0)
+                    reg = reg.Where(t => t.Anoisencao == Ano).ToList();
+                List<IsencaoStruct> Lista = new List<IsencaoStruct>();
+
+            ProcessoRepository processoRepository = new ProcessoRepository(context);
+            foreach (var item in reg) {
+                    IsencaoStruct Linha = new IsencaoStruct {
+                        Codreduzido = item.Codreduzido,
+                        Anoisencao = item.Anoisencao,
+                        Anoproc = item.Anoproc,
+                        Codisencao = item.Codisencao,
+                        dataaltera = item.dataaltera,
+                        dataprocesso = processoRepository.Dados_Processo((short)item.Anoproc, (int)item.Numproc).DataEntrada,
+                        Filantropico = item.Filantropico,
+                        Motivo = item.Motivo,
+                        Numproc = item.Numproc,
+                        Numprocesso = item.Numprocesso,
+                        Percisencao = item.Percisencao,
+                        Periodo = item.Periodo,
+                        Userid = item.Userid
+                    };
+                    Lista.Add(Linha);
+                }
+                return Lista;
+        }
+
+
 
     }
 }
