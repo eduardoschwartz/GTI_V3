@@ -339,6 +339,19 @@ namespace GTI_WebCore.Controllers {
                 return View(certidaoViewModel);
             }
 
+            decimal SomaArea = _imovelRepository.Soma_Area(_codigo);
+            //reg.Area = SomaArea;
+
+            bool bImune = _imovelRepository.Verifica_Imunidade(_codigo);
+            bool bIsentoProcesso = false;
+            List<IsencaoStruct> ListaIsencao = null;
+            if (!bImune) {
+                ListaIsencao = _imovelRepository.Lista_Imovel_Isencao(_codigo, DateTime.Now.Year);
+                if (ListaIsencao.Count > 0) {
+                    bIsentoProcesso = true;
+                }
+            }
+
             List<ProprietarioStruct> listaProp = _imovelRepository.Lista_Proprietario(_codigo, true);
             ImovelStruct _dados = _imovelRepository.Dados_Imovel(_codigo);
             Certidao reg = new Certidao() {
@@ -353,23 +366,17 @@ namespace GTI_WebCore.Controllers {
                 Numero = _numero,
                 Quadra_Original = _dados.QuadraOriginal ?? "",
                 Lote_Original = _dados.LoteOriginal ?? "",
-                Controle = _numero.ToString("00000") + DateTime.Now.Year.ToString("0000") + "/" + _codigo.ToString() + "-VV"
+                Controle = _numero.ToString("00000") + DateTime.Now.Year.ToString("0000") + "/" + _codigo.ToString() + "-CI",
+                Data_Processo = (DateTime)ListaIsencao[0].dataprocesso,
+                Numero_Processo=ListaIsencao[0].Numprocesso??"",
+                Area=SomaArea
+                
             };
-
-            decimal SomaArea = _imovelRepository.Soma_Area(_codigo);
-            reg.Area = SomaArea; 
-
-            bool bImune = _imovelRepository.Verifica_Imunidade(_codigo);
-            bool bIsentoProcesso = false;
-            List<IsencaoStruct> ListaIsencao = null;
-            if (!bImune) {
-                ListaIsencao = _imovelRepository.Lista_Imovel_Isencao(_codigo, DateTime.Now.Year);
-                if (ListaIsencao.Count > 0)
-                    bIsentoProcesso = true;
-            }
+            if (ListaIsencao != null)
+                reg.Percentual_Isencao = (decimal)ListaIsencao[0].Percisencao;
 
             decimal nPerc = 0;
-            string reportName = "";
+            string reportName;
             if (bImune) {
                 reportName = "Certidao_Imunidade.rpt";  
                 nPerc = 100;
@@ -407,12 +414,12 @@ namespace GTI_WebCore.Controllers {
                 reg.Data_Geracao = certidaoGerada.Data;
                 reg.Inscricao = certidaoGerada.Inscricao;
                 reg.Percentual_Isencao = (decimal)certidaoGerada.Percisencao;
-                reg.Numero_Processo = certidaoGerada.Numprocesso;
+                reg.Numero_Processo = certidaoGerada.Numprocesso??"";
+                reg.Data_Processo = (DateTime)certidaoGerada.Dataprocesso;
                 reg.Area = (decimal)certidaoGerada.Area;
+                reg.Numero_Ano = reg.Numero.ToString("00000") + "/" + reg.Ano;
+                certidao.Add(reg);
             }
-            reg.Numero_Ano = reg.Numero.ToString("00000") + "/" + reg.Ano;
-
-            certidao.Add(reg);
 
             if (!_Valida) {
                 Models.Certidao_isencao regCert = new Certidao_isencao() {
@@ -428,11 +435,13 @@ namespace GTI_WebCore.Controllers {
                     Li_num = reg.Endereco_Numero,
                     Li_quadras = reg.Quadra_Original,
                     Numero = reg.Numero,
-                    Area=SomaArea,
-                    Numprocesso=reg.Numero_Processo,
-                    Dataprocesso=reg.Data_Processo,
-                    Percisencao=nPerc
+                    Area = SomaArea,
+                    Numprocesso = reg.Numero_Processo ?? "",
+                    Dataprocesso = ListaIsencao[0].dataprocesso,
+                    Percisencao = nPerc
                 };
+                reg.Numero_Ano = reg.Numero.ToString("00000") + "/" + reg.Ano;
+                certidao.Add(reg);
                 Exception ex = tributarioRepository.Insert_Certidao_Isencao(regCert);
                 if (ex != null) {
                     ViewBag.Result = "Ocorreu um erro no processamento das informações.";
@@ -442,14 +451,14 @@ namespace GTI_WebCore.Controllers {
 
             ReportDocument rd = new ReportDocument();
             if (_Valida)
-                rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Certidao_Valor_venal_Valida.rpt");
+                rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Certidao_Isencao_Valida.rpt");
             else
                 rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\" + reportName);
 
             try {
                 rd.SetDataSource(certidao);
                 Stream stream = rd.ExportToStream(ExportFormatType.PortableDocFormat);
-                return File(stream, "application/pdf", "Certidao_VVenal.pdf");
+                return File(stream, "application/pdf", "Certidao_Isencao.pdf");
             } catch {
                 throw;
             }

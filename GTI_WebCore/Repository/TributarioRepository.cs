@@ -247,7 +247,7 @@ namespace GTI_WebCore.Repository {
             Parametros[12] = new SqlParameter { ParameterName = "@percisencao", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Percisencao };
             Parametros[13] = new SqlParameter { ParameterName = "@Area", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Area };
             Parametros[14] = new SqlParameter { ParameterName = "@numprocesso", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Numprocesso };
-            Parametros[15] = new SqlParameter { ParameterName = "@dataprocesso", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Dataprocesso };
+            Parametros[15] = new SqlParameter { ParameterName = "@dataprocesso", SqlDbType = SqlDbType.SmallDateTime,IsNullable=true,  SqlValue = DBNull.Value };
 
             context.Database.ExecuteSqlCommand("INSERT INTO certidao_isencao(numero,ano,data,codigo,nomecidadao,inscricao,logradouro,li_num,li_compl,li_quadras,li_lotes," +
                 "descbairro,percisencao,area,numprocesso,dataprocesso) VALUES(@numero,@ano,@data,@codigo,@nomecidadao,@inscricao,@logradouro,@li_num,@li_compl,@li_quadras,@li_lotes," +
