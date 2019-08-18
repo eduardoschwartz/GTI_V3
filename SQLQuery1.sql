@@ -1,1 +1,1 @@
-﻿select top(10) * FROM isencao WHERE anoisencao=2019 and percisencao<100
+﻿select top(10) * FROM certidao_isencao order by data desc

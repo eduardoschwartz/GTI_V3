@@ -306,7 +306,7 @@ namespace GTI_WebCore.Controllers {
             int _codigo = 0, _ano = 0;
             int _numero = tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Isencao);
             bool _existeCod = false, _Valida = false;
-            string _chave = model.Chave;
+            string _chave = model.Chave,_numero_processo="";
             CertidaoViewModel certidaoViewModel = new CertidaoViewModel();
             ViewBag.Result = "";
 
@@ -349,6 +349,7 @@ namespace GTI_WebCore.Controllers {
                 ListaIsencao = _imovelRepository.Lista_Imovel_Isencao(_codigo, DateTime.Now.Year);
                 if (ListaIsencao.Count > 0) {
                     bIsentoProcesso = true;
+                    _numero_processo = ListaIsencao[0].Numprocesso ?? "";
                 }
             }
 
@@ -367,13 +368,13 @@ namespace GTI_WebCore.Controllers {
                 Quadra_Original = _dados.QuadraOriginal ?? "",
                 Lote_Original = _dados.LoteOriginal ?? "",
                 Controle = _numero.ToString("00000") + DateTime.Now.Year.ToString("0000") + "/" + _codigo.ToString() + "-CI",
-                Data_Processo = (DateTime)ListaIsencao[0].dataprocesso,
-                Numero_Processo=ListaIsencao[0].Numprocesso??"",
+                Numero_Processo=_numero_processo,
                 Area=SomaArea
-                
             };
-            if (ListaIsencao != null)
+            if (ListaIsencao.Count>0) {
                 reg.Percentual_Isencao = (decimal)ListaIsencao[0].Percisencao;
+                reg.Data_Processo = (DateTime)ListaIsencao[0].dataprocesso;
+            }
 
             decimal nPerc = 0;
             string reportName;
@@ -392,6 +393,7 @@ namespace GTI_WebCore.Controllers {
                             ViewBag.Result = "Este imóvel não esta isento da cobrança de IPTU no ano atual.";
                             return View(certidaoViewModel);
                         }
+                        nPerc = 100;
                         reportName = "Certidao_Isencao_65metros.rpt";
                     } else {
                         ViewBag.Result = "Este imóvel não esta isento da cobrança de IPTU no ano atual.";
@@ -415,11 +417,13 @@ namespace GTI_WebCore.Controllers {
                 reg.Inscricao = certidaoGerada.Inscricao;
                 reg.Percentual_Isencao = (decimal)certidaoGerada.Percisencao;
                 reg.Numero_Processo = certidaoGerada.Numprocesso??"";
-                reg.Data_Processo = (DateTime)certidaoGerada.Dataprocesso;
+                if(certidaoGerada.Dataprocesso!=null)
+                    reg.Data_Processo = (DateTime)certidaoGerada.Dataprocesso;
                 reg.Area = (decimal)certidaoGerada.Area;
                 reg.Numero_Ano = reg.Numero.ToString("00000") + "/" + reg.Ano;
                 certidao.Add(reg);
             }
+
 
             if (!_Valida) {
                 Models.Certidao_isencao regCert = new Certidao_isencao() {
@@ -437,7 +441,7 @@ namespace GTI_WebCore.Controllers {
                     Numero = reg.Numero,
                     Area = SomaArea,
                     Numprocesso = reg.Numero_Processo ?? "",
-                    Dataprocesso = ListaIsencao[0].dataprocesso,
+                    Dataprocesso = reg.Data_Processo,
                     Percisencao = nPerc
                 };
                 reg.Numero_Ano = reg.Numero.ToString("00000") + "/" + reg.Ano;
