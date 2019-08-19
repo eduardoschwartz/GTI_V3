@@ -19,5 +19,6 @@ namespace GTI_WebCore.ViewModels {
         public string CaptchaCode { get; set; }
         [Display(Name = "Chave de validação")]
         public string Chave { get; set; }
+        public bool Extrato { get; set; }
     }
 }

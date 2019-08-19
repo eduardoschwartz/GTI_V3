@@ -13,7 +13,7 @@ using System.IO;
 
 namespace GTI_WebCore.Controllers {
 
-    [Route("Imovel/Certidao")]
+    [Route("Imovel")]
     public class ImovelController : Controller{
         private readonly IImovelRepository _imovelRepository;
         private readonly IHostingEnvironment hostingEnvironment;
@@ -25,13 +25,13 @@ namespace GTI_WebCore.Controllers {
             this.tributarioRepository = tributarioRepository;
         }
 
-        [Route("Certidao_Endereco")]
+        [Route("Certidao/Certidao_Endereco")]
         [HttpGet]
         public ViewResult Certidao_Endereco() {
             return View();
         }
 
-        [Route("Certidao_Endereco")]
+        [Route("Certidao/Certidao_Endereco")]
         [HttpPost]
         public IActionResult Certidao_Endereco(CertidaoViewModel model) {
             int _codigo = 0,_ano=0;
@@ -156,13 +156,13 @@ namespace GTI_WebCore.Controllers {
             return new FileStreamResult(s, "image/png");
         }
 
-        [Route("Certidao_Valor_Venal")]
+        [Route("Certidao/Certidao_Valor_Venal")]
         [HttpGet]
         public ViewResult Certidao_Valor_Venal() {
             return View();
         }
 
-        [Route("Certidao_Valor_Venal")]
+        [Route("Certidao/Certidao_Valor_Venal")]
         [HttpPost]
         public IActionResult Certidao_Valor_Venal(CertidaoViewModel model) {
             int _codigo = 0, _ano = 0;
@@ -294,13 +294,13 @@ namespace GTI_WebCore.Controllers {
             }
         }
 
-        [Route("Certidao_Isencao")]
+        [Route("Certidao/Certidao_Isencao")]
         [HttpGet]
         public ViewResult Certidao_Isencao() {
             return View();
         }
 
-        [Route("Certidao_Isencao")]
+        [Route("Certidao/Certidao_Isencao")]
         [HttpPost]
         public IActionResult Certidao_Isencao(CertidaoViewModel model) {
             int _codigo = 0, _ano = 0;

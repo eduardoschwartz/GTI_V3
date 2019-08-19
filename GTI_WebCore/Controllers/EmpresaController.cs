@@ -13,7 +13,7 @@ using System.IO;
 
 namespace GTI_WebCore.Controllers {
 
-    [Route("Empresa/Details")]
+    [Route("Empresa")]
     public class EmpresaController : Controller {
         private readonly IEmpresaRepository _empresaRepository;
 
@@ -21,11 +21,13 @@ namespace GTI_WebCore.Controllers {
             _empresaRepository = empresaRepository;
         }
 
+        [Route("Details")]
         [HttpGet]
         public ViewResult Details() {
             return View();
         }
 
+        [Route("Details")]
         [HttpPost]
         public ViewResult Details(EmpresaDetailsViewModel model) {
             int _codigo = 0;
@@ -107,7 +109,6 @@ namespace GTI_WebCore.Controllers {
             
         }
 
-
         [Route("get-captcha-image")]
         public IActionResult GetCaptchaImage() {
             int width = 100;
@@ -118,6 +119,25 @@ namespace GTI_WebCore.Controllers {
             Stream s = new MemoryStream(result.CaptchaByteData);
             return new FileStreamResult(s, "image/png");
         }
+
+        [Route("Certidao/Certidao_Inscricao")]
+        [HttpGet]
+        public ViewResult Certidao_Inscricao() {
+            return View();
+        }
+
+        [Route ("Retorna_Codigos")]
+        public IActionResult Retorna_Codigos() {
+            ViewBag.Lista_Codigo = new List<int>() {1,2,3};
+            return View("Certidao_Inscricao");
+        }
+
+        [Route("Validate_CI")]
+        public IActionResult Validate_CI() {
+            ViewBag.Lista_Codigo = new List<int>() { 4, 5, 6 };
+            return View("Certidao_Inscricao");
+        }
+
 
     }
 }

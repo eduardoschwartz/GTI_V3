@@ -29,7 +29,7 @@
     <div class="form-group row">
         <div class="input-group">
             <div class="input-group-prepend">
-                <img id="img-captcha" src="~/Empresa/Details/get-captcha-image" title="Clique para atualizar" />
+                <img id="img-captcha" src="~/Empresa/get-captcha-image" title="Clique para atualizar" />
             </div>
             &nbsp;<input type="text" class="form-control" asp-for="CaptchaCode" maxlength="4" id="captchaTxt" />
             &nbsp;<span asp-validation-for="CaptchaCode" class="text-danger"></span>
@@ -88,7 +88,7 @@
 
         function resetCaptchaImage() {
             d = new Date();
-            $("#img-captcha").attr("src", "/Empresa/Details/get-captcha-image?" + d.getTime());
+            $("#img-captcha").attr("src", "/Empresa/get-captcha-image?" + d.getTime());
         }
 
     </script>}
