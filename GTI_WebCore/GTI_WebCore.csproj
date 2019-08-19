@@ -18,6 +18,8 @@
     <None Remove="Reports\Certidao_Isencao_Valida.rpt" />
     <None Remove="Reports\Certidao_Valor_Venal.rpt" />
     <None Remove="Reports\Certidao_Valor_Venal_Valida.rpt" />
+    <None Remove="Reports\Comprovante_Inscricao.rpt" />
+    <None Remove="Reports\Comprovante_InscricaoValida.rpt" />
     <None Remove="Reports\Empresa_Detalhe.rpt" />
   </ItemGroup>
 
@@ -52,6 +54,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Certidao_Endereco.rpt">
       <LastGenOutput>Certidao_Endereco.cs</LastGenOutput>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Comprovante_Inscricao.rpt">
+      <LastGenOutput>Comprovante_Inscricao.cs</LastGenOutput>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Comprovante_InscricaoValida.rpt">
+      <LastGenOutput>Comprovante_InscricaoValida.cs</LastGenOutput>
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Empresa_Detalhe.rpt">
@@ -142,6 +152,18 @@
     <Compile Update="Reports\Certidao_Endereco.cs">
       <SubType>Component</SubType>
       <DependentUpon>Certidao_Endereco.rpt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Reports\Comprovante_Inscricao.cs">
+      <SubType>Component</SubType>
+      <DependentUpon>Comprovante_Inscricao.rpt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Reports\Comprovante_InscricaoValida.cs">
+      <SubType>Component</SubType>
+      <DependentUpon>Comprovante_InscricaoValida.rpt</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>

@@ -376,7 +376,7 @@ namespace GTI_WebCore.Controllers {
                 reg.Data_Processo = (DateTime)ListaIsencao[0].dataprocesso;
             }
 
-            decimal nPerc = 0;
+            decimal nPerc;
             string reportName;
             if (bImune) {
                 reportName = "Certidao_Imunidade.rpt";  
