@@ -16,9 +16,11 @@ namespace GTI_WebCore.Controllers {
     [Route("Empresa")]
     public class EmpresaController : Controller {
         private readonly IEmpresaRepository _empresaRepository;
+        private readonly ITributarioRepository tributarioRepository;
 
-        public EmpresaController(IEmpresaRepository empresaRepository) {
+        public EmpresaController(IEmpresaRepository empresaRepository, ITributarioRepository tributarioRepository) {
             _empresaRepository = empresaRepository;
+            this.tributarioRepository = tributarioRepository;
         }
 
         [Route("Details")]
@@ -27,6 +29,7 @@ namespace GTI_WebCore.Controllers {
             return View();
         }
 
+       
         [Route("Details")]
         [HttpPost]
         public ViewResult Details(EmpresaDetailsViewModel model) {
@@ -36,7 +39,7 @@ namespace GTI_WebCore.Controllers {
 
             if (model.Inscricao != null) {
                 _codigo = Convert.ToInt32(model.Inscricao);
-                if(_codigo>=100000 && _codigo<210000) //Se estiver fora deste intervalo nem precisa checar se a empresa existe
+                if (_codigo >= 100000 && _codigo < 210000) //Se estiver fora deste intervalo nem precisa checar se a empresa existe
                     _existeCod = _empresaRepository.Existe_Empresa_Codigo(_codigo);
             } else {
                 if (model.CnpjValue != null) {
@@ -77,7 +80,7 @@ namespace GTI_WebCore.Controllers {
             if (_existeCod) {
                 EmpresaStruct empresa = _empresaRepository.Dados_Empresa(_codigo);
                 empresaDetailsViewModel.EmpresaStruct = empresa;
-                empresaDetailsViewModel.TaxaLicenca = _empresaRepository.Empresa_tem_TL(_codigo)?"Sim":"Não";
+                empresaDetailsViewModel.TaxaLicenca = _empresaRepository.Empresa_tem_TL(_codigo) ? "Sim" : "Não";
                 empresaDetailsViewModel.Vigilancia_Sanitaria = _empresaRepository.Empresa_tem_VS(_codigo) ? "Sim" : "Não";
                 empresaDetailsViewModel.Mei = _empresaRepository.Empresa_Mei(_codigo) ? "Sim" : "Não";
                 List<CnaeStruct> ListaCnae = _empresaRepository.Lista_Cnae_Empresa(_codigo);
@@ -101,12 +104,12 @@ namespace GTI_WebCore.Controllers {
                 }
                 empresaDetailsViewModel.Regime_Iss = sRegime;
                 empresaDetailsViewModel.ErrorMessage = "";
-                return View("DetailsTable",empresaDetailsViewModel);
+                return View("DetailsTable", empresaDetailsViewModel);
             } else {
                 empresaDetailsViewModel.ErrorMessage = "Empresa não cadastrada.";
                 return View(empresaDetailsViewModel);
             }
-            
+
         }
 
         [Route("get-captcha-image")]
@@ -126,17 +129,42 @@ namespace GTI_WebCore.Controllers {
             return View();
         }
 
-        [Route ("Retorna_Codigos")]
+        [Route("Retorna_Codigos")]
         public IActionResult Retorna_Codigos() {
-            ViewBag.Lista_Codigo = new List<int>() {1,2,3};
+            ViewBag.Lista_Codigo = new List<int>() { 1, 2, 3 };
             return View("Certidao_Inscricao");
         }
 
+        [HttpPost]
         [Route("Validate_CI")]
+        [Route("Certidao/Validate_CI")]
         public IActionResult Validate_CI() {
             ViewBag.Lista_Codigo = new List<int>() { 4, 5, 6 };
             return View("Certidao_Inscricao");
         }
+
+
+        [Route("Certidao_Inscricao")]
+        [Route("Certidao/Certidao_Inscricao")]
+        [HttpPost]
+        public IActionResult Certidao_Inscricao(CertidaoViewModel model) {
+            int _codigo = 0, _ano = 0;
+            int _numero = tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Comprovante_Pagamento);
+            bool _existeCod = false, _Valida = false;
+            string _chave = model.Chave, _numero_processo = "";
+            CertidaoViewModel certidaoViewModel = new CertidaoViewModel();
+            ViewBag.Result = "";
+
+            if (!Captcha.ValidateCaptchaCode(model.CaptchaCode, HttpContext)) {
+                ViewBag.Result = "Código de verificação inválido.";
+                return View(certidaoViewModel);
+            }
+
+
+
+            return View(certidaoViewModel);
+        }
+
 
 
     }
