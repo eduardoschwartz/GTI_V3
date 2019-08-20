@@ -257,5 +257,15 @@ namespace GTI_WebCore.Repository {
             return ret;
         }
 
+        public List<int> Retorna_Codigo_por_CPF(string CPF) {
+            List<int> Sql = (from c in context.Mobiliario where c.Cpf == CPF orderby c.Codigomob select c.Codigomob).ToList();
+            return Sql;
+        }
+
+        public List<int> Retorna_Codigo_por_CNPJ(string CNPJ) {
+            List<int> Sql = (from c in context.Mobiliario where c.Cnpj == CNPJ orderby c.Codigomob descending select c.Codigomob).ToList();
+            return Sql;
+        }
+
     }
 }

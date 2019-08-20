@@ -129,16 +129,35 @@ namespace GTI_WebCore.Controllers {
             return View();
         }
 
+
         [Route("Retorna_Codigos")]
-        public IActionResult Retorna_Codigos() {
-            ViewBag.Lista_Codigo = new List<int>() { 1, 2, 3 };
+        [Route("Certidao/Retorna_Codigos")]
+        public IActionResult Retorna_Codigos(CertidaoViewModel model) {
+            if(model.CpfValue!=null || model.CnpjValue != null) {
+                List<int> _lista = new List<int>();
+                if (model.CpfValue != null) {
+                    _lista = _empresaRepository.Retorna_Codigo_por_CPF(Functions.RetornaNumero(model.CpfValue));
+                } else {
+                    if (model.CnpjValue != null) {
+                        _lista = _empresaRepository.Retorna_Codigo_por_CNPJ(Functions.RetornaNumero(model.CnpjValue));
+                    }
+                }
+                if (_lista.Count > 0) {
+                    ViewBag.Lista_Codigo = _lista;
+                    return View("Certidao_Inscricao");
+                } else {
+                    ViewBag.Result = "Não foi localizada nenhuma empresa cadastrada com o CPF/CNPJ informado.";
+                    return View("Certidao_Inscricao");
+                }
+            }
+            ViewBag.Result = "Informe o CPF ou o CNPJ para busca.";
             return View("Certidao_Inscricao");
         }
 
         [HttpPost]
         [Route("Validate_CI")]
         [Route("Certidao/Validate_CI")]
-        public IActionResult Validate_CI() {
+        public IActionResult Validate_CI(CertidaoViewModel model) {
             ViewBag.Lista_Codigo = new List<int>() { 4, 5, 6 };
             return View("Certidao_Inscricao");
         }
@@ -148,10 +167,8 @@ namespace GTI_WebCore.Controllers {
         [Route("Certidao/Certidao_Inscricao")]
         [HttpPost]
         public IActionResult Certidao_Inscricao(CertidaoViewModel model) {
-            int _codigo = 0, _ano = 0;
+            int _codigo = 0;
             int _numero = tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Comprovante_Pagamento);
-            bool _existeCod = false, _Valida = false;
-            string _chave = model.Chave, _numero_processo = "";
             CertidaoViewModel certidaoViewModel = new CertidaoViewModel();
             ViewBag.Result = "";
 
@@ -160,7 +177,56 @@ namespace GTI_WebCore.Controllers {
                 return View(certidaoViewModel);
             }
 
+            if (model.Inscricao != null) {
+                _codigo = Convert.ToInt32(model.Inscricao);
+            } else {
+                ViewBag.Result = "Erro ao recuperar as informações.";
+                return View(certidaoViewModel);
+            }
 
+            EmpresaStruct _dados = _empresaRepository.Dados_Empresa(_codigo);
+            Certidao reg = new Certidao() {
+                Codigo = _dados.Codigo,
+                Insc_Estadual = _dados.Inscricao_estadual,
+                Endereco = _dados.Nome_logradouro,
+                Endereco_Numero = (int)_dados.Numero,
+                Endereco_Complemento = _dados.Complemento,
+                Bairro = _dados.Bairro_nome ?? "",
+                Ano = DateTime.Now.Year,
+                Numero = _numero,
+                Controle = _numero.ToString("00000") + DateTime.Now.Year.ToString("0000") + "/" + _codigo.ToString() + "-CI"
+            };
+
+
+
+            
+            //certidaoViewModel.EmpresaStruct.Codigo = empresa.Codigo;
+            //certidaoViewModel.EmpresaStruct.Razao_social = empresa.Razao_social;
+            //certidaoViewModel.EmpresaStruct.Nome_fantasia = empresa.Nome_fantasia;
+            //certidaoViewModel.EmpresaStruct.Cpf_cnpj = empresa.Cpf_cnpj;
+            //certidaoViewModel.EmpresaStruct.Inscricao_estadual = empresa.Inscricao_estadual;
+            //certidaoViewModel.EmpresaStruct.Data_abertura = empresa.Data_abertura;
+            //certidaoViewModel.EmpresaStruct.Data_Encerramento = empresa.Data_Encerramento;
+            //certidaoViewModel.EmpresaStruct.Cpf_cnpj = empresa.Numprocesso;
+            //certidaoViewModel.EmpresaStruct.Cpf_cnpj = empresa.Numprocessoencerramento;
+            //certidaoViewModel.EmpresaStruct.Endereco_nome = empresa.Endereco_nome;
+            //certidaoViewModel.EmpresaStruct.Numero = empresa.Numero;
+            //certidaoViewModel.EmpresaStruct.Complemento = empresa.Complemento;
+            //certidaoViewModel.EmpresaStruct.Bairro_nome = empresa.Bairro_nome;
+            //certidaoViewModel.EmpresaStruct.Cidade_nome = empresa.Cidade_nome;
+            //certidaoViewModel.EmpresaStruct.UF = empresa.UF;
+            //certidaoViewModel.EmpresaStruct.Cep = empresa.Cep;
+            //certidaoViewModel.EmpresaStruct.Atividade_extenso = empresa.Atividade_extenso;
+            //List<CnaeStruct> ListaCnae = _empresaRepository.Lista_Cnae_Empresa(_codigo);
+            //string sCnae = "",sCnae2="";
+            //foreach (CnaeStruct cnae in ListaCnae) {
+            //    if (cnae.Principal)
+            //        sCnae = cnae.CNAE + "-" + cnae.Descricao;
+            //    else
+            //        sCnae2 += cnae.CNAE + "-" + cnae.Descricao + System.Environment.NewLine;
+            //}
+            //certidaoViewModel.Cnae_Principal = sCnae;
+            //certidaoViewModel.Cnae_Secundario = sCnae2;
 
             return View(certidaoViewModel);
         }

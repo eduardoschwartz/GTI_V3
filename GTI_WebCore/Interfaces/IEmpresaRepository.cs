@@ -14,5 +14,7 @@ namespace GTI_WebCore.Interfaces {
         List<CnaeStruct> Lista_Cnae_Empresa(int nCodigo);
         string Regime_Empresa(int Codigo);
         bool Empresa_Mei(int nCodigo);
+        List<int> Retorna_Codigo_por_CPF(string CPF);
+        List<int> Retorna_Codigo_por_CNPJ(string CNPJ);
     }
 }

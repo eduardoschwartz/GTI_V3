@@ -1,1 +1,1 @@
-﻿select top(10) * FROM certidao_isencao order by data desc
+﻿select top(200) * from mobiliario where cpf is not null and cpf<>'' order by cpf

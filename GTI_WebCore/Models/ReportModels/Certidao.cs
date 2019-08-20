@@ -23,5 +23,15 @@ namespace GTI_WebCore.Models.ReportModels {
         public string Numero_Processo { get; set; }
         public DateTime Data_Processo { get; set; }
         public decimal Percentual_Isencao { get; set; }
+        public string Insc_Estadual { get; set; }
+        public DateTime Data_Abertura { get; set; }
+        public DateTime Data_Encerramento { get; set; }
+        public string Processo_Abertura { get; set; }
+        public string Processo_Encerramento { get; set; }
+        public string Cpf_Cnpj { get; set; }
+        public string Razao_Social { get; set; }
+        public string Nome_Fantasia { get; set; }
+        public string Cnae_Principal { get; set; }
+        public string Cnae_Secundario { get; set; }
     }
 }
