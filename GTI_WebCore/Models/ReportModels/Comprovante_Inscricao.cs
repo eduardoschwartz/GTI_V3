@@ -17,7 +17,7 @@ namespace GTI_WebCore.Models.ReportModels {
         public string Uf { get; set; }
         public string Cpf_Cnpj { get; set; }
         public string Atividade { get; set; }
-        public string Data_Abertura { get; set; }
+        public DateTime Data_Abertura { get; set; }
         public string Inscricao_Estadual { get; set; }
         public string Nome_Fantasia { get; set; }
         public string Cep { get; set; }
@@ -33,6 +33,6 @@ namespace GTI_WebCore.Models.ReportModels {
         public string Rg { get; set; }
         public string Processo_Abertura { get; set; }
         public string Processo_Encerramento { get; set; }
-        public string Data_Encerramento { get; set; }
+        public DateTime Data_Encerramento { get; set; }
     }
 }

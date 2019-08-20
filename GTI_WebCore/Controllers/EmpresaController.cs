@@ -15,12 +15,14 @@ namespace GTI_WebCore.Controllers {
 
     [Route("Empresa")]
     public class EmpresaController : Controller {
-        private readonly IEmpresaRepository _empresaRepository;
+        private readonly IEmpresaRepository empresaRepository;
         private readonly ITributarioRepository tributarioRepository;
+        private readonly IHostingEnvironment hostingEnvironment;
 
-        public EmpresaController(IEmpresaRepository empresaRepository, ITributarioRepository tributarioRepository) {
-            _empresaRepository = empresaRepository;
+        public EmpresaController(IEmpresaRepository empresaRepository, ITributarioRepository tributarioRepository,IHostingEnvironment hostingEnvironment) {
+            this.empresaRepository = empresaRepository;
             this.tributarioRepository = tributarioRepository;
+            this.hostingEnvironment = hostingEnvironment;
         }
 
         [Route("Details")]
@@ -40,13 +42,13 @@ namespace GTI_WebCore.Controllers {
             if (model.Inscricao != null) {
                 _codigo = Convert.ToInt32(model.Inscricao);
                 if (_codigo >= 100000 && _codigo < 210000) //Se estiver fora deste intervalo nem precisa checar se a empresa existe
-                    _existeCod = _empresaRepository.Existe_Empresa_Codigo(_codigo);
+                    _existeCod = empresaRepository.Existe_Empresa_Codigo(_codigo);
             } else {
                 if (model.CnpjValue != null) {
                     string _cnpj = model.CnpjValue;
                     bool _valida = Functions.ValidaCNPJ(_cnpj); //CNPJ válido?
                     if (_valida) {
-                        _codigo = _empresaRepository.Existe_Empresa_Cnpj(_cnpj);
+                        _codigo = empresaRepository.Existe_Empresa_Cnpj(_cnpj);
                         if (_codigo > 0)
                             _existeCod = true;
                     } else {
@@ -58,7 +60,7 @@ namespace GTI_WebCore.Controllers {
                         string _cpf = model.CpfValue;
                         bool _valida = Functions.ValidaCpf(_cpf); //CPF válido?
                         if (_valida) {
-                            _codigo = _empresaRepository.Existe_Empresa_Cpf(_cpf);
+                            _codigo = empresaRepository.Existe_Empresa_Cpf(_cpf);
                             if (_codigo > 0)
                                 _existeCod = true;
 
@@ -78,18 +80,18 @@ namespace GTI_WebCore.Controllers {
 
 
             if (_existeCod) {
-                EmpresaStruct empresa = _empresaRepository.Dados_Empresa(_codigo);
+                EmpresaStruct empresa = empresaRepository.Dados_Empresa(_codigo);
                 empresaDetailsViewModel.EmpresaStruct = empresa;
-                empresaDetailsViewModel.TaxaLicenca = _empresaRepository.Empresa_tem_TL(_codigo) ? "Sim" : "Não";
-                empresaDetailsViewModel.Vigilancia_Sanitaria = _empresaRepository.Empresa_tem_VS(_codigo) ? "Sim" : "Não";
-                empresaDetailsViewModel.Mei = _empresaRepository.Empresa_Mei(_codigo) ? "Sim" : "Não";
-                List<CnaeStruct> ListaCnae = _empresaRepository.Lista_Cnae_Empresa(_codigo);
+                empresaDetailsViewModel.TaxaLicenca = empresaRepository.Empresa_tem_TL(_codigo) ? "Sim" : "Não";
+                empresaDetailsViewModel.Vigilancia_Sanitaria = empresaRepository.Empresa_tem_VS(_codigo) ? "Sim" : "Não";
+                empresaDetailsViewModel.Mei = empresaRepository.Empresa_Mei(_codigo) ? "Sim" : "Não";
+                List<CnaeStruct> ListaCnae = empresaRepository.Lista_Cnae_Empresa(_codigo);
                 string sCnae = "";
                 foreach (CnaeStruct cnae in ListaCnae) {
                     sCnae += cnae.CNAE + "-" + cnae.Descricao + System.Environment.NewLine;
                 }
                 empresaDetailsViewModel.Cnae = sCnae;
-                string sRegime = _empresaRepository.Regime_Empresa(_codigo);
+                string sRegime = empresaRepository.Regime_Empresa(_codigo);
                 if (sRegime == "F")
                     sRegime = "ISS FIXO";
                 else {
@@ -136,10 +138,10 @@ namespace GTI_WebCore.Controllers {
             if(model.CpfValue!=null || model.CnpjValue != null) {
                 List<int> _lista = new List<int>();
                 if (model.CpfValue != null) {
-                    _lista = _empresaRepository.Retorna_Codigo_por_CPF(Functions.RetornaNumero(model.CpfValue));
+                    _lista = empresaRepository.Retorna_Codigo_por_CPF(Functions.RetornaNumero(model.CpfValue));
                 } else {
                     if (model.CnpjValue != null) {
-                        _lista = _empresaRepository.Retorna_Codigo_por_CNPJ(Functions.RetornaNumero(model.CnpjValue));
+                        _lista = empresaRepository.Retorna_Codigo_por_CNPJ(Functions.RetornaNumero(model.CnpjValue));
                     }
                 }
                 if (_lista.Count > 0) {
@@ -167,7 +169,8 @@ namespace GTI_WebCore.Controllers {
         [Route("Certidao/Certidao_Inscricao")]
         [HttpPost]
         public IActionResult Certidao_Inscricao(CertidaoViewModel model) {
-            int _codigo = 0;
+            int _codigo;
+            bool _valida = false;
             int _numero = tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Comprovante_Pagamento);
             CertidaoViewModel certidaoViewModel = new CertidaoViewModel();
             ViewBag.Result = "";
@@ -184,53 +187,55 @@ namespace GTI_WebCore.Controllers {
                 return View(certidaoViewModel);
             }
 
-            EmpresaStruct _dados = _empresaRepository.Dados_Empresa(_codigo);
-            Certidao reg = new Certidao() {
-                Codigo = _dados.Codigo,
-                Insc_Estadual = _dados.Inscricao_estadual,
+            EmpresaStruct _dados = empresaRepository.Dados_Empresa(_codigo);
+            string _sufixo = model.Extrato ? _dados.Data_Encerramento == null ? "XA" : "XE" : "IE";
+            List<CnaeStruct> ListaCnae = empresaRepository.Lista_Cnae_Empresa(_codigo);
+            string _cnae = "", _cnae2 = "";
+            foreach (CnaeStruct cnae in ListaCnae) {
+                if (cnae.Principal)
+                    _cnae = cnae.CNAE + "-" + cnae.Descricao;
+                else
+                    _cnae2 += cnae.CNAE + "-" + cnae.Descricao + System.Environment.NewLine;
+            }
+
+            Comprovante_Inscricao reg = new Comprovante_Inscricao() {
+                Codigo = _codigo,
+                Inscricao_Estadual = _dados.Inscricao_estadual,
                 Endereco = _dados.Nome_logradouro,
-                Endereco_Numero = (int)_dados.Numero,
-                Endereco_Complemento = _dados.Complemento,
+                Complemento = _dados.Complemento,
                 Bairro = _dados.Bairro_nome ?? "",
                 Ano = DateTime.Now.Year,
                 Numero = _numero,
-                Controle = _numero.ToString("00000") + DateTime.Now.Year.ToString("0000") + "/" + _codigo.ToString() + "-CI"
+                Controle = _numero.ToString("00000") + DateTime.Now.Year.ToString("0000") + "/" + _codigo.ToString() + "-" + _sufixo,
+                Atividade = _cnae,
+                Atividade2 = _cnae2,
+                Cpf_Cnpj = _dados.Cpf_cnpj,
+                Data_Abertura = (DateTime)_dados.Data_abertura,
+                Processo_Abertura = _dados.Numprocesso,
+                Processo_Encerramento = _dados.Numprocessoencerramento
             };
+            if (_dados.Data_Encerramento != null)
+                reg.Data_Encerramento = (DateTime)_dados.Data_Encerramento;
 
+            List<Comprovante_Inscricao> certidao = new List<Comprovante_Inscricao> {
+                reg
+            };
+            ReportDocument rd = new ReportDocument();
+            if (model.Extrato) {
+            } else
+                if (_valida)
+                rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Comprovante_InscricaoValida");
+            else
+                rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Comprovante_Inscricao");
+            try {
+                rd.SetDataSource(certidao);
+                Stream stream = rd.ExportToStream(ExportFormatType.PortableDocFormat);
+                return File(stream, "application/pdf", "Certidao_Inscricao.pdf");
+            } catch {
+                throw;
+            }
 
-
-            
-            //certidaoViewModel.EmpresaStruct.Codigo = empresa.Codigo;
-            //certidaoViewModel.EmpresaStruct.Razao_social = empresa.Razao_social;
-            //certidaoViewModel.EmpresaStruct.Nome_fantasia = empresa.Nome_fantasia;
-            //certidaoViewModel.EmpresaStruct.Cpf_cnpj = empresa.Cpf_cnpj;
-            //certidaoViewModel.EmpresaStruct.Inscricao_estadual = empresa.Inscricao_estadual;
-            //certidaoViewModel.EmpresaStruct.Data_abertura = empresa.Data_abertura;
-            //certidaoViewModel.EmpresaStruct.Data_Encerramento = empresa.Data_Encerramento;
-            //certidaoViewModel.EmpresaStruct.Cpf_cnpj = empresa.Numprocesso;
-            //certidaoViewModel.EmpresaStruct.Cpf_cnpj = empresa.Numprocessoencerramento;
-            //certidaoViewModel.EmpresaStruct.Endereco_nome = empresa.Endereco_nome;
-            //certidaoViewModel.EmpresaStruct.Numero = empresa.Numero;
-            //certidaoViewModel.EmpresaStruct.Complemento = empresa.Complemento;
-            //certidaoViewModel.EmpresaStruct.Bairro_nome = empresa.Bairro_nome;
-            //certidaoViewModel.EmpresaStruct.Cidade_nome = empresa.Cidade_nome;
-            //certidaoViewModel.EmpresaStruct.UF = empresa.UF;
-            //certidaoViewModel.EmpresaStruct.Cep = empresa.Cep;
-            //certidaoViewModel.EmpresaStruct.Atividade_extenso = empresa.Atividade_extenso;
-            //List<CnaeStruct> ListaCnae = _empresaRepository.Lista_Cnae_Empresa(_codigo);
-            //string sCnae = "",sCnae2="";
-            //foreach (CnaeStruct cnae in ListaCnae) {
-            //    if (cnae.Principal)
-            //        sCnae = cnae.CNAE + "-" + cnae.Descricao;
-            //    else
-            //        sCnae2 += cnae.CNAE + "-" + cnae.Descricao + System.Environment.NewLine;
-            //}
-            //certidaoViewModel.Cnae_Principal = sCnae;
-            //certidaoViewModel.Cnae_Secundario = sCnae2;
-
-            return View(certidaoViewModel);
         }
-
 
 
     }
