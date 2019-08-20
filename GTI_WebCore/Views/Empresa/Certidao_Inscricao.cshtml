@@ -5,15 +5,17 @@
     ViewBag.Title = "Certidão de Inscrição";
 }
 
-<form asp-controller="Empresa" method="post" class="mt-3" onsubmit="return ValidateForm()">
+<form asp-controller="Empresa" enctype="multipart/form-data" method="post" class="mt-3" onsubmit="return ValidateForm()">
 
     <div class="form-group"><label style="color:brown;font-size:16px;font-style:italic">Certidão de Inscrição</label></div>
 
+    <h1>@Model.CpfCheck</h1>
+    <h1>@Model.CnpjCheck</h1>
     <div class="form-group row align-items-lg-baseline">
-        CPF:&nbsp; <input type="radio" required asp-for="CpfCnpjLabel" id="cpfCheck" value="cpf" name="doc" checked="checked" onclick="radioCheck()" />
-        &nbsp;CNPJ:&nbsp;  <input type="radio" required asp-for="CpfCnpjLabel" id="cnpjCheck" value="cnpj" name="doc" onclick="radioCheck()" />
-        &nbsp;<input asp-for="CpfValue" id="cpfTxt" class="form-control" style="max-width:200px;max-height:25px;" onKeyPress="return formata(this, '§§§.§§§.§§§-§§', event)" onchange="ClearError()" placeholder="Digite o nº do CPF">
-        &nbsp;<input asp-for="CnpjValue" id="cnpjTxt" class="form-control" style="max-width:200px;max-height:25px;display:none" onKeyPress="return formata(this, '§§.§§§.§§§/§§§§-§§', event)" onchange="ClearError()" placeholder="Digite o nº do CNPJ">
+        CPF:&nbsp; <input type="radio" required asp-for="CpfCheck" checked="@Model.CpfCheck"  value="@Model.CpfCheck" name="doc"  id="cpfCheck"  onclick="radioCheck()" />
+        &nbsp;CNPJ:&nbsp;  <input type="radio" required asp-for="CnpjCheck" checked="@Model.CnpjCheck" value="@Model.CnpjCheck" name="doc" id="cnpjCheck"  onclick="radioCheck()" />
+        &nbsp;<input asp-for="CpfValue" value="@Model.CpfValue" id="cpfTxt" class="form-control" style="max-width:200px;max-height:25px;" onKeyPress="return formata(this, '§§§.§§§.§§§-§§', event)" onchange="ClearError()" placeholder="Digite o nº do CPF">
+        &nbsp;<input asp-for="CnpjValue" value="@Model.CnpjValue" id="cnpjTxt" class="form-control" style="max-width:200px;max-height:25px;display:none" onKeyPress="return formata(this, '§§.§§§.§§§/§§§§-§§', event)" onchange="ClearError()" placeholder="Digite o nº do CNPJ">
     </div>
     <div class="form-group row">
         <div>
@@ -61,9 +63,7 @@
         </div>
 
     </div>
-    @*<div class="form-group row">
-            <label class="text-danger" id="errorLabel"></label>
-        </div>*@
+
 </form>
 
 

@@ -10,7 +10,8 @@ namespace GTI_WebCore.ViewModels {
         public ImovelStruct ImovelStruct { get; set; }
         [Display(Name = "Inscrição Municipal")]
         public string Inscricao { get; set; }
-        public string CpfCnpjLabel { get; set; }
+        public bool CpfCheck { get; set; } 
+        public bool CnpjCheck { get; set; } 
         public string CpfValue { get; set; }
         public string CnpjValue { get; set; }
         public string ErrorMessage { get; set; }

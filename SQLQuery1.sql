@@ -1,1 +1,1 @@
-﻿select top(200) * from mobiliario where cpf is not null and cpf<>'' order by cpf
+﻿select top(200) * from mobiliario where CNPJ is not null and CNPJ<>'' order by cNPJ

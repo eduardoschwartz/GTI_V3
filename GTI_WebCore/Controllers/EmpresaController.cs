@@ -128,9 +128,12 @@ namespace GTI_WebCore.Controllers {
         [Route("Certidao/Certidao_Inscricao")]
         [HttpGet]
         public ViewResult Certidao_Inscricao() {
-            return View();
+            CertidaoViewModel model = new CertidaoViewModel() {
+                CpfCheck = true,
+                CnpjCheck =false
+            };
+            return View(model);
         }
-
 
         [Route("Retorna_Codigos")]
         [Route("Certidao/Retorna_Codigos")]
@@ -146,14 +149,14 @@ namespace GTI_WebCore.Controllers {
                 }
                 if (_lista.Count > 0) {
                     ViewBag.Lista_Codigo = _lista;
-                    return View("Certidao_Inscricao");
+                    return View("Certidao_Inscricao", model);
                 } else {
                     ViewBag.Result = "Não foi localizada nenhuma empresa cadastrada com o CPF/CNPJ informado.";
-                    return View("Certidao_Inscricao");
+                    return View("Certidao_Inscricao", model);
                 }
             }
             ViewBag.Result = "Informe o CPF ou o CNPJ para busca.";
-            return View("Certidao_Inscricao");
+            return View("Certidao_Inscricao",model);
         }
 
         [HttpPost]
@@ -175,16 +178,30 @@ namespace GTI_WebCore.Controllers {
             CertidaoViewModel certidaoViewModel = new CertidaoViewModel();
             ViewBag.Result = "";
 
-            if (!Captcha.ValidateCaptchaCode(model.CaptchaCode, HttpContext)) {
-                ViewBag.Result = "Código de verificação inválido.";
-                return View(certidaoViewModel);
+            if (model.CpfValue != null || model.CnpjValue != null) {
+                List<int> _lista = new List<int>();
+                if (model.CpfValue != null) {
+                    _lista = empresaRepository.Retorna_Codigo_por_CPF(Functions.RetornaNumero(model.CpfValue));
+                } else {
+                    if (model.CnpjValue != null) {
+                        _lista = empresaRepository.Retorna_Codigo_por_CNPJ(Functions.RetornaNumero(model.CnpjValue));
+                    }
+                }
+                if (_lista.Count > 0) {
+                    ViewBag.Lista_Codigo = _lista;
+                } 
             }
 
+            if (!Captcha.ValidateCaptchaCode(model.CaptchaCode, HttpContext)) {
+                ViewBag.Result = "Código de verificação inválido.";
+                return View(model);
+            }
+            
             if (model.Inscricao != null) {
                 _codigo = Convert.ToInt32(model.Inscricao);
             } else {
                 ViewBag.Result = "Erro ao recuperar as informações.";
-                return View(certidaoViewModel);
+                return View(model);
             }
 
             EmpresaStruct _dados = empresaRepository.Dados_Empresa(_codigo);
@@ -200,8 +217,13 @@ namespace GTI_WebCore.Controllers {
 
             Comprovante_Inscricao reg = new Comprovante_Inscricao() {
                 Codigo = _codigo,
+                Razao_Social=_dados.Razao_social,
+                Nome_Fantasia=_dados.Nome_fantasia,
+                Cep=_dados.Cep,
+                Cidade=_dados.Cidade_nome,
+                Email=_dados.Email_contato,
                 Inscricao_Estadual = _dados.Inscricao_estadual,
-                Endereco = _dados.Nome_logradouro,
+                Endereco = _dados.Endereco_nome +", " + _dados.Numero,
                 Complemento = _dados.Complemento,
                 Bairro = _dados.Bairro_nome ?? "",
                 Ano = DateTime.Now.Year,
@@ -212,7 +234,14 @@ namespace GTI_WebCore.Controllers {
                 Cpf_Cnpj = _dados.Cpf_cnpj,
                 Data_Abertura = (DateTime)_dados.Data_abertura,
                 Processo_Abertura = _dados.Numprocesso,
-                Processo_Encerramento = _dados.Numprocessoencerramento
+                Processo_Encerramento = _dados.Numprocessoencerramento,
+                Situacao=_dados.Situacao,
+                Telefone=_dados.Fone_contato,
+                Uf=_dados.UF,
+                Area=(decimal)_dados.Area,
+                Mei = Convert.ToBoolean(_dados.Mei) ? "SIM" : "NÃO",
+                Vigilancia_Sanitaria = empresaRepository.Empresa_tem_VS(_codigo)?"SIM":"NÃO",
+                Taxa_Licenca = empresaRepository.Empresa_tem_TL(_codigo) ? "SIM" : "NÃO"
             };
             if (_dados.Data_Encerramento != null)
                 reg.Data_Encerramento = (DateTime)_dados.Data_Encerramento;
@@ -224,9 +253,9 @@ namespace GTI_WebCore.Controllers {
             if (model.Extrato) {
             } else
                 if (_valida)
-                rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Comprovante_InscricaoValida");
+                rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Comprovante_InscricaoValida.rpt");
             else
-                rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Comprovante_Inscricao");
+                rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Comprovante_Inscricao.rpt");
             try {
                 rd.SetDataSource(certidao);
                 Stream stream = rd.ExportToStream(ExportFormatType.PortableDocFormat);
