@@ -128,10 +128,11 @@ namespace GTI_WebCore.Controllers {
         [Route("Certidao/Certidao_Inscricao")]
         [HttpGet]
         public ViewResult Certidao_Inscricao() {
-            CertidaoViewModel model = new CertidaoViewModel() {
-                CpfCheck = true,
-                CnpjCheck =false
-            };
+            CertidaoViewModel model = new CertidaoViewModel();
+            model.OptionList = new List<SelectListItem>();
+            model.OptionList.Add(new SelectListItem { Text = " CPF", Value = "cpfCheck", Selected = true });
+            model.OptionList.Add(new SelectListItem { Text = " CNPJ", Value = "cnpjCheck", Selected = false });
+            model.SelectedValue = "cpfCheck";
             return View(model);
         }
 
@@ -139,6 +140,11 @@ namespace GTI_WebCore.Controllers {
         [Route("Certidao/Retorna_Codigos")]
         public IActionResult Retorna_Codigos(CertidaoViewModel model) {
             if(model.CpfValue!=null || model.CnpjValue != null) {
+
+                model.OptionList = new List<SelectListItem>();
+                model.OptionList.Add(new SelectListItem { Text = "CPF", Value = "cpfCheck", Selected = model.SelectedValue== "cpfCheck" });
+                model.OptionList.Add(new SelectListItem { Text = "CNPJ", Value = "cnpjCheck", Selected = model.SelectedValue == "cnpjCheck" });
+
                 List<int> _lista = new List<int>();
                 if (model.CpfValue != null) {
                     _lista = empresaRepository.Retorna_Codigo_por_CPF(Functions.RetornaNumero(model.CpfValue));
