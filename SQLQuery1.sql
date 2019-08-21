@@ -1,1 +1,1 @@
-﻿select top(200) * from mobiliario where CNPJ is not null and CNPJ<>'' order by cNPJ
+﻿select * from certidao_inscricao where cadastro=123555

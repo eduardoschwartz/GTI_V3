@@ -128,11 +128,13 @@ namespace GTI_WebCore.Controllers {
         [Route("Certidao/Certidao_Inscricao")]
         [HttpGet]
         public ViewResult Certidao_Inscricao() {
-            CertidaoViewModel model = new CertidaoViewModel();
-            model.OptionList = new List<SelectListItem>();
-            model.OptionList.Add(new SelectListItem { Text = " CPF", Value = "cpfCheck", Selected = true });
-            model.OptionList.Add(new SelectListItem { Text = " CNPJ", Value = "cnpjCheck", Selected = false });
-            model.SelectedValue = "cpfCheck";
+            CertidaoViewModel model = new CertidaoViewModel {
+                OptionList = new List<SelectListItem> {
+                new SelectListItem { Text = " CPF", Value = "cpfCheck", Selected = true },
+                new SelectListItem { Text = " CNPJ", Value = "cnpjCheck", Selected = false }
+            },
+                SelectedValue = "cpfCheck"
+            };
             return View(model);
         }
 
@@ -141,9 +143,10 @@ namespace GTI_WebCore.Controllers {
         public IActionResult Retorna_Codigos(CertidaoViewModel model) {
             if(model.CpfValue!=null || model.CnpjValue != null) {
 
-                model.OptionList = new List<SelectListItem>();
-                model.OptionList.Add(new SelectListItem { Text = "CPF", Value = "cpfCheck", Selected = model.SelectedValue== "cpfCheck" });
-                model.OptionList.Add(new SelectListItem { Text = "CNPJ", Value = "cnpjCheck", Selected = model.SelectedValue == "cnpjCheck" });
+                model.OptionList = new List<SelectListItem> {
+                    new SelectListItem { Text = "CPF", Value = "cpfCheck", Selected = model.SelectedValue == "cpfCheck" },
+                    new SelectListItem { Text = "CNPJ", Value = "cnpjCheck", Selected = model.SelectedValue == "cnpjCheck" }
+                };
 
                 List<int> _lista = new List<int>();
                 if (model.CpfValue != null) {
@@ -169,8 +172,73 @@ namespace GTI_WebCore.Controllers {
         [Route("Validate_CI")]
         [Route("Certidao/Validate_CI")]
         public IActionResult Validate_CI(CertidaoViewModel model) {
-            ViewBag.Lista_Codigo = new List<int>() { 4, 5, 6 };
-            return View("Certidao_Inscricao");
+            int _codigo , _ano ,_numero;
+            string _chave = model.Chave;
+
+            model.OptionList = new List<SelectListItem> {
+                new SelectListItem { Text = "CPF", Value = "cpfCheck", Selected = model.SelectedValue == "cpfCheck" },
+                new SelectListItem { Text = "CNPJ", Value = "cnpjCheck", Selected = model.SelectedValue == "cnpjCheck" }
+            };
+
+            if (model.Chave != null) {
+                chaveStruct _chaveStruct = tributarioRepository.Valida_Certidao(_chave);
+                if (!_chaveStruct.Valido) {
+                    ViewBag.Result = "Chave de autenticação da certidão inválida.";
+                    return View("Certidao_Inscricao", model);
+                } else {
+                    _codigo = _chaveStruct.Codigo;
+                    _numero = _chaveStruct.Numero;
+                    _ano = _chaveStruct.Ano;
+
+                    Certidao_Inscricao _dados = tributarioRepository.Retorna_Certidao_Inscricao(_ano, _numero);
+                    Comprovante_Inscricao reg = new Comprovante_Inscricao() {
+                        Codigo = _codigo,
+                        Razao_Social = _dados.Nome,
+                        Nome_Fantasia = _dados.Nome_fantasia,
+                        Cep = _dados.Cep,
+                        Cidade = _dados.Cidade,
+                        Email = _dados.Email,
+                        Inscricao_Estadual = _dados.Inscricao_estadual,
+                        Endereco = _dados.Endereco + ", " + _dados.Numero,
+                        Complemento = _dados.Complemento,
+                        Bairro = _dados.Bairro ?? "",
+                        Ano = _ano,
+                        Numero = _numero,
+                        Controle = _chave,
+                        Atividade = _dados.Atividade,
+                        Atividade2 = _dados.Atividade_secundaria,
+                        Cpf_Cnpj = _dados.Documento,
+                        Data_Abertura = (DateTime)_dados.Data_abertura,
+                        Processo_Abertura = _dados.Processo_abertura,
+                        Processo_Encerramento = _dados.Processo_encerramento,
+                        Situacao = _dados.Situacao,
+                        Telefone = _dados.Telefone,
+                        Area = (decimal)_dados.Area,
+                        Mei = _dados.Mei,
+                        Vigilancia_Sanitaria = _dados.Vigilancia_sanitaria,
+                        Taxa_Licenca = _dados.Taxa_licenca
+                    };
+                    if (_dados.Data_encerramento != null)
+                        reg.Data_Encerramento = (DateTime)_dados.Data_encerramento;
+
+                    List<Comprovante_Inscricao> certidao = new List<Comprovante_Inscricao> { reg };
+
+                    ReportDocument rd = new ReportDocument();
+                    rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Comprovante_Inscricao_Valida.rpt");
+
+                    try {
+                        rd.SetDataSource(certidao);
+                        Stream stream = rd.ExportToStream(ExportFormatType.PortableDocFormat);
+                        return File(stream, "application/pdf", "Certidao_Endereco.pdf");
+                    } catch {
+
+                        throw;
+                    }
+                }
+            } else {
+                ViewBag.Result = "Chave de validação inválida.";
+                return View("Certidao_Inscricao", model);
+            }
         }
 
 
@@ -181,8 +249,12 @@ namespace GTI_WebCore.Controllers {
             int _codigo;
             bool _valida = false;
             int _numero = tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Comprovante_Pagamento);
-            CertidaoViewModel certidaoViewModel = new CertidaoViewModel();
             ViewBag.Result = "";
+
+            model.OptionList = new List<SelectListItem> {
+                new SelectListItem { Text = "CPF", Value = "cpfCheck", Selected = model.SelectedValue == "cpfCheck" },
+                new SelectListItem { Text = "CNPJ", Value = "cnpjCheck", Selected = model.SelectedValue == "cnpjCheck" }
+            };
 
             if (model.CpfValue != null || model.CnpjValue != null) {
                 List<int> _lista = new List<int>();
@@ -223,6 +295,7 @@ namespace GTI_WebCore.Controllers {
 
             Comprovante_Inscricao reg = new Comprovante_Inscricao() {
                 Codigo = _codigo,
+                Data_Emissao=DateTime.Now,
                 Razao_Social=_dados.Razao_social,
                 Nome_Fantasia=_dados.Nome_fantasia,
                 Cep=_dados.Cep,
@@ -238,6 +311,7 @@ namespace GTI_WebCore.Controllers {
                 Atividade = _cnae,
                 Atividade2 = _cnae2,
                 Cpf_Cnpj = _dados.Cpf_cnpj,
+                Rg=_dados.Rg,
                 Data_Abertura = (DateTime)_dados.Data_abertura,
                 Processo_Abertura = _dados.Numprocesso,
                 Processo_Encerramento = _dados.Numprocessoencerramento,
@@ -252,9 +326,45 @@ namespace GTI_WebCore.Controllers {
             if (_dados.Data_Encerramento != null)
                 reg.Data_Encerramento = (DateTime)_dados.Data_Encerramento;
 
+            Certidao_Inscricao reg2 = new Certidao_Inscricao() {
+                Cadastro = reg.Codigo,
+                Data_emissao=reg.Data_Emissao,
+                Data_encerramento=reg.Data_Encerramento,
+                Nome = reg.Razao_Social,
+                Nome_fantasia = reg.Nome_Fantasia??"",
+                Cep = reg.Cep??"",
+                Cidade = reg.Cidade??"",
+                Email = reg.Email??"",
+                Inscricao_estadual = reg.Inscricao_Estadual??"",
+                Endereco = reg.Endereco + ", " + reg.Numero,
+                Complemento = reg.Complemento??"",
+                Bairro = reg.Bairro ?? "",
+                Ano = DateTime.Now.Year,
+                Numero = _numero,
+                Atividade = _cnae??"",
+                Atividade_secundaria = _cnae2??"",
+                Rg = reg.Rg ?? "",
+                Documento = reg.Cpf_Cnpj,
+                Data_abertura = (DateTime)reg.Data_Abertura,
+                Processo_abertura = reg.Processo_Abertura??"",
+                Processo_encerramento = reg.Processo_Encerramento??"",
+                Situacao = reg.Situacao,
+                Telefone = reg.Telefone??"",
+                Area = (decimal)reg.Area,
+                Mei = reg.Mei,
+                Vigilancia_sanitaria = reg.Vigilancia_Sanitaria,
+                Taxa_licenca = reg.Taxa_Licenca
+            };
+            if (reg.Data_Encerramento != null)
+                reg2.Data_encerramento = (DateTime)reg.Data_Encerramento;
+
+            Exception ex = tributarioRepository.Insert_Certidao_Inscricao(reg2);
+            if (ex != null)
+                throw ex;
             List<Comprovante_Inscricao> certidao = new List<Comprovante_Inscricao> {
                 reg
             };
+
             ReportDocument rd = new ReportDocument();
             if (model.Extrato) {
             } else

@@ -142,7 +142,7 @@ namespace GTI_WebCore.Repository {
                                         Valido = true
                                     };
                                     return reg;
-                                }else
+                                } else
                                     goto fim;
                             } else if (sTipo == "CI") {
                                 Certidao_isencao dados = Retorna_Certidao_Isencao(nAno, nNumero, nCodigo);
@@ -155,9 +155,20 @@ namespace GTI_WebCore.Repository {
                                         Valido = true
                                     };
                                     return reg;
-                                } else {
-                                    goto fim;
                                 }
+                            } else if (sTipo == "IE" || sTipo == "XE" || sTipo == "XA") {
+                                Certidao_Inscricao dados = Retorna_Certidao_Inscricao(nAno, nNumero);
+                                if (dados != null) {
+                                    chaveStruct reg = new chaveStruct {
+                                        Codigo = nCodigo,
+                                        Ano = nAno,
+                                        Numero = nNumero,
+                                        Tipo = sTipo,
+                                        Valido = true
+                                    };
+                                    return reg;
+                                } else
+                                    goto fim;
                             }
                         }
                     }
@@ -261,6 +272,50 @@ namespace GTI_WebCore.Repository {
             return null;
         }
 
+        public Exception Insert_Certidao_Inscricao(Certidao_Inscricao Reg) {
+            object[] Parametros = new object[27];
+            Parametros[0] = new SqlParameter { ParameterName = "@numero", SqlDbType = SqlDbType.Int, SqlValue = Reg.Numero };
+            Parametros[1] = new SqlParameter { ParameterName = "@ano", SqlDbType = SqlDbType.Int, SqlValue = Reg.Ano };
+            Parametros[2] = new SqlParameter { ParameterName = "@data_emissao", SqlDbType = SqlDbType.SmallDateTime ,SqlValue=Reg.Data_emissao};
+            Parametros[3] = new SqlParameter { ParameterName = "@endereco", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Endereco };
+            Parametros[4] = new SqlParameter { ParameterName = "@bairro", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Bairro };
+            Parametros[5] = new SqlParameter { ParameterName = "@cadastro", SqlDbType = SqlDbType.Int, SqlValue = Reg.Cadastro };
+            Parametros[6] = new SqlParameter { ParameterName = "@nome", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Nome };
+            Parametros[7] = new SqlParameter { ParameterName = "@rg", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Rg };
+            Parametros[8] = new SqlParameter { ParameterName = "@documento", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Documento };
+            Parametros[9] = new SqlParameter { ParameterName = "@cidade", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Cidade };
+            Parametros[10] = new SqlParameter { ParameterName = "@atividade", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Atividade };
+            Parametros[11] = new SqlParameter { ParameterName = "@data_abertura", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Data_abertura };
+            Parametros[12] = new SqlParameter { ParameterName = "@processo_abertura", SqlDbType = SqlDbType.VarChar,  SqlValue = Reg.Processo_abertura };
+            Parametros[13] = new SqlParameter { ParameterName = "@data_encerramento", SqlDbType = SqlDbType.SmallDateTime,  IsNullable = true, SqlValue = DBNull.Value };
+            Parametros[14] = new SqlParameter { ParameterName = "@processo_encerramento", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Processo_encerramento };
+            Parametros[15] = new SqlParameter { ParameterName = "@inscricao_estadual", SqlDbType = SqlDbType.VarChar,  SqlValue = Reg.Inscricao_estadual };
+            Parametros[16] = new SqlParameter { ParameterName = "@nome_fantasia", SqlDbType = SqlDbType.VarChar,  SqlValue = Reg.Nome_fantasia };
+            Parametros[17] = new SqlParameter { ParameterName = "@atividade_secundaria", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Atividade_secundaria };
+            Parametros[18] = new SqlParameter { ParameterName = "@complemento", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Complemento };
+            Parametros[19] = new SqlParameter { ParameterName = "@cep", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Cep };
+            Parametros[20] = new SqlParameter { ParameterName = "@situacao", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Situacao };
+            Parametros[21] = new SqlParameter { ParameterName = "@telefone", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Telefone };
+            Parametros[22] = new SqlParameter { ParameterName = "@email", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Email };
+            Parametros[23] = new SqlParameter { ParameterName = "@taxa_licenca", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Taxa_licenca };
+            Parametros[24] = new SqlParameter { ParameterName = "@vigilancia_sanitaria", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Vigilancia_sanitaria };
+            Parametros[25] = new SqlParameter { ParameterName = "@mei", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Mei };
+            Parametros[26] = new SqlParameter { ParameterName = "@area", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Area };
+
+            context.Database.ExecuteSqlCommand("INSERT INTO certidao_inscricao(numero,ano,data_emissao,endereco,bairro,cadastro,nome,rg,documento,cidade,atividade,data_abertura," +
+                "processo_abertura,data_encerramento,processo_encerramento,inscricao_estadual,nome_fantasia,atividade_secundaria,complemento,cep,situacao,telefone,email,taxa_licenca," +
+                "vigilancia_sanitaria,mei,area) VALUES(@numero,@ano,@data_emissao,@endereco,@bairro,@cadastro,@nome,@rg,@documento,@cidade,@atividade,@data_abertura," +
+                "@processo_abertura,@data_encerramento,@processo_encerramento,@inscricao_estadual,@nome_fantasia,@atividade_secundaria,@complemento,@cep,@situacao,@telefone,@email," +
+                "@taxa_licenca,@vigilancia_sanitaria,@mei,@area)", Parametros);
+
+            try {
+                context.SaveChanges();
+            } catch (Exception ex) {
+                return ex;
+            }
+            return null;
+        }
+
         public Certidao_valor_venal Retorna_Certidao_Valor_Venal(int Ano, int Numero, int Codigo) {
             var Sql = (from p in context.Certidao_Valor_Venal where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
             return Sql;
@@ -273,6 +328,11 @@ namespace GTI_WebCore.Repository {
 
         public Certidao_endereco Retorna_Certidao_Endereco(int Ano, int Numero, int Codigo) {
             var Sql = (from p in context.Certidao_Endereco where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
+            return Sql;
+        }
+
+        public Certidao_Inscricao Retorna_Certidao_Inscricao(int Ano, int Numero) {
+            var Sql = (from c in context.Certidao_Inscricao where c.Ano == Ano && c.Numero == Numero select c).FirstOrDefault();
             return Sql;
         }
     }

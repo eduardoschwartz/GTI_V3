@@ -12,6 +12,7 @@ namespace GTI_WebCore.Models {
             modelBuilder.Entity<Bairro>().HasKey(c =>new { c.Siglauf, c.Codcidade,c.Codbairro });
             modelBuilder.Entity<Cep>().HasKey(c => new { c.Codlogr, c.cep, c.Valor1 });
             modelBuilder.Entity<Certidao_endereco>().HasKey(c => new { c.Numero, c.Ano });
+            modelBuilder.Entity<Certidao_Inscricao>().HasKey(c => new { c.Numero, c.Ano });
             modelBuilder.Entity<Certidao_isencao>().HasKey(c => new { c.Numero, c.Ano });
             modelBuilder.Entity<Certidao_valor_venal>().HasKey(c => new { c.Numero, c.Ano });
             modelBuilder.Entity<Cidade>().HasKey(c => new { c.Siglauf, c.Codcidade });
@@ -44,6 +45,7 @@ namespace GTI_WebCore.Models {
         public DbSet<Centrocusto> Centrocusto { get; set; }
         public DbSet<Cep> Cep { get; set; }
         public DbSet<Certidao_endereco> Certidao_Endereco { get; set; }
+        public DbSet<Certidao_Inscricao> Certidao_Inscricao { get; set; }
         public DbSet<Certidao_isencao> Certidao_Isencao { get; set; }
         public DbSet<Certidao_valor_venal> Certidao_Valor_Venal { get; set; }
         public DbSet<Cidadao> Cidadao { get; set; }

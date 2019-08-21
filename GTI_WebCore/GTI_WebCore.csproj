@@ -19,7 +19,7 @@
     <None Remove="Reports\Certidao_Valor_Venal.rpt" />
     <None Remove="Reports\Certidao_Valor_Venal_Valida.rpt" />
     <None Remove="Reports\Comprovante_Inscricao.rpt" />
-    <None Remove="Reports\Comprovante_InscricaoValida.rpt" />
+    <None Remove="Reports\Comprovante_Inscricao_Valida.rpt" />
     <None Remove="Reports\Empresa_Detalhe.rpt" />
   </ItemGroup>
 
@@ -60,8 +60,8 @@
       <LastGenOutput>Comprovante_Inscricao.cs</LastGenOutput>
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Comprovante_InscricaoValida.rpt">
-      <LastGenOutput>Comprovante_InscricaoValida.cs</LastGenOutput>
+    <EmbeddedResource Include="Reports\Comprovante_Inscricao_Valida.rpt">
+      <LastGenOutput>Comprovante_Inscricao_Valida.cs</LastGenOutput>
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Empresa_Detalhe.rpt">
@@ -161,9 +161,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Reports\Comprovante_InscricaoValida.cs">
+    <Compile Update="Reports\Comprovante_Inscricao_Valida.cs">
       <SubType>Component</SubType>
-      <DependentUpon>Comprovante_InscricaoValida.rpt</DependentUpon>
+      <DependentUpon>Comprovante_Inscricao_Valida.rpt</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
