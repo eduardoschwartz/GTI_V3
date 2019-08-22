@@ -9,7 +9,7 @@
 
     <div class="form-group"><label style="color:brown;font-size:16px;font-style:italic">Certidão de Inscrição</label></div>
 
-    <div class="form-group row align-items-lg-baseline">
+    <div class="form-group row align-items-lg-baseline" style="margin-left:1px">
 
         @foreach (var item in Model.OptionList) {
             <br />
@@ -31,7 +31,7 @@
 
     </div>
 
-    <div class="form-group row">
+    <div class="form-group row" style="margin-left:1px">
         <div>
             <label asp-for="Inscricao"> </label>
             @{ List<int> _lista_codigos = new List<int>();
@@ -44,16 +44,16 @@
         </div>
     </div>
 
-    <input type="submit" value="Verificar" title="Retorna as incrições municipais atreladas ao CPF/CNPJ informado." style="margin-left:-15px" class="green_button" formaction="Retorna_Codigos" />
+    <input type="submit" value="Verificar" title="Retorna as incrições municipais atreladas ao CPF/CNPJ informado." style="margin-left:1px" class="green_button" formaction="Retorna_Codigos" />
     <br />
     <br />
-    <div class="form-group">
-        <input type="checkbox" asp-for="@Model.Extrato" title="Marque esta opção para exibir o resumo dos pagamentos na certidão" style="margin-left:-15px" />
+    <div class="form-group" style="margin-left:1px">
+        <input type="checkbox" asp-for="@Model.Extrato" title="Marque esta opção para exibir o resumo dos pagamentos na certidão"  />
         <label>Exibir o resumo dos pagamentos na certidão</label>
     </div>
 
 
-    <div class="form-group row align-items-lg-baseline">
+    <div class="form-group row align-items-lg-baseline" style="margin-left:1px">
         <div>
             <div class="input-group">
                 <img id="img-captcha" src="~/Empresa/get-captcha-image" title="Clique para atualizar" />
@@ -64,7 +64,7 @@
     </div>
 
     <br />
-    <div style="border:1px solid black;width:350px;margin:-15px">
+    <div style="border:1px solid black;width:350px;margin-left:1px">
         <label style="color:brown;font-size:16px;font-style:italic;margin-left:10px">Autenticar a Certidão</label>
         <br />
         <div class="form-group row align-items-lg-baseline">
@@ -141,6 +141,23 @@
                 document.getElementById('errorLabel').innerHTML = "Digite a chave de autenticação.";
                 return false;
             }
+
+            if (_chave.length > 8) {
+                var _sufixo = _chave.substring(_chave.length - 3, _chave.length);
+                if (_sufixo != "-XA" && _sufixo != "-XE" && _sufixo != "-IE") {
+                    document.getElementById('errorLabel').innerHTML = "Chave de autenticação inválida!";
+                    return false;
+                }
+            } else {
+                if (_chave.length != "" ) {
+                    document.getElementById('errorLabel').innerHTML = "Chave de autenticação inválida!";
+                    return false;
+                }
+            }
+            return true;
+
+
+
 
             return true;
         }

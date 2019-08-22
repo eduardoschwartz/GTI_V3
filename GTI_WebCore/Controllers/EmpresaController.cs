@@ -189,39 +189,43 @@ namespace GTI_WebCore.Controllers {
                     _codigo = _chaveStruct.Codigo;
                     _numero = _chaveStruct.Numero;
                     _ano = _chaveStruct.Ano;
-
+                    List<Comprovante_Inscricao> certidao = new List<Comprovante_Inscricao>();
                     Certidao_Inscricao _dados = tributarioRepository.Retorna_Certidao_Inscricao(_ano, _numero);
-                    Comprovante_Inscricao reg = new Comprovante_Inscricao() {
-                        Codigo = _codigo,
-                        Razao_Social = _dados.Nome,
-                        Nome_Fantasia = _dados.Nome_fantasia,
-                        Cep = _dados.Cep,
-                        Cidade = _dados.Cidade,
-                        Email = _dados.Email,
-                        Inscricao_Estadual = _dados.Inscricao_estadual,
-                        Endereco = _dados.Endereco + ", " + _dados.Numero,
-                        Complemento = _dados.Complemento,
-                        Bairro = _dados.Bairro ?? "",
-                        Ano = _ano,
-                        Numero = _numero,
-                        Controle = _chave,
-                        Atividade = _dados.Atividade,
-                        Atividade2 = _dados.Atividade_secundaria,
-                        Cpf_Cnpj = _dados.Documento,
-                        Data_Abertura = (DateTime)_dados.Data_abertura,
-                        Processo_Abertura = _dados.Processo_abertura,
-                        Processo_Encerramento = _dados.Processo_encerramento,
-                        Situacao = _dados.Situacao,
-                        Telefone = _dados.Telefone,
-                        Area = (decimal)_dados.Area,
-                        Mei = _dados.Mei,
-                        Vigilancia_Sanitaria = _dados.Vigilancia_sanitaria,
-                        Taxa_Licenca = _dados.Taxa_licenca
-                    };
-                    if (_dados.Data_encerramento != null)
-                        reg.Data_Encerramento = (DateTime)_dados.Data_encerramento;
-
-                    List<Comprovante_Inscricao> certidao = new List<Comprovante_Inscricao> { reg };
+                    if (_dados != null) {
+                        Comprovante_Inscricao reg = new Comprovante_Inscricao() {
+                            Codigo = _codigo,
+                            Razao_Social = _dados.Nome,
+                            Nome_Fantasia = _dados.Nome_fantasia,
+                            Cep = _dados.Cep,
+                            Cidade = _dados.Cidade,
+                            Email = _dados.Email,
+                            Inscricao_Estadual = _dados.Inscricao_estadual,
+                            Endereco = _dados.Endereco + ", " + _dados.Numero,
+                            Complemento = _dados.Complemento,
+                            Bairro = _dados.Bairro ?? "",
+                            Ano = _ano,
+                            Numero = _numero,
+                            Controle = _chave,
+                            Atividade = _dados.Atividade,
+                            Atividade2 = _dados.Atividade_secundaria,
+                            Cpf_Cnpj = _dados.Documento,
+                            Data_Abertura = (DateTime)_dados.Data_abertura,
+                            Processo_Abertura = _dados.Processo_abertura,
+                            Processo_Encerramento = _dados.Processo_encerramento,
+                            Situacao = _dados.Situacao,
+                            Telefone = _dados.Telefone,
+                            Area = (decimal)_dados.Area,
+                            Mei = _dados.Mei,
+                            Vigilancia_Sanitaria = _dados.Vigilancia_sanitaria,
+                            Taxa_Licenca = _dados.Taxa_licenca
+                        };
+                        if (_dados.Data_encerramento != null)
+                            reg.Data_Encerramento = (DateTime)_dados.Data_encerramento;
+                        certidao.Add(reg);
+                    } else {
+                        ViewBag.Result = "Ocorreu um erro ao processar as informações.";
+                        return View("Certidao_Inscricao", model);
+                    }
 
                     ReportDocument rd = new ReportDocument();
                     rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Comprovante_Inscricao_Valida.rpt");

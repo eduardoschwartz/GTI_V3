@@ -13,7 +13,6 @@
                     <input asp-for="Inscricao" id="codigo" class="form-control" style="max-width:100px;max-height:25px;overflow:auto;" onKeyPress="return formata(this, '§§§§§§', event)" onchange="ClearError()">
                 </div>
                 <br />
-
             </div>
 
             <div class="form-group row align-items-lg-baseline"  style="margin-left:1px">
@@ -71,6 +70,19 @@
                         return true;
                     }
 
+                    if (_chave.length > 8) {
+                        var _sufixo = _chave.substring(_chave.length - 3, _chave.length);
+                        if (_sufixo != "-CI") {
+                            document.getElementById('errorLabel').innerHTML = "Chave de autenticação inválida!";
+                            return false;
+                        }
+                    } else {
+                        if (_chave.length != "") {
+                            document.getElementById('errorLabel').innerHTML = "Chave de autenticação inválida!";
+                            return false;
+                        }
+                    }
+                    return true;
                 }
 
                 function ClearError() {
