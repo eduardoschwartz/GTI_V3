@@ -14,12 +14,12 @@ using System.IO;
 namespace GTI_WebCore.Controllers {
 
     [Route("Imovel")]
-    public class ImovelController : Controller{
+    public class ImovelController : Controller {
         private readonly IImovelRepository _imovelRepository;
         private readonly IHostingEnvironment hostingEnvironment;
         private readonly ITributarioRepository tributarioRepository;
 
-        public ImovelController(IImovelRepository imovelRepository, IHostingEnvironment hostingEnvironment,ITributarioRepository tributarioRepository) {
+        public ImovelController(IImovelRepository imovelRepository, IHostingEnvironment hostingEnvironment, ITributarioRepository tributarioRepository) {
             _imovelRepository = imovelRepository;
             this.hostingEnvironment = hostingEnvironment;
             this.tributarioRepository = tributarioRepository;
@@ -34,32 +34,16 @@ namespace GTI_WebCore.Controllers {
         [Route("Certidao/Certidao_Endereco")]
         [HttpPost]
         public IActionResult Certidao_Endereco(CertidaoViewModel model) {
-            int _codigo = 0,_ano=0;
+            int _codigo = 0;
             int _numero = tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Endereco);
-            bool _existeCod = false,_Valida=false;
-            string _chave = model.Chave;
+            bool _existeCod = false;
             CertidaoViewModel certidaoViewModel = new CertidaoViewModel();
             ViewBag.Result = "";
 
-            if (!string.IsNullOrWhiteSpace(_chave)) {
-                chaveStruct _chaveStruct = tributarioRepository.Valida_Certidao(_chave);
-                if (!_chaveStruct.Valido) {
-                    ViewBag.Result = "Chave de autenticação da certidão inválida.";
-                    return View(certidaoViewModel);
-                } else {
-                    _codigo = _chaveStruct.Codigo;
-                    _numero = _chaveStruct.Numero;
-                    _ano = _chaveStruct.Ano;
-                    
-
-                    _Valida = true;
-                }
-            } else {
-                if (model.Inscricao != null) {
-                    _codigo = Convert.ToInt32(model.Inscricao);
-                    if (_codigo < 100000)
-                        _existeCod = _imovelRepository.Existe_Imovel(_codigo);
-                }
+            if (model.Inscricao != null) {
+                _codigo = Convert.ToInt32(model.Inscricao);
+                if (_codigo < 100000)
+                    _existeCod = _imovelRepository.Existe_Imovel(_codigo);
             }
 
             if (!Captcha.ValidateCaptchaCode(model.CaptchaCode, HttpContext)) {
@@ -67,11 +51,11 @@ namespace GTI_WebCore.Controllers {
                 return View(certidaoViewModel);
             }
 
-            if (!_existeCod && !_Valida) {
+            if (!_existeCod) {
                 ViewBag.Result = "Imóvel não cadastrado.";
                 return View(certidaoViewModel);
             }
-            
+
             List<Certidao> certidao = new List<Certidao>();
             List<ProprietarioStruct> listaProp = _imovelRepository.Lista_Proprietario(_codigo, true);
             ImovelStruct _dados = _imovelRepository.Dados_Imovel(_codigo);
@@ -79,8 +63,8 @@ namespace GTI_WebCore.Controllers {
                 Codigo = _dados.Codigo,
                 Inscricao = _dados.Inscricao,
                 Endereco = _dados.NomeLogradouro,
-                Endereco_Numero= (int)_dados.Numero,
-                Endereco_Complemento=_dados.Complemento,
+                Endereco_Numero = (int)_dados.Numero,
+                Endereco_Complemento = _dados.Complemento,
                 Bairro = _dados.NomeBairro ?? "",
                 Nome_Requerente = listaProp[0].Nome,
                 Ano = DateTime.Now.Year,
@@ -90,60 +74,99 @@ namespace GTI_WebCore.Controllers {
                 Controle = _numero.ToString("00000") + DateTime.Now.Year.ToString("0000") + "/" + _codigo.ToString() + "-EA"
             };
 
-            if (_Valida) {
-                reg.Codigo = _codigo;
-                reg.Ano = _ano;
-                reg.Numero = _numero;
-                Certidao_endereco certidaoGerada = tributarioRepository.Retorna_Certidao_Endereco(_ano, _numero, _codigo);
-                reg.Endereco = certidaoGerada.Logradouro;
-                reg.Endereco_Numero = certidaoGerada.Li_num;
-                reg.Endereco_Complemento = certidaoGerada.Li_compl??"";
-                reg.Bairro = certidaoGerada.descbairro;
-                reg.Nome_Requerente = certidaoGerada.Nomecidadao;
-                reg.Data_Geracao = certidaoGerada.Data;
-                reg.Inscricao = certidaoGerada.Inscricao;
-            }
             reg.Numero_Ano = reg.Numero.ToString("00000") + "/" + reg.Ano;
             certidao.Add(reg);
 
-            if (!_Valida) {
-                Models.Certidao_endereco regCert = new Certidao_endereco() {
-                    Ano=reg.Ano,
-                    Codigo=reg.Codigo,
-                    Data=DateTime.Now,
-                    descbairro=reg.Bairro,
-                    Inscricao=reg.Inscricao,
-                    Logradouro=reg.Endereco,
-                    Nomecidadao=reg.Nome_Requerente,
-                    Li_lotes=reg.Lote_Original,
-                    Li_compl=reg.Endereco_Complemento,
-                    Li_num=reg.Endereco_Numero,
-                    Li_quadras=reg.Quadra_Original,
-                    Numero=reg.Numero
-                };
-                Exception ex = tributarioRepository.Insert_Certidao_Endereco(regCert);
-                if (ex != null) {
-                    ViewBag.Result = "Ocorreu um erro no processamento das informações.";
-                    return View(certidaoViewModel);
-                }
+            Models.Certidao_endereco regCert = new Certidao_endereco() {
+                Ano = reg.Ano,
+                Codigo = reg.Codigo,
+                Data = DateTime.Now,
+                descbairro = reg.Bairro,
+                Inscricao = reg.Inscricao,
+                Logradouro = reg.Endereco,
+                Nomecidadao = reg.Nome_Requerente,
+                Li_lotes = reg.Lote_Original,
+                Li_compl = reg.Endereco_Complemento,
+                Li_num = reg.Endereco_Numero,
+                Li_quadras = reg.Quadra_Original,
+                Numero = reg.Numero
+            };
+            Exception ex = tributarioRepository.Insert_Certidao_Endereco(regCert);
+            if (ex != null) {
+                ViewBag.Result = "Ocorreu um erro no processamento das informações.";
+                return View(certidaoViewModel);
             }
 
             ReportDocument rd = new ReportDocument();
-            if(_Valida)
-                rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Certidao_Endereco_Valida.rpt");
-            else
-                rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Certidao_Endereco.rpt");
+            rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Certidao_Endereco.rpt");
 
             try {
                 rd.SetDataSource(certidao);
                 Stream stream = rd.ExportToStream(ExportFormatType.PortableDocFormat);
                 return File(stream, "application/pdf", "Certidao_Endereco.pdf");
             } catch {
-
                 throw;
             }
-
         }
+
+        [HttpPost]
+        [Route("Validate_CE")]
+        [Route("Certidao/Validate_CE")]
+        public IActionResult Validate_CE(CertidaoViewModel model) {
+            int _codigo, _ano, _numero;
+            string _chave = model.Chave;
+
+            model.OptionList = new List<SelectListItem> {
+                new SelectListItem { Text = "CPF", Value = "cpfCheck", Selected = model.SelectedValue == "cpfCheck" },
+                new SelectListItem { Text = "CNPJ", Value = "cnpjCheck", Selected = model.SelectedValue == "cnpjCheck" }
+            };
+
+            if (model.Chave != null) {
+                Certidao reg = new Certidao();
+                List<Certidao> certidao = new List<Certidao>();
+                chaveStruct _chaveStruct = tributarioRepository.Valida_Certidao(_chave);
+                if (!_chaveStruct.Valido) {
+                    ViewBag.Result = "Chave de autenticação da certidão inválida.";
+                    return View("Certidao_Endereco", model);
+                } else {
+                    _codigo = _chaveStruct.Codigo;
+                    _numero = _chaveStruct.Numero;
+                    _ano = _chaveStruct.Ano;
+
+                    Certidao_endereco certidaoGerada = tributarioRepository.Retorna_Certidao_Endereco(_ano, _numero, _codigo);
+                    reg.Codigo = _codigo;
+                    reg.Ano = _ano;
+                    reg.Numero = _numero;
+                    reg.Endereco = certidaoGerada.Logradouro;
+                    reg.Endereco_Numero = certidaoGerada.Li_num;
+                    reg.Endereco_Complemento = certidaoGerada.Li_compl ?? "";
+                    reg.Bairro = certidaoGerada.descbairro;
+                    reg.Nome_Requerente = certidaoGerada.Nomecidadao;
+                    reg.Data_Geracao = certidaoGerada.Data;
+                    reg.Inscricao = certidaoGerada.Inscricao;
+                    reg.Numero_Ano = reg.Numero.ToString("00000") + "/" + reg.Ano;
+                };
+                
+                certidao.Add(reg);
+
+                ReportDocument rd = new ReportDocument();
+                rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Certidao_Endereco_Valida.rpt");
+
+                try {
+                    rd.SetDataSource(certidao);
+                    Stream stream = rd.ExportToStream(ExportFormatType.PortableDocFormat);
+                    return File(stream, "application/pdf", "Certidao_Endereco.pdf");
+                } catch {
+
+                    throw;
+                }
+            } else {
+                ViewBag.Result = "Chave de validação inválida.";
+                return View("Certidao_Endereço", model);
+            }
+        }
+
+
 
         [Route("get-captcha-image")]
         public IActionResult GetCaptchaImage() {
@@ -467,6 +490,7 @@ namespace GTI_WebCore.Controllers {
                 throw;
             }
         }
+
 
     }
 }
