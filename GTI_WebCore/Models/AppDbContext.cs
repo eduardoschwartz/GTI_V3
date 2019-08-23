@@ -13,6 +13,7 @@ namespace GTI_WebCore.Models {
             modelBuilder.Entity<Cep>().HasKey(c => new { c.Codlogr, c.cep, c.Valor1 });
             modelBuilder.Entity<Certidao_endereco>().HasKey(c => new { c.Numero, c.Ano });
             modelBuilder.Entity<Certidao_Inscricao>().HasKey(c => new { c.Numero, c.Ano });
+            modelBuilder.Entity<Certidao_Inscricao_Extrato>().HasKey(c => new { c.Numero_certidao, c.Ano_certidao,c.Codigo,c.Ano,c.Lancamento_Codigo,c.Sequencia,c.Parcela,c.Complemento });
             modelBuilder.Entity<Certidao_isencao>().HasKey(c => new { c.Numero, c.Ano });
             modelBuilder.Entity<Certidao_valor_venal>().HasKey(c => new { c.Numero, c.Ano });
             modelBuilder.Entity<Cidade>().HasKey(c => new { c.Siglauf, c.Codcidade });
@@ -30,6 +31,7 @@ namespace GTI_WebCore.Models {
             modelBuilder.Entity<Processogti>().HasKey(c => new { c.Ano, c.Numero});
             modelBuilder.Entity<Proprietario>().HasKey(c => new { c.Codreduzido, c.Codcidadao });
             modelBuilder.Entity<SpCalculo>().HasKey(c => new { c.Codigo, c.Ano });
+            modelBuilder.Entity<SpExtrato>().HasKey(c => new { c.Usuario, c.Codreduzido,  c.Anoexercicio, c.Codlancamento, c.Seqlancamento, c.Numparcela, c.Codcomplemento,c.Codtributo });
         }
 
 
@@ -46,6 +48,7 @@ namespace GTI_WebCore.Models {
         public DbSet<Cep> Cep { get; set; }
         public DbSet<Certidao_endereco> Certidao_Endereco { get; set; }
         public DbSet<Certidao_Inscricao> Certidao_Inscricao { get; set; }
+        public DbSet<Certidao_Inscricao_Extrato> Certidao_Inscricao_Extrato { get; set; }
         public DbSet<Certidao_isencao> Certidao_Isencao { get; set; }
         public DbSet<Certidao_valor_venal> Certidao_Valor_Venal { get; set; }
         public DbSet<Cidadao> Cidadao { get; set; }
@@ -75,6 +78,7 @@ namespace GTI_WebCore.Models {
         public DbSet<Proprietario> Proprietario { get; set; }
         public DbSet<Situacao> Situacao { get; set; }
         public DbSet<SpCalculo> SpCalculo { get; set; }
+        public DbSet<SpExtrato> SpExtrato { get; set; }
         public DbSet<Topografia> Topografia { get; set; }
         public DbSet<Usoterreno> Usoterreno { get; set; }
         public DbSet<Usuario> Usuario { get; set; }

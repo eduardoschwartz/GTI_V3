@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace GTI_WebCore.Controllers {
 
@@ -369,11 +370,48 @@ namespace GTI_WebCore.Controllers {
                 reg
             };
 
+            if (model.Extrato) {
+
+                List<SpExtrato> ListaTributo = tributarioRepository.Lista_Extrato_Tributo(_codigo, 1980, 2050, 0, 99, 0, 99, 0, 999, 0, 99, 0, 99, DateTime.Now, "Web");
+                List<SpExtrato> ListaParcela = tributarioRepository.Lista_Extrato_Parcela(ListaTributo);
+
+                foreach (SpExtrato item in ListaParcela.Where(x => (x.Codlancamento == 2 || x.Codlancamento == 6 || x.Codlancamento == 14) && x.Statuslanc < 3)) {
+                    Certidao_Inscricao_Extrato regExt = new Certidao_Inscricao_Extrato {
+                        Id = reg.Controle,
+                        Numero_certidao = reg.Numero,
+                        Ano_certidao = (short)reg.Ano,
+                        Ano = item.Anoexercicio,
+                        Codigo = item.Codreduzido,
+                        Complemento = item.Codcomplemento
+                    };
+                    if (item.Datapagamento != null)
+                        regExt.Data_Pagamento = Convert.ToDateTime(item.Datapagamento);
+                    regExt.Data_Vencimento = item.Datavencimento;
+                    regExt.Lancamento_Codigo = item.Codlancamento;
+                    regExt.Lancamento_Descricao = item.Desclancamento;
+                    regExt.Parcela = (byte)item.Numparcela;
+                    regExt.Sequencia = (byte)item.Seqlancamento;
+                    regExt.Valor_Pago = (decimal)item.Valorpagoreal;
+                    ex = tributarioRepository.Insert_Certidao_Inscricao_Extrato(regExt);
+                    if (ex != null)
+                        throw ex;
+                }
+            }
+
             ReportDocument rd = new ReportDocument();
             if (model.Extrato) {
+                if (_dados.Data_Encerramento != null) {
+                    rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\CertidaoInscricaoExtratoEncerrada.rpt");
+                } else {
+                    rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\CertidaoInscricaoExtratoAtiva.rpt");
+                }
+                rd.RecordSelectionFormula = "{Certidao_inscricao_extrato.Id}='" + reg.Controle + "'";
             } else
                 if (_valida)
                 rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Comprovante_InscricaoValida.rpt");
+            else
+                if(model.Extrato)
+                    rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Comprovante_Inscricao.rpt");
             else
                 rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Comprovante_Inscricao.rpt");
             try {

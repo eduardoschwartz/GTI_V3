@@ -14,5 +14,9 @@ namespace GTI_WebCore.Interfaces {
         Exception Insert_Certidao_Valor_Venal(Certidao_valor_venal Reg);
         Exception Insert_Certidao_Isencao(Certidao_isencao Reg);
         Exception Insert_Certidao_Inscricao(Certidao_Inscricao Reg);
+        Exception Insert_Certidao_Inscricao_Extrato(Certidao_Inscricao_Extrato Reg);
+        List<SpExtrato> Lista_Extrato_Tributo(int Codigo, short Ano1 = 1990, short Ano2 = 2050, short Lancamento1 = 1, short Lancamento2 = 99, short Sequencia1 = 0, short Sequencia2 = 9999,
+                                              short Parcela1 = 0, short Parcela2 = 999, short Complemento1 = 0, short Complemento2 = 999, short Status1 = 0, short Status2 = 99, DateTime? Data_Atualizacao = null, string Usuario = "");
+        List<SpExtrato> Lista_Extrato_Parcela(List<SpExtrato> Lista_Tributo);
     }
 }
