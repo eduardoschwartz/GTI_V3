@@ -1,1 +1,1 @@
-﻿select * from certidao_inscricao where cadastro=123555
+﻿select top(100) * from mobiliario where dataencerramento is null

@@ -241,7 +241,6 @@ namespace GTI_WebCore.Repository {
         }
 
         public Exception Insert_Certidao_Isencao(Certidao_isencao Reg) {
-
             object[] Parametros = new object[16];
             Parametros[0] = new SqlParameter { ParameterName = "@numero", SqlDbType = SqlDbType.Int, SqlValue = Reg.Numero };
             Parametros[1] = new SqlParameter { ParameterName = "@ano", SqlDbType = SqlDbType.Int, SqlValue = Reg.Ano };
@@ -263,6 +262,34 @@ namespace GTI_WebCore.Repository {
             context.Database.ExecuteSqlCommand("INSERT INTO certidao_isencao(numero,ano,data,codigo,nomecidadao,inscricao,logradouro,li_num,li_compl,li_quadras,li_lotes," +
                 "descbairro,percisencao,area,numprocesso,dataprocesso) VALUES(@numero,@ano,@data,@codigo,@nomecidadao,@inscricao,@logradouro,@li_num,@li_compl,@li_quadras,@li_lotes," +
                 "@descbairro,@percisencao,@area,@numprocesso,@dataprocesso)", Parametros);
+
+            try {
+                context.SaveChanges();
+            } catch (Exception ex) {
+                return ex;
+            }
+            return null;
+        }
+
+        public Exception Insert_Certidao_Inscricao_Extrato(Certidao_Inscricao_Extrato Reg) {
+            object[] Parametros = new object[13];
+            Parametros[0] = new SqlParameter { ParameterName = "@id", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Id };
+            Parametros[1] = new SqlParameter { ParameterName = "@numero_certidao", SqlDbType = SqlDbType.Int, SqlValue = Reg.Numero_certidao };
+            Parametros[2] = new SqlParameter { ParameterName = "@ano_certidao", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Ano_certidao };
+            Parametros[3] = new SqlParameter { ParameterName = "@codigo", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codigo };
+            Parametros[4] = new SqlParameter { ParameterName = "@ano", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Ano };
+            Parametros[5] = new SqlParameter { ParameterName = "@lancamento_codigo", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Lancamento_Codigo };
+            Parametros[6] = new SqlParameter { ParameterName = "@sequencia", SqlDbType = SqlDbType.TinyInt, SqlValue = Reg.Sequencia };
+            Parametros[7] = new SqlParameter { ParameterName = "@parcela", SqlDbType = SqlDbType.TinyInt, SqlValue = Reg.Parcela };
+            Parametros[8] = new SqlParameter { ParameterName = "@complemento", SqlDbType = SqlDbType.TinyInt, SqlValue = Reg.Complemento };
+            Parametros[9] = new SqlParameter { ParameterName = "@lancamento_descricao", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Lancamento_Descricao };
+            Parametros[10] = new SqlParameter { ParameterName = "@data_vencimento", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Data_Vencimento };
+            Parametros[11] = new SqlParameter { ParameterName = "@data_pagamento", SqlDbType = SqlDbType.SmallDateTime, IsNullable = true, SqlValue = DBNull.Value };
+            Parametros[12] = new SqlParameter { ParameterName = "@valor_pago", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Valor_Pago };
+
+            context.Database.ExecuteSqlCommand("INSERT INTO certidao_inscricao_extrato(id,numero_certidao,ano_certidao,codigo,ano,lancamento_codigo,sequencia,parcela,complemento,lancamento_descricao," +
+                "data_vencimento,data_pagamento,valor_pago) VALUES(@id,@numero_certidao,@ano_certidao,@codigo,@ano,@lancamento_codigo,@sequencia,@parcela,@complemento,@lancamento_descricao," +
+                "@data_vencimento,@data_pagamento,@valor_pago)", Parametros);
 
             try {
                 context.SaveChanges();
@@ -334,16 +361,6 @@ namespace GTI_WebCore.Repository {
         public Certidao_Inscricao Retorna_Certidao_Inscricao(int Ano, int Numero) {
             var Sql = (from c in context.Certidao_Inscricao where c.Ano == Ano && c.Numero == Numero select c).FirstOrDefault();
             return Sql;
-        }
-
-        public Exception Insert_Certidao_Inscricao_Extrato(Certidao_Inscricao_Extrato Reg) {
-                try {
-                    context.Certidao_Inscricao_Extrato.Add(Reg);
-                    context.SaveChanges();
-                } catch (Exception ex) {
-                    return ex;
-                }
-                return null;
         }
 
         public List<SpExtrato> Lista_Extrato_Tributo(int Codigo, short Ano1 = 1990, short Ano2 = 2050, short Lancamento1 = 1, short Lancamento2 = 99, short Sequencia1 = 0, short Sequencia2 = 9999,
