@@ -390,20 +390,19 @@ namespace UIWeb.Pages {
             int nIndex = 0;
             if (bRefis) {
                 foreach (var item in ListaParcela) {
-                    if (Convert.ToDateTime(item.Datavencimento) <= Convert.ToDateTime("30/06/2018")) {
+                    if (Convert.ToDateTime(item.Datavencimento) <= Convert.ToDateTime("30/06/2019")) {
                         Int16 CodLanc = item.Codlancamento;
                         if (CodLanc != 48 || CodLanc != 69 || CodLanc != 78) {
 
-                            //if (DateTime.Now <= Convert.ToDateTime("19/11/2018")) {
-                            if (Convert.ToDateTime(sDataDAM) <= Convert.ToDateTime("30/11/2018")) {
+                            if (Convert.ToDateTime(sDataDAM) <= Convert.ToDateTime("18/10/2019")) {
                                 nPerc = 1M;
-                                nPlano = 26;
-                            } else if (Convert.ToDateTime(sDataDAM) > Convert.ToDateTime("30/11/2018") && Convert.ToDateTime(sDataDAM) <= Convert.ToDateTime("14/12/2018")) {
+                                nPlano = 33;
+                            } else if (Convert.ToDateTime(sDataDAM) > Convert.ToDateTime("18/10/2019") && Convert.ToDateTime(sDataDAM) <= Convert.ToDateTime("29/11/2019")) {
                                 nPerc = 0.9M;
-                                nPlano = 27;
-                            } else if (Convert.ToDateTime(sDataDAM) > Convert.ToDateTime("14/12/2018") && Convert.ToDateTime(sDataDAM) <= Convert.ToDateTime("28/12/2018")) {
+                                nPlano = 34;
+                            } else if (Convert.ToDateTime(sDataDAM) > Convert.ToDateTime("29/11/2019") && Convert.ToDateTime(sDataDAM) <= Convert.ToDateTime("20/12/2019")) {
                                 nPerc = 0.8M;
-                                nPlano = 28;
+                                nPlano = 35;
                             }
                             if (nPlano > 0) {
                                 item.Valorjuros = Convert.ToDecimal(item.Valorjuros) - (Convert.ToDecimal(item.Valorjuros) * nPerc);
@@ -515,9 +514,9 @@ namespace UIWeb.Pages {
                                 bParcNormal = true;
 
 //                            if (Convert.ToDateTime(row.Cells[6].Text).Year < 2017)
-                            if (Convert.ToDateTime(row.Cells[6].Text).Year <= 2018  && Convert.ToDateTime(row.Cells[6].Text).Month <= 6)
+                            if (Convert.ToDateTime(row.Cells[6].Text).Year <= 2019  && Convert.ToDateTime(row.Cells[6].Text).Month <= 6)
                                     bAnoAnterior = true;
-                            if (Convert.ToDateTime(row.Cells[6].Text).Year >= 2018 && Convert.ToDateTime(row.Cells[6].Text).Month > 6 && Convert.ToInt16(row.Cells[2].Text.Substring(0, 3)) != 41)
+                            if (Convert.ToDateTime(row.Cells[6].Text).Year >= 2019 && Convert.ToDateTime(row.Cells[6].Text).Month > 6 && Convert.ToInt16(row.Cells[2].Text.Substring(0, 3)) != 41)
                                 bAnoAtual = true;
 
                             if (Convert.ToInt16(row.Cells[2].Text.Substring(0, 3)) == 5) {

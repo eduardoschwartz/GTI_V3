@@ -31,7 +31,20 @@ namespace GTI_WebCore.Models.ReportModels {
         public string Cpf_Cnpj { get; set; }
         public string Razao_Social { get; set; }
         public string Nome_Fantasia { get; set; }
+        public string Atividade_Extenso { get; set; }
         public string Cnae_Principal { get; set; }
         public string Cnae_Secundario { get; set; }
+        public string Rg { get; set; }
+        public string Cidade { get; set; }
+        public string Uf { get; set; }
+        public short Exercicio { get; set; }
+        public byte Lancamento_codigo { get; set; }
+        public string Lancamento_Nome { get; set; }
+        public byte Sequencia_Lancamento { get; set; }
+        public byte Parcela { get; set; }
+        public byte Complemento { get; set; }
+        public DateTime Data_Vencimento { get; set; }
+        public DateTime Data_Pagamento { get; set; }
+        public decimal Valor_Pago { get; set; }
     }
 }

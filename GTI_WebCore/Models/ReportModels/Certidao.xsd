@@ -26,6 +26,29 @@
         <xsd:element name="Numero_Processo" type="xsd:string"></xsd:element>
         <xsd:element name="Data_Processo" type="xsd:dateTime"></xsd:element>
         <xsd:element name="Percentual_Isencao" type="xsd:decimal"></xsd:element>
+        <xsd:element name="Insc_Estadual" type="xsd:string"></xsd:element>
+        <xsd:element name="Data_Abertura" type="xsd:dateTime"></xsd:element>
+        <xsd:element name="Data_Encerramento" type="xsd:dateTime"></xsd:element>
+        <xsd:element name="Processo_Abertura" type="xsd:string"></xsd:element>
+        <xsd:element name="Processo_Encerramento" type="xsd:string"></xsd:element>
+        <xsd:element name="Cpf_Cnpj" type="xsd:string"></xsd:element>
+        <xsd:element name="Razao_Social" type="xsd:string"></xsd:element>
+        <xsd:element name="Nome_Fantasia" type="xsd:string"></xsd:element>
+        <xsd:element name="Atividade_Extenso" type="xsd:string"></xsd:element>
+        <xsd:element name="Cnae_Principal" type="xsd:string"></xsd:element>
+        <xsd:element name="Cnae_Secundario" type="xsd:string"></xsd:element>
+        <xsd:element name="Rg" type="xsd:string"></xsd:element>
+        <xsd:element name="Cidade" type="xsd:string"></xsd:element>
+        <xsd:element name="uf" type="xsd:string"></xsd:element>
+        <xsd:element name="Exercicio" type="xsd:short"></xsd:element>
+        <xsd:element name="Lancamento_codigo" type="xsd:byte"></xsd:element>
+        <xsd:element name="Lancamento_nome" type="xsd:string"></xsd:element>
+        <xsd:element name="Sequencia_Lancamento" type="xsd:byte"></xsd:element>
+        <xsd:element name="Parcela" type="xsd:byte"></xsd:element>
+        <xsd:element name="Complemento" type="xsd:byte"></xsd:element>
+        <xsd:element name="Data_Vencimento" type="xsd:dateTime"></xsd:element>
+        <xsd:element name="Data_Pagamento" type="xsd:dateTime"></xsd:element>
+        <xsd:element name="Valor_Pago" type="xsd:decimal"></xsd:element>
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>

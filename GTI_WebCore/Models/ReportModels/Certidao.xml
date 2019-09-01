@@ -21,5 +21,28 @@
   <Numero_Processo>'35'</Numero_Processo>
   <Data_Processo>1980-03-23T10:20:15</Data_Processo>
   <Percentual_Isencao>32.1</Percentual_Isencao>
+  <Insc_Estadual>1</Insc_Estadual>
+  <Data_Abertura>1980-03-23T10:20:15</Data_Abertura>
+  <Data_Encerramento>1980-03-23T10:20:15</Data_Encerramento>
+  <Processo_Abertura>35/2005</Processo_Abertura>
+  <Processo_Encerramento>1980-03-23T10:20:15</Processo_Encerramento>
+  <Cpf_Cnpj>65678</Cpf_Cnpj>
+  <Razao_Social>yuuyu</Razao_Social>
+  <Nome_Fantasia>hjgjh></Nome_Fantasia>
+  <Atividade_Extenso>hgh</Atividade_Extenso>
+  <Cnae_Principal>8787</Cnae_Principal>
+  <Cnae_Secundario>7676</Cnae_Secundario>
+  <Rg>222</Rg>
+  <Cidade>Jaboticabal</Cidade>
+  <uf>SP</uf>
+  <Exercicio>2010</Exercicio>
+  <Lancamento_codigo>1</Lancamento_codigo>
+  <Lancamento_nome>aa</Lancamento_nome>
+  <Sequencia_Lancamento>2</Sequencia_Lancamento>
+  <Parcela>2</Parcela>
+  <Complemento>1</Complemento>
+  <Data_Vencimento>1980-03-23T10:20:15</Data_Vencimento>
+  <Data_Pagamento>1980-03-23T10:20:15</Data_Pagamento>
+  <Valor_Pago>22</Valor_Pago>
 </Certidao>
 

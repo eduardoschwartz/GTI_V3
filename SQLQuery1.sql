@@ -1,1 +1,1 @@
-﻿select top(100) * from mobiliario where dataencerramento is null
+﻿select * from vwfullimovel where codreduzido=38
