@@ -22,6 +22,7 @@ namespace GTI_WebCore.Models.ReportModels {
         public string Nome_Fantasia { get; set; }
         public string Cep { get; set; }
         public string Atividade2 { get; set; }
+        public string Atividade_Extenso { get; set; }
         public string Complemento { get; set; }
         public string Situacao { get; set; }
         public string Email { get; set; }

@@ -13,7 +13,7 @@
 
         @foreach (var item in Model.OptionList) {
             <br />
-            <input asp-for="SelectedValue" type="radio" id="@item.Value" value="@item.Value" checked=@item.Selected onclick="radioCheck()" /> @(item.Text)
+            <input asp-for="SelectedValue" type="radio" id="@item.Value" value="@item.Value" checked=@item.Selected onclick="radioCheck()" />@(" " + item.Text + " ")
         }
         &nbsp;
         @if (@Model.SelectedValue == "cpfCheck") {

@@ -131,7 +131,7 @@ namespace GTI_WebCore.Controllers {
         public ViewResult Certidao_Inscricao() {
             CertidaoViewModel model = new CertidaoViewModel {
                 OptionList = new List<SelectListItem> {
-                new SelectListItem { Text = " CPF", Value = "cpfCheck", Selected = true },
+                new SelectListItem { Text = " CPF", Value = "cpfCheck", Selected = true },
                 new SelectListItem { Text = " CNPJ", Value = "cnpjCheck", Selected = false }
             },
                 SelectedValue = "cpfCheck"
@@ -145,7 +145,7 @@ namespace GTI_WebCore.Controllers {
             if(model.CpfValue!=null || model.CnpjValue != null) {
 
                 model.OptionList = new List<SelectListItem> {
-                    new SelectListItem { Text = "CPF", Value = "cpfCheck", Selected = model.SelectedValue == "cpfCheck" },
+                    new SelectListItem { Text = " CPF", Value = "cpfCheck", Selected = model.SelectedValue == "cpfCheck" },
                     new SelectListItem { Text = "CNPJ", Value = "cnpjCheck", Selected = model.SelectedValue == "cnpjCheck" }
                 };
 
@@ -209,6 +209,7 @@ namespace GTI_WebCore.Controllers {
                             Controle = _chave,
                             Atividade = _dados.Atividade,
                             Atividade2 = _dados.Atividade_secundaria,
+                            Atividade_Extenso=_dados.Atividade_Extenso,
                             Cpf_Cnpj = _dados.Documento,
                             Data_Abertura = (DateTime)_dados.Data_abertura,
                             Processo_Abertura = _dados.Processo_abertura,
@@ -253,7 +254,11 @@ namespace GTI_WebCore.Controllers {
         public IActionResult Certidao_Inscricao(CertidaoViewModel model) {
             int _codigo;
             bool _valida = false;
-            int _numero = tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Comprovante_Pagamento);
+            int _numero;
+            if(model.Extrato)
+                _numero= tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Debito);
+            else
+                _numero = tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Comprovante_Pagamento);
             ViewBag.Result = "";
 
             model.OptionList = new List<SelectListItem> {
@@ -304,7 +309,7 @@ namespace GTI_WebCore.Controllers {
                 Razao_Social=_dados.Razao_social,
                 Nome_Fantasia=_dados.Nome_fantasia,
                 Cep=_dados.Cep,
-                Cidade=_dados.Cidade_nome,
+                Cidade=_dados.Cidade_nome + "/" + _dados.UF,
                 Email=_dados.Email_contato,
                 Inscricao_Estadual = _dados.Inscricao_estadual,
                 Endereco = _dados.Endereco_nome +", " + _dados.Numero,
@@ -315,6 +320,7 @@ namespace GTI_WebCore.Controllers {
                 Controle = _numero.ToString("00000") + DateTime.Now.Year.ToString("0000") + "/" + _codigo.ToString() + "-" + _sufixo,
                 Atividade = _cnae,
                 Atividade2 = _cnae2,
+                Atividade_Extenso=_dados.Atividade_extenso,
                 Cpf_Cnpj = _dados.Cpf_cnpj,
                 Rg=_dados.Rg,
                 Data_Abertura = (DateTime)_dados.Data_abertura,
@@ -348,6 +354,7 @@ namespace GTI_WebCore.Controllers {
                 Numero = _numero,
                 Atividade = _cnae??"",
                 Atividade_secundaria = _cnae2??"",
+                Atividade_Extenso=reg.Atividade_Extenso,
                 Rg = reg.Rg ?? "",
                 Documento = reg.Cpf_Cnpj,
                 Data_abertura = (DateTime)reg.Data_Abertura,
@@ -366,14 +373,13 @@ namespace GTI_WebCore.Controllers {
             Exception ex = tributarioRepository.Insert_Certidao_Inscricao(reg2);
             if (ex != null)
                 throw ex;
-            List<Comprovante_Inscricao> certidao = new List<Comprovante_Inscricao> {
-                reg
-            };
 
+            List<Certidao> Lista_Certidao = new List<Certidao>();
             if (model.Extrato) {
 
                 List<SpExtrato> ListaTributo = tributarioRepository.Lista_Extrato_Tributo(_codigo, 1980, 2050, 0, 99, 0, 99, 0, 999, 0, 99, 0, 99, DateTime.Now, "Web");
                 List<SpExtrato> ListaParcela = tributarioRepository.Lista_Extrato_Parcela(ListaTributo);
+                Certidao regCert = new Certidao();
 
                 foreach (SpExtrato item in ListaParcela.Where(x => (x.Codlancamento == 2 || x.Codlancamento == 6 || x.Codlancamento == 14) && x.Statuslanc < 3)) {
                     Certidao_Inscricao_Extrato regExt = new Certidao_Inscricao_Extrato {
@@ -382,7 +388,7 @@ namespace GTI_WebCore.Controllers {
                         Ano_certidao = (short)reg.Ano,
                         Ano = item.Anoexercicio,
                         Codigo = item.Codreduzido,
-                        Complemento = item.Codcomplemento
+                        Complemento = item.Codcomplemento,
                     };
                     if (item.Datapagamento != null)
                         regExt.Data_Pagamento = Convert.ToDateTime(item.Datapagamento);
@@ -395,8 +401,42 @@ namespace GTI_WebCore.Controllers {
                     ex = tributarioRepository.Insert_Certidao_Inscricao_Extrato(regExt);
                     if (ex != null)
                         throw ex;
+
+                    regCert.Codigo = _codigo;
+                    regCert.Razao_Social = reg2.Nome;
+                    regCert.Nome_Requerente = reg2.Nome;
+                    regCert.Endereco = reg2.Endereco;
+                    regCert.Endereco_Numero = reg2.Numero;
+                    regCert.Endereco_Complemento = reg2.Complemento;
+                    regCert.Bairro = reg2.Bairro;
+                    regCert.Cidade = reg2.Cidade ;
+                    regCert.Atividade_Extenso = reg2.Atividade_Extenso;
+                    regCert.Rg = reg2.Rg;
+                    regCert.Cpf_Cnpj = reg2.Documento;
+                    regCert.Exercicio = regExt.Ano;
+                    regCert.Lancamento_codigo = (byte)regExt.Lancamento_Codigo;
+                    regCert.Lancamento_Nome = regExt.Lancamento_Descricao;
+                    regCert.Sequencia_Lancamento = regExt.Sequencia;
+                    regCert.Complemento = regExt.Complemento;
+                    regCert.Data_Vencimento = regExt.Data_Vencimento;
+                    regCert.Data_Pagamento = regExt.Data_Pagamento;
+                    regCert.Valor_Pago = regExt.Valor_Pago;
+                    regCert.Processo_Abertura = reg2.Processo_abertura;
+                    regCert.Numero_Ano = regExt.Numero_certidao.ToString("00000") + "/" + regExt.Ano_certidao;
+
+                    Lista_Certidao.Add(regCert);
+
                 }
+                if (Lista_Certidao.Count == 0) {
+                    ViewBag.Result = "Esta empresa não possui débitos pagos de ISS/Taxa.";
+                    return View(model);
+                }
+
             }
+
+            List<Certidao_Inscricao> certidao = new List<Certidao_Inscricao> {
+                reg2
+            };
 
             ReportDocument rd = new ReportDocument();
             if (model.Extrato) {
@@ -405,7 +445,6 @@ namespace GTI_WebCore.Controllers {
                 } else {
                     rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\CertidaoInscricaoExtratoAtiva.rpt");
                 }
-                rd.RecordSelectionFormula = "{Certidao_inscricao_extrato.Id}='" + reg.Controle + "'";
             } else
                 if (_valida)
                 rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Comprovante_InscricaoValida.rpt");
@@ -415,10 +454,13 @@ namespace GTI_WebCore.Controllers {
             else
                 rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Comprovante_Inscricao.rpt");
             try {
-                rd.SetDataSource(certidao);
+                if(model.Extrato)
+                    rd.SetDataSource(Lista_Certidao);
+                else
+                    rd.SetDataSource(certidao);
                 Stream stream = rd.ExportToStream(ExportFormatType.PortableDocFormat);
                 return File(stream, "application/pdf", "Certidao_Inscricao.pdf");
-            } catch {
+            } catch{
                 throw;
             }
 

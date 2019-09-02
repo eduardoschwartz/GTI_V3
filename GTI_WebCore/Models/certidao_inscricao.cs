@@ -10,7 +10,7 @@ namespace GTI_WebCore.Models {
         [Key]
         [Column(Order = 2)]
         public int Ano { get; set; }
-        public DateTime? Data_emissao { get; set; }
+        public DateTime Data_emissao { get; set; }
         public string Endereco { get; set; }
         public string Bairro { get; set; }
         public int Cadastro { get; set; }
@@ -19,9 +19,9 @@ namespace GTI_WebCore.Models {
         public string Documento { get; set; }
         public string Cidade { get; set; }
         public string Atividade { get; set; }
-        public DateTime?  Data_abertura { get; set; }
+        public DateTime  Data_abertura { get; set; }
         public string Processo_abertura { get; set; }
-        public DateTime? Data_encerramento { get; set; }
+        public DateTime Data_encerramento { get; set; }
         public string Processo_encerramento { get; set; }
         public string Inscricao_estadual { get; set; }
         public string Nome_fantasia { get; set; }
@@ -34,6 +34,7 @@ namespace GTI_WebCore.Models {
         public string Taxa_licenca { get; set; }
         public string Vigilancia_sanitaria { get; set; }
         public string Mei { get; set; }
-        public decimal? Area { get; set; }
+        public decimal Area { get; set; }
+        public string Atividade_Extenso { get; set; }
     }
 }

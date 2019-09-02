@@ -1,1 +1,1 @@
-﻿select * from vwfullimovel where codreduzido=38
+﻿select * from certidao_inscricao_extrato

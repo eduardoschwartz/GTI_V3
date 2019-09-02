@@ -31,7 +31,7 @@ namespace GTI_WebCore.Models {
         public byte Complemento { get; set; }
         public string Lancamento_Descricao { get; set; }
         public DateTime Data_Vencimento { get; set; }
-        public DateTime? Data_Pagamento { get; set; }
+        public DateTime Data_Pagamento { get; set; }
         public decimal Valor_Pago { get; set; }
     }
 }
