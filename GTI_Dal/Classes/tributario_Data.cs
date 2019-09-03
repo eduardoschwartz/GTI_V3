@@ -626,6 +626,16 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public short Retorna_Ultima_Seq_AR(int Codigo, int Ano) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var cntCod = (from c in db.Debitoparcela where c.Codreduzido == Codigo && c.Anoexercicio == Ano && c.Codlancamento == 79 orderby c.Seqlancamento descending select c.Seqlancamento).FirstOrDefault();
+                return Convert.ToInt16(cntCod);
+            }
+        }
+
+
+
+
         public Exception Alterar_Observacao_Codigo(Debitoobservacao reg) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 Debitoobservacao b = db.Debitoobservacao.First(i => i.Codreduzido == reg.Codreduzido && i.Seq==reg.Seq);
@@ -2290,7 +2300,7 @@ Proximo:;
                 Parametros[3] = new SqlParameter { ParameterName = "@seqlancamento", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Seqlancamento };
                 Parametros[4] = new SqlParameter { ParameterName = "@numparcela", SqlDbType = SqlDbType.TinyInt, SqlValue = Reg.Numparcela };
                 Parametros[5] = new SqlParameter { ParameterName = "@codcomplemento", SqlDbType = SqlDbType.TinyInt, SqlValue = Reg.Codcomplemento };
-                Parametros[6] = new SqlParameter { ParameterName = "@Codtributo", SqlDbType = SqlDbType.TinyInt, SqlValue = Reg.Codtributo };
+                Parametros[6] = new SqlParameter { ParameterName = "@Codtributo", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Codtributo };
                 Parametros[7] = new SqlParameter { ParameterName = "@Valortributo", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Valortributo };
 
                 db.Database.ExecuteSqlCommand("INSERT INTO debitotributo(codreduzido,anoexercicio,codlancamento,seqlancamento,numparcela,codcomplemento,Codtributo,Valortributo) " +

@@ -79,6 +79,7 @@ namespace GTI_Desktop.Forms {
             Empresa_bll empresa_Class = new Empresa_bll(_connection);
             Cidadao_bll cidadao_Class = new Cidadao_bll(_connection);
 
+            decimal _valor_AR = tributario_Class.Retorna_Valor_Tributo(DateTime.Now.Year, 667);
             List<int> _lista_codigos = tributario_Class.Lista_Codigo_Carta(_codigo_ini, _codigo_fim, _data_vencto);
 
             PBar.Value = 0;
@@ -296,6 +297,7 @@ namespace GTI_Desktop.Forms {
                 _linha_digitavel += _digitavel.Substring(21, 5) + "." + _digitavel.Substring(26, 6) + " " + _digitavel.Substring(32, 1) + " " + gtiCore.StringRight(_digitavel, 14);
                 string _codigo_barra = gtiCore.Gera2of5Str(_barra);
                 //**************************************************
+                _descricao_lancamento += ", AR-DIGITAL";
                 if (_valor_honorario > 0)
                     _descricao_lancamento += ", DESPESAS JUDICIAIS";
 
@@ -350,7 +352,7 @@ namespace GTI_Desktop.Forms {
                 //****** GRAVA DETALHE**************
 
                 foreach (SpExtrato_carta item in Lista_Final) {
-                    Carta_cobranca_detalhe RegDet = new Carta_cobranca_detalhe {
+                    Carta_cobranca_detalhe RegDet2 = new Carta_cobranca_detalhe {
                         Codigo = _codigo_atual,
                         Remessa = _remessa,
                         Ano = item.Anoexercicio,
@@ -361,7 +363,7 @@ namespace GTI_Desktop.Forms {
                         Correcao = item.Valorcorrecao,
                         Total = item.Valortotal
                     };
-                    ex = tributario_Class.Insert_Carta_Cobranca_Detalhe(RegDet);
+                    ex = tributario_Class.Insert_Carta_Cobranca_Detalhe(RegDet2);
                     if (ex != null) {
                         ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
                         eBox.ShowDialog();
@@ -390,10 +392,56 @@ namespace GTI_Desktop.Forms {
                     }
                 }
 
+                //********* GRAVA A.R. ***********
+                short _maxSeqAR = tributario_Class.Retorna_Ultima_Seq_AR(_codigo_atual, DateTime.Now.Year);
+                _maxSeqAR++;
+
+                Debitoparcela regParcelaAR = new Debitoparcela {
+                    Codreduzido = _codigo_atual,
+                    Anoexercicio = Convert.ToInt16(DateTime.Now.Year),
+                    Codlancamento = 78,
+                    Seqlancamento = _maxSeqAR,
+                    Numparcela = 1,
+                    Codcomplemento = 0,
+                    Statuslanc = 3,
+                    Datadebase = DateTime.Now,
+                    Datavencimento = _data_vencimento,
+                    Userid = 508
+                };
+                ex = tributario_Class.Insert_Debito_Parcela(regParcelaAR);
+
+                Debitotributo regTributoAR = new Debitotributo {
+                    Codreduzido = _codigo_atual,
+                    Anoexercicio = Convert.ToInt16(DateTime.Now.Year),
+                    Codlancamento = 78,
+                    Seqlancamento = _maxSeqAR,
+                    Numparcela = 1,
+                    Codcomplemento = 0,
+                    Codtributo = 667,
+                    Valortributo = _valor_AR
+                };
+                ex = tributario_Class.Insert_Debito_Tributo(regTributoAR);
+
+                Parceladocumento RegParcAR = new Parceladocumento {
+                    Codreduzido = _codigo_atual,
+                    Anoexercicio = Convert.ToInt16(DateTime.Now.Year),
+                    Codlancamento = 78,
+                    Seqlancamento = _maxSeqAR,
+                    Numparcela = 1,
+                    Codcomplemento = 0,
+                    Numdocumento = _numero_documento
+                };
+                ex = tributario_Class.Insert_Parcela_Documento(RegParcAR);
+
+              
+                //*************************************
+
+
                 //********* GRAVA HONORÁRIO ***********
                 if (_valor_honorario > 0) {
                     short _maxSeq = tributario_Class.Retorna_Ultima_Seq_Honorario(_codigo_atual, DateTime.Now.Year);
                     _maxSeq++;
+
                     Debitoparcela regParcela = new Debitoparcela {
                         Codreduzido = _codigo_atual,
                         Anoexercicio=Convert.ToInt16(DateTime.Now.Year),
@@ -431,21 +479,21 @@ namespace GTI_Desktop.Forms {
                     };
                     ex = tributario_Class.Insert_Parcela_Documento(RegParc);
 
-                    Carta_cobranca_detalhe RegDet = new Carta_cobranca_detalhe {
-                        Codigo = _codigo_atual,
-                        Remessa = _remessa,
-                        Ano = Convert.ToInt16(DateTime.Now.Year),
-                        Parcela = 1,
-                        Principal = _valor_honorario,
-                        Juros = 0,
-                        Multa = 0,
-                        Correcao = 0,
-                        Total = _valor_honorario
-                    };
-                    ex = tributario_Class.Insert_Carta_Cobranca_Detalhe(RegDet);
 
                 }
-            //*************************************
+                //*************************************
+                Carta_cobranca_detalhe RegDet = new Carta_cobranca_detalhe {
+                    Codigo = _codigo_atual,
+                    Remessa = _remessa,
+                    Ano = Convert.ToInt16(DateTime.Now.Year),
+                    Parcela = 1,
+                    Principal = _valor_honorario + _valor_AR,
+                    Juros = 0,
+                    Multa = 0,
+                    Correcao = 0,
+                    Total = _valor_honorario+_valor_AR
+                };
+                ex = tributario_Class.Insert_Carta_Cobranca_Detalhe(RegDet);
 
             Proximo:;
                 _pos++;
