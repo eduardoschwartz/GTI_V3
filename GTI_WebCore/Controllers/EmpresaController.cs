@@ -255,10 +255,10 @@ namespace GTI_WebCore.Controllers {
             int _codigo;
             bool _valida = false;
             int _numero;
-            if(model.Extrato)
+//            if(model.Extrato)
                 _numero= tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Debito);
-            else
-                _numero = tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Comprovante_Pagamento);
+//            else
+ //               _numero = tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Comprovante_Pagamento);
             ViewBag.Result = "";
 
             model.OptionList = new List<SelectListItem> {
@@ -434,8 +434,8 @@ namespace GTI_WebCore.Controllers {
 
             }
 
-            List<Certidao_Inscricao> certidao = new List<Certidao_Inscricao> {
-                reg2
+            List<Comprovante_Inscricao> certidao = new List<Comprovante_Inscricao> {
+                reg
             };
 
             ReportDocument rd = new ReportDocument();
@@ -445,22 +445,20 @@ namespace GTI_WebCore.Controllers {
                 } else {
                     rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\CertidaoInscricaoExtratoAtiva.rpt");
                 }
-            } else
-                if (_valida)
-                rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Comprovante_InscricaoValida.rpt");
-            else
-                if(model.Extrato)
+            } else {
+                if (_valida) {
+                    rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Comprovante_InscricaoValida.rpt");
+                } else
                     rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Comprovante_Inscricao.rpt");
-            else
-                rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Comprovante_Inscricao.rpt");
+            }
             try {
-                if(model.Extrato)
+                if (model.Extrato)
                     rd.SetDataSource(Lista_Certidao);
                 else
                     rd.SetDataSource(certidao);
                 Stream stream = rd.ExportToStream(ExportFormatType.PortableDocFormat);
                 return File(stream, "application/pdf", "Certidao_Inscricao.pdf");
-            } catch{
+            } catch {
                 throw;
             }
 

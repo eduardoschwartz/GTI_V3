@@ -1,1 +1,1 @@
-﻿select * from certidao_inscricao_extrato
+﻿select * from mobiliario where codigomob=100020
