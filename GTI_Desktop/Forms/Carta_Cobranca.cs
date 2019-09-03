@@ -64,8 +64,8 @@ namespace GTI_Desktop.Forms {
         }
 
         private void Gera_Matriz(int _codigo_ini, int _codigo_fim, DateTime _data_vencto) {
-            int _total = 0, _pos = 1, _numero_documento = 0; //5.100.001 até 5.400.000
-            DateTime _data_vencimento = Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy"));
+            int _total = 0, _pos = 1, _numero_documento = 17236150; //17.236.150 até 17.256.149
+            DateTime _data_vencimento = Convert.ToDateTime("18/10/2019");
             decimal _valor_honorario = 0;
 
             Exception ex = null;
@@ -306,11 +306,12 @@ namespace GTI_Desktop.Forms {
                     numdocumento = _numero_documento,
                     Datadocumento = DateTime.Now,
                     Valorguia = _valor_boleto,
-                    Emissor = "GTI",
+                    Emissor = "GTI/CCob",
                     Registrado = true,
-                    Percisencao = 0
+                    Percisencao = 0,
+                    Userid=508
                 };
-                _numero_documento = tributario_Class.Insert_Documento(RegDoc);
+                ex = tributario_Class.Insert_Documento_Existente(RegDoc);
 
                 //****** GRAVA HEADER **************
                 Carta_cobranca Reg = new Carta_cobranca();
@@ -494,7 +495,7 @@ namespace GTI_Desktop.Forms {
                     Total = _valor_honorario+_valor_AR
                 };
                 ex = tributario_Class.Insert_Carta_Cobranca_Detalhe(RegDet);
-
+                _numero_documento++;
             Proximo:;
                 _pos++;
             }
