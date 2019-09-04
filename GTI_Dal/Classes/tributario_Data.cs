@@ -964,12 +964,13 @@ namespace GTI_Dal.Classes {
         public Exception Insert_Documento_Existente(Numdocumento Reg) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
-                    db.Database.ExecuteSqlCommand("INSERT INTO numdocumento(numdocumento,datadocumento,valorguia,emissor,registrado) VALUES(@numdocumento,@datadocumento,@valorguia,@emissor,@registrado)",
+                    db.Database.ExecuteSqlCommand("INSERT INTO numdocumento(numdocumento,datadocumento,valorguia,emissor,registrado,percisencao) VALUES(@numdocumento,@datadocumento,@valorguia,@emissor,@registrado,@percisencao)",
                         new SqlParameter("@numdocumento", Reg.numdocumento),
                         new SqlParameter("@datadocumento", Reg.Datadocumento),
                         new SqlParameter("@valorguia", Reg.Valorguia),
                         new SqlParameter("@emissor", Reg.Emissor),
-                        new SqlParameter("@registrado", Reg.Registrado));
+                        new SqlParameter("@registrado", Reg.Registrado),
+                        new SqlParameter("@percisencao", Reg.Percisencao));
                 } catch (Exception ex) {
                     return ex;
                 }
@@ -1692,7 +1693,7 @@ namespace GTI_Dal.Classes {
 
         public Exception Insert_Carta_Cobranca_Detalhe(Carta_cobranca_detalhe Reg) {
             using (GTI_Context db = new GTI_Context(_connection)) {
-                object[] Parametros = new object[9];
+                object[] Parametros = new object[10];
                 Parametros[0] = new SqlParameter { ParameterName = "@remessa", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Remessa };
                 Parametros[1] = new SqlParameter { ParameterName = "@codigo", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codigo };
                 Parametros[2] = new SqlParameter { ParameterName = "@parcela", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Parcela };
@@ -1702,9 +1703,10 @@ namespace GTI_Dal.Classes {
                 Parametros[6] = new SqlParameter { ParameterName = "@multa", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Multa };
                 Parametros[7] = new SqlParameter { ParameterName = "@correcao", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Correcao };
                 Parametros[8] = new SqlParameter { ParameterName = "@total", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Total };
+                Parametros[9] = new SqlParameter { ParameterName = "@ordem", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Ordem };
 
-                db.Database.ExecuteSqlCommand("INSERT INTO carta_cobranca_detalhe(remessa,codigo,parcela,ano,principal,juros,multa,correcao,total) " +
-                    "VALUES(@remessa,@codigo,@parcela,@ano,@principal,@juros,@multa,@correcao,@total)", Parametros);
+                db.Database.ExecuteSqlCommand("INSERT INTO carta_cobranca_detalhe(remessa,codigo,parcela,ano,principal,juros,multa,correcao,total,ordem) " +
+                    "VALUES(@remessa,@codigo,@parcela,@ano,@principal,@juros,@multa,@correcao,@total,@ordem)", Parametros);
 
                 try {
                     db.SaveChanges();

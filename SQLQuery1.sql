@@ -1,1 +1,1 @@
-﻿select * from mobiliario where codigomob=100020
+﻿delete from parceladocumento where numdocumento between 17236150 and 17256148

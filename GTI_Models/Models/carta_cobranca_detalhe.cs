@@ -17,5 +17,6 @@ namespace GTI_Models.Models {
         public decimal Multa { get; set; }
         public decimal Correcao { get; set; }
         public decimal Total { get; set; }
+        public short Ordem { get; set; }
     }
 }
