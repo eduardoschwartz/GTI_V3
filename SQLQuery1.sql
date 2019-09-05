@@ -1,1 +1,1 @@
-﻿delete from parceladocumento where numdocumento between 17236150 and 17256148
+﻿select * from numdocumento where numdocumento between 17236150 and 17256148

@@ -242,7 +242,7 @@ namespace GTI_Dal.Classes {
                                join l in db.Logradouro on ee.Ee_codlog equals l.Codlogradouro into lee from l in lee.DefaultIfEmpty()
                                where ee.Codreduzido == Codigo
                                select new {
-                                   ee.Ee_numimovel, ee.Ee_bairro, b.Descbairro, c.Desccidade, ee.Ee_uf, ee.Ee_cidade, ee.Ee_codlog, ee.Ee_nomelog, l.Endereco, ee.Ee_complemento,l.Endereco_resumido
+                                   ee.Ee_numimovel, ee.Ee_bairro, b.Descbairro, c.Desccidade, ee.Ee_uf, ee.Ee_cidade, ee.Ee_codlog, ee.Ee_nomelog, l.Endereco, ee.Ee_complemento,l.Endereco_resumido,ee.Ee_cep
                                }).FirstOrDefault();
                     if (reg == null)
                         return regEnd;
@@ -262,7 +262,10 @@ namespace GTI_Dal.Classes {
                         regEnd.CodigoBairro = reg.Ee_bairro;
                         regEnd.NomeBairro = reg.Descbairro;
                         Endereco_Data clsCep = new Endereco_Data(_connection);
-                        regEnd.Cep = clsCep.RetornaCep(Convert.ToInt32(regEnd.CodLogradouro), Convert.ToInt16(reg.Ee_numimovel)) == 0 ? "00000000" : clsCep.RetornaCep(Convert.ToInt32(regEnd.CodLogradouro), Convert.ToInt16(reg.Ee_numimovel)).ToString("0000");
+                        if(regEnd.CodLogradouro==0)
+                            regEnd.Cep = Convert.ToInt32 (dalCore.RetornaNumero(  reg.Ee_cep)).ToString("00000000");
+                        else
+                            regEnd.Cep = clsCep.RetornaCep( Convert.ToInt32(regEnd.CodLogradouro), Convert.ToInt16(reg.Ee_numimovel)) == 0 ? "00000000" : clsCep.RetornaCep(Convert.ToInt32(regEnd.CodLogradouro), Convert.ToInt16(reg.Ee_numimovel)).ToString("0000");
                     }
                 } else if (Tipo == TipoEndereco.Proprietario) {
                     List<ProprietarioStruct> _lista_proprietario = Lista_Proprietario(Codigo, true);

@@ -89,6 +89,7 @@ namespace GTI_Desktop.Forms {
                 eBox.ShowDialog();
             }
             _total = _lista_codigos.Count;
+            _lista_codigos.Sort();
             foreach (int _codigo_atual in _lista_codigos) {
                 if (_stop) break;
                 if (_pos % 2 == 0) {
@@ -206,6 +207,7 @@ namespace GTI_Desktop.Forms {
                         ex = tributario_Class.Insert_Parcela_Documento(RegParcAR);
                     }
                 }
+
                 Carta_cobranca_detalhe RegDetAR = new Carta_cobranca_detalhe {
                     Codigo = _codigo_atual,
                     Remessa = _remessa,
@@ -408,7 +410,6 @@ namespace GTI_Desktop.Forms {
                         eBox.ShowDialog();
                     }
                 }
-
 
                 //****** GRAVA PARCELA x DOCUMENTO*******
 
