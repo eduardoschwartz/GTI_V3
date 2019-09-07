@@ -263,7 +263,7 @@ namespace GTI_Dal.Classes {
                         regEnd.NomeBairro = reg.Descbairro;
                         Endereco_Data clsCep = new Endereco_Data(_connection);
                         if(regEnd.CodLogradouro==0)
-                            regEnd.Cep = Convert.ToInt32 (dalCore.RetornaNumero(  reg.Ee_cep)).ToString("00000000");
+                            regEnd.Cep = dalCore.RetornaNumero(reg.Ee_cep)==""?"00000000": Convert.ToInt32 (dalCore.RetornaNumero(  reg.Ee_cep)).ToString("00000000");
                         else
                             regEnd.Cep = clsCep.RetornaCep( Convert.ToInt32(regEnd.CodLogradouro), Convert.ToInt16(reg.Ee_numimovel)) == 0 ? "00000000" : clsCep.RetornaCep(Convert.ToInt32(regEnd.CodLogradouro), Convert.ToInt16(reg.Ee_numimovel)).ToString("0000");
                     }

@@ -95,8 +95,8 @@ namespace GTI_Dal.Classes {
                 _tipo_end = _imovel.EE_TipoEndereco == 0 ? GTI_Models.modelCore.TipoEndereco.Local : _imovel.EE_TipoEndereco == 1 ? GTI_Models.modelCore.TipoEndereco.Proprietario : GTI_Models.modelCore.TipoEndereco.Entrega;
                 EnderecoStruct regEntrega = imovel_Class.Dados_Endereco(_codigo, _tipo_end);
                 if (regEntrega != null) {
-                    _endereco_entrega = regEntrega.Endereco.ToString();
-                    _endereco_entrega_abreviado = regEntrega.Endereco_Abreviado.ToString();
+                    _endereco_entrega = regEntrega.Endereco??"";
+                    _endereco_entrega_abreviado = regEntrega.Endereco_Abreviado??"";
                     _numero_entrega = (int)regEntrega.Numero;
                     _complemento_entrega = regEntrega.Complemento??"";
                     _uf_entrega = regEntrega.UF.ToString();
@@ -169,7 +169,7 @@ namespace GTI_Dal.Classes {
                         _uf = _cidadao.UfC;
                     } else {
                         if (_cidadao.CodigoCidadeR == 413) {
-                            _endereco = _cidadao.EnderecoR.ToString();
+                            _endereco = _cidadao.EnderecoR??""                            ;
                             Endereco_Data endereco_Class = new Endereco_Data(_connection);
                             if (_cidadao.NumeroR == null || _cidadao.NumeroR == 0 || _cidadao.CodigoLogradouroR == null || _cidadao.CodigoLogradouroR == 0)
                                 _cep = "14870000";
@@ -179,7 +179,7 @@ namespace GTI_Dal.Classes {
                             _endereco = _cidadao.CodigoCidadeR.ToString();
                             _cep = _cidadao.CepR.ToString();
                         }
-                        _numero = (int)_cidadao.NumeroR;
+                        _numero =  _cidadao.NumeroR==null?0: (int)_cidadao.NumeroR;
                         _complemento = _cidadao.ComplementoR;
                         _bairro = _cidadao.NomeBairroR;
                         _cidade = _cidadao.NomeCidadeR;
