@@ -146,7 +146,7 @@ namespace GTI_WebCore.Controllers {
 
                 model.OptionList = new List<SelectListItem> {
                     new SelectListItem { Text = " CPF", Value = "cpfCheck", Selected = model.SelectedValue == "cpfCheck" },
-                    new SelectListItem { Text = "CNPJ", Value = "cnpjCheck", Selected = model.SelectedValue == "cnpjCheck" }
+                    new SelectListItem { Text = " CNPJ", Value = "cnpjCheck", Selected = model.SelectedValue == "cnpjCheck" }
                 };
 
                 List<int> _lista = new List<int>();
@@ -177,8 +177,8 @@ namespace GTI_WebCore.Controllers {
             string _chave = model.Chave;
 
             model.OptionList = new List<SelectListItem> {
-                new SelectListItem { Text = "CPF", Value = "cpfCheck", Selected = model.SelectedValue == "cpfCheck" },
-                new SelectListItem { Text = "CNPJ", Value = "cnpjCheck", Selected = model.SelectedValue == "cnpjCheck" }
+                new SelectListItem { Text = " CPF", Value = "cpfCheck", Selected = model.SelectedValue == "cpfCheck" },
+                new SelectListItem { Text = " CNPJ", Value = "cnpjCheck", Selected = model.SelectedValue == "cnpjCheck" }
             };
 
             if (model.Chave != null) {
@@ -262,8 +262,8 @@ namespace GTI_WebCore.Controllers {
             ViewBag.Result = "";
 
             model.OptionList = new List<SelectListItem> {
-                new SelectListItem { Text = "CPF", Value = "cpfCheck", Selected = model.SelectedValue == "cpfCheck" },
-                new SelectListItem { Text = "CNPJ", Value = "cnpjCheck", Selected = model.SelectedValue == "cnpjCheck" }
+                new SelectListItem { Text = " CPF", Value = "cpfCheck", Selected = model.SelectedValue == "cpfCheck" },
+                new SelectListItem { Text = " CNPJ", Value = "cnpjCheck", Selected = model.SelectedValue == "cnpjCheck" }
             };
 
             if (model.CpfValue != null || model.CnpjValue != null) {
