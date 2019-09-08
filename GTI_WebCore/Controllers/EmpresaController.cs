@@ -145,8 +145,8 @@ namespace GTI_WebCore.Controllers {
             if(model.CpfValue!=null || model.CnpjValue != null) {
 
                 model.OptionList = new List<SelectListItem> {
-                    new SelectListItem { Text = " CPF", Value = "cpfCheck", Selected = model.SelectedValue == "cpfCheck" },
-                    new SelectListItem { Text = "CNPJ", Value = "cnpjCheck", Selected = model.SelectedValue == "cnpjCheck" }
+                    new SelectListItem { Text = "1 CPF", Value = "cpfCheck", Selected = model.SelectedValue == "cpfCheck" },
+                    new SelectListItem { Text = "1 CNPJ", Value = "cnpjCheck", Selected = model.SelectedValue == "cnpjCheck" }
                 };
 
                 List<int> _lista = new List<int>();
@@ -177,8 +177,8 @@ namespace GTI_WebCore.Controllers {
             string _chave = model.Chave;
 
             model.OptionList = new List<SelectListItem> {
-                new SelectListItem { Text = "CPF", Value = "cpfCheck", Selected = model.SelectedValue == "cpfCheck" },
-                new SelectListItem { Text = "CNPJ", Value = "cnpjCheck", Selected = model.SelectedValue == "cnpjCheck" }
+                new SelectListItem { Text = "2 CPF", Value = "cpfCheck", Selected = model.SelectedValue == "cpfCheck" },
+                new SelectListItem { Text = "2 CNPJ", Value = "cnpjCheck", Selected = model.SelectedValue == "cnpjCheck" }
             };
 
             if (model.Chave != null) {
@@ -209,7 +209,7 @@ namespace GTI_WebCore.Controllers {
                             Controle = _chave,
                             Atividade = _dados.Atividade,
                             Atividade2 = _dados.Atividade_secundaria,
-                            Atividade_Extenso=_dados.Atividade_Extenso,
+                            Atividade_Extenso=_dados.Atividade_Extenso??"",
                             Cpf_Cnpj = _dados.Documento,
                             Data_Abertura = (DateTime)_dados.Data_abertura,
                             Processo_Abertura = _dados.Processo_abertura,
@@ -219,7 +219,8 @@ namespace GTI_WebCore.Controllers {
                             Area = (decimal)_dados.Area,
                             Mei = _dados.Mei,
                             Vigilancia_Sanitaria = _dados.Vigilancia_sanitaria,
-                            Taxa_Licenca = _dados.Taxa_licenca
+                            Taxa_Licenca = _dados.Taxa_licenca,
+                            Data_Emissao=_dados.Data_emissao
                         };
                         if (_dados.Data_encerramento != null)
                             reg.Data_Encerramento = (DateTime)_dados.Data_encerramento;
@@ -262,8 +263,8 @@ namespace GTI_WebCore.Controllers {
             ViewBag.Result = "";
 
             model.OptionList = new List<SelectListItem> {
-                new SelectListItem { Text = "CPF", Value = "cpfCheck", Selected = model.SelectedValue == "cpfCheck" },
-                new SelectListItem { Text = "CNPJ", Value = "cnpjCheck", Selected = model.SelectedValue == "cnpjCheck" }
+                new SelectListItem { Text = "3 CPF", Value = "cpfCheck", Selected = model.SelectedValue == "cpfCheck" },
+                new SelectListItem { Text = "3 CNPJ", Value = "cnpjCheck", Selected = model.SelectedValue == "cnpjCheck" }
             };
 
             if (model.CpfValue != null || model.CnpjValue != null) {
@@ -423,6 +424,7 @@ namespace GTI_WebCore.Controllers {
                     regCert.Valor_Pago = regExt.Valor_Pago;
                     regCert.Processo_Abertura = reg2.Processo_abertura;
                     regCert.Numero_Ano = regExt.Numero_certidao.ToString("00000") + "/" + regExt.Ano_certidao;
+                    regCert.Controle = _numero.ToString("00000") + DateTime.Now.Year.ToString("0000") + "/" + _codigo.ToString() + "-" + _sufixo;
 
                     Lista_Certidao.Add(regCert);
 
