@@ -64,7 +64,7 @@ namespace GTI_Desktop.Forms {
         }
 
         private void Gera_Matriz(int _codigo_ini, int _codigo_fim, DateTime _data_vencto) {
-            int _total = 0, _pos = 1, _numero_documento = 17236150; //17.236.150 até 17.256.149
+            int _total = 0, _pos = 1, _numero_documento = 17246998; //17.236.150 até 17.256.149
             DateTime _data_vencimento = Convert.ToDateTime("18/10/2019");
             decimal _valor_honorario = 0;
 
@@ -83,12 +83,13 @@ namespace GTI_Desktop.Forms {
             List<int> _lista_codigos = tributario_Class.Lista_Codigo_Carta(_codigo_ini, _codigo_fim, _data_vencto);
 
             PBar.Value = 0;
-            ex = tributario_Class.Excluir_Carta_Cobranca(_remessa);
-            if (ex != null) {
-                ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
-                eBox.ShowDialog();
-            }
+        //    ex = tributario_Class.Excluir_Carta_Cobranca(_remessa);
+        //    if (ex != null) {
+        //        ErrorBox eBox = new ErrorBox("Atenção", ex.Message, ex);
+        //        eBox.ShowDialog();
+        //    }
             _total = _lista_codigos.Count;
+            _lista_codigos.Sort();
             foreach (int _codigo_atual in _lista_codigos) {
                 if (_stop) break;
                 if (_pos % 2 == 0) {
@@ -206,6 +207,7 @@ namespace GTI_Desktop.Forms {
                         ex = tributario_Class.Insert_Parcela_Documento(RegParcAR);
                     }
                 }
+
                 Carta_cobranca_detalhe RegDetAR = new Carta_cobranca_detalhe {
                     Codigo = _codigo_atual,
                     Remessa = _remessa,
@@ -408,7 +410,6 @@ namespace GTI_Desktop.Forms {
                         eBox.ShowDialog();
                     }
                 }
-
 
                 //****** GRAVA PARCELA x DOCUMENTO*******
 

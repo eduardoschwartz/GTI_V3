@@ -166,7 +166,7 @@ namespace GTI_Dal.Classes {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 db.Database.CommandTimeout = 3 * 60;
                 List<int> Lista =  (from d in db.Debitoparcela where d.Codreduzido >= _codigo_inicial && d.Codreduzido <= _codigo_final && d.Datavencimento <= _data_vencimento && 
-                                    (d.Statuslanc == 3 || d.Statuslanc == 38 || d.Statuslanc == 39) && d.Codlancamento!=20 orderby d.Codreduzido select d.Codreduzido  ).Distinct().ToList();
+                                    (d.Statuslanc == 3 || d.Statuslanc==42 || d.Statuslanc==43  || d.Statuslanc == 38 || d.Statuslanc == 39) && d.Codlancamento!=20 orderby d.Codreduzido select d.Codreduzido  ).Distinct().ToList();
                 return Lista;
             }
         }
@@ -628,7 +628,7 @@ namespace GTI_Dal.Classes {
 
         public short Retorna_Ultima_Seq_AR(int Codigo, int Ano) {
             using (GTI_Context db = new GTI_Context(_connection)) {
-                var cntCod = (from c in db.Debitoparcela where c.Codreduzido == Codigo && c.Anoexercicio == Ano && c.Codlancamento == 78 orderby c.Seqlancamento descending select c.Seqlancamento).FirstOrDefault();
+                var cntCod = (from c in db.Parceladocumento where c.Codreduzido == Codigo && c.Anoexercicio == Ano && c.Codlancamento == 78 orderby c.Seqlancamento descending select c.Seqlancamento).FirstOrDefault();
                 return Convert.ToInt16(cntCod);
             }
         }
