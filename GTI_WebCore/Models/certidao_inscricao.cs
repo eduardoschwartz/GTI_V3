@@ -21,7 +21,7 @@ namespace GTI_WebCore.Models {
         public string Atividade { get; set; }
         public DateTime  Data_abertura { get; set; }
         public string Processo_abertura { get; set; }
-        public DateTime? Data_encerramento { get; set; }
+        public DateTime Data_encerramento { get; set; }
         public string Processo_encerramento { get; set; }
         public string Inscricao_estadual { get; set; }
         public string Nome_fantasia { get; set; }

@@ -27,11 +27,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Reports\CertidaoInscricaoExtratoEncerrada.rpt">
-      <LastGenOutput>CertidaoInscricaoExtratoEncerrada.cs</LastGenOutput>
+    <EmbeddedResource Include="Reports\CertidaoInscricaoExtratoAtiva.rpt">
+      <LastGenOutput>CertidaoInscricaoExtratoAtiva.cs</LastGenOutput>
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\CertidaoInscricaoExtratoAtiva.rpt">
+    <EmbeddedResource Include="Reports\CertidaoInscricaoExtratoEncerrada.rpt">
       <LastGenOutput>CertidaoInscricaoExtratoEncerrada.cs</LastGenOutput>
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
     </EmbeddedResource>
@@ -122,7 +122,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Reports\CertidaoInscricaoExtratoAtiva - Copy.cs">
+    <Compile Update="Reports\CertidaoInscricaoExtratoAtiva.cs">
       <SubType>Component</SubType>
       <DependentUpon>CertidaoInscricaoExtratoAtiva.rpt</DependentUpon>
       <DesignTime>True</DesignTime>
