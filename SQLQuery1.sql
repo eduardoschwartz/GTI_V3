@@ -1,1 +1,1 @@
-﻿select * from numdocumento where numdocumento between 17236150 and 17256148
+﻿select * from certidao_inscricao where ano=2019 and numero=11077

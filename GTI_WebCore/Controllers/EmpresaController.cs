@@ -401,10 +401,12 @@ namespace GTI_WebCore.Controllers {
                     ex = tributarioRepository.Insert_Certidao_Inscricao_Extrato(regExt);
                     if (ex != null)
                         throw ex;
-
+                    regCert.Controle = _numero.ToString("00000") + DateTime.Now.Year.ToString("0000") + "/" + _codigo.ToString() + "-" + _sufixo;
                     regCert.Codigo = _codigo;
                     regCert.Razao_Social = reg2.Nome;
                     regCert.Nome_Requerente = reg2.Nome;
+                    regCert.Data_Abertura = reg2.Data_abertura;
+                    regCert.Processo_Encerramento = reg2.Processo_encerramento;
                     regCert.Endereco = reg2.Endereco;
                     regCert.Endereco_Numero = reg2.Numero;
                     regCert.Endereco_Complemento = reg2.Complemento;
@@ -423,6 +425,8 @@ namespace GTI_WebCore.Controllers {
                     regCert.Valor_Pago = regExt.Valor_Pago;
                     regCert.Processo_Abertura = reg2.Processo_abertura;
                     regCert.Numero_Ano = regExt.Numero_certidao.ToString("00000") + "/" + regExt.Ano_certidao;
+                    if (reg2.Data_encerramento != null)
+                        regCert.Data_Encerramento = (DateTime)reg.Data_Encerramento;
 
                     Lista_Certidao.Add(regCert);
 
