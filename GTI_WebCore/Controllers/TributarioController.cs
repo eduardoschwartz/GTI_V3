@@ -39,7 +39,7 @@ namespace GTI_WebCore.Controllers {
             short _ret =0;
             int _numero = tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Debito);
             bool _existeCod = false;
-            string _tipoCertidao = "",_nao="", _sufixo = "XX",_reportName="", _numProcesso = "9222-3/2012", _dataProcesso = "18/04/2012"; 
+            string _tipoCertidao = "",_nao="", _sufixo = "XX",_reportName="", _numProcesso = "9222-3/2012", _dataProcesso = "18/04/2012",_cpf="",_cnpj=""; 
             Functions.TipoCadastro _tipoCadastro=new Functions.TipoCadastro();
 
             CertidaoViewModel certidaoViewModel = new CertidaoViewModel();
@@ -76,6 +76,8 @@ namespace GTI_WebCore.Controllers {
             //***Verifica débito
 
             Certidao_debito_detalhe dadosCertidao = tributarioRepository.Certidao_Debito(_codigo);
+            string _tributo = dadosCertidao.Descricao_Lancamentos;
+
             if (dadosCertidao.Tipo_Retorno == Functions.RetornoCertidaoDebito.Negativa) {
                 _tipoCertidao = "NEGATIVA";
                 _nao = "não ";
@@ -83,6 +85,8 @@ namespace GTI_WebCore.Controllers {
                 _sufixo = "CN";
                 if (_tipoCadastro == Functions.TipoCadastro.Imovel)
                     _reportName = "Certidao_Debito_Imovel.rpt";
+                else 
+                    _reportName = "Certidao_Debito_Empresa.rpt";
             }
             //else {
             //    if (dadosCertidao.Tipo_Retorno == RetornoCertidaoDebito.Positiva) {
@@ -119,40 +123,60 @@ namespace GTI_WebCore.Controllers {
             //        }
             //    }
             //}
-            string _tributo = dadosCertidao.Descricao_Lancamentos;
+            
 
             int _numero_certidao =tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Debito);
             int _ano_certidao = DateTime.Now.Year;
-            
-
             List<Certidao> certidao = new List<Certidao>();
-            List<ProprietarioStruct> listaProp = imovelRepository.Lista_Proprietario(_codigo, true);
-            ImovelStruct _dados = imovelRepository.Dados_Imovel(_codigo);
-            Certidao reg = new Certidao() {
-                Codigo = _dados.Codigo,
-                Inscricao = _dados.Inscricao,
-                Endereco = _dados.NomeLogradouro,
-                Endereco_Numero = (int)_dados.Numero,
-                Endereco_Complemento = _dados.Complemento,
-                Bairro = _dados.NomeBairro ?? "",
-                Cidade="JABOTICABAL",
-                Uf="SP",
-                Atividade_Extenso="",
-                Nome_Requerente = listaProp[0].Nome,
-                Ano = DateTime.Now.Year,
-                Numero = _numero,
-                Quadra_Original = _dados.QuadraOriginal ?? "",
-                Lote_Original = _dados.LoteOriginal ?? "",
-                Controle = _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _codigo.ToString() + "-" + _sufixo,
-                Tipo_Certidao = _tipoCertidao,
-                Nao=_nao,
-                Tributo=_tributo
-            };
-
+            Certidao reg = new Certidao();
+            if (_tipoCadastro == Functions.TipoCadastro.Imovel) {
+                List<ProprietarioStruct> listaProp = imovelRepository.Lista_Proprietario(_codigo, true);
+                _cpf = listaProp[0].CPF;
+                _cnpj = listaProp[0].CNPJ;
+                ImovelStruct _dados = imovelRepository.Dados_Imovel(_codigo);
+                reg.Codigo = _dados.Codigo;
+                reg.Inscricao = _dados.Inscricao;
+                reg.Endereco = _dados.NomeLogradouro;
+                reg.Endereco_Numero = (int)_dados.Numero;
+                reg.Endereco_Complemento = _dados.Complemento;
+                reg.Bairro = _dados.NomeBairro ?? "";
+                reg.Cidade = "JABOTICABAL";
+                reg.Uf = "SP";
+                reg.Atividade_Extenso = "";
+                reg.Nome_Requerente = listaProp[0].Nome;
+                reg.Ano = DateTime.Now.Year;
+                reg.Numero = _numero;
+                reg.Quadra_Original = _dados.QuadraOriginal ?? "";
+                reg.Lote_Original = _dados.LoteOriginal ?? "";
+                reg.Controle = _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _codigo.ToString() + "-" + _sufixo;
+                reg.Tipo_Certidao = _tipoCertidao;
+                reg.Nao = _nao;
+                reg.Tributo = _tributo;
+            } else {
+                EmpresaStruct _dados = empresaRepository.Dados_Empresa(_codigo);
+                _cpf = _dados.Cpf ?? "";
+                _cnpj = _dados.Cnpj ?? "";
+                reg.Codigo = _dados.Codigo;
+                reg.Cpf_Cnpj = _dados.Cpf_cnpj;
+                reg.Inscricao = _dados.Inscricao_estadual ?? "";
+                reg.Endereco = _dados.Endereco_nome;
+                reg.Endereco_Numero = (int)_dados.Numero;
+                reg.Endereco_Complemento = _dados.Complemento;
+                reg.Bairro = _dados.Bairro_nome ?? "";
+                reg.Cidade = _dados.Cidade_nome;
+                reg.Uf = _dados.UF;
+                reg.Atividade_Extenso = _dados.Atividade_extenso;
+                reg.Nome_Requerente = _dados.Razao_social;
+                reg.Ano = DateTime.Now.Year;
+                reg.Numero = _numero;
+                reg.Controle = _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _codigo.ToString() + "-" + _sufixo;
+                reg.Tipo_Certidao = _tipoCertidao;
+                reg.Nao = _nao;
+                reg.Tributo = _tributo;
+            }
             reg.Numero_Ano = _numero_certidao.ToString("00000") + "/" + _ano_certidao.ToString("0000");
             certidao.Add(reg);
 
-            
             Certidao_debito cert = new Certidao_debito {
                 Codigo = _codigo,
                 Ano = (short)DateTime.Now.Year,
@@ -169,8 +193,8 @@ namespace GTI_WebCore.Controllers {
                 Processo = _numProcesso,
                 Dataprocesso = Convert.ToDateTime(_dataProcesso),
                 Atendente = "GTI.Web",
-                Cpf = listaProp[0].CPF,
-                Cnpj = listaProp[0].CNPJ,
+                Cpf = _cpf,
+                Cnpj = _cnpj,
                 Atividade = reg.Atividade_Extenso,
                 Suspenso="",
                 Lancamento = dadosCertidao.Descricao_Lancamentos
@@ -192,13 +216,6 @@ namespace GTI_WebCore.Controllers {
                 throw;
             }
         }
-
-
-
-
-
-
-
 
 
 

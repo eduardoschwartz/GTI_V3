@@ -352,7 +352,7 @@ namespace GTI_WebCore.Repository {
             Parametros[3] = new SqlParameter { ParameterName = "@lancamento", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Lancamento };
             Parametros[4] = new SqlParameter { ParameterName = "@suspenso", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Suspenso };
             Parametros[5] = new SqlParameter { ParameterName = "@codigo", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codigo };
-            Parametros[6] = new SqlParameter { ParameterName = "@processo", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Logradouro };
+            Parametros[6] = new SqlParameter { ParameterName = "@processo", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Processo };
             Parametros[7] = new SqlParameter { ParameterName = "@dataprocesso", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Dataprocesso };
             Parametros[8] = new SqlParameter { ParameterName = "@nome", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Nome };
             Parametros[9] = new SqlParameter { ParameterName = "@logradouro", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Logradouro };

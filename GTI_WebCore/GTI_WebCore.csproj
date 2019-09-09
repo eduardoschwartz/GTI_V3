@@ -13,6 +13,7 @@
     <None Remove="Reports\CertidaoInscricaoExtratoAtiva.rpt" />
     <None Remove="Reports\CertidaoInscricaoExtratoEncerrada.rpt" />
     <None Remove="Reports\CertidaoInscricaoExtratoValida.rpt" />
+    <None Remove="Reports\Certidao_Debito_Empresa.rpt" />
     <None Remove="Reports\Certidao_Debito_Imovel.rpt" />
     <None Remove="Reports\Certidao_Endereco.rpt" />
     <None Remove="Reports\Certidao_Endereco_Valida.rpt" />
@@ -28,6 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Reports\Certidao_Debito_Empresa.rpt">
+      <LastGenOutput>Certidao_Debito_Empresa.cs</LastGenOutput>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Certidao_Debito_Imovel.rpt">
       <LastGenOutput>Certidao_Debito_Imovel.cs</LastGenOutput>
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -127,6 +132,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Reports\Certidao_Debito_Empresa.cs">
+      <SubType>Component</SubType>
+      <DependentUpon>Certidao_Debito_Empresa.rpt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Reports\Certidao_Debito_Imovel.cs">
       <SubType>Component</SubType>
       <DependentUpon>Certidao_Debito_Imovel.rpt</DependentUpon>
