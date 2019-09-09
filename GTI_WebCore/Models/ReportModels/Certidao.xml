@@ -44,5 +44,9 @@
   <Data_Vencimento>1980-03-23T10:20:15</Data_Vencimento>
   <Data_Pagamento>1980-03-23T10:20:15</Data_Pagamento>
   <Valor_Pago>22</Valor_Pago>
+  <Tipo_Certidao>Positiva</Tipo_Certidao>
+  <Nao>Sim</Nao>
+  <Certifica>que</Certifica>
+  <Tributo>IPTU</Tributo>
 </Certidao>
 

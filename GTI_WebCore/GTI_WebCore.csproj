@@ -13,6 +13,7 @@
     <None Remove="Reports\CertidaoInscricaoExtratoAtiva.rpt" />
     <None Remove="Reports\CertidaoInscricaoExtratoEncerrada.rpt" />
     <None Remove="Reports\CertidaoInscricaoExtratoValida.rpt" />
+    <None Remove="Reports\Certidao_Debito_Imovel.rpt" />
     <None Remove="Reports\Certidao_Endereco.rpt" />
     <None Remove="Reports\Certidao_Endereco_Valida.rpt" />
     <None Remove="Reports\Certidao_Imunidade.rpt" />
@@ -27,6 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Reports\Certidao_Debito_Imovel.rpt">
+      <LastGenOutput>Certidao_Debito_Imovel.cs</LastGenOutput>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\CertidaoInscricaoExtratoEncerrada.rpt">
       <LastGenOutput>CertidaoInscricaoExtratoEncerrada.cs</LastGenOutput>
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -122,6 +127,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Reports\Certidao_Debito_Imovel.cs">
+      <SubType>Component</SubType>
+      <DependentUpon>Certidao_Debito_Imovel.rpt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Reports\CertidaoInscricaoExtratoAtiva - Copy.cs">
       <SubType>Component</SubType>
       <DependentUpon>CertidaoInscricaoExtratoAtiva.rpt</DependentUpon>

@@ -16,11 +16,13 @@ namespace GTI_WebCore.Controllers {
     {
         private readonly ITributarioRepository tributarioRepository;
         private readonly IImovelRepository imovelRepository;
+        private readonly IEmpresaRepository empresaRepository;
         private readonly IHostingEnvironment hostingEnvironment;
 
-        public TributarioController(ITributarioRepository tributarioRepository,IImovelRepository imovelRepository,IHostingEnvironment hostingEnvironment) {
+        public TributarioController(ITributarioRepository tributarioRepository,IImovelRepository imovelRepository,IEmpresaRepository empresaRepository,IHostingEnvironment hostingEnvironment) {
             this.tributarioRepository = tributarioRepository;
             this.imovelRepository = imovelRepository;
+            this.empresaRepository = empresaRepository;
             this.hostingEnvironment = hostingEnvironment;
         }
 
@@ -32,17 +34,32 @@ namespace GTI_WebCore.Controllers {
 
         [Route("Certidao/Certidao_Debito_Codigo")]
         [HttpPost]
-        public IActionResult Certidao_Endereco(CertidaoViewModel model) {
+        public IActionResult Certidao_Debito_Codigo(CertidaoViewModel model) {
             int _codigo = 0;
-            int _numero = tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Endereco);
+            short _ret =0;
+            int _numero = tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Debito);
             bool _existeCod = false;
+            string _tipoCertidao = "",_nao="", _sufixo = "XX",_reportName="", _numProcesso = "9222-3/2012", _dataProcesso = "18/04/2012"; 
+            Functions.TipoCadastro _tipoCadastro=new Functions.TipoCadastro();
+
             CertidaoViewModel certidaoViewModel = new CertidaoViewModel();
             ViewBag.Result = "";
 
             if (model.Inscricao != null) {
                 _codigo = Convert.ToInt32(model.Inscricao);
-                if (_codigo < 100000)
+                if (_codigo < 100000) {
                     _existeCod = imovelRepository.Existe_Imovel(_codigo);
+                    _tipoCadastro = Functions.TipoCadastro.Imovel;
+                } else {
+                    if (_codigo >= 100000 && _codigo < 500000) {
+                        _existeCod = empresaRepository.Existe_Empresa_Codigo(_codigo);
+                        _tipoCadastro = Functions.TipoCadastro.Empresa;
+                    } else {
+                        _tipoCadastro = Functions.TipoCadastro.Cidadao;
+                        ViewBag.Result = "Inscrição inválida.";
+                        return View(certidaoViewModel);
+                    }
+                }
             }
 
             if (!Captcha.ValidateCaptchaCode(model.CaptchaCode, HttpContext)) {
@@ -51,9 +68,62 @@ namespace GTI_WebCore.Controllers {
             }
 
             if (!_existeCod) {
-                ViewBag.Result = "Imóvel não cadastrado.";
+                ViewBag.Result = "Inscrição não cadastrada.";
                 return View(certidaoViewModel);
             }
+
+
+            //***Verifica débito
+
+            Certidao_debito_detalhe dadosCertidao = tributarioRepository.Certidao_Debito(_codigo);
+            if (dadosCertidao.Tipo_Retorno == Functions.RetornoCertidaoDebito.Negativa) {
+                _tipoCertidao = "NEGATIVA";
+                _nao = "não ";
+                _ret = 3;
+                _sufixo = "CN";
+                if (_tipoCadastro == Functions.TipoCadastro.Imovel)
+                    _reportName = "Certidao_Debito_Imovel.rpt";
+            }
+            //else {
+            //    if (dadosCertidao.Tipo_Retorno == RetornoCertidaoDebito.Positiva) {
+            //        sTipoCertidao = "POSITIVA";
+            //        nRet = 4;
+            //        sSufixo = "CP";
+            //        if (_tipo_cadastro == TipoCadastro.Imovel) {
+            //            bool bCertifica = tributario_Class.Parcela_Unica_IPTU_NaoPago(Codigo, DateTime.Now.Year);
+            //            if (bCertifica) {
+            //                sCertifica = " embora conste parcela(s) não paga(s) do IPTU de " + DateTime.Now.Year.ToString() + ", em razão da possibilidade do pagamento integral deste imposto em data futura";
+            //                nRet = 3;
+            //                sTipoCertidao = "NEGATIVA";
+            //                sSufixo = "CN";
+            //                sNao = "não ";
+            //            } else
+            //                sCertifica = " até a presente data";
+            //            crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoImovel.rpt"));
+
+            //        } else {
+            //            if (_tipo_cadastro == TipoCadastro.Empresa)
+            //                crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoEmpresa.rpt"));
+            //        }
+            //    } else {
+            //        if (dadosCertidao.Tipo_Retorno == RetornoCertidaoDebito.NegativaPositiva) {
+            //            sTipoCertidao = "POSITIVA COM EFEITO NEGATIVA";
+            //            nRet = 5;
+            //            sSufixo = "PN";
+            //            if (_tipo_cadastro == TipoCadastro.Imovel)
+            //                crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoImovelPN.rpt"));
+            //            else {
+            //                if (_tipo_cadastro == TipoCadastro.Empresa)
+            //                    crystalReport.Load(Server.MapPath("~/Report/CertidaoDebitoEmpresaPN.rpt"));
+            //            }
+            //        }
+            //    }
+            //}
+            string _tributo = dadosCertidao.Descricao_Lancamentos;
+
+            int _numero_certidao =tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Debito);
+            int _ano_certidao = DateTime.Now.Year;
+            
 
             List<Certidao> certidao = new List<Certidao>();
             List<ProprietarioStruct> listaProp = imovelRepository.Lista_Proprietario(_codigo, true);
@@ -65,44 +135,59 @@ namespace GTI_WebCore.Controllers {
                 Endereco_Numero = (int)_dados.Numero,
                 Endereco_Complemento = _dados.Complemento,
                 Bairro = _dados.NomeBairro ?? "",
+                Cidade="JABOTICABAL",
+                Uf="SP",
+                Atividade_Extenso="",
                 Nome_Requerente = listaProp[0].Nome,
                 Ano = DateTime.Now.Year,
                 Numero = _numero,
                 Quadra_Original = _dados.QuadraOriginal ?? "",
                 Lote_Original = _dados.LoteOriginal ?? "",
-                Controle = _numero.ToString("00000") + DateTime.Now.Year.ToString("0000") + "/" + _codigo.ToString() + "-EA"
+                Controle = _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + _codigo.ToString() + "-" + _sufixo,
+                Tipo_Certidao = _tipoCertidao,
+                Nao=_nao,
+                Tributo=_tributo
             };
 
-            reg.Numero_Ano = reg.Numero.ToString("00000") + "/" + reg.Ano;
+            reg.Numero_Ano = _numero_certidao.ToString("00000") + "/" + _ano_certidao.ToString("0000");
             certidao.Add(reg);
 
-            Models.Certidao_endereco regCert = new Certidao_endereco() {
-                Ano = reg.Ano,
-                Codigo = reg.Codigo,
-                Data = DateTime.Now,
-                descbairro = reg.Bairro,
+            
+            Certidao_debito cert = new Certidao_debito {
+                Codigo = _codigo,
+                Ano = (short)DateTime.Now.Year,
+                Ret = _ret,
+                Numero = _numero_certidao,
+                Datagravada = DateTime.Now,
                 Inscricao = reg.Inscricao,
+                Nome = reg.Nome_Requerente,
                 Logradouro = reg.Endereco,
-                Nomecidadao = reg.Nome_Requerente,
-                Li_lotes = reg.Lote_Original,
-                Li_compl = reg.Endereco_Complemento,
-                Li_num = reg.Endereco_Numero,
-                Li_quadras = reg.Quadra_Original,
-                Numero = reg.Numero
+                Numimovel = (short)reg.Endereco_Numero,
+                Bairro = reg.Bairro,
+                Cidade = reg.Cidade,
+                UF = reg.Uf,
+                Processo = _numProcesso,
+                Dataprocesso = Convert.ToDateTime(_dataProcesso),
+                Atendente = "GTI.Web",
+                Cpf = listaProp[0].CPF,
+                Cnpj = listaProp[0].CNPJ,
+                Atividade = reg.Atividade_Extenso,
+                Suspenso="",
+                Lancamento = dadosCertidao.Descricao_Lancamentos
             };
-            Exception ex = tributarioRepository.Insert_Certidao_Endereco(regCert);
+            Exception ex = tributarioRepository.Insert_Certidao_Debito(cert);
             if (ex != null) {
                 ViewBag.Result = "Ocorreu um erro no processamento das informações.";
-                return View(certidaoViewModel);
+                return View("Certidao_Debito_Codigo");
             }
 
             ReportDocument rd = new ReportDocument();
-            rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\Certidao_Endereco.rpt");
+            rd.Load(hostingEnvironment.ContentRootPath + "\\Reports\\" + _reportName);
 
             try {
                 rd.SetDataSource(certidao);
                 Stream stream = rd.ExportToStream(ExportFormatType.PortableDocFormat);
-                return File(stream, "application/pdf", "Certidao_Endereco.pdf");
+                return File(stream, "application/pdf", "Certidao_Debito.pdf");
             } catch {
                 throw;
             }

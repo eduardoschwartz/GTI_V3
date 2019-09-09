@@ -46,5 +46,9 @@ namespace GTI_WebCore.Models.ReportModels {
         public DateTime Data_Vencimento { get; set; }
         public DateTime Data_Pagamento { get; set; }
         public decimal Valor_Pago { get; set; }
+        public string Tipo_Certidao { get; set; }
+        public string Nao { get; set; }
+        public string Certifica { get; set; }
+        public string Tributo { get; set; }
     }
 }

@@ -49,6 +49,10 @@
         <xsd:element name="Data_Vencimento" type="xsd:dateTime"></xsd:element>
         <xsd:element name="Data_Pagamento" type="xsd:dateTime"></xsd:element>
         <xsd:element name="Valor_Pago" type="xsd:decimal"></xsd:element>
+        <xsd:element name="Tipo_Certidao" type="xsd:string"></xsd:element>
+        <xsd:element name="Nao" type="xsd:string"></xsd:element>
+        <xsd:element name="Certifica" type="xsd:string"></xsd:element>
+        <xsd:element name="Tributo" type="xsd:string"></xsd:element>
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>

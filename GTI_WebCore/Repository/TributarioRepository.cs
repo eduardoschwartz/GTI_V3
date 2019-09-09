@@ -2,6 +2,7 @@
 using GTI_WebCore.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -343,6 +344,50 @@ namespace GTI_WebCore.Repository {
             return null;
         }
 
+        public Exception Insert_Certidao_Debito(Certidao_debito Reg) {
+            object[] Parametros = new object[20];
+            Parametros[0] = new SqlParameter { ParameterName = "@numero", SqlDbType = SqlDbType.Int, SqlValue = Reg.Numero };
+            Parametros[1] = new SqlParameter { ParameterName = "@ano", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Ano };
+            Parametros[2] = new SqlParameter { ParameterName = "@ret", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Ret };
+            Parametros[3] = new SqlParameter { ParameterName = "@lancamento", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Lancamento };
+            Parametros[4] = new SqlParameter { ParameterName = "@suspenso", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Suspenso };
+            Parametros[5] = new SqlParameter { ParameterName = "@codigo", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codigo };
+            Parametros[6] = new SqlParameter { ParameterName = "@processo", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Logradouro };
+            Parametros[7] = new SqlParameter { ParameterName = "@dataprocesso", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Dataprocesso };
+            Parametros[8] = new SqlParameter { ParameterName = "@nome", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Nome };
+            Parametros[9] = new SqlParameter { ParameterName = "@logradouro", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Logradouro };
+            Parametros[10] = new SqlParameter { ParameterName = "@numimovel", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Numimovel };
+            Parametros[11] = new SqlParameter { ParameterName = "@cpf", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Cpf };
+            Parametros[12] = new SqlParameter { ParameterName = "@cnpj", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Cnpj };
+            Parametros[13] = new SqlParameter { ParameterName = "@bairro", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Bairro };
+            Parametros[14] = new SqlParameter { ParameterName = "@cidade", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Cidade };
+            Parametros[15] = new SqlParameter { ParameterName = "@uf", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.UF };
+            Parametros[16] = new SqlParameter { ParameterName = "@atendente", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Atendente };
+            Parametros[17] = new SqlParameter { ParameterName = "@inscricao", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Inscricao };
+            Parametros[18] = new SqlParameter { ParameterName = "@atividade", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Atividade };
+            Parametros[19] = new SqlParameter { ParameterName = "@datagravada", SqlDbType = SqlDbType.SmallDateTime, SqlValue = Reg.Datagravada };
+
+            context.Database.ExecuteSqlCommand("INSERT INTO certidao_debito(numero,ano,ret,lancamento,suspenso,codigo,processo,dataprocesso,nome,logradouro,numimovel,cpf,cnpj,bairro,cidade,uf,atendente,inscricao,atividade,datagravada)" +
+                " VALUES(@numero,@ano,@ret,@lancamento,@suspenso,@codigo,@processo,@dataprocesso,@nome,@logradouro,@numimovel,@cpf,@cnpj,@bairro,@cidade,@uf,@atendente,@inscricao,@atividade,@datagravada)", Parametros);
+
+            try {
+                context.SaveChanges();
+            } catch (Exception ex) {
+                return ex;
+            }
+            return null;
+        }
+
+        public Exception Insert_Certidao_Debito_Doc(Certidao_debito_doc Reg) {
+                try {
+                    context.Certidao_Debito_Doc.Add(Reg);
+                    context.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+                return null;
+        }
+
         public Certidao_valor_venal Retorna_Certidao_Valor_Venal(int Ano, int Numero, int Codigo) {
             var Sql = (from p in context.Certidao_Valor_Venal where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();
             return Sql;
@@ -492,6 +537,139 @@ namespace GTI_WebCore.Repository {
 
         }
 
+        public Certidao_debito_detalhe Certidao_Debito(int Codigo) {
+            Functions.TipoCadastro _tipo_Cadastro = Codigo < 100000 ? Functions.TipoCadastro.Imovel : Codigo >= 500000 ? Functions.TipoCadastro.Cidadao : Functions.TipoCadastro.Empresa;
+            Certidao_debito_detalhe Certidao = new Certidao_debito_detalhe();
+            List<SpExtrato> ListaTributo = Lista_Extrato_Tributo(Codigo, 1980, 2050, 0, 99, 0, 99, 0, 999, 0, 99, 0, 99, DateTime.ParseExact(DateTime.Now.ToShortDateString(), "dd/MM/yyyy", null), "Web");
+
+            ArrayList alArrayNaoPagoVencido = new ArrayList();
+            ArrayList alArrayParceladoAVencer = new ArrayList();
+            ArrayList alArraySuspenso = new ArrayList();
+            ArrayList alArrayResult = new ArrayList();
+
+            string _descricao_lancamento = "";
+            string sDescTmp = "";
+
+            if (ListaTributo.Count > 0) {
+                bool bNaoPagoVencido = false;
+                bool bParceladoAVencer = false;
+                bool bSuspenso = false;
+
+                foreach (var item in ListaTributo) {
+                    bool bFind = false;
+                    sDescTmp = item.Abrevtributo;
+                    if (item.Codlancamento == 29)
+                        sDescTmp = "IPTU";
+
+                    //Verifica o status
+                    //*** não pagos
+                    TimeSpan difference = DateTime.Now - item.Datavencimento;
+                    var days = difference.TotalDays;
+                    if ((item.Statuslanc == 3 | item.Statuslanc == 18 | item.Statuslanc == 42 | item.Statuslanc == 43 | item.Statuslanc == 38 | item.Statuslanc == 39) && days > 1) {
+                        bNaoPagoVencido = true;
+                        for (int i = 0; i < alArrayNaoPagoVencido.Count; i++) {
+                            if (item.Codtributo == 26 || item.Codtributo == 90 || item.Codtributo == 112 || item.Codtributo == 113 || item.Codtributo == 585 || item.Codtributo == 587 || item.Codtributo == 24 || item.Codtributo == 28) {
+                                bFind = true;
+                                break;
+                            }
+                            if (alArrayNaoPagoVencido[i].ToString() == sDescTmp) {
+                                bFind = true;
+                                break;
+                            }
+                        }
+                        if (!bFind)
+                            alArrayNaoPagoVencido.Add(sDescTmp);
+
+                    }
+
+                    //*** suspensos ou em julgamento
+                    if ((item.Statuslanc == 18 | item.Statuslanc == 19 | item.Statuslanc == 20) && item.Datavencimento < DateTime.Now) {
+                        bSuspenso = true;
+                        if (item.Codtributo == 26 || item.Codtributo == 90 || item.Codtributo == 112 || item.Codtributo == 113 || item.Codtributo == 585 || item.Codtributo == 587 || item.Codtributo == 24 || item.Codtributo == 28) {
+                            bFind = true;
+                            break;
+                        }
+                        for (int i = 0; i < alArraySuspenso.Count; i++) {
+                            if (alArraySuspenso[i].ToString() == sDescTmp) {
+                                bFind = true;
+                                break;
+                            }
+                        }
+                        if (!bFind)
+                            alArraySuspenso.Add(sDescTmp);
+                    }
+
+                    //*** parcelados
+                    if (item.Codlancamento == 20 && (item.Statuslanc == 3 || item.Statuslanc == 18 || item.Statuslanc == 42 || item.Statuslanc == 43) && item.Datavencimento >= DateTime.Now) {
+                        bParceladoAVencer = true;
+                        for (int i = 0; i < alArrayParceladoAVencer.Count; i++) {
+                            if (item.Codtributo == 26 || item.Codtributo == 90 || item.Codtributo == 112 || item.Codtributo == 113 || item.Codtributo == 585 || item.Codtributo == 587 || item.Codtributo == 24 || item.Codtributo == 28) {
+                                bFind = true;
+                                break;
+                            }
+                            if (alArrayParceladoAVencer[i].ToString() == sDescTmp) {
+                                bFind = true;
+                                break;
+                            }
+                        }
+                        if (!bFind)
+                            alArrayParceladoAVencer.Add(sDescTmp);
+                    }
+                }
+
+                if (bNaoPagoVencido) {
+                    alArrayResult = alArrayNaoPagoVencido;
+                } else {
+                    if (bSuspenso) {
+                        alArrayResult = alArraySuspenso;
+                    } else {
+                        if (bParceladoAVencer) {
+                            alArrayResult = alArrayParceladoAVencer;
+                        }
+                    }
+                }
+
+                for (int i = 0; i < alArrayResult.Count; i++) {
+                    _descricao_lancamento += alArrayResult[i].ToString() + ", ";
+                }
+
+                if (_descricao_lancamento != "")
+                    _descricao_lancamento = _descricao_lancamento.Substring(0, _descricao_lancamento.Length - 2);
+                else {
+                    if (_tipo_Cadastro == Functions.TipoCadastro.Imovel) {
+                        _descricao_lancamento = "Débitos Imobiliários";
+                    } else {
+                        if (_tipo_Cadastro == Functions.TipoCadastro.Empresa) {
+                            _descricao_lancamento = "Débitos Mobiliários";
+                        } else {
+                            _descricao_lancamento = "Débitos do Contribuinte";
+                        }
+                    }
+                }
+
+                if (bNaoPagoVencido)
+                    Certidao.Tipo_Retorno = Functions.RetornoCertidaoDebito.Positiva;
+                else {
+                    //Verifica se tem débito suspenso/julgamento
+                    if (bSuspenso)
+                        Certidao.Tipo_Retorno = Functions.RetornoCertidaoDebito.NegativaPositiva;
+                    else {
+                        //Verifica se tem parcelamento
+                        if (bParceladoAVencer)
+                            Certidao.Tipo_Retorno = Functions.RetornoCertidaoDebito.NegativaPositiva;
+                        else
+                            Certidao.Tipo_Retorno = Functions.RetornoCertidaoDebito.Negativa;
+                    }
+                }
+            } else {
+                //Código sem lançamentos, emite negativa
+                Certidao.Descricao_Lancamentos = "";
+                Certidao.Tipo_Retorno = Functions.RetornoCertidaoDebito.Negativa;
+            }
+
+            Certidao.Descricao_Lancamentos = _descricao_lancamento;
+            return Certidao;
+        }
 
 
     }

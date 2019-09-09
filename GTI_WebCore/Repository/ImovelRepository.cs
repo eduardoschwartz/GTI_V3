@@ -200,22 +200,14 @@ namespace GTI_WebCore.Repository {
 
             List<ProprietarioStruct> Lista = new List<ProprietarioStruct>();
             foreach (var query in reg) {
-                string sDoc;
-                if (!string.IsNullOrEmpty(query.Cpf) && query.Cpf.ToString().Length > 5)
-                    sDoc = query.Cpf;
-                else {
-                    if (!string.IsNullOrEmpty(query.Cnpj) && query.Cnpj.ToString().Length > 10)
-                        sDoc = query.Cnpj;
-                    else
-                        sDoc = "";
-                }
 
                 ProprietarioStruct Linha = new ProprietarioStruct {
                     Codigo = query.Codcidadao,
                     Nome = query.Nomecidadao,
                     Tipo = query.Tipoprop,
                     Principal = Convert.ToBoolean(query.Principal),
-                    CPF = sDoc,
+                    CPF = query.Cpf,
+                    CNPJ=query.Cnpj,
                     RG = query.Rg
                 };
                 Lista.Add(Linha);
