@@ -255,10 +255,7 @@ namespace GTI_WebCore.Controllers {
             int _codigo;
             bool _valida = false;
             int _numero;
-//            if(model.Extrato)
-                _numero= tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Debito);
-//            else
- //               _numero = tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Comprovante_Pagamento);
+            _numero = tributarioRepository.Retorna_Codigo_Certidao(Functions.TipoCertidao.Debito);
             ViewBag.Result = "";
 
             model.OptionList = new List<SelectListItem> {
