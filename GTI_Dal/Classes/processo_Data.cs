@@ -707,11 +707,11 @@ namespace GTI_Dal.Classes {
                         Lista[i].DataEntrada = query.Datahora.ToString() == "" ? "" : DateTime.Parse(query.Datahora.ToString()).ToString("dd/MM/yyyy");
                         Lista[i].HoraEntrada = query.Datahora.ToString() == "" ? "" : DateTime.Parse(query.Datahora.ToString()).ToString("hh:mm");
                         sFullName = String.IsNullOrEmpty(query.Usuario1) ? "" : clsSistema.Retorna_User_FullName(query.Usuario1);
-                        Lista[1].Userid1 = query.Userid;
+                        Lista[i].Userid1 = query.Userid;
                         Lista[i].Usuario1 = sFullName;
                         Lista[i].DespachoNome = String.IsNullOrEmpty(query.Descricao) ? "" : query.Descricao;
                         Lista[i].DataEnvio = query.Dataenvio == null ? "" : DateTime.Parse(query.Dataenvio.ToString()).ToString("dd/MM/yyyy");
-                        Lista[1].Userid2 = query.Userid2;
+                        Lista[i].Userid2 = query.Userid2;
 
                         if (query.Userid2 != null) {
                             string NomeLogin = clsSistema.Retorna_User_LoginName((int)query.Userid2);

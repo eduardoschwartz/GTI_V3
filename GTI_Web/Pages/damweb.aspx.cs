@@ -541,10 +541,6 @@ namespace UIWeb.Pages {
 
             if (bFind) {
                 _valor_Honorario = (_valor_ajuizado * (decimal)0.1);
-                var dt = (DataTable)grdMain.DataSource;
-                var newRow = dt.NewRow();
-                dt.Rows.Add(DateTime.Now.Year.ToString(), "41" + "-" + "DESPESAS JUDICIAIS", "0","1", "0", Convert.ToDateTime(lblVenctoDam.Text).ToString("dd/MM/yyyy"),
-                _valor_Honorario.ToString("#0.00"), "0,00", "0,00", "0.00", _valor_Honorario.ToString("#0.00"), "NÃO", "NÃO";
             }
 
             if (bRefis) {
@@ -624,6 +620,60 @@ namespace UIWeb.Pages {
                     }
 
                 }
+            }
+
+            if (Valor_Honorario > 0) {
+                int _codigo = Convert.ToInt32(txtCod.Text);
+                int _seq = tributario_Class.Retorna_Ultima_Seq_Honorario(_codigo, DateTime.Now.Year);
+                _seq++;
+                reg = new DebitoStructure();
+                reg.Codigo_Reduzido = _codigo;
+                reg.Ano_Exercicio = DateTime.Now.Year;
+                reg.Codigo_Lancamento = 41;
+                reg.Sequencia_Lancamento = _seq;
+                reg.Numero_Parcela = 1;
+                reg.Complemento = 0;
+                reg.Descricao_Lancamento = "41-DESPESAS JUDICIAIS";
+                reg.Data_Vencimento = Convert.ToDateTime(lblVenctoDam.Text);
+                reg.Soma_Principal = Valor_Honorario;
+                reg.Soma_Juros = 0;
+                reg.Soma_Multa = 0;
+                reg.Soma_Correcao = 0;
+                reg.Soma_Total = Valor_Honorario;
+
+                List<SpExtrato> ListaTributo = tributario_Class.Lista_Extrato_Tributo(reg.Codigo_Reduzido, Convert.ToInt16(reg.Ano_Exercicio), Convert.ToInt16(reg.Ano_Exercicio), Convert.ToInt16(reg.Codigo_Lancamento), Convert.ToInt16(reg.Codigo_Lancamento), Convert.ToInt16(reg.Sequencia_Lancamento), Convert.ToInt16(reg.Sequencia_Lancamento),
+                Convert.ToInt16(reg.Numero_Parcela), Convert.ToInt16(reg.Numero_Parcela), reg.Complemento, reg.Complemento, 0, 99, Convert.ToDateTime(reg.Data_Vencimento), "Web");
+
+                DescTributo += "090 - Honorários";
+                reg.Descricao_Tributo = DescTributo;
+                lstExtrato.Add(reg);
+
+                Debitoparcela regParcela = new Debitoparcela {
+                    Codreduzido=_codigo,
+                    Anoexercicio=(short)DateTime.Now.Year,
+                    Codlancamento=41,
+                    Seqlancamento=(short)_seq,
+                    Numparcela=1,
+                    Codcomplemento=0,
+                    Statuslanc=3,
+                    Datavencimento=Convert.ToDateTime(lblVenctoDam.Text),
+                    Datadebase=DateTime.Now,
+                    Userid=236
+                };
+                Exception ex = tributario_Class.Insert_Debito_Parcela(regParcela);
+
+                Debitotributo regTributo = new Debitotributo {
+                    Codreduzido = _codigo,
+                    Anoexercicio = (short)DateTime.Now.Year,
+                    Codlancamento = 41,
+                    Seqlancamento = (short)_seq,
+                    Numparcela = 1,
+                    Codcomplemento = 0,
+                    Codtributo = 90,
+                    Valortributo = Valor_Honorario
+                };
+                ex = tributario_Class.Insert_Debito_Tributo(regTributo);
+
             }
 
             decimal nValorGuia = 0;
