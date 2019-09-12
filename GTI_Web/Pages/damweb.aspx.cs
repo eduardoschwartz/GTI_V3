@@ -520,21 +520,26 @@ namespace UIWeb.Pages {
                                 bAnoAtual = true;
 
                             if (Convert.ToInt16(row.Cells[2].Text.Substring(0, 3)) == 5) {
-                                if (Convert.ToDateTime(row.Cells[6].Text) > Convert.ToDateTime("05/01/2015")  && !bRefis ) {
+                                if (Convert.ToDateTime(row.Cells[6].Text) > Convert.ToDateTime("05/01/2015") && !bRefis) {
                                     bGerado = false;
                                     lblMsg2.Text = "ISS Variável com vencimento após 01/05/2015 não pode ser pago por DAM.";
                                     return;
                                 }
-                            } else
-                            if (row.Cells[12].Text == "SIM") {
-                                bGerado = false;
-                                lblMsg2.Text = "Débitos ajuizados não podem ser pagos através de DAM.";
-                                return;
-                            }
-                            if (row.Cells[13].Text == "SIM") {
-                                bGerado = false;
-                                lblMsg2.Text = "Débitos protestados ou enviados para protesto não podem ser pagos através de DAM.";
-                                return;
+                            } else {
+
+
+
+
+                                if (row.Cells[12].Text == "SIM") {
+                                    bGerado = false;
+                                    lblMsg2.Text = "Débitos ajuizados não podem ser pagos através de DAM.";
+                                    return;
+                                }
+                                if (row.Cells[13].Text == "SIM") {
+                                    bGerado = false;
+                                    lblMsg2.Text = "Débitos protestados ou enviados para protesto não podem ser pagos através de DAM.";
+                                    return;
+                                }
                             }
                         }
                     }
@@ -695,6 +700,7 @@ namespace UIWeb.Pages {
             }
         }
 
- 
+
+
     }//end class
 }

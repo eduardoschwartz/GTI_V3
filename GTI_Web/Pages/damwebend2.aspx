@@ -1,7 +1,59 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="damwebend2.aspx.cs" Inherits="UIWeb.Pages.damwebend2" MasterPageFile="~/Pages/default.Master"    %>
 
+
+
+
 <asp:Content ID="Content" ContentPlaceHolderID="MenuContentPlaceHolder" runat="server" >
     <link href="../css/gti.css" rel="stylesheet" />
+
+
+    <style>
+          .modalDialog {
+        position: fixed;
+        font-family: Arial, Helvetica, sans-serif;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0,0,0,0.8);
+        z-index: 99999;
+        -webkit-transition: opacity 400ms ease-in;
+        -moz-transition: opacity 400ms ease-in;
+        transition: opacity 400ms ease-in;
+    }
+    .modalDialog > div {
+        width: 400px;
+        position: relative;
+        margin: 10% auto;
+        margin-left:20%;
+        padding: 5px 20px 13px 20px;
+        border-radius: 10px;
+        background: #fff;
+        background: -moz-linear-gradient(#fff, #999);
+        background: -webkit-linear-gradient(#fff, #999);
+        background: -o-linear-gradient(#fff, #999);
+    }
+    .close {
+        background: #606061;
+        color: #FFFFFF;
+        line-height: 25px;
+        position: absolute;
+        right: -12px;
+        text-align: center;
+        top: -10px;
+        width: 24px;
+        text-decoration: none;
+        font-weight: bold;
+        -webkit-border-radius: 12px;
+        -moz-border-radius: 12px;
+        border-radius: 12px;
+        -moz-box-shadow: 1px 1px 3px #000;
+        -webkit-box-shadow: 1px 1px 3px #000;
+        box-shadow: 1px 1px 3px #000;
+    }
+    .close:hover { background: #00d9ff; }
+    </style>
+
 
     <%--<form id="pagamento" runat="server" action="https://mpag.bb.com.br/site/mpag/" method="post" name="pagamento">--%>
         <div class="auto-style1">
@@ -121,4 +173,18 @@
         &nbsp;&nbsp;&nbsp;
         </div>
        
+
+    g<asp:Button ID="btnOpenModal" runat="server" Text="Open Modal Window" OnClick="btnOpenModal_Click" />
+    <div id="divModal" runat="server" class ="modalDialog" visible="false">
+    <div>
+        <asp:LinkButton ID="lbtnModalClose" runat="server"  CssClass="close" Text="X" OnClick="CloseModal" />
+        <h2>Modal Box</h2>
+        <p>This is a sample modal box that can be created using CSS3.</p>
+        <br />
+        <asp:Button ID="btn123" runat="server" Text="Close" OnClick="CloseModal" />
+    </div>
+</div>
+
+
+
 </asp:Content>
