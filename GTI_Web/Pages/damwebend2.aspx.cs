@@ -112,13 +112,6 @@ namespace UIWeb.Pages {
 
         }
 
-        protected void btnOpenModal_Click(object sender, EventArgs e) {
-            divModal.Visible = true;
-        }
-        protected void CloseModal(object sender, EventArgs e) {
-            divModal.Visible = false;
-        }
-
 
     }
 }

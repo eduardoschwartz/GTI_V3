@@ -37,17 +37,67 @@
 
 
     <style type="text/css">
-        
-      
+        .modalDialog {
+            position: fixed;
+            font-family: Arial, Helvetica, sans-serif;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 99999;
+            -webkit-transition: opacity 400ms ease-in;
+            -moz-transition: opacity 400ms ease-in;
+            transition: opacity 400ms ease-in;
+        }
+
+            .modalDialog > div {
+                width: 600px;
+                position: relative;
+                margin: 10% auto;
+                margin-left: 20%;
+                padding: 5px 20px 13px 20px;
+                border-radius: 10px;
+                background: #fff;
+                background: -moz-linear-gradient(#fff, #bbb);
+                background: -webkit-linear-gradient(#fff, #bbb);
+                background: -o-linear-gradient(#fff, #bbb);
+            }
+
+        .close {
+            background: #606061;
+            color: #FFFFFF;
+            line-height: 25px;
+            position: absolute;
+            right: -12px;
+            text-align: center;
+            top: -10px;
+            width: 24px;
+            text-decoration: none;
+            font-weight: bold;
+            -webkit-border-radius: 12px;
+            -moz-border-radius: 12px;
+            border-radius: 12px;
+            -moz-box-shadow: 1px 1px 3px #000;
+            -webkit-box-shadow: 1px 1px 3px #000;
+            box-shadow: 1px 1px 3px #000;
+        }
+
+            .close:hover {
+                background: #00d9ff;
+            }
+
+
         .auto-style3 {
             color: blue;
         }
+
         .auto-style7 {
             font-size: 8pt;
             font: 400 10px/1.5 Arial,Verdana, sans-serif, Helvetica;
             color: #3a8dcc;
             width: 800px;
-           height:400px;
+            height: 400px;
             overflow: auto;
         }
         .auto-style8 {
@@ -307,12 +357,31 @@
                 <asp:Label ID="lblMsg2" runat="server" ForeColor="#CC0000" Text="lblMsg2"></asp:Label>
                 <br />
                 <br />
-                <asp:Button ID="btPrint" runat="server" align="left" colspan="2" OnClick="btPrint_Click" Text="Emissão de Guia" class="button" />
+                <asp:Button ID="btPrint" runat="server" align="left" colspan="2" OnClick="btnOpenModal_Click" Text="Emissão de Guia" class="button" />
             </div>
+
+
+   
+
         </div>
 
-      
-<br />
 
+    <br />
+    <br />
+    <div id="divModal" runat="server" class="modalDialog" visible="false">
+        <div>
+            <asp:LinkButton ID="lbtnModalClose" runat="server" CssClass="close" Text="X" OnClick="CloseModal" />
+            <h3 style="color: red">Observação Importante: </h3>
+            <br />
+            <br />  
+            <h4>Foram selecionados débitos ajuizados e/ou protestados.</h4><br /><br />
+            <p>- Se debito ajuizados solicitar as guias das custas e despesas processuais através do e-mail: <u style="color: blue">dividaativa@jaboticabal.sp.gov.br</u> ou pessoalmente no Sistema Prático.</p>
 
+            <p>- Se debito protestado informar o pagamento através do e-mail: <u style="color: blue">dividaativa@jaboticabal.sp.gov.br</u> ou pessoalmente no Sistema Prático.</p>
+            <p style="color: black;font-weight:bold">Tal procedimento é de extrema importância para providências junto ao Fórum e Tabelião de Notas e Protesto."</p>
+            <br />
+            <asp:Button ID="btConcordo" runat="server" align="left" colspan="2" OnClick="btPrint_Click" Text="Prosseguir" class="button" />
+            <asp:Button ID="btFechar" runat="server" align="left" colspan="2" OnClick="CloseModal" Text="Cancelar" class="button" BackColor="Red" />
+        </div>
+    </div>
 </asp:Content>

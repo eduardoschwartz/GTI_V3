@@ -490,6 +490,10 @@ namespace UIWeb.Pages {
             bool bParcNormal = false;
             bool bAnoAtual = false;
             bool bAnoAnterior = false;
+            bool bFind = false;
+            decimal _valor_ajuizado = 0, _valor_Honorario = 0;
+
+            divModal.Visible = false;
             Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
             bRefis = tributario_Class.IsRefis();
             nPlano = Convert.ToInt32(PlanoLabel.Text);
@@ -503,7 +507,7 @@ namespace UIWeb.Pages {
 
             if (TableResumo.Rows[0].Cells[1].Text == "0,00")
                 lblMsg2.Text = "Selecione os débitos que deseja pagar.";
-            else
+            else {
                 foreach (GridViewRow row in grdMain.Rows) {
                     if (row.RowType == DataControlRowType.DataRow) {
 
@@ -513,9 +517,8 @@ namespace UIWeb.Pages {
                             if (Convert.ToInt16(row.Cells[4].Text) != 0)
                                 bParcNormal = true;
 
-//                            if (Convert.ToDateTime(row.Cells[6].Text).Year < 2017)
-                            if (Convert.ToDateTime(row.Cells[6].Text).Year <= 2019  && Convert.ToDateTime(row.Cells[6].Text).Month <= 6)
-                                    bAnoAnterior = true;
+                            if (Convert.ToDateTime(row.Cells[6].Text).Year <= 2019 && Convert.ToDateTime(row.Cells[6].Text).Month <= 6)
+                                bAnoAnterior = true;
                             if (Convert.ToDateTime(row.Cells[6].Text).Year >= 2019 && Convert.ToDateTime(row.Cells[6].Text).Month > 6 && Convert.ToInt16(row.Cells[2].Text.Substring(0, 3)) != 41)
                                 bAnoAtual = true;
 
@@ -526,25 +529,24 @@ namespace UIWeb.Pages {
                                     return;
                                 }
                             } else {
-
-
-
-
-                                if (row.Cells[12].Text == "SIM") {
-                                    bGerado = false;
-                                    lblMsg2.Text = "Débitos ajuizados não podem ser pagos através de DAM.";
-                                    return;
-                                }
-                                if (row.Cells[13].Text == "SIM") {
-                                    bGerado = false;
-                                    lblMsg2.Text = "Débitos protestados ou enviados para protesto não podem ser pagos através de DAM.";
-                                    return;
+                                if (row.Cells[12].Text == "SIM" || row.Cells[13].Text == "SIM") {
+                                    bFind = true;
+                                    _valor_ajuizado += Convert.ToDecimal(row.Cells[11].Text);
                                 }
                             }
                         }
                     }
                 }
-            
+            }
+
+            if (bFind) {
+                _valor_Honorario = (_valor_ajuizado * (decimal)0.1);
+                var dt = (DataTable)grdMain.DataSource;
+                var newRow = dt.NewRow();
+                dt.Rows.Add(DateTime.Now.Year.ToString(), "41" + "-" + "DESPESAS JUDICIAIS", "0","1", "0", Convert.ToDateTime(lblVenctoDam.Text).ToString("dd/MM/yyyy"),
+                _valor_Honorario.ToString("#0.00"), "0,00", "0,00", "0.00", _valor_Honorario.ToString("#0.00"), "NÃO", "NÃO";
+            }
+
             if (bRefis) {
                 if (bAnoAnterior && bAnoAtual) {
                     bGerado = false;
@@ -562,12 +564,12 @@ namespace UIWeb.Pages {
             if (bParcUnica && bParcNormal) {
                 lblMsg2.Text = "Parcela ùnica não pode ser paga junto com outras parcelas.";
             } else {
-                  GeraGuia();
+                  GeraGuia(_valor_Honorario);
             }
                 
         }
 
-        private void GeraGuia() {
+        private void GeraGuia(decimal Valor_Honorario) {
             decimal tmpNumber = 0;
             bGerado = true;
             Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
@@ -700,6 +702,28 @@ namespace UIWeb.Pages {
             }
         }
 
+        protected void btnOpenModal_Click(object sender, EventArgs e) {
+            bool _find = false;
+            foreach (GridViewRow row in grdMain.Rows) {
+                if (row.RowType == DataControlRowType.DataRow) {
+                    if ((row.FindControl("chkRow") as CheckBox).Checked) {
+                        if (row.Cells[12].Text == "SIM" || row.Cells[13].Text == "SIM") {
+                            bGerado = false;
+                            _find = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if(_find)
+                divModal.Visible = true;
+            else 
+                btPrint_Click(sender, e);
+        }
+
+        protected void CloseModal(object sender, EventArgs e) {
+            divModal.Visible = false;
+        }
 
 
     }//end class
