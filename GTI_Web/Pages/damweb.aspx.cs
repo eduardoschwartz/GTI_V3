@@ -28,8 +28,6 @@ namespace UIWeb.Pages {
                     Response.Redirect("~/Pages/gtiMenu.aspx");
                 }
 
-                
-
                 if (!DateTime.TryParse(lblVenctoDam.Text, out DataDAM)) {
                     Response.Redirect("~/Pages/gtiMenu.aspx");
                 } else {
@@ -517,9 +515,9 @@ namespace UIWeb.Pages {
                             if (Convert.ToInt16(row.Cells[4].Text) != 0)
                                 bParcNormal = true;
 
-                            if (Convert.ToDateTime(row.Cells[6].Text).Year <= 2019 && Convert.ToDateTime(row.Cells[6].Text).Month <= 6)
+                            if (Convert.ToDateTime(row.Cells[6].Text) <= Convert.ToDateTime("30/06/2019") )
                                 bAnoAnterior = true;
-                            if (Convert.ToDateTime(row.Cells[6].Text).Year >= 2019 && Convert.ToDateTime(row.Cells[6].Text).Month > 6 && Convert.ToInt16(row.Cells[2].Text.Substring(0, 3)) != 41)
+                            if (Convert.ToDateTime(row.Cells[6].Text) > Convert.ToDateTime("30/06/2019") )
                                 bAnoAtual = true;
 
                             if (Convert.ToInt16(row.Cells[2].Text.Substring(0, 3)) == 5) {
@@ -548,7 +546,8 @@ namespace UIWeb.Pages {
                     bGerado = false;
                     nPlano = 0;
                     //lblMsg2.Text = "Não é possível pagar débitos de 2017 com outros anos pelo Refis.";
-                    lblMsg2.Text = "Não é possível pagar débitos anteriores a 30/06/2018 com débitos posteriores durante Refis.";
+                    lblMsg2.Text = "Não é possível pagar débitos anteriores a 30/06/2019 com débitos posteriores durante Refis. ";
+                    lblMsg2.Text += "Será necessário emitir dois boletos um contendo apenas os débitos com vencimento anterior à 30/06/2018 e depois outro com débitos posteriores as esta data.";
                     return;
                 }
                 if (!bAnoAnterior && bAnoAtual) {

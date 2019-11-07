@@ -12,9 +12,9 @@ namespace GTI_Desktop.Forms {
     public partial class Calculo_Imposto : Form {
         string _connection = gtiCore.Connection_Name();
         string _path = @"c:\cadastro\bin\";
-        int _ano = 2019;
-        int _documento = 17032686;
-        decimal _ipca = (decimal)3.4128;
+        int _ano = 2020;
+        int _documento = 17801000;
+        decimal _ipca = (decimal)2.894;
  
         private enum Tipo_imposto {
             Iptu = 1,
@@ -276,16 +276,13 @@ namespace GTI_Desktop.Forms {
             Valor_ci_Total.Text = _valor_ci_total.ToString("#0.00");
 
             Refresh();
-            MessageBox.Show("Cálculo finalizado.", "Infiormação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Cálculo finalizado.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
 
         private void Calculo_IssTLL() {
-            //&&&APAGAR APÓS 2019
-            int[] Lista_Medico = { 114367, 114436, 114874, 116910, 118812, 119547, 119695, 119942, 120500, 120837, 121235,113367, 113374,
-                121516, 121635, 122069, 122391, 122516, 122806, 122951, 122892, 113377, 113459, 113499, 115479, 113884, 113965, 113364,
-                113374, 110344, 107902, 110647, 101074, 121860, 110909, 111361, 111446, 111515, 111523, 112477, 112596, 113199, 113344,  113375 };
 
+            _ipca = (decimal)3.5116;
             FileStream fsDP = new FileStream(_path + "DEBITOPARCELA.TXT", FileMode.Create, FileAccess.Write);
             StreamWriter fs1 = new StreamWriter(fsDP, System.Text.Encoding.Default);
             FileStream fsDT = new FileStream(_path + "DEBITOTRIBUTO.TXT", FileMode.Create, FileAccess.Write);
@@ -340,7 +337,7 @@ namespace GTI_Desktop.Forms {
                 bool _vistoria = item.Vistoria == 1 ? true : false;
                 decimal _area = item.Area == null ? 0 : (decimal)item.Area;
                 int Codigo = item.Codigo;
-                if (Codigo == 100256)
+                if (Codigo == 100006)
                     _possui_taxa = false;
 
                 int _codigo_aliquota = item.Codigo_aliquota == null ? 0 : (int)item.Codigo_aliquota;
@@ -417,16 +414,8 @@ namespace GTI_Desktop.Forms {
                         fs4.WriteLine(_linha);
                     }
 
-                    //&&&& APAGAR ISSO APÓS 2019
-                    bool IsMedico = false;
-                    for (int i = 0; i < Lista_Medico.Length; i++) {
-                        if (Codigo == Lista_Medico[i]) {
-                            IsMedico = true;
-                            break;
-                        }
-                    }
 
-                    if (_valor_aliquota_ISS > 0 && !IsMedico ) {
+                    if (_valor_aliquota_ISS > 0  ) {
                         _linha = Codigo + "#" + _ano + "#14#0#" + _parcela + "#0#18#" + _vencto + "#01/01/" + _ano;
                         fs1.WriteLine(_linha);
 
@@ -492,7 +481,6 @@ namespace GTI_Desktop.Forms {
         }
 
         private void Calculo_Vigilancia() {
-
             FileStream fsDP = new FileStream(_path + "DEBITOPARCELA.TXT", FileMode.Create, FileAccess.Write);
             StreamWriter fs1 = new StreamWriter(fsDP, System.Text.Encoding.Default);
             FileStream fsDT = new FileStream(_path + "DEBITOTRIBUTO.TXT", FileMode.Create, FileAccess.Write);
