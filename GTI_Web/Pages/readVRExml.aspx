@@ -17,6 +17,14 @@
             &nbsp;&nbsp;&nbsp;&nbsp;
             <br />
             <br />
+            <asp:Label runat="server" ID="lblArquivo0"  Text="Tipo de arquivo selecionado..:" Font-Size="Small" ForeColor="Maroon"></asp:Label>
+            &nbsp;
+            <asp:DropDownList ID="TipoArquivoList" runat="server" Height="16px" Width="200px">
+                <asp:ListItem Value="1">VRE - Antigo</asp:ListItem>
+                <asp:ListItem Value="2">REDESIM - Viabilidade</asp:ListItem>
+                <asp:ListItem Value="3">REDESIM - Licenciamento</asp:ListItem>
+            </asp:DropDownList>
+            <br />
 
         <br /> <asp:button CssClass="button1" id="btEnviar" runat="server" text="Importar" OnClick="btEnviar_Click" Width="100px" /> &nbsp;&nbsp;&nbsp;
             <br />

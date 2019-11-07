@@ -8,10 +8,10 @@
 //------------------------------------------------------------------------------
 
 namespace UIWeb.Pages {
-    
-    
+
+
     public partial class readVRExml {
-        
+
         /// <summary>
         /// lblArquivo control.
         /// </summary>
@@ -20,7 +20,7 @@ namespace UIWeb.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblArquivo;
-        
+
         /// <summary>
         /// FileUpload1 control.
         /// </summary>
@@ -29,7 +29,25 @@ namespace UIWeb.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
-        
+
+        /// <summary>
+        /// lblArquivo0 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblArquivo0;
+
+        /// <summary>
+        /// TipoArquivoList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList TipoArquivoList;
+
         /// <summary>
         /// btEnviar control.
         /// </summary>
@@ -38,7 +56,7 @@ namespace UIWeb.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btEnviar;
-        
+
         /// <summary>
         /// grdMain control.
         /// </summary>
@@ -47,7 +65,7 @@ namespace UIWeb.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grdMain;
-        
+
         /// <summary>
         /// Statuslbl control.
         /// </summary>

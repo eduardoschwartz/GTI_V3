@@ -24,9 +24,15 @@ namespace UIWeb.Pages {
             }
             if (FileUpload1.PostedFile.ContentType.CompareTo("text/xml") == 0) {
                 try {
-                    UploadArquivo();
+                    int _value = Convert.ToInt32(TipoArquivoList.SelectedValue);
+                    if(_value==1)
+                        UploadArquivo();
+                    else {
+                        if (_value == 2)
+                            UploadRedeSimViabilidade();
+                    }
                 } catch {
-                    throw;
+                    Statuslbl.Text = "Arquivo inválido!";
                 }
             } else {
                 Statuslbl.Text = "Apenas arquivos em Xml podem ser enviados";
@@ -70,6 +76,45 @@ namespace UIWeb.Pages {
             } else
                 Statuslbl.Text = "Upload status: Tamanho máximo 5Mb!";
         }
+
+        private void UploadRedeSimViabilidade() {
+            String path = Server.MapPath("~/VRExml/");
+
+            if (FileUpload1.PostedFile.ContentLength < 5102400) {
+                //string MyPath = @""; // \\networkmachine\foo\bar OR C:\foo\bar
+                string MyPathWithoutDriveOrNetworkShare = FileUpload1.PostedFile.FileName.Substring(Path.GetPathRoot(FileUpload1.PostedFile.FileName).Length);
+
+                try {
+                    FileUpload1.SaveAs(path + System.IO.Path.GetFileName(MyPathWithoutDriveOrNetworkShare));
+                    List<EmpresaStruct> Lista = ReadFileViabilidade(path + System.IO.Path.GetFileName(MyPathWithoutDriveOrNetworkShare));
+                    if (Lista.Count > 0) {
+                        //FillListView(Lista);
+                        //Grava_Empresas_Vre(Lista);
+                        //foreach (EmpresaStruct reg in Lista) {
+                        //    foreach (DataRow dr in dt.Rows) {
+                        //        if ((string)dr["Seq"] == reg.id) {
+                        //            if (reg.Already_inDB)
+                        //                dr["Sit"] = "Duplicado";
+                        //            else
+                        //                dr["Sit"] = "Importado";
+                        //        }
+                        //    }
+                        //}
+                        //grdMain.DataSource = dt;
+                        //grdMain.DataBind();
+                    } else {
+                        Statuslbl.Text = "Arquivo inválido";
+                    }
+                    Statuslbl.Text = Lista.Count.ToString() + " Empresas analisadas.";
+                } catch {
+                    Statuslbl.Text = "Arquivo inválido";
+                    throw;
+                }
+
+            } else
+                Statuslbl.Text = "Upload status: Tamanho máximo 5Mb!";
+        }
+
 
         private void FillListView(List<EmpresaStruct>Lista) {
             try { 
@@ -196,6 +241,26 @@ namespace UIWeb.Pages {
 
             return empresas;
         }
+
+        private List<EmpresaStruct> ReadFileViabilidade(string sFileName) {
+            List<EmpresaStruct> empresas;
+            
+            try {
+                XElement xmlDoc = XElement.Load(sFileName);
+                empresas = (from cust in xmlDoc.Descendants("Viabilidade")
+                                select new EmpresaStruct {
+                                    id = cust.Element("Protocolo").Value,
+                                    Nome = cust.Element("RazaoSocial").Value,
+                                    Cnpj = cust.Element("CNPJ").Value
+                                }).ToList();
+
+            } catch (Exception ex) {
+
+                throw;
+            }
+            return empresas;
+        }
+        
 
         private void Grava_Empresas_Vre(List<EmpresaStruct> Lista) {
             Empresa_bll empresa_Class = new Empresa_bll("GTIconnection");
@@ -406,5 +471,14 @@ namespace UIWeb.Pages {
         protected void Button1_Click(object sender, EventArgs e) {
             Response.Redirect("~/Pages/alvara_vre.aspx");
         }
+
+
+
+
+
+
+
+
+
     }
 }
