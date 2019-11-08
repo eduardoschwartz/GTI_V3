@@ -13,7 +13,7 @@ namespace GTI_Desktop.Forms {
         string _connection = gtiCore.Connection_Name();
         string _path = @"c:\cadastro\bin\";
         int _ano = 2020;
-        int _documento = 17801000;
+        int _documento = 17287151;
         decimal _ipca = (decimal)2.894;
  
         private enum Tipo_imposto {
@@ -827,13 +827,13 @@ namespace GTI_Desktop.Forms {
                 _row["qtde_parcela"] = Convert.ToByte(_fields[3]);
                 _row["valor0"] = Convert.ToDecimal(_fields[4]);
                 _row["valor1"] = Convert.ToDecimal(_fields[5]);
-                _row["valor91"] = Convert.ToDecimal(_fields[6]);
-                _row["valor92"] = Convert.ToDecimal(_fields[7]);
-                _row["documento0"] = Convert.ToInt32(_fields[8]);
-                _row["documento91"] = Convert.ToInt32(_fields[9]);
-                _row["documento92"] = Convert.ToInt32(_fields[10]);
-                _row["documento1"] = Convert.ToInt32(_fields[11]);
-                _row["vencimento1"] = Convert.ToDateTime(_fields[12]);
+                _row["valor91"] = Convert.ToDecimal(_fields[6]==""?"0": _fields[6]);
+                _row["valor92"] = Convert.ToDecimal(_fields[7] == "" ? "0" : _fields[7]);
+                _row["documento0"] = Convert.ToInt32(_fields[8] == "" ? "0" : _fields[8]);
+                _row["documento91"] = Convert.ToInt32(_fields[9] == "" ? "0" : _fields[9]);
+                _row["documento92"] = Convert.ToInt32(_fields[10] == "" ? "0" : _fields[10]);
+                _row["documento1"] = Convert.ToInt32(_fields[11] == "" ? "0" : _fields[11]);
+                _row["vencimento1"] = Convert.ToDateTime(_fields[12] == "" ? "0" : _fields[12]);
                 if (_fields.Length > 13) {
                     _row["documento2"] = Convert.ToInt32(_fields[13]);
                     _row["vencimento2"] = Convert.ToDateTime(_fields[14]);
@@ -944,8 +944,8 @@ namespace GTI_Desktop.Forms {
                     _row["testadaprinc"] = Convert.ToDecimal(_fields[9]);
                     _row["valortotalparc"] = Convert.ToDecimal(_fields[10]);
                     _row["valortotalunica"] = Convert.ToDecimal(_fields[11]);
-                    _row["valortotalunica2"] = Convert.ToDecimal(_fields[12]);
-                    _row["valortotalunica3"] = Convert.ToDecimal(_fields[13]);
+                    _row["valortotalunica2"] = Convert.ToDecimal(_fields[12] == "" ? "0" : _fields[12]);
+                    _row["valortotalunica3"] = Convert.ToDecimal(_fields[13] == "" ? "0" : _fields[13]);
                     _row["qtdeparc"] = Convert.ToInt16(_fields[14]);
                     _row["txexpparc"] = Convert.ToDecimal(_fields[15]);
                     _row["txexpunica"] = Convert.ToDecimal(_fields[16]);
@@ -957,9 +957,9 @@ namespace GTI_Desktop.Forms {
                     _row["fatortop"] = Convert.ToDecimal(_fields[22]);
                     _row["fatordis"] = Convert.ToDecimal(_fields[23]);
                     _row["fatorgle"] = Convert.ToDecimal(_fields[24]);
-                    _row["agrupamento"] = Convert.ToDecimal(_fields[25]);
-                    _row["fracaoideal"] = Convert.ToDecimal(_fields[26]);
-                    _row["aliquota"] = Convert.ToDecimal(_fields[27]);
+                    _row["agrupamento"] = Convert.ToDecimal(_fields[25] == "" ? "0" : _fields[25]);
+                    _row["fracaoideal"] = Convert.ToDecimal(_fields[26] == "" ? "0" : _fields[26]);
+                    _row["aliquota"] = Convert.ToDecimal(_fields[27] == "" ? "0" : _fields[27]);
 
                     dt.Rows.Add(_row);
                 }
