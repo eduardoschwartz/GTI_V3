@@ -934,8 +934,8 @@ namespace GTI_Desktop.Forms {
                     DataRow _row = dt.NewRow();
                     _row["ano"] = Convert.ToInt16(_fields[0]);
                     _row["codreduzido"] = Convert.ToInt32(_fields[1]);
-                    _row["vvt"] = Convert.ToDecimal(_fields[2]);
-                    _row["vvc"] = Convert.ToDecimal(_fields[3]);
+                    _row["vvt"] = Convert.ToDecimal(_fields[2] == "" ? "0" : _fields[2]);
+                    _row["vvc"] = Convert.ToDecimal(_fields[3] == "" ? "0" : _fields[3]);
                     _row["vvi"] = Convert.ToDecimal(_fields[4]);
                     _row["impostopredial"] = Convert.ToDecimal(_fields[5]);
                     _row["impostoterritorial"] = Convert.ToDecimal(_fields[6]);
