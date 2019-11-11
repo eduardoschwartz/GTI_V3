@@ -22,7 +22,7 @@ namespace UIWeb.Pages {
                 Statuslbl.Text = "Selecione um arquivo para enviar";
                 return;
             }
-            if (FileUpload1.PostedFile.ContentType.CompareTo("text/xml") == 0) {
+//            if (FileUpload1.PostedFile.ContentType.CompareTo("text/xml") == 0 || FileUpload1.PostedFile.ContentType.CompareTo("text/csv") == 0) {
                 try {
                     int _value = Convert.ToInt32(TipoArquivoList.SelectedValue);
                     if(_value==1)
@@ -34,9 +34,9 @@ namespace UIWeb.Pages {
                 } catch {
                     Statuslbl.Text = "Arquivo inválido!";
                 }
-            } else {
-                Statuslbl.Text = "Apenas arquivos em Xml podem ser enviados";
-            }
+        //    } else {
+        //        Statuslbl.Text = "Apenas arquivos em Xml ou Csv podem ser enviados";
+        //    }
         }
 
         private void UploadArquivo() {
@@ -86,7 +86,7 @@ namespace UIWeb.Pages {
 
                 try {
                     FileUpload1.SaveAs(path + System.IO.Path.GetFileName(MyPathWithoutDriveOrNetworkShare));
-                    List<EmpresaStruct> Lista = ReadFileViabilidade(path + System.IO.Path.GetFileName(MyPathWithoutDriveOrNetworkShare));
+                    List<Redesim_viabilidade> Lista = ReadFileViabilidade(path + System.IO.Path.GetFileName(MyPathWithoutDriveOrNetworkShare));
                     if (Lista.Count > 0) {
                         //FillListView(Lista);
                         //Grava_Empresas_Vre(Lista);
@@ -102,10 +102,10 @@ namespace UIWeb.Pages {
                         //}
                         //grdMain.DataSource = dt;
                         //grdMain.DataBind();
+                        Statuslbl.Text = Lista.Count.ToString() + " Empresas analisadas.";
                     } else {
                         Statuslbl.Text = "Arquivo inválido";
                     }
-                    Statuslbl.Text = Lista.Count.ToString() + " Empresas analisadas.";
                 } catch {
                     Statuslbl.Text = "Arquivo inválido";
                     throw;
@@ -242,22 +242,44 @@ namespace UIWeb.Pages {
             return empresas;
         }
 
-        private List<EmpresaStruct> ReadFileViabilidade(string sFileName) {
-            List<EmpresaStruct> empresas;
-            
-            try {
-                XElement xmlDoc = XElement.Load(sFileName);
-                empresas = (from cust in xmlDoc.Descendants("Viabilidade")
-                                select new EmpresaStruct {
-                                    id = cust.Element("Protocolo").Value,
-                                    Nome = cust.Element("RazaoSocial").Value,
-                                    Cnpj = cust.Element("CNPJ").Value
-                                }).ToList();
-
-            } catch (Exception ex) {
-
-                throw;
+        private List<Redesim_viabilidade> ReadFileViabilidade(string sFileName) {
+            List<Redesim_viabilidade> empresas = new List<Redesim_viabilidade>();
+            using (var reader = new StreamReader(sFileName)) {
+                int pos = 0;
+                while (!reader.EndOfStream) {
+                    Redesim_viabilidade reg = new Redesim_viabilidade();
+                    var line = reader.ReadLine();
+                    var values = line.Split(';');
+                    if (values.Length > 1) {
+                        reg.Protocolo = values[0];
+                        if (reg.Protocolo.Length == 13 && reg.Protocolo.Substring(0, 2) == "SP") {
+                            reg.Analise = values[1];
+                            if (pos > 0)
+                                empresas.Add(reg);
+                        }
+                    }
+                    pos++;
+                }
             }
+
+
+
+            //try {
+            //    XElement xmlDoc = XElement.Load(sFileName);
+            //    empresas = (from cust in xmlDoc.Descendants("Viabilidade")
+            //                    select new Redesim_viabilidade {
+            //                        Protocolo = cust.Element("Protocolo").Value,
+            //                        Analise = cust.Element("Analise").Value,
+            //                        Nire = cust.Element("Nire").Value,
+            //                        Cnpj = cust.Element("CNPJ").Value,
+            //                        RazaoSocial = cust.Element("RazaoSocial").Value,
+            //                        AreaEstabelecimento = Convert.ToDecimal(cust.Element("Area Estabelecimento").Value)
+            //                    }).ToList();
+
+            //} catch (Exception ex) {
+
+            //    throw;
+            //}
             return empresas;
         }
         
