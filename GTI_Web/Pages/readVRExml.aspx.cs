@@ -88,25 +88,25 @@ namespace UIWeb.Pages {
                     FileUpload1.SaveAs(path + System.IO.Path.GetFileName(MyPathWithoutDriveOrNetworkShare));
                     List<Redesim_viabilidade> Lista = ReadFileViabilidade(path + System.IO.Path.GetFileName(MyPathWithoutDriveOrNetworkShare));
                     if (Lista.Count > 0) {
-                        //FillListView(Lista);
-                        //Grava_Empresas_Vre(Lista);
-                        //foreach (EmpresaStruct reg in Lista) {
-                        //    foreach (DataRow dr in dt.Rows) {
-                        //        if ((string)dr["Seq"] == reg.id) {
-                        //            if (reg.Already_inDB)
-                        //                dr["Sit"] = "Duplicado";
-                        //            else
-                        //                dr["Sit"] = "Importado";
-                        //        }
-                        //    }
-                        //}
-                        //grdMain.DataSource = dt;
-                        //grdMain.DataBind();
+                        FillListViewViabilidade(Lista);
+                        Grava_redeSim_Viabilidade(Lista);
+                        foreach (Redesim_viabilidade reg in Lista) {
+                            foreach (DataRow dr in dt.Rows) {
+                                if ((string)dr["Seq"] == reg.Protocolo) {
+                                    //if (reg.Already_inDB)
+                                    //    dr["Sit"] = "Duplicado";
+                                    //else
+                                    //    dr["Sit"] = "Importado";
+                                }
+                            }
+                        }
+                        grdMain.DataSource = dt;
+                        grdMain.DataBind();
                         Statuslbl.Text = Lista.Count.ToString() + " Empresas analisadas.";
                     } else {
                         Statuslbl.Text = "Arquivo inválido";
                     }
-                } catch {
+                } catch (Exception ex) {
                     Statuslbl.Text = "Arquivo inválido";
                     throw;
                 }
@@ -141,7 +141,33 @@ namespace UIWeb.Pages {
                 Statuslbl.Text = "Arquivo inválido";
                 throw;
             }
+        }
 
+        private void FillListViewViabilidade(List<Redesim_viabilidade> Lista) {
+            try {
+                DataColumn cl = new DataColumn("Seq");
+                dt.Columns.Add(cl);
+                cl = new DataColumn("Nome");
+                dt.Columns.Add(cl);
+                cl = new DataColumn("Doc");
+                dt.Columns.Add(cl);
+                cl = new DataColumn("Sit");
+                dt.Columns.Add(cl);
+
+                foreach (Redesim_viabilidade reg in Lista) {
+                    DataRow dr = dt.NewRow();
+                    dr[0] = reg.Protocolo;
+                    dr[1] = reg.RazaoSocial.Replace("&amp;", "&");
+                    dr[2] = reg.Cnpj;
+                    dr[3] = "";
+                    dt.Rows.Add(dr);
+                }
+                grdMain.DataSource = dt;
+                grdMain.DataBind();
+            } catch (Exception ex) {
+                Statuslbl.Text = "Arquivo inválido";
+                throw;
+            }
         }
 
         private List<EmpresaStruct> ReadFile(string sFileName) {
@@ -244,7 +270,7 @@ namespace UIWeb.Pages {
 
         private List<Redesim_viabilidade> ReadFileViabilidade(string sFileName) {
             List<Redesim_viabilidade> empresas = new List<Redesim_viabilidade>();
-            using (var reader = new StreamReader(sFileName)) {
+            using (var reader = new StreamReader(sFileName, System.Text.Encoding.Default)) {
                 int pos = 0;
                 while (!reader.EndOfStream) {
                     Redesim_viabilidade reg = new Redesim_viabilidade();
@@ -253,7 +279,46 @@ namespace UIWeb.Pages {
                     if (values.Length > 1) {
                         reg.Protocolo = values[0];
                         if (reg.Protocolo.Length == 13 && reg.Protocolo.Substring(0, 2) == "SP") {
-                            reg.Analise = values[1];
+                            try {
+                                reg.Analise = values[1];
+                                reg.Nire = values[2];
+                                reg.Cnpj = values[3];
+                                reg.EmpresaEstabelecida = values[4];
+                                //reg.Cnae = values[5];
+                                reg.AtividadeAuxiliar = values[6];
+                                if (values[7] != "")
+                                    reg.DataProtocolo = Convert.ToDateTime(values[7]);
+                                if (values[8] != "" && Convert.ToDateTime(values[8]) != DateTime.MinValue)
+                                    reg.DataResultadoAnalise = Convert.ToDateTime(values[8]);
+                                if (values[9] != "" && Convert.ToDateTime(values[9]) != DateTime.MinValue)
+                                    reg.DataResultadoViabilidade = Convert.ToDateTime(values[9]);
+                                reg.TempoAndamento = values[10];
+                                //reg.CdEvento = values[11];
+                                //reg.Evento = values[12];
+                                reg.Cep = values[13];
+                                reg.TipoInscricaoImovel = values[14];
+                                reg.NumeroInscricaoImovel = values[15];
+                                reg.TipoLogradouro = values[16];
+                                reg.Logradouro = values[17];
+                                reg.Bairro = values[18];
+                                reg.Complemento = values[19];
+                                reg.TipoUnidade = values[20];
+                                reg.FormaAtuacao = values[21];
+                                reg.Municipio = values[22];
+                                reg.RazaoSocial = values[23].ToUpper();
+                                reg.Orgao = values[24];
+                                reg.AreaImovel = values[25] == "" ? 0 : Convert.ToDecimal(values[25]);
+                                reg.AreaEstabelecimento = values[26] == "" ? 0 : Convert.ToDecimal(values[26]);
+                                string _cpf = reg.RazaoSocial.Substring(reg.RazaoSocial.Length - 11, 11);
+                                if (gtiCore.IsNumeric(_cpf)) {
+                                    if (gtiCore.ValidaCpf(_cpf))
+                                        reg.Cpf = _cpf;
+                                }
+
+                            } catch (Exception ex) {
+                                throw;
+                            }
+
                             if (pos > 0)
                                 empresas.Add(reg);
                         }
@@ -262,27 +327,62 @@ namespace UIWeb.Pages {
                 }
             }
 
-
-
-            //try {
-            //    XElement xmlDoc = XElement.Load(sFileName);
-            //    empresas = (from cust in xmlDoc.Descendants("Viabilidade")
-            //                    select new Redesim_viabilidade {
-            //                        Protocolo = cust.Element("Protocolo").Value,
-            //                        Analise = cust.Element("Analise").Value,
-            //                        Nire = cust.Element("Nire").Value,
-            //                        Cnpj = cust.Element("CNPJ").Value,
-            //                        RazaoSocial = cust.Element("RazaoSocial").Value,
-            //                        AreaEstabelecimento = Convert.ToDecimal(cust.Element("Area Estabelecimento").Value)
-            //                    }).ToList();
-
-            //} catch (Exception ex) {
-
-            //    throw;
-            //}
             return empresas;
         }
-        
+
+        private void Grava_redeSim_Viabilidade(List<Redesim_viabilidade> Lista) {
+            Empresa_bll empresa_Class = new Empresa_bll("GTIconnection");
+            foreach (Redesim_viabilidade item in Lista) {
+                if (empresa_Class.Existe_redeSim_Viabilidade(item.Protocolo)) {
+//                    item.Already_inDB = true;
+                } else {
+                    try {
+                        Redesim_viabilidade reg = new Redesim_viabilidade() {
+                            NomeArquivo = Path.GetFileName(FileUpload1.PostedFile.FileName),
+                            Data_Importacao = DateTime.Now,
+                            Protocolo = item.Protocolo,
+                            Analise = item.Analise,
+                            AreaEstabelecimento = item.AreaEstabelecimento,
+                            AreaImovel = item.AreaImovel,
+                            Bairro = item.Bairro,
+                            Cep = item.Cep,
+                            DataProtocolo = item.DataProtocolo,
+                            EmpresaEstabelecida = item.EmpresaEstabelecida,
+                            FormaAtuacao = item.FormaAtuacao,
+                            Logradouro = item.Logradouro,
+                            Municipio = item.Municipio,
+                            NumeroInscricaoImovel = item.NumeroInscricaoImovel,
+                            RazaoSocial = item.RazaoSocial,
+                            TipoInscricaoImovel = item.TipoInscricaoImovel,
+                            TipoLogradouro = item.TipoLogradouro,
+                            TipoUnidade = item.TipoUnidade
+                        };
+                        if (item.AtividadeAuxiliar != "")
+                            reg.AtividadeAuxiliar = item.AtividadeAuxiliar;
+                        if (item.Cpf != "")
+                            reg.Cpf = item.Cpf;
+                        if (item.Cnpj != "")
+                            reg.Cnpj = item.Cnpj;
+                        if (item.Nire != "")
+                            reg.Nire = item.Nire;
+                        if (item.Orgao != "")
+                            reg.Orgao = item.Orgao;
+                        if (item.TempoAndamento != "")
+                            reg.TempoAndamento = item.TempoAndamento;
+                        if (item.Complemento != "")
+                            reg.Complemento = item.Complemento;
+                        if (item.DataResultadoAnalise != null && item.DataResultadoAnalise!=DateTime.MinValue)
+                            reg.DataResultadoAnalise = item.DataResultadoAnalise;
+                        if (item.DataResultadoViabilidade != null && item.DataResultadoViabilidade != DateTime.MinValue)
+                            reg.DataResultadoViabilidade = item.DataResultadoViabilidade;
+
+                        empresa_Class.Incluir_redeSim_Viabilidade(reg);
+                    } catch  {
+                        throw;
+                    }
+                }
+            }
+        }
 
         private void Grava_Empresas_Vre(List<EmpresaStruct> Lista) {
             Empresa_bll empresa_Class = new Empresa_bll("GTIconnection");
@@ -291,35 +391,36 @@ namespace UIWeb.Pages {
                     item.Already_inDB = true;
                 } else {
                     try {
-                        Vre_empresa reg = new Vre_empresa();
-                        reg.Nome_arquivo =Path.GetFileName( FileUpload1.PostedFile.FileName);
-                        reg.Data_importacao = DateTime.Now;
-                        reg.Id = Convert.ToInt32(item.id);
-                        reg.Razao_social = item.Nome.ToString().Replace("&amp;", "&");
-                        reg.Cnpj = item.Cnpj;
-                        reg.Data_abertura = item.DataAbertura;
-                        reg.Porte = Convert.ToByte(item.Porte);
-                        reg.Numero_registro = item.NumeroRegistro;
-                        reg.Tipo_registro = Convert.ToByte(item.TipoRegistro);
-                        reg.Tipo_mei = Convert.ToByte(item.TipoMei);
-                        reg.Cpf_responsavel = item.CpfResponsavel;
-                        reg.Nome_responsavel = item.NomeResponsavel;
-                        reg.Fone_contato1 = item.DDDContato1 + " " + item.FoneContato1;
-                        reg.Fone_contato2 = item.DDDContato2 + " " + item.FoneContato2;
-                        reg.Email_contato = item.EmailContato;
-                        reg.Setor_quadra_lote = item.Endereco.SetorQuadraLote;
-                        reg.Tipo_logradouro =  item.Endereco.TipoLogradouro.Length>15? item.Endereco.TipoLogradouro.Substring(0,15): item.Endereco.TipoLogradouro;
-                        reg.Nome_logradouro = item.Endereco.Logradouro;
-                        reg.Numero_imovel = gtiCore.IsNumeric(item.Endereco.Numero.ToString()) ? Convert.ToInt32(gtiCore.RetornaNumero(item.Endereco.Numero)) : 0;
-                        reg.Complemento = gtiCore.Truncate(item.Endereco.Complemento, 47, "...").ToString().TrimEnd();
-                        reg.Bairro = item.Endereco.Bairro;
-                        reg.Cidade = item.Endereco.Cidade;
-                        reg.UF = item.Endereco.UF;
-                        reg.Cep = item.Endereco.Cep;
-                        reg.Area_estabelecimento = item.Licenciamento[0].Imovel == null ? 0 : Convert.ToSingle(item.Licenciamento[0].Imovel.AreaEstabelecimento);
-                        reg.Nome_proprietario = item.Licenciamento[0].Imovel == null ? "" : item.Licenciamento[0].Imovel.NomeProprietario;
-                        reg.Email_proprietario = item.Licenciamento[0].Imovel == null ? "" : item.Licenciamento[0].Imovel.EmailProprietario;
-                        reg.Fone_proprietario = item.Licenciamento[0].Imovel== null ? "" : item.Licenciamento[0].Imovel.TelefoneProprietario;
+                        Vre_empresa reg = new Vre_empresa {
+                            Nome_arquivo = Path.GetFileName(FileUpload1.PostedFile.FileName),
+                            Data_importacao = DateTime.Now,
+                            Id = Convert.ToInt32(item.id),
+                            Razao_social = item.Nome.ToString().Replace("&amp;", "&"),
+                            Cnpj = item.Cnpj,
+                            Data_abertura = item.DataAbertura,
+                            Porte = Convert.ToByte(item.Porte),
+                            Numero_registro = item.NumeroRegistro,
+                            Tipo_registro = Convert.ToByte(item.TipoRegistro),
+                            Tipo_mei = Convert.ToByte(item.TipoMei),
+                            Cpf_responsavel = item.CpfResponsavel,
+                            Nome_responsavel = item.NomeResponsavel,
+                            Fone_contato1 = item.DDDContato1 + " " + item.FoneContato1,
+                            Fone_contato2 = item.DDDContato2 + " " + item.FoneContato2,
+                            Email_contato = item.EmailContato,
+                            Setor_quadra_lote = item.Endereco.SetorQuadraLote,
+                            Tipo_logradouro = item.Endereco.TipoLogradouro.Length > 15 ? item.Endereco.TipoLogradouro.Substring(0, 15) : item.Endereco.TipoLogradouro,
+                            Nome_logradouro = item.Endereco.Logradouro,
+                            Numero_imovel = gtiCore.IsNumeric(item.Endereco.Numero.ToString()) ? Convert.ToInt32(gtiCore.RetornaNumero(item.Endereco.Numero)) : 0,
+                            Complemento = gtiCore.Truncate(item.Endereco.Complemento, 47, "...").ToString().TrimEnd(),
+                            Bairro = item.Endereco.Bairro,
+                            Cidade = item.Endereco.Cidade,
+                            UF = item.Endereco.UF,
+                            Cep = item.Endereco.Cep,
+                            Area_estabelecimento = item.Licenciamento[0].Imovel == null ? 0 : Convert.ToSingle(item.Licenciamento[0].Imovel.AreaEstabelecimento),
+                            Nome_proprietario = item.Licenciamento[0].Imovel == null ? "" : item.Licenciamento[0].Imovel.NomeProprietario,
+                            Email_proprietario = item.Licenciamento[0].Imovel == null ? "" : item.Licenciamento[0].Imovel.EmailProprietario,
+                            Fone_proprietario = item.Licenciamento[0].Imovel == null ? "" : item.Licenciamento[0].Imovel.TelefoneProprietario
+                        };
                         reg.Email_proprietario = item.Licenciamento[0].Imovel == null ? "" : item.Licenciamento[0].Imovel.EmailProprietario;
                         reg.Nome_responsavel_uso = item.Licenciamento[0].Imovel == null ? "" : item.Licenciamento[0].Imovel.NomeResponsavelUso;
                         reg.Fone_responsavel_uso = item.Licenciamento[0].Imovel == null ? "" : item.Licenciamento[0].Imovel.TelefoneResponsavelUso;

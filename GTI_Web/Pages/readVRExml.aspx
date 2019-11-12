@@ -31,8 +31,8 @@
             <br />
             <asp:GridView ID="grdMain" runat="server" AutoGenerateColumns="False" >
                 <Columns>
-                    <asp:BoundField DataField="Seq" HeaderText="Id">
-                    <HeaderStyle ForeColor="Maroon" HorizontalAlign="Center" />
+                    <asp:BoundField DataField="Seq" HeaderText="Id/Protocolo">
+                    <HeaderStyle ForeColor="Maroon" HorizontalAlign="Left" />
                     </asp:BoundField>
                     <asp:BoundField DataField="Nome" HeaderText="Razão Social">
                     <HeaderStyle ForeColor="Maroon" HorizontalAlign="Left" />

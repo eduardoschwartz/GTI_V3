@@ -1,14 +1,16 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace GTI_Models.Models {
     public class Redesim_viabilidade {
+        [Key]
         public string Protocolo { get; set; }
         public string Analise { get; set; }
         public string Nire { get; set; }
         public string Cnpj { get; set; }
         public string EmpresaEstabelecida { get; set; }
         public string AtividadeAuxiliar { get; set; }
-        public DateTime? DataProcotolo { get; set; }
+        public DateTime? DataProtocolo { get; set; }
         public DateTime? DataResultadoAnalise { get; set; }
         public DateTime? DataResultadoViabilidade { get; set; }
         public string TempoAndamento { get; set; }
@@ -26,5 +28,8 @@ namespace GTI_Models.Models {
         public string Orgao { get; set; }
         public decimal AreaImovel { get; set; }
         public decimal AreaEstabelecimento { get; set; }
+        public string Cpf { get; set; }
+        public string NomeArquivo { get; set; }
+        public DateTime Data_Importacao { get; set; }
     }
 }
