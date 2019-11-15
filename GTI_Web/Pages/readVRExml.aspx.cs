@@ -86,17 +86,17 @@ namespace UIWeb.Pages {
 
                 try {
                     FileUpload1.SaveAs(path + System.IO.Path.GetFileName(MyPathWithoutDriveOrNetworkShare));
-                    List<Redesim_viabilidade> Lista = ReadFileViabilidade(path + System.IO.Path.GetFileName(MyPathWithoutDriveOrNetworkShare));
+                    List<Redesim_viabilidadeStuct> Lista = ReadFileViabilidade(path + System.IO.Path.GetFileName(MyPathWithoutDriveOrNetworkShare));
                     if (Lista.Count > 0) {
                         FillListViewViabilidade(Lista);
                         Grava_redeSim_Viabilidade(Lista);
-                        foreach (Redesim_viabilidade reg in Lista) {
+                        foreach (Redesim_viabilidadeStuct reg in Lista) {
                             foreach (DataRow dr in dt.Rows) {
                                 if ((string)dr["Seq"] == reg.Protocolo) {
-                                    //if (reg.Already_inDB)
-                                    //    dr["Sit"] = "Duplicado";
-                                    //else
-                                    //    dr["Sit"] = "Importado";
+                                    if (reg.Already_inDB)
+                                        dr["Sit"] = "Duplicado";
+                                    else
+                                        dr["Sit"] = "Importado";
                                 }
                             }
                         }
@@ -143,7 +143,7 @@ namespace UIWeb.Pages {
             }
         }
 
-        private void FillListViewViabilidade(List<Redesim_viabilidade> Lista) {
+        private void FillListViewViabilidade(List<Redesim_viabilidadeStuct> Lista) {
             try {
                 DataColumn cl = new DataColumn("Seq");
                 dt.Columns.Add(cl);
@@ -154,7 +154,7 @@ namespace UIWeb.Pages {
                 cl = new DataColumn("Sit");
                 dt.Columns.Add(cl);
 
-                foreach (Redesim_viabilidade reg in Lista) {
+                foreach (Redesim_viabilidadeStuct reg in Lista) {
                     DataRow dr = dt.NewRow();
                     dr[0] = reg.Protocolo;
                     dr[1] = reg.RazaoSocial.Replace("&amp;", "&");
@@ -268,14 +268,16 @@ namespace UIWeb.Pages {
             return empresas;
         }
 
-        private List<Redesim_viabilidade> ReadFileViabilidade(string sFileName) {
-            List<Redesim_viabilidade> empresas = new List<Redesim_viabilidade>();
+        private List<Redesim_viabilidadeStuct> ReadFileViabilidade(string sFileName) {
+            List<Redesim_viabilidadeStuct> empresas = new List<Redesim_viabilidadeStuct>();
             using (var reader = new StreamReader(sFileName, System.Text.Encoding.Default)) {
                 int pos = 0;
+                string _evento_codigo, _evento_nome,_cnae;
                 while (!reader.EndOfStream) {
-                    Redesim_viabilidade reg = new Redesim_viabilidade();
+                    Redesim_viabilidadeStuct reg = new Redesim_viabilidadeStuct();
                     var line = reader.ReadLine();
                     var values = line.Split(';');
+                    List<Redesim_evento> Lista_Evento = new List<Redesim_evento>();
                     if (values.Length > 1) {
                         reg.Protocolo = values[0];
                         if (reg.Protocolo.Length == 13 && reg.Protocolo.Substring(0, 2) == "SP") {
@@ -284,7 +286,7 @@ namespace UIWeb.Pages {
                                 reg.Nire = values[2];
                                 reg.Cnpj = values[3];
                                 reg.EmpresaEstabelecida = values[4];
-                                //reg.Cnae = values[5];
+                                _cnae = values[5];
                                 reg.AtividadeAuxiliar = values[6];
                                 if (values[7] != "")
                                     reg.DataProtocolo = Convert.ToDateTime(values[7]);
@@ -293,8 +295,8 @@ namespace UIWeb.Pages {
                                 if (values[9] != "" && Convert.ToDateTime(values[9]) != DateTime.MinValue)
                                     reg.DataResultadoViabilidade = Convert.ToDateTime(values[9]);
                                 reg.TempoAndamento = values[10];
-                                //reg.CdEvento = values[11];
-                                //reg.Evento = values[12];
+                                _evento_codigo = values[11];
+                                _evento_nome = values[12];
                                 reg.Cep = values[13];
                                 reg.TipoInscricaoImovel = values[14];
                                 reg.NumeroInscricaoImovel = values[15];
@@ -315,6 +317,35 @@ namespace UIWeb.Pages {
                                         reg.Cpf = _cpf;
                                 }
 
+                                bool _find = false;
+                                int _pos = 0;
+                                var evento_cod = _evento_codigo.Split(',');
+                                var evento_nome = _evento_nome.Split(',');
+                                List<Redesim_evento> _lista_evento = new List<Redesim_evento>();
+                                foreach (string _cod in evento_cod) {
+                                    foreach (Redesim_evento _ev in _lista_evento) {
+                                        if(_ev.Codigo==Convert.ToInt32(_cod)) {
+                                            _find = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!_find) {
+                                        Redesim_evento _regEvento = new Redesim_evento();
+                                        _regEvento.Codigo = Convert.ToInt32(_cod);
+                                        _regEvento.Nome = evento_nome[_pos];
+                                        _lista_evento.Add(_regEvento);
+                                    }
+                                    _pos++;
+                                }
+                                reg.Lista_Evento = _lista_evento;
+                                var lista_cnae = _cnae.Split(',');
+                                List<string> _lista_cnae = new List<string>();
+                                foreach (string _regcnae in lista_cnae) {
+                                    _lista_cnae.Add(_regcnae);
+                                }
+
+                                reg.Lista_Cnae = _lista_cnae;
+
                             } catch (Exception ex) {
                                 throw;
                             }
@@ -330,11 +361,11 @@ namespace UIWeb.Pages {
             return empresas;
         }
 
-        private void Grava_redeSim_Viabilidade(List<Redesim_viabilidade> Lista) {
+        private void Grava_redeSim_Viabilidade(List<Redesim_viabilidadeStuct> Lista) {
             Empresa_bll empresa_Class = new Empresa_bll("GTIconnection");
-            foreach (Redesim_viabilidade item in Lista) {
+            foreach (Redesim_viabilidadeStuct item in Lista) {
                 if (empresa_Class.Existe_redeSim_Viabilidade(item.Protocolo)) {
-//                    item.Already_inDB = true;
+                    item.Already_inDB = true;
                 } else {
                     try {
                         Redesim_viabilidade reg = new Redesim_viabilidade() {
