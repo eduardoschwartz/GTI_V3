@@ -12,12 +12,12 @@
             <ul>
                 <li><a href="gtiMenu2.aspx?d=gti" style="width: 600px">Consulta e atualização de boletos vencidos para pagamento</a></li>
                 <%--<li><a href="wait.aspx?d=gti" style="width: 600px">Consulta e atualização de boletos vencidos para pagamento</a></li>--%>
-                <li><a href="SegundaViaIPTU.aspx?d=gti" style="width: 600px;">Emissão de 2ª via do carnê de IPTU (2019)</a> </li>
-                <li><a href="SegundaViaISS.aspx?d=gti" style="width: 600px;">Emissão de 2ª via do carnê de ISS Fixo/Taxa de Licença (2019)</a> </li>
-                <li><a href="SegundaViaVS.aspx?d=gti" style="width: 600px;">Emissão de 2ª via do carnê de Vigilância Sanitária (2019)</a> </li>
+                <li><a href="SegundaViaIPTU.aspx?d=gti" style="width: 600px;color: #CC0000">Emissão de 2ª via do carnê de IPTU (2020)</a> </li>
+<%--                <li><a href="SegundaViaISS.aspx?d=gti" style="width: 600px;">Emissão de 2ª via do carnê de ISS Fixo/Taxa de Licença (2019)</a> </li>
+                <li><a href="SegundaViaVS.aspx?d=gti" style="width: 600px;">Emissão de 2ª via do carnê de Vigilância Sanitária (2019)</a> </li>--%>
                 <li><a href="ConsultaProcesso.aspx?d=gti" style="width: 600px; ">Consulta de Processos</a> </li>
-                <li><a href="SegundaViaCIP.aspx?d=gti" style="width: 600px; color: #CC0000">Emissão de 2ª via da contribuição de iluminação pública (CIP) (2019)</a></li>
-                <li><a href="cipendereco.aspx?d=gti" style="width: 600px; color: #CC0000">Consultar endereço da contribuição de iluminação pública (CIP) (2019)</a></li>
+<%--                <li><a href="SegundaViaCIP.aspx?d=gti" style="width: 600px; color: #CC0000">Emissão de 2ª via da contribuição de iluminação pública (CIP) (2019)</a></li>--%>
+                <%--<li><a href="cipendereco.aspx?d=gti" style="width: 600px; color: #CC0000">Consultar endereço da contribuição de iluminação pública (CIP) (2019)</a></li>--%>
                 <li><a href="detalhe_boleto.aspx?d=gti" style="width: 600px">Impressão dos detalhes de um boleto</a></li>
                 <li><a href="certidaoinscricao.aspx?d=gti" style="width: 600px">Comprovante de inscrição e de situação cadastral</a></li>
                 <li><a href="../Deca/DECA2018.pdf" style="width: 600px">Download da declaração cadastral (DECA)</a></li>
