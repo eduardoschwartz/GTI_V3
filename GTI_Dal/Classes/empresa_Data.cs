@@ -120,18 +120,20 @@ namespace GTI_Dal.Classes {
 
                 foreach (EmpresaStruct item in ListaGeral) {
                     if (item.Isento_taxa == null || item.Isento_taxa == 0) {
-                        for (int w = 0; w < ListaAtivos.Count; w++) {
-                            if (item.Codigo == ListaAtivos[w]) {
-                                EmpresaStruct reg = new EmpresaStruct {
-                                    Codigo = item.Codigo,
-                                    Area = item.Area,
-                                    Codigo_aliquota = item.Codigo_aliquota,
-                                    Valor_aliquota1 = item.Valor_aliquota1,
-                                    Valor_aliquota2 = item.Valor_aliquota2,
-                                    Valor_aliquota3 = item.Valor_aliquota3,
-                                    Vistoria = item.Vistoria
-                                };
-                                ListaFinal.Add(reg);
+                        if (!Empresa_Mei(item.Codigo)) {
+                            for (int w = 0; w < ListaAtivos.Count; w++) {
+                                if (item.Codigo == ListaAtivos[w]) {
+                                    EmpresaStruct reg = new EmpresaStruct {
+                                        Codigo = item.Codigo,
+                                        Area = item.Area,
+                                        Codigo_aliquota = item.Codigo_aliquota,
+                                        Valor_aliquota1 = item.Valor_aliquota1,
+                                        Valor_aliquota2 = item.Valor_aliquota2,
+                                        Valor_aliquota3 = item.Valor_aliquota3,
+                                        Vistoria = item.Vistoria
+                                    };
+                                    ListaFinal.Add(reg);
+                                }
                             }
                         }
                     }
@@ -1726,5 +1728,6 @@ namespace GTI_Dal.Classes {
                 return null;
             }
         }
+
     }
 }

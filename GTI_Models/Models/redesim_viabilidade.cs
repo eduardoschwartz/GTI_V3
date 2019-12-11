@@ -31,6 +31,9 @@ namespace GTI_Models.Models {
         public decimal AreaEstabelecimento { get; set; }
         public string Cpf { get; set; }
         public string NomeArquivo { get; set; }
+        public string Evento_codigo { get; set; }
+        public string Evento_nome { get; set; }
+        public string Cnae { get; set; }
         public DateTime Data_Importacao { get; set; }
     }
 
@@ -62,8 +65,9 @@ namespace GTI_Models.Models {
         public string Cpf { get; set; }
         public string NomeArquivo { get; set; }
         public DateTime Data_Importacao { get; set; }
-        public List<Redesim_evento> Lista_Evento { get; set; }
-        public List<string> Lista_Cnae { get; set; }
+        public string Evento_codigo { get; set; }
+        public string Evento_nome { get; set; }
+        public string Cnae { get; set; }
         public bool Already_inDB { get; set; }
     }
 
@@ -71,6 +75,5 @@ namespace GTI_Models.Models {
         public int Codigo { get; set; }
         public string Nome { get; set; }
     }
-
 
 }

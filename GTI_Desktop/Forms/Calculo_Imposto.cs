@@ -13,7 +13,7 @@ namespace GTI_Desktop.Forms {
         string _connection = gtiCore.Connection_Name();
         string _path = @"c:\cadastro\bin\";
         int _ano = 2020;
-        int _documento = 17287151;
+        int _documento = 17770764;
         decimal _ipca = (decimal)2.894;
  
         private enum Tipo_imposto {

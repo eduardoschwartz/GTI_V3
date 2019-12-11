@@ -286,7 +286,7 @@ namespace UIWeb.Pages {
                                 reg.Nire = values[2];
                                 reg.Cnpj = values[3];
                                 reg.EmpresaEstabelecida = values[4];
-                                _cnae = values[5];
+                                reg.Cnae = values[5];
                                 reg.AtividadeAuxiliar = values[6];
                                 if (values[7] != "")
                                     reg.DataProtocolo = Convert.ToDateTime(values[7]);
@@ -324,7 +324,7 @@ namespace UIWeb.Pages {
                                 List<Redesim_evento> _lista_evento = new List<Redesim_evento>();
                                 foreach (string _cod in evento_cod) {
                                     foreach (Redesim_evento _ev in _lista_evento) {
-                                        if(_ev.Codigo==Convert.ToInt32(_cod)) {
+                                        if (_ev.Codigo == Convert.ToInt32(_cod)) {
                                             _find = true;
                                             break;
                                         }
@@ -337,14 +337,23 @@ namespace UIWeb.Pages {
                                     }
                                     _pos++;
                                 }
-                                reg.Lista_Evento = _lista_evento;
-                                var lista_cnae = _cnae.Split(',');
-                                List<string> _lista_cnae = new List<string>();
-                                foreach (string _regcnae in lista_cnae) {
-                                    _lista_cnae.Add(_regcnae);
-                                }
 
-                                reg.Lista_Cnae = _lista_cnae;
+                                string _evento_desc = "", _evento_cod = "";
+                                foreach (Redesim_evento item in _lista_evento) {
+                                    _evento_cod += item.Codigo.ToString() +";"  ;
+                                    _evento_desc += item.Nome+";";
+                                }
+                                reg.Evento_codigo = _evento_cod.Substring(0,_evento_cod.ToString().Length-1);
+                                reg.Evento_nome = _evento_nome.Substring(0, _evento_nome.Length - 1);
+
+                                //reg.Lista_Evento = _lista_evento;
+                                //var lista_cnae = _cnae.Split(',');
+                                //List<string> _lista_cnae = new List<string>();
+                                //foreach (string _regcnae in lista_cnae) {
+                                //    _lista_cnae.Add(_regcnae);
+                                //}
+
+                                //reg.Lista_Cnae = _lista_cnae;
 
                             } catch (Exception ex) {
                                 throw;
@@ -386,7 +395,10 @@ namespace UIWeb.Pages {
                             RazaoSocial = item.RazaoSocial,
                             TipoInscricaoImovel = item.TipoInscricaoImovel,
                             TipoLogradouro = item.TipoLogradouro,
-                            TipoUnidade = item.TipoUnidade
+                            TipoUnidade = item.TipoUnidade,
+                            Evento_codigo=item.Evento_codigo,
+                            Evento_nome=item.Evento_nome,
+                            Cnae=item.Cnae
                         };
                         if (item.AtividadeAuxiliar != "")
                             reg.AtividadeAuxiliar = item.AtividadeAuxiliar;
@@ -408,12 +420,14 @@ namespace UIWeb.Pages {
                             reg.DataResultadoViabilidade = item.DataResultadoViabilidade;
 
                         empresa_Class.Incluir_redeSim_Viabilidade(reg);
-                    } catch  {
+
+                    } catch (Exception ex)  {
                         throw;
                     }
                 }
             }
         }
+
 
         private void Grava_Empresas_Vre(List<EmpresaStruct> Lista) {
             Empresa_bll empresa_Class = new Empresa_bll("GTIconnection");
