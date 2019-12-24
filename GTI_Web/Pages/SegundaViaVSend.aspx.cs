@@ -45,7 +45,7 @@ namespace GTI_Web.Pages {
             List<Boletoguia> ListaBoleto = tributario_Class.Lista_Boleto_Guia(nSid);
             int _codigo = Convert.ToInt32(ListaBoleto[0].Codreduzido);
             if (ListaBoleto.Count > 0) {
-                tributario_Class.Insert_Carne_Web(_codigo, 2019);
+                tributario_Class.Insert_Carne_Web(_codigo, 2020);
                 DataSet Ds = gtiCore.ToDataSet(ListaBoleto);
                 ReportDataSource rdsAct = new ReportDataSource("dsBoletoGuia", Ds.Tables[0]);
                 DataTable DataTable1 = GetData(_codigo);

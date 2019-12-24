@@ -37,7 +37,7 @@ namespace UIWeb.Pages {
             Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
             List<Boletoguia> ListaBoleto = tributario_Class.Lista_Boleto_Guia(nSid);
             if (ListaBoleto.Count > 0) {
-                tributario_Class.Insert_Carne_Web(Convert.ToInt32( ListaBoleto[0].Codreduzido), 2019);
+                tributario_Class.Insert_Carne_Web(Convert.ToInt32( ListaBoleto[0].Codreduzido), 2020);
                 DataSet Ds = gtiCore.ToDataSet(ListaBoleto);
                 ReportDataSource rdsAct = new ReportDataSource("dsBoletoGuia", Ds.Tables[0]);
                 ReportViewer viewer = new ReportViewer();
@@ -45,7 +45,7 @@ namespace UIWeb.Pages {
                 viewer.LocalReport.ReportPath = "Report/Carne_IPTU.rdlc";
                 viewer.LocalReport.DataSources.Add(rdsAct); // Add  datasource here       
 
-                Laseriptu RegIPTU = tributario_Class.Carrega_Dados_IPTU(Convert.ToInt32(ListaBoleto[0].Codreduzido), 2019);
+                Laseriptu RegIPTU = tributario_Class.Carrega_Dados_IPTU(Convert.ToInt32(ListaBoleto[0].Codreduzido), 2020);
 
                 List<ReportParameter> parameters = new List<ReportParameter>();
                 parameters.Add(new ReportParameter("QUADRA", "Quadra: "+ ListaBoleto[0].Quadra + " Lote: " + ListaBoleto[0].Lote));

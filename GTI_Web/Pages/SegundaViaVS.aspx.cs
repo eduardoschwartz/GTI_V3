@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace GTI_Web.Pages {
     public partial class SegundaViaVS : System.Web.UI.Page {
-        int _ano = 2019;
+        int _ano = 2020;
 
         protected void Page_Load(object sender, EventArgs e) {
             lblMsg.Text = "";
@@ -76,7 +76,7 @@ namespace GTI_Web.Pages {
                             Paramparcela _parametro_parcela = tributario_Class.Retorna_Parametro_Parcela(_ano, (int)modelCore.TipoCarne.Vigilancia);
                             int _qtde_parcela = (int)_parametro_parcela.Qtdeparcela;
 
-                            List<DebitoStructure> Lista_Taxa = tributario_Class.Lista_Parcelas_Vigilancia(_codigo, 2019);
+                            List<DebitoStructure> Lista_Taxa = tributario_Class.Lista_Parcelas_Vigilancia(_codigo, 2020);
                             bool _temtaxa = Lista_Taxa.Count > 0 ? true : false;
                             decimal _total = Lista_Taxa.Sum(item => item.Soma_Principal);
 

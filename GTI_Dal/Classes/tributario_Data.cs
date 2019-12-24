@@ -933,7 +933,7 @@ namespace GTI_Dal.Classes {
         }
 
         public bool IsRefis() {
-            return true;
+            return false;
         }
 
         public bool IsRefisDI() {
@@ -1785,7 +1785,7 @@ namespace GTI_Dal.Classes {
 
         public List<DebitoStructure> Lista_Parcelas_Taxa(int nCodigo, int nAno) {
             using (GTI_Context db = new GTI_Context(_connection)) {
-                DateTime dDataBase = Convert.ToDateTime("01/01/2019");
+                DateTime dDataBase = Convert.ToDateTime("01/01/2020");
                 //Retornar a lista das parcelas registradas
                 var reg = (from dp in db.Debitoparcela
                            join dt in db.Debitotributo on new { p1 = dp.Codreduzido, p2 = dp.Anoexercicio, p3 = dp.Codlancamento, p4 = dp.Seqlancamento, p5 = dp.Numparcela, p6 = dp.Codcomplemento }
@@ -1826,7 +1826,7 @@ Proximo:;
         }
 
         public List<DebitoStructure> Lista_Parcelas_Iss_Fixo(int nCodigo, int nAno) {
-            DateTime dDataBase = Convert.ToDateTime("01/01/2019");
+            DateTime dDataBase = Convert.ToDateTime("01/01/2020");
             using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from dp in db.Debitoparcela
                            join dt in db.Debitotributo on new { p1 = dp.Codreduzido, p2 = dp.Anoexercicio, p3 = dp.Codlancamento, p4 = dp.Seqlancamento, p5 = dp.Numparcela, p6 = dp.Codcomplemento }
@@ -1901,7 +1901,7 @@ Proximo:;
         }
 
         public List<DebitoStructure> Lista_Parcelas_Vigilancia(int nCodigo, int nAno) {
-            DateTime dDataBase = Convert.ToDateTime("01/01/2019");
+            DateTime dDataBase = Convert.ToDateTime("01/01/2020");
             using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from dp in db.Debitoparcela
                            join dt in db.Debitotributo on new { p1 = dp.Codreduzido, p2 = dp.Anoexercicio, p3 = dp.Codlancamento, p4 = dp.Seqlancamento, p5 = dp.Numparcela, p6 = dp.Codcomplemento }
