@@ -1595,8 +1595,12 @@ namespace GTI_Dal.Classes {
         public int Retorna_Alvara_Disponivel(int Ano) {
             int maxCod = 0;
             using (GTI_Context db = new GTI_Context(_connection)) {
-                maxCod = (from c in db.Alvara_funcionamento where c.Ano==Ano select c.Numero ).Max();
-                maxCod = Convert.ToInt32(maxCod + 1);
+                try {
+                    maxCod = (from c in db.Alvara_funcionamento where c.Ano == Ano select c.Numero).Max();
+                    maxCod = Convert.ToInt32(maxCod + 1);
+                } catch (Exception) {
+                    maxCod = 1;     
+                }
             }
             return maxCod;
         }
