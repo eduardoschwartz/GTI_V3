@@ -22,11 +22,15 @@ namespace GTI_Dal.Classes {
                 List<int> _codigos;
                 //procura imóvel
                 if (_tipo == TipoDocumento.Cpf) {
+                    //_codigos = (from i in db.Cadimob join p in db.Proprietario on i.Codreduzido equals p.Codreduzido join c in db.Cidadao on p.Codcidadao equals c.Codcidadao
+                    //           where p.Tipoprop == "P" && p.Principal == true && c.Cpf.Contains(_doc) select i.Codreduzido).ToList();
                     _codigos = (from i in db.Cadimob join p in db.Proprietario on i.Codreduzido equals p.Codreduzido join c in db.Cidadao on p.Codcidadao equals c.Codcidadao
-                               where p.Tipoprop == "P" && p.Principal == true && c.Cpf.Contains(_doc) select i.Codreduzido).ToList();
+                                where  c.Cpf.Contains(_doc) select i.Codreduzido).ToList();
                 } else {
+                    //_codigos = (from i in db.Cadimob join p in db.Proprietario on i.Codreduzido equals p.Codreduzido join c in db.Cidadao on p.Codcidadao equals c.Codcidadao
+                    //           where p.Tipoprop == "P" && p.Principal == true && c.Cnpj.Contains(_doc) select i.Codreduzido).ToList();
                     _codigos = (from i in db.Cadimob join p in db.Proprietario on i.Codreduzido equals p.Codreduzido join c in db.Cidadao on p.Codcidadao equals c.Codcidadao
-                               where p.Tipoprop == "P" && p.Principal == true && c.Cnpj.Contains(_doc) select i.Codreduzido).ToList();
+                                where  c.Cnpj.Contains(_doc) select i.Codreduzido).ToList();
                 }
                 foreach (int item in _codigos) {
                     _lista.Add(item);
@@ -46,22 +50,53 @@ namespace GTI_Dal.Classes {
                 _codigos.Clear();
                 //procura cidadão
                 if (_tipo == TipoDocumento.Cpf) {
-                    _codigos = (from c in db.Cidadao where c.Cpf.Contains(_doc) select c.Codcidadao).ToList();
+                    _codigos = (from c in db.Cidadao where  c.Codcidadao>=500000 && c.Codcidadao<700000 &&  c.Cpf.Contains(_doc) select c.Codcidadao).ToList();
                 } else {
-                    _codigos = (from c in db.Cidadao where c.Cnpj.Contains(_doc) select c.Codcidadao).ToList();
+                    _codigos = (from c in db.Cidadao where c.Codcidadao >= 500000 && c.Codcidadao < 700000 && c.Cnpj.Contains(_doc) select c.Codcidadao).ToList();
                 }
                 foreach (int item in _codigos) {
                     _lista.Add(item);
                 }
-
-
 
             }
 
             return _lista;
         }
 
-        public Contribuinte_Header_Struct Contribuinte_Header(int _codigo) {
+
+        public string Nome_por_Cpf(string cpf) {
+            string _nome = "";
+
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var Sql = (from c in db.Cidadao where c.Cpf == cpf select c.Nomecidadao).FirstOrDefault();
+                if (Sql != null) {
+                    _nome = Sql.ToString();
+                } else {
+                    var Sql2 = (from m in db.Mobiliario where m.Cpf == cpf select m.Razaosocial).FirstOrDefault();
+                    if (Sql2 != null)
+                        _nome = Sql2.ToString();
+                }
+            }
+            return _nome;
+        }
+
+        public string Nome_por_Cnpj(string cnpj) {
+            string _nome = "";
+
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var Sql = (from c in db.Cidadao where c.Cnpj == cnpj select c.Nomecidadao).FirstOrDefault();
+                if (Sql != null) {
+                    _nome = Sql.ToString();
+                } else {
+                    var Sql2 = (from m in db.Mobiliario where m.Cnpj == cnpj select m.Razaosocial).FirstOrDefault();
+                    if (Sql2 != null)
+                        _nome = Sql2.ToString();
+                }
+            }
+            return _nome;
+        }
+
+        public Contribuinte_Header_Struct Contribuinte_Header(int _codigo,bool _principal = false) {
             string _nome = "", _inscricao = "", _endereco = "", _complemento = "", _bairro = "", _cidade = "", _uf = "", _cep = "", _quadra = "", _lote = "";
             string _endereco_entrega = "", _complemento_entrega = "", _bairro_entrega = "", _cidade_entrega = "", _uf_entrega = "", _cep_entrega = "";
             string _cpf_cnpj = "",_atividade="",_rg="",_endereco_abreviado="",_endereco_entrega_abreviado="";
@@ -74,7 +109,7 @@ namespace GTI_Dal.Classes {
             if (_tipo_cadastro == TipoCadastro.Imovel) {
                 Imovel_Data imovel_Class = new Imovel_Data(_connection);
                 ImovelStruct _imovel = imovel_Class.Dados_Imovel(_codigo);
-                List<ProprietarioStruct> _proprietario = imovel_Class.Lista_Proprietario(_codigo, true);
+                List<ProprietarioStruct> _proprietario = imovel_Class.Lista_Proprietario(_codigo, _principal);
                 _nome = _proprietario[0].Nome;
                 _cpf_cnpj = _proprietario[0].CPF;
                 _rg = _proprietario[0].RG;

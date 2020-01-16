@@ -235,5 +235,15 @@ namespace GTI_Bll.Classes {
             return obj.Retorna_Valor_Parametro(ParameterName);
         }
 
+        public string Nome_por_Cpf(string cpf) {
+            Sistema_Data obj = new Sistema_Data(_connection);
+            return obj.Nome_por_Cpf(cpf);
+        }
+
+        public string Nome_por_Cnpj(string cnpj) {
+            Sistema_Data obj = new Sistema_Data(_connection);
+            return obj.Nome_por_Cnpj(cnpj);
+        }
+
     }
 }
