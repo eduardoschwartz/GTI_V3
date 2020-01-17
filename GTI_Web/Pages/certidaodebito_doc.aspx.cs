@@ -115,12 +115,20 @@ namespace GTI_Web.Pages {
                 goto SEM_INSCRICAO;
             }
 
-            bool  bEmpresa = false, bCidadao = false;
+            bool  bEmpresa = false, bCidadao = false,bImovel=false;
+            Sistema_bll sistema_Class = new Sistema_bll("GTIconnection");
+            string sNome = "";
+            if (optCPF.Checked)
+                sNome = sistema_Class.Nome_por_Cpf(gtiCore.RetornaNumero( txtCPF.Text));
+            else
+                sNome = sistema_Class.Nome_por_Cnpj(gtiCore.RetornaNumero( txtCNPJ.Text));
+
+
             foreach (int _codigo in _codigos) {
                 TipoCadastro _tipo_cadastro = _codigo < 100000 ? TipoCadastro.Imovel : _codigo >= 100000 && _codigo < 500000 ? TipoCadastro.Empresa : TipoCadastro.Cidadao;
-                Sistema_bll sistema_Class = new Sistema_bll("GTIconnection");
-                Contribuinte_Header_Struct _header = sistema_Class.Contribuinte_Header(_codigo);
-                string sNome =  _header==null?"":   _header.Nome;
+
+ //               Contribuinte_Header_Struct _header = sistema_Class.Contribuinte_Header(_codigo);
+                //string sNome =  _header==null?"":   _header.Nome;
 
                 //***Verifica débito
                 Certidao_debito_detalhe dadosCertidao = tributario_Class.Certidao_Debito(_codigo);
@@ -131,6 +139,7 @@ namespace GTI_Web.Pages {
                     if (dadosCertidao.Tipo_Retorno == RetornoCertidaoDebito.Positiva) {
                         if (_tipo_cadastro == TipoCadastro.Empresa) bEmpresa = true;
                         if (_tipo_cadastro == TipoCadastro.Cidadao) bCidadao = true;
+                        if (_tipo_cadastro == TipoCadastro.Imovel) bImovel = true;
                         nRet = 4;
                         sTributo = dadosCertidao.Descricao_Lancamentos;
                     } else {
@@ -169,7 +178,7 @@ namespace GTI_Web.Pages {
                 }
                 if (_find) {
                     _tipo_Certidao = RetornoCertidaoDebito.Positiva;
-                    if (!bEmpresa && !bCidadao) {
+                    if (!bEmpresa && !bCidadao && !bImovel) {
                         //Se a certidão positiva for apenas de imóvel, verifica se esta no prazo das parcelas únicas em aberto.
                         bool bUnicaNaoPago = false;
                         foreach (int _codigo in _codigos) {
