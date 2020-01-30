@@ -197,7 +197,7 @@ namespace UIWeb.Pages {
                 ShowResult(false);
                 return;
             }
-            if (optCNPJ.Checked && txtCNPJ.Text.Length < 18) {
+            if (optCNPJ.Checked && gtiCore.RetornaNumero( txtCNPJ.Text).Length < 14) {
                 lblmsg.Text = "CNPJ inválido!";
                 ShowResult(false);
                 return;

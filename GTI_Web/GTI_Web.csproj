@@ -121,6 +121,7 @@
     <Content Include="Pages\gticertidao.aspx" />
     <Content Include="Pages\gtiMenu.aspx" />
     <Content Include="Pages\gtiMenu2.aspx" />
+    <Content Include="Pages\LiberacaoParc.aspx" />
     <Content Include="Pages\LoginFunc.aspx" />
     <Content Include="Pages\readVRExml.aspx" />
     <Content Include="Pages\SegundaViaCIP.aspx" />
@@ -342,6 +343,13 @@
     </Compile>
     <Compile Include="Pages\gtiMenu2.aspx.designer.cs">
       <DependentUpon>gtiMenu2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LiberacaoParc.aspx.cs">
+      <DependentUpon>LiberacaoParc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\LiberacaoParc.aspx.designer.cs">
+      <DependentUpon>LiberacaoParc.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\LoginFunc.aspx.cs">
       <DependentUpon>LoginFunc.aspx</DependentUpon>
@@ -703,6 +711,7 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AlvaraFuncionamentoValida.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\Carne_PARCELAMENTO.rdlc" />
     <EmbeddedResource Include="Report\Carne_CIP.rdlc" />
     <EmbeddedResource Include="Report\Carne_VS.rdlc" />
     <EmbeddedResource Include="Report\Carne_ISS_TLL.rdlc" />

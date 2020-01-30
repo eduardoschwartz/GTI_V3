@@ -1415,7 +1415,7 @@ namespace GTI_Dal.Classes {
         public Certidao_debito_detalhe Certidao_Debito(int Codigo) {
             TipoCadastro _tipo_Cadastro = Codigo < 100000 ? TipoCadastro.Imovel : Codigo >= 500000 ? TipoCadastro.Cidadao : TipoCadastro.Empresa;
             Certidao_debito_detalhe Certidao = new Certidao_debito_detalhe();
-            List<SpExtrato> ListaTributo = Lista_Extrato_Tributo(Codigo, 1980, 2050, 0, 99, 0, 99, 0, 999, 0, 99, 0, 99, DateTime.ParseExact(DateTime.Now.ToShortDateString(), "dd/MM/yyyy", null), "Web");
+            List<SpExtrato> ListaTributo = Lista_Extrato_Tributo(Codigo, 1980, 2050, 0, 99, 0, 99, 1, 999, 0, 99, 0, 99, DateTime.ParseExact(DateTime.Now.ToShortDateString(), "dd/MM/yyyy", null), "Web");
        
             ArrayList alArrayNaoPagoVencido = new ArrayList();
             ArrayList alArrayParceladoAVencer = new ArrayList();
@@ -1438,23 +1438,40 @@ namespace GTI_Dal.Classes {
 
                     //Verifica o status
                     //*** não pagos
-                    TimeSpan difference =DateTime.Now- item.Datavencimento ;
+                    TimeSpan difference = DateTime.Now - item.Datavencimento;
                     var days = difference.TotalDays;
-                    if ((item.Statuslanc == 3 | item.Statuslanc== 18 | item.Statuslanc == 42 | item.Statuslanc == 43 | item.Statuslanc == 38 | item.Statuslanc == 39) && days>1) {
-                        bNaoPagoVencido = true;
-                        for (int i = 0; i < alArrayNaoPagoVencido.Count; i++) {
-                            if (item.Codtributo == 26 || item.Codtributo == 90 || item.Codtributo == 112 || item.Codtributo == 113 || item.Codtributo == 585 || item.Codtributo == 587 || item.Codtributo == 24 || item.Codtributo == 28) {
-                                bFind = true;
-                                break;
+                    if ((item.Statuslanc == 3 | item.Statuslanc == 18 | item.Statuslanc == 42 | item.Statuslanc == 43 | item.Statuslanc == 38 | item.Statuslanc == 39) && days > 1) {
+                        if (item.Anoexercicio == DateTime.Now.Year  && item.Codlancamento == 1) {
+                            if (item.Numparcela > 4) {
+                                bNaoPagoVencido = true;
+                                for (int i = 0; i < alArrayNaoPagoVencido.Count; i++) {
+                                    if (item.Codtributo == 26 || item.Codtributo == 90 || item.Codtributo == 112 || item.Codtributo == 113 || item.Codtributo == 585 || item.Codtributo == 587 || item.Codtributo == 24 || item.Codtributo == 28) {
+                                        bFind = true;
+                                        break;
+                                    }
+                                    if (alArrayNaoPagoVencido[i].ToString() == sDescTmp) {
+                                        bFind = true;
+                                        break;
+                                    }
+                                }
+                                if (!bFind)
+                                    alArrayNaoPagoVencido.Add(sDescTmp);
                             }
-                            if (alArrayNaoPagoVencido[i].ToString() == sDescTmp) {
-                                bFind = true;
-                                break;
+                        } else {
+                            bNaoPagoVencido = true;
+                            for (int i = 0; i < alArrayNaoPagoVencido.Count; i++) {
+                                if (item.Codtributo == 26 || item.Codtributo == 90 || item.Codtributo == 112 || item.Codtributo == 113 || item.Codtributo == 585 || item.Codtributo == 587 || item.Codtributo == 24 || item.Codtributo == 28) {
+                                    bFind = true;
+                                    break;
+                                }
+                                if (alArrayNaoPagoVencido[i].ToString() == sDescTmp) {
+                                    bFind = true;
+                                    break;
+                                }
                             }
+                            if (!bFind)
+                                alArrayNaoPagoVencido.Add(sDescTmp);
                         }
-                        if (!bFind)
-                            alArrayNaoPagoVencido.Add(sDescTmp);
-    
                     }
 
                     //*** suspensos ou em julgamento
