@@ -2076,7 +2076,7 @@ Proximo:;
                                                    join s in db.Situacaolancamento on d.Statuslanc equals s.Codsituacao
                                                   where o.Anoproc == _ano && o.Numproc == _numero orderby o.Anoexercicio, o.Codlancamento, o.Numsequencia, o.Numparcela, o.Codcomplemento
                                                   select new DestinoreparcStruct {
-                                                      Numero_Processo_Unificado = o.Numprocesso, Ano_Processo = o.Anoproc, Numero_Processo = o.Numproc, Codigo = o.Codreduzido, Exercicio = o.Anoexercicio, Lancamento_Codigo = o.Codlancamento, 
+                                                      Numero_Processo_Unificado = o.Numprocesso, Ano_Processo = (int)o.Anoproc, Numero_Processo = (int)o.Numproc, Codigo = o.Codreduzido, Exercicio = o.Anoexercicio, Lancamento_Codigo = o.Codlancamento, 
                                                       Sequencia = o.Numsequencia, Parcela = o.Numparcela, Complemento = o.Codcomplemento,Data_Vencimento=d.Datavencimento,Situacao_Lancamento_Codigo=d.Statuslanc,Situacao_Lancamento_Descricao=s.Descsituacao
                                                   }).ToList();
 
@@ -2345,6 +2345,42 @@ Proximo:;
             using (GTI_Context db = new GTI_Context(_connection)) {
                 db.Database.CommandTimeout = 3 * 60;
                 List<Destinoreparc> Lista = (from d in db.Destinoreparc where d.Numprocesso == NumeroProcesso select d).Distinct().ToList();
+                return Lista;
+            }
+        }
+
+        public List<DebitoStructure> Lista_Parcelas_Parcelamento_Ano(int nCodigo, int nAno,int nSeq) {
+            DateTime dDataBase = DateTime.Now;
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var reg = (from dp in db.Debitoparcela
+                           join dt in db.Debitotributo on new { p1 = dp.Codreduzido, p2 = dp.Anoexercicio, p3 = dp.Codlancamento, p4 = dp.Seqlancamento, p5 = dp.Numparcela, p6 = dp.Codcomplemento }
+                                                   equals new { p1 = dt.Codreduzido, p2 = dt.Anoexercicio, p3 = dt.Codlancamento, p4 = dt.Seqlancamento, p5 = dt.Numparcela, p6 = dt.Codcomplemento } into dpdt from dt in dpdt.DefaultIfEmpty()
+                           join pd in db.Parceladocumento on new { p1 = dp.Codreduzido, p2 = dp.Anoexercicio, p3 = dp.Codlancamento, p4 = dp.Seqlancamento, p5 = dp.Numparcela, p6 = dp.Codcomplemento }
+                                                      equals new { p1 = pd.Codreduzido, p2 = pd.Anoexercicio, p3 = pd.Codlancamento, p4 = pd.Seqlancamento, p5 = pd.Numparcela, p6 = pd.Codcomplemento } into dppd from pd in dppd.DefaultIfEmpty()
+                           where dp.Codreduzido == nCodigo && dp.Anoexercicio == nAno && dp.Codlancamento == 20 && dp.Seqlancamento == nSeq 
+                           orderby new { dp.Numparcela }
+                           select new { dp.Codreduzido, dp.Anoexercicio, dp.Codlancamento, dp.Seqlancamento, dp.Numparcela, dp.Codcomplemento, dp.Datavencimento, dt.Valortributo });
+
+                List<DebitoStructure> Lista = new List<DebitoStructure>();
+                foreach (var query in reg) {
+                    foreach (DebitoStructure item in Lista) {
+                        if (item.Numero_Parcela == query.Numparcela && item.Complemento == query.Codcomplemento)
+                            goto Proximo;
+                    }
+                    DebitoStructure Linha = new DebitoStructure {
+                        Codigo_Reduzido = query.Codreduzido,
+                        Ano_Exercicio = query.Anoexercicio,
+                        Codigo_Lancamento = query.Codlancamento,
+                        Sequencia_Lancamento = query.Seqlancamento,
+                        Numero_Parcela = query.Numparcela,
+                        Complemento = query.Codcomplemento,
+                        Soma_Principal = Convert.ToDecimal(query.Valortributo),
+                        Data_Vencimento = query.Datavencimento,
+                        Data_Base = dDataBase
+                    };
+                    Lista.Add(Linha);
+                Proximo:;
+                }
                 return Lista;
             }
         }

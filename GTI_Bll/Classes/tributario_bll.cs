@@ -1286,6 +1286,12 @@ namespace GTI_Bll.Classes {
             return Lista;
         }
 
+        public List<DebitoStructure> Lista_Parcelas_Parcelamento_Ano(int nCodigo, int nAno, int nSeq) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            List<DebitoStructure> Lista = obj.Lista_Parcelas_Parcelamento_Ano(nCodigo,nAno,nSeq);
+            return Lista;
+        }
+
     }//end class
 }
 

@@ -5,8 +5,8 @@ namespace GTI_Models.Models {
     public class Destinoreparc {
         [Key]
         public string Numprocesso { get; set; }
-        public int Anoproc { get; set; }
-        public int Numproc { get; set; }
+        public int? Anoproc { get; set; }
+        public int? Numproc { get; set; }
         public int Codreduzido { get; set; }
         public short Anoexercicio { get; set; }
         public short Codlancamento { get; set; }

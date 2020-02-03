@@ -43,10 +43,14 @@
              <br />
              Emissão de carnê de parcelamento (parcelas de 2020)<br />
              <br />
+             <span style="color: #CC0000"><span style="text-decoration: underline">Observação importante</span>:&nbsp; Os boletos serão registrados durante a noite e estarão disponíveis para pagamento<br />
+             a partir de amanhã. Caso queira pagar alguma parcela hoje, emitir boleto através da consulta e atualização
+             <br />
+             de boletos disponível no site.</span><br />
+             <br />
              <table style="width: 456px; height: 62px;">
                  <tr><td class="panel" style="height: 51px; width: 140px;">&nbsp;
-                     Inscrição Cadastral:
-                        </td> <td class="panel" style="height: 51px">&nbsp;&nbsp;
+                     Inscrição Cadastral: </td> <td class="panel" style="height: 51px">&nbsp;&nbsp;
                             <asp:TextBox ID="txtIM" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="14" Width="66px" TabIndex="1"  onKeyPress="return formata(this, '§§§§§§', event)"></asp:TextBox>
                         </td>
 
@@ -66,7 +70,7 @@
                      <td class="panel">&nbsp;Digite o conteúdo da imagem                                              
                          <br />&nbsp;&nbsp;
                          <asp:TextBox ID="txtimgcode" runat="server" OnClick="btConsultar_Click" ViewStateMode="Disabled" Width="108px" TabIndex="3" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px"></asp:TextBox>
-                         &nbsp; <asp:Button ID="Button1" class="button1" runat="server" Text="Imprimir" OnClick="btPrint_Click" Width="89px" />
+                         &nbsp; <asp:Button ID="Button1" class="button1" runat="server" Text="Próximo" OnClick="btPrint_Click" Width="89px" />
                      </td>
                  </tr>
                 

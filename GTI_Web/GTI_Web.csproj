@@ -122,6 +122,7 @@
     <Content Include="Pages\gtiMenu.aspx" />
     <Content Include="Pages\gtiMenu2.aspx" />
     <Content Include="Pages\LiberacaoParc.aspx" />
+    <Content Include="Pages\LiberacaoParcend.aspx" />
     <Content Include="Pages\LoginFunc.aspx" />
     <Content Include="Pages\readVRExml.aspx" />
     <Content Include="Pages\SegundaViaCIP.aspx" />
@@ -350,6 +351,13 @@
     </Compile>
     <Compile Include="Pages\LiberacaoParc.aspx.designer.cs">
       <DependentUpon>LiberacaoParc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LiberacaoParcend.aspx.cs">
+      <DependentUpon>LiberacaoParcend.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\LiberacaoParcend.aspx.designer.cs">
+      <DependentUpon>LiberacaoParcend.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\LoginFunc.aspx.cs">
       <DependentUpon>LoginFunc.aspx</DependentUpon>
