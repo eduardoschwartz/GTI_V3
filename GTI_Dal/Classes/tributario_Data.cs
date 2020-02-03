@@ -2333,7 +2333,21 @@ Proximo:;
             }
         }
 
+        public List<Origemreparc> Lista_Origem_Parcelamento(string NumeroProcesso) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                db.Database.CommandTimeout = 3 * 60;
+                List<Origemreparc> Lista = (from d in db.Origemreparc where d.Numprocesso == NumeroProcesso select d).Distinct().ToList();
+                return Lista;
+            }
+        }
 
+        public List<Destinoreparc> Lista_Destino_Parcelamento(string NumeroProcesso) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                db.Database.CommandTimeout = 3 * 60;
+                List<Destinoreparc> Lista = (from d in db.Destinoreparc where d.Numprocesso == NumeroProcesso select d).Distinct().ToList();
+                return Lista;
+            }
+        }
 
     }//end class
 }

@@ -1274,6 +1274,17 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        public List<Origemreparc> Lista_Origem_Parcelamento(string NumeroProcesso) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            List<Origemreparc> Lista = obj.Lista_Origem_Parcelamento(NumeroProcesso);
+            return Lista;
+        }
+
+        public List<Destinoreparc> Lista_Destino_Parcelamento(string NumeroProcesso) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            List<Destinoreparc> Lista = obj.Lista_Destino_Parcelamento(NumeroProcesso);
+            return Lista;
+        }
 
     }//end class
 }
