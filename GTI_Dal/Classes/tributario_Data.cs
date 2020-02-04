@@ -2359,7 +2359,7 @@ Proximo:;
                                                       equals new { p1 = pd.Codreduzido, p2 = pd.Anoexercicio, p3 = pd.Codlancamento, p4 = pd.Seqlancamento, p5 = pd.Numparcela, p6 = pd.Codcomplemento } into dppd from pd in dppd.DefaultIfEmpty()
                            where dp.Codreduzido == nCodigo && dp.Anoexercicio == nAno && dp.Codlancamento == 20 && dp.Seqlancamento == nSeq 
                            orderby new { dp.Numparcela }
-                           select new { dp.Codreduzido, dp.Anoexercicio, dp.Codlancamento, dp.Seqlancamento, dp.Numparcela, dp.Codcomplemento, dp.Datavencimento, dt.Valortributo });
+                           select new { dp.Codreduzido, dp.Anoexercicio, dp.Codlancamento, dp.Seqlancamento, dp.Numparcela, dp.Codcomplemento, dp.Datavencimento, dt.Valortributo,dp.Statuslanc });
 
                 List<DebitoStructure> Lista = new List<DebitoStructure>();
                 foreach (var query in reg) {
@@ -2376,6 +2376,7 @@ Proximo:;
                         Complemento = query.Codcomplemento,
                         Soma_Principal = Convert.ToDecimal(query.Valortributo),
                         Data_Vencimento = query.Datavencimento,
+                        Codigo_Situacao=query.Statuslanc,
                         Data_Base = dDataBase
                     };
                     Lista.Add(Linha);

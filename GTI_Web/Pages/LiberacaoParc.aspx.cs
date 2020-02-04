@@ -139,9 +139,23 @@ namespace GTI_Web.Pages {
 
                             int _seq = Lista[0].Numsequencia;
                             List<DebitoStructure> ListaDebito = tributario_class.Lista_Parcelas_Parcelamento_Ano(_codigo, 2020, _seq);
-                            if (ListaDebito.Count == 0) {
+                            if (ListaDebito.Count == 0 ) {
                                 lblMsg.Text = "Não existem parcelas a serem impressas.";
                             } else {
+                                if (ListaDebito[0].Numero_Parcela == 1) {
+                                    bool _find = false;
+                                    foreach (DebitoStructure itemtmp in ListaDebito) {
+                                        if (itemtmp.Codigo_Situacao < 3) {
+                                            _find = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!_find) {
+                                        lblMsg.Text = "Libertação do carnê somente após o pagamento da primeira parcela.";
+                                        return;
+                                    }
+                                }
+
                                 lblMsg.Text = "Imprimindo " + ListaDebito.Count.ToString() + " parcelas";
 
                                 string _descricao_lancamento = "PARCELAMENTO DE DÉBITOS";
