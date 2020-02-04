@@ -1292,6 +1292,13 @@ namespace GTI_Bll.Classes {
             return Lista;
         }
 
+        public Processoreparc Retorna_Processo_Parcelamento(string Numprocesso) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            Processoreparc reg = obj.Retorna_Processo_Parcelamento(Numprocesso);
+            return reg;
+        }
+
+
     }//end class
 }
 

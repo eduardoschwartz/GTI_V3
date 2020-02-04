@@ -16,38 +16,80 @@
              <br />
              de boletos disponível no site.</span><br />
              <br />
-             <table style="width: 456px; height: 75px;">
-                 <tr><td class="panel" style="height: 19px; width: 140px;">&nbsp;
-                     Inscrição Cadastral: </td> <td class="panel" style="height: 19px">&nbsp;&nbsp;
-                            000000</td>
+                <div style="color: #3a8dcc;">
+            &nbsp;<br />
+           <br />
+           Clique em imprimir boleto para 
+           gerar o Boleto Bancário<br />
+           
+            <br />
+            <br />
 
-                 </tr>
-                 <tr><td class="panel" style="height: 20px; width: 140px;">&nbsp;
-                     Número do Processo:
-                        <br />
-                     </td> <td class="panel" style="height: 20px">&nbsp;&nbsp;
-                            12345/2020&nbsp;</td>
+        <asp:Table ID="Table1" runat="server" Width="484px">
 
-                 </tr>
-                 <tr>
-                     <td style="width: 140px; vertical-align: bottom">&nbsp;&nbsp;
-                        </td>
-
-                     <td class="panel">                                            
-                         <br />
-                         &nbsp; <asp:Button ID="Button1" class="button1" runat="server" Text="Imprimir" OnClick="btPrint_Click" Width="89px" />
-                     </td>
-                 </tr>
-                
-
-
-
-
-
-             </table>
+            <asp:TableRow>
+                <asp:TableCell>
+                    <asp:Label ID="Label2" runat="server" Text="Inscrição cadastral: "></asp:Label>
+                </asp:TableCell>
+                <asp:TableCell>
+                    <asp:Label ID="txtCodigo" runat="server" Width="350" ReadOnly="true" ForeColor="OrangeRed"></asp:Label>
+                </asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow>
+                <asp:TableCell>
+                    <asp:Label ID="Label3" runat="server" Text="Nome/Razão Social: "></asp:Label>
+                </asp:TableCell>
+                <asp:TableCell>
+                    <asp:Label ID="txtNome" runat="server" Width="350" ReadOnly="true" ForeColor="OrangeRed"></asp:Label>
+                </asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow>
+                <asp:TableCell>
+                    <asp:Label ID="Label1" runat="server" Text="CPF/CNPJ: "></asp:Label>
+                </asp:TableCell>
+                <asp:TableCell>
+                    <asp:Label ID="txtcpfCnpj" runat="server" Width="200" ReadOnly="true" ForeColor="OrangeRed"></asp:Label>
+                </asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow>
+                <asp:TableCell>
+                    <asp:Label ID="Label4" runat="server" Text="Endereço: "></asp:Label>
+                </asp:TableCell>
+                <asp:TableCell>
+                    <asp:Label ID="txtEndereco" runat="server"  Width="350" ReadOnly="true" ForeColor="OrangeRed"></asp:Label>
+                </asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow>
+                <asp:TableCell>
+                    <asp:Label ID="Label5" runat="server" Text="Cidade: "></asp:Label>
+                </asp:TableCell>
+                <asp:TableCell>
+                    <asp:Label ID="txtCidade" runat="server" Width="350" ReadOnly="true" ForeColor="OrangeRed"></asp:Label>
+                </asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow>
+                <asp:TableCell>
+                    <asp:Label ID="Label6"  runat="server" Text="Cep: "></asp:Label>
+                </asp:TableCell>
+                <asp:TableCell>
+                    <asp:Label ID="txtCep" runat="server" ReadOnly="true" ForeColor="OrangeRed"></asp:Label>
+                </asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow>
+                <asp:TableCell>
+                    <asp:Label ID="Label7"  runat="server" Text="Nº do processo: "></asp:Label>
+                </asp:TableCell>
+                <asp:TableCell>
+                    <asp:Label ID="txtProcesso" runat="server" ReadOnly="true" ForeColor="OrangeRed"></asp:Label>
+                </asp:TableCell>
+            </asp:TableRow>
+        </asp:Table>       
+               </div>
             <br />
             
-             
+
+           <asp:Button ID="btGerar" runat="server" Text="Imprimir Boleto" class="button1" OnClick="btPrint_Click"     />
+<br /> <br />            
          <asp:Label ID="lblMsg" runat="server" ForeColor="Red" />
 
      </div>

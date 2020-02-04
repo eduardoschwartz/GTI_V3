@@ -9,15 +9,19 @@ using System.Web.UI.WebControls;
 using UIWeb;
 
 namespace GTI_Web.Pages {
-    public partial class LiberacaoParc : System.Web.UI.Page {
+    public partial class LiberacaoParc : Page {
+        string _nome,_endereco,_endereco_rua,_complemento,_bairro,_cpfcnpj,_cidade,_cep,_uf;
+        short _numero,_totParcela;
+
         protected void Page_Load(object sender, EventArgs e) {
             String s = Request.QueryString["d"];
             if (s != "gti")
                 Response.Redirect("~/Pages/gtiMenu.aspx");
-
+            if (!IsPostBack) {
                 txtProcesso.Text = "";
                 txtIM.Text = "";
                 lblMsg.Text = "";
+            }
         }
 
         private bool Valida() {
@@ -40,6 +44,19 @@ namespace GTI_Web.Pages {
                     if (!ExisteImovel) {
                         lblMsg.Text = "Inscrição não cadastrada.";
                         return false;
+                    } else {
+                        ImovelStruct reg = imovel_Class.Dados_Imovel(Codigo);
+                        List<ProprietarioStruct> regProp = imovel_Class.Lista_Proprietario(Codigo, true);
+                        _endereco = reg.NomeLogradouro + ", " + reg.Numero + " " + reg.Complemento;
+                        _endereco_rua=reg.NomeLogradouro;
+                        _numero = (short)reg.Numero;
+                        _complemento = reg.Complemento;
+                        _bairro = reg.NomeBairro;
+                        _cidade = "JABOTICABAL/SP";
+                        _uf = "SP";
+                        _cep = reg.Cep;
+                        _nome = regProp[0].Nome;
+                        _cpfcnpj = regProp[0].CPF;
                     }
                 } else {
                     if (Codigo >= 100000 && Codigo < 500000) {
@@ -48,13 +65,50 @@ namespace GTI_Web.Pages {
                         if (!ExisteEmpresa) {
                             lblMsg.Text = "Inscrição não cadastrada.";
                             return false;
-                        } 
+                        } else {
+                            EmpresaStruct _empresa = empresa_Class.Retorna_Empresa(Codigo);
+                            _nome = _empresa.Razao_social;
+                            _endereco = _empresa.Endereco_nome + ", " + _empresa.Numero.ToString() + " " + _empresa.Complemento;
+                            _endereco_rua = _empresa.Endereco_nome;
+                            _numero = (short)_empresa.Numero;
+                            _complemento = _empresa.Complemento;
+                            _bairro = _empresa.Bairro_nome;
+                            _cidade = _empresa.Cidade_nome + "/" + _empresa.UF;
+                            _uf = _empresa.UF;
+                            _cep = _empresa.Cep;
+                            _cpfcnpj = _empresa.Cpf_cnpj;
+                        }
                     } else {
                         Cidadao_bll cidadao_Class = new Cidadao_bll("GTIconnection");
                         bool ExisteCidadao = cidadao_Class.ExisteCidadao(Codigo);
                         if (!ExisteCidadao) {
                             lblMsg.Text = "Inscrição não cadastrada.";
                             return false;
+                        } else {
+                            CidadaoStruct reg = cidadao_Class.LoadReg(Codigo);
+                            if (reg.EtiquetaR != null && reg.EtiquetaR == "S") {
+                                _endereco = reg.EnderecoR + ", " + reg.NumeroR + " " + reg.ComplementoR;
+                                _endereco_rua = reg.EnderecoR;
+                                _numero = (short)reg.NumeroR;
+                                _complemento = reg.ComplementoR;
+                                _bairro = reg.NomeBairroR;
+                                _cidade = reg.NomeCidadeR + "/" + reg.UfR;
+                                _uf = reg.UfR;
+
+                            } else {
+                                _endereco = reg.EnderecoC + ", " + reg.NumeroC + " " + reg.ComplementoC;
+                                _endereco_rua = reg.EnderecoC;
+                                _numero = (short)reg.NumeroC;
+                                _complemento = reg.ComplementoC;
+                                _bairro = reg.NomeBairroC;
+                                _cidade = reg.NomeCidadeC + "/" + reg.UfC;
+                                _uf = reg.UfC;
+                            }
+                            _nome = reg.Nome;
+                            if (reg.Cnpj != null)
+                                _cpfcnpj = reg.Cnpj;
+                            else
+                                _cpfcnpj = reg.Cpf;    
                         }
                     }
                 }
@@ -80,6 +134,9 @@ namespace GTI_Web.Pages {
                         if (_codigo != Codigo) {
                             lblMsg.Text = "Processo não pertence a esta inscrição.";
                         } else {
+                            Processoreparc pr = tributario_class.Retorna_Processo_Parcelamento(sNumProc);
+                            _totParcela = (short)pr.Qtdeparcela;
+
                             int _seq = Lista[0].Numsequencia;
                             List<DebitoStructure> ListaDebito = tributario_class.Lista_Parcelas_Parcelamento_Ano(_codigo, 2020, _seq);
                             if (ListaDebito.Count == 0) {
@@ -121,71 +178,57 @@ namespace GTI_Web.Pages {
                                     tributario_class.Insert_Parcela_Documento(regParc);
 
                                     //Registrar os novos documentos
-                                    //_empresa = empresa_Class.Retorna_Empresa(_codigo);
-                                    //Ficha_compensacao_documento ficha = new Ficha_compensacao_documento();
-                                    //ficha.Nome = _empresa.Razao_social.Length > 40 ? _empresa.Razao_social.Substring(0, 40) : _empresa.Razao_social;
-                                    //string _enderecoReg = _empresa.Endereco_nome + ", " + _empresa.Numero.ToString() + " " + _empresa.Complemento;
-                                    //ficha.Endereco = _enderecoReg.Length > 40 ? _enderecoReg.Substring(0, 40) : _enderecoReg;
-                                    //ficha.Bairro = _empresa.Bairro_nome.Length > 15 ? _empresa.Bairro_nome.Substring(0, 15) : _empresa.Bairro_nome;
-                                    //ficha.Cidade = _empresa.Cidade_nome.Length > 30 ? _empresa.Cidade_nome.Substring(0, 30) : _empresa.Cidade_nome;
-                                    //ficha.Uf = _empresa.UF;
-                                    //ficha.Cep = gtiCore.RetornaNumero(_empresa.Cep);
-                                    //ficha.Cpf = _empresa.Cpf_cnpj;
-                                    //ficha.Numero_documento = _novo_documento;
-                                    //ficha.Data_vencimento = Convert.ToDateTime(item.Data_Vencimento);
-                                    //ficha.Valor_documento = Convert.ToDecimal(item.Soma_Principal);
-                                    //Exception ex = tributario_Class.Insert_Ficha_Compensacao_Documento(ficha);
-                                    //if (ex == null)
-                                    //    ex = tributario_Class.Marcar_Documento_Registrado(_novo_documento);
+                                    Ficha_compensacao_documento ficha = new Ficha_compensacao_documento();
+                                    ficha.Nome = _nome.Length > 40 ? _nome.Substring(0, 40) : _nome;
+                                    ficha.Endereco = _endereco.Length > 40 ? _endereco.Substring(0, 40) : _endereco;
+                                    ficha.Bairro = _bairro.Length > 15 ? _bairro.Substring(0, 15) : _bairro;
+                                    ficha.Cidade = _cidade.Length > 30 ? _cidade.Substring(0, 30) : _cidade;
+                                    ficha.Cep = _cep;
+                                    ficha.Cpf = _cpfcnpj;
+                                    ficha.Numero_documento = _novo_documento;
+                                    ficha.Data_vencimento = Convert.ToDateTime(item.Data_Vencimento);
+                                    ficha.Valor_documento = Convert.ToDecimal(item.Soma_Principal);
+                                    ficha.Uf = _uf;
+                                    if (item.Data_Vencimento > DateTime.Now) {
+                                        Exception ex = tributario_class.Insert_Ficha_Compensacao_Documento(ficha);
+                                        if (ex == null)
+                                            ex = tributario_class.Marcar_Documento_Registrado(_novo_documento);
+                                    }
                                     nPos++;
                                 }
-
-
-                                //string _razao = _empresa.Razao_social;
-                                //string _cpfcnpj;
-                                //if (_empresa.Juridica)
-                                //    _cpfcnpj = Convert.ToUInt64(_empresa.Cpf_cnpj).ToString(@"00\.000\.000\/0000\-00");
-                                //else {
-                                //    if (_empresa.Cpf_cnpj.Length > 1)
-                                //        _cpfcnpj = Convert.ToUInt64(_empresa.Cpf_cnpj).ToString(@"000\.000\.000\-00");
-                                //    else
-                                //        _cpfcnpj = "";
-                                //}
-                                //string _endereco = _empresa.Endereco_nome;
-                                //short _numimovel = (short)_empresa.Numero;
-                                //string _complemento = _empresa.Complemento;
-                                //string _bairro = _empresa.Bairro_nome;
-                                //string _cep = _empresa.Cep;
 
                                 short _index = 0;
                                 string _convenio = "2873532";
                                 foreach (DebitoStructure item in ListaDebito) {
 
                                     Boletoguia reg = new Boletoguia();
-                                    reg.Usuario = "Gti.Web/2ViaVSTLL";
+                                    reg.Usuario = "Gti.Web/LibParc";
                                     reg.Computer = "web";
                                     reg.Sid = nSid;
                                     reg.Seq = _index;
                                     reg.Codreduzido = _codigo.ToString("000000");
-                                    //reg.Nome = _razao;
-                                    //reg.Cpf = _cpfcnpj;
-                                    //reg.Numimovel = _numimovel;
-                                    //reg.Endereco = _endereco;
-                                    //reg.Complemento = _complemento;
-                                    //reg.Bairro = _bairro;
-                                    //reg.Cidade = "JABOTICABAL";
-                                    //reg.Uf = "SP";
-                                    //reg.Cep = _cep;
-                                    //reg.Desclanc = _descricao_lancamento;
-                                    //reg.Fulllanc = _descricao_lancamento;
-                                    //reg.Numdoc = item.Numero_Documento.ToString();
-                                    //reg.Numparcela = (short)item.Numero_Parcela;
-                                    //reg.Datadoc = item.Data_Base;
-                                    //reg.Datavencto = item.Data_Vencimento;
-                                    //reg.Numdoc2 = item.Numero_Documento.ToString();
-                                    //reg.Valorguia = item.Soma_Principal;
-                                    //reg.Valor_ISS = 0;
-                                    //reg.Valor_Taxa = _total;
+                                    reg.Nome = _nome;
+                                    reg.Cpf = _cpfcnpj;
+                                    reg.Numimovel = _numero;
+                                    reg.Endereco = _endereco_rua;
+                                    reg.Complemento = _complemento;
+                                    reg.Bairro = _bairro;
+                                    reg.Cidade = "JABOTICABAL";
+                                    reg.Uf = "SP";
+                                    reg.Cep = _cep;
+                                    reg.Desclanc = _descricao_lancamento;
+                                    reg.Fulllanc = _descricao_lancamento;
+                                    reg.Numdoc = item.Numero_Documento.ToString();
+                                    reg.Numparcela = (short)item.Numero_Parcela;
+                                    reg.Datadoc = DateTime.Now;
+                                    reg.Datavencto = item.Data_Vencimento;
+                                    reg.Numdoc2 = item.Numero_Documento.ToString();
+                                    reg.Valorguia = item.Soma_Principal;
+                                    reg.Valor_ISS = 0;
+                                    reg.Valor_Taxa =0;
+                                    reg.Totparcela = _totParcela;
+                                    reg.Obs = "Referente ao parcelamento de débitos: processo nº " + txtProcesso.Text;
+                                    reg.Numproc = txtProcesso.Text;
 
                                     //***** GERA CÓDIGO DE BARRAS BOLETO REGISTRADO*****
                                     DateTime _data_base = Convert.ToDateTime("07/10/1997");
@@ -215,8 +258,7 @@ namespace GTI_Web.Pages {
                                     if (item.Numero_Parcela == 0) {
                                         reg.Parcela = "Única";
                                     } else
-                                        //    reg.Parcela = reg.Numparcela.ToString("00") + "/" + reg.Totparcela.ToString("00");
-                                        reg.Parcela = reg.Numparcela.ToString("00") + "/" + (ListaDebito.Count - 1).ToString("00");
+                                        reg.Parcela = reg.Numparcela.ToString("00") + "/" + _totParcela.ToString("00");
 
                                     reg.Digitavel = _linha_digitavel;
                                     reg.Codbarra = _codigo_barra;

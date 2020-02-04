@@ -2385,5 +2385,12 @@ Proximo:;
             }
         }
 
+        public Processoreparc Retorna_Processo_Parcelamento(string Numprocesso) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                Processoreparc Sql = (from l in db.Processoreparc where l.Numprocesso == Numprocesso select l).FirstOrDefault();
+                return Sql;
+            }
+        }
+
     }//end class
 }
