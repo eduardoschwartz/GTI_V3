@@ -84,7 +84,6 @@ namespace GTI_Web.Pages {
                 crystalReport.Close();
                 crystalReport.Dispose();
             }
-
         }
 
         protected void ValidarButton_Click(object sender, EventArgs e) {
@@ -154,48 +153,48 @@ namespace GTI_Web.Pages {
                         //} else {
                             bool bSuspenso = empresa_Class.EmpresaSuspensa(Num);
                             if (bSuspenso) {
-                                lblmsg.Text = "Esta empresa encontra-se suspensa.";
+                            lblmsg.Text = "Esta empresa encontra-se suspensa.";
+                            return;
+                        } else {
+                            EmpresaStruct empresa = empresa_Class.Retorna_Empresa(Num);
+                            if (empresa.Data_Encerramento != null) {
+                                lblmsg.Text = "Esta empresa encontra-se encerrada.";
                                 return;
                             } else {
-                                EmpresaStruct empresa = empresa_Class.Retorna_Empresa(Num);
-                                if (empresa.Data_Encerramento != null) {
-                                    lblmsg.Text = "Esta empresa encontra-se encerrada.";
+                                if (Convert.ToDateTime(empresa.Data_abertura).Year == DateTime.Now.Year) {
+                                    lblmsg.Text = "Empresa aberta este ano não pode renovar o alvará.";
                                     return;
                                 } else {
-                                    if (Convert.ToDateTime(empresa.Data_abertura).Year == DateTime.Now.Year) {
-                                        lblmsg.Text = "Empresa aberta este ano não pode renovar o alvará.";
+                                    int _atividade_codigo = (int)empresa.Atividade_codigo;
+                                    bool bAtividadeAlvara = empresa_Class.Atividade_tem_Alvara(_atividade_codigo);
+                                    if (!bAtividadeAlvara) {
+                                        lblmsg.Text = "Atividade da empresa não permite renovar o alvará .";
                                         return;
                                     } else {
-                                        int _atividade_codigo = (int)empresa.Atividade_codigo;
-                                        bool bAtividadeAlvara = empresa_Class.Atividade_tem_Alvara(_atividade_codigo);
-                                        if (!bAtividadeAlvara) {
-                                            lblmsg.Text = "Atividade da empresa não permite renovar o alvará .";
-                                            return;
-                                        } else {
-                                            bool bIsentoTaxa;
-                                            if (empresa.Isento_taxa == 1)
-                                                bIsentoTaxa = true;
-                                            else
-                                                bIsentoTaxa = false;
+                                        bool bIsentoTaxa;
+                                        if (empresa.Isento_taxa == 1)
+                                            bIsentoTaxa = true;
+                                        else
+                                            bIsentoTaxa = false;
 
-                                            if (!bIsentoTaxa) {
-                                                int _qtde = empresa_Class.Qtde_Parcelas_TLL_Vencidas(Num);
+                                        if (!bIsentoTaxa) {
+                                            int _qtde = empresa_Class.Qtde_Parcelas_TLL_Vencidas(Num);
                                             if (_qtde > 0) {
                                                 lblmsg.Text = "A taxa de licença não esta paga, favor dirigir-se ao Sistema Prático da Prefeitura para regularizar.";
                                                 return;
                                             } else {
-                                                if(empresa.Endereco_codigo==123 && empresa.Numero==146 ) {
+                                                if (empresa.Endereco_codigo == 123 && empresa.Numero == 146) {
                                                     lblmsg.Text = "O endereço desta empresa não permite a emissão de alvará automático.";
                                                     return;
                                                 }
                                             }
 
-                                            }
-                                            EmiteAlvara(Num);
                                         }
+                                        EmiteAlvara(Num);
                                     }
                                 }
-//                            }
+                            }
+                            //                            }
                         }
                     }
                 }

@@ -527,7 +527,7 @@ namespace UIWeb.Pages {
                                     return;
                                 }
                             } else {
-                                if (row.Cells[12].Text == "SIM" || row.Cells[13].Text == "SIM") {
+                                if (row.Cells[12].Text == "SIM" && row.Cells[13].Text.Substring(0, 1) == "N") {
                                     bFind = true;
                                     _valor_ajuizado += Convert.ToDecimal(row.Cells[11].Text);
                                 }
@@ -570,7 +570,7 @@ namespace UIWeb.Pages {
             Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
             List<DebitoStructure> lstExtrato = new List<DebitoStructure>();
             DebitoStructure reg = null;
-            String DescTributo = "";
+            string DescTributo = "";
             foreach (GridViewRow row in grdMain.Rows) {
                 if (row.RowType == DataControlRowType.DataRow) {
                     if ((row.FindControl("chkRow") as CheckBox).Checked) {
@@ -620,6 +620,21 @@ namespace UIWeb.Pages {
 
                 }
             }
+
+            bool _find = false;
+            foreach (GridViewRow row in grdMain.Rows) {
+                if (row.RowType == DataControlRowType.DataRow) {
+                    if ((row.FindControl("chkRow") as CheckBox).Checked) {
+                        if (row.Cells[12].Text.Substring(0, 1) == "S") {
+                            bGerado = false;
+                            _find = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (!_find) Valor_Honorario = 0;
+
 
             if (Valor_Honorario > 0) {
                 int _codigo = Convert.ToInt32(txtCod.Text);
@@ -715,7 +730,7 @@ namespace UIWeb.Pages {
                 tributario_Class.Insert_Parcela_Documento(regParc);
             }
 
-            String sDataDAM = lblVenctoDam.Text;
+            string sDataDAM = lblVenctoDam.Text;
             if (lstExtrato.Count == 0) {
                 lblMsg2.Text = "Selecione ao menos uma parcela.";
                 return;
@@ -756,7 +771,7 @@ namespace UIWeb.Pages {
             foreach (GridViewRow row in grdMain.Rows) {
                 if (row.RowType == DataControlRowType.DataRow) {
                     if ((row.FindControl("chkRow") as CheckBox).Checked) {
-                        if (row.Cells[12].Text == "SIM" || row.Cells[13].Text == "SIM") {
+                        if (row.Cells[12].Text.Substring(0, 1) == "S" || row.Cells[13].Text.Substring(0,1) == "S") {
                             bGerado = false;
                             _find = true;
                             break;
@@ -773,7 +788,6 @@ namespace UIWeb.Pages {
         protected void CloseModal(object sender, EventArgs e) {
             divModal.Visible = false;
         }
-
 
     }//end class
 }
