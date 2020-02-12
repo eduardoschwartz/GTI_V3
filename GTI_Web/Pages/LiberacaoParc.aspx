@@ -49,22 +49,22 @@
              de boletos disponível no site.</span><br />
              <br />
              <table style="width: 456px; height: 62px;">
-                 <tr><td class="panel" style="height: 23px; width: 140px;">&nbsp;
-                     Inscrição Cadastral: </td> <td class="panel" style="height: 23px">&nbsp;&nbsp;
+                 <tr><td class="panel" style="height: 23px; width: 173px;">&nbsp;
+                     Inscrição Cadastral/ Código: </td> <td class="panel" style="height: 23px">&nbsp;&nbsp;
                             <asp:TextBox ID="txtIM" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="14" Width="66px" TabIndex="1"  onKeyPress="return formata(this, '§§§§§§', event)"></asp:TextBox>
                         </td>
 
                  </tr>
-                 <tr><td class="panel" style="height: 40px; width: 140px;">&nbsp;
+                 <tr><td class="panel" style="height: 40px; width: 173px;">&nbsp;
                      Número do Processo:
                         <br />
-&nbsp;<span style="color: #009900">(Ex: 1234/2020)</span></td> <td class="panel" style="height: 40px">&nbsp;&nbsp;
+&nbsp;<span style="color: #009900">(Ex: 1234-5/2020)</span></td> <td class="panel" style="height: 40px">&nbsp;&nbsp;
                             <asp:TextBox ID="txtProcesso" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="11" Width="108px" TabIndex="1" ></asp:TextBox> 
                         &nbsp;</td>
 
                  </tr>
                  <tr>
-                     <td style="width: 140px; vertical-align: bottom">&nbsp;&nbsp;
+                     <td style="width: 173px; vertical-align: bottom">&nbsp;&nbsp;
                          <img height="30" alt="" src="Turing.aspx" width="80" />&nbsp;</td>
 
                      <td class="panel">&nbsp;Digite o conteúdo da imagem                                              

@@ -122,9 +122,10 @@ namespace GTI_Web.Pages {
             if (Valida()) {
                 int Codigo = Convert.ToInt32(txtIM.Text);
                 string sNumProc = txtProcesso.Text;
-                if (sNumProc.Length < 6) {
+                if (sNumProc.Length < 6 || !sNumProc.Contains("-")) {
                     lblMsg.Text = "Nº de processo inválido.";
                 } else {
+                    sNumProc = sNumProc.Substring(0, sNumProc.LastIndexOf('-')) + sNumProc.Substring(sNumProc.Length-5,5);
                     Tributario_bll tributario_class = new Tributario_bll("GTIconnection");
                     List<Destinoreparc> Lista = tributario_class.Lista_Destino_Parcelamento(sNumProc);
                     if (Lista.Count == 0) {
