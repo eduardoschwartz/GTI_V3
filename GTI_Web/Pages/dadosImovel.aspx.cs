@@ -114,10 +114,30 @@ namespace GTI_Web.Pages {
             ImovelStruct _dados = imovel_Class.Dados_Imovel(Codigo);
             string _ativo = "SIM";
             string _controle = "XXX";
+            byte[] _foto = new byte[] { 0x20 };
 
+            dados_imovel_rpt cert = new dados_imovel_rpt {
+                Codigo = Codigo,
+                Agrupamento = 0,
+                Areapredial=0,
+                Areaterreno=(decimal)_dados.Area_Terreno,
+                Ativo=_ativo,
+                Bairro=_dados.NomeBairro,
+                Benfeitoria=_dados.Benfeitoria_Nome,
+                Categoria=_dados.Categoria_Nome,
+                Cep=_dados.Cep,
+                Complemento=_dados.Complemento,
+                Condominio=_dados.NomeCondominio,
+                Endereco=_dados.NomeLogradouro,
+                Foto=_foto,
+                Fracaoideal=(decimal)_dados.FracaoIdeal,
+                Imunidade=_dados.Imunidade==true?"Sim":"Não",
+                Inscricao=_dados.Inscricao,
+                Iptu=0,
+                Isentocip=_dados.Cip==true?"Sim":"Não"
 
-            dados_imovel_rpt cert = new dados_imovel_rpt();
-            cert.Codigo = Codigo;
+            };
+
             Exception ex = imovel_Class.Insert_Dados_Imovel(cert);
             if (ex != null) {
                 throw ex;
