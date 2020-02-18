@@ -12,10 +12,10 @@
             <ul>
                 <li><a href="gtiMenu2.aspx?d=gti" style="width: 600px">Consulta e atualização de boletos vencidos para pagamento</a></li>
                 <%--<li><a href="wait.aspx?d=gti" style="width: 600px">Consulta e atualização de boletos vencidos para pagamento</a></li>--%>
-                <li><a href="SegundaViaIPTU.aspx?d=gti" style="width: 600px;color: #CC0000">Emissão de 2ª via do carnê de IPTU (2020)</a> </li>
-                <li><a href="SegundaViaISS.aspx?d=gti" style="width: 600px;color: #CC0000">Emissão de 2ª via do carnê de ISS Fixo/Taxa de Licença (2020)</a> </li>
-                <li><a href="SegundaViaVS.aspx?d=gti" style="width: 600px;color: #CC0000">Emissão de 2ª via do carnê de Vigilância Sanitária (2020)</a> </li>
-                <li><a href="LiberacaoParc.aspx?d=gti" style="width: 600px;color: #CC0000">Emissão de carnê de parcelamento (parcelas de 2020)</a> </li>
+                <li><a href="SegundaViaIPTU.aspx?d=gti" style="width: 600px">Emissão de 2ª via do carnê de IPTU (2020)</a> </li>
+                <li><a href="SegundaViaISS.aspx?d=gti" style="width: 600px">Emissão de 2ª via do carnê de ISS Fixo/Taxa de Licença (2020)</a> </li>
+                <li><a href="SegundaViaVS.aspx?d=gti" style="width: 600px">Emissão de 2ª via do carnê de Vigilância Sanitária (2020)</a> </li>
+                <li><a href="LiberacaoParc.aspx?d=gti" style="width: 600px">Emissão de carnê de parcelamento (parcelas de 2020)</a> </li>
                 <li><a href="ConsultaProcesso.aspx?d=gti" style="width: 600px; ">Consulta de Processos</a> </li>
 <%--                <li><a href="SegundaViaCIP.aspx?d=gti" style="width: 600px; color: #CC0000">Emissão de 2ª via da contribuição de iluminação pública (CIP) (2019)</a></li>--%>
                 <%--<li><a href="cipendereco.aspx?d=gti" style="width: 600px; color: #CC0000">Consultar endereço da contribuição de iluminação pública (CIP) (2019)</a></li>--%>
@@ -27,6 +27,7 @@
                 <li><a href="alvara_funcionamento.aspx?d=gti" style="width: 600px">Renovação de alvará de funcionamento</a></li>
                 <li><a href="gticertidao.aspx?d=gti" style="width: 600px">Emissão de certidões / Verificar autenticidade</a></li>
                 <li><a href="dadosEmpresa.aspx?d=gti" style="width: 600px">Dados cadastrais de uma empresa</a></li>
+                <li><a href="dadosImovel.aspx?d=gti" style="width: 600px">Dados cadastrais de um imóvel</a></li>
                 <li><a href="cpv_pagto.aspx?d=gti" style="width: 600px">Impressão de comprovante de pagamento</a></li>
                 <li><a href="situacao_pagto.aspx?d=gti" style="width: 600px">Situação dos débitos ref. a ISS Fixo, Taxa de Licença e Vig.Sanitária.</a></li>
                 <%--<li><a href="LoginFunc.aspx?d=gti" style="width: 600px">Área restrita do usuário.</a></li>--%>

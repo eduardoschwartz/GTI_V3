@@ -114,6 +114,7 @@
     <Content Include="Pages\ConsultaProcessoend.aspx" />
     <Content Include="Pages\cpv_pagto.aspx" />
     <Content Include="Pages\dadosEmpresa.aspx" />
+    <Content Include="Pages\dadosImovel.aspx" />
     <Content Include="Pages\damweb.aspx" />
     <Content Include="Pages\damwebend2.aspx" />
     <Content Include="Pages\detalhe_boleto.aspx" />
@@ -288,6 +289,13 @@
     </Compile>
     <Compile Include="Pages\dadosEmpresa.aspx.designer.cs">
       <DependentUpon>dadosEmpresa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\dadosImovel.aspx.cs">
+      <DependentUpon>dadosImovel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\dadosImovel.aspx.designer.cs">
+      <DependentUpon>dadosImovel.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\damweb.aspx.cs">
       <DependentUpon>damweb.aspx</DependentUpon>
@@ -510,6 +518,12 @@
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Report\Dados_Imovel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Dados_Imovel.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\SituacaoPagamento.cs">
       <DependentUpon>SituacaoPagamento.rpt</DependentUpon>
@@ -756,6 +770,10 @@
       <LastGenOutput>ComprovanteInscricao.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Carne_IPTU.rdlc" />
+    <EmbeddedResource Include="Report\Dados_Imovel.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Dados_Imovel.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\SituacaoPagamento.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SituacaoPagamento.cs</LastGenOutput>

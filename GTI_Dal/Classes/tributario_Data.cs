@@ -2359,28 +2359,41 @@ Proximo:;
                                                       equals new { p1 = pd.Codreduzido, p2 = pd.Anoexercicio, p3 = pd.Codlancamento, p4 = pd.Seqlancamento, p5 = pd.Numparcela, p6 = pd.Codcomplemento } into dppd from pd in dppd.DefaultIfEmpty()
                            where dp.Codreduzido == nCodigo && dp.Anoexercicio == nAno && dp.Codlancamento == 20 && dp.Seqlancamento == nSeq 
                            orderby new { dp.Numparcela }
-                           select new { dp.Codreduzido, dp.Anoexercicio, dp.Codlancamento, dp.Seqlancamento, dp.Numparcela, dp.Codcomplemento, dp.Datavencimento, dt.Valortributo,dp.Statuslanc });
+                           select new { dp.Codreduzido, dp.Anoexercicio, dp.Codlancamento, dp.Seqlancamento, dp.Numparcela, dp.Codcomplemento, dp.Datavencimento, dt.Valortributo,dp.Statuslanc }).Distinct();
 
                 List<DebitoStructure> Lista = new List<DebitoStructure>();
+                int _pos=0;
                 foreach (var query in reg) {
+                    bool _find = false;
+                    _pos = 0;
                     foreach (DebitoStructure item in Lista) {
-                        if (item.Numero_Parcela == query.Numparcela && item.Complemento == query.Codcomplemento)
+                        if (item.Numero_Parcela == query.Numparcela && item.Complemento == query.Codcomplemento) {
+                            _find = true;
                             goto Proximo;
+                        }
+                        _pos++;
                     }
-                    DebitoStructure Linha = new DebitoStructure {
-                        Codigo_Reduzido = query.Codreduzido,
-                        Ano_Exercicio = query.Anoexercicio,
-                        Codigo_Lancamento = query.Codlancamento,
-                        Sequencia_Lancamento = query.Seqlancamento,
-                        Numero_Parcela = query.Numparcela,
-                        Complemento = query.Codcomplemento,
-                        Soma_Principal = Convert.ToDecimal(query.Valortributo),
-                        Data_Vencimento = query.Datavencimento,
-                        Codigo_Situacao=query.Statuslanc,
-                        Data_Base = dDataBase
-                    };
-                    Lista.Add(Linha);
+                    
                 Proximo:;
+                    if (_find)
+                        Lista[_pos].Soma_Principal += Convert.ToDecimal(query.Valortributo);
+                    else {
+                        DebitoStructure Linha = new DebitoStructure {
+                            Codigo_Reduzido = query.Codreduzido,
+                            Ano_Exercicio = query.Anoexercicio,
+                            Codigo_Lancamento = query.Codlancamento,
+                            Sequencia_Lancamento = query.Seqlancamento,
+                            Numero_Parcela = query.Numparcela,
+                            Complemento = query.Codcomplemento,
+                            Soma_Principal = Convert.ToDecimal(query.Valortributo),
+                            Data_Vencimento = query.Datavencimento,
+                            Codigo_Situacao = query.Statuslanc,
+                            Data_Base = dDataBase
+                        };
+                        Lista.Add(Linha);
+                        
+                    }
+                    
                 }
                 return Lista;
             }

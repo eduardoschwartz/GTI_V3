@@ -147,5 +147,6 @@ namespace GTI_Dal {
         public DbSet<Logevento> Logevento { get; set; }
         public DbSet<Livro> Livro { get; set; }
         public DbSet<Redesim_viabilidade> Redesim_viabilidade { get; set; }
+        public DbSet<dados_imovel_rpt> Dados_Imovel { get; set; }
     }
 }
