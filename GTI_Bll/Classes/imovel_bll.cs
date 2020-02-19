@@ -485,7 +485,7 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Foto_Imovel(Codigo);
         }
 
-        public Exception Insert_Dados_Imovel(dados_imovel_rpt Reg) {
+        public Exception Insert_Dados_Imovel(dados_imovel_web Reg) {
             Imovel_Data obj = new Imovel_Data(_connection);
             Exception ex = obj.Insert_Dados_Imovel(Reg);
             return ex;

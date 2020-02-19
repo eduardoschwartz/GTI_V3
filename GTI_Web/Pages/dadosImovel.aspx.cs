@@ -56,23 +56,25 @@ namespace GTI_Web.Pages {
 
         protected void btPrint_Click(object sender, EventArgs e) {
             lblMsg.Text = "";
+            if (txtIM.Text =="") txtIM.Text = "0";
+            int Codigo = Convert.ToInt32(txtIM.Text);
+
             Imovel_bll imovel_class = new Imovel_bll("GTIconnection");
-            if (string.IsNullOrWhiteSpace(txtIM.Text) && string.IsNullOrWhiteSpace(txtCNPJ.Text) && string.IsNullOrWhiteSpace(txtCPF.Text))
+            if (Convert.ToInt32(txtIM.Text)==0 && string.IsNullOrWhiteSpace(txtCNPJ.Text) && string.IsNullOrWhiteSpace(txtCPF.Text))
                 lblMsg.Text = "Digite IM ou CPF ou CNPJ.";
             else {
-                if (!string.IsNullOrWhiteSpace(txtIM.Text) && (!string.IsNullOrWhiteSpace(txtCNPJ.Text) || !string.IsNullOrWhiteSpace(txtCPF.Text))) {
+
+                if (Convert.ToInt32(txtIM.Text) > 0 && (!string.IsNullOrWhiteSpace(txtCNPJ.Text) || !string.IsNullOrWhiteSpace(txtCPF.Text))) {
 
                 } else {
                     lblMsg.Text = "Erro: Digite a inscrição municipal e o CPF ou o CNPJ do proprietário.";
                     return;
                 }
 
-                if (!string.IsNullOrWhiteSpace(txtIM.Text)) {
-                    if (!imovel_class.Existe_Imovel(Convert.ToInt32(txtIM.Text))) {
-                        lblMsg.Text = "Erro: Cadastro inexistente.";
-                        return;
-                    }
-                } 
+                if (!imovel_class.Existe_Imovel(Codigo)) {
+                    lblMsg.Text = "Erro: Cadastro inexistente.";
+                    return;
+                }
 
                 if (optCPF.Checked && txtCPF.Text.Length < 14) {
                     lblMsg.Text = "CPF inválido!";
@@ -82,14 +84,22 @@ namespace GTI_Web.Pages {
                     lblMsg.Text = "CNPJ inválido!";
                     return;
                 }
+
                 string num_cpf_cnpj = "";
+                Imovel_bll imovel_Class = new Imovel_bll("GTIconnection");
+                List<ProprietarioStruct> _prop = imovel_Class.Lista_Proprietario(Codigo, true);
+                string _cpfcnpj = _prop[0].CPF;
+
                 if (optCPF.Checked) {
                     num_cpf_cnpj = gtiCore.RetornaNumero(txtCPF.Text);
                     if (!gtiCore.ValidaCpf(num_cpf_cnpj)) {
                         lblMsg.Text = "CPF inválido!";
                         return;
                     } else {
-                        //valida codigo cpf
+                        if (num_cpf_cnpj != _cpfcnpj) {
+                            lblMsg.Text = "CPF informado não pertence a este imóvel!";
+                            return;
+                        }
                     }
                 } else {
                     num_cpf_cnpj = gtiCore.RetornaNumero(txtCNPJ.Text);
@@ -97,11 +107,13 @@ namespace GTI_Web.Pages {
                         lblMsg.Text = "CNPJ inválido!";
                         return;
                     } else {
-                        //valida codigo cnpj
+                        if (num_cpf_cnpj != _cpfcnpj) {
+                            lblMsg.Text = "CNPJ informado não pertence a este imóvel!";
+                            return;
+                        }
                     }
                 }
                 Imprimir_Ficha(Convert.ToInt32(txtIM.Text));
-               
             }
         }
 
@@ -114,29 +126,48 @@ namespace GTI_Web.Pages {
             ImovelStruct _dados = imovel_Class.Dados_Imovel(Codigo);
             string _ativo = "SIM";
             string _controle = "XXX";
-            byte[] _foto = new byte[] { 0x20 };
 
-            dados_imovel_rpt cert = new dados_imovel_rpt {
-                Codigo = Codigo,
+            dados_imovel_web cert = new dados_imovel_web {
                 Agrupamento = 0,
-                Areapredial=0,
                 Areaterreno=(decimal)_dados.Area_Terreno,
                 Ativo=_ativo,
                 Bairro=_dados.NomeBairro,
                 Benfeitoria=_dados.Benfeitoria_Nome,
                 Categoria=_dados.Categoria_Nome,
                 Cep=_dados.Cep,
-                Complemento=_dados.Complemento,
+                Codigo = Codigo,
+                Complemento =_dados.Complemento,
                 Condominio=_dados.NomeCondominio,
+                Controle=_controle,
                 Endereco=_dados.NomeLogradouro,
-                Foto=_foto,
-                Fracaoideal=(decimal)_dados.FracaoIdeal,
                 Imunidade=_dados.Imunidade==true?"Sim":"Não",
                 Inscricao=_dados.Inscricao,
-                Iptu=0,
-                Isentocip=_dados.Cip==true?"Sim":"Não"
-
+                Isentocip=_dados.Cip==true?"Sim":"Não",
+                Lote=_dados.LoteOriginal,
+                Mt=_dados.NumMatricula.ToString(),
+                Numero=(int)_dados.Numero,
+                Pedologia=_dados.Pedologia_Nome,
+                Qtdeedif=0,
+                Quadra=_dados.QuadraOriginal,
+                Reside=(bool)_dados.ResideImovel?"Sim":"Não",
+                Situacao=_dados.Situacao_Nome,
+                Topografia=_dados.Topografia_Nome,
+                Usoterreno=_dados.Uso_terreno_Nome
             };
+
+            List<ProprietarioStruct> _prop = imovel_Class.Lista_Proprietario(Codigo,true);
+            cert.Proprietario = _prop[0].Nome;
+
+            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
+            SpCalculo _calculo = tributario_Class.Calculo_IPTU(Codigo, DateTime.Now.Year);
+            cert.Vvc = _calculo.Vvp;
+            cert.Vvt = _calculo.Vvt;
+            cert.Vvi = _calculo.Vvi;
+            cert.Iptu = _calculo.Valoriptu==0?_calculo.Valoritu:_calculo.Valoriptu;
+            cert.Testada = _calculo.Testadaprinc;
+            cert.Agrupamento = _calculo.Agrupamento;
+            cert.Areapredial = _calculo.Areapredial;
+            cert.Fracaoideal = _calculo.Fracao;
 
             Exception ex = imovel_Class.Insert_Dados_Imovel(cert);
             if (ex != null) {

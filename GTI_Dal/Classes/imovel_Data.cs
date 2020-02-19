@@ -1261,12 +1261,12 @@ namespace GTI_Dal.Classes {
             }
         }
 
-        public Exception Insert_Dados_Imovel(dados_imovel_rpt Reg) {
+        public Exception Insert_Dados_Imovel(dados_imovel_web Reg) {
             using (var db = new GTI_Context(_connection)) {
                 object[] Parametros = new object[35];
-                Parametros[0] = new SqlParameter { ParameterName = "@codigo", SqlDbType = SqlDbType.SmallInt, SqlValue = Reg.Codigo };
-                Parametros[1] = new SqlParameter { ParameterName = "@proprietario", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Proprietario };
-                Parametros[2] = new SqlParameter { ParameterName = "@foto", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Foto };
+                Parametros[0] = new SqlParameter { ParameterName = "@controle", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Controle };
+                Parametros[1] = new SqlParameter { ParameterName = "@codigo", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codigo };
+                Parametros[2] = new SqlParameter { ParameterName = "@proprietario", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Proprietario };
                 Parametros[3] = new SqlParameter { ParameterName = "@inscricao", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Inscricao };
                 Parametros[4] = new SqlParameter { ParameterName = "@ativo", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Ativo };
                 Parametros[5] = new SqlParameter { ParameterName = "@endereco", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Endereco };
@@ -1276,35 +1276,35 @@ namespace GTI_Dal.Classes {
                 Parametros[9] = new SqlParameter { ParameterName = "@quadra", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Quadra };
                 Parametros[10] = new SqlParameter { ParameterName = "@lote", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Lote };
                 Parametros[11] = new SqlParameter { ParameterName = "@cep", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Cep };
-                Parametros[12] = new SqlParameter { ParameterName = "@areaterreno", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Areaterreno };
-                Parametros[13] = new SqlParameter { ParameterName = "@fracaoideal", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Fracaoideal };
+                Parametros[12] = new SqlParameter { ParameterName = "@areaterreno", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Areaterreno };
+                Parametros[13] = new SqlParameter { ParameterName = "@fracaoideal", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Fracaoideal };
                 Parametros[14] = new SqlParameter { ParameterName = "@topografia", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Topografia };
                 Parametros[15] = new SqlParameter { ParameterName = "@pedologia", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Pedologia };
                 Parametros[16] = new SqlParameter { ParameterName = "@situacao", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Situacao };
                 Parametros[17] = new SqlParameter { ParameterName = "@usoterreno", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Usoterreno };
                 Parametros[18] = new SqlParameter { ParameterName = "@benfeitoria", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Benfeitoria };
                 Parametros[19] = new SqlParameter { ParameterName = "@categoria", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Categoria };
-                Parametros[20] = new SqlParameter { ParameterName = "@testada", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Testada };
-                Parametros[21] = new SqlParameter { ParameterName = "@agrupamento", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Agrupamento };
-                Parametros[22] = new SqlParameter { ParameterName = "@somafator", SqlDbType = SqlDbType.Int, SqlValue = Reg.Somafator };
-                Parametros[23] = new SqlParameter { ParameterName = "@vvt", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Vvt };
-                Parametros[24] = new SqlParameter { ParameterName = "@vvc", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Vvc };
-                Parametros[25] = new SqlParameter { ParameterName = "@vvi", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Vvi };
-                Parametros[26] = new SqlParameter { ParameterName = "@iptu", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Iptu };
-                Parametros[27] = new SqlParameter { ParameterName = "@areapredial", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Areapredial };
+                Parametros[20] = new SqlParameter { ParameterName = "@testada", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Testada };
+                Parametros[21] = new SqlParameter { ParameterName = "@agrupamento", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Agrupamento };
+                Parametros[22] = new SqlParameter { ParameterName = "@somafator", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Somafator };
+                Parametros[23] = new SqlParameter { ParameterName = "@vvt", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Vvt };
+                Parametros[24] = new SqlParameter { ParameterName = "@vvc", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Vvc };
+                Parametros[25] = new SqlParameter { ParameterName = "@vvi", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Vvi };
+                Parametros[26] = new SqlParameter { ParameterName = "@iptu", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Iptu };
+                Parametros[27] = new SqlParameter { ParameterName = "@areapredial", SqlDbType = SqlDbType.Decimal, SqlValue = Reg.Areapredial };
                 Parametros[28] = new SqlParameter { ParameterName = "@condominio", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Condominio };
                 Parametros[29] = new SqlParameter { ParameterName = "@imunidade", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Imunidade };
                 Parametros[30] = new SqlParameter { ParameterName = "@reside", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Reside };
                 Parametros[31] = new SqlParameter { ParameterName = "@isentocip", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Isentocip };
-                Parametros[32] = new SqlParameter { ParameterName = "@qtdeedif", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Qtdeedif };
+                Parametros[32] = new SqlParameter { ParameterName = "@qtdeedif", SqlDbType = SqlDbType.Int, SqlValue = Reg.Qtdeedif };
                 Parametros[33] = new SqlParameter { ParameterName = "@mt", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Mt };
-                Parametros[34] = new SqlParameter { ParameterName = "@proprietario2", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Proprietario2 };
+                Parametros[34] = new SqlParameter { ParameterName = "@data_impressao", SqlDbType = SqlDbType.SmallDateTime, SqlValue = DateTime.Now };
 
-                db.Database.ExecuteSqlCommand("INSERT INTO dados_imovel_rpt(codigo,proprietario,foto,inscricao,ativo,endereco,numero,complemento,bairro,quadra,lote," +
+                db.Database.ExecuteSqlCommand("INSERT INTO dados_imovel_web(controle,codigo,proprietario,inscricao,ativo,endereco,numero,complemento,bairro,quadra,lote," +
                     "cep,areaterreno,fracaoideal,topografia,pedologia,situacao,usoterreno,benfeitoria,categoria,testada,agrupamento,somafator,vvt,vvc,vvi,iptu,areapredial," +
-                    "condominio,imunidade,reside,isentocip,qtdeedif,mt,proprietario2) VALUES(@codigo,@proprietario,@foto,@inscricao,@ativo,@endereco,@numero,@complemento," +
+                    "condominio,imunidade,reside,isentocip,qtdeedif,mt,data_impressao) VALUES(@controle,@codigo,@proprietario,@inscricao,@ativo,@endereco,@numero,@complemento," +
                     "@bairro,@quadra,@lote,@cep,@areaterreno,@fracaoideal,@topografia,@pedologia,@situacao,@usoterreno,@benfeitoria,@categoria,@testada,@agrupamento," +
-                    "@somafator,@vvt,@vvc,@vvi,@iptu,@areapredial,@condominio,@imunidade,@reside,@isentocip,@qtdeedif,@mt,@proprietario2)", Parametros);
+                    "@somafator,@vvt,@vvc,@vvi,@iptu,@areapredial,@condominio,@imunidade,@reside,@isentocip,@qtdeedif,@mt,@data_impressao)", Parametros);
 
                 try {
                     db.SaveChanges();

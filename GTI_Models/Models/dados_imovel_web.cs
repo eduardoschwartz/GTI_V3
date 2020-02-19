@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace GTI_Models.Models {
-    public class dados_imovel_rpt {
+    public class dados_imovel_web {
         [Key]
+        public string Controle { get; set; }
         public int Codigo { get; set; }
         public string Proprietario { get; set; }
-        public byte[] Foto { get; set; }
         public string Inscricao { get; set; }
         public string Ativo { get; set; }
         public string Endereco { get; set; }
@@ -37,6 +38,6 @@ namespace GTI_Models.Models {
         public string Isentocip { get; set; }
         public int Qtdeedif { get; set; }
         public string Mt { get; set; }
-        public string Proprietario2 { get; set; }
+        public DateTime Data_impressao { get; set; }
     }
 }
