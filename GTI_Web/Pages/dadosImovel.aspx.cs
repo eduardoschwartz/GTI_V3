@@ -129,24 +129,25 @@ namespace GTI_Web.Pages {
 
             dados_imovel_web cert = new dados_imovel_web {
                 Agrupamento = 0,
-                Areaterreno=(decimal)_dados.Area_Terreno,
-                Ativo=_ativo,
-                Bairro=_dados.NomeBairro,
-                Benfeitoria=_dados.Benfeitoria_Nome,
-                Categoria=_dados.Categoria_Nome,
-                Cep=_dados.Cep,
+                Areaterreno = (decimal)_dados.Area_Terreno,
+                Ativo = _ativo,
+                Bairro = _dados.NomeBairro,
+                Benfeitoria = _dados.Benfeitoria_Nome,
+                Categoria = _dados.Categoria_Nome,
+                Cep = _dados.Cep,
                 Codigo = Codigo,
-                Complemento =_dados.Complemento,
-                Condominio=_dados.NomeCondominio,
-                Controle=_controle,
-                Endereco=_dados.NomeLogradouro,
-                Imunidade=_dados.Imunidade==true?"Sim":"Não",
-                Inscricao=_dados.Inscricao,
-                Isentocip=_dados.Cip==true?"Sim":"Não",
-                Lote=_dados.LoteOriginal,
-                Mt=_dados.NumMatricula.ToString(),
-                Numero=(int)_dados.Numero,
-                Pedologia=_dados.Pedologia_Nome,
+                Complemento = _dados.Complemento,
+                Condominio = _dados.NomeCondominio,
+                Controle = _controle,
+                Endereco = _dados.NomeLogradouro,
+                Imunidade = _dados.Imunidade == true ? "Sim" : "Não",
+                Inscricao = _dados.Inscricao,
+                Isentocip = _dados.Cip == true ? "Sim" : "Não",
+                Lote = _dados.LoteOriginal,
+                Mt = _dados.NumMatricula.ToString(),
+                Numero = (int)_dados.Numero,
+                Pedologia = _dados.Pedologia_Nome,
+                Proprietario2 = "",
                 Qtdeedif=0,
                 Quadra=_dados.QuadraOriginal,
                 Reside=(bool)_dados.ResideImovel?"Sim":"Não",
@@ -155,8 +156,16 @@ namespace GTI_Web.Pages {
                 Usoterreno=_dados.Uso_terreno_Nome
             };
 
-            List<ProprietarioStruct> _prop = imovel_Class.Lista_Proprietario(Codigo,true);
-            cert.Proprietario = _prop[0].Nome;
+            List<ProprietarioStruct> _prop = imovel_Class.Lista_Proprietario(Codigo,false);
+            foreach (ProprietarioStruct item in _prop) {
+                if(item.Principal)
+                    cert.Proprietario = _prop[0].Nome;
+                else {
+                    cert.Proprietario2 += _prop[0].Nome + "; ";
+                }
+            }
+
+            
 
             Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
             SpCalculo _calculo = tributario_Class.Calculo_IPTU(Codigo, DateTime.Now.Year);
@@ -173,12 +182,41 @@ namespace GTI_Web.Pages {
             if (ex != null) {
                 throw ex;
             } else {
-                crystalReport.SetParameterValue("CODIGO", _dados.Codigo.ToString("000000"));
-                crystalReport.SetParameterValue("INSCRICAO", _dados.Inscricao);
-                crystalReport.SetParameterValue("SITUACAO", _ativo);
-                crystalReport.SetParameterValue("MT", _dados.NumMatricula);
-                crystalReport.SetParameterValue("PROPRIETARIO", _dados.Proprietario_Nome);
-                crystalReport.SetParameterValue("CONTROLE", _controle);
+                crystalReport.SetParameterValue("CODIGO", cert.Codigo.ToString("000000"));
+                crystalReport.SetParameterValue("INSCRICAO", cert.Inscricao);
+                crystalReport.SetParameterValue("SITUACAO", cert.Ativo);
+                crystalReport.SetParameterValue("MT", cert.Mt);
+                crystalReport.SetParameterValue("PROPRIETARIO", cert.Proprietario);
+                crystalReport.SetParameterValue("CONTROLE", cert.Controle);
+                crystalReport.SetParameterValue("PROPRIETARIO2", cert.Proprietario2);
+                crystalReport.SetParameterValue("ENDERECO", cert.Endereco);
+                crystalReport.SetParameterValue("NUMERO", cert.Numero);
+                crystalReport.SetParameterValue("COMPLEMENTO", cert.Complemento);
+                crystalReport.SetParameterValue("BAIRRO", cert.Bairro);
+                crystalReport.SetParameterValue("CEP", cert.Cep);
+                crystalReport.SetParameterValue("QUADRA", cert.Quadra);
+                crystalReport.SetParameterValue("LOTE", cert.Lote);
+                crystalReport.SetParameterValue("AREATERRENO", cert.Areaterreno);
+                crystalReport.SetParameterValue("FRACAO", cert.Fracaoideal);
+                crystalReport.SetParameterValue("TESTADA", cert.Testada);
+                crystalReport.SetParameterValue("AGRUPAMENTO", cert.Agrupamento);
+                crystalReport.SetParameterValue("FATORES", cert.Somafator);
+                crystalReport.SetParameterValue("AREAPREDIAL", cert.Areapredial);
+                crystalReport.SetParameterValue("IMUNIDADE", cert.Imunidade);
+                crystalReport.SetParameterValue("RESIDE", cert.Reside);
+                crystalReport.SetParameterValue("QTDEEDIF", cert.Qtdeedif);
+                crystalReport.SetParameterValue("ISENTOCIP", cert.Isentocip);
+                crystalReport.SetParameterValue("SITUACAO2", cert.Situacao);
+                crystalReport.SetParameterValue("PEDOLOGIA", cert.Pedologia);
+                crystalReport.SetParameterValue("TOPOGRAFIA", cert.Topografia);
+                crystalReport.SetParameterValue("CATEGORIA", cert.Categoria);
+                crystalReport.SetParameterValue("BENFEITORIA", cert.Benfeitoria);
+                crystalReport.SetParameterValue("USOTERRENO", cert.Usoterreno);
+                crystalReport.SetParameterValue("CONDOMINIO", cert.Condominio);
+                crystalReport.SetParameterValue("VVT", cert.Vvt);
+                crystalReport.SetParameterValue("VVI", cert.Vvi);
+                crystalReport.SetParameterValue("VVP", cert.Vvc);
+                crystalReport.SetParameterValue("IPTU", cert.Iptu);
 
                 HttpContext.Current.Response.Buffer = false;
                 HttpContext.Current.Response.ClearContent();

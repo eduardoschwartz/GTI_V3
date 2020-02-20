@@ -39,5 +39,6 @@ namespace GTI_Models.Models {
         public int Qtdeedif { get; set; }
         public string Mt { get; set; }
         public DateTime Data_impressao { get; set; }
+        public string Proprietario2 { get; set; }
     }
 }

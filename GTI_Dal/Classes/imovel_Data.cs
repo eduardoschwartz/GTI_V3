@@ -1263,7 +1263,7 @@ namespace GTI_Dal.Classes {
 
         public Exception Insert_Dados_Imovel(dados_imovel_web Reg) {
             using (var db = new GTI_Context(_connection)) {
-                object[] Parametros = new object[35];
+                object[] Parametros = new object[36];
                 Parametros[0] = new SqlParameter { ParameterName = "@controle", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Controle };
                 Parametros[1] = new SqlParameter { ParameterName = "@codigo", SqlDbType = SqlDbType.Int, SqlValue = Reg.Codigo };
                 Parametros[2] = new SqlParameter { ParameterName = "@proprietario", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Proprietario };
@@ -1299,12 +1299,13 @@ namespace GTI_Dal.Classes {
                 Parametros[32] = new SqlParameter { ParameterName = "@qtdeedif", SqlDbType = SqlDbType.Int, SqlValue = Reg.Qtdeedif };
                 Parametros[33] = new SqlParameter { ParameterName = "@mt", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Mt };
                 Parametros[34] = new SqlParameter { ParameterName = "@data_impressao", SqlDbType = SqlDbType.SmallDateTime, SqlValue = DateTime.Now };
+                Parametros[35] = new SqlParameter { ParameterName = "@proprietario2", SqlDbType = SqlDbType.VarChar, SqlValue = Reg.Proprietario2 };
 
                 db.Database.ExecuteSqlCommand("INSERT INTO dados_imovel_web(controle,codigo,proprietario,inscricao,ativo,endereco,numero,complemento,bairro,quadra,lote," +
                     "cep,areaterreno,fracaoideal,topografia,pedologia,situacao,usoterreno,benfeitoria,categoria,testada,agrupamento,somafator,vvt,vvc,vvi,iptu,areapredial," +
-                    "condominio,imunidade,reside,isentocip,qtdeedif,mt,data_impressao) VALUES(@controle,@codigo,@proprietario,@inscricao,@ativo,@endereco,@numero,@complemento," +
+                    "condominio,imunidade,reside,isentocip,qtdeedif,mt,data_impressao,proprietario2) VALUES(@controle,@codigo,@proprietario,@inscricao,@ativo,@endereco,@numero,@complemento," +
                     "@bairro,@quadra,@lote,@cep,@areaterreno,@fracaoideal,@topografia,@pedologia,@situacao,@usoterreno,@benfeitoria,@categoria,@testada,@agrupamento," +
-                    "@somafator,@vvt,@vvc,@vvi,@iptu,@areapredial,@condominio,@imunidade,@reside,@isentocip,@qtdeedif,@mt,@data_impressao)", Parametros);
+                    "@somafator,@vvt,@vvc,@vvi,@iptu,@areapredial,@condominio,@imunidade,@reside,@isentocip,@qtdeedif,@mt,@data_impressao,@proprietario2)", Parametros);
 
                 try {
                     db.SaveChanges();
