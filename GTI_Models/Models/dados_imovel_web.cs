@@ -40,5 +40,7 @@ namespace GTI_Models.Models {
         public string Mt { get; set; }
         public DateTime Data_impressao { get; set; }
         public string Proprietario2 { get; set; }
+        public int Ano_Certidao { get; set; }
+        public int Numero_Certidao { get; set; }
     }
 }

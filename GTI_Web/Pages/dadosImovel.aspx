@@ -69,6 +69,23 @@
                     &nbsp;<asp:Button ID="btPrint" class="button1" runat="server" Text="Imprimir" OnClick="btPrint_Click" />
                     </td>
                 </tr>
+                                 <tr>
+                     <td>
+                         <br />
+                         <asp:Label ID="Label1" runat="server" Text="Validação da certidão:" ForeColor="Maroon"></asp:Label>
+                     </td>
+                     </tr>
+                 <tr>
+                     <td class="auto-style1" style="width: 134px">Código de validação..:</td>
+                
+                     <td>
+                         <asp:TextBox ID="Codigo" runat="server" Width="147px" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="20" ></asp:TextBox>
+                         &nbsp;
+                         <asp:Button ID="ValidarButton" class="button1" runat="server" Text="Validar" OnClick="ValidarButton_Click" />
+                     </td>
+                 </tr>
+
+
             </table>
             <br />
             

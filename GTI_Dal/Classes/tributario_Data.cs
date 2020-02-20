@@ -1349,6 +1349,13 @@ namespace GTI_Dal.Classes {
             }
         }
 
+        public dados_imovel_web Retorna_Ficha_Imovel_Web(int Ano, int Numero, int Codigo) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var Sql = (from p in db.Dados_Imovel where p.Ano_Certidao == Ano && p.Numero_Certidao == Numero && p.Codigo == Codigo select p).FirstOrDefault();
+                return Sql;
+            }
+        }
+
         public Certidao_valor_venal Retorna_Certidao_ValorVenal(int Ano, int Numero, int Codigo) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from p in db.Certidao_valor_venal where p.Ano == Ano && p.Numero == Numero && p.Codigo == Codigo select p).FirstOrDefault();

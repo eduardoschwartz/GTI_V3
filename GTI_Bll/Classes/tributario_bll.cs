@@ -1298,6 +1298,11 @@ namespace GTI_Bll.Classes {
             return reg;
         }
 
+        public dados_imovel_web Retorna_Ficha_Imovel_Web(int Ano, int Numero, int Codigo) {
+            Tributario_Data obj = new Tributario_Data(_connection);
+            dados_imovel_web reg = obj.Retorna_Ficha_Imovel_Web(Ano,Numero,Codigo);
+            return reg;
+        }
 
     }//end class
 }

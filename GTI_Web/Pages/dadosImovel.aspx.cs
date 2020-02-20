@@ -130,6 +130,8 @@ namespace GTI_Web.Pages {
             ImovelStruct _dados = imovel_Class.Dados_Imovel(Codigo);
 
             dados_imovel_web cert = new dados_imovel_web {
+                Ano_Certidao=_ano_certidao,
+                Numero_Certidao=_numero_certidao,
                 Agrupamento = 0,
                 Areaterreno = (decimal)_dados.Area_Terreno,
                 Ativo = _dados.Inativo == true ? "INATIVO" : "ATIVO",
@@ -236,5 +238,105 @@ namespace GTI_Web.Pages {
             }
         }
 
+        protected void ValidarButton_Click(object sender, EventArgs e) {
+            string sCod = Codigo.Text;
+            string sTipo = "";
+            lblMsg.Text = "";
+            int nPos = 0, nPos2 = 0, nCodigo = 0, nAno = 0, nNumero = 0;
+            if (sCod.Trim().Length < 8)
+                lblMsg.Text = "Código de validação inválido.";
+            else {
+                nPos = sCod.IndexOf("-");
+                if (nPos < 6)
+                    lblMsg.Text = "Código de validação inválido.";
+                else {
+                    nPos2 = sCod.IndexOf("/");
+                    if (nPos2 < 5 || nPos - nPos2 < 2)
+                        lblMsg.Text = "Código de validação inválido.";
+                    else {
+                        nCodigo = Convert.ToInt32(sCod.Substring(nPos2 + 1, nPos - nPos2 - 1));
+                        nAno = Convert.ToInt32(sCod.Substring(nPos2 - 4, 4));
+                        nNumero = Convert.ToInt32(sCod.Substring(0, 5));
+                        if (nAno < 2010 || nAno > DateTime.Now.Year + 1)
+                            lblMsg.Text = "Código de validação inválido.";
+                        else {
+                            sTipo = sCod.Substring(sCod.Length - 2, 2);
+                            if (sTipo == "FI") {
+                                dados_imovel_web dados = Valida_Certidao(nNumero, nAno, nCodigo);
+                                if (dados != null)
+                                    Exibe_Certidao(dados);
+                                else
+                                    lblMsg.Text = "Certidão não cadastrada.";
+                            } else {
+                                lblMsg.Text = "Código de validação inválido.";
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+        private dados_imovel_web Valida_Certidao(int Numero, int Ano, int Codigo) {
+            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
+            dados_imovel_web dados = tributario_Class.Retorna_Ficha_Imovel_Web(Ano, Numero, Codigo);
+            return dados;
+        }
+
+        private void Exibe_Certidao(dados_imovel_web cert) {
+            lblMsg.Text = "";
+
+            ReportDocument crystalReport = new ReportDocument();
+            crystalReport.Load(Server.MapPath("~/Report/Dados_Imovel.rpt"));
+            crystalReport.SetParameterValue("CODIGO", cert.Codigo.ToString("000000"));
+            crystalReport.SetParameterValue("INSCRICAO", cert.Inscricao);
+            crystalReport.SetParameterValue("SITUACAO", cert.Ativo);
+            crystalReport.SetParameterValue("MT", cert.Mt);
+            crystalReport.SetParameterValue("PROPRIETARIO", cert.Proprietario);
+            crystalReport.SetParameterValue("CONTROLE", cert.Controle);
+            crystalReport.SetParameterValue("PROPRIETARIO2", cert.Proprietario2);
+            crystalReport.SetParameterValue("ENDERECO", cert.Endereco);
+            crystalReport.SetParameterValue("NUMERO", cert.Numero);
+            crystalReport.SetParameterValue("COMPLEMENTO", cert.Complemento);
+            crystalReport.SetParameterValue("BAIRRO", cert.Bairro);
+            crystalReport.SetParameterValue("CEP", cert.Cep);
+            crystalReport.SetParameterValue("QUADRA", cert.Quadra);
+            crystalReport.SetParameterValue("LOTE", cert.Lote);
+            crystalReport.SetParameterValue("AREATERRENO", cert.Areaterreno);
+            crystalReport.SetParameterValue("FRACAO", cert.Fracaoideal);
+            crystalReport.SetParameterValue("TESTADA", cert.Testada);
+            crystalReport.SetParameterValue("AGRUPAMENTO", cert.Agrupamento);
+            crystalReport.SetParameterValue("FATORES", cert.Somafator);
+            crystalReport.SetParameterValue("AREAPREDIAL", cert.Areapredial);
+            crystalReport.SetParameterValue("IMUNIDADE", cert.Imunidade);
+            crystalReport.SetParameterValue("RESIDE", cert.Reside);
+            crystalReport.SetParameterValue("QTDEEDIF", cert.Qtdeedif);
+            crystalReport.SetParameterValue("ISENTOCIP", cert.Isentocip);
+            crystalReport.SetParameterValue("SITUACAO2", cert.Situacao);
+            crystalReport.SetParameterValue("PEDOLOGIA", cert.Pedologia);
+            crystalReport.SetParameterValue("TOPOGRAFIA", cert.Topografia);
+            crystalReport.SetParameterValue("CATEGORIA", cert.Categoria);
+            crystalReport.SetParameterValue("BENFEITORIA", cert.Benfeitoria);
+            crystalReport.SetParameterValue("USOTERRENO", cert.Usoterreno);
+            crystalReport.SetParameterValue("CONDOMINIO", cert.Condominio);
+            crystalReport.SetParameterValue("VVT", cert.Vvt);
+            crystalReport.SetParameterValue("VVI", cert.Vvi);
+            crystalReport.SetParameterValue("VVP", cert.Vvc);
+            crystalReport.SetParameterValue("IPTU", cert.Iptu);
+
+
+            HttpContext.Current.Response.Buffer = false;
+            HttpContext.Current.Response.ClearContent();
+            HttpContext.Current.Response.ClearHeaders();
+
+            try {
+                crystalReport.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, HttpContext.Current.Response, true, "comp" + cert.Numero_Certidao.ToString() + cert.Ano_Certidao.ToString() + "_FI");
+            } catch {
+            } finally {
+                crystalReport.Close();
+                crystalReport.Dispose();
+            }
+        }
+               
     }
 }
