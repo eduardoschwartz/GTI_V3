@@ -1184,6 +1184,10 @@ namespace GTI_Dal.Classes {
                                     else {
                                         if (tipo_certidao == TipoCertidao.Debito_Doc)
                                             Sql = Sql.Where(c => c.Nomeparam == "CDB_DOC");
+                                        else{
+                                            if (tipo_certidao == TipoCertidao.Ficha_Imovel)
+                                                Sql = Sql.Where(c => c.Nomeparam == "CET_FIM");
+                                        }
                                     }
                                 }
                             }
@@ -1230,6 +1234,10 @@ namespace GTI_Dal.Classes {
                                     else {
                                         if (tipo_certidao == TipoCertidao.Debito_Doc)
                                             p = db.Parametros.First(i => i.Nomeparam == "CDB_DOC");
+                                        else {
+                                            if (tipo_certidao == TipoCertidao.Ficha_Imovel)
+                                                p = db.Parametros.First(i => i.Nomeparam == "CET_FIM");
+                                        }
                                     }
                                 }
                             }

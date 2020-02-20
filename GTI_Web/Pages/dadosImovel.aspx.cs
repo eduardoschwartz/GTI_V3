@@ -122,22 +122,24 @@ namespace GTI_Web.Pages {
             crystalReport.Load(Server.MapPath("~/Report/Dados_Imovel.rpt"));
 
             Imovel_bll imovel_Class = new Imovel_bll("GTIconnection");
+            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
+            int _numero_certidao = tributario_Class.Retorna_Codigo_Certidao(modelCore.TipoCertidao.Ficha_Imovel);
+            int _ano_certidao = DateTime.Now.Year;
+            string _controle = _numero_certidao.ToString("00000") + _ano_certidao.ToString("0000") + "/" + Codigo.ToString() + "-FI";
 
             ImovelStruct _dados = imovel_Class.Dados_Imovel(Codigo);
-            string _ativo = "SIM";
-            string _controle = "XXX";
 
             dados_imovel_web cert = new dados_imovel_web {
                 Agrupamento = 0,
                 Areaterreno = (decimal)_dados.Area_Terreno,
-                Ativo = _ativo,
+                Ativo = _dados.Inativo == true ? "INATIVO" : "ATIVO",
                 Bairro = _dados.NomeBairro,
                 Benfeitoria = _dados.Benfeitoria_Nome,
                 Categoria = _dados.Categoria_Nome,
                 Cep = _dados.Cep,
                 Codigo = Codigo,
                 Complemento = _dados.Complemento,
-                Condominio = _dados.NomeCondominio,
+                Condominio = _dados.NomeCondominio=="NÃO CADASTRADO"?"":_dados.NomeCondominio,
                 Controle = _controle,
                 Endereco = _dados.NomeLogradouro,
                 Imunidade = _dados.Imunidade == true ? "Sim" : "Não",
@@ -158,25 +160,27 @@ namespace GTI_Web.Pages {
 
             List<ProprietarioStruct> _prop = imovel_Class.Lista_Proprietario(Codigo,false);
             foreach (ProprietarioStruct item in _prop) {
-                if(item.Principal)
-                    cert.Proprietario = _prop[0].Nome;
+                if(item.Tipo=="P" && item.Principal)
+                    cert.Proprietario = item.Nome;
                 else {
-                    cert.Proprietario2 += _prop[0].Nome + "; ";
+                    cert.Proprietario2 += item.Nome + "; ";
                 }
             }
 
-            
+            List<AreaStruct> _areas = imovel_Class.Lista_Area(Codigo);
+            cert.Qtdeedif = _areas.Count;
 
-            Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
+            
             SpCalculo _calculo = tributario_Class.Calculo_IPTU(Codigo, DateTime.Now.Year);
             cert.Vvc = _calculo.Vvp;
             cert.Vvt = _calculo.Vvt;
             cert.Vvi = _calculo.Vvi;
             cert.Iptu = _calculo.Valoriptu==0?_calculo.Valoritu:_calculo.Valoriptu;
             cert.Testada = _calculo.Testadaprinc;
-            cert.Agrupamento = _calculo.Agrupamento;
+            cert.Agrupamento = _calculo.Valoragrupamento;
             cert.Areapredial = _calculo.Areapredial;
             cert.Fracaoideal = _calculo.Fracao;
+            cert.Somafator =  _calculo.Fgle * _calculo.Fped * _calculo.Fpro * _calculo.Fsit * _calculo.Ftop;
 
             Exception ex = imovel_Class.Insert_Dados_Imovel(cert);
             if (ex != null) {
