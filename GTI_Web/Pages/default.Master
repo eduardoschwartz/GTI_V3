@@ -16,17 +16,11 @@
             width: 434px;
         }
         
-     
-        
-       
-        
-     
-        
         </style>
         
     
 </head>
-<body>
+<body id = "pagebody" runat="server">
 
 
     <div id="outer">

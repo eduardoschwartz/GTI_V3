@@ -8,10 +8,19 @@
 //------------------------------------------------------------------------------
 
 namespace GTI_Web.Pages {
-    
-    
+
+
     public partial class _default {
-        
+
+        /// <summary>
+        /// pagebody control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pagebody;
+
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -20,7 +29,7 @@ namespace GTI_Web.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// MenuContentPlaceHolder control.
         /// </summary>

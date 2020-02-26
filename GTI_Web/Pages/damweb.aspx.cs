@@ -737,14 +737,11 @@ namespace UIWeb.Pages {
             }
             int nSid = tributario_Class.Insert_Boleto_DAM(lstExtrato, NumDoc, DateTime.ParseExact(sDataDAM, "dd/MM/yyyy", null));
             if (nSid > 0) {
-                
+
                 Session["sid"] = nSid;
-//                if (Convert.ToInt32(txtCod.Text) == 38 || Convert.ToInt32(txtCod.Text) == 118777 || Convert.ToInt32(txtCod.Text) == 500000) {
-                    Response.Redirect("~/Pages/damwebend2.aspx");
-                    ShowResult(false);
-                    Response.Write("<script>window.open('damwebend2.aspx','_blank');</script>");
-  //              } else
-    //                Response.Redirect("~/Pages/damwebend.aspx");
+                Response.Redirect("~/Pages/damwebend2.aspx");
+                ShowResult(false);
+                Response.Write("<script>window.open('damwebend2.aspx','_blank');</script>");
             }
         }
 

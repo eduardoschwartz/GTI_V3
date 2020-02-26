@@ -126,6 +126,7 @@
     <Content Include="Pages\dadosImovel.aspx" />
     <Content Include="Pages\damweb.aspx" />
     <Content Include="Pages\damwebend2.aspx" />
+    <Content Include="Pages\damwebend3.aspx" />
     <Content Include="Pages\detalhe_boleto.aspx" />
     <Content Include="Pages\envioDeca.aspx" />
     <Content Include="Pages\gticertidao.aspx" />
@@ -319,6 +320,13 @@
     </Compile>
     <Compile Include="Pages\damwebend2.aspx.designer.cs">
       <DependentUpon>damwebend2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\damwebend3.aspx.cs">
+      <DependentUpon>damwebend3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\damwebend3.aspx.designer.cs">
+      <DependentUpon>damwebend3.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\default.Master.cs">
       <DependentUpon>default.Master</DependentUpon>

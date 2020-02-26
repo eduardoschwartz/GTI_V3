@@ -94,7 +94,6 @@ namespace GTI_Web.Pages {
                                 _bairro = reg.NomeBairroR;
                                 _cidade = reg.NomeCidadeR + "/" + reg.UfR;
                                 _uf = reg.UfR;
-
                             } else {
                                 _endereco = reg.EnderecoC + ", " + reg.NumeroC + " " + reg.ComplementoC;
                                 _endereco_rua = reg.EnderecoC;
@@ -105,7 +104,7 @@ namespace GTI_Web.Pages {
                                 _uf = reg.UfC;
                             }
                             _nome = reg.Nome;
-                            if (reg.Cnpj != null)
+                            if (!string.IsNullOrWhiteSpace(reg.Cnpj))
                                 _cpfcnpj = reg.Cnpj;
                             else
                                 _cpfcnpj = reg.Cpf;    
@@ -198,7 +197,7 @@ namespace GTI_Web.Pages {
                                     ficha.Endereco = _endereco.Length > 40 ? _endereco.Substring(0, 40) : _endereco;
                                     ficha.Bairro = _bairro.Length > 15 ? _bairro.Substring(0, 15) : _bairro;
                                     ficha.Cidade = _cidade.Length > 30 ? _cidade.Substring(0, 30) : _cidade;
-                                    ficha.Cep = _cep;
+                                    ficha.Cep = _cep??"14870000";
                                     ficha.Cpf = _cpfcnpj;
                                     ficha.Numero_documento = _novo_documento;
                                     ficha.Data_vencimento = Convert.ToDateTime(item.Data_Vencimento);
