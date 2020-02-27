@@ -59,7 +59,7 @@
                      Número do Processo:
                         <br />
 &nbsp;<span style="color: #009900">(Ex: 1234-5/2020)</span></td> <td class="panel" style="height: 40px">&nbsp;&nbsp;
-                            <asp:TextBox ID="txtProcesso" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="11" Width="108px" TabIndex="1" ></asp:TextBox> 
+                            <asp:TextBox ID="txtProcesso" runat="server" BorderColor="#3399FF" BorderStyle="Solid" BorderWidth="1px" MaxLength="12" Width="108px" TabIndex="1" ></asp:TextBox> 
                         &nbsp;</td>
 
                  </tr>

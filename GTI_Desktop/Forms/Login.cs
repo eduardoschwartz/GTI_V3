@@ -102,7 +102,7 @@ namespace GTI_Desktop.Forms {
             m_aeroEnabled = false;
             this.Refresh();
             InitializeComponent();
-            this.Size = new Size(this.Size.Width, 190);
+            Size = new Size(Size.Width, 190);
             OriginSize = this.Size.Height;
             LoginToolStrip.Renderer = new MySR();
             txtServer.Text = GTI_Desktop.Properties.Settings.Default.ServerName;
