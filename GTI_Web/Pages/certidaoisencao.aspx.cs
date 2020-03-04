@@ -31,13 +31,16 @@ namespace GTI_Web.Pages {
                     if (_dadosImovel.ResideImovel == false)
                         lblMsg.Text = "Isenção válida apenas proprietários residentes no imóvel.";
                     else {
-
-
                         if (txtimgcode.Text != Session["randomStr"].ToString())
                             lblMsg.Text = "Código da imagem inválido";
-                        else
-                            PrintReport(Codigo);
-                    }                }
+                        else {
+                            if (_dadosImovel.Inativo == true)
+                                lblMsg.Text = "O imóvel esta inativo!";
+                            else
+                                PrintReport(Codigo);
+                        }
+                    }
+                }
             }
         }
 

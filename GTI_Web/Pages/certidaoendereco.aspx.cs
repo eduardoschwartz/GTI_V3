@@ -29,8 +29,13 @@ namespace GTI_Web.Pages {
                 else {
                     if (txtimgcode.Text != Session["randomStr"].ToString())
                         lblMsg.Text = "Código da imagem inválido";
-                    else
-                        PrintReport(Codigo);
+                    else {
+                        ImovelStruct _imovel = imovel_Class.Dados_Imovel(Codigo);
+                        if (_imovel.Inativo == true)
+                            lblMsg.Text = "O imóvel esta inativo!";
+                        else
+                            PrintReport(Codigo);
+                    }
                 }
             }
         }

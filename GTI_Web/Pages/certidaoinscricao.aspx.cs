@@ -58,8 +58,15 @@ namespace GTI_Web.Pages {
                     else {
                         if (ExtratoCheckBox.Checked && optCNPJ.Checked)
                             lblMsg.Text = "Resumo de pagamento apenas para pessoas físicas.";
-                        else
-                            PrintReport(Codigo, TipoCadastro.Empresa);
+                        else {
+                            Imovel_bll imovel_Class = new Imovel_bll("GTIconnection");
+                            ImovelStruct _imovel = imovel_Class.Dados_Imovel(Codigo);
+                            if (_imovel.Inativo == true)
+                                lblMsg.Text = "O imóvel esta inativo!";
+                            else
+                                PrintReport(Codigo, TipoCadastro.Imovel);
+
+                        }
                     }
                 } else {
                     lblMsg.Text = "Selecione uma inscrição municipal da lista.";
