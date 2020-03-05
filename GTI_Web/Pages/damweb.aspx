@@ -267,6 +267,10 @@
                                     <HeaderStyle HorizontalAlign="Right" Font-Size="Small" Font-Bold="false"/>
                                     <ItemStyle Width="70px" />
                                 </asp:BoundField>
+                                <asp:BoundField DataField="Envprot" HeaderStyle-HorizontalAlign="Center" HeaderText="Env.Prot." ItemStyle-HorizontalAlign="Center"  ItemStyle-ForeColor="#3A8DCC" ItemStyle-Font-Names="Arial" ItemStyle-Font-Size="X-Small">
+                                    <HeaderStyle HorizontalAlign="Right" Font-Size="Small" Font-Bold="false"/>
+                                    <ItemStyle Width="70px" />
+                                </asp:BoundField>
                                 
                             </Columns>
                             <FooterStyle BackColor="White" ForeColor="#000066" />

@@ -449,15 +449,17 @@ namespace UIWeb.Pages {
             }
 
             DataTable dt = new DataTable();
-            dt.Columns.AddRange(new DataColumn[13] { new DataColumn("Exercicio"), new DataColumn("Lancamento"), new DataColumn("Sequencia"),
+            dt.Columns.AddRange(new DataColumn[14] { new DataColumn("Exercicio"), new DataColumn("Lancamento"), new DataColumn("Sequencia"),
                                 new DataColumn("Parcela"),new DataColumn("Complemento"),new DataColumn("DtVencimento"),new DataColumn("VlPrincipal"),
-                                new DataColumn("VlJuros"),new DataColumn("VlMulta"),new DataColumn("VlCorrecao"),new DataColumn("VlTotal"),new DataColumn("DtAjuiza"),new DataColumn("Protesto")});
+                                new DataColumn("VlJuros"),new DataColumn("VlMulta"),new DataColumn("VlCorrecao"),new DataColumn("VlTotal"),new DataColumn("DtAjuiza"),
+                                new DataColumn("Protesto"),new DataColumn("EnvProt")});
 
             foreach (var item in debitos2) {
                 dt.Rows.Add(item.Ano_Exercicio.ToString(), item.Codigo_Lancamento.ToString("000") + "-" + item.Descricao_Lancamento.ToString(), item.Sequencia_Lancamento.ToString(),
                             item.Numero_Parcela.ToString(), item.Complemento.ToString(), Convert.ToDateTime(item.Data_Vencimento).ToString("dd/MM/yyyy"),
                             item.Soma_Principal.ToString("#0.00"), item.Soma_Juros.ToString("#0.00"), item.Soma_Multa.ToString("#0.00"),
-                            item.Soma_Correcao.ToString("#0.00"), item.Soma_Total.ToString("#0.00"), item.Data_Ajuizamento == DateTime.MinValue || item.Data_Ajuizamento==null? "NÃO" : "SIM", item.Codigo_Situacao ==38| item.Codigo_Situacao == 39 ? "SIM" : "NÃO");
+                            item.Soma_Correcao.ToString("#0.00"), item.Soma_Total.ToString("#0.00"), item.Data_Ajuizamento == DateTime.MinValue || item.Data_Ajuizamento==null? "NÃO" : "SIM",
+                            item.Codigo_Situacao ==38 ? "SIM" : "NÃO", item.Codigo_Situacao == 39 ? "SIM" : "NÃO");
                 nSomaPrincipal += item.Soma_Principal;
                 nSomaJuros += item.Soma_Juros;
                 nSomaMulta += item.Soma_Multa;
@@ -489,6 +491,7 @@ namespace UIWeb.Pages {
             bool bAnoAtual = false;
             bool bAnoAnterior = false;
             bool bFind = false;
+            bool bEnvProt = false;
             decimal _valor_ajuizado = 0, _valor_Honorario = 0;
 
             divModal.Visible = false;
@@ -527,15 +530,25 @@ namespace UIWeb.Pages {
                                     return;
                                 }
                             } else {
-                                if (row.Cells[12].Text == "SIM" && row.Cells[13].Text.Substring(0, 1) == "N") {
-                                    bFind = true;
+                                //if (row.Cells[12].Text == "SIM" && row.Cells[13].Text.Substring(0, 1) == "N") {
+                                if (row.Cells[12].Text == "SIM" ) {
+                                        bFind = true;
                                     _valor_ajuizado += Convert.ToDecimal(row.Cells[11].Text);
                                 }
+                            }
+                            if (row.Cells[14].Text == "SIM") {
+                                bEnvProt = true;
                             }
                         }
                     }
                 }
             }
+
+            if (bEnvProt) {
+                lblMsg2.Text = "Débitos enviados para protesto não podem ser pagos através de DAM";
+                return;
+            }
+
 
             if (bFind) {
                 _valor_Honorario = (_valor_ajuizado * (decimal)0.1);
@@ -765,20 +778,28 @@ namespace UIWeb.Pages {
 
         protected void btnOpenModal_Click(object sender, EventArgs e) {
             bool _find = false;
+            bool _envProt = false;
             foreach (GridViewRow row in grdMain.Rows) {
                 if (row.RowType == DataControlRowType.DataRow) {
                     if ((row.FindControl("chkRow") as CheckBox).Checked) {
                         if (row.Cells[12].Text.Substring(0, 1) == "S" || row.Cells[13].Text.Substring(0,1) == "S") {
                             bGerado = false;
                             _find = true;
+//                            break;
+                        }
+                        if (row.Cells[14].Text.Substring(0, 1) == "S") {
+                            _envProt = true;
                             break;
                         }
                     }
                 }
             }
-            if(_find)
-                divModal.Visible = true;
-            else 
+            if (_find) {
+                if(_envProt)
+                    btPrint_Click(sender, e);
+                else
+                    divModal.Visible = true;
+            } else
                 btPrint_Click(sender, e);
         }
 
