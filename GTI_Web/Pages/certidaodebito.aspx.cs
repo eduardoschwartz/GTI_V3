@@ -51,11 +51,13 @@ namespace GTI_Web.Pages {
                                 lblMsg.Text = "Código da imagem inválido";
                             else {
                                 string Regime = empresa_Class.RegimeEmpresa(Codigo);
+                                EmpresaStruct _dados = empresa_Class.Retorna_Empresa(Codigo);
+
                                 if (Regime == "V") {
                                     //Verifica competência en
                                     Tributario_bll tributario_Class = new Tributario_bll("GTIconnection");
                                     Eicon_bll eicon_Class = new Eicon_bll("GTIEicon");
-                                    int _holes = tributario_Class.Competencias_Nao_Encerradas(eicon_Class.Resumo_CompetenciaISS(Codigo));
+                                    int _holes = tributario_Class.Competencias_Nao_Encerradas(eicon_Class.Resumo_CompetenciaISS(Codigo,_dados.Data_Encerramento));
                                     if (_holes == 0) {
                                         lblMsg.Text = "";
                                         PrintReport(Codigo, TipoCadastro.Empresa);

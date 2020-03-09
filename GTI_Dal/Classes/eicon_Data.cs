@@ -13,7 +13,7 @@ namespace GTI_Dal.Classes {
             _connection = sConnection;
         }
 
-        public List<CompetenciaISS> Resumo_CompetenciaISS(int Codigo) {
+        public List<CompetenciaISS> Resumo_CompetenciaISS(int Codigo,DateTime? Data_Encerramento) {
             List<CompetenciaISS> TabelaMes = new List<CompetenciaISS>();
             using (Eicon_Context db = new Eicon_Context(_connection)) {
                 decimal _mes_inicial = db.Tb_inter_encerramento_giss.OrderBy(c => c.Ano_competencia).ThenBy(c => c.Mes_competencia).Where(c => c.Num_cadastro == Codigo).Select(c => c.Mes_competencia).FirstOrDefault();
@@ -32,9 +32,16 @@ namespace GTI_Dal.Classes {
 
                 //DateTime _data_30dias = DateTime.Now.AddDays(-31);
                 DateTime _data_30dias = DateTime.Now.AddDays(-40);
+                int _mes_final, _ano_final;
 
-                int _mes_final = _data_30dias.Month;
-                int _ano_final = _data_30dias.Year;
+                if (Data_Encerramento == null) {
+                     _mes_final = _data_30dias.Month;
+                     _ano_final = _data_30dias.Year;
+                } else {
+                     _mes_final = Convert.ToDateTime(Data_Encerramento).Month;
+                     _ano_final = Convert.ToDateTime(Data_Encerramento).Year;
+                }
+
 
                 decimal _mes_atual = _mes_inicial, _ano_atual = _ano_inicial;
 

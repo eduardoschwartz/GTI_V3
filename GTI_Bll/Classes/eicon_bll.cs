@@ -17,9 +17,9 @@ namespace GTI_Bll.Classes {
         /// </summary>
         /// <param name="Codigo"></param>
         /// <returns></returns>
-        public List<CompetenciaISS> Resumo_CompetenciaISS(int Codigo) {
+        public List<CompetenciaISS> Resumo_CompetenciaISS(int Codigo,DateTime? Data_Encerramento) {
             Eicon_Data obj = new Eicon_Data(_connection);
-            return obj.Resumo_CompetenciaISS(Codigo);
+            return obj.Resumo_CompetenciaISS(Codigo,Data_Encerramento);
         }
 
 
