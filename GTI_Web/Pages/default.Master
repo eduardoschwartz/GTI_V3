@@ -40,9 +40,24 @@
 
                 </asp:ContentPlaceHolder>
             </div>
+
             <div id="footer"   >
-                 <a href="gtiMenu.aspx">Retornar ao menu principal</a> 
+                 <a href="gtiMenu.aspx">Retornar ao menu principal</a>
+                 <br />
+                 <br />
             </div>
+            <br />
+            <div >
+                 
+                 <asp:Label ID="Logado" runat="server" Text="Logado como: "></asp:Label>
+                <asp:Label ID="lblLogin" runat="server" Text="Visitante"></asp:Label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 <asp:LinkButton ID="lblLogon" runat="server" OnClick="lblLogon_Click">Efetuar Login</asp:LinkButton>
+&nbsp;
+                 <asp:LinkButton ID="lblLogOff" runat="server" OnClick="lblLogOut_Click">Sair</asp:LinkButton>
+            </div>
+
+
 
         
         </form>

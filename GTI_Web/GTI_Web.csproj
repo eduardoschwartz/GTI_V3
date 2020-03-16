@@ -454,6 +454,7 @@
     <Compile Include="Pages\SegundaViaVSend.aspx.designer.cs">
       <DependentUpon>SegundaViaVSend.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\sistema_bll.cs" />
     <Compile Include="Pages\situacao_pagto.aspx.cs">
       <DependentUpon>situacao_pagto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -663,6 +664,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="TAcesso.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GTI_Bll\GTI_Bll.csproj">

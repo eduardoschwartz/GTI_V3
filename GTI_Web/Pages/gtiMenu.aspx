@@ -32,6 +32,15 @@
                 <li><a href="situacao_pagto.aspx?d=gti" style="width: 600px">Situação dos débitos ref. a ISS Fixo, Taxa de Licença e Vig.Sanitária.</a></li>
                 <%--<li><a href="LoginFunc.aspx?d=gti" style="width: 600px">Área restrita do usuário.</a></li>--%>
             </ul>
+            <br />
+            <br />
+            <h4>Serviços reservados</h4>
+            <br />
+            <br />
+           
+            <ul>
+                <li><a href="tramite_processo.aspx?d=gti" style="width: 600px">Tramitação de processos</a></li>
+            </ul>
         </div>
 
 </asp:Content>

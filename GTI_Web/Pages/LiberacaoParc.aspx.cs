@@ -151,7 +151,7 @@ namespace GTI_Web.Pages {
                                         }
                                     }
                                     if (!_find) {
-                                        lblMsg.Text = "Libertação do carnê somente após o pagamento da primeira parcela.";
+                                        lblMsg.Text = "Liberação do carnê somente após o pagamento da primeira parcela.";
                                         return;
                                     }
                                 }

@@ -361,7 +361,7 @@ namespace GTI_Dal.Classes {
 
         public string Retorna_User_Password(string login) {
             using (GTI_Context db = new GTI_Context(_connection)) {
-                string Sql = (from u in db.Usuario where u.Nomelogin == login select u.Senha2).FirstOrDefault();
+                string Sql = (from u in db.Usuario where u.Nomelogin == login select u.Senha).FirstOrDefault();
                 return Sql;
             }
         }

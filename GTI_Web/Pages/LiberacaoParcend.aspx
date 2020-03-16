@@ -19,8 +19,7 @@
                 <div style="color: #3a8dcc;">
             &nbsp;<br />
            <br />
-           Clique em imprimir boleto para 
-           gerar o Boleto Bancário<br />
+           Clique em imprimir para gerar o carnê de parcelamento.<br />
            
             <br />
             <br />
@@ -88,7 +87,7 @@
             <br />
             
 
-           <asp:Button ID="btGerar" runat="server" Text="Imprimir Boleto" class="button1" OnClick="btPrint_Click"     />
+           <asp:Button ID="btGerar" runat="server" Text="Imprimir" class="button1" OnClick="btPrint_Click"     />
 <br /> <br />            
          <asp:Label ID="lblMsg" runat="server" ForeColor="Red" />
 
