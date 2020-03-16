@@ -30,19 +30,16 @@
                 <li><a href="dadosImovel.aspx?d=gti" style="width: 600px">Dados cadastrais de um imóvel</a></li>
                 <li><a href="cpv_pagto.aspx?d=gti" style="width: 600px">Impressão de comprovante de pagamento</a></li>
                 <li><a href="situacao_pagto.aspx?d=gti" style="width: 600px">Situação dos débitos ref. a ISS Fixo, Taxa de Licença e Vig.Sanitária.</a></li>
-                <%--<li><a href="LoginFunc.aspx?d=gti" style="width: 600px">Área restrita do usuário.</a></li>--%>
+                <li><a href="gtiMenu3.aspx" style="width: 600px">Área restrita do usuário.</a></li>
             </ul>
-            <br />
-            <br />
-            <h4>Serviços reservados</h4>
             <br />
             <br />
            
-            <ul>
-                <li><a href="tramite_processo.aspx?d=gti" style="width: 600px">Tramitação de processos</a></li>
-            </ul>
+           
         </div>
 
+
+ 
 </asp:Content>
 
 

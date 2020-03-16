@@ -4,17 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using UIWeb;
 
 namespace GTI_Web.Pages {
-    public partial class _default : System.Web.UI.MasterPage {
+    public partial class gtiMenu3 : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
+            if (Session["pUserId"] == null) {
+                Response.Redirect("LoginFunc.aspx");
+            }
         }
-
-        protected void lblLogOut_Click(object sender, EventArgs e) {
-            gtiCore.pUserId = 0;
-        }
-
-       
     }
 }

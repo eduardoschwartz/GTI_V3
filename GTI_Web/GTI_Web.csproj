@@ -132,6 +132,7 @@
     <Content Include="Pages\gticertidao.aspx" />
     <Content Include="Pages\gtiMenu.aspx" />
     <Content Include="Pages\gtiMenu2.aspx" />
+    <Content Include="Pages\gtiMenu3.aspx" />
     <Content Include="Pages\LiberacaoParc.aspx" />
     <Content Include="Pages\LiberacaoParcend.aspx" />
     <Content Include="Pages\LoginFunc.aspx" />
@@ -369,6 +370,13 @@
     </Compile>
     <Compile Include="Pages\gtiMenu2.aspx.designer.cs">
       <DependentUpon>gtiMenu2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\gtiMenu3.aspx.cs">
+      <DependentUpon>gtiMenu3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\gtiMenu3.aspx.designer.cs">
+      <DependentUpon>gtiMenu3.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\LiberacaoParc.aspx.cs">
       <DependentUpon>LiberacaoParc.aspx</DependentUpon>
