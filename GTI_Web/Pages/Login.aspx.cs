@@ -25,20 +25,23 @@ namespace GTI_Web.Pages {
                     sOldPwd = sistema_Class.Retorna_User_Password(sLogin);
                     UserId = sistema_Class.Retorna_User_LoginId(sLogin);
                     sName = sistema_Class.Retorna_User_FullName(UserId);
-                    if (sOldPwd == null)
+                    if (sOldPwd == null) {
                         lblMsg.Text = "Usuário/Senha inválido!";
-                    else {
+                        Session["pUserId"] = 0;
+                    } else {
                         gtiCore.pUserId = UserId;
                         gtiCore.pUserFullName = sName;
                         gtiCore.pUserLoginName = sLogin;
                         sOldPwd2 = tacesso_Class.DecryptGTI(sOldPwd);
-                        if (sOldPwd2 != sNewPwd)
+                        if (sOldPwd2 != sNewPwd) {
                             lblMsg.Text = "Usuário/Senha inválido!";
-                        else {
-                            Label lbl = Master.FindControl("lblLogin") as Label;
-                            lbl.Text = sName;
+                            Session["pUserId"] = 0;
+                        } else {
                             lblMsg.Text = "";
-
+                            Session["pUserId"] = UserId;
+                            //Label lbl = Master.FindControl("lblLogin") as Label;
+                            //lbl.Text = sName;
+                            Response.Redirect("gtiMenu3.aspx");
                         }
                     }
                 }

@@ -135,7 +135,7 @@
     <Content Include="Pages\gtiMenu3.aspx" />
     <Content Include="Pages\LiberacaoParc.aspx" />
     <Content Include="Pages\LiberacaoParcend.aspx" />
-    <Content Include="Pages\LoginFunc.aspx" />
+    <Content Include="Pages\Login.aspx" />
     <Content Include="Pages\readVRExml.aspx" />
     <Content Include="Pages\SegundaViaCIP.aspx" />
     <Content Include="Pages\SegundaViaCIPFim.aspx" />
@@ -146,6 +146,7 @@
     <Content Include="Pages\SegundaViaVS.aspx" />
     <Content Include="Pages\SegundaViaVSend.aspx" />
     <Content Include="Pages\situacao_pagto.aspx" />
+    <Content Include="Pages\Tramite_Processo.aspx" />
     <Content Include="Pages\Turing.aspx" />
     <Content Include="Pages\wait.aspx" />
     <Content Include="SqlServerTypes\readme.htm" />
@@ -392,12 +393,12 @@
     <Compile Include="Pages\LiberacaoParcend.aspx.designer.cs">
       <DependentUpon>LiberacaoParcend.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\LoginFunc.aspx.cs">
-      <DependentUpon>LoginFunc.aspx</DependentUpon>
+    <Compile Include="Pages\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\LoginFunc.aspx.designer.cs">
-      <DependentUpon>LoginFunc.aspx</DependentUpon>
+    <Compile Include="Pages\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\readVRExml.aspx.cs">
       <DependentUpon>readVRExml.aspx</DependentUpon>
@@ -469,6 +470,13 @@
     </Compile>
     <Compile Include="Pages\situacao_pagto.aspx.designer.cs">
       <DependentUpon>situacao_pagto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Tramite_Processo.aspx.cs">
+      <DependentUpon>Tramite_Processo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Tramite_Processo.aspx.designer.cs">
+      <DependentUpon>Tramite_Processo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Turing.aspx.cs">
       <DependentUpon>Turing.aspx</DependentUpon>

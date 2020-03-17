@@ -10,7 +10,7 @@
             <br />
            
             <ul>
-                <li><a href="cip.aspx?d=gti" style="width: 600px">Tramitação de processos</a></li>
+                <li><a href="Tramite_Processo.aspx?d=gti" style="width: 600px">Tramitação de processos</a></li>
             </ul>
         </div>
 </asp:Content>

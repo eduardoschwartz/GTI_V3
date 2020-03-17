@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Pages/default.Master" AutoEventWireup="true" CodeBehind="LoginFunc.aspx.cs" Inherits="GTI_Web.Pages.LoginFunc" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Pages/default.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="GTI_Web.Pages.LoginFunc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MenuContentPlaceHolder" runat="server">
     <link href="../css/gti.css" rel="stylesheet" />
 
@@ -37,7 +37,7 @@
             <br />
             
              
-         <asp:Label ID="lblMsg" runat="server" ForeColor="Red" />
+         <asp:Label  ID="lblMsg" runat="server" ForeColor="Red"  />
 
      </div>
         <br />

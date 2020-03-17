@@ -16,6 +16,10 @@
             width: 434px;
         }
         
+        .auto-style4 {
+            font-size: 8pt;
+        }
+        
         </style>
         
     
@@ -42,10 +46,17 @@
             </div>
 
             <div id="footer"   >
-                 <a href="gtiMenu.aspx">Retornar ao menu principal</a>
+                 <a href="gtiMenu.aspx" style="color:darkred;font-size:10pt">Retornar ao menu principal </a>
                  <br />
                  <br />
             </div>
+            <br />
+            <span class="auto-style4">
+            <br />
+            Logado como:</span>
+            <asp:Label ID="lblLogin" runat="server" Text="Visitante" EnableViewState="False" Font-Size="8pt" ForeColor="#3A8DCC"></asp:Label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:LinkButton ID="lblLogout" runat="server" OnClick="lblLogOut_Click" Font-Size="8pt" ForeColor="DarkRed">Sair</asp:LinkButton>
             <br />
 
             
