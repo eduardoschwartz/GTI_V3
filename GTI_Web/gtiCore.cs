@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Data;
 using System.ComponentModel;
 using System.Security.Cryptography;
+using GTI_Models.Models;
 
 namespace UIWeb {
     public static class gtiCore {
@@ -473,6 +474,21 @@ namespace UIWeb {
 
         }
 
+        public static ProcessoNumero Split_Processo_Numero(string Numero) {
+            bool res = int.TryParse(Numero.Substring(Numero.IndexOf("-") + 1, 1), out int _dv);
+            res = int.TryParse(Numero.Substring(0, Numero.IndexOf("-")), out int _numero);
+            res = int.TryParse((Numero.Substring(Numero.Length - 4)), out int _ano);
 
+            ProcessoNumero _reg = new ProcessoNumero {
+                Ano = _ano,
+                Numero = _numero,
+                Dv = _dv
+            };
+            return _reg;
+        }
     }//end class
+
+
+  
+
 }

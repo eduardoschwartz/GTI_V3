@@ -10,33 +10,51 @@
 namespace GTI_Web.Pages {
 
 
-    public partial class Tramite_Processo {
+    public partial class Tramite_Processo2 {
 
         /// <summary>
-        /// txtProcesso control.
+        /// DadosProcesso control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtProcesso;
+        protected global::System.Web.UI.WebControls.Table DadosProcesso;
 
         /// <summary>
-        /// ConsultarButton control.
+        /// Processo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ConsultarButton;
+        protected global::System.Web.UI.WebControls.TableCell Processo;
 
         /// <summary>
-        /// lblMsg control.
+        /// DataAbertura control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMsg;
+        protected global::System.Web.UI.WebControls.TableCell DataAbertura;
+
+        /// <summary>
+        /// Requerente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Requerente;
+
+        /// <summary>
+        /// Assunto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Assunto;
     }
 }
