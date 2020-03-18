@@ -75,7 +75,7 @@ namespace GTI_Dal.Classes {
 
         public List<Despacho> Lista_Despacho() {
             using (GTI_Context db = new GTI_Context(_connection)) {
-                var Sql = (from c in db.Despacho select c);
+                var Sql = (from c in db.Despacho orderby c.Descricao select c);
                 return Sql.ToList();
             }
         }
@@ -1120,6 +1120,47 @@ Inicio:;
             }
         }
 
+        public bool Existe_Tramite(int Ano, int Numero,int Seq) {
+            bool bValido = false;
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                var existingReg = db.Tramitacao.Count(a => a.Ano == Ano && a.Numero == Numero && a.Seq == Seq);
+                if (existingReg > 0)
+                    bValido = true;
+            }
+            return bValido;
+        }
+
+        public Exception Receber_Processo(Tramitacao Reg) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                if (Existe_Tramite(Reg.Ano, Reg.Numero, Reg.Seq)) {
+                    Tramitacao t = db.Tramitacao.First(i => i.Ano == Reg.Ano && i.Numero == Reg.Numero && i.Seq == Reg.Seq);
+                    db.Tramitacao.Remove(t);
+                    db.SaveChanges();
+                }
+
+                try {
+                    db.Tramitacao.Add(Reg);
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+            }
+            return null;
+        }
+
+        public Tramitacao Dados_Tramite(int Ano,int Numero,int Seq) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                Tramitacao Sql = (from t in db.Tramitacao where t.Ano == Ano && t.Numero==Numero && t.Seq==Seq select t).FirstOrDefault();
+                return Sql;
+            }
+        }
+
+        public int Retorna_CCusto_TramiteCC(int Ano, int Numero, int Seq) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                int Sql = (from t in db.Tramitacaocc where t.Ano == Ano && t.Numero == Numero && t.Seq == Seq select t.Ccusto).FirstOrDefault();
+                return Sql;
+            }
+        }
 
     }
 }

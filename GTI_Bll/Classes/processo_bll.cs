@@ -500,6 +500,26 @@ namespace GTI_Bll.Classes {
             return obj.Lista_Processo_Parcelamento_Header(Codigo);
         }
 
+        public bool Existe_Tramite(int Ano, int Numero, int Seq) {
+            Processo_Data obj = new Processo_Data(_connection);
+            return obj.Existe_Tramite(Ano,Numero,Seq);
+        }
+
+        public Exception Receber_Processo(Tramitacao Reg) {
+            Processo_Data obj = new Processo_Data(_connection);
+            Exception ex = obj.Receber_Processo(Reg);
+            return ex;
+        }
+
+        public Tramitacao Dados_Tramite(int Ano, int Numero, int Seq) {
+            Processo_Data obj = new Processo_Data(_connection);
+            return obj.Dados_Tramite(Ano, Numero, Seq);
+        }
+
+        public int Retorna_CCusto_TramiteCC(int Ano, int Numero, int Seq) {
+            Processo_Data obj = new Processo_Data(_connection);
+            return obj.Retorna_CCusto_TramiteCC(Ano, Numero, Seq);
+        }
 
     }
 }
