@@ -14,12 +14,13 @@ namespace GTI_Web.Pages {
             if (Session["pUserId"] == null || (int)Session["pUserId"] == 0) {
                 Response.Redirect("Login.aspx");
             }
-
-              sNumProc = gtiCore.Decrypt(Request.QueryString["a"]);
-              Carrega_Grid();
+            lblMsg.Text = "";
+            sNumProc = gtiCore.Decrypt(Request.QueryString["a"]);
+            Carrega_Grid();
         }
 
         private void Carrega_Grid() {
+            lblMsg.Text = "";
             Processo_bll processo_Class = new Processo_bll("GTIconnection");
             try {
                 _numeroProcesso = gtiCore.Split_Processo_Numero(sNumProc);
@@ -51,10 +52,28 @@ namespace GTI_Web.Pages {
         }
 
         protected void grdMain_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e) {
-            string arg = Convert.ToString(e.CommandArgument);
+            short ccusto = 0;
             int Seq = Convert.ToInt32(e.CommandArgument) + 1;
             Processo_bll processo_Class = new Processo_bll("GTIconnection");
             if (e.CommandName == "cmdReceber") {
+                if (Seq > 1) {
+                    bool _existeTramiteAnterior = processo_Class.Existe_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq - 1);
+                    if (!_existeTramiteAnterior) {
+                        lblMsg.Text = "Local anterior não tramitado.";
+                        return;
+                    } else {
+                        Tramitacao linha = processo_Class.Dados_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq - 1);
+                        if (linha.Dataenvio == null) {
+                            lblMsg.Text = "Local anterior não tramitado.";
+                            return;
+                        }
+                    }
+                    bool _existeTramite = processo_Class.Existe_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq);
+                    if (_existeTramite) {
+                        lblMsg.Text = "Este local já foi tramitado.";
+                        return;
+                    }
+                }
                 List<Despacho> Lista = processo_Class.Lista_Despacho();
                 DespachoListReceber.DataSource = Lista;
                 DespachoListReceber.DataTextField = "Descricao";
@@ -65,19 +84,51 @@ namespace GTI_Web.Pages {
                 divModalReceber.Visible = true;
             } else {
                 if (e.CommandName == "cmdEnviar") {
+                    if (Seq > 1) {
+                        bool _existeTramite = processo_Class.Existe_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq);
+                        if (!_existeTramite) {
+                            lblMsg.Text = "Este processo ainda não foi recebido neste local.";
+                            return;
+                        } else {
+                            Tramitacao linha = processo_Class.Dados_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq );
+                            ccusto = (short)linha.Despacho;
+                            if (linha.Datahora == null) {
+                                lblMsg.Text = "Este processo ainda não foi recebido neste local.";
+                                return;
+                            } else {
+                                if (linha.Dataenvio != null) {
+                                    lblMsg.Text = "Processo já enviado deste local.";
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                    List<Despacho> Lista = processo_Class.Lista_Despacho();
+                    DespachoListEnviar.DataSource = Lista;
+                    DespachoListEnviar.DataTextField = "Descricao";
+                    DespachoListEnviar.DataValueField = "Codigo";
+                    DespachoListEnviar.DataBind();
+                    DespachoListEnviar.SelectedValue = ccusto.ToString();
+
+                    SeqEnviarLabel.Text = Seq.ToString();
+                    divModalEnviar.Visible = true;
                 }
             }
         }
 
         protected void btOkReceber_Click(object sender, EventArgs e) {
+            lblMsg.Text = "";
             Processo_bll processo_Class = new Processo_bll("GTIconnection");
             int ccusto;
-            bool _existeTramite = processo_Class.Existe_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Convert.ToInt32(SeqReceberLabel.Text));
+            int seq = Convert.ToInt32(SeqReceberLabel.Text);
+
+
+            bool _existeTramite = processo_Class.Existe_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, seq);
             if (_existeTramite) {
-                Tramitacao linha = processo_Class.Dados_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Convert.ToInt32(SeqReceberLabel.Text));
+                Tramitacao linha = processo_Class.Dados_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, seq);
                 ccusto = linha.Ccusto;
             } else {
-                ccusto = processo_Class.Retorna_CCusto_TramiteCC(_numeroProcesso.Ano, _numeroProcesso.Numero, Convert.ToInt32(SeqReceberLabel.Text));
+                ccusto = processo_Class.Retorna_CCusto_TramiteCC(_numeroProcesso.Ano, _numeroProcesso.Numero, seq);
             }
             Tramitacao reg = new Tramitacao() {
                 Ano = (short)_numeroProcesso.Ano,
@@ -86,7 +137,7 @@ namespace GTI_Web.Pages {
                 Despacho = Convert.ToInt16(DespachoListReceber.SelectedValue),
                 Datahora = DateTime.Now,
                 Userid=gtiCore.pUserId,
-                Ccusto = (short)ccusto
+                Ccusto=(short)ccusto
             };
             Exception ex = processo_Class.Receber_Processo(reg);
             if (ex != null)
@@ -95,11 +146,41 @@ namespace GTI_Web.Pages {
             Carrega_Grid();
         }
 
-  
         protected void CloseModalReceber(object sender, EventArgs e) {
             divModalReceber.Visible = false;
         }
 
-       
+        protected void btOkEnviar_Click(object sender, EventArgs e) {
+            lblMsgEnviar.Text = "";
+            if (DespachoListEnviar.SelectedIndex==0) {
+                lblMsgEnviar.Text = "Selecione um despacho!";
+                return;
+            }
+            lblMsg.Text = "";
+            Processo_bll processo_Class = new Processo_bll("GTIconnection");
+            int seq = Convert.ToInt32(SeqEnviarLabel.Text);
+
+            Tramitacao linha = processo_Class.Dados_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, seq);
+            Tramitacao reg = new Tramitacao() {
+                Ano = linha.Ano,
+                Numero = linha.Numero,
+                Seq = linha.Seq,
+                Despacho = Convert.ToInt16(DespachoListEnviar.SelectedValue),
+                Datahora = linha.Datahora,
+                Userid = linha.Userid,
+                Ccusto = linha.Ccusto,
+                Dataenvio=DateTime.Now,
+                Userid2=gtiCore.pUserId                
+            };
+            Exception ex = processo_Class.Enviar_Processo(reg);
+            if (ex != null)
+                throw ex.InnerException;
+            divModalEnviar.Visible = false;
+            Carrega_Grid();
+        }
+
+        protected void CloseModalEnviar(object sender, EventArgs e) {
+            divModalEnviar.Visible = false;
+        }
     }
 }

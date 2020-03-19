@@ -174,31 +174,54 @@
     </div>
 
     <br />
+    <asp:Label ID="lblMsg" runat="server" ForeColor="#CC0000" Text="lblMsg"></asp:Label>
 
     <div id="divModalReceber" runat="server" class="modalDialog" visible="false">
         <div class="auto-style5">
-            <%--            <asp:LinkButton ID="lbtnModalReceberClose" runat="server" CssClass="close" Text="X" OnClick="CloseModalReceber" />--%>
             <h4 style="color: red">Recebimento de Processo </h4>
             <asp:Label ID="SeqReceberLabel" runat="server" Text="0" Visible="False"></asp:Label>
             <br />
-            <br />  
-                        <strong>  
-            
-            <asp:Label ID="Label1" runat="server" Text="Selecione o despacho"></asp:Label>
             <br />
-            <br />
-            <asp:DropDownList ID="DespachoListReceber" runat="server" Height="16px" Width="405px">
-            </asp:DropDownList>
-            <br />
-            <br />
+            <strong>
+                <asp:Label ID="Label1" runat="server" Text="Selecione o despacho"></asp:Label>
+                <br />
+                <br />
+                <asp:DropDownList ID="DespachoListReceber" runat="server" Height="16px" Width="405px">
+                </asp:DropDownList>
+                <br />
+                <br />
             </strong>
             <br />
 
             <asp:Button ID="btOkReceber" runat="server" align="left" OnClick="btOkReceber_Click" Text="Aceitar" class="button1" Width="80px" />
-
-            &nbsp;<asp:Button ID="btCancelarReceber" runat="server"  colspan="2" OnClick="CloseModalReceber" Text="Cancelar" class="button1" Width="80px" Height="20px"  />
+            &nbsp;<asp:Button ID="btCancelarReceber" runat="server" colspan="2" OnClick="CloseModalReceber" Text="Cancelar" class="button1" Width="80px" Height="20px" />
         </div>
     </div>
 
 
-      </asp:Content>
+    <div id="divModalEnviar" runat="server" class="modalDialog" visible="false">
+        <div class="auto-style5">
+            <h4 style="color: red">Envio de Processo </h4>
+            <asp:Label ID="SeqEnviarLabel" runat="server" Text="0" Visible="False"></asp:Label>
+            <br />
+            <br />
+            <strong>
+                <asp:Label ID="Label3" runat="server" Text="Selecione o despacho"></asp:Label>
+                <br />
+                <br />
+                <asp:DropDownList ID="DespachoListEnviar" runat="server" Height="16px" Width="405px">
+                </asp:DropDownList>
+                <br />
+                <br />
+            </strong>
+          
+            <asp:Label ID="lblMsgEnviar" runat="server" ForeColor="#CC0000" Text=""></asp:Label>
+            <br />
+            <br />
+            <asp:Button ID="btOkEnviar" runat="server" align="left" OnClick="btOkEnviar_Click" Text="Aceitar" class="button1" Width="80px" />
+            &nbsp;<asp:Button ID="btCancelarEnviar" runat="server" colspan="2" OnClick="CloseModalEnviar" Text="Cancelar" class="button1" Width="80px" Height="20px" />
+        </div>
+    </div>
+
+
+</asp:Content>

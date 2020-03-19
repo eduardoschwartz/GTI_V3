@@ -1162,5 +1162,23 @@ Inicio:;
             }
         }
 
+        public Exception Enviar_Processo(Tramitacao reg) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                Tramitacao t = db.Tramitacao.First(i => i.Ano == reg.Ano && i.Numero == reg.Numero && i.Seq == reg.Seq);
+                
+                try {
+                    t.Dataenvio = reg.Dataenvio;
+                    t.Despacho = reg.Despacho;
+                    t.Userid2 = reg.Userid2;
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+            }
+            return null;
+        }
+
+
+
     }
 }

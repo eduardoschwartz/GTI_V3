@@ -226,6 +226,7 @@ namespace GTI_Bll.Classes {
             return null;
         }
 
+
         ///<summary> Retorna o dígito verificador de um número de processo.
         ///O dígito verificador é o mesmo para todos os números iguais, independente do ano do processo.
         ///</summary>
@@ -520,6 +521,14 @@ namespace GTI_Bll.Classes {
             Processo_Data obj = new Processo_Data(_connection);
             return obj.Retorna_CCusto_TramiteCC(Ano, Numero, Seq);
         }
+
+        public Exception Enviar_Processo(Tramitacao reg) {
+            Processo_Data obj = new Processo_Data(_connection);
+            Exception ex = obj.Enviar_Processo(reg);
+            return ex;
+        }
+
+
 
     }
 }
