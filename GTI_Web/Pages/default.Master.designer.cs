@@ -49,6 +49,15 @@ namespace GTI_Web.Pages {
         protected global::System.Web.UI.WebControls.Label lblLogin;
 
         /// <summary>
+        /// Par1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Par1;
+
+        /// <summary>
         /// lblLogout control.
         /// </summary>
         /// <remarks>
@@ -56,5 +65,14 @@ namespace GTI_Web.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lblLogout;
+
+        /// <summary>
+        /// Par2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Par2;
     }
 }

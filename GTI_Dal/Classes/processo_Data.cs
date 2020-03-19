@@ -1178,7 +1178,78 @@ Inicio:;
             return null;
         }
 
+        public Exception Move_Sequencia_Tramite_Acima(int Numero, int Ano, int Seq) {
 
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                try {
+                    db.Database.ExecuteSqlCommand("UPDATE TRAMITACAOCC SET SEQ=100 WHERE ANO=@Ano AND NUMERO=@Numero AND SEQ=@Seq",
+                        new SqlParameter("@Ano", Ano),
+                        new SqlParameter("@Numero", Numero),
+                        new SqlParameter("@Seq", Seq ));
+                } catch (Exception ex) {
+                    return ex;
+                }
+
+                try {
+                    db.Database.ExecuteSqlCommand("UPDATE TRAMITACAOCC SET SEQ=@Seq WHERE ANO=@Ano AND NUMERO=@Numero AND SEQ=@Seq2",
+                        new SqlParameter("@Ano", Ano),
+                        new SqlParameter("@Numero", Numero),
+                        new SqlParameter("@Seq", Seq),
+                        new SqlParameter("@Seq2", Seq - 1));
+                } catch (Exception ex) {
+                    return ex;
+                }
+
+                try {
+                    db.Database.ExecuteSqlCommand("UPDATE TRAMITACAOCC SET SEQ=@Seq WHERE ANO=@Ano AND NUMERO=@Numero AND SEQ=100",
+                        new SqlParameter("@Ano", Ano),
+                        new SqlParameter("@Numero", Numero),
+                        new SqlParameter("@Seq", Seq-1));
+                } catch (Exception ex) {
+                    return ex;
+                }
+            }
+            return null;
+        }
+
+        public Exception Move_Sequencia_Tramite_Abaixo(int Numero, int Ano, int Seq) {
+           
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                try {
+                    db.Database.ExecuteSqlCommand("UPDATE TRAMITACAOCC SET SEQ=100 WHERE ANO=@Ano AND NUMERO=@Numero AND SEQ=@Seq",
+                        new SqlParameter("@Ano", Ano),
+                        new SqlParameter("@Numero", Numero),
+                        new SqlParameter("@Seq", Seq+1));
+                } catch (Exception ex) {
+                    return ex;
+                }
+
+
+                try {
+                    db.Database.ExecuteSqlCommand("UPDATE TRAMITACAOCC SET SEQ=@Seq2 WHERE ANO=@Ano AND NUMERO=@Numero AND SEQ=@Seq",
+                        new SqlParameter("@Ano", Ano),
+                        new SqlParameter("@Numero", Numero),
+                        new SqlParameter("@Seq", Seq ),
+                        new SqlParameter("@Seq2", Seq + 1));
+                } catch (Exception ex) {
+                    return ex;
+                }
+
+                try {
+                    db.Database.ExecuteSqlCommand("UPDATE TRAMITACAOCC SET SEQ=@Seq WHERE ANO=@Ano AND NUMERO=@Numero AND SEQ=100",
+                        new SqlParameter("@Ano", Ano),
+                        new SqlParameter("@Numero", Numero),
+                        new SqlParameter("@Seq", Seq ));
+                } catch (Exception ex) {
+                    return ex;
+                }
+
+
+            }
+
+
+            return null;
+        }
 
     }
 }

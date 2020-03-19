@@ -3,6 +3,7 @@ using GTI_Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Web;
 using UIWeb;
 
 namespace GTI_Web.Pages {
@@ -15,7 +16,13 @@ namespace GTI_Web.Pages {
                 Response.Redirect("Login.aspx");
             }
             lblMsg.Text = "";
-            sNumProc = gtiCore.Decrypt(Request.QueryString["a"]);
+            try {
+                sNumProc = gtiCore.Decrypt(Request.QueryString["a"]);
+            } catch (Exception) {
+                Session["pUserId"] = 0;
+                Response.Redirect("Login.aspx");
+            }
+            
             Carrega_Grid();
         }
 
@@ -90,7 +97,7 @@ namespace GTI_Web.Pages {
                             lblMsg.Text = "Este processo ainda não foi recebido neste local.";
                             return;
                         } else {
-                            Tramitacao linha = processo_Class.Dados_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq );
+                            Tramitacao linha = processo_Class.Dados_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq);
                             ccusto = (short)linha.Despacho;
                             if (linha.Datahora == null) {
                                 lblMsg.Text = "Este processo ainda não foi recebido neste local.";
@@ -112,6 +119,16 @@ namespace GTI_Web.Pages {
 
                     SeqEnviarLabel.Text = Seq.ToString();
                     divModalEnviar.Visible = true;
+                } else {
+                    if (e.CommandName == "cmdAcima") {
+                        Exception ex = processo_Class.Move_Sequencia_Tramite_Acima(_numeroProcesso.Numero, _numeroProcesso.Ano, Seq);
+                        Response.Redirect(Request.RawUrl, true);
+                    } else {
+                        if (e.CommandName == "cmdAbaixo") {
+                            Exception ex = processo_Class.Move_Sequencia_Tramite_Abaixo(_numeroProcesso.Numero, _numeroProcesso.Ano, Seq);
+                            Response.Redirect(Request.RawUrl, true);
+                        }
+                    }
                 }
             }
         }

@@ -528,7 +528,17 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        public Exception Move_Sequencia_Tramite_Acima(int Numero, int Ano, int Seq) {
+            Processo_Data obj = new Processo_Data(_connection);
+            Exception ex = obj.Move_Sequencia_Tramite_Acima(Numero,Ano,Seq);
+            return ex;
+        }
 
+        public Exception Move_Sequencia_Tramite_Abaixo(int Numero, int Ano, int Seq) {
+            Processo_Data obj = new Processo_Data(_connection);
+            Exception ex = obj.Move_Sequencia_Tramite_Abaixo(Numero, Ano, Seq);
+            return ex;
+        }
 
     }
 }

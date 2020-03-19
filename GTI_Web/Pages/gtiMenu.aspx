@@ -30,7 +30,7 @@
                 <li><a href="dadosImovel.aspx?d=gti" style="width: 600px">Dados cadastrais de um imóvel</a></li>
                 <li><a href="cpv_pagto.aspx?d=gti" style="width: 600px">Impressão de comprovante de pagamento</a></li>
                 <li><a href="situacao_pagto.aspx?d=gti" style="width: 600px">Situação dos débitos ref. a ISS Fixo, Taxa de Licença e Vig.Sanitária.</a></li>
-                <li><a href="gtiMenu3.aspx" style="width: 600px">Área restrita do usuário.</a></li>
+                <li><a href="gtiMenu3.aspx" style="width: 600px">Área restrita do usuário</a></li>
             </ul>
             <br />
             <br />

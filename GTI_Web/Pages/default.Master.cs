@@ -7,9 +7,13 @@ namespace GTI_Web.Pages {
             if (gtiCore.pUserId == 0) {
                 lblLogin.Text = "Visitante";
                 lblLogout.Visible = false;
+                Par1.Visible = false;
+                Par2.Visible = false;
             } else {
                 lblLogin.Text = gtiCore.pUserFullName;
                 lblLogout.Visible = true;
+                Par1.Visible = true;
+                Par2.Visible = true;
             }
         }
 
@@ -19,6 +23,7 @@ namespace GTI_Web.Pages {
             Response.Redirect("gtiMenu.aspx");
         }
 
-       
+
+
     }
 }

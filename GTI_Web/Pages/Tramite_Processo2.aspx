@@ -143,10 +143,10 @@
                 <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/enviar.png" Text="Button" CommandName="cmdEnviar">
                     <ItemStyle BorderStyle="Solid" Width="20px" HorizontalAlign="Center" />
                 </asp:ButtonField>
-                <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/acima.gif" Text="Button">
+                <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/acima.gif" Text="Button" CommandName="cmdAcima">
                     <ItemStyle BorderStyle="Solid" Width="20px" HorizontalAlign="Center" />
                 </asp:ButtonField>
-                <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/abaixo.gif" Text="Button">
+                <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/abaixo.gif" Text="Button" CommandName="cmdAbaixo">
                     <ItemStyle BorderStyle="Solid" Width="20px" HorizontalAlign="Center" />
                 </asp:ButtonField>
                 <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/inserir_local.png" Text="Button">

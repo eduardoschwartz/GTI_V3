@@ -462,7 +462,7 @@ namespace UIWeb {
             byte[] inputbuffer = System.Text.Encoding.Unicode.GetBytes(clearText);
             byte[] outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
             return Convert.ToBase64String(outputBuffer);
-
+            //mt0I4prk % 2bmCEmHzKmIeOc2anN6kLxtvJ
         }
 
         public static string Decrypt(string cipherText) {
@@ -486,6 +486,8 @@ namespace UIWeb {
             };
             return _reg;
         }
+
+
     }//end class
 
 
