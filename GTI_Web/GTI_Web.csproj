@@ -472,7 +472,6 @@
     <Compile Include="Pages\SegundaViaVSend.aspx.designer.cs">
       <DependentUpon>SegundaViaVSend.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\sistema_bll.cs" />
     <Compile Include="Pages\situacao_pagto.aspx.cs">
       <DependentUpon>situacao_pagto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

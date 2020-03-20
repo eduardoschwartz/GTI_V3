@@ -139,7 +139,6 @@ namespace GTI_Web.Pages {
             int ccusto;
             int seq = Convert.ToInt32(SeqReceberLabel.Text);
 
-
             bool _existeTramite = processo_Class.Existe_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, seq);
             if (_existeTramite) {
                 Tramitacao linha = processo_Class.Dados_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, seq);
@@ -199,5 +198,8 @@ namespace GTI_Web.Pages {
         protected void CloseModalEnviar(object sender, EventArgs e) {
             divModalEnviar.Visible = false;
         }
+
+
+
     }
 }
