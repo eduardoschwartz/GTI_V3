@@ -137,6 +137,7 @@
                     <HeaderStyle HorizontalAlign="Left" Font-Size="Small" Font-Bold="false" Wrap="False" />
                     <ItemStyle Width="80px" Wrap="False" />
                 </asp:BoundField>
+
                 <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/receber.png" Text="Button" CommandName="cmdReceber">
                     <ItemStyle BorderStyle="Solid" Width="20px" HorizontalAlign="Center" />
                 </asp:ButtonField>
@@ -149,13 +150,13 @@
                 <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/abaixo.gif" Text="Button" CommandName="cmdAbaixo">
                     <ItemStyle BorderStyle="Solid" Width="20px" HorizontalAlign="Center" />
                 </asp:ButtonField>
-                <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/inserir_local.png" Text="Button">
+                <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/inserir_local.png" Text="Button" CommandName="cmdRemover">
                     <ItemStyle BorderStyle="Solid" Width="20px" HorizontalAlign="Center" />
                 </asp:ButtonField>
-                <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/remover_local.png" Text="Button">
+                <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/remover_local.png" Text="Button" CommandName="cmdInserir">
                     <ItemStyle BorderStyle="Solid" Width="20px" HorizontalAlign="Center" />
                 </asp:ButtonField>
-                <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/observacao.png" Text="Button">
+                <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/observacao.png" Text="Button" CommandName="cmdObs">
                     <ItemStyle BorderStyle="Solid" Width="20px" HorizontalAlign="Center" />
                 </asp:ButtonField>
 
@@ -175,6 +176,8 @@
 
     <br />
     <asp:Label ID="lblMsg" runat="server" ForeColor="#CC0000" Text="lblMsg"></asp:Label>
+    <br />
+    <a href="Tramite_Processo.aspx" style="color:darkred;font-size:10pt">Tramitar outro processo</a>
 
     <div id="divModalReceber" runat="server" class="modalDialog" visible="false">
         <div class="auto-style5">
@@ -219,9 +222,49 @@
             <br />
             <br />
             <asp:Button ID="btOkEnviar" runat="server" align="left" OnClick="btOkEnviar_Click" Text="Aceitar" class="button1" Width="80px" />
-            &nbsp;<asp:Button ID="btCancelarEnviar" runat="server" colspan="2" OnClick="CloseModalEnviar" Text="Cancelar" class="button1" Width="80px" Height="20px" />
+            &nbsp;<asp:Button ID="btCancelarEnviar" runat="server" colspan="2" OnClick="CloseModalInserir" Text="Cancelar" class="button1" Width="80px" Height="20px" />
         </div>
     </div>
 
+    <div id="divModalInserir" runat="server" class="modalDialog" visible="false">
+        <div class="auto-style5">
+            <h4 style="color: red">Inserir local de trâmite </h4>
+            <asp:Label ID="SeqInserirLabel" runat="server" Text="0" Visible="False"></asp:Label>
+            <br />
+            <br />
+            <strong>
+                <asp:Label ID="Label4" runat="server" Text="Selecione o local"></asp:Label>
+                <br />
+                <br />
+                <asp:DropDownList ID="LocalListInserir" runat="server" Height="16px" Width="405px">
+                </asp:DropDownList>
+                <br />
+                <br />
+            </strong>
+
+            <asp:Label ID="lblMsgInserir" runat="server" ForeColor="#CC0000" Text=""></asp:Label>
+            <br />
+            <br />
+            <asp:Button ID="btOkInserir" runat="server" align="left" OnClick="btOkInserir_Click" Text="Aceitar" class="button1" Width="80px" />
+            &nbsp;<asp:Button ID="btCancelarInserir" runat="server" colspan="2" OnClick="CloseModalInserir" Text="Cancelar" class="button1" Width="80px" Height="20px" />
+        </div>
+    </div>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    <script Type ="text/javascript" >
+        $(document).ready(function () {
+            $("#grdMain tr ").mouseover(function () {
+                $(this).css("background-color", "red");
+            });
+
+
+            $("#grdMain tr ").mouseout(function () {
+                $(this).css("background-color", "white");
+            });
+
+
+
+
+        });
+        </script>
 
 </asp:Content>

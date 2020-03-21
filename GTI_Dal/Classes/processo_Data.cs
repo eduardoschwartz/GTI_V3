@@ -1,15 +1,14 @@
 ﻿using GTI_Models.Models;
-using GTI_Dal.Classes;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
 
 namespace GTI_Dal.Classes {
     public class Processo_Data {
 
-        private static string  _connection;
+        private static string _connection;
         public Processo_Data(string sConnection) {
             _connection = sConnection;
         }
@@ -254,7 +253,7 @@ namespace GTI_Dal.Classes {
             }
         }
 
-        public List<Centrocusto> Lista_Local(bool Somente_Ativo,bool Local) {
+        public List<Centrocusto> Lista_Local(bool Somente_Ativo, bool Local) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Centrocusto select c);
                 if (Somente_Ativo)
@@ -369,15 +368,17 @@ namespace GTI_Dal.Classes {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from c in db.Processogti
                            join u in db.Usuario on c.Userid equals u.Id into uc from u in uc.DefaultIfEmpty()
-                           where c.Ano == nAno && c.Numero == nNumero select new ProcessoStruct { Ano= c.Ano,CodigoAssunto=c.Codassunto,AtendenteNome=u.Nomelogin,CentroCusto=(int)c.Centrocusto,
-                           CodigoCidadao=(int)c.Codcidadao,Complemento=c.Complemento,DataArquivado=c.Dataarquiva,DataCancelado=c.Datacancel,DataEntrada=c.Dataentrada,DataReativacao=c.Datareativa,
-                           DataSuspensao=c.Datasuspenso,Fisico=c.Fisico,Hora=c.Hora,Inscricao=(int)c.Insc,Interno=c.Interno,Numero=c.Numero,ObsArquiva=c.Obsa,
-                           ObsCancela=c.Obsc,ObsReativa=c.Obsr,ObsSuspensao=c.Obss,Observacao=c.Observacao,Origem=c.Origem,TipoEnd=c.Tipoend,AtendenteId=(int)u.Id}).FirstOrDefault();
+                           where c.Ano == nAno && c.Numero == nNumero select new ProcessoStruct {
+                               Ano = c.Ano, CodigoAssunto = c.Codassunto, AtendenteNome = u.Nomelogin, CentroCusto = (int)c.Centrocusto,
+                               CodigoCidadao = (int)c.Codcidadao, Complemento = c.Complemento, DataArquivado = c.Dataarquiva, DataCancelado = c.Datacancel, DataEntrada = c.Dataentrada, DataReativacao = c.Datareativa,
+                               DataSuspensao = c.Datasuspenso, Fisico = c.Fisico, Hora = c.Hora, Inscricao = (int)c.Insc, Interno = c.Interno, Numero = c.Numero, ObsArquiva = c.Obsa,
+                               ObsCancela = c.Obsc, ObsReativa = c.Obsr, ObsSuspensao = c.Obss, Observacao = c.Observacao, Origem = c.Origem, TipoEnd = c.Tipoend, AtendenteId = (int)u.Id
+                           }).FirstOrDefault();
                 if (reg == null)
                     return null;
                 ProcessoStruct row = new ProcessoStruct {
                     AtendenteNome = reg.AtendenteNome,
-                    AtendenteId=reg.AtendenteId,
+                    AtendenteId = reg.AtendenteId,
                     Dv = DvProcesso(nNumero)
                 };
                 row.SNumero = nNumero.ToString() + "-" + row.Dv.ToString() + "/" + nAno.ToString();
@@ -417,7 +418,7 @@ namespace GTI_Dal.Classes {
                 row.ObsReativa = reg.ObsReativa;
                 row.ObsSuspensao = reg.ObsSuspensao;
                 row.ListaProcessoDoc = ListProcessoDoc(nAno, nNumero);
-                if (reg.TipoEnd =="1" || reg.TipoEnd=="2")
+                if (reg.TipoEnd == "1" || reg.TipoEnd == "2")
                     row.TipoEnd = reg.TipoEnd.ToString();
                 else
                     row.TipoEnd = "R";
@@ -457,8 +458,10 @@ namespace GTI_Dal.Classes {
                 var Sql = (from a in db.Anexo_log
                            join u in db.Usuario on a.Userid equals u.Id into ac from u in ac.DefaultIfEmpty()
                            where a.Ano == nAno && a.Numero == nNumero
-                           select new Anexo_logStruct {Ano=(short)nAno,Numero=(short)nNumero,Ano_anexo=a.Ano_anexo,Numero_anexo=a.Numero_anexo,
-                           Data=a.Data,Sid=a.Sid,Userid=a.Userid,Removido=a.Removido,Ocorrencia= a.Removido?"Removido":"Anexado",UserName=u.Nomecompleto});
+                           select new Anexo_logStruct {
+                               Ano = (short)nAno, Numero = (short)nNumero, Ano_anexo = a.Ano_anexo, Numero_anexo = a.Numero_anexo,
+                               Data = a.Data, Sid = a.Sid, Userid = a.Userid, Removido = a.Removido, Ocorrencia = a.Removido ? "Removido" : "Anexado", UserName = u.Nomecompleto
+                           });
                 return Sql.ToList();
             }
         }
@@ -657,13 +660,13 @@ namespace GTI_Dal.Classes {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 var reg = (from v in db.Tramitacaocc where v.Ano == Ano && v.Numero == Numero orderby v.Seq select new { v.Seq, v.Ccusto });
                 if (reg.Count() > 0) {
-                    var reg5 = (from tcc in db.Tramitacaocc join cc in db.Centrocusto on tcc.Ccusto equals cc.Codigo where tcc.Ano == Ano && tcc.Numero == Numero select new { tcc.Seq, tcc.Ccusto, cc.Descricao,cc.Telefone });
+                    var reg5 = (from tcc in db.Tramitacaocc join cc in db.Centrocusto on tcc.Ccusto equals cc.Codigo where tcc.Ano == Ano && tcc.Numero == Numero select new { tcc.Seq, tcc.Ccusto, cc.Descricao, cc.Telefone });
                     foreach (var query in reg5) {
                         TramiteStruct Linha = new TramiteStruct {
                             Seq = query.Seq,
                             CentroCustoCodigo = Convert.ToInt16(query.Ccusto),
                             CentroCustoNome = query.Descricao,
-                            Telefone=query.Telefone
+                            Telefone = query.Telefone
                         };
                         Lista.Add(Linha);
                     }
@@ -701,7 +704,7 @@ namespace GTI_Dal.Classes {
                                 join d in db.Despacho on t.Despacho equals d.Codigo into td from d in td.DefaultIfEmpty()
                                 join u in db.Usuario on t.Userid equals u.Id into tu from u in tu.DefaultIfEmpty()
                                 where t.Ano == Ano && t.Numero == Numero && t.Seq == Seq
-                                select new { t.Seq, t.Ccusto, t.Datahora, t.Dataenvio, d.Descricao, t.Userid,t.Userid2, Usuario1=u.Nomelogin, t.Obs });
+                                select new { t.Seq, t.Ccusto, t.Datahora, t.Dataenvio, d.Descricao, t.Userid, t.Userid2, Usuario1 = u.Nomelogin, t.Obs });
 
                     foreach (var query in reg4) {
                         Lista[i].DataEntrada = query.Datahora.ToString() == "" ? "" : DateTime.Parse(query.Datahora.ToString()).ToString("dd/MM/yyyy");
@@ -845,7 +848,7 @@ namespace GTI_Dal.Classes {
         public bool Cidadao_Processo(int id_cidadao) {
             int _contador = 0;
             using (GTI_Context db = new GTI_Context(_connection)) {
-Inicio:;
+            Inicio:;
                 try {
                     _contador = (from p in db.Processogti where p.Codcidadao == id_cidadao select p.Numero).Count();
                 } catch {
@@ -864,26 +867,26 @@ Inicio:;
                            join e in db.Processoend on new { P1 = p.Ano, P2 = p.Numero } equals new { P1 = e.Ano, P2 = e.Numprocesso } into ep from e in ep.DefaultIfEmpty()
                            join l in db.Logradouro on e.Codlogr equals l.Codlogradouro into le from l in le.DefaultIfEmpty()
                            join u in db.Centrocusto on p.Centrocusto equals u.Codigo into pu from u in pu.DefaultIfEmpty()
-                           orderby p.Ano,p.Numero
+                           orderby p.Ano, p.Numero
                            select new ProcessoStruct {
                                Ano = p.Ano, Numero = p.Numero, NomeCidadao = c.Nomecidadao, Assunto = a.Nome, DataEntrada = p.Dataentrada, DataCancelado = p.Datacancel,
                                DataReativacao = p.Datareativa, DataArquivado = p.Dataarquiva, DataSuspensao = p.Datasuspenso, Interno = p.Interno, Fisico = p.Fisico, LogradouroNome = l.Endereco,
-                               LogradouroNumero = e.Numero,Complemento=p.Complemento,CentroCustoNome= u.Descricao,Inscricao=p.Insc ,CodigoCidadao=p.Codcidadao,CodigoAssunto=p.Codassunto,
-                               CentroCusto =p.Centrocusto
-                           }); 
+                               LogradouroNumero = e.Numero, Complemento = p.Complemento, CentroCustoNome = u.Descricao, Inscricao = p.Insc, CodigoCidadao = p.Codcidadao, CodigoAssunto = p.Codassunto,
+                               CentroCusto = p.Centrocusto
+                           });
                 if (!string.IsNullOrWhiteSpace(Filter.SNumProcesso))
-                    Sql = Sql.Where(c => c.Ano == Filter.Ano && c.Numero==Filter.Numero);
-                if (Filter.AnoIni>0)
+                    Sql = Sql.Where(c => c.Ano == Filter.Ano && c.Numero == Filter.Numero);
+                if (Filter.AnoIni > 0)
                     Sql = Sql.Where(c => c.Ano >= Filter.AnoIni);
                 if (Filter.AnoFim > 0)
                     Sql = Sql.Where(c => c.Ano <= Filter.AnoFim);
-                if (Filter.Arquivado ==false)
+                if (Filter.Arquivado == false)
                     Sql = Sql.Where(c => c.DataArquivado == null);
                 if (Filter.Arquivado == true)
                     Sql = Sql.Where(c => c.DataArquivado != null);
-                if(Filter.Requerente!=null && Filter.Requerente>0)
+                if (Filter.Requerente != null && Filter.Requerente > 0)
                     Sql = Sql.Where(c => c.CodigoCidadao == Filter.Requerente);
-                if (Filter.DataEntrada != null )
+                if (Filter.DataEntrada != null)
                     Sql = Sql.Where(c => c.DataEntrada == Filter.DataEntrada);
                 if (Filter.Setor > 0)
                     Sql = Sql.Where(c => c.CentroCusto == Filter.Setor);
@@ -891,7 +894,7 @@ Inicio:;
                     Sql = Sql.Where(c => c.CodigoAssunto <= Filter.AssuntoCodigo);
                 if (Filter.Complemento != "")
                     Sql = Sql.Where(c => c.Complemento.Contains(Filter.Complemento));
-                if (Filter.Fisico !=null)
+                if (Filter.Fisico != null)
                     Sql = Sql.Where(c => c.Fisico == Filter.Fisico);
                 if (Filter.Interno != null)
                     Sql = Sql.Where(c => c.Interno == Filter.Interno);
@@ -900,7 +903,7 @@ Inicio:;
             }
         }
 
-        public DateTime? Data_Processo(int Ano,int Numero) {
+        public DateTime? Data_Processo(int Ano, int Numero) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 DateTime? Sql = (from p in db.Processogti where p.Ano == Ano && p.Numero == Numero select p.Dataentrada).FirstOrDefault();
                 if (Sql == null)
@@ -919,14 +922,14 @@ Inicio:;
                 Parametros[3] = new SqlParameter { ParameterName = "@Origem", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Origem };
                 Parametros[4] = new SqlParameter { ParameterName = "@Interno", SqlDbType = SqlDbType.Bit, SqlValue = reg.Interno };
                 Parametros[5] = new SqlParameter { ParameterName = "@Codassunto", SqlDbType = SqlDbType.SmallInt, SqlValue = reg.Codassunto };
-                if(reg.Complemento!=null)
+                if (reg.Complemento != null)
                     Parametros[6] = new SqlParameter { ParameterName = "@Complemento", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Complemento };
                 else
-                    Parametros[6] = new SqlParameter { ParameterName = "@Complemento",  SqlValue = DBNull.Value };
+                    Parametros[6] = new SqlParameter { ParameterName = "@Complemento", SqlValue = DBNull.Value };
                 if (reg.Observacao != null)
                     Parametros[7] = new SqlParameter { ParameterName = "@Observacao", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Observacao };
                 else
-                    Parametros[7] = new SqlParameter { ParameterName = "@Observacao",  SqlValue = DBNull.Value };
+                    Parametros[7] = new SqlParameter { ParameterName = "@Observacao", SqlValue = DBNull.Value };
                 if (reg.Dataentrada != null)
                     Parametros[8] = new SqlParameter { ParameterName = "@Dataentrada", SqlDbType = SqlDbType.SmallDateTime, SqlValue = reg.Dataentrada };
                 else
@@ -934,15 +937,15 @@ Inicio:;
                 if (reg.Datareativa != null)
                     Parametros[9] = new SqlParameter { ParameterName = "@Datareativa", SqlDbType = SqlDbType.SmallDateTime, SqlValue = reg.Datareativa };
                 else
-                    Parametros[9] = new SqlParameter { ParameterName = "@Datareativa",  SqlValue = DBNull.Value };
+                    Parametros[9] = new SqlParameter { ParameterName = "@Datareativa", SqlValue = DBNull.Value };
                 if (reg.Datacancel != null)
                     Parametros[10] = new SqlParameter { ParameterName = "@Datacancel", SqlDbType = SqlDbType.SmallDateTime, SqlValue = reg.Datacancel };
                 else
-                    Parametros[10] = new SqlParameter { ParameterName = "@Datacancel",  SqlValue = DBNull.Value };
+                    Parametros[10] = new SqlParameter { ParameterName = "@Datacancel", SqlValue = DBNull.Value };
                 if (reg.Dataarquiva != null)
                     Parametros[11] = new SqlParameter { ParameterName = "@Dataarquiva", SqlDbType = SqlDbType.SmallDateTime, SqlValue = reg.Dataarquiva };
                 else
-                    Parametros[11] = new SqlParameter { ParameterName = "@Dataarquiva",  SqlValue = DBNull.Value };
+                    Parametros[11] = new SqlParameter { ParameterName = "@Dataarquiva", SqlValue = DBNull.Value };
                 if (reg.Datasuspenso != null)
                     Parametros[12] = new SqlParameter { ParameterName = "@Datasuspenso", SqlDbType = SqlDbType.SmallDateTime, SqlValue = reg.Datasuspenso };
                 else
@@ -950,31 +953,31 @@ Inicio:;
                 if (reg.Etiqueta != null)
                     Parametros[13] = new SqlParameter { ParameterName = "@Etiqueta", SqlDbType = SqlDbType.Bit, SqlValue = reg.Etiqueta };
                 else
-                    Parametros[13] = new SqlParameter { ParameterName = "@Etiqueta",  SqlValue = DBNull.Value };
+                    Parametros[13] = new SqlParameter { ParameterName = "@Etiqueta", SqlValue = DBNull.Value };
                 if (reg.Codcidadao != null)
                     Parametros[14] = new SqlParameter { ParameterName = "@Codcidadao", SqlDbType = SqlDbType.Int, SqlValue = reg.Codcidadao };
                 else
-                    Parametros[14] = new SqlParameter { ParameterName = "@Codcidadao",  SqlValue = DBNull.Value };
+                    Parametros[14] = new SqlParameter { ParameterName = "@Codcidadao", SqlValue = DBNull.Value };
                 if (reg.Motivocancel != null)
                     Parametros[15] = new SqlParameter { ParameterName = "@Motivocancel", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Motivocancel };
                 else
-                    Parametros[15] = new SqlParameter { ParameterName = "@Motivocancel",  SqlValue = DBNull.Value };
+                    Parametros[15] = new SqlParameter { ParameterName = "@Motivocancel", SqlValue = DBNull.Value };
                 if (reg.Centrocusto != null)
                     Parametros[16] = new SqlParameter { ParameterName = "@Centrocusto", SqlDbType = SqlDbType.Int, SqlValue = reg.Centrocusto };
                 else
-                    Parametros[16] = new SqlParameter { ParameterName = "@Centrocusto",  SqlValue = DBNull.Value };
+                    Parametros[16] = new SqlParameter { ParameterName = "@Centrocusto", SqlValue = DBNull.Value };
                 if (reg.Obsa != null)
                     Parametros[17] = new SqlParameter { ParameterName = "@Obsa", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Obsa };
                 else
-                    Parametros[17] = new SqlParameter { ParameterName = "@Obsa",  SqlValue = DBNull.Value };
+                    Parametros[17] = new SqlParameter { ParameterName = "@Obsa", SqlValue = DBNull.Value };
                 if (reg.Obsc != null)
                     Parametros[18] = new SqlParameter { ParameterName = "@Obsc", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Obsc };
                 else
-                    Parametros[18] = new SqlParameter { ParameterName = "@Obsc",  SqlValue = DBNull.Value };
+                    Parametros[18] = new SqlParameter { ParameterName = "@Obsc", SqlValue = DBNull.Value };
                 if (reg.Obss != null)
                     Parametros[19] = new SqlParameter { ParameterName = "@Obss", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Obss };
                 else
-                    Parametros[19] = new SqlParameter { ParameterName = "@Obss",  SqlValue = DBNull.Value };
+                    Parametros[19] = new SqlParameter { ParameterName = "@Obss", SqlValue = DBNull.Value };
                 if (reg.Obsr != null)
                     Parametros[20] = new SqlParameter { ParameterName = "@Obsr", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Obsr };
                 else
@@ -982,19 +985,19 @@ Inicio:;
                 if (reg.Hora != null)
                     Parametros[21] = new SqlParameter { ParameterName = "@Hora", SqlDbType = SqlDbType.VarChar, SqlValue = reg.Hora };
                 else
-                    Parametros[21] = new SqlParameter { ParameterName = "@Hora",  SqlValue = DBNull.Value };
+                    Parametros[21] = new SqlParameter { ParameterName = "@Hora", SqlValue = DBNull.Value };
                 if (reg.Insc != null)
                     Parametros[22] = new SqlParameter { ParameterName = "@Insc", SqlDbType = SqlDbType.Int, SqlValue = reg.Insc };
                 else
-                    Parametros[22] = new SqlParameter { ParameterName = "@Insc",  SqlValue = DBNull.Value };
+                    Parametros[22] = new SqlParameter { ParameterName = "@Insc", SqlValue = DBNull.Value };
                 if (reg.Tipoend != null)
                     Parametros[23] = new SqlParameter { ParameterName = "@Tipoend", SqlDbType = SqlDbType.Char, SqlValue = reg.Tipoend };
                 else
-                    Parametros[23] = new SqlParameter { ParameterName = "@Tipoend",  SqlValue = DBNull.Value };
+                    Parametros[23] = new SqlParameter { ParameterName = "@Tipoend", SqlValue = DBNull.Value };
                 if (reg.Userid != null)
                     Parametros[24] = new SqlParameter { ParameterName = "@Userid", SqlDbType = SqlDbType.Int, SqlValue = reg.Userid };
                 else
-                    Parametros[24] = new SqlParameter { ParameterName = "@Userid",  SqlValue = DBNull.Value };
+                    Parametros[24] = new SqlParameter { ParameterName = "@Userid", SqlValue = DBNull.Value };
 
                 db.Database.ExecuteSqlCommand("INSERT INTO processogti(ano,numero,fisico,origem,interno,codassunto,complemento,observacao,dataentrada,datareativa," +
                                               "datacancel,dataarquiva,datasuspenso,etiqueta,codcidadao,motivocancel,centrocusto,obsa,obsc,obss,obsr,hora,insc,tipoend," +
@@ -1014,13 +1017,13 @@ Inicio:;
         public int Retorna_Numero_Disponivel(int Ano) {
             int maxCod = 0;
             using (GTI_Context db = new GTI_Context(_connection)) {
-                var Sql = (from p in db.Processogti where p.Ano ==Ano select p.Numero).Max();
+                var Sql = (from p in db.Processogti where p.Ano == Ano select p.Numero).Max();
                 maxCod = Convert.ToInt32(Sql) + 1;
             }
             return maxCod;
         }
 
-        public Exception Incluir_Processo_Endereco(List<Processoend> Lista,int Ano,int Numero) {
+        public Exception Incluir_Processo_Endereco(List<Processoend> Lista, int Ano, int Numero) {
             using (GTI_Context db = new GTI_Context(_connection)) {
 
                 try {
@@ -1077,7 +1080,7 @@ Inicio:;
             using (GTI_Context db = new GTI_Context(_connection)) {
                 short _ano = reg.Ano;
                 int _numero = reg.Numero;
-                Processogti p = db.Processogti.First(i => i.Ano == _ano && i.Numero==_numero);
+                Processogti p = db.Processogti.First(i => i.Ano == _ano && i.Numero == _numero);
                 p.Centrocusto = reg.Centrocusto;
                 p.Codassunto = reg.Codassunto;
                 p.Codcidadao = reg.Codcidadao;
@@ -1114,13 +1117,13 @@ Inicio:;
 
         public List<Processo_Numero> Lista_Processo_Parcelamento_Header(int Codigo) {
             using (GTI_Context db = new GTI_Context(_connection)) {
-                var Sql = (from p in db.Processoreparc where p.Codigoresp==Codigo orderby p.Anoproc,p.Numproc
-                           select new Processo_Numero { Numero_processo=p.Numprocesso,Numero=p.Numproc,Ano=p.Anoproc});
+                var Sql = (from p in db.Processoreparc where p.Codigoresp == Codigo orderby p.Anoproc, p.Numproc
+                           select new Processo_Numero { Numero_processo = p.Numprocesso, Numero = p.Numproc, Ano = p.Anoproc });
                 return Sql.ToList();
             }
         }
 
-        public bool Existe_Tramite(int Ano, int Numero,int Seq) {
+        public bool Existe_Tramite(int Ano, int Numero, int Seq) {
             bool bValido = false;
             using (GTI_Context db = new GTI_Context(_connection)) {
                 var existingReg = db.Tramitacao.Count(a => a.Ano == Ano && a.Numero == Numero && a.Seq == Seq);
@@ -1148,9 +1151,9 @@ Inicio:;
             return null;
         }
 
-        public Tramitacao Dados_Tramite(int Ano,int Numero,int Seq) {
+        public Tramitacao Dados_Tramite(int Ano, int Numero, int Seq) {
             using (GTI_Context db = new GTI_Context(_connection)) {
-                Tramitacao Sql = (from t in db.Tramitacao where t.Ano == Ano && t.Numero==Numero && t.Seq==Seq select t).FirstOrDefault();
+                Tramitacao Sql = (from t in db.Tramitacao where t.Ano == Ano && t.Numero == Numero && t.Seq == Seq select t).FirstOrDefault();
                 return Sql;
             }
         }
@@ -1165,7 +1168,7 @@ Inicio:;
         public Exception Enviar_Processo(Tramitacao reg) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 Tramitacao t = db.Tramitacao.First(i => i.Ano == reg.Ano && i.Numero == reg.Numero && i.Seq == reg.Seq);
-                
+
                 try {
                     t.Dataenvio = reg.Dataenvio;
                     t.Despacho = reg.Despacho;
@@ -1185,7 +1188,7 @@ Inicio:;
                     db.Database.ExecuteSqlCommand("UPDATE TRAMITACAOCC SET SEQ=100 WHERE ANO=@Ano AND NUMERO=@Numero AND SEQ=@Seq",
                         new SqlParameter("@Ano", Ano),
                         new SqlParameter("@Numero", Numero),
-                        new SqlParameter("@Seq", Seq ));
+                        new SqlParameter("@Seq", Seq));
                 } catch (Exception ex) {
                     return ex;
                 }
@@ -1204,7 +1207,7 @@ Inicio:;
                     db.Database.ExecuteSqlCommand("UPDATE TRAMITACAOCC SET SEQ=@Seq WHERE ANO=@Ano AND NUMERO=@Numero AND SEQ=100",
                         new SqlParameter("@Ano", Ano),
                         new SqlParameter("@Numero", Numero),
-                        new SqlParameter("@Seq", Seq-1));
+                        new SqlParameter("@Seq", Seq - 1));
                 } catch (Exception ex) {
                     return ex;
                 }
@@ -1213,13 +1216,13 @@ Inicio:;
         }
 
         public Exception Move_Sequencia_Tramite_Abaixo(int Numero, int Ano, int Seq) {
-           
+
             using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     db.Database.ExecuteSqlCommand("UPDATE TRAMITACAOCC SET SEQ=100 WHERE ANO=@Ano AND NUMERO=@Numero AND SEQ=@Seq",
                         new SqlParameter("@Ano", Ano),
                         new SqlParameter("@Numero", Numero),
-                        new SqlParameter("@Seq", Seq+1));
+                        new SqlParameter("@Seq", Seq + 1));
                 } catch (Exception ex) {
                     return ex;
                 }
@@ -1229,7 +1232,7 @@ Inicio:;
                     db.Database.ExecuteSqlCommand("UPDATE TRAMITACAOCC SET SEQ=@Seq2 WHERE ANO=@Ano AND NUMERO=@Numero AND SEQ=@Seq",
                         new SqlParameter("@Ano", Ano),
                         new SqlParameter("@Numero", Numero),
-                        new SqlParameter("@Seq", Seq ),
+                        new SqlParameter("@Seq", Seq),
                         new SqlParameter("@Seq2", Seq + 1));
                 } catch (Exception ex) {
                     return ex;
@@ -1239,7 +1242,7 @@ Inicio:;
                     db.Database.ExecuteSqlCommand("UPDATE TRAMITACAOCC SET SEQ=@Seq WHERE ANO=@Ano AND NUMERO=@Numero AND SEQ=100",
                         new SqlParameter("@Ano", Ano),
                         new SqlParameter("@Numero", Numero),
-                        new SqlParameter("@Seq", Seq ));
+                        new SqlParameter("@Seq", Seq));
                 } catch (Exception ex) {
                     return ex;
                 }
@@ -1250,6 +1253,104 @@ Inicio:;
 
             return null;
         }
+
+        public Exception Inserir_Local(int Numero, int Ano, int Seq, int CCusto_Codigo) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                List<Tramitacaocc> _lista_atual = (from c in db.Tramitacaocc where c.Ano == Ano && c.Numero == Numero orderby c.Seq select c).ToList();
+                List<Tramitacaocc> _lista_nova = new List<Tramitacaocc>();
+
+                int _pos = 1, _seq = 0;
+                foreach (Tramitacaocc item in _lista_atual) {
+                    _seq = item.Seq;
+                    if (_pos > Seq)
+                        _seq = item.Seq + 1;
+
+                    Tramitacaocc _newOrder = new Tramitacaocc() {
+                        Ano = item.Ano,
+                        Numero = item.Numero,
+                        Seq = (byte)_seq,
+                        Ccusto = item.Ccusto
+                    };
+
+                    _lista_nova.Add(_newOrder);
+                    _pos++;
+                }
+
+                Tramitacaocc _newItem = new Tramitacaocc() {
+                    Ano = (short)Ano,
+                    Numero = Numero,
+                    Seq = (byte)(Seq + 1),
+                    Ccusto = (short)CCusto_Codigo
+                };
+
+                _lista_nova.Add(_newItem);
+
+                db.Database.ExecuteSqlCommand("DELETE FROM TRAMITACAOCC WHERE ANO=@Ano AND NUMERO=@Numero", new SqlParameter("@Ano", Ano), new SqlParameter("@Numero", Numero));
+                try {
+                    foreach (Tramitacaocc item in _lista_nova.OrderBy(m => m.Seq)) {
+                        db.Database.ExecuteSqlCommand("INSERT TRAMITACAOCC VALUES(@Ano,@Numero,@Seq,@CCusto)",
+                            new SqlParameter("@Ano", Ano), new SqlParameter("@Numero", Numero),
+                            new SqlParameter("@Numero", Seq), new SqlParameter("@Numero", CCusto_Codigo));
+
+                    }
+                } catch (Exception ex) {
+                    return ex;
+                }
+            }
+            return null;
+        }
+
+        public Exception Remover_Local(int Numero, int Ano, int Seq) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                List<Tramitacaocc> _lista_atual = (from c in db.Tramitacaocc where c.Ano == Ano && c.Numero == Numero orderby c.Seq select c).ToList();
+                List<Tramitacaocc> _lista_nova = new List<Tramitacaocc>();
+
+                foreach (Tramitacaocc item in _lista_atual) {
+                    if (item.Seq != Seq) {
+                        Tramitacaocc _newOrder = new Tramitacaocc() {
+                            Ano = item.Ano,
+                            Numero = item.Numero,
+                            Seq = item.Seq,
+                            Ccusto = item.Ccusto
+                        };
+
+                        _lista_nova.Add(_newOrder);
+                    }
+                }
+
+                db.Database.ExecuteSqlCommand("DELETE FROM TRAMITACAOCC WHERE ANO=@Ano AND NUMERO=@Numero", new SqlParameter("@Ano", Ano), new SqlParameter("@Numero", Numero)); 
+                int _pos = 1;
+
+                try {
+                    foreach (Tramitacaocc item in _lista_nova.OrderBy(m => m.Seq)) {
+                        db.Database.ExecuteSqlCommand("INSERT TRAMITACAOCC VALUES(@Ano,@Numero,@Seq,@CCusto)",
+                            new SqlParameter("@Ano", Ano), new SqlParameter("@Numero", Numero),
+                            new SqlParameter("@Numero", _pos), new SqlParameter("@Numero", item.Ccusto));
+
+                    }
+                } catch (Exception ex) {
+                    return ex;
+                }
+            }
+            return null;
+        }
+
+        public Exception Alterar_Obs(int Ano, int Numero, int Seq, string ObsGeral, string ObsInterna) {
+            using (GTI_Context db = new GTI_Context(_connection)) {
+                Tramitacao _sql = db.Tramitacao.First(t => t.Ano == Ano && t.Numero == Numero && t.Seq == Seq);
+                _sql.Obs = ObsGeral;
+                _sql.Obsinterna = ObsInterna;
+                try {
+                    db.SaveChanges();
+                } catch (Exception ex) {
+                    return ex;
+                }
+            }
+            return null;
+        }
+
+
+
 
     }
 }

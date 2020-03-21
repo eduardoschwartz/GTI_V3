@@ -540,5 +540,24 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
+        public Exception Inserir_Local(int Numero, int Ano, int Seq, int CCusto_Codigo) {
+            Processo_Data obj = new Processo_Data(_connection);
+            Exception ex = obj.Inserir_Local(Numero, Ano, Seq,CCusto_Codigo);
+            return ex;
+        }
+
+        public Exception Remover_Local(int Numero, int Ano, int Seq) {
+            Processo_Data obj = new Processo_Data(_connection);
+            Exception ex = obj.Remover_Local(Numero, Ano, Seq);
+            return ex;
+        }
+
+        public Exception Alterar_Obs(int Ano, int Numero, int Seq, string ObsGeral, string ObsInterna) {
+            Processo_Data obj = new Processo_Data(_connection);
+            Exception ex = obj.Alterar_Obs(Numero, Ano, Seq, ObsGeral,ObsInterna);
+            return ex;
+        }
+
+
     }
 }

@@ -3,7 +3,7 @@ using GTI_Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Web;
+using System.Web.UI.WebControls;
 using UIWeb;
 
 namespace GTI_Web.Pages {
@@ -22,7 +22,7 @@ namespace GTI_Web.Pages {
                 Session["pUserId"] = 0;
                 Response.Redirect("Login.aspx");
             }
-            
+
             Carrega_Grid();
         }
 
@@ -40,18 +40,18 @@ namespace GTI_Web.Pages {
                 List<TramiteStruct> Lista_Tramite = processo_Class.DadosTramite((short)_numeroProcesso.Ano, _numeroProcesso.Numero, 0);
 
                 DataTable dt = new DataTable();
-                dt.Columns.AddRange(new DataColumn[8] { new DataColumn("Seq"), new DataColumn("Local"), new DataColumn("Data"), new DataColumn("Hora"), 
+                dt.Columns.AddRange(new DataColumn[8] { new DataColumn("Seq"), new DataColumn("Local"), new DataColumn("Data"), new DataColumn("Hora"),
                     new DataColumn("Usuario1"), new DataColumn("Despacho"), new DataColumn("Data2"), new DataColumn("Usuario2") });
 
                 foreach (TramiteStruct item in Lista_Tramite) {
-                    dt.Rows.Add(item.Seq, item.CentroCustoNome,item.DataEntrada,item.HoraEntrada,item.Usuario1,item.DespachoNome,item.DataEnvio,item.Usuario2);
+                    dt.Rows.Add(item.Seq, item.CentroCustoNome, item.DataEntrada, item.HoraEntrada, item.Usuario1, item.DespachoNome, item.DataEnvio, item.Usuario2);
                 }
 
                 grdMain.DataSource = dt;
                 grdMain.DataBind();
 
 
-            } catch (Exception ) {
+            } catch (Exception) {
 
                 Response.Redirect("~/Pages/gtiMenu3.aspx");
             }
@@ -80,33 +80,37 @@ namespace GTI_Web.Pages {
                         lblMsg.Text = "Este local já foi tramitado.";
                         return;
                     }
+                } else {
+                    bool _existeTramite = processo_Class.Existe_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq);
+                    if (_existeTramite) {
+                        lblMsg.Text = "Este local já foi tramitado.";
+                        return;
+                    }
                 }
                 List<Despacho> Lista = processo_Class.Lista_Despacho();
                 DespachoListReceber.DataSource = Lista;
                 DespachoListReceber.DataTextField = "Descricao";
                 DespachoListReceber.DataValueField = "Codigo";
                 DespachoListReceber.DataBind();
-                
+
                 SeqReceberLabel.Text = Seq.ToString();
                 divModalReceber.Visible = true;
             } else {
                 if (e.CommandName == "cmdEnviar") {
-                    if (Seq > 1) {
-                        bool _existeTramite = processo_Class.Existe_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq);
-                        if (!_existeTramite) {
+                    bool _existeTramite = processo_Class.Existe_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq);
+                    if (!_existeTramite) {
+                        lblMsg.Text = "Este processo ainda não foi recebido neste local.";
+                        return;
+                    } else {
+                        Tramitacao linha = processo_Class.Dados_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq);
+                        ccusto = (short)linha.Despacho;
+                        if (linha.Datahora == null) {
                             lblMsg.Text = "Este processo ainda não foi recebido neste local.";
                             return;
                         } else {
-                            Tramitacao linha = processo_Class.Dados_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq);
-                            ccusto = (short)linha.Despacho;
-                            if (linha.Datahora == null) {
-                                lblMsg.Text = "Este processo ainda não foi recebido neste local.";
+                            if (linha.Dataenvio != null) {
+                                lblMsg.Text = "Processo já enviado deste local.";
                                 return;
-                            } else {
-                                if (linha.Dataenvio != null) {
-                                    lblMsg.Text = "Processo já enviado deste local.";
-                                    return;
-                                }
                             }
                         }
                     }
@@ -115,7 +119,10 @@ namespace GTI_Web.Pages {
                     DespachoListEnviar.DataTextField = "Descricao";
                     DespachoListEnviar.DataValueField = "Codigo";
                     DespachoListEnviar.DataBind();
-                    DespachoListEnviar.SelectedValue = ccusto.ToString();
+                    try {
+                        DespachoListEnviar.SelectedValue = ccusto.ToString();
+                    } catch (Exception) {
+                    }
 
                     SeqEnviarLabel.Text = Seq.ToString();
                     divModalEnviar.Visible = true;
@@ -127,6 +134,15 @@ namespace GTI_Web.Pages {
                         if (e.CommandName == "cmdAbaixo") {
                             Exception ex = processo_Class.Move_Sequencia_Tramite_Abaixo(_numeroProcesso.Numero, _numeroProcesso.Ano, Seq);
                             Response.Redirect(Request.RawUrl, true);
+                        } else {
+                            if (e.CommandName == "cmdInserir") {
+
+                            } else {
+                                if (e.CommandName == "cmdRemover") {
+                                    Exception ex = processo_Class.Remover_Local(_numeroProcesso.Numero, _numeroProcesso.Ano, Seq);
+                                    Response.Redirect(Request.RawUrl, true);
+                                }
+                            }
                         }
                     }
                 }
@@ -152,8 +168,8 @@ namespace GTI_Web.Pages {
                 Seq = Convert.ToByte(SeqReceberLabel.Text),
                 Despacho = Convert.ToInt16(DespachoListReceber.SelectedValue),
                 Datahora = DateTime.Now,
-                Userid=gtiCore.pUserId,
-                Ccusto=(short)ccusto
+                Userid = gtiCore.pUserId,
+                Ccusto = (short)ccusto
             };
             Exception ex = processo_Class.Receber_Processo(reg);
             if (ex != null)
@@ -168,7 +184,7 @@ namespace GTI_Web.Pages {
 
         protected void btOkEnviar_Click(object sender, EventArgs e) {
             lblMsgEnviar.Text = "";
-            if (DespachoListEnviar.SelectedIndex==0) {
+            if (DespachoListEnviar.SelectedIndex == 0) {
                 lblMsgEnviar.Text = "Selecione um despacho!";
                 return;
             }
@@ -185,8 +201,8 @@ namespace GTI_Web.Pages {
                 Datahora = linha.Datahora,
                 Userid = linha.Userid,
                 Ccusto = linha.Ccusto,
-                Dataenvio=DateTime.Now,
-                Userid2=gtiCore.pUserId                
+                Dataenvio = DateTime.Now,
+                Userid2 = gtiCore.pUserId
             };
             Exception ex = processo_Class.Enviar_Processo(reg);
             if (ex != null)
@@ -199,7 +215,14 @@ namespace GTI_Web.Pages {
             divModalEnviar.Visible = false;
         }
 
+        protected void btOkInserir_Click(object sender, EventArgs e) {
 
+        }
 
+        protected void CloseModalInserir(object sender, EventArgs e) {
+            divModalInserir.Visible = false;
+        }
+
+       
     }
 }
