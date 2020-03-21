@@ -136,11 +136,22 @@ namespace GTI_Web.Pages {
                             Response.Redirect(Request.RawUrl, true);
                         } else {
                             if (e.CommandName == "cmdInserir") {
-
+                                List<Centrocusto> Lista = processo_Class.Lista_Local(true,false);
+                                LocalListInserir.DataSource = Lista;
+                                LocalListInserir.DataTextField = "Descricao";
+                                LocalListInserir.DataValueField = "Codigo";
+                                LocalListInserir.DataBind();
+                                SeqInserirLabel.Text = Seq.ToString();
+                                divModalInserir.Visible = true;
                             } else {
                                 if (e.CommandName == "cmdRemover") {
-                                    Exception ex = processo_Class.Remover_Local(_numeroProcesso.Numero, _numeroProcesso.Ano, Seq);
-                                    Response.Redirect(Request.RawUrl, true);
+                                    bool _existeTramite = processo_Class.Existe_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq);
+                                    if (_existeTramite) {
+                                        lblMsg.Text = "Este local já foi tramitado e não pode ser removido.";
+                                    } else {
+                                        Exception ex = processo_Class.Remover_Local(_numeroProcesso.Numero, _numeroProcesso.Ano, Seq);
+                                        Response.Redirect(Request.RawUrl, true);
+                                    }
                                 }
                             }
                         }
@@ -216,13 +227,30 @@ namespace GTI_Web.Pages {
         }
 
         protected void btOkInserir_Click(object sender, EventArgs e) {
-
+            lblMsg.Text = "";
+            Processo_bll processo_Class = new Processo_bll("GTIconnection");
+            Exception ex = processo_Class.Inserir_Local(_numeroProcesso.Numero, _numeroProcesso.Ano, Convert.ToInt32(SeqInserirLabel.Text), Convert.ToInt32(LocalListInserir.SelectedValue));
+            Response.Redirect(Request.RawUrl, true);
         }
 
         protected void CloseModalInserir(object sender, EventArgs e) {
             divModalInserir.Visible = false;
         }
 
-       
+        protected void grdMain_RowDataBound(object sender, GridViewRowEventArgs e) {
+            try {
+                if (e.Row.RowType == DataControlRowType.DataRow) {
+                    e.Row.Cells[8].ToolTip = "Receber processo";
+                    e.Row.Cells[9].ToolTip = "Enviar processo";
+                    e.Row.Cells[10].ToolTip = "Mover trâmite para cima";
+                    e.Row.Cells[11].ToolTip = "Mover trâmite para baixo";
+                    e.Row.Cells[12].ToolTip = "Inserir local";
+                    e.Row.Cells[13].ToolTip = "Remover local";
+                    e.Row.Cells[14].ToolTip = "Alterar observação";
+                }
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
     }
 }

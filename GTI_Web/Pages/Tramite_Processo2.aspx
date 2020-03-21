@@ -103,7 +103,7 @@
 
     <div style="color: #3a8dcc;">
 
-        <asp:GridView ID="grdMain" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" TabIndex="7" RowHeaderColumn="Sequencia" OnRowCommand="grdMain_RowCommand">
+        <asp:GridView ID="grdMain" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" TabIndex="7" RowHeaderColumn="Sequencia" OnRowCommand="grdMain_RowCommand" OnRowDataBound="grdMain_RowDataBound">
             <Columns>
                 <asp:BoundField DataField="Seq" HeaderStyle-HorizontalAlign="Center" HeaderText="Seq" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="30" ItemStyle-ForeColor="#3A8DCC" ItemStyle-Font-Names="Arial" ItemStyle-Font-Size="X-Small">
                     <HeaderStyle HorizontalAlign="Center" Font-Size="Small" Font-Bold="false" Width="12px" />
@@ -138,7 +138,7 @@
                     <ItemStyle Width="80px" Wrap="False" />
                 </asp:BoundField>
 
-                <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/receber.png" Text="Button" CommandName="cmdReceber">
+                <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/receber.png" Text="Button" CommandName="cmdReceber" >
                     <ItemStyle BorderStyle="Solid" Width="20px" HorizontalAlign="Center" />
                 </asp:ButtonField>
                 <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/enviar.png" Text="Button" CommandName="cmdEnviar">
@@ -150,10 +150,10 @@
                 <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/abaixo.gif" Text="Button" CommandName="cmdAbaixo">
                     <ItemStyle BorderStyle="Solid" Width="20px" HorizontalAlign="Center" />
                 </asp:ButtonField>
-                <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/inserir_local.png" Text="Button" CommandName="cmdRemover">
+                <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/inserir_local.png" Text="Button" CommandName="cmdInserir">
                     <ItemStyle BorderStyle="Solid" Width="20px" HorizontalAlign="Center" />
                 </asp:ButtonField>
-                <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/remover_local.png" Text="Button" CommandName="cmdInserir">
+                <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/remover_local.png" Text="Button" CommandName="cmdRemover">
                     <ItemStyle BorderStyle="Solid" Width="20px" HorizontalAlign="Center" />
                 </asp:ButtonField>
                 <asp:ButtonField ButtonType="Image" ImageUrl="~/Images/observacao.png" Text="Button" CommandName="cmdObs">

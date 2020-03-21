@@ -1290,7 +1290,7 @@ namespace GTI_Dal.Classes {
                     foreach (Tramitacaocc item in _lista_nova.OrderBy(m => m.Seq)) {
                         db.Database.ExecuteSqlCommand("INSERT TRAMITACAOCC VALUES(@Ano,@Numero,@Seq,@CCusto)",
                             new SqlParameter("@Ano", Ano), new SqlParameter("@Numero", Numero),
-                            new SqlParameter("@Numero", Seq), new SqlParameter("@Numero", CCusto_Codigo));
+                            new SqlParameter("@Seq", item.Seq), new SqlParameter("@CCusto", item.Ccusto));
 
                     }
                 } catch (Exception ex) {
@@ -1325,8 +1325,8 @@ namespace GTI_Dal.Classes {
                     foreach (Tramitacaocc item in _lista_nova.OrderBy(m => m.Seq)) {
                         db.Database.ExecuteSqlCommand("INSERT TRAMITACAOCC VALUES(@Ano,@Numero,@Seq,@CCusto)",
                             new SqlParameter("@Ano", Ano), new SqlParameter("@Numero", Numero),
-                            new SqlParameter("@Numero", _pos), new SqlParameter("@Numero", item.Ccusto));
-
+                            new SqlParameter("@Seq", _pos), new SqlParameter("@CCusto", item.Ccusto));
+                        _pos++;
                     }
                 } catch (Exception ex) {
                     return ex;
