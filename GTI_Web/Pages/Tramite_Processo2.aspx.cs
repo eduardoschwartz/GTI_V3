@@ -62,6 +62,20 @@ namespace GTI_Web.Pages {
             short ccusto = 0;
             int Seq = Convert.ToInt32(e.CommandArgument) + 1;
             Processo_bll processo_Class = new Processo_bll("GTIconnection");
+            int _ccusto = processo_Class.Retorna_CCusto_TramiteCC(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq );
+            List<UsuariocentroCusto> _listaCC = processo_Class.ListaCentrocustoUsuario(Convert.ToInt32(gtiCore.pUserId));
+            bool _find = false;
+            foreach (UsuariocentroCusto item in _listaCC) {
+                if (item.Codigo == _ccusto) {
+                    _find = true;
+                    break;
+                }
+            }
+            if (!_find) {
+                lblMsg.Text = "Você não tem permissão para tramitar neste local.";
+                return;
+            }
+
             if (e.CommandName == "cmdReceber") {
                 if (Seq > 1) {
                     bool _existeTramiteAnterior = processo_Class.Existe_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq - 1);
@@ -128,21 +142,59 @@ namespace GTI_Web.Pages {
                     divModalEnviar.Visible = true;
                 } else {
                     if (e.CommandName == "cmdAcima") {
-                        Exception ex = processo_Class.Move_Sequencia_Tramite_Acima(_numeroProcesso.Numero, _numeroProcesso.Ano, Seq);
-                        Response.Redirect(Request.RawUrl, true);
+                        if (Seq== 1) {
+                            return;
+                        } else {
+                            bool _existeTramite = processo_Class.Existe_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq);
+                            if (_existeTramite) {
+                                lblMsg.Text = "Este local já foi tramitado.";
+                                return;
+                            } else {
+                                _existeTramite = processo_Class.Existe_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq-1);
+                                if (_existeTramite) {
+                                    lblMsg.Text = "O local anterior já foi tramitado.";
+                                    return;
+                                } else {
+                                    Exception ex = processo_Class.Move_Sequencia_Tramite_Acima(_numeroProcesso.Numero, _numeroProcesso.Ano, Seq);
+                                    if(ex==null)
+                                        Response.Redirect(Request.RawUrl, true);
+                                }
+                            }
+                        }
                     } else {
                         if (e.CommandName == "cmdAbaixo") {
-                            Exception ex = processo_Class.Move_Sequencia_Tramite_Abaixo(_numeroProcesso.Numero, _numeroProcesso.Ano, Seq);
-                            Response.Redirect(Request.RawUrl, true);
+                            if (Seq> grdMain.Rows.Count-1) {
+                                return;
+                            } else {
+                                bool _existeTramite = processo_Class.Existe_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq);
+                                if (_existeTramite) {
+                                    lblMsg.Text = "Este local já foi tramitado.";
+                                    return;
+                                } else {
+                                    Exception ex = processo_Class.Move_Sequencia_Tramite_Abaixo(_numeroProcesso.Numero, _numeroProcesso.Ano, Seq);
+                                    if (ex == null)
+                                        Response.Redirect(Request.RawUrl, true);
+                                }
+                            }
                         } else {
                             if (e.CommandName == "cmdInserir") {
-                                List<Centrocusto> Lista = processo_Class.Lista_Local(true,false);
-                                LocalListInserir.DataSource = Lista;
-                                LocalListInserir.DataTextField = "Descricao";
-                                LocalListInserir.DataValueField = "Codigo";
-                                LocalListInserir.DataBind();
-                                SeqInserirLabel.Text = Seq.ToString();
-                                divModalInserir.Visible = true;
+                                if (Seq > grdMain.Rows.Count - 1) {
+                                    return;
+                                } else {
+                                    bool _existeTramite = processo_Class.Existe_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq+1);
+                                    if (_existeTramite) {
+                                        lblMsg.Text = "O próximo local já foi tramitado.";
+                                        return;
+                                    } else {
+                                        List<Centrocusto> Lista = processo_Class.Lista_Local(true, false);
+                                        LocalListInserir.DataSource = Lista;
+                                        LocalListInserir.DataTextField = "Descricao";
+                                        LocalListInserir.DataValueField = "Codigo";
+                                        LocalListInserir.DataBind();
+                                        SeqInserirLabel.Text = Seq.ToString();
+                                        divModalInserir.Visible = true;
+                                    }
+                                }
                             } else {
                                 if (e.CommandName == "cmdRemover") {
                                     bool _existeTramite = processo_Class.Existe_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq);

@@ -177,6 +177,7 @@
     <br />
     <asp:Label ID="lblMsg" runat="server" ForeColor="#CC0000" Text="lblMsg"></asp:Label>
     <br />
+    <br />
     <a href="Tramite_Processo.aspx" style="color:darkred;font-size:10pt">Tramitar outro processo</a>
 
     <div id="divModalReceber" runat="server" class="modalDialog" visible="false">
