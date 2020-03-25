@@ -153,6 +153,7 @@
     <Content Include="Pages\SegundaViaISSend.aspx" />
     <Content Include="Pages\SegundaViaVS.aspx" />
     <Content Include="Pages\SegundaViaVSend.aspx" />
+    <Content Include="Pages\Senha.aspx" />
     <Content Include="Pages\situacao_pagto.aspx" />
     <Content Include="Pages\Tramite_Processo.aspx" />
     <Content Include="Pages\Tramite_Processo2.aspx" />
@@ -471,6 +472,13 @@
     </Compile>
     <Compile Include="Pages\SegundaViaVSend.aspx.designer.cs">
       <DependentUpon>SegundaViaVSend.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Senha.aspx.cs">
+      <DependentUpon>Senha.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Senha.aspx.designer.cs">
+      <DependentUpon>Senha.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\situacao_pagto.aspx.cs">
       <DependentUpon>situacao_pagto.aspx</DependentUpon>

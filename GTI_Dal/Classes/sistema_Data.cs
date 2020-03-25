@@ -307,7 +307,7 @@ namespace GTI_Dal.Classes {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 string sLogin = reg.Nomelogin;
                 Usuario b = db.Usuario.First(i => i.Nomelogin == sLogin);
-                b.Senha2 = reg.Senha2;
+                b.Senha = reg.Senha;
                 try {
                     db.SaveChanges();
                 } catch (Exception ex) {

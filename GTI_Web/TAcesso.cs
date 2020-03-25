@@ -166,5 +166,55 @@ namespace GTI_Web {
             }
         }
 
+        public string Encrypt128(string PlainText) {
+            string _data="", champ1 = "everest";
+            int fois = 0, lchamp1 = 7,d=0,e=0;
+            double c = 0;
+            byte[] asciiBytes;
+
+            si = 0;
+            x1a2 = 0;
+            i128 = 0;
+            for (fois = 1; fois <= 16; fois++) {
+                cle[fois] = 0;
+            }
+
+            for (fois = 0; fois < lchamp1; fois++) {
+                asciiBytes = Encoding.ASCII.GetBytes(champ1.Substring(fois, 1));
+                cle[fois] = asciiBytes[0];
+            }
+
+            champ1 = PlainText;
+            lchamp1 = champ1.Length;
+
+
+            for (fois = 0; fois < lchamp1; fois++) {
+                asciiBytes = Encoding.ASCII.GetBytes(champ1.Substring(fois, 1));
+                c = asciiBytes[0];
+                Assemble128();
+
+                double cfc = (((inter / 256) * 256) - (inter % 256)) / 256;
+                double cfd = (int)inter % 256;
+
+                for (int compte = 0; compte <= 16; compte++) {
+                    cle[compte] = (int)cle[compte] ^ (int)c;
+                }
+
+                double t = (int)cfc ^ (int)cfd;
+                c =(int) c ^ (int)t;
+
+                d =(int) ((c / 16 * 16) - (c % 16)) / 16;
+                e = (int)c % 16;
+
+                _data += Convert.ToChar(97+d);
+                _data += Convert.ToChar(97+e);
+
+            }
+
+            return _data;
+        }
+
+
+
     }
 }

@@ -55,7 +55,7 @@
             <br />
             Logado como:</span>
             <asp:Label ID="lblLogin" runat="server" Text="Visitante" EnableViewState="False" Font-Size="8pt" ForeColor="#3A8DCC"></asp:Label>
-            &nbsp;<asp:Label ID="Par1" runat="server" Text="(" Font-Size="8pt" ForeColor="#3A8DCC"></asp:Label><asp:LinkButton ID="lblLogout" runat="server" OnClick="lblLogOut_Click" Font-Size="8pt" ForeColor="#3A8DCC">Sair</asp:LinkButton>
+            &nbsp;<asp:Label ID="Par1" runat="server" Text="(" Font-Size="8pt" ForeColor="#3A8DCC"></asp:Label><asp:LinkButton ID="lblLogout" runat="server" OnClick="lblLogOut_Click" Font-Size="8pt" ForeColor="#3A8DCC">Sair</asp:LinkButton> &nbsp;&nbsp;&nbsp;&nbsp; <asp:LinkButton ID="lblPwd" runat="server" OnClick="lblSenha_Click" Font-Size="8pt" ForeColor="#3A8DCC">Mudar a senha</asp:LinkButton>
             <asp:Label ID="Par2" runat="server" Text=")" Font-Size="8pt" ForeColor="#3A8DCC"></asp:Label><br />
 
             
