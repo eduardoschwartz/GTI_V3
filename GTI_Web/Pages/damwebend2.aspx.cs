@@ -56,7 +56,7 @@ namespace UIWeb.Pages {
                             txtUF.Text = reg.UfR;
                         }
                     }
-                    UpdateDatabase();
+                    //UpdateDatabase();
                 } else
                     Response.Redirect("~/Pages/gtiMenu.aspx");
             }
@@ -112,6 +112,8 @@ namespace UIWeb.Pages {
 
         }
 
+        protected void btGerar_Click1(object sender, EventArgs e) {
 
+        }
     }
 }
