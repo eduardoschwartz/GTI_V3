@@ -204,6 +204,18 @@ namespace GTI_Web.Pages {
                                         Exception ex = processo_Class.Remover_Local(_numeroProcesso.Numero, _numeroProcesso.Ano, Seq);
                                         Response.Redirect(Request.RawUrl, true);
                                     }
+                                } else {
+                                    if (e.CommandName == "cmdObs") {
+                                        bool _existeTramite = processo_Class.Existe_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq);
+                                        if (!_existeTramite) {
+                                            lblMsg.Text = "Este local ainda não foi tramitado.";
+                                        } else {
+                                            SeqObsLabel.Text = Seq.ToString();
+                                            ObsGeralText.Visible = true;
+                                            ObsInternoText.Visible = false;
+                                            divModalObs.Visible = true;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -304,5 +316,24 @@ namespace GTI_Web.Pages {
                 throw ex;
             }
         }
+
+        protected void btOkObs_Click(object sender, EventArgs e) {
+
+        }
+
+        protected void CloseModalObs(object sender, EventArgs e) {
+            divModalObs.Visible = false;
+        }
+
+        protected void optGeral_CheckedChanged(object sender, EventArgs e) {
+            ObsGeralText.Visible = true;
+            ObsInternoText.Visible = false;
+        }
+
+        protected void optInterno_CheckedChanged(object sender, EventArgs e) {
+            ObsGeralText.Visible = false;
+            ObsInternoText.Visible = true;
+        }
     }
+
 }

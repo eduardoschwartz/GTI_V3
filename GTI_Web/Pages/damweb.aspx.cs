@@ -256,7 +256,7 @@ namespace UIWeb.Pages {
                 }
             } else {
                 if (optList.Items[1].Selected == true) {
-                    isNum = Int32.TryParse(txtCod.Text, out Num);
+                    isNum = int.TryParse(txtCod.Text, out Num);
                     if (!isNum) {
                         lblmsg.Text = "Código da empresa inválido!";
                         ShowResult(false);

@@ -367,7 +367,7 @@ Adicionar:;
                 int Ano = processo_Class.ExtractAnoProcesso(lblNumProc.Text);
                 int Numero = processo_Class.ExtractNumeroProcessoNoDV(lblNumProc.Text);
                 int Seq = Convert.ToInt16(lvMain.SelectedItems[0].SubItems[1].Text);
-                Exception ex = processo_Class.Alterar_Observacao_Tramite(Ano, Numero, Seq, txtObs.Text);
+                Exception ex = processo_Class.Alterar_Observacao_Tramite(Ano, Numero, Seq, txtObs.Text,"");
                 if (ex != null) {
                     ErrorBox eBox = new ErrorBox("Erro!", ex.Message, ex);
                     eBox.ShowDialog();

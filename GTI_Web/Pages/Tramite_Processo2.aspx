@@ -66,6 +66,21 @@
              text-align: justify;
          }
 
+         .auto-style6 {
+             left: 73px;
+             top: 58px;
+             width: 426px;
+             text-align: justify;
+             height: 228px;
+         }
+
+         .auto-style7 {
+             left: 95px;
+             top: 83px;
+             width: 426px;
+             text-align: justify;
+         }
+
         </style>
    
     <br />
@@ -181,7 +196,7 @@
     <a href="Tramite_Processo.aspx" style="color:darkred;font-size:10pt">Tramitar outro processo</a>
 
     <div id="divModalReceber" runat="server" class="modalDialog" visible="false">
-        <div class="auto-style5">
+        <div class="auto-style7">
             <h4 style="color: red">Recebimento de Processo </h4>
             <asp:Label ID="SeqReceberLabel" runat="server" Text="0" Visible="False"></asp:Label>
             <br />
@@ -250,22 +265,52 @@
             &nbsp;<asp:Button ID="btCancelarInserir" runat="server" colspan="2" OnClick="CloseModalInserir" Text="Cancelar" class="button1" Width="80px" Height="20px" />
         </div>
     </div>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-    <script Type ="text/javascript" >
-        $(document).ready(function () {
-            $("#grdMain tr ").mouseover(function () {
-                $(this).css("background-color", "red");
-            });
+
+    <div id="divModalObs" runat="server" class="modalDialog" visible="false">
+        <div class="auto-style6">
+            <h4 style="color: red">Observação do trâmite </h4>
+            <asp:Label ID="SeqObsLabel" runat="server" Text="0" Visible="False"></asp:Label>
+            <br />
+            <asp:RadioButton ID="optGeral" runat="server" AutoPostBack="True" Checked="True" GroupName="optDoc" OnCheckedChanged="optGeral_CheckedChanged" Text="Obs. Geral" />
+            &nbsp;&nbsp;
+                        <asp:RadioButton ID="optInterno" runat="server" AutoPostBack="True" GroupName="optDoc" OnCheckedChanged="optInterno_CheckedChanged" Text="Obs. Interna" />
+            <br />
+
+            <br />
+            <asp:TextBox ID="ObsGeralText" runat="server" Height="105px" TextMode="MultiLine" Visible="True" Width="400px">Texto geral</asp:TextBox>
+            <asp:TextBox ID="ObsInternoText" runat="server" Height="105px" TextMode="MultiLine" Width="399px" Visible="True">Texto interno</asp:TextBox>
+            <br />
+
+            <br />
+            <asp:Button ID="btOkObs" runat="server" align="left" OnClick="btOkObs_Click" Text="Gravar" class="button1" Width="80px" />
+            &nbsp;<asp:Button ID="btCancelarObs" runat="server" colspan="2" OnClick="CloseModalObs" Text="Cancelar" class="button1" Width="80px" Height="20px" />
+        </div>
+    </div>
 
 
-            $("#grdMain tr ").mouseout(function () {
-                $(this).css("background-color", "white");
-            });
+    <%--  <script>
+        // Defining custom functions
+        function HideInterno() {
+            var dvGeral = document.getElementById("ObsGeralText");
+            var dvInterno = document.getElementById("ObsInternoText");
+            dvGeral.style.visibility = "visible";
+            dvInterno.style.visibility = "hidden";
+        }
+
+        function HideGeral() {
+            var dvGeral = document.getElementById("ObsGeralText");
+            var dvInterno = document.getElementById("ObsInternoText");
+            dvGeral.style.visibility = "hidden";
+            dvInterno.style.visibility = "visible";
+        }
+
+        var btn = document.getElementById("ObsGeralButton");
+        var btn2 = document.getElementById("ObsInternaButton");
+        btn.addEventListener("click", HideInterno);
+        btn2.addEventListener("click", HideGeral);
+    </script>--%>
 
 
 
-
-        });
-        </script>
 
 </asp:Content>

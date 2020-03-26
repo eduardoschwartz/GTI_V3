@@ -760,11 +760,12 @@ namespace GTI_Dal.Classes {
             }
         }
 
-        public Exception Alterar_Observacao_Tramite(int Ano, int Numero, int Seq, string Observacao) {
+        public Exception Alterar_Observacao_Tramite(int Ano, int Numero, int Seq, string Observacao_Geral,string Observacao_Interna) {
             using (GTI_Context db = new GTI_Context(_connection)) {
                 try {
                     Tramitacao t = db.Tramitacao.First(i => i.Ano == Ano && i.Numero == Numero && i.Seq == Seq);
-                    t.Obs = string.IsNullOrWhiteSpace(Observacao) ? null : Observacao;
+                    t.Obs = string.IsNullOrWhiteSpace(Observacao_Geral) ? null : Observacao_Geral;
+                    t.Obsinterna = string.IsNullOrWhiteSpace(Observacao_Interna) ? null : Observacao_Interna;
                     db.SaveChanges();
                 } catch (Exception ex) {
                     return ex;

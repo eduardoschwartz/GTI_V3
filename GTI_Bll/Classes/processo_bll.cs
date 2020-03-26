@@ -30,9 +30,9 @@ namespace GTI_Bll.Classes {
             return ex;
         }
 
-        public Exception Alterar_Observacao_Tramite(int Ano, int Numero, int Seq, string Observacao) {
+        public Exception Alterar_Observacao_Tramite(int Ano, int Numero, int Seq, string Observacao_Geral,string Observacao_Interna) {
             Processo_Data obj = new Processo_Data(_connection);
-            Exception ex = obj.Alterar_Observacao_Tramite(Ano, Numero, Seq, Observacao);
+            Exception ex = obj.Alterar_Observacao_Tramite(Ano, Numero, Seq, Observacao_Geral,Observacao_Interna);
             return ex;
         }
 

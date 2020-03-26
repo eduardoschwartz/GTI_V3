@@ -671,6 +671,7 @@
             this.lvMain.FullRowSelect = true;
             this.lvMain.GridLines = true;
             this.lvMain.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lvMain.HideSelection = false;
             this.lvMain.Location = new System.Drawing.Point(12, 48);
             this.lvMain.MinimumSize = new System.Drawing.Size(565, 176);
             this.lvMain.Name = "lvMain";
@@ -746,7 +747,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(794, 379);
-            this.Controls.Add(this.pnlEnvRec);
             this.Controls.Add(this.pnlDespacho);
             this.Controls.Add(this.pnlLocal);
             this.Controls.Add(this.lblComplemento);
@@ -759,6 +759,7 @@
             this.Controls.Add(this.label10);
             this.Controls.Add(this.labelreq);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.pnlEnvRec);
             this.Controls.Add(this.lvMain);
             this.DoubleBuffered = true;
             this.MaximizeBox = false;
