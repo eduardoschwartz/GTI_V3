@@ -271,6 +271,7 @@
             <h4 style="color: red">Observação do trâmite </h4>
             <asp:Label ID="SeqObsLabel" runat="server" Text="0" Visible="False"></asp:Label>
             <br />
+            <br />
             <asp:RadioButton ID="optGeral" runat="server" AutoPostBack="True" Checked="True" GroupName="optDoc" OnCheckedChanged="optGeral_CheckedChanged" Text="Obs. Geral" />
             &nbsp;&nbsp;
                         <asp:RadioButton ID="optInterno" runat="server" AutoPostBack="True" GroupName="optDoc" OnCheckedChanged="optInterno_CheckedChanged" Text="Obs. Interna" />

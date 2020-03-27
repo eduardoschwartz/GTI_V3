@@ -71,7 +71,7 @@ namespace GTI_Web.Pages {
                     break;
                 }
             }
-            if (!_find) {
+            if (!_find && e.CommandName != "cmdObs") {
                 lblMsg.Text = "Você não tem permissão para tramitar neste local.";
                 return;
             }
@@ -210,6 +210,13 @@ namespace GTI_Web.Pages {
                                         if (!_existeTramite) {
                                             lblMsg.Text = "Este local ainda não foi tramitado.";
                                         } else {
+                                            foreach (UsuariocentroCusto item in _listaCC) {
+                                                if (item.Codigo == _ccusto) {
+                                                    _find = true;
+                                                    break;
+                                                }
+                                            }
+                                            btOkObs.Enabled = _find;
                                             SeqObsLabel.Text = Seq.ToString();
                                             ObsGeralText.Visible = true;
                                             ObsInternoText.Visible = false;
