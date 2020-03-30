@@ -81,19 +81,19 @@ namespace GTI_Dal.Classes {
         }
 
         public string Nome_por_Cnpj(string cnpj) {
-            string _nome = "";
+            string _nome = "",_nome2="";
 
             using (GTI_Context db = new GTI_Context(_connection)) {
                 var Sql = (from c in db.Cidadao where c.Cnpj == cnpj select c.Nomecidadao).FirstOrDefault();
                 if (Sql != null) {
                     _nome = Sql.ToString();
-                } else {
-                    var Sql2 = (from m in db.Mobiliario where m.Cnpj == cnpj select m.Razaosocial).FirstOrDefault();
-                    if (Sql2 != null)
-                        _nome = Sql2.ToString();
-                }
+                } 
+                var Sql2 = (from m in db.Mobiliario where m.Cnpj == cnpj select m.Razaosocial).FirstOrDefault();
+                if (Sql2 != null)
+                    _nome2 = Sql2.ToString();
+               
             }
-            return _nome;
+            return _nome2==null? _nome:_nome2;
         }
 
         public Contribuinte_Header_Struct Contribuinte_Header(int _codigo,bool _principal = false) {

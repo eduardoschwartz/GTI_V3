@@ -216,11 +216,16 @@ namespace GTI_Web.Pages {
                                                     break;
                                                 }
                                             }
+                                            Tramitacao _tramite = processo_Class.Dados_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Seq);
+                                            ObsGeralText.Text = _tramite.Obs??"";
+                                            ObsInternoText.Text = _tramite.Obsinterna??"";
+
                                             btOkObs.Enabled = _find;
                                             SeqObsLabel.Text = Seq.ToString();
                                             ObsGeralText.Visible = true;
                                             ObsInternoText.Visible = false;
                                             divModalObs.Visible = true;
+                                            
                                         }
                                     }
                                 }
@@ -325,7 +330,9 @@ namespace GTI_Web.Pages {
         }
 
         protected void btOkObs_Click(object sender, EventArgs e) {
-
+            Processo_bll processo_Class = new Processo_bll("GTIconnection");
+            Exception ex = processo_Class.Alterar_Observacao_Tramite(_numeroProcesso.Ano, _numeroProcesso.Numero, Convert.ToInt32(SeqObsLabel.Text), ObsGeralText.Text, ObsInternoText.Text);
+            divModalObs.Visible = false;
         }
 
         protected void CloseModalObs(object sender, EventArgs e) {

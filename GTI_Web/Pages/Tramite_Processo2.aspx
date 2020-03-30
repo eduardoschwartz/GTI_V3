@@ -278,8 +278,8 @@
             <br />
 
             <br />
-            <asp:TextBox ID="ObsGeralText" runat="server" Height="105px" TextMode="MultiLine" Visible="True" Width="400px">Texto geral</asp:TextBox>
-            <asp:TextBox ID="ObsInternoText" runat="server" Height="105px" TextMode="MultiLine" Width="399px" Visible="True">Texto interno</asp:TextBox>
+            <asp:TextBox ID="ObsGeralText" runat="server" Height="105px" TextMode="MultiLine" Visible="True" Width="400px"></asp:TextBox>
+            <asp:TextBox ID="ObsInternoText" runat="server" Height="105px" TextMode="MultiLine" Width="399px" Visible="True"></asp:TextBox>
             <br />
 
             <br />
