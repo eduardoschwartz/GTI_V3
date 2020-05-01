@@ -47,6 +47,7 @@
 
             <div id="footer"   >
                  <a href="gtiMenu.aspx" style="color:darkred;font-size:10pt">Retornar ao menu principal </a>
+                <%--<a href="http://sistemas.jaboticabal.sp.gov.br/gti/" style="color:darkred;font-size:10pt">Retornar ao menu principal </a>--%>
                  <br />
                  <br />
             </div>

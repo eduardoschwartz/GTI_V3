@@ -138,6 +138,7 @@
     <Content Include="Pages\detalhe_boleto.aspx" />
     <Content Include="Pages\envioDeca.aspx" />
     <Content Include="Pages\gticertidao.aspx" />
+    <Content Include="Pages\gtiMenuNew.aspx" />
     <Content Include="Pages\gtiMenu.aspx" />
     <Content Include="Pages\gtiMenu2.aspx" />
     <Content Include="Pages\gtiMenu3.aspx" />
@@ -367,6 +368,13 @@
     </Compile>
     <Compile Include="Pages\gticertidao.aspx.designer.cs">
       <DependentUpon>gticertidao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\gtiMenuNew.aspx.cs">
+      <DependentUpon>gtiMenuNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\gtiMenuNew.aspx.designer.cs">
+      <DependentUpon>gtiMenuNew.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\gtiMenu.aspx.cs">
       <DependentUpon>gtiMenu.aspx</DependentUpon>

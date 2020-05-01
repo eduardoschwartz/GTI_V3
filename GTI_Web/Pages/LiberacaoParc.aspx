@@ -73,15 +73,9 @@
                          &nbsp; <asp:Button ID="Button1" class="button1" runat="server" Text="Próximo" OnClick="btPrint_Click" Width="89px" />
                      </td>
                  </tr>
-                
-
-
-
-
 
              </table>
             <br />
-            
              
          <asp:Label ID="lblMsg" runat="server" ForeColor="Red" />
 

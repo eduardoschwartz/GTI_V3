@@ -29,18 +29,7 @@ namespace UIWeb.Pages {
             s = Request.QueryString["f10"];
             u = s;
 
-            /*  txtNome.Text = "SÃO SEBASTIÃO AÇAÍ";
-              txtEndereco.Text = "AV TIRADENTES, 330 - CENTRO";
-              txtDtVenc.Text = "15/01/2018";
-              txtcpfCnpj.Text = "03203004801";
-              txtrefTran.Text = "28735320016301528";
-              txtValor.Text = "253,00";
-              txtCidade.Text = "JABOTICABAL";
-              txtUF.Text = "SP";
-              txtCep.Text = "14870-021";
-              u = "SCHWARTZ-Dam";*/
-
-
+         
 
             UpdateDatabase();
         }

@@ -379,9 +379,9 @@
             <br />
             <br />  
             <h4>Foram selecionados débitos ajuizados e/ou protestados.</h4><br /><br />
-            <p>- Se debito ajuizados solicitar as guias das custas e despesas processuais através do e-mail: <u style="color: blue">dividaativa@jaboticabal.sp.gov.br</u> ou pessoalmente no Sistema Prático.</p>
+            <p>- Se debito ajuizados solicitar as guias das custas e despesas processuais através do e-mail: <u style="color: blue">dividaativa@jaboticabal.sp.gov.br</u> ou pelo telefone (16) 32019-3312.</p>
 
-            <p>- Se debito protestado informar o pagamento através do e-mail: <u style="color: blue">dividaativa@jaboticabal.sp.gov.br</u> ou pessoalmente no Sistema Prático.</p>
+            <p>- Se debito protestado informar o pagamento através do e-mail: <u style="color: blue">dividaativa@jaboticabal.sp.gov.br</u> ou pelo telefone (16) 32019-3312.</p>
             <p style="color: black;font-weight:bold">Tal procedimento é de extrema importância para providências junto ao Fórum e Tabelião de Notas e Protesto."</p>
             <br />
             <asp:Button ID="btConcordo" runat="server" align="left" colspan="2" OnClick="btPrint_Click" Text="Prosseguir" class="button" />

@@ -136,8 +136,6 @@ namespace UIWeb {
                 reg.Cep = dados_imovel.Cep;
                 //decimal nValorguia = Math.Truncate(Convert.ToDecimal(reg.Valorguia * 100));
                 string _convenio = "2873532";
-
-
                 //***** GERA CÓDIGO DE BARRAS BOLETO REGISTRADO*****
                 DateTime _data_base = Convert.ToDateTime("07/10/1997");
                 TimeSpan ts = Convert.ToDateTime(item.Data_Vencimento) - _data_base;
