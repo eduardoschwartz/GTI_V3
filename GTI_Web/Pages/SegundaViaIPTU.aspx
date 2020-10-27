@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SegundaViaIPTU.aspx.cs" Inherits="UIWeb.SegundaViaIPTU" MasterPageFile="~/Pages/default.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MenuContentPlaceHolder" runat="server">
-    <link href="../css/gti.css" rel="stylesheet" />
+<%--    <link href="../css/gti.css" rel="stylesheet" />
 
 
 
@@ -102,5 +102,5 @@
 
         </div>
         <br />
-   
+   --%>
 </asp:Content>

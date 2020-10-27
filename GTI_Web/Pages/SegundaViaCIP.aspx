@@ -18,7 +18,7 @@
             if (document.all) { // Internet Explorer 
                 key = evt.keyCode;
             }
-            else { // Nestcape 
+            else { // Netscape 
                 key = evt.which;
             }
 

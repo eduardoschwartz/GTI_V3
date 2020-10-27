@@ -215,8 +215,8 @@ namespace GTI_Desktop.Classes {
             Ul = "gtisys"; Up = "everest";
             Main f1 = (Main)Application.OpenForms["Main"];
             try {
-                BaseDados = f1.DataBaseToolStripStatus.Text;
-                connString = CreateConnectionString(Properties.Settings.Default.ServerName, BaseDados, Ul, Up);
+//                BaseDados = f1.DataBaseToolStripStatus.Text;
+                connString = CreateConnectionString(Properties.Settings.Default.ServerName, Properties.Settings.Default.DataBaseReal, Ul, Up);
             } catch (Exception) {
             }
             return connString;

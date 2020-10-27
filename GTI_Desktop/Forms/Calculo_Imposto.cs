@@ -12,9 +12,9 @@ namespace GTI_Desktop.Forms {
     public partial class Calculo_Imposto : Form {
         string _connection = gtiCore.Connection_Name();
         string _path = @"c:\cadastro\bin\";
-        int _ano = 2020;
-        int _documento = 17770764;
-        decimal _ipca = (decimal)2.894;
+        int _ano = 2021;
+        int _documento = 17993600;
+        decimal _ipca = (decimal)3.1352;
  
         private enum Tipo_imposto {
             Iptu = 1,
