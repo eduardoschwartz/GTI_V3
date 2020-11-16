@@ -209,9 +209,9 @@ namespace GTI_Desktop.Forms {
                 string sPwd = sistema_Class.Retorna_User_Password(txtLogin.Text);
                 if (string.IsNullOrEmpty(sPwd)) {
                     gtiCore.Liberado(this);
-                    MessageBox.Show("Por favor cadastre uma senha!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    SenhaButton_Click(null, null);
-                    return;
+//                    MessageBox.Show("Por favor cadastre uma senha!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+//                    SenhaButton_Click(null, null);
+ //                   return;
                 } else {
                     if (string.Compare(txtPwd.Text, gtiCore.Decrypt(sPwd)) != 0) {
                         gtiCore.Liberado(this);

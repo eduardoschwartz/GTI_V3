@@ -75,7 +75,6 @@ namespace GTI_Web.Pages {
                 parameters.Add(new ReportParameter("ALIQUOTA", _valor_aliquota.ToString("#0.00")));
                 viewer.LocalReport.SetParameters(parameters);
 
-
                 byte[] bytes = viewer.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
                 tributario_Class.Excluir_Carne(nSid);
                 Response.Buffer = true;

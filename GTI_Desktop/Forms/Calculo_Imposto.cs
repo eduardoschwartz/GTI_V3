@@ -96,6 +96,8 @@ namespace GTI_Desktop.Forms {
 
             Imovel_bll imovel_Class = new Imovel_bll(_connection);
             List<int> ListaAtivos = imovel_Class.Lista_Imovel_Ativo();
+            //List<int> ListaAtivos = new List<int>();
+            //ListaAtivos.Add(25839);
 
             int _total = ListaAtivos.Count, _pos = 1;
             int _qtde_normal = 0,_qtde_imune=0,_qtde_isento_area=0,_qtde_isento_processo=0,_qtde_total=0,_qtde_laminas=0;
