@@ -49,14 +49,16 @@ namespace GTI_Desktop.Forms
             this.Refresh();
 
             this.SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
-            FillBackgroundImage(false);
+            //FillBackgroundImage(false);
+
+            //typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, DrawingPanel, new object[] { true });
 
             ServidorToolStripStatus.Text = Properties.Settings.Default.ServerName;
 
             Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             VersaoToolStripStatus.Text = $"{version.Major}"+"."+ $"{version.Minor}" +"."+ $"{version.Build}";
             this.Text += VersaoToolStripStatus.Text;
-
+            
             LockForm(true);
             Forms.Login login = new Forms.Login();
             login.ShowDialog();
